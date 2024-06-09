@@ -1,14 +1,33 @@
 #include "BubbleManager.h"
 #include "Transform.h"
 #include "Shader.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 GLuint pgId;
 Shader phong;
+void drawImGui() {
+    
+    ImGui::Begin("Simple Window");
+    ImGui::Text("Hello, world!");
+    ImGui::End();
+}
 
 int main() {
     BubbleManager bm;
 
     if (bm.bubbleInitGlfw()) {
+
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+
+    // Setup Platform/Renderer bindings
+    ImGui_ImplGlfw_InitForOpenGL(bm.glfwWindow, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
 
     ObjectFile obj("C:/Users/Daniel/Desktop/test_monkey/scene.gltf");
     GameObject go(obj);
@@ -58,11 +77,26 @@ void BubbleManager::renderOpengl(GameObject* go) {
     {
         /* Render here */
         float st = glfwGetTime();
+        // Start the ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        // Draw ImGui window
+        drawImGui();
+
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(glfwWindow, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         for (Renderer* renderer : rendererList) {
             renderer->update();
         }
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
 
         /* Swap front and back buffers */
         glfwSwapBuffers(glfwWindow);
@@ -73,4 +107,11 @@ void BubbleManager::renderOpengl(GameObject* go) {
         transform->Rotate(glm::vec3(0, 0.5f * (glfwGetTime() - st), 0));
         transform->update();
     }
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(glfwWindow);
+    glfwTerminate();
 }
