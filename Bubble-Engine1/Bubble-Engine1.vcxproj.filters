@@ -15,42 +15,45 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BubbleManager.h">
+    <ClInclude Include="src\nucleo\gerenciador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="src\arquivadores\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFile.h">
+    <ClInclude Include="src\arquivadores\arquivo3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="src\entidades\objeto_geral.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="src\comum\componente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="src\componentes\renderizador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h">
+    <ClInclude Include="src\componentes\transformador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BubbleManager.cpp">
+    <ClCompile Include="src\nucleo\gerenciador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="src\arquivadores\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="src\entidades\objeto_geral.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
+    <ClCompile Include="src\componentes\transformador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nucleo\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

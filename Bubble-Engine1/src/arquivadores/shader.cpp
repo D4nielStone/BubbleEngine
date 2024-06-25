@@ -54,7 +54,7 @@ Shader(const char* vertexPath, const char* fragmentPath) {
     glUseProgram(ID);
 }
 void Shader::
-compile(const char* vertexPath, const char* fragmentPath) {
+compilar(const char* vertexPath, const char* fragmentPath) {
     ID = glCreateProgram();
     std::string vertexCode;
     std::string fragmentCode;
@@ -124,7 +124,7 @@ setInt(const std::string& name, int value) const {
 }
 void Shader::
 setMat4(const std::string& name, const GLfloat* value) const {
-    glUniformMatrix4fv(glGetUniformLocation(ID, "model"), 1, GL_FALSE, value);
+    glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 void Shader::
 setVec3(const std::string& name, float r, float g, float b) const {

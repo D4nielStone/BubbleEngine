@@ -8,10 +8,10 @@ struct Color {
 };
 
 struct Material {
-    std::string name;
-    Color ambient;
-    Color diffuse;
-    Color specular;
+    std::string nome;
+    Color ambiente;
+    Color difusa;
+    Color especular;
 };
 
 struct Vertex {

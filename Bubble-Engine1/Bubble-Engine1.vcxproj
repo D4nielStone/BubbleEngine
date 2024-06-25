@@ -29,26 +29,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -126,8 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,20 +158,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BubbleManager.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Component.h" />
+    <ClInclude Include="src\nucleo\gerenciador.h" />
+    <ClInclude Include="src\entidades\objeto_geral.h" />
+    <ClInclude Include="src\comum\componente.h" />
     <ClInclude Include="includes.h" />
-    <ClInclude Include="ObjectFile.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="src\arquivadores\arquivo3d.h" />
+    <ClInclude Include="src\componentes\renderizador.h" />
+    <ClInclude Include="src\arquivadores\shader.h" />
+    <ClInclude Include="src\componentes\transformador.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BubbleManager.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="src\nucleo\gerenciador.cpp" />
+    <ClCompile Include="src\entidades\objeto_geral.cpp" />
+    <ClCompile Include="src\arquivadores\shader.cpp" />
+    <ClCompile Include="src\nucleo\main.cpp" />
+    <ClCompile Include="src\componentes\transformador.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="phong.frag" />

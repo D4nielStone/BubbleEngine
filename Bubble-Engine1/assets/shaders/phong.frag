@@ -7,7 +7,7 @@ vec3 LightDir = vec3(0.1,0.1,0);        // Direction to the light source
 out vec4 FragColor;
 
 vec3 lightColor = vec3(1, 1, 1);
-vec3 materialColor = vec3(1,1,1);
+vec3 materialColor = vec3(1, 1, 1);
 vec3 ambientColor = vec3(1, 1, 1);
 uniform float shininess;
 
