@@ -1,9 +1,6 @@
 #include "gerenciador.h"
-#include "src/componentes/transformador.h"
-#include "src/componentes/renderizador.h"
-
-GLuint pgId;
-Shader phong;
+#include "src/componentes/transformacao/transformacao.h"
+#include "src/componentes/renderizador/renderizador.h"
 
 //@Initialize GLFW and GLAD
 bool Bubble::Nucleo::Gerenciador::inicializacao() {
@@ -21,8 +18,6 @@ bool Bubble::Nucleo::Gerenciador::inicializacao() {
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         return false;
     }
-    phong.compilar("phong.vert", "phong.frag");
-    phong.use();
 
     glEnable(GL_DEPTH_TEST);
 
@@ -31,24 +26,26 @@ bool Bubble::Nucleo::Gerenciador::inicializacao() {
 int Bubble::Nucleo::Gerenciador::pararloop() {
     return glfwWindowShouldClose(glfwWindow);
 }
+void Bubble::Nucleo::Gerenciador::atualizar(Bubble::Entidades::Entidade* ent) {
+        for (auto& c : ent->obterComponentesLogicos()) {
+            c->atualizar();
+        }
+}
 //@Render OpenGL (virtual function)
-void Bubble::Nucleo::Gerenciador::renderizar(Bubble::Entidades::ObjetoGeral* go) {
+void Bubble::Nucleo::Gerenciador::renderizar(Bubble::Entidades::Entidade* ent) {
         /* Render here */
-        float st = glfwGetTime();
 
         int display_w, display_h;
         glfwGetFramebufferSize(glfwWindow, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
         glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        for (auto& r : go->obterComponentes("Renderizador")) {
-            dynamic_cast<Bubble::Componentes::Rendererizador&>(r.get()).definirShader(phong);
-            dynamic_cast<Bubble::Componentes::Rendererizador&>(r.get()).atualizar();
+        
+        for (auto& r : ent->obterRenderizadores())
+        {
+            r->atualizar();
         }
 
-        Bubble::Componentes::Transformador* transform = go->obterTransformador();
-        transform->definirShader(phong);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(glfwWindow);
@@ -56,8 +53,6 @@ void Bubble::Nucleo::Gerenciador::renderizar(Bubble::Entidades::ObjetoGeral* go)
         /* Poll for and process events */
         glfwPollEvents();
 
-        transform->Rotacionar(glm::vec3(0, 0.5f * (glfwGetTime() - st), 0));
-        transform->atualizar();
    
 }
 void Bubble::Nucleo::Gerenciador::limpar() {

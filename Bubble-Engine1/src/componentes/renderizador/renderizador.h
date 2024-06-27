@@ -1,16 +1,14 @@
 #pragma once
 #include "src/comum/componente.h"
-#include "src/arquivadores/shader.h"
 #include "includes.h"
 #include <glad/glad.h>
 
 namespace Bubble{
     namespace Componentes {
-        class Rendererizador : public Bubble::Comum::Componente {
+        class Renderizador : public Bubble::Comum::Componente {
         private:
             Vertex mVertex;
             Material mMaterial;
-            Shader shader;
             GLuint VAO, EBO, VBO;
             void configurarBuffers() {
                 glGenVertexArrays(1, &VAO);
@@ -70,20 +68,21 @@ namespace Bubble{
                 glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
             }
             void atualizarCores() {
-                shader.setVec3("materialColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
-                shader.setVec3("ambientColor", mMaterial.ambiente.r, mMaterial.ambiente.g, mMaterial.ambiente.b);
-                shader.setFloat("shininess", 32.f);
+                if(shader)
+                    shader->setVec3("materialColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
+                    shader->setVec3("ambientColor", mMaterial.ambiente.r, mMaterial.ambiente.g, mMaterial.ambiente.b);
+                    shader->setFloat("shininess", 32.f);
             }
         public:
-            Rendererizador() {
+            Renderizador() {
                 Nome = "Renderizador";
                 std::cout << ">> Renderizador criado\n";
             };
-            Rendererizador(Vertex vertex, Material materials) : mVertex(vertex), mMaterial(materials) {
+            Renderizador(Vertex vertex, Material materials) : mVertex(vertex), mMaterial(materials) {
                 Nome = "Renderizador";
                 std::cout << ">> Renderizador criado\n";
             };
-            Rendererizador(Vertex vertex) : mVertex(vertex) {
+            Renderizador(Vertex vertex) : mVertex(vertex) {
                 Nome = "Renderizador";
                 std::cout << ">> Renderizador criado\n";
             };
@@ -92,12 +91,10 @@ namespace Bubble{
                 std::cout << ">> Renderizador configurado\n";
             }
             void atualizar() override {
-                std::cout << ">> Renderizador atualizado\n";
+                //std::cout << ">> Renderizador atualizado\n";
                 atualizarCores();
                 desenharModelo();
             }
-
-            void definirShader(Shader& s) { shader = s; };
         };
     }
 }

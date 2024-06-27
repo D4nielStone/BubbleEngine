@@ -27,16 +27,22 @@
     <ClInclude Include="src\arquivadores\arquivo3d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\entidades\objeto_geral.h">
+    <ClInclude Include="src\entidades\entidade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\comum\componente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\componentes\renderizador.h">
+    <ClInclude Include="src\componentes\renderizador\renderizador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\componentes\transformador.h">
+    <ClInclude Include="src\componentes\transformacao\transformacao.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\componentes\codigo\codigo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\componentes\camera\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,18 +53,25 @@
     <ClCompile Include="src\arquivadores\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\entidades\objeto_geral.cpp">
+    <ClCompile Include="src\entidades\entidade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\componentes\transformador.cpp">
+    <ClCompile Include="src\componentes\transformacao\transformacao.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\nucleo\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\componentes\codigo\codigo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\componentes\camera\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="phong.frag" />
-    <None Include="phong.vert" />
+    <None Include="assets\shaders\phong.frag" />
+    <None Include="assets\shaders\phong.vert" />
+    <None Include="assets\scripts\rotacionar.lua" />
   </ItemGroup>
 </Project>

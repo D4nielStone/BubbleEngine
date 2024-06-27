@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "includes.h"
-#include "src/entidades/objeto_geral.h"
+#include "src/entidades/entidade.h"
 
 namespace Bubble {
 	namespace Nucleo {
@@ -16,8 +16,8 @@ namespace Bubble {
 			unsigned int shaderProgram, VAO;
 			bool inicializacao();
 			int pararloop();
-			//void atualizar();
-			void renderizar(Bubble::Entidades::ObjetoGeral* go);
+			void atualizar(Bubble::Entidades::Entidade* go);
+			void renderizar(Bubble::Entidades::Entidade* go);
 			void limpar();
 		};
 	}

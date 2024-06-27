@@ -158,25 +158,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\componentes\camera\camera.h" />
+    <ClInclude Include="src\componentes\codigo\codigo.h" />
     <ClInclude Include="src\nucleo\gerenciador.h" />
-    <ClInclude Include="src\entidades\objeto_geral.h" />
+    <ClInclude Include="src\entidades\entidade.h" />
     <ClInclude Include="src\comum\componente.h" />
     <ClInclude Include="includes.h" />
     <ClInclude Include="src\arquivadores\arquivo3d.h" />
-    <ClInclude Include="src\componentes\renderizador.h" />
+    <ClInclude Include="src\componentes\renderizador\renderizador.h" />
     <ClInclude Include="src\arquivadores\shader.h" />
-    <ClInclude Include="src\componentes\transformador.h" />
+    <ClInclude Include="src\componentes\transformacao\transformacao.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\componentes\camera\camera.cpp" />
+    <ClCompile Include="src\componentes\codigo\codigo.cpp" />
     <ClCompile Include="src\nucleo\gerenciador.cpp" />
-    <ClCompile Include="src\entidades\objeto_geral.cpp" />
+    <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\nucleo\main.cpp" />
-    <ClCompile Include="src\componentes\transformador.cpp" />
+    <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="phong.frag" />
-    <None Include="phong.vert" />
+    <None Include="assets\scripts\rotacionar.lua" />
+    <None Include="assets\shaders\phong.frag" />
+    <None Include="assets\shaders\phong.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,8 +7,8 @@ vec3 LightDir = vec3(0.1,0.1,0);        // Direction to the light source
 out vec4 FragColor;
 
 vec3 lightColor = vec3(1, 1, 1);
-vec3 materialColor = vec3(1, 1, 1);
-vec3 ambientColor = vec3(1, 1, 1);
+uniform vec3 materialColor;
+uniform vec3 ambientColor;
 uniform float shininess;
 
 void main()
@@ -23,7 +23,7 @@ void main()
     // Specular lighting
     vec3 viewDir = normalize(-FragPos); // Direction from fragment to the camera
     vec3 reflectDir = reflect(-LightDir, Normal); // Reflected light direction
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
     vec3 specular = spec * lightColor;
 
     // Final color
