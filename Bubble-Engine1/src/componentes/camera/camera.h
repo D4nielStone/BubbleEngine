@@ -12,7 +12,7 @@ namespace Bubble {
             float FoV = 45.0f;
             Camera() {};
             void configurar() override;
-            void atualizar() override;
+            void atualizar(float deltaTime) override;
         private:
             glm::mat4 matrizProjecao;
             glm::mat4 matrizVisualizacao;

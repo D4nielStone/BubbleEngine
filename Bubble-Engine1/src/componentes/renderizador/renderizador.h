@@ -68,7 +68,8 @@ namespace Bubble{
                 glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
             }
             void atualizarCores() {
-                if(shader)
+                if (shader)
+                    shader->use();
                     shader->setVec3("materialColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
                     shader->setVec3("ambientColor", mMaterial.ambiente.r, mMaterial.ambiente.g, mMaterial.ambiente.b);
                     shader->setFloat("shininess", 32.f);
@@ -90,8 +91,8 @@ namespace Bubble{
                 configurarBuffers();
                 std::cout << ">> Renderizador configurado\n";
             }
-            void atualizar() override {
-                //std::cout << ">> Renderizador atualizado\n";
+            void atualizar(float deltaTime) override {
+                std::cout << ">> Renderizador atualizado\n";
                 atualizarCores();
                 desenharModelo();
             }

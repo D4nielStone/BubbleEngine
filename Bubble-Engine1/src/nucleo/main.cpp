@@ -1,40 +1,37 @@
-#include "gerenciador.h"
+#include "gerenciador.h" // Suponho que este seja o arquivo onde você incluiu o SceneManager e outras classes
+#include "src/arquivadores/shader.h"
 
 int main() {
-
     Bubble::Nucleo::Gerenciador gerenciador;
+    auto cena1 = std::make_shared<Bubble::Nucleo::Scene>("Cena de teste");
 
-    if (!gerenciador.inicializacao()){
+    if (!gerenciador.inicializacao()) {
         std::cerr << "\n>> Não foi possível inicializar o gerenciador\n";
         return -1;
     }
-    Shader phong;
-    phong.compilar("assets/shaders/phong.vert", "assets/shaders/phong.frag");
-    phong.use();
 
-    Bubble::Arquivadores::Arquivo3d arma("assets/models/minecraft-tree/source/Mineways2Skfb.obj");
-    Bubble::Entidades::Entidade ent(arma);
-    Bubble::Entidades::Entidade camera(arma);
+    auto bola = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+    auto chao = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae"));
+    auto cam = std::make_shared<Bubble::Entidades::Entidade>();
 
-    camera.obterTransformacao()->definirPosicao(glm::vec3(0,0,-3));
+    chao->obterTransformacao()->definirPosicao(glm::vec3(0, -2, 0));
+    chao->obterTransformacao()->definirEscala(glm::vec3(2, 0.5, 2));
+    cam->obterTransformacao()->definirPosicao(glm::vec3(0,0,-5));
+    
+    cam->adicionarComponente(std::make_shared < Bubble::Componentes::Camera>());
+    bola->adicionarComponente(std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua"));
 
-    camera.adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
-    ent.adicionarComponente(std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua"));
+    cena1->adicionarEntidade(cam);
+    cena1->adicionarEntidade(chao);
+    cena1->adicionarEntidade(bola);
 
-    for (auto& c : ent.listaDeComponentes()) {
-        c->configurar();
-        c->definirShader(phong);
-    }
-    for (auto& c : camera.listaDeComponentes()) {
-        c->configurar();
-        c->definirShader(phong);
-    }
+    gerenciador.gerenciadorDeCenas.adicionarCena(cena1);
+    gerenciador.gerenciadorDeCenas.carregarCena(0);
+    
     while (!gerenciador.pararloop()) {
-        gerenciador.atualizar(&camera);
-        gerenciador.renderizar(&camera);
-        gerenciador.atualizar(&ent);
-        gerenciador.renderizar(&ent);
+        gerenciador.renderizar();
     }
+
     gerenciador.limpar();
     return 0;
 }

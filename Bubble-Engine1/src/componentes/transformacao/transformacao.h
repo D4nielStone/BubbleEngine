@@ -19,18 +19,25 @@ namespace Bubble {
             glm::mat4 matriz_de_modelo;
         public:
             Transformacao()
-                : posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(0.5f) {
+                : posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(1.0f) {
                 Nome = "Transformacao";
             }
 
-            void atualizar() override {
+            void atualizar(float deltaTime) override {
                 glm::mat4 matriz_de_transformacao = glm::translate(glm::mat4(1.0f), posicao);
                 glm::mat4 matriz_de_rotacao = glm::toMat4(rotacao);
                 glm::mat4 matriz_de_escala = glm::scale(glm::mat4(1.0f), escala);
 
                 matriz_de_modelo = matriz_de_transformacao * matriz_de_rotacao * matriz_de_escala;
-                if(shader)
+                if (shader) {
+                    shader->use();
+
+                    glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
                     shader->setMat4("model", glm::value_ptr(matriz_de_modelo));
+                    shader->setMat3("normalMatrix", glm::value_ptr(normalMatrix));
+
+                    std::cout << ">> Transformacao atualizada\n";
+                }
             }
             void configurar() override {
                 std::cout << ">> Transformacao configurada\n";
@@ -45,7 +52,7 @@ namespace Bubble {
 
             void definirPosicao(const glm::vec3& newPosition) { posicao = newPosition; }
             void definirRotacao(const glm::vec3& newRotation) { rotacao = newRotation; }
-            void definirEscla(const glm::vec3& newScale) { escala = newScale; }
+            void definirEscala(const glm::vec3& newScale) { escala = newScale; }
             void Rotacionar(const float x, const float y, const float z) {
                 // Converta a nova rotação de Euler para um quaternion
                 glm::quat quaternionRotation = glm::quat(glm::radians(glm::vec3(x, y, z)));

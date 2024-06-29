@@ -1,6 +1,9 @@
+
+-- Autor BubbleEngine
+
 function iniciar()
 	
 end
 function atualizar()
-print("A");
+	print("B");
 end

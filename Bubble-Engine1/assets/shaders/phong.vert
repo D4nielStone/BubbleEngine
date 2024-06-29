@@ -10,11 +10,12 @@ out vec2 TexCoord;
 uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
+uniform mat3 normalMatrix; // Added normal matrix
 
 void main() {
-    FragPos = vec3(vec4(aPos, 1.0));
-    Normal = mat3(transpose(inverse(model))) * aNormal;  // Normal transformation
+    FragPos = vec3(model * vec4(aPos, 1.0)); // Transforming position by model matrix
+    Normal = normalMatrix * aNormal; // Transforming normal by normal matrix
     TexCoord = aUv;
 
-    gl_Position = projection * view * model * vec4(FragPos, 1.0);
+    gl_Position = projection * view * vec4(FragPos, 1.0);
 }

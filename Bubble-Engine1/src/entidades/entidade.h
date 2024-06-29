@@ -15,10 +15,11 @@ namespace Bubble {
 	namespace Entidades {
 		class Entidade {
 		public:
-			Entidade() {
-				adicionarComponente(std::make_shared<Bubble::Componentes::Transformacao>());
-			};
+			Entidade();
+
 			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
+
+			void atualizar(float deltaTime);
 
 			const char* nome();
 
@@ -28,22 +29,16 @@ namespace Bubble {
 
 			std::vector<std::reference_wrapper<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
 
-			std::vector<Bubble::Comum::Componente*> obterComponentesLogicos();
 
-			Bubble::Componentes::Transformacao* obterTransformacao();
-
-			std::vector<Bubble::Componentes::Renderizador*> obterRenderizadores();
+			std::shared_ptr<Bubble::Componentes::Transformacao> obterTransformacao();
 
 			const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
 
-			template <typename T>
-			void adicionarComponente(std::shared_ptr<T> componente);
+			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
 
 		private:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
 			std::vector<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
-			std::vector<std::shared_ptr<Bubble::Comum::Componente>> ComponentesLogicos;
-			std::vector<std::shared_ptr<Bubble::Comum::Componente>> ComponentesGraficos;
 
 			const char* Nome = "NONAMEENTITIE";
 		};

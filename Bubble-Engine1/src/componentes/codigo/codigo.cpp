@@ -30,9 +30,14 @@ namespace Bubble {
             }
         }
 
-        void Codigo::atualizar() {
+        void Codigo::atualizar(float deltaTime) {
+            //mais tare vou criar a api
             meuObjeto->obterTransformacao()->Rotacionar(1, 1, 1);
             lua_getglobal(L, "atualizar");
+            if (luaL_loadfile(L, scriptPath.c_str()) || lua_pcall(L, 0, 0, 0)) {
+                std::cerr << "Não foi possível carregar o script: " << scriptPath << "\n";
+                std::cerr << lua_tostring(L, -1) << "\n";
+            }
             if (lua_pcall(L, 0, 0, 0) != LUA_OK) {
                 std::cerr << "Erro ao executar a função de atualização: \n";
                 std::cerr << lua_tostring(L, -1) << "\n";

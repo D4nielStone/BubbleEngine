@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "includes.h"
-#include "src/entidades/entidade.h"
+#include "src/nucleo/scenemanager.h"
 
 namespace Bubble {
 	namespace Nucleo {
@@ -12,12 +12,11 @@ namespace Bubble {
 		{
 		private:
 		public:
+			SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
-			unsigned int shaderProgram, VAO;
 			bool inicializacao();
 			int pararloop();
-			void atualizar(Bubble::Entidades::Entidade* go);
-			void renderizar(Bubble::Entidades::Entidade* go);
+			void renderizar();
 			void limpar();
 		};
 	}

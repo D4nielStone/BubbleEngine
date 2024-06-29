@@ -2,13 +2,13 @@
 
 in vec3 FragPos;         // Fragment position in world space
 in vec3 Normal;          // Normal vector at the fragment
-vec3 LightDir = vec3(0.1,0.1,0);        // Direction to the light source
+vec3 LightDir = vec3(0.2,0.2,-0.1);        // Direction to the light source
 
 out vec4 FragColor;
 
-vec3 lightColor = vec3(1, 1, 1);
+vec3 lightColor = vec3(1, 0, 1);
 uniform vec3 materialColor;
-uniform vec3 ambientColor;
+vec3 ambientColor=vec3(1,1,1);
 uniform float shininess;
 
 void main()

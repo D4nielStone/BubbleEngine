@@ -127,6 +127,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +159,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\nucleo\scenemanager.h" />
+    <ClInclude Include="src\inputs\inputs.h" />
+    <ClInclude Include="src\inputs\gameinputs.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\arquivadores\imageloader.h" />
     <ClInclude Include="src\componentes\camera\camera.h" />
     <ClInclude Include="src\componentes\codigo\codigo.h" />
     <ClInclude Include="src\nucleo\gerenciador.h" />
@@ -170,6 +176,10 @@
     <ClInclude Include="src\componentes\transformacao\transformacao.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\nucleo\scenemanager.cpp" />
+    <ClCompile Include="src\inputs\inputs.cpp" />
+    <ClCompile Include="src\inputs\gameinputs.cpp" />
+    <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\componentes\camera\camera.cpp" />
     <ClCompile Include="src\componentes\codigo\codigo.cpp" />
     <ClCompile Include="src\nucleo\gerenciador.cpp" />
@@ -182,6 +192,12 @@
     <None Include="assets\scripts\rotacionar.lua" />
     <None Include="assets\shaders\phong.frag" />
     <None Include="assets\shaders\phong.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
