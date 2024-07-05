@@ -1,6 +1,8 @@
 #ifndef COMPONENTE_H
 #define COMPONENTE_H
 #include "src/arquivadores/shader.h"
+#include "rapidjson/document.h"
+#include "rapidjson/allocators.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -24,6 +26,10 @@ namespace Bubble {
 			void definirShader(Shader* shade) {
 				shader = shade;
 			}
+			virtual rapidjson::Value serializar(rapidjson::Document* doc)
+			{
+				return rapidjson::Value();
+			};
 		};
 	}
 }	

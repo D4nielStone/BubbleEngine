@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 #include <stdexcept>
+#include "rapidjson/document.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -35,6 +36,8 @@ namespace Bubble {
 			const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
 
 			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
+			
+			rapidjson::Value serializar(rapidjson::Document* a);
 
 		private:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;

@@ -45,6 +45,34 @@ namespace Bubble {
             glm::mat4 obterMatrizGlobal() const {
                 return matriz_de_modelo;
             }
+            rapidjson::Value serializar(rapidjson::Document* doc) override
+            {
+                rapidjson::Value obj(rapidjson::kObjectType);
+                rapidjson::Value positionarr(rapidjson::kArrayType);
+
+                positionarr.PushBack(rapidjson::Value().SetFloat(posicao.x), doc->GetAllocator());
+                positionarr.PushBack(rapidjson::Value().SetFloat(posicao.y), doc->GetAllocator());
+                positionarr.PushBack(rapidjson::Value().SetFloat(posicao.z), doc->GetAllocator());
+
+                obj.AddMember("posicao", positionarr, doc->GetAllocator());
+                
+                rapidjson::Value rotacaoarr(rapidjson::kArrayType);
+
+                rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.x), doc->GetAllocator());
+                rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.y), doc->GetAllocator());
+                rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.z), doc->GetAllocator());
+
+                obj.AddMember("rotacao", rotacaoarr, doc->GetAllocator());
+                
+                rapidjson::Value escalaarr(rapidjson::kArrayType);
+
+                escalaarr.PushBack(rapidjson::Value().SetFloat(escala.x), doc->GetAllocator());
+                escalaarr.PushBack(rapidjson::Value().SetFloat(escala.y), doc->GetAllocator());
+                escalaarr.PushBack(rapidjson::Value().SetFloat(escala.z), doc->GetAllocator());
+
+                obj.AddMember("escala", escalaarr, doc->GetAllocator());
+                return obj;
+            }
 
             glm::vec3 obterPosicao() const { return posicao; }
             glm::quat obterRotacao() const { return rotacao; }

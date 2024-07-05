@@ -18,6 +18,9 @@ namespace Bubble {
 			int pararloop();
 			void renderizar();
 			void limpar();
+			bool carregarProjeto(const std::string& path);
+			bool criarProjeto(const std::string& path, const std::string& nome);
+			std::shared_ptr<Bubble::Nucleo::Scene> criarProjetoPadrao();
 		};
 	}
 }

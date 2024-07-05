@@ -4,6 +4,8 @@
 #include <vector>
 #include <memory>
 #include <iostream>
+#include "rapidjson/document.h"
+#include "rapidjson/stringbuffer.h"
 #include "src/entidades/entidade.h"
 #include "src/arquivadores/shader.h"
 
@@ -16,6 +18,10 @@ namespace Bubble {
             std::vector<std::shared_ptr<Bubble::Entidades::Entidade>> Entidades; // vetor de objetos na cena
 
         public:
+
+            Scene()
+            {}
+
             Scene(const char* name) : Name(name) {
                 std::cout << ">> " << name << " criada\n";
             }
@@ -53,7 +59,24 @@ namespace Bubble {
                     }
                 }
             }
+            void serializar(rapidjson::Document* doc) const
+            {
+                doc->SetObject();
+                doc->AddMember("nome", rapidjson::Value().SetString(Name, doc->GetAllocator()),doc->GetAllocator());
+                
+                rapidjson::Value arr(rapidjson::kArrayType);
+                for (auto& entidade : Entidades)
+                {
+                    arr.PushBack(entidade->serializar(doc), doc->GetAllocator());
+                }
 
+                doc->AddMember("entidades", arr,doc->GetAllocator());
+            }
+
+            std::string nome()
+            {
+                return Name;
+            }
         private:
             bool existeEntidade(Entidades::Entidade* entidade) {
                 for (const auto& obj : Entidades) {
@@ -75,9 +98,22 @@ namespace Bubble {
 
         public:
             SceneManager() : currentSceneIndex(-1) {}
+            
+
+
+            int numeroDeCenas() const
+            {
+                return scenes.size();
+            }
 
             void adicionarCena(std::shared_ptr<Scene> scene) {
                 scenes.push_back(scene);
+                currentSceneIndex = scenes.size() - 1;
+            }
+
+            int cenaAtual()
+            {
+                return currentSceneIndex;
             }
 
             void carregarCena(int sceneIndex) {

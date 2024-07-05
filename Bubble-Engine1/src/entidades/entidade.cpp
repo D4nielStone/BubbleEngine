@@ -1,4 +1,5 @@
 #include "entidade.h"
+#include "rapidjson/stringbuffer.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -63,6 +64,16 @@ namespace Bubble {
 			componente->definirPai(this);
 			Componentes.push_back(componente);
 		}
+		rapidjson::Value Entidade::serializar(rapidjson::Document* v)
+		{
+			rapidjson::Value obj(rapidjson::kObjectType);
+			obj.AddMember("nome", rapidjson::Value().SetString(Nome, v->GetAllocator()), v->GetAllocator());
+			rapidjson::Value array(rapidjson::kArrayType);
 
+			array.PushBack(transformacao->serializar(v), v->GetAllocator());
+			
+			obj.AddMember("transformacao", array, v->GetAllocator());
+			return obj;
+		}
 	}
 }

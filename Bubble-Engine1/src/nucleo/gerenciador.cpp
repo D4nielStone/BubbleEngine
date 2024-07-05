@@ -2,11 +2,16 @@
 #include "src/componentes/transformacao/transformacao.h"
 #include "src/componentes/renderizador/renderizador.h"
 #include "src/inputs/gameinputs.h"
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "filesystem"
 #include <FreeImage.h>
 
 float deltaTime = 1;
 
-GLFWimage loadImage(const std::string& filepath) {
+GLFWimage loadImage(const std::string& filepath)
+{
     GLFWimage image = {};
     FREE_IMAGE_FORMAT format = FreeImage_GetFileType(filepath.c_str(), 0);
     if (format == FIF_UNKNOWN) {
@@ -48,10 +53,9 @@ GLFWimage loadImage(const std::string& filepath) {
     FreeImage_Unload(converted);
     return image;
 }
-
-
 //@Initialize GLFW and GLAD
-bool Bubble::Nucleo::Gerenciador::inicializacao() {
+bool Bubble::Nucleo::Gerenciador::inicializacao() 
+{
     if (!glfwInit())
         return false;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -62,36 +66,35 @@ bool Bubble::Nucleo::Gerenciador::inicializacao() {
         glfwTerminate();
         return false;
     }
+
     glfwMakeContextCurrent(glfwWindow);
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+    
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) 
         return false;
-    }
-
-
-    //auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
-    //GLFWimage icone;
-    //icone.pixels = icone_.obterDados();
+        //auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
+        //GLFWimage icone;
+        //icone.pixels = icone_.obterDados();
     GLFWimage icone = loadImage("ICON.ico");
     glfwSetWindowIcon(glfwWindow, 1, &icone);
-
     return true;
 }
-int Bubble::Nucleo::Gerenciador::pararloop() {
+int Bubble::Nucleo::Gerenciador::pararloop() 
+{
     return glfwWindowShouldClose(glfwWindow);
 }
 //@Render OpenGL (virtual function)
-void Bubble::Nucleo::Gerenciador::renderizar() {
-        /* Render here */
+void Bubble::Nucleo::Gerenciador::renderizar()
+{
+    /* Render here */
     float st = glfwGetTime();
-
     int display_w, display_h;
     glfwGetFramebufferSize(glfwWindow, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
-    
+
     gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
     /* Swap front and back buffers */
     glfwSwapBuffers(glfwWindow);
-    
+
     /* Poll for and process events */
     glfwPollEvents();
 
@@ -100,4 +103,68 @@ void Bubble::Nucleo::Gerenciador::renderizar() {
 void Bubble::Nucleo::Gerenciador::limpar() {
     glfwDestroyWindow(glfwWindow);
     glfwTerminate();
+}
+std::shared_ptr<Bubble::Nucleo::Scene> Bubble::Nucleo::Gerenciador::criarProjetoPadrao()
+{
+    auto scene = std::make_shared<Scene>("Cena Padrão");
+    auto bola = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+    auto chao = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae"));
+    auto cam = std::make_shared<Bubble::Entidades::Entidade>();
+    
+    chao->obterTransformacao()->definirPosicao(glm::vec3(0, -2, 0));
+    chao->obterTransformacao()->definirEscala(glm::vec3(2, 0.5, 2));
+    cam->obterTransformacao()->definirPosicao(glm::vec3(0, 0, -5));
+    
+    cam->adicionarComponente(std::make_shared < Bubble::Componentes::Camera>());
+    bola->adicionarComponente(std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua"));
+    
+    scene->adicionarEntidade(cam);
+    scene->adicionarEntidade(chao);
+    scene->adicionarEntidade(bola);
+    
+    gerenciadorDeCenas.adicionarCena(scene);
+    gerenciadorDeCenas.carregarCena(gerenciadorDeCenas.cenaAtual());
+    return scene;
+}
+bool Bubble::Nucleo::Gerenciador::criarProjeto(const std::string& rootpath, const std::string& nome)
+{
+    rapidjson::Document doc;
+    doc.SetArray();
+
+    auto scene = criarProjetoPadrao();
+
+    scene->serializar(&doc);
+
+//    if (!std::filesystem::exists(rootpath + "/" + nome + "/ativos"))
+  //  {
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/modelos");
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/texturas");
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/shaders");
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/sons");
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/cenas");
+        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/materiais");
+        
+        rapidjson::StringBuffer buffer;
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        doc.Accept(writer);
+        
+        std::ofstream output(rootpath + "/" + nome + "/ativos/cenas/" + scene->nome() + ".bubble");
+        if (!output.is_open())
+        {
+            return false;
+        }
+        std::cout << buffer.GetString();
+        output << buffer.GetString();
+        output.close();
+    //}
+
+
+    //else
+        //return false;
+    return true;
+}
+bool Bubble::Nucleo::Gerenciador::carregarProjeto(const std::string& path)
+{
+    
+    return true;
 }
