@@ -12,6 +12,8 @@
 #include <stdexcept>
 #include "rapidjson/document.h"
 
+enum class Modo;
+
 namespace Bubble {
 	namespace Entidades {
 		class Entidade {
@@ -20,7 +22,7 @@ namespace Bubble {
 
 			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 
-			void atualizar(float deltaTime);
+			void atualizar(Modo m, float deltaTime, float aspecto);
 
 			const char* nome();
 

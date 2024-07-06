@@ -1,5 +1,6 @@
 #include "entidade.h"
 #include "rapidjson/stringbuffer.h"
+#include "src/nucleo/scenemanager.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -12,9 +13,17 @@ namespace Bubble {
 		Entidade::Entidade() : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()) {
 			adicionarComponente(std::make_shared<Bubble::Componentes::Transformacao>());
 		};
-		void Entidade::atualizar(float deltaTime) {
-			for (auto& c : Componentes) {
-				c->atualizar(deltaTime);  // Certifique-se de que atualizar recebe deltaTime como parâmetro
+		void Entidade::atualizar(Modo m, float deltaTime, float aspecto) {
+			for (auto c : Componentes) {
+				if(m == Modo::Jogo)
+				{
+					c->atualizar(deltaTime);
+					dynamic_cast<Componentes::Camera*>(c.get())->atualizarAspecto(aspecto);
+				}
+				else if (!dynamic_cast<Componentes::Camera*>(c.get()))
+				{
+					c->atualizar(deltaTime);
+				}
 			}
 		}
 

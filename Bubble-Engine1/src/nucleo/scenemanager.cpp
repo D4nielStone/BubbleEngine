@@ -1,7 +1,9 @@
 #include "scenemanager.h"
 #include "src/debug/debug.h"
 
+std::shared_ptr<Shader>phong;
 namespace Bubble {
+
     namespace Nucleo {
 
         Scene::Scene(const char* name) : Name(name) {
@@ -18,23 +20,21 @@ namespace Bubble {
             }
         }
 
-        void Scene::atualizar(float deltaTime) {
+        void Scene::atualizar(Modo m, float deltaTime, float aspecto) {
             glEnable(GL_DEPTH_TEST);
             glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
             glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
             for (auto& obj : Entidades) {
-                obj->atualizar(deltaTime);
+                obj->atualizar(m, deltaTime, aspecto);
             }
         }
 
         void Scene::
             carregar() {
-            auto phong = new Shader("assets/shaders/phong.vert", "assets/shaders/phong.frag");
-            phong->use();
 
             for (auto& obj : Entidades) {
                 for (auto& c : obj->listaDeComponentes()) {
-                    c->definirShader(phong);
+                    c->definirShader(phong.get());
                     
                     c->configurar();
                 }
@@ -66,7 +66,9 @@ namespace Bubble {
             return false;
         }
 
-        SceneManager::SceneManager() : currentSceneIndex(-1) {}
+        SceneManager::SceneManager() : currentSceneIndex(-1) 
+        {
+        }
         
         SceneManager::~SceneManager() {}
 
@@ -83,6 +85,9 @@ namespace Bubble {
         }
 
         void SceneManager::carregarCena(int sceneIndex) {
+            phong = std::make_shared<Shader>("assets/shaders/phong.vert", "assets/shaders/phong.frag");
+            phong->use();
+            camera_do_editor.definirShader(phong.get());
             if (sceneIndex >= 0 && sceneIndex < scenes.size()) {
                 currentSceneIndex = sceneIndex;
 
@@ -98,9 +103,15 @@ namespace Bubble {
             }
         }
 
-        void SceneManager::atualizarCenaAtual(float deltaTime) {
-            if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) {
-                scenes[currentSceneIndex]->atualizar(deltaTime);
+        void SceneManager::atualizarCenaAtual(Modo m, float deltaTime, float aspecto) {
+            if(m == Modo::Editor)
+            {
+                camera_do_editor.atualizarAspecto(aspecto);
+                camera_do_editor.atualizar(deltaTime);
+            }
+            if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) 
+            {
+                scenes[currentSceneIndex]->atualizar(m, deltaTime, aspecto);
             }
         }
 

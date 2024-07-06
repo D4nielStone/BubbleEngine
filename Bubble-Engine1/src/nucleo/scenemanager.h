@@ -10,6 +10,13 @@
 #include "rapidjson/stringbuffer.h"
 #include "src/entidades/entidade.h"
 #include "src/arquivadores/shader.h"
+#include "src/entidades/camera_editor.h"
+
+enum class BECORE_DLL_API Modo
+{
+    Editor,
+    Jogo
+};
 
 namespace Bubble {
     namespace Nucleo {
@@ -29,7 +36,7 @@ namespace Bubble {
 
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
 
-            void atualizar(float deltaTime);
+            void atualizar(Modo m, float deltaTime,float aspecto);
 
             void carregar();
 
@@ -43,13 +50,11 @@ namespace Bubble {
 
         class BECORE_DLL_API SceneManager {
         private:
-            std::vector<std::shared_ptr<Scene>> 
-                
-                
-                scenes; // vetor de cenas disponíveis
-            int currentSceneIndex;                      // índice da cena atual
+            std::vector<std::shared_ptr<Scene>> scenes; 
+            int currentSceneIndex;
 
         public:
+            Bubble::Entidades::CameraEditor camera_do_editor;
             SceneManager();
 
             ~SceneManager();
@@ -62,7 +67,7 @@ namespace Bubble {
 
             void carregarCena(int sceneIndex);
 
-            void atualizarCenaAtual(float deltaTime);
+            void atualizarCenaAtual(Modo m, float deltaTime,float aspecto);
         };
 
     } // namespace Nucleo

@@ -162,6 +162,7 @@
   <ItemGroup>
     <ClInclude Include="becore.h" />
     <ClInclude Include="src\debug\debug.h" />
+    <ClInclude Include="src\entidades\camera_editor.h" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
     <ClInclude Include="src\inputs\gameinputs.h" />
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
+    <ClCompile Include="src\entidades\camera_editor.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\inputs\gameinputs.cpp" />

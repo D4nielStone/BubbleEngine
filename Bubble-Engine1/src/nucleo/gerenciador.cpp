@@ -85,7 +85,7 @@ int Bubble::Nucleo::Gerenciador::pararloop()
     return glfwWindowShouldClose(glfwWindow);
 }
 //@Render OpenGL (virtual function)
-void Bubble::Nucleo::Gerenciador::renderizar()
+void Bubble::Nucleo::Gerenciador::renderizar(Modo m)
 {
     /* Render here */
     float st = glfwGetTime();
@@ -93,7 +93,7 @@ void Bubble::Nucleo::Gerenciador::renderizar()
     glfwGetFramebufferSize(glfwWindow, &display_w, &display_h);
     glViewport(0, 0, display_w, display_h);
 
-    gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
+    gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, display_w/display_h);
     /* Swap front and back buffers */
     glfwSwapBuffers(glfwWindow);
 
@@ -111,16 +111,12 @@ std::shared_ptr<Bubble::Nucleo::Scene> Bubble::Nucleo::Gerenciador::criarProjeto
     auto scene = std::make_shared<Scene>("Cena Padrão");
     auto bola = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
     auto chao = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae"));
-    auto cam = std::make_shared<Bubble::Entidades::Entidade>();
     
     chao->obterTransformacao()->definirPosicao(glm::vec3(0, -2, 0));
     chao->obterTransformacao()->definirEscala(glm::vec3(2, 0.5, 2));
-    cam->obterTransformacao()->definirPosicao(glm::vec3(0, 0, -5));
     
-    cam->adicionarComponente(std::make_shared < Bubble::Componentes::Camera>());
     bola->adicionarComponente(std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua"));
     
-    scene->adicionarEntidade(cam);
     scene->adicionarEntidade(chao);
     scene->adicionarEntidade(bola);
     
@@ -137,8 +133,6 @@ bool Bubble::Nucleo::Gerenciador::criarProjeto(const std::string& rootpath, cons
 
     scene->serializar(&doc);
 
-//    if (!std::filesystem::exists(rootpath + "/" + nome + "/ativos"))
-  //  {
         std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/modelos");
         std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/texturas");
         std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/shaders");
@@ -158,11 +152,6 @@ bool Bubble::Nucleo::Gerenciador::criarProjeto(const std::string& rootpath, cons
         std::cout << buffer.GetString();
         output << buffer.GetString();
         output.close();
-    //}
-
-
-    //else
-        //return false;
     return true;
 }
 bool Bubble::Nucleo::Gerenciador::carregarProjeto(const std::string& path)

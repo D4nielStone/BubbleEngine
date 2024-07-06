@@ -9,11 +9,12 @@ namespace Bubble {
         class Camera : public Bubble::Comum::Componente
         {
         public:
-            float FoV = 45.0f;
-            Camera() {};
+            Camera();
             void configurar() override;
             void atualizar(float deltaTime) override;
-        private:
+            void atualizarAspecto(float aspect);
+        protected:
+            float FOV, aspecto, zFar, zNear;
             glm::mat4 matrizProjecao;
             glm::mat4 matrizVisualizacao;
         };

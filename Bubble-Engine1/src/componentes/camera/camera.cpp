@@ -3,13 +3,18 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "src/entidades/entidade.h"
 
+Bubble::Componentes::Camera::Camera() : FOV(45.0f), aspecto(4 / 3), zNear(0.1), zFar(100) {}
 
 void Bubble::Componentes::Camera::configurar() {
 	std::cout << ">> Camera configurada\n";
 }
+void Bubble::Componentes::Camera::atualizarAspecto(float aspect)
+{
+    aspecto = aspect;
+}
 void Bubble::Componentes::Camera::atualizar(float deltaTime) {
     matrizProjecao = glm::perspective(
-        glm::radians(FoV),
+        glm::radians(FOV),
         4.0f / 3.0f,
         0.1f,
         100.0f

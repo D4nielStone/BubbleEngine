@@ -18,7 +18,7 @@ namespace Bubble {
 			GLFWwindow* glfwWindow;
 			bool inicializacao();
 			int pararloop();
-			void renderizar();
+			void renderizar(Modo m);
 			void limpar();
 			bool carregarProjeto(const std::string& path);
 			bool criarProjeto(const std::string& path, const std::string& nome);

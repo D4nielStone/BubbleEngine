@@ -66,6 +66,9 @@
     <ClInclude Include="src\debug\debug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\entidades\camera_editor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nucleo\gerenciador.cpp">
@@ -99,6 +102,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entidades\camera_editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
