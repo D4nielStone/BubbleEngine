@@ -98,9 +98,6 @@
     <ClCompile Include="src\nucleo\scenemanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\nucleo\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

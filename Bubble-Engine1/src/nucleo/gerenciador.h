@@ -5,13 +5,15 @@
 #include <GLFW/glfw3.h>
 #include "includes.h"
 #include "src/nucleo/scenemanager.h"
+#include "becore.h"
 
 namespace Bubble {
 	namespace Nucleo {
-		class Gerenciador
+		class BECORE_DLL_API Gerenciador
 		{
-		private:
 		public:
+			Gerenciador();
+			~Gerenciador();
 			SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
 			bool inicializacao();

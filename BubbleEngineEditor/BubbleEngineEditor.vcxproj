@@ -24,6 +24,7 @@
     <ProjectGuid>{ee4dccfd-0b6b-491a-806b-dbc8a393313c}</ProjectGuid>
     <RootNamespace>BubbleEngineEditor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>editor</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -134,6 +135,9 @@
     <ProjectReference Include="..\Bubble-Engine1\Bubble-Engine1.vcxproj">
       <Project>{43f2e8ca-ebd9-4e23-b6b9-a87341710c99}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

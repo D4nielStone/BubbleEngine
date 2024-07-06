@@ -180,7 +180,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
-    <ClCompile Include="src\nucleo\main.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\inputs\gameinputs.cpp" />

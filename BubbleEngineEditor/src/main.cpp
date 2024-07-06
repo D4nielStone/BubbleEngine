@@ -1,5 +1,4 @@
-#include "gerenciador.h" 
-#include "src/arquivadores/shader.h"
+#include "src/nucleo/gerenciador.h"
 
 int main() {
     Bubble::Nucleo::Gerenciador gerenciador;

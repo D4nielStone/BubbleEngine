@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "src/nucleo/scenemanager.h"
+#include "src/nucleo/gerenciador.h"
 
 int main(int argc, char** argv)
 {
@@ -9,6 +9,13 @@ int main(int argc, char** argv)
     system("pause");
     return 0;
 }
+
+TEST(GerenciadorTest, Testando_Gerenciador_Inicialização)
+{
+    Bubble::Nucleo::Gerenciador g;
+    EXPECT_EQ(g.inicializacao(), 1);
+}
+
 TEST(SceneManagerTest, Testando_Adicionar_Cena)
 {
     Bubble::Nucleo::SceneManager sm;
