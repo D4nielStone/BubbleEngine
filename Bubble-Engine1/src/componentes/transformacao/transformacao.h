@@ -61,7 +61,7 @@ namespace Bubble {
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.x), doc->GetAllocator());
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.y), doc->GetAllocator());
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.z), doc->GetAllocator());
-
+            
                 obj.AddMember("rotacao", rotacaoarr, doc->GetAllocator());
                 
                 rapidjson::Value escalaarr(rapidjson::kArrayType);

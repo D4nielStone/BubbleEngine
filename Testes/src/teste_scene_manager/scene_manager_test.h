@@ -1,14 +1,11 @@
 #include <gtest/gtest.h>
-#include <Bubble-Engine1/src/nucleo/scenemanager.h>
-
-using namespace Bubble::Nucleo;
+#include "src/nucleo/scenemanager.h"
 
 TEST(SceneManagerTest, TesteAdicionarCena)
 {
-    
-    SceneManager sm;
+    Bubble::Nucleo::SceneManager sm;
 
-    auto cena = std::make_shared<Scene>("CENA GTEST");
+    auto cena = std::make_shared<Bubble::Nucleo::Scene>("CENA GTEST");
     
     sm.adicionarCena(cena);
 
@@ -16,9 +13,9 @@ TEST(SceneManagerTest, TesteAdicionarCena)
 }
 TEST(SceneManagerTest, TesteCarregarCena)
 {
-    SceneManager sm;
+    Bubble::Nucleo::SceneManager sm;
 
-    auto cena = std::make_shared<Scene>("CENA GTEST");
+    auto cena = std::make_shared<Bubble::Nucleo::Scene>("CENA GTEST");
 
     sm.adicionarCena(cena);
 

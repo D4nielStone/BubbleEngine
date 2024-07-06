@@ -1,11 +1,27 @@
 #include "Shader.h"
+#include <GLFW/glfw3.h>
+
+ShaderException::ShaderException(const char* msg) : msg_(msg) {}
+const char* ShaderException::what() const noexcept
+{
+    return msg_.c_str();
+}
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     compilar(vertexPath, fragmentPath);
 }
 
 void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
-    ID = glCreateProgram();
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        throw ShaderException("Falha ao iniciar o glad");
+    }
+    try {
+        ID = glCreateProgram();
+    }
+    catch(std::exception& e){
+        std::cerr << "Erro ao criar shader_program::" << e.what() << std::endl;
+    }
     std::string vertexCode;
     std::string fragmentCode;
     std::ifstream vShaderFile;

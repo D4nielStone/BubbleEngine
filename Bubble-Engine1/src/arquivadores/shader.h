@@ -9,6 +9,15 @@
 #include <iostream>
 #include <glm/gtc/type_ptr.hpp>
 
+class ShaderException : public std::exception 
+{
+public:
+    ShaderException(const char* msg);
+    virtual const char* what() const noexcept override;
+private:
+    std::string msg_;
+};
+
 class Shader
 {
 public:

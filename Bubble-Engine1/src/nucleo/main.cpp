@@ -5,7 +5,6 @@ int main() {
     Bubble::Nucleo::Gerenciador gerenciador;
 
     if (!gerenciador.inicializacao()) {
-        std::cerr << "\n>> Não foi possível inicializar o gerenciador\n";
         return -1;
     }
 

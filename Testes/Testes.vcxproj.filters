@@ -18,8 +18,5 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\teste_scene_manager\scene_manager_test.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -60,6 +60,12 @@
     <ClInclude Include="src\nucleo\scenemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="becore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\debug\debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nucleo\gerenciador.cpp">
@@ -93,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\nucleo\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\arquivadores\arquivo3d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
