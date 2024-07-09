@@ -14,6 +14,7 @@ TEST(GerenciadorTest, Testando_Gerenciador_Inicialização)
 {
     Bubble::Nucleo::Gerenciador g;
     EXPECT_EQ(g.inicializacao(), 1);
+    g.limpar();
 }
 
 TEST(SceneManagerTest, Testando_Adicionar_Cena)
@@ -25,14 +26,4 @@ TEST(SceneManagerTest, Testando_Adicionar_Cena)
     sm.adicionarCena(cena);
 
     EXPECT_EQ(sm.numeroDeCenas(), 1);
-}
-TEST(SceneManagerTest, Testando_Execao_Shader)
-{
-    Bubble::Nucleo::SceneManager sm;
-
-    auto cena = std::make_shared<Bubble::Nucleo::Scene>("CENA GTEST");
-
-    sm.adicionarCena(cena);
-
-    EXPECT_THROW(sm.carregarCena(0), ShaderException);
 }

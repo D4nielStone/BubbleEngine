@@ -1,9 +1,16 @@
+#include "becore.h"
 #include "entidade.h"
 #include "rapidjson/stringbuffer.h"
 #include "src/nucleo/scenemanager.h"
 
 namespace Bubble {
 	namespace Entidades {
+		Entidade::~Entidade() {}
+
+		Entidade::Entidade(const char* name) : Nome(name), transformacao(std::make_shared<Bubble::Componentes::Transformacao>())
+		{
+			adicionarComponente(transformacao);
+		}
 
 		Entidade::Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto)
 			: transformacao(std::make_shared<Bubble::Componentes::Transformacao>()) { // Use std::make_shared aqui

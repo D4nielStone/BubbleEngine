@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "becore", "Bubble-Engine1\Bu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "Testes\Testes.vcxproj", "{BE98EEDB-67F8-43D7-85CB-5C4FC066C22D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BubbleEngineEditor", "BubbleEngineEditor\BubbleEngineEditor.vcxproj", "{EE4DCCFD-0B6B-491A-806B-DBC8A393313C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "BubbleEngineEditor\BubbleEngineEditor.vcxproj", "{EE4DCCFD-0B6B-491A-806B-DBC8A393313C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

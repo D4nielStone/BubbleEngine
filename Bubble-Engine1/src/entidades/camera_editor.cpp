@@ -1,4 +1,5 @@
 #include "camera_editor.h"
+#include "src/depuracao/debug.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -42,12 +43,16 @@ namespace Bubble {
                 }
             }
             else {
-                std::cerr << "Erro: meuObjeto não está definido.\n";
+                Debug::emitir(Debug::Tipo::Erro,"meuObjeto não está definido");
             }
 		}
 		void CameraEditor::configurar()
 		{
             Camera::configurar();
 		}
+        CameraEditor::~CameraEditor()
+        {
+
+        }
 	}
 }

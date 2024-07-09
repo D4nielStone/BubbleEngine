@@ -1,5 +1,6 @@
 #pragma once
 #include "src/comum/componente.h"
+#include "src/depuracao/debug.h"
 #include <iostream>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
@@ -35,12 +36,10 @@ namespace Bubble {
                     glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
                     shader->setMat4("model", glm::value_ptr(matriz_de_modelo));
                     shader->setMat3("normalMatrix", glm::value_ptr(normalMatrix));
-
-                    std::cout << ">> Transformacao atualizada\n";
                 }
             }
             void configurar() override {
-                std::cout << ">> Transformacao configurada\n";
+                Debug::emitir(Debug::Tipo::Mensagem, "Transformacao configurada");
             }
             glm::mat4 obterMatrizGlobal() const {
                 return matriz_de_modelo;

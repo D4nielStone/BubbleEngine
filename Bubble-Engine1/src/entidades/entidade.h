@@ -1,6 +1,7 @@
 #ifndef ENTIDADE_H
 #define ENTIDADE_H
 
+#include "becore.h"
 #include "src/comum/componente.h"
 #include "src/arquivadores/arquivo3d.h"
 #include "src/componentes/transformacao/transformacao.h"
@@ -16,9 +17,13 @@ enum class Modo;
 
 namespace Bubble {
 	namespace Entidades {
-		class Entidade {
+		class BECORE_DLL_API Entidade {
 		public:
 			Entidade();
+
+			Entidade(const char* name);
+
+			~Entidade();
 
 			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 

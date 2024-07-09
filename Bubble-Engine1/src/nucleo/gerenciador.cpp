@@ -6,6 +6,8 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "filesystem"
+#include "becore.h"
+#include "imgui.h"
 
 float deltaTime = 1;
 
@@ -85,24 +87,27 @@ int Bubble::Nucleo::Gerenciador::pararloop()
     return glfwWindowShouldClose(glfwWindow);
 }
 //@Render OpenGL (virtual function)
-void Bubble::Nucleo::Gerenciador::renderizar(Modo m)
+void Bubble::Nucleo::Gerenciador::renderizar(Modo m, ImVec2 tamanhoJanela)
 {
-    /* Render here */
     float st = glfwGetTime();
-    int display_w, display_h;
-    glfwGetFramebufferSize(glfwWindow, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
+    if (m == Modo::Editor)
+    {
+        int w, h;
+        glfwGetFramebufferSize(glfwWindow, &w, &h);
+        // Bind to the framebuffer and render the scene
+        glBindFramebuffer(GL_FRAMEBUFFER, gerenciadorDeCenas.camera_do_editor.FBO);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        gerenciadorDeCenas.atualizarCenaAtual(Modo::Editor, deltaTime, w ,h, tamanhoJanela.x, tamanhoJanela.y);
+        gerenciadorDeCenas.camera_do_editor.transformacao->definirPosicao(glm::vec3(0, 0, -5));
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, display_w/display_h);
-    /* Swap front and back buffers */
-    glfwSwapBuffers(glfwWindow);
 
-    /* Poll for and process events */
-    glfwPollEvents();
-
+        glfwSwapBuffers(glfwWindow);
+        glfwPollEvents();
+    }
     deltaTime = glfwGetTime() - st;
 }
-void Bubble::Nucleo::Gerenciador::limpar() {
+void Bubble::Nucleo::Gerenciador::limpar() const {
     glfwDestroyWindow(glfwWindow);
     glfwTerminate();
 }

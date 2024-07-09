@@ -125,7 +125,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -161,7 +161,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="becore.h" />
-    <ClInclude Include="src\debug\debug.h" />
     <ClInclude Include="src\entidades\camera_editor.h" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
@@ -181,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
+    <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\camera_editor.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
@@ -194,7 +194,6 @@
     <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\scripts\rotacionar.lua" />
     <None Include="assets\shaders\phong.frag" />
     <None Include="assets\shaders\phong.vert" />
   </ItemGroup>
@@ -203,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\depuracao\debug.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

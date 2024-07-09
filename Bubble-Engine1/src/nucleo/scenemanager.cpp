@@ -1,5 +1,6 @@
 #include "scenemanager.h"
-#include "src/debug/debug.h"
+#include "becore.h"
+#include "src/depuracao/debug.h"
 
 std::shared_ptr<Shader>phong;
 namespace Bubble {
@@ -8,14 +9,19 @@ namespace Bubble {
 
         Scene::Scene(const char* name) : Name(name) {
             std::string msg = std::string(name) + " criada";
-            Debug::emitir(Tipo::Mensagem, msg.c_str());
+            Debug::emitir(Debug::Tipo::Mensagem, msg.c_str());
         }
         
         Scene::~Scene() {}
 
-        void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
-            // Verifica se a entidade já existe na cena antes de adicionar
+        void Scene::
+            adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
             if (!existeEntidade(gameObject.get())) {
+                for (auto& c : gameObject->listaDeComponentes()) {
+                    c->definirShader(phong.get());
+
+                    c->configurar();
+                }
                 Entidades.push_back(gameObject);
             }
         }
@@ -80,13 +86,18 @@ namespace Bubble {
             scenes.push_back(scene);
         }
 
-        int SceneManager::cenaAtual() const {
+        int SceneManager::cenaAtualIdx() const {
             return currentSceneIndex;
+        }
+        
+        std::shared_ptr<Scene> SceneManager::cenaAtual() const {
+            return scenes[currentSceneIndex];
         }
 
         void SceneManager::carregarCena(int sceneIndex) {
             phong = std::make_shared<Shader>("assets/shaders/phong.vert", "assets/shaders/phong.frag");
             phong->use();
+            camera_do_editor.configurar();
             camera_do_editor.definirShader(phong.get());
             if (sceneIndex >= 0 && sceneIndex < scenes.size()) {
                 currentSceneIndex = sceneIndex;
@@ -94,26 +105,57 @@ namespace Bubble {
                 std::string msg("Carregando cena ");
                 std::string soma = msg + std::to_string(currentSceneIndex);
 
-                Debug::emitir(Tipo::Mensagem, soma.c_str());
+                Debug::emitir(Debug::Tipo::Mensagem, soma.c_str());
                 
                 scenes[currentSceneIndex]->carregar();
             }
             else {
-                std::cerr << "Erro: índice da cena não é válido!" << std::endl;
+                Debug::emitir(Debug::Tipo::Erro,"índice da cena não é válido");
             }
         }
 
-        void SceneManager::atualizarCenaAtual(Modo m, float deltaTime, float aspecto) {
-            if(m == Modo::Editor)
-            {
+        void SceneManager::atualizarCenaAtual(Modo m, float deltaTime, int window_w, int window_h, int fb_w, int fb_h)
+        {
+            float aspecto = (m == Modo::Editor) ? static_cast<float>(window_w) / window_h : static_cast<float>(fb_w) / fb_h;
+
+            // Ajustar o viewport para centralizar a imagem
+            int width, height;
+            if (m == Modo::Editor) {
+                width = window_w;
+                height = window_h;
+            }
+            else {
+                width = fb_w;
+                height = fb_h;
+            }
+
+            // Calcular as dimensões do viewport centralizado
+            int viewportWidth = static_cast<int>(height * aspecto);
+            int viewportHeight = height;
+
+            if (viewportWidth > width) {
+                viewportWidth = width;
+                viewportHeight = static_cast<int>(width / aspecto);
+            }
+
+            int viewportX = (width - viewportWidth) / 2;
+            int viewportY = (height - viewportHeight) / 2;
+
+            // Definir o viewport
+            glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
+
+            // Atualizar a câmera
+            if (m == Modo::Editor) {
                 camera_do_editor.atualizarAspecto(aspecto);
                 camera_do_editor.atualizar(deltaTime);
             }
-            if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) 
-            {
+
+            if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) {
                 scenes[currentSceneIndex]->atualizar(m, deltaTime, aspecto);
             }
         }
+    
+
 
     } // namespace Nucleo
 } // namespace Bubble

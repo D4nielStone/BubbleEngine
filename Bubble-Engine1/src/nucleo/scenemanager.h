@@ -1,7 +1,6 @@
 #ifndef SCENEMANAGER_H
 #define SCENEMANAGER_H
 
-
 #include "becore.h"
 #include <vector>
 #include <memory>
@@ -63,11 +62,13 @@ namespace Bubble {
 
             void adicionarCena(std::shared_ptr<Scene> scene);
 
-            int cenaAtual() const;
+            int cenaAtualIdx() const;
+            
+            std::shared_ptr<Scene> cenaAtual() const;
 
             void carregarCena(int sceneIndex);
 
-            void atualizarCenaAtual(Modo m, float deltaTime,float aspecto);
+            void atualizarCenaAtual(Modo m, float deltaTime, int window_w, int window_h, int fb_w, int fb_h);
         };
 
     } // namespace Nucleo

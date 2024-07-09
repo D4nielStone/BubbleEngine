@@ -2,6 +2,7 @@
 #include "src/comum/componente.h"
 #include "includes.h"
 #include <glad/glad.h>
+#include "src/depuracao/debug.h"
 
 namespace Bubble{
     namespace Componentes {
@@ -77,22 +78,21 @@ namespace Bubble{
         public:
             Renderizador() {
                 Nome = "Renderizador";
-                std::cout << ">> Renderizador criado\n";
+                Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
             };
             Renderizador(Vertex vertex, Material materials) : mVertex(vertex), mMaterial(materials) {
                 Nome = "Renderizador";
-                std::cout << ">> Renderizador criado\n";
+                Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
             };
             Renderizador(Vertex vertex) : mVertex(vertex) {
                 Nome = "Renderizador";
-                std::cout << ">> Renderizador criado\n";
+                Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
             };
             void configurar() override {
                 configurarBuffers();
-                std::cout << ">> Renderizador configurado\n";
+                Debug::emitir(Debug::Tipo::Mensagem, "Renderizador configurado");
             }
             void atualizar(float deltaTime) override {
-                std::cout << ">> Renderizador atualizado\n";
                 atualizarCores();
                 desenharModelo();
             }
