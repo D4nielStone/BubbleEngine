@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "becore", "Bubble-Engine1\Bubble-Engine1.vcxproj", "{43F2E8CA-EBD9-4E23-B6B9-A87341710C99}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "becore", "becore\becore.vcxproj", "{43F2E8CA-EBD9-4E23-B6B9-A87341710C99}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "Testes\Testes.vcxproj", "{BE98EEDB-67F8-43D7-85CB-5C4FC066C22D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{BE98EEDB-67F8-43D7-85CB-5C4FC066C22D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "BubbleEngineEditor\BubbleEngineEditor.vcxproj", "{EE4DCCFD-0B6B-491A-806B-DBC8A393313C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcxproj", "{EE4DCCFD-0B6B-491A-806B-DBC8A393313C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
