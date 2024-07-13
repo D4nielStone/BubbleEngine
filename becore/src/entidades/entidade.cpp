@@ -21,16 +21,9 @@ namespace Bubble {
 			adicionarComponente(std::make_shared<Bubble::Componentes::Transformacao>());
 		};
 		void Entidade::atualizar(Modo m, float deltaTime, float aspecto) {
-			for (auto c : Componentes) {
-				if(m == Modo::Jogo)
-				{
-					c->atualizar(deltaTime);
-					dynamic_cast<Componentes::Camera*>(c.get())->atualizarAspecto(aspecto);
-				}
-				else if (!dynamic_cast<Componentes::Camera*>(c.get()))
-				{
-					c->atualizar(deltaTime);
-				}
+			for (auto c : Componentes) 
+			{
+				c->atualizar(deltaTime);
 			}
 		}
 
@@ -49,13 +42,13 @@ namespace Bubble {
 			}
 		}
 
-		Bubble::Comum::Componente& Entidade::obterComponente(const std::string& nome) {
+		std::shared_ptr<Bubble::Comum::Componente> Entidade::obterComponente(const std::string& nome) {
 			for (auto& c : Componentes) {
 				if (c->nome() == nome) {
-					return *c;
+					return c;
 				}
 			}
-			throw std::runtime_error("Componente não encontrado: " + nome);
+			return nullptr;
 		}
 
 		std::vector<std::reference_wrapper<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome) {

@@ -7,7 +7,7 @@ namespace Bubble
 {
     namespace Componentes
     {
-        Terreno::Terreno() : scale(50.0), width(250), depth(250) {}
+        Terreno::Terreno() : scale(50.0), width(100), depth(100) {}
 
         Terreno::~Terreno()
         {
@@ -66,7 +66,6 @@ namespace Bubble
 
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindVertexArray(0);
-            Debug::emitir(Debug::Tipo::Mensagem, "buffers do Terreno configurados");
         }
 
         void Terreno::gerarHeightMap()
@@ -125,6 +124,7 @@ namespace Bubble
         {
             gerarHeightMap();
             configurarBuffers();
+            Debug::emitir(Debug::Tipo::Mensagem, "Terreno configurado");
         }
 
         void Terreno::calcularNormais()
@@ -164,7 +164,6 @@ namespace Bubble
                 mVertex.normals[i + 1] = normal.y;
                 mVertex.normals[i + 2] = normal.z;
             }
-            Debug::emitir(Debug::Tipo::Mensagem, "normais do Terreno configuradas");
         }
     }
 }

@@ -1,7 +1,7 @@
 #ifndef IMAGELOADER_H
 #define IMAGELOADER_H
-#include <stb_image.h>
 #include <string>
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "becore.h"
 

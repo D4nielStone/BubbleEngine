@@ -10,6 +10,7 @@
 #include "src/entidades/entidade.h"
 #include "src/arquivadores/shader.h"
 #include "src/entidades/camera_editor.h"
+#include "src/util/skybox.h"
 
 enum class BECORE_DLL_API Modo
 {
@@ -23,10 +24,11 @@ namespace Bubble {
         class BECORE_DLL_API Scene {
         private:
             const char* Name;
-            std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>
-                Entidades; // vetor de objetos na cena
-
+            Bubble::Util::Skybox skybox;
         public:
+            std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
+            Bubble::Entidades::CameraEditor camera_editor;
+            Bubble::Componentes::Camera* camera_principal = nullptr;
             Scene() : Name("Cena sem nome") {}
 
             ~Scene();
@@ -53,7 +55,6 @@ namespace Bubble {
             int currentSceneIndex;
 
         public:
-            Bubble::Entidades::CameraEditor camera_do_editor;
             SceneManager();
 
             ~SceneManager();

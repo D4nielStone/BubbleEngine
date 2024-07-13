@@ -16,6 +16,8 @@ namespace Bubble {
             void configurar() override;
             void atualizar(float deltaTime) override;
             void atualizarAspecto(float aspect);
+            const float* obterViewMatrix();
+            const float* obterProjMatrix();
             GLuint FBO, textureColorbuffer, rbo;
         protected:
             float FOV, aspecto, zFar, zNear;

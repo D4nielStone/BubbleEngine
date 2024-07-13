@@ -3,12 +3,19 @@
 
 namespace Bubble {
 	namespace Entidades {
-		CameraEditor::CameraEditor() : alvoCamera(0,0,0) {
+		CameraEditor::CameraEditor(Bubble::Inputs::GameInputs* input) : alvoCamera(0,0,0), inputs(input) {
             transformacao = std::make_shared<Componentes::Transformacao>();
             FOV = 45.0f;
             aspecto = 4 / 3;
             zNear = 0.1;
-            zFar = 100.f;
+            zFar = 300.f;
+        }
+        CameraEditor::CameraEditor() : alvoCamera(0,0,0){
+            transformacao = std::make_shared<Componentes::Transformacao>();
+            FOV = 45.0f;
+            aspecto = 4 / 3;
+            zNear = 0.1;
+            zFar = 300.f;
         }
         CameraEditor::CameraEditor(float fov, float aspect, float znear, float zfar)
         {
@@ -20,6 +27,13 @@ namespace Bubble {
         }
 		void CameraEditor::atualizar(float dt)
 		{
+            if (inputs && inputs->getInputMode() == InputMode::Editor)
+            {
+                if (inputs->isKeyPressed(Key::W))
+                {
+                    transformacao->Move(0, 0, dt * 10);
+                }
+            }
             matrizProjecao = glm::perspective(
                 glm::radians(FOV),
                 aspecto,
@@ -30,7 +44,7 @@ namespace Bubble {
             if (transformacao) {
                 glm::vec3 posicaoCamera = transformacao->obterPosicao();
                 glm::vec3 vetorCima(0, 1, 0);
-
+                timea += dt;
                 // Calculate view matrix
                 matrizVisualizacao = glm::lookAt(posicaoCamera, alvoCamera, vetorCima);
 
@@ -51,7 +65,7 @@ namespace Bubble {
 		}
         CameraEditor::~CameraEditor()
         {
-
+            Camera::~Camera();
         }
         void CameraEditor::olharPara(glm::vec3 pov)
         {

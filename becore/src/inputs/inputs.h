@@ -5,8 +5,9 @@
 #include <iostream>
 #include <unordered_map>
 #include <functional>
+#include "becore.h"
 
-enum class Key {
+enum class BECORE_DLL_API Key {
     W = 0, A = 1, S = 2, D = 3, E = 4, Q = 5, Shift = 6, Ctrl = 7, Alt = 8, Count = 9
 };
 
@@ -20,12 +21,12 @@ namespace std {
 }
 
 
-enum class InputMode {
+enum class BECORE_DLL_API InputMode {
     Editor,
     Game
 };
 
-class Inputs {
+class BECORE_DLL_API Inputs {
 public:
     Inputs();
 
@@ -33,6 +34,7 @@ public:
     void keyPressed(Key key);
     void keyReleased(Key key);
     bool isKeyPressed(Key key);
+    InputMode getInputMode() const;
 
 protected:
     virtual void handleKey(Key key);

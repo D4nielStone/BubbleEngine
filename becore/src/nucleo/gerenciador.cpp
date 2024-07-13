@@ -1,119 +1,145 @@
+#include <glad/glad.h>
 #include "gerenciador.h"
 #include "src/componentes/prototipo/terreno.h"
-#include "src/inputs/gameinputs.h"
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include "src/arquivadores/imageloader.h"
 #include "filesystem"
 #include "imgui.h"
-#include "src/arquivadores/imageloader.h"
 
 float deltaTime = 1;
-
-Bubble::Nucleo::Gerenciador::Gerenciador(){}
-Bubble::Nucleo::Gerenciador::~Gerenciador(){}
-
-
-//@Initialize GLFW and GLAD
-bool Bubble::Nucleo::Gerenciador::inicializacao() 
+namespace Bubble::Nucleo
 {
-    if (!glfwInit())
-        return false;
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    glfwWindow = glfwCreateWindow(640, 480, "Bubble", NULL, NULL);
-    if (!glfwWindow)
+    Engine::Engine() {}
+    Engine::~Engine() {}
+
+
+    //@Initialize GLFW and GLAD
+    bool Engine::inicializacao()
     {
-        glfwTerminate();
-        return false;
+        if (!glfwInit())
+            return false;
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindow = glfwCreateWindow(800, 500, "MotorBubble-Editor", NULL, NULL);
+        if (!glfwWindow)
+        {
+            glfwTerminate();
+            return false;
+        }
+
+        glfwMakeContextCurrent(glfwWindow);
+
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            return false;
+
+        auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
+        GLFWimage icone = icone_.converterParaGlfw();
+        if (icone_.carregado)
+        {
+            glfwSetWindowIcon(glfwWindow, 1, &icone);
+        }
+
+        glfwSetWindowUserPointer(glfwWindow, &inputs);
+        glfwSetKeyCallback(glfwWindow, keyCallback);
+
+        return true;
     }
-
-    glfwMakeContextCurrent(glfwWindow);
-    
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) 
-        return false;
-    
-    auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
-    GLFWimage icone = icone_.converterParaGlfw();
-    if (icone_.carregado)
+    int Engine::pararloop() const
     {
-        glfwSetWindowIcon(glfwWindow, 1, &icone);
+        return glfwWindowShouldClose(glfwWindow);
     }
-    return true;
-}
-int Bubble::Nucleo::Gerenciador::pararloop() 
-{
-    return glfwWindowShouldClose(glfwWindow);
-}
-void Bubble::Nucleo::Gerenciador::renderizar(Modo m, ImVec2 tamanhoJanela)
-{
-    float st = glfwGetTime();
-    if (m == Modo::Editor)
+    void Engine::renderizar(Modo m, ImVec2 tamanhoJanela)
     {
+        float st = glfwGetTime();
         int w, h;
+        auto cena = gerenciadorDeCenas.cenaAtual();
         glfwGetFramebufferSize(glfwWindow, &w, &h);
-        // Bind to the framebuffer and render the scene
-        glBindFramebuffer(GL_FRAMEBUFFER, gerenciadorDeCenas.camera_do_editor.FBO);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        gerenciadorDeCenas.atualizarCenaAtual(Modo::Editor, deltaTime, tamanhoJanela.x, tamanhoJanela.y, w, h);
-        gerenciadorDeCenas.camera_do_editor.transformacao->definirPosicao(glm::vec3(125, 10, 125));
+        if (m == Modo::Editor)
+        {
+            glBindFramebuffer(GL_FRAMEBUFFER, cena->camera_editor.FBO);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            gerenciadorDeCenas.atualizarCenaAtual(Modo::Editor, deltaTime, w, h, tamanhoJanela.x, tamanhoJanela.y);
+        }
+        else
+        {
+            if (cena->camera_principal)
+                glBindFramebuffer(GL_FRAMEBUFFER, cena->camera_principal->FBO);
+            else
+                glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            gerenciadorDeCenas.atualizarCenaAtual(Modo::Editor, deltaTime, w, h, tamanhoJanela.x, tamanhoJanela.y);
+        }
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-
-        glfwSwapBuffers(glfwWindow);
-        glfwPollEvents();
+        deltaTime = glfwGetTime() - st;
     }
-    deltaTime = glfwGetTime() - st;
-}
-void Bubble::Nucleo::Gerenciador::limpar() const {
-    glfwDestroyWindow(glfwWindow);
-    glfwTerminate();
-}
-std::shared_ptr<Bubble::Nucleo::Scene> Bubble::Nucleo::Gerenciador::criarProjetoPadrao()
-{
-    auto scene = std::make_shared<Scene>("Cena Padrão");
-    auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
-    
-    terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
-    
-    scene->adicionarEntidade(terreno);
-    
-    gerenciadorDeCenas.adicionarCena(scene);
-    gerenciadorDeCenas.carregarCena(gerenciadorDeCenas.numeroDeCenas()-1);
-    return scene;
-}
-bool Bubble::Nucleo::Gerenciador::criarProjeto(const std::string& rootpath, const std::string& nome)
-{
-    rapidjson::Document doc;
-    doc.SetArray();
+    void Engine::limpar() const {
+        glfwDestroyWindow(glfwWindow);
+        glfwTerminate();
+    }
+    std::shared_ptr<Bubble::Nucleo::Scene> Engine::criarProjetoPadrao()
+    {
+        //Cria cena
+        auto scene = std::make_shared<Scene>("Cena Padrão");
+        //Cira e configura entidade Terreno
+        auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
+        terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
 
-    auto scene = criarProjetoPadrao();
+        //Cria e configura entidade Camera
+        //auto camera = std::make_shared<Bubble::Entidades::Entidade>("Cam");
+        //camera->adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
 
-    scene->serializar(&doc);
+        auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
 
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/modelos");
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/texturas");
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/shaders");
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/sons");
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/cenas");
-        std::filesystem::create_directories(rootpath + "/" + nome + "/ativos/materiais");
-        
+        scene->adicionarEntidade(esfera);
+        scene->adicionarEntidade(terreno);
+        //scene->adicionarEntidade(camera);
+
+        gerenciadorDeCenas.adicionarCena(scene);
+        gerenciadorDeCenas.carregarCena(gerenciadorDeCenas.numeroDeCenas() - 1);
+        gerenciadorDeCenas.cenaAtual()->camera_editor.transformacao->Move(10, 10, -10);
+        gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = &inputs;
+
+        return scene;
+    }
+    bool Engine::criarProjeto(const std::string& rootpath, const std::string& nome)
+    {
+        rapidjson::Document doc;
+        doc.SetArray();
+        auto scene = criarProjetoPadrao();
+        scene->serializar(&doc);
         rapidjson::StringBuffer buffer;
         rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
         doc.Accept(writer);
-        
-        std::ofstream output(rootpath + "/" + nome + "/ativos/cenas/" + scene->nome() + ".bubble");
+
+        std::string fullpath = rootpath + "/" + nome;
+        std::string cenaPath = fullpath + "/Cenas";
+
+        if (std::filesystem::exists(fullpath))
+        {
+            std::filesystem::remove_all(fullpath);
+            Debug::emitir(Debug::Tipo::Alerta, "Diretorio do projeto antigo removido");
+        }
+        if (!std::filesystem::create_directories(cenaPath))
+        {
+            Debug::emitir(Debug::Tipo::Erro, "Diretorio do projeto nao foi criado");
+            return false;
+        }
+
+        std::ofstream output(cenaPath + scene->nome() + ".bubble");
         if (!output.is_open())
         {
             return false;
         }
-        std::cout << buffer.GetString();
         output << buffer.GetString();
         output.close();
-    return true;
-}
-bool Bubble::Nucleo::Gerenciador::carregarProjeto(const std::string& path)
-{
-    
-    return true;
+        return true;
+    }
+    bool Engine::carregarProjeto(const std::string& path)
+    {
+
+        return true;
+    }
 }

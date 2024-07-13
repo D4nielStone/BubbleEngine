@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
@@ -83,7 +84,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glUseProgram(ID);
 }
 
-void Shader::use() {
+void Shader::use() const {
     glUseProgram(ID);
 }
 

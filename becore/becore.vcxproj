@@ -47,7 +47,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -144,10 +144,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,6 +178,7 @@
     <ClInclude Include="src\componentes\renderizador\renderizador.h" />
     <ClInclude Include="src\arquivadores\shader.h" />
     <ClInclude Include="src\componentes\transformacao\transformacao.h" />
+    <ClInclude Include="src\util\skybox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />
+    <ClCompile Include="src\util\skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\phong.frag" />

@@ -4,7 +4,10 @@
 #include "src/entidades/entidade.h"
 #include "src/depuracao/debug.h"
 
-Bubble::Componentes::Camera::Camera() : FOV(45.0f), aspecto(4 / 3), zNear(0.1), zFar(100) {}
+Bubble::Componentes::Camera::Camera() : FOV(45.0f), aspecto(4 / 3), zNear(0.1), zFar(300) 
+{
+    Nome = "Camera";
+}
 Bubble::Componentes::Camera::~Camera() {}
 
 void Bubble::Componentes::Camera::configurar() {
@@ -56,7 +59,6 @@ void Bubble::Componentes::Camera::atualizar(float deltaTime) {
         // Calculate view matrix
         matrizVisualizacao = glm::lookAt(posicaoCamera, alvoCamera, vetorCima);
 
-        // Assuming 'shader' is a valid pointer or reference to a shader object
         if (shader) {
             shader->use();
             shader->setMat4("projection", glm::value_ptr(matrizProjecao));
@@ -64,6 +66,17 @@ void Bubble::Componentes::Camera::atualizar(float deltaTime) {
         }
     }
     else {
-        std::cerr << "Erro: meuObjeto não está definido.\n";
+        Debug::emitir(Debug::Tipo::Erro, "meuObjeto não está definido");
+    }
+}
+namespace Bubble::Componentes
+{
+    const float* Camera::obterViewMatrix()
+    {
+        return glm::value_ptr(matrizVisualizacao);
+    }
+    const float* Camera::obterProjMatrix()
+    {
+        return glm::value_ptr(matrizProjecao);
     }
 }

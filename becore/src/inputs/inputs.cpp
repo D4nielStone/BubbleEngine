@@ -3,6 +3,11 @@
 #include <unordered_map>
 #include <stdexcept>
 
+InputMode Inputs::getInputMode() const
+{
+    return currentMode;
+}
+
 Inputs::Inputs() : currentMode(InputMode::Editor) {
     for (int i = 0; i < static_cast<int>(Key::Count); ++i) {
         keyStates[static_cast<Key>(i)] = false;

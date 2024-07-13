@@ -1,9 +1,13 @@
 #ifndef UI_H
 #define UI_H
-#include "GLFW/glfw3.h"
-#include "vector"
-#include "imgui.h"
 
+#include "vector"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "imgui.h"
+#include "src/nucleo/gerenciador.h"
+
+class GLFWwindow;
 namespace Bubble 
 {
 	namespace Interface
@@ -19,15 +23,15 @@ namespace Bubble
 		class UI
 		{
 		private:
-			std::vector<std::pair<Janela, GLuint>>janelas;
+			std::vector<Janela>janelas;
+			Nucleo::Engine *engine;
 		public:
-			ImVec2 window_size;
 			UI();
-			void configurar(GLFWwindow* window);
+			void configurar(Nucleo::Engine * eng);
 			void novoFrame();
 			void renderizar();
 			void limpar();
-			void novaJanela(Janela j, GLuint framebuffe = 0);
+			void novaJanela(Janela j);
 		};
 	}
 }

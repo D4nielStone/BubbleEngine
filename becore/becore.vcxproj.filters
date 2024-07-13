@@ -46,6 +46,9 @@
     <ClCompile Include="src\componentes\prototipo\perlinnoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\skybox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.h">
@@ -100,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\componentes\prototipo\perlinnoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

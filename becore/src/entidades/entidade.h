@@ -33,7 +33,7 @@ namespace Bubble {
 
 			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 
-			Bubble::Comum::Componente& obterComponente(const std::string& nome);
+			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);
 
 			std::vector<std::reference_wrapper<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
 

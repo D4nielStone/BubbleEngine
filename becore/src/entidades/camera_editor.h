@@ -2,6 +2,7 @@
 #include "src/componentes/camera/camera.h"
 #include "src/componentes/transformacao/transformacao.h"
 #include "becore.h"
+#include "src/inputs/gameinputs.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -9,9 +10,12 @@ namespace Bubble {
 		{
 		private:
 			glm::vec3 alvoCamera;
+			float timea = 0;
 		public:
-			CameraEditor();
+			Bubble::Inputs::GameInputs* inputs;
+			CameraEditor(Bubble::Inputs::GameInputs* input);
 			~CameraEditor();
+			CameraEditor();
 			CameraEditor(float fov, float aspecto, float znear, float zfar);
 			void configurar() override;
 			void atualizar(float deltaTime) override;

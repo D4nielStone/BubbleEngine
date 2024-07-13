@@ -8,7 +8,6 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
-#include <glad/glad.h>
 
 namespace Bubble {
     namespace Componentes {
@@ -41,8 +40,8 @@ namespace Bubble {
             void configurar() override {
                 Debug::emitir(Debug::Tipo::Mensagem, "Transformacao configurada");
             }
-            glm::mat4 obterMatrizGlobal() const {
-                return matriz_de_modelo;
+            float* obterMatrizGlobal() const {
+                return (float*)glm::value_ptr(matriz_de_modelo);
             }
             rapidjson::Value serializar(rapidjson::Document* doc) override
             {
@@ -80,6 +79,11 @@ namespace Bubble {
             void definirPosicao(const glm::vec3& newPosition) { posicao = newPosition; }
             void definirRotacao(const glm::vec3& newRotation) { rotacao = newRotation; }
             void definirEscala(const glm::vec3& newScale) { escala = newScale; }
+
+            void Move(const float x, const float y, const float z)
+            {
+                posicao = posicao + glm::vec3(x, y, z);
+            }
             void Rotacionar(const float x, const float y, const float z) {
                 // Converta a nova rotação de Euler para um quaternion
                 glm::quat quaternionRotation = glm::quat(glm::radians(glm::vec3(x, y, z)));
