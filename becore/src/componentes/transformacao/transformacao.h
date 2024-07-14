@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TRANSFORMACAO_H
+#define TRANSFORMACAO_H
 #include "src/comum/componente.h"
 #include "src/depuracao/debug.h"
 #include <iostream>
@@ -13,10 +14,13 @@ namespace Bubble {
     namespace Componentes {
         class Transformacao : public Bubble::Comum::Componente {
         private:
+            glm::mat4 matriz_de_transformacao;
+            glm::mat4 matriz_de_rotacao;
+            glm::mat4 matriz_de_escala;
             glm::vec3 posicao;
-            glm::quat rotacao;
             glm::vec3 escala;
             glm::mat4 matriz_de_modelo;
+            glm::quat rotacao;
         public:
             Transformacao()
                 : posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(1.0f) {
@@ -24,10 +28,6 @@ namespace Bubble {
             }
 
             void atualizar(float deltaTime) override {
-                glm::mat4 matriz_de_transformacao = glm::translate(glm::mat4(1.0f), posicao);
-                glm::mat4 matriz_de_rotacao = glm::toMat4(rotacao);
-                glm::mat4 matriz_de_escala = glm::scale(glm::mat4(1.0f), escala);
-
                 matriz_de_modelo = matriz_de_transformacao * matriz_de_rotacao * matriz_de_escala;
                 if (shader) {
                     shader->use();
@@ -38,6 +38,10 @@ namespace Bubble {
                 }
             }
             void configurar() override {
+                matriz_de_transformacao = glm::translate(glm::mat4(1.0f), posicao);
+                matriz_de_rotacao = glm::toMat4(rotacao);
+                matriz_de_escala = glm::scale(glm::mat4(1.0f), escala);
+
                 Debug::emitir(Debug::Tipo::Mensagem, "Transformacao configurada");
             }
             float* obterMatrizGlobal() const {
@@ -53,15 +57,15 @@ namespace Bubble {
                 positionarr.PushBack(rapidjson::Value().SetFloat(posicao.z), doc->GetAllocator());
 
                 obj.AddMember("posicao", positionarr, doc->GetAllocator());
-                
+
                 rapidjson::Value rotacaoarr(rapidjson::kArrayType);
 
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.x), doc->GetAllocator());
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.y), doc->GetAllocator());
                 rotacaoarr.PushBack(rapidjson::Value().SetFloat(rotacao.z), doc->GetAllocator());
-            
+
                 obj.AddMember("rotacao", rotacaoarr, doc->GetAllocator());
-                
+
                 rapidjson::Value escalaarr(rapidjson::kArrayType);
 
                 escalaarr.PushBack(rapidjson::Value().SetFloat(escala.x), doc->GetAllocator());
@@ -77,23 +81,29 @@ namespace Bubble {
             glm::vec3 obterEscala() const { return escala; }
 
             void definirPosicao(const glm::vec3& newPosition) { posicao = newPosition; }
-            void definirRotacao(const glm::vec3& newRotation) { rotacao = newRotation; }
+            void definirRotacao(const glm::quat& newRotation) { rotacao = newRotation; }
             void definirEscala(const glm::vec3& newScale) { escala = newScale; }
 
-            void Move(const float x, const float y, const float z)
+            void Move(glm::vec3 pos)
             {
-                posicao = posicao + glm::vec3(x, y, z);
+                posicao += pos;
             }
+            
             void Rotacionar(const float x, const float y, const float z) {
-                // Converta a nova rotação de Euler para um quaternion
                 glm::quat quaternionRotation = glm::quat(glm::radians(glm::vec3(x, y, z)));
 
-                // Atualize a rotação atual multiplicando pelo novo quaternion
                 rotacao = quaternionRotation * rotacao;
 
-                // Opcional: Normalizar o quaternion para evitar acumulação de erro numérico
                 rotacao = glm::normalize(rotacao);
+            }
+
+            glm::vec3 obterDirecao() const {
+                // Vetor de direção padrão (para frente)
+                glm::vec3 direcaoPadrao = glm::vec3(0.0f, 0.0f, -1.0f);
+                // Transformar o vetor de direção pelo quaternion de rotação
+                return rotacao * direcaoPadrao;
             }
         };
     }
 }
+#endif

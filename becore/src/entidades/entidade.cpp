@@ -51,11 +51,11 @@ namespace Bubble {
 			return nullptr;
 		}
 
-		std::vector<std::reference_wrapper<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome) {
-			std::vector<std::reference_wrapper<Bubble::Comum::Componente>> comps;
+		std::vector<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome) {
+			std::vector<std::shared_ptr<Bubble::Comum::Componente>> comps;
 			for (auto& c : Componentes) {
 				if (c->nome() == nome) {
-					comps.push_back(*c);
+					comps.push_back(c);
 				}
 			}
 			return comps;

@@ -8,7 +8,20 @@
 #include "becore.h"
 
 enum class BECORE_DLL_API Key {
-    W = 0, A = 1, S = 2, D = 3, E = 4, Q = 5, Shift = 6, Ctrl = 7, Alt = 8, Count = 9
+    W,
+    A,
+    S,
+    D,
+    E, 
+    Q,
+    UP,
+    RIGHT,
+    LEFT,
+    DOWN,
+    Shift,
+    Ctrl,
+    Alt,
+    Count
 };
 
 namespace std {

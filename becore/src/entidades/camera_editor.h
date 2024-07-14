@@ -10,16 +10,20 @@ namespace Bubble {
 		{
 		private:
 			glm::vec3 alvoCamera;
-			float timea = 0;
+			float velocidadeDeMovimento;
+			float sensibilidadeDeRotacao;
+			float elapsed = 0;
+			float yaw, pitch;
+			glm::vec3 frente;
 		public:
+			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
 			Bubble::Inputs::GameInputs* inputs;
 			CameraEditor(Bubble::Inputs::GameInputs* input);
 			~CameraEditor();
 			CameraEditor();
-			CameraEditor(float fov, float aspecto, float znear, float zfar);
+			void atualizarDirecao();
 			void configurar() override;
 			void atualizar(float deltaTime) override;
-			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
 			void olharPara(glm::vec3 pov);
 		};
 	}

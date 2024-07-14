@@ -111,6 +111,10 @@ Key glfwKeyToKey(int glfwKey) {
     case GLFW_KEY_D: return Key::D;
     case GLFW_KEY_E: return Key::E;
     case GLFW_KEY_Q: return Key::Q;
+    case GLFW_KEY_RIGHT: return Key::RIGHT;
+    case GLFW_KEY_LEFT: return Key::LEFT;
+    case GLFW_KEY_DOWN: return Key::DOWN;
+    case GLFW_KEY_UP: return Key::UP;
     case GLFW_KEY_LEFT_SHIFT:
     case GLFW_KEY_RIGHT_SHIFT: return Key::Shift;
     case GLFW_KEY_LEFT_CONTROL:

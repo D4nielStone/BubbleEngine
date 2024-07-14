@@ -1,6 +1,5 @@
 #ifndef UI_H
 #define UI_H
-
 #include "vector"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -8,7 +7,7 @@
 #include "src/nucleo/gerenciador.h"
 
 class GLFWwindow;
-namespace Bubble 
+namespace Bubble
 {
 	namespace Interface
 	{
@@ -24,10 +23,12 @@ namespace Bubble
 		{
 		private:
 			std::vector<Janela>janelas;
-			Nucleo::Engine *engine;
+			Nucleo::Engine* engine;
+			void iniciarJanelas();
+			void desenharFrustums(std::vector<std::shared_ptr<Comum::Componente>> cameras);
 		public:
 			UI();
-			void configurar(Nucleo::Engine * eng);
+			void configurar(Nucleo::Engine* eng);
 			void novoFrame();
 			void renderizar();
 			void limpar();
@@ -35,5 +36,4 @@ namespace Bubble
 		};
 	}
 }
-
 #endif

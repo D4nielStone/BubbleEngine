@@ -70,7 +70,7 @@ namespace Bubble::Nucleo
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            gerenciadorDeCenas.atualizarCenaAtual(Modo::Editor, deltaTime, w, h, tamanhoJanela.x, tamanhoJanela.y);
+            gerenciadorDeCenas.atualizarCenaAtual(Modo::Jogo, deltaTime, w, h, tamanhoJanela.x, tamanhoJanela.y);
         }
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         deltaTime = glfwGetTime() - st;
@@ -88,18 +88,18 @@ namespace Bubble::Nucleo
         terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
 
         //Cria e configura entidade Camera
-        //auto camera = std::make_shared<Bubble::Entidades::Entidade>("Cam");
-        //camera->adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
+        auto camera = std::make_shared<Bubble::Entidades::Entidade>("Cam");
+        camera->adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
+        camera->obterTransformacao()->definirPosicao(glm::vec3(10, 10, 10));
 
-        auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+        auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae"));
 
-        scene->adicionarEntidade(esfera);
         scene->adicionarEntidade(terreno);
-        //scene->adicionarEntidade(camera);
+        scene->adicionarEntidade(esfera);
+        scene->adicionarEntidade(camera);
 
         gerenciadorDeCenas.adicionarCena(scene);
         gerenciadorDeCenas.carregarCena(gerenciadorDeCenas.numeroDeCenas() - 1);
-        gerenciadorDeCenas.cenaAtual()->camera_editor.transformacao->Move(10, 10, -10);
         gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = &inputs;
 
         return scene;

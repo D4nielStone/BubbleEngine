@@ -63,6 +63,10 @@ void Bubble::Componentes::Camera::atualizar(float deltaTime) {
             shader->use();
             shader->setMat4("projection", glm::value_ptr(matrizProjecao));
             shader->setMat4("view", glm::value_ptr(matrizVisualizacao));
+            shader->setVec3("viewPos",
+                meuObjeto->obterTransformacao()->obterPosicao().x,
+                meuObjeto->obterTransformacao()->obterPosicao().y,
+                meuObjeto->obterTransformacao()->obterPosicao().z);
         }
     }
     else {
@@ -78,5 +82,13 @@ namespace Bubble::Componentes
     const float* Camera::obterProjMatrix()
     {
         return glm::value_ptr(matrizProjecao);
+    }
+    glm::mat4 Camera::obterViewMatrixMat()const
+    {
+        return matrizVisualizacao;
+    }
+    glm::mat4 Camera::obterProjMatrixMat()const
+    {
+        return matrizProjecao;
     }
 }

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ARQUIVO_3D_H
+#define ARQUIVO_3D_H
 #include <string>
 #include <vector>
 #include "includes.h"
@@ -34,3 +35,4 @@ namespace Bubble {
         };
     }
 };
+#endif

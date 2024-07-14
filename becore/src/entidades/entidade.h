@@ -35,7 +35,7 @@ namespace Bubble {
 
 			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);
 
-			std::vector<std::reference_wrapper<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
+			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
 
 
 			std::shared_ptr<Bubble::Componentes::Transformacao> obterTransformacao();

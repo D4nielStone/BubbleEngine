@@ -95,12 +95,12 @@ namespace Bubble
                     int bottomRight = (x + 1) * depth + (z + 1);
 
                     mVertex.indices.push_back(topLeft);
-                    mVertex.indices.push_back(bottomLeft);
                     mVertex.indices.push_back(topRight);
+                    mVertex.indices.push_back(bottomLeft);
 
                     mVertex.indices.push_back(bottomLeft);
-                    mVertex.indices.push_back(bottomRight);
                     mVertex.indices.push_back(topRight);
+                    mVertex.indices.push_back(bottomRight);
                 }
             }
             calcularNormais();

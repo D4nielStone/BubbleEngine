@@ -57,12 +57,12 @@ namespace Bubble {
         void Scene::
             carregar() {
             glEnable(GL_DEPTH_TEST);
-            //glEnable(GL_CULL_FACE);
-            //glCullFace(GL_FRONT);
+            glEnable(GL_CULL_FACE);
+            glCullFace(GL_BACK);
 
             camera_editor.configurar();
 
-            skybox.configurarBuffers();
+            //skybox.configurarBuffers();
 
             for (auto& obj : Entidades) {
                 for (auto& c : obj->listaDeComponentes()) {
@@ -140,34 +140,35 @@ namespace Bubble {
 
         void SceneManager::atualizarCenaAtual(Modo m, float deltaTime, int window_w, int window_h, int fb_w, int fb_h)
         {
+            // Calculate the aspect ratio of the framebuffer
             float aspecto = static_cast<float>(fb_w) / fb_h;
+            // Get the size of the ImGui window
+            int imGuiWindowWidth = static_cast<int>(fb_w);
+            int imGuiWindowHeight = static_cast<int>(fb_h);
 
-            // Ajustar o viewport para centralizar a imagem
-            int width, height;
-                width = fb_w;
-                height = fb_h;
+            // Calculate the dimensions of the viewport to maintain the aspect ratio
+            int viewportWidth = static_cast<int>(imGuiWindowHeight * aspecto);
+            int viewportHeight = imGuiWindowHeight;
 
-            // Calcular as dimensões do viewport centralizado
-            int viewportWidth = static_cast<int>(height * aspecto);
-            int viewportHeight = height;
-
-            if (viewportWidth > width) {
-                viewportWidth = width;
-                viewportHeight = static_cast<int>(width / aspecto);
+            // Adjust the viewport dimensions if they exceed the ImGui window dimensions
+            if (viewportWidth > imGuiWindowWidth) {
+                viewportWidth = imGuiWindowWidth;
+                viewportHeight = static_cast<int>(imGuiWindowWidth / aspecto);
             }
 
-            int viewportX = (width - viewportWidth) / 2;
-            int viewportY = (height - viewportHeight) / 2;
+            // Calculate the position of the viewport to center it within the ImGui window
+            int viewportX = (imGuiWindowWidth - viewportWidth) / 2;
+            int viewportY = (imGuiWindowHeight - viewportHeight) / 2;
 
-            // Definir o viewport
+            // Set the viewport
             glViewport(viewportX, viewportY, viewportWidth, viewportHeight);
 
+            // Update the current scene if it exists
             if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) {
                 scenes[currentSceneIndex]->atualizar(m, deltaTime, aspecto);
             }
+
+            // Render the ImGui image for the framebuffer
         }
-    
-
-
     } // namespace Nucleo
 } // namespace Bubble

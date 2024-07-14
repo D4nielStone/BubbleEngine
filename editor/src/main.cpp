@@ -23,7 +23,7 @@ int INIT {
     ui.configurar(&engine);
 
     ui.novaJanela(Bubble::Interface::Janela::Editor);
-//    ui.novaJanela(Bubble::Interface::Janela::Preview);
+    ui.novaJanela(Bubble::Interface::Janela::Preview);
     
     while (!engine.pararloop())
     {
