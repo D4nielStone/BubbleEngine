@@ -1,4 +1,4 @@
-# Bubble
+## Bubble
 Bubble é um projeto individual criado por mim para estudo, e futuramente criar um jogo usando esse engine.
 ## Instalação
 De preferência usando o vcpkg, instale as seguintes bibliotecas:
