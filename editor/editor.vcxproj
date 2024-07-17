@@ -141,11 +141,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\interface\ui.cpp" />
     <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\interface\ui.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\scripts\rotacionar.lua" />

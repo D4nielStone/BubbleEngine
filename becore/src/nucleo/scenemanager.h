@@ -25,28 +25,25 @@ namespace Bubble {
         private:
             const char* Name;
             Bubble::Util::Skybox skybox;
+
+            bool existeEntidade(Entidades::Entidade* entidade) const;
+            void desenharCeu();
         public:
             std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
+            Entidades::Entidade* entidadeSelecionada = nullptr;
             Bubble::Entidades::CameraEditor camera_editor;
             Bubble::Componentes::Camera* camera_principal = nullptr;
+
+            float corCeu[3]{0.3f, 0.3f, 1.f};
+
             Scene() : Name("Cena sem nome") {}
-
             ~Scene();
-
             explicit Scene(const char* name);
-
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
-
             void atualizar(Modo m, float deltaTime,float aspecto);
-
             void carregar();
-
             void serializar(rapidjson::Document* doc) const;
-
             std::string nome() const;
-
-        private:
-            bool existeEntidade(Entidades::Entidade* entidade) const;
         };
 
         class BECORE_DLL_API SceneManager {
@@ -69,7 +66,7 @@ namespace Bubble {
 
             void carregarCena(int sceneIndex);
 
-            void atualizarCenaAtual(Modo m, float deltaTime, int window_w, int window_h, int fb_w, int fb_h);
+            void atualizarCenaAtual(Modo m, float deltaTime, int window_x, int window_y, int fb_w, int fb_h);
         };
 
     } // namespace Nucleo

@@ -18,11 +18,13 @@ namespace Bubble {
             void atualizarAspecto(float aspect);
             const float* obterViewMatrix();
             const float* obterProjMatrix();
+            float ceu[3]{ 0.7f, 0.7f, 1.0f };
             glm::mat4 obterViewMatrixMat() const;
             glm::mat4 obterProjMatrixMat() const;
+            bool corSolida;
             GLuint FBO, textureColorbuffer, rbo;
-        protected:
             float FOV, aspecto, zFar, zNear;
+        protected:
             glm::mat4 matrizProjecao;
             glm::mat4 matrizVisualizacao;
         };

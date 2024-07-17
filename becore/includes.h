@@ -4,7 +4,7 @@
 #include <cstdio>
 
 struct Color {
-    float r = 1, g = 1, b = 1;
+    float r = 0.7, g = 0.7, b = 0.7;
 };
 
 struct Material {

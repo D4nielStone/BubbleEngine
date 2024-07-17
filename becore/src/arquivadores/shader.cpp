@@ -1,6 +1,9 @@
 #include "Shader.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "src/depuracao/debug.h"
+
+std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
 
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 const char* ShaderException::what() const noexcept
@@ -13,6 +16,15 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
 }
 
 void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
+    for (auto shader : shaders)
+    {
+        if (shader.first.first == vertexPath && shader.first.second == fragmentPath)
+        {
+            ID = shader.second;
+            Debug::emitir(Debug::Alerta, "Shader já compilado, re-utilizando");
+            return;
+        }
+    }
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         throw ShaderException("Falha ao iniciar o glad");
@@ -81,7 +93,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    glUseProgram(ID);
+    shaders.push_back(std::pair(std::pair(vertexPath, fragmentPath), ID));
 }
 
 void Shader::use() const {

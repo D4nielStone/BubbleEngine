@@ -79,6 +79,8 @@ namespace Bubble {
                 }
             }
 
+            glClearColor(ceu[0], ceu[1], ceu[2], 1);
+
             matrizProjecao = glm::perspective(
                 glm::radians(FOV),
                 aspecto,

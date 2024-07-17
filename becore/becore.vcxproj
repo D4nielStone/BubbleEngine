@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -146,7 +146,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -164,6 +164,7 @@
     <ClInclude Include="src\componentes\prototipo\perlinnoise.h" />
     <ClInclude Include="src\componentes\prototipo\terreno.h" />
     <ClInclude Include="src\entidades\camera_editor.h" />
+    <ClInclude Include="src\interface\ui.h" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
     <ClInclude Include="src\inputs\gameinputs.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="src\componentes\prototipo\terreno.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\camera_editor.cpp" />
+    <ClCompile Include="src\interface\ui.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\inputs\gameinputs.cpp" />

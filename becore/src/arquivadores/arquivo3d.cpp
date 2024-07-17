@@ -1,4 +1,7 @@
 #include "arquivo3d.h"
+#include "src/depuracao/debug.h"
+
+std::vector<std::pair<std::pair<std::vector<Vertex>, std::vector<Material>>, std::string>> arquivos;
 
 void Bubble::Arquivadores::Arquivo3d::exibirInformacoes() 
 {
@@ -15,6 +18,18 @@ void Bubble::Arquivadores::Arquivo3d::exibirInformacoes()
      }
 }
 void Bubble::Arquivadores::Arquivo3d::carregarModelo(const std::string& caminho) {
+    
+    for (const auto& arquivo : arquivos)
+    {
+        if (arquivo.second == caminho)
+        {
+            Debug::emitir(Debug::Alerta, "Arquivo 3d já existente, re-utilizando");
+            vertices = arquivo.first.first;
+            materiais = arquivo.first.second;
+            Caminho = arquivo.second;
+        }
+    }
+    
     Assimp::Importer importador;
     cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_FlipUVs);
 
@@ -24,6 +39,8 @@ void Bubble::Arquivadores::Arquivo3d::carregarModelo(const std::string& caminho)
     }
 
     extrairDados();
+
+    arquivos.push_back(std::pair(std::pair(vertices, materiais), caminho));
 }
 void Bubble::Arquivadores::Arquivo3d::extrairDados() {
     if (!cena) return;

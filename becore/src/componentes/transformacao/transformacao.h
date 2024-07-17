@@ -9,27 +9,29 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 
 namespace Bubble {
     namespace Componentes {
+        enum Estado
+        {
+            ESTATICO,
+            DINAMICO
+        };
         class Transformacao : public Bubble::Comum::Componente {
         private:
-            glm::mat4 matriz_de_transformacao;
-            glm::mat4 matriz_de_rotacao;
-            glm::mat4 matriz_de_escala;
             glm::vec3 posicao;
             glm::vec3 escala;
             glm::mat4 matriz_de_modelo;
             glm::quat rotacao;
         public:
             Transformacao()
-                : posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(1.0f) {
+                : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(1.0f) {
                 Nome = "Transformacao";
             }
 
             void atualizar(float deltaTime) override {
-                matriz_de_modelo = matriz_de_transformacao * matriz_de_rotacao * matriz_de_escala;
-                if (shader) {
+                if (shader && estado == DINAMICO) {
                     shader->use();
 
                     glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
@@ -38,10 +40,9 @@ namespace Bubble {
                 }
             }
             void configurar() override {
-                matriz_de_transformacao = glm::translate(glm::mat4(1.0f), posicao);
-                matriz_de_rotacao = glm::toMat4(rotacao);
-                matriz_de_escala = glm::scale(glm::mat4(1.0f), escala);
-
+                glm::translate(matriz_de_modelo, posicao);
+                matriz_de_modelo *= glm::toMat4(rotacao);
+                glm::scale(matriz_de_modelo, escala);
                 Debug::emitir(Debug::Tipo::Mensagem, "Transformacao configurada");
             }
             float* obterMatrizGlobal() const {
@@ -87,14 +88,16 @@ namespace Bubble {
             void Move(glm::vec3 pos)
             {
                 posicao += pos;
+                glm::translate(matriz_de_modelo, posicao);
             }
-            
+
             void Rotacionar(const float x, const float y, const float z) {
                 glm::quat quaternionRotation = glm::quat(glm::radians(glm::vec3(x, y, z)));
 
                 rotacao = quaternionRotation * rotacao;
 
                 rotacao = glm::normalize(rotacao);
+                matriz_de_modelo *= glm::toMat4(rotacao);
             }
 
             glm::vec3 obterDirecao() const {
@@ -103,6 +106,26 @@ namespace Bubble {
                 // Transformar o vetor de direção pelo quaternion de rotação
                 return rotacao * direcaoPadrao;
             }
+            // Função para decompor uma matriz
+            void decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) {
+                glm::vec3 skew;
+                glm::vec4 perspective;
+                glm::quat orientation;
+                glm::decompose(matriz_de_modelo, *scale, orientation, *position, skew, perspective);
+                *rotation = glm::eulerAngles(orientation);
+                *rotation = glm::degrees(*rotation);
+
+            }
+            
+            // Função para recompor uma matriz
+            void comporMatriz(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale) {
+                matriz_de_modelo = glm::translate(glm::mat4(1.0f), position);
+                matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+                matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+                matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+                matriz_de_modelo = glm::scale(matriz_de_modelo, scale);
+            }
+            Estado estado = DINAMICO;
         };
     }
 }

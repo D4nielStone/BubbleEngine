@@ -27,9 +27,11 @@ namespace Bubble {
 
 			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 
+			bool ativado;
+
 			void atualizar(Modo m, float deltaTime, float aspecto);
 
-			const char* nome();
+			std::string* nome();
 
 			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 
@@ -50,7 +52,7 @@ namespace Bubble {
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
 			std::vector<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
 
-			const char* Nome = "NONAMEENTITIE";
+			std::string Nome = "SemNome";
 		};
 	}
 }

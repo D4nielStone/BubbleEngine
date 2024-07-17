@@ -5,6 +5,8 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <vector>
+#include <utility>
 #include <glm/gtc/type_ptr.hpp>
 
 class ShaderException : public std::exception 
@@ -23,7 +25,7 @@ public:
     unsigned int ID;
 
     // constructor reads and builds the shader
-    Shader() {};
+    Shader() { compilar("assets/shaders/phong.vert", "assets/shaders/phong.frag"); };
     Shader(const char* vertexPath, const char* fragmentPath);
     // use/activate the shader
     void use() const;

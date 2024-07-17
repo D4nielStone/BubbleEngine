@@ -7,25 +7,53 @@
 #include "includes.h"
 #include "src/inputs/gameinputs.h"
 #include "src/nucleo/scenemanager.h"
-#include "imgui.h"
+#include "src/interface/ui.h"
 
 namespace Bubble {
 	namespace Nucleo {
+		struct BECORE_DLL_API Projeto
+		{
+			std::string nome;
+			std::string path;
+		};
 		class BECORE_DLL_API Engine
 		{
-		public:
-			Bubble::Inputs::GameInputs inputs;
-			Engine();
-			~Engine();
+		private:
+			Projeto projeto;
+			Inputs::GameInputs inputs;
 			SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
+		public:
+			Projeto* obterProjeto() { return &projeto; };
+			Inputs::GameInputs* obterGI() { return &inputs; };
+			SceneManager* obterGC() { return &gerenciadorDeCenas; };
+			GLFWwindow* obterJanela() { return glfwWindow; };
 			bool inicializacao();
 			int pararloop() const;
-			void renderizar(Modo m, ImVec2 tamanhoJanela = ImVec2(0,0));
+			void renderizar(Modo m, ImVec2 viewportPos, ImVec2 viewportSize);
 			void limpar() const;
-			bool carregarProjeto(const std::string& path);
-			bool criarProjeto(const std::string& path, const std::string& nome);
-			std::shared_ptr<Bubble::Nucleo::Scene> criarProjetoPadrao();
+			bool salvarCena(unsigned int idx);
+			Engine();
+			~Engine() { limpar(); };
+		};
+		class BECORE_DLL_API Gerenciador
+		{
+		private:
+			GLFWwindow* janelaGerenciador;
+			std::vector<Engine> engines;
+			Scene criarCenaPadrao();
+			bool escanearProjetos();
+		public:
+			GLFWwindow* obterJanela() { return janelaGerenciador; };
+			std::vector<Engine>* obterEngines() { return &engines; };
+			std::vector<Projeto>* obterProjetos();
+			void limpar();
+			bool inicializacao();
+			bool carregarProjeto(Projeto proj);
+			bool criarProjeto(const std::string& path, const std::string& nome, bool criarCenaPadrao = true);
+			bool salvarProjetos();
+			Gerenciador() {};
+			~Gerenciador() { limpar(); };
 		};
 	}
 }

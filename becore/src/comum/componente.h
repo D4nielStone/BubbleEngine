@@ -13,7 +13,7 @@ namespace Bubble {
 
 		class Componente {
 		protected:
-			Shader* shader = nullptr;
+			Shader* shader = new Shader();
 			Bubble::Entidades::Entidade* meuObjeto = nullptr;
 			const char* Nome = "componente_base";
 		public:

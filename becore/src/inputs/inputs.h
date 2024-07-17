@@ -60,6 +60,6 @@ private:
 };
 
 // Callback de teclado GLFW
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+extern "C" BECORE_DLL_API void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 #endif // INPUTS_H

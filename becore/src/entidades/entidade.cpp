@@ -7,7 +7,7 @@ namespace Bubble {
 	namespace Entidades {
 		Entidade::~Entidade() {}
 
-		Entidade::Entidade(const char* name) : Nome(name), transformacao(std::make_shared<Bubble::Componentes::Transformacao>())
+		Entidade::Entidade(const char* name) : ativado(true), Nome(name), transformacao(std::make_shared<Bubble::Componentes::Transformacao>())
 		{
 			adicionarComponente(transformacao);
 		}
@@ -23,12 +23,13 @@ namespace Bubble {
 		void Entidade::atualizar(Modo m, float deltaTime, float aspecto) {
 			for (auto c : Componentes) 
 			{
+				if(ativado && !dynamic_cast<Componentes::Camera*>(c.get()))
 				c->atualizar(deltaTime);
 			}
 		}
 
-		const char* Entidade::nome() {
-			return Nome;
+		std::string *Entidade::nome() {
+			return &Nome;
 		}
 
 		void Entidade::carregarModelo(Bubble::Arquivadores::Arquivo3d object_file) {
@@ -76,7 +77,7 @@ namespace Bubble {
 		rapidjson::Value Entidade::serializar(rapidjson::Document* v)
 		{
 			rapidjson::Value obj(rapidjson::kObjectType);
-			obj.AddMember("nome", rapidjson::Value().SetString(Nome, v->GetAllocator()), v->GetAllocator());
+			obj.AddMember("nome", rapidjson::Value().SetString(Nome.c_str(), v->GetAllocator()), v->GetAllocator());
 			rapidjson::Value array(rapidjson::kArrayType);
 
 			array.PushBack(transformacao->serializar(v), v->GetAllocator());

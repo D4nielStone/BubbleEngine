@@ -9,6 +9,7 @@ namespace Bubble {
     namespace Arquivadores {
         class BECORE_DLL_API ImageLoader {
         public:
+            ImageLoader(){}
             ImageLoader(const std::string& filepath);
             ~ImageLoader();
 

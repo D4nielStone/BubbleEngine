@@ -7,7 +7,11 @@ namespace Bubble
 {
     namespace Componentes
     {
-        Terreno::Terreno() : scale(50.0), width(100), depth(100) {}
+        Terreno::Terreno() : scale(50.0), width(100), depth(100) 
+        {
+            Nome = "Terreno";
+            shader = new Shader();
+        }
 
         Terreno::~Terreno()
         {
