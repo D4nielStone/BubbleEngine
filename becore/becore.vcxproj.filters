@@ -52,6 +52,12 @@
     <ClCompile Include="src\interface\ui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\nucleo\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\componentes\renderizador\renderizador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.h">
@@ -72,9 +78,6 @@
     <ClInclude Include="src\comum\componente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="includes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\arquivadores\imageloader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -93,9 +96,6 @@
     <ClInclude Include="src\nucleo\scenemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\componentes\renderizador\renderizador.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\componentes\prototipo\terreno.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -112,6 +112,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\interface\ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nucleo\engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\componentes\renderizador\renderizador.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

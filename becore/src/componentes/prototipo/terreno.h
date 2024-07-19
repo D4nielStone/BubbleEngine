@@ -1,9 +1,8 @@
 #ifndef TERRENO_H
 #define TERRENO_H
 #include "src/comum/componente.h"
-#include "glad/glad.h"
+#include "src/util/includes.h"
 #include "vector"
-#include "includes.h"
 
 namespace Bubble
 {
@@ -13,7 +12,7 @@ namespace Bubble
 		{
 		private:
 			Vertex mVertex; Material mMaterial;
-			GLuint VAO, EBO, VBO;
+			unsigned int VAO, EBO, VBO;
 			std::vector<std::vector<float>> heightmap;
 			float scale;
 			int width, depth;

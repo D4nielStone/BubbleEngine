@@ -5,7 +5,7 @@
 #include "src/comum/componente.h"
 #include "src/arquivadores/arquivo3d.h"
 #include "src/componentes/transformacao/transformacao.h"
-#include "src/componentes/renderizador/renderizador.h"
+#include "src/componentes/renderizador/renderizador.hpp"
 #include "src/componentes/codigo/codigo.h"
 #include "src/componentes/camera/camera.h"
 #include <memory>
@@ -19,40 +19,24 @@ namespace Bubble {
 	namespace Entidades {
 		class BECORE_DLL_API Entidade {
 		public:
-			Entidade();
-
-			Entidade(const char* name);
-
-			~Entidade();
-
 			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
-
-			bool ativado;
-
+			Entidade();
+			~Entidade();
+			Entidade(const char* name);
 			void atualizar(Modo m, float deltaTime, float aspecto);
-
 			std::string* nome();
-
 			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
-
 			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);
-
 			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
-
-
 			std::shared_ptr<Bubble::Componentes::Transformacao> obterTransformacao();
-
 			const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
-
 			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
-			
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
-
+			bool ativado;
 		private:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
 			std::vector<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
-
 			std::string Nome = "SemNome";
 		};
 	}

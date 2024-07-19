@@ -1,8 +1,11 @@
 #include "ui.h"
-#include "ShlObj.h"
-#include "src/nucleo/scenemanager.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "src/nucleo/gerenciador.h"
+#include "ShlObj.h"
+#include "src/nucleo/scenemanager.h"
 #include "ImGuizmo.h"
 #include "iostream"
 #include "string"
@@ -10,9 +13,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/transform.hpp>
 #include "filesystem"
-#include "src/nucleo/gerenciador.h"
 
-namespace Bubble::Interface { 
+namespace Bubble::Interface
+{ 
     std::wstring UI::desktopPath()
     {
         PWSTR path = NULL;
@@ -25,7 +28,6 @@ namespace Bubble::Interface {
         }
         return std::wstring();
     }
-
     void UI::novoContexto(GLFWwindow* window, Estilo e)
     {
         for (const auto& janela : janelas)
@@ -50,7 +52,7 @@ namespace Bubble::Interface {
         std::vector<Janela>* configuracao_jnl = new std::vector<Janela>();
         switch (e)
         {
-        case Interface::Engine:
+        case Interface::Motor:
             configuracao_jnl->push_back(Console);
             configuracao_jnl->push_back(Editor);
             configuracao_jnl->push_back(Preview);
@@ -66,8 +68,8 @@ namespace Bubble::Interface {
             break;
         }
         janelas.push_back(std::make_pair(std::make_pair(window, contexto), configuracao_jnl));
-        ImGui_ImplOpenGL3_Init("#version 330");
         ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplOpenGL3_Init("#version 330");
     }
     void UI::pullevents()
     {
@@ -115,13 +117,11 @@ namespace Bubble::Interface {
             }
         }
     }
-
     void UI::inicializarImGui(Nucleo::Gerenciador& gen)
     {
         gerenciador = &gen;
         IMGUI_CHECKVERSION();
     }
-
     void UI::iniciarJanelas(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*> window)
     {
         unsigned int jnum = 0;
@@ -166,7 +166,6 @@ namespace Bubble::Interface {
             jnum++;
         }
     }
-
     void UI::novaJanela(GLFWwindow* w, Janela janela)
     {
         if (janela == MENU_CriarProjeto) {
@@ -183,11 +182,8 @@ namespace Bubble::Interface {
             }
         }
     }
-
     void UI::desenharMenuCena() {}
-
     void UI::desenharMenuEditar() {}
-
     void UI::desenharMenuCriarP()
     {
         if (ImGui::BeginMainMenuBar())
@@ -219,9 +215,7 @@ namespace Bubble::Interface {
             ImGui::EndMainMenuBar();
         }
     }
-
     void UI::desenharMenuArquivos() {}
-
     void UI::desenharComponente(Comum::Componente* componente)
     {
         if (componente && ImGui::TreeNode(std::string(componente->nome() + std::string(1, ' ')).c_str()))
@@ -268,7 +262,6 @@ namespace Bubble::Interface {
             ImGui::TreePop();
         }
     }
-
     void UI::limpar(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*> window)
     {
         if (window.first.first)
@@ -286,7 +279,7 @@ namespace Bubble::Interface {
     void UI::desenharProjetos(unsigned int depth)
     {
         bool carregar_projeto = false;
-        Nucleo::Projeto projet;
+        Projeto projet;
         ImGui::Begin(std::string("Projetos" + std::string(depth, ' ')).c_str());
         for (const auto& projeto : *gerenciador->obterProjetos())
         {

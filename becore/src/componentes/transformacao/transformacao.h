@@ -1,6 +1,5 @@
 #ifndef TRANSFORMACAO_H
 #define TRANSFORMACAO_H
-
 #include "src/comum/componente.h"
 #include "src/depuracao/debug.h"
 #define GLM_ENABLE_EXPERIMENTAL
@@ -18,7 +17,6 @@ namespace Bubble {
             ESTATICO,
             DINAMICO
         };
-
         class Transformacao : public Bubble::Comum::Componente {
         private:
             glm::vec3 posicao;

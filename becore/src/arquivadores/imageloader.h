@@ -1,10 +1,9 @@
 #ifndef IMAGELOADER_H
 #define IMAGELOADER_H
 #include <string>
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include "unordered_map"
 #include "becore.h"
-
+class GLFWimage;
 namespace Bubble {
     namespace Arquivadores {
         class BECORE_DLL_API ImageLoader {
@@ -20,7 +19,9 @@ namespace Bubble {
             GLFWimage converterParaGlfw();
             bool carregado;
         private:
+            std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
             void flipVertical();
+            void carregarImagem(const std::string& filepath);
             const char* path;
             int width, height, channels;
             unsigned char* data;

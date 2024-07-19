@@ -1,10 +1,10 @@
 #ifndef UI_H
 #define UI_H
 #include "vector"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "imgui.h"
+#include "src/util/includes.h"
 #include "src/arquivadores/imageloader.h"
+#include "imgui.h"
+
 
 class GLFWwindow;
 namespace Bubble
@@ -36,7 +36,7 @@ namespace Bubble
 		};
 		enum BECORE_DLL_API Estilo
 		{
-			Engine,
+			Motor,
 			Vazio
 		};
 		class BECORE_DLL_API UI

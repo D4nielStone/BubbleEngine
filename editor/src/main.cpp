@@ -13,8 +13,8 @@ int INIT
 {
     Nucleo::Gerenciador gerenciador;
 
-    gerenciador.inicializacao();
-    //    return -1;
+    if(!gerenciador.inicializacao())
+        return -1;
     
     return 0;   
 }

@@ -1,7 +1,6 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 #include "src/comum/componente.h"
-#include "glad/glad.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "becore.h"
@@ -22,7 +21,7 @@ namespace Bubble {
             glm::mat4 obterViewMatrixMat() const;
             glm::mat4 obterProjMatrixMat() const;
             bool corSolida;
-            GLuint FBO, textureColorbuffer, rbo;
+            unsigned int FBO, textureColorbuffer, rbo;
             float FOV, aspecto, zFar, zNear;
         protected:
             glm::mat4 matrizProjecao;

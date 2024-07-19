@@ -1,10 +1,48 @@
 #include "imageloader.h"
 #include "src/depuracao/debug.h"
-#include <freeimage.h> // Assumindo que é onde freeimage.h está localizado
+#include <freeimage.h>
+#include "GLFW/glfw3.h"
 
 Bubble::Arquivadores::ImageLoader::ImageLoader(const std::string& filepath)
     : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false)
 {
+    carregarImagem(filepath);
+}
+
+Bubble::Arquivadores::ImageLoader::~ImageLoader()
+{
+    if (data) {
+        delete[] data;
+        data = nullptr; // Precaução para evitar acesso duplo
+    }
+}
+
+void Bubble::Arquivadores::ImageLoader::flipVertical()
+{
+    int rowSize = width * channels;
+    unsigned char* tempRow = new unsigned char[rowSize];
+    for (int y = 0; y < height / 2; ++y) {
+        unsigned char* row1 = data + y * rowSize;
+        unsigned char* row2 = data + (height - 1 - y) * rowSize;
+        memcpy(tempRow, row1, rowSize);
+        memcpy(row1, row2, rowSize);
+        memcpy(row2, tempRow, rowSize);
+    }
+    delete[] tempRow;
+}
+
+void Bubble::Arquivadores::ImageLoader::carregarImagem(const std::string& filepath)
+{
+    auto it = imagens_carregadas.find(filepath);
+    if (it != imagens_carregadas.end())
+    {
+        data = it->second->data;
+        channels = it->second->channels;
+        width = it->second->width;
+        height = it->second->height;
+        carregado = true;
+        return;
+    }
     // Inicializa o FreeImage
     FreeImage_Initialise();
 
@@ -51,31 +89,10 @@ Bubble::Arquivadores::ImageLoader::ImageLoader(const std::string& filepath)
 
     // Indica que a imagem foi carregada com sucesso
     carregado = true;
+    imagens_carregadas.insert(std::pair(path, this));
 
     // Finaliza o FreeImage
     FreeImage_DeInitialise();
-}
-
-Bubble::Arquivadores::ImageLoader::~ImageLoader()
-{
-    if (data) {
-        delete[] data;
-        data = nullptr; // Precaução para evitar acesso duplo
-    }
-}
-
-void Bubble::Arquivadores::ImageLoader::flipVertical()
-{
-    int rowSize = width * channels;
-    unsigned char* tempRow = new unsigned char[rowSize];
-    for (int y = 0; y < height / 2; ++y) {
-        unsigned char* row1 = data + y * rowSize;
-        unsigned char* row2 = data + (height - 1 - y) * rowSize;
-        memcpy(tempRow, row1, rowSize);
-        memcpy(row1, row2, rowSize);
-        memcpy(row2, tempRow, rowSize);
-    }
-    delete[] tempRow;
 }
 
 GLFWimage Bubble::Arquivadores::ImageLoader::converterParaGlfw()

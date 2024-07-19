@@ -2,7 +2,7 @@
 #define ARQUIVO_3D_H
 #include <string>
 #include <vector>
-#include "includes.h"
+#include "src/util/includes.h"
 #include <iostream>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>

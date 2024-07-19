@@ -4,17 +4,14 @@
 #include "src/depuracao/debug.h"
 
 std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
-
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 const char* ShaderException::what() const noexcept
 {
     return msg_.c_str();
 }
-
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     compilar(vertexPath, fragmentPath);
 }
-
 void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     for (auto shader : shaders)
     {
@@ -94,35 +91,27 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
 
     shaders.push_back(std::pair(std::pair(vertexPath, fragmentPath), ID));
 }
-
 void Shader::use() const {
     glUseProgram(ID);
 }
-
 void Shader::setBool(const std::string& name, bool value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
-
 void Shader::setFloat(const std::string& name, float value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
-
 void Shader::setInt(const std::string& name, int value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
-
 void Shader::setMat4(const std::string& name, const GLfloat* value) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
-
 void Shader::setMat3(const std::string& name, const GLfloat* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
-
 void Shader::setVec3(const std::string& name, float r, float g, float b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
-
 bool Shader::checkCompileErrors(GLuint shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];
@@ -144,7 +133,6 @@ bool Shader::checkCompileErrors(GLuint shader, const std::string& type) {
     }
     return true;
 }
-
 bool Shader::checkLinkErrors(GLuint program) {
     GLint success;
     GLchar infoLog[1024];

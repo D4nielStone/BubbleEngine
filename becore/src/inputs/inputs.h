@@ -1,12 +1,11 @@
 #ifndef INPUTS_H
 #define INPUTS_H
-
-#include <GLFW/glfw3.h>
 #include <iostream>
 #include <unordered_map>
 #include <functional>
+#include "imgui.h"
 #include "becore.h"
-
+class GLFWwindow;
 enum class BECORE_DLL_API Key {
     W,
     A,
