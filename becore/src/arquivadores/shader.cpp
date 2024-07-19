@@ -21,7 +21,6 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
         if (shader.first.first == vertexPath && shader.first.second == fragmentPath)
         {
             ID = shader.second;
-            Debug::emitir(Debug::Alerta, "Shader já compilado, re-utilizando");
             return;
         }
     }

@@ -39,19 +39,21 @@ namespace Bubble {
 		class BECORE_DLL_API Gerenciador
 		{
 		private:
+			Interface::UI ui;
 			GLFWwindow* janelaGerenciador;
-			std::vector<Engine> engines;
+			std::vector<Engine*> engines;
 			Scene criarCenaPadrao();
 			bool escanearProjetos();
 		public:
+			Engine* engineAtual = nullptr;
 			GLFWwindow* obterJanela() { return janelaGerenciador; };
-			std::vector<Engine>* obterEngines() { return &engines; };
+			std::vector<Engine*>* obterEngines() { return &engines; };
 			std::vector<Projeto>* obterProjetos();
 			void limpar();
 			bool inicializacao();
 			bool carregarProjeto(Projeto proj);
 			bool criarProjeto(const std::string& path, const std::string& nome, bool criarCenaPadrao = true);
-			bool salvarProjetos();
+			bool salvarListaProjetos();
 			Gerenciador() {};
 			~Gerenciador() { limpar(); };
 		};

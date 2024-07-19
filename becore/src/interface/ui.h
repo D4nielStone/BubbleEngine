@@ -28,20 +28,32 @@ namespace Bubble
 			Entidades,
 			Arquivos,
 			Inpetor,
-			Console
+			Console,
+			MENU_Arquivos,
+			MENU_CriarProjeto,
+			MENU_Cena,
+			MENU_Editar
+		};
+		enum BECORE_DLL_API Estilo
+		{
+			Engine,
+			Vazio
 		};
 		class BECORE_DLL_API UI
 		{
 		private:
-			std::string nome;
-			std::string path;
+			ImFont* notosans;
+			char nomeBuffer[64];
+			char pathBuffer[1024];
 			bool criarPadrao = true;
 
-			std::vector<Janela>janelas;
 			Nucleo::Gerenciador* gerenciador;
-			std::vector<GLFWwindow*> janelasGLFW;
-			std::vector<ImGuiContext*> contextosImGui;
+			std::vector<std::pair<std::pair<GLFWwindow*, ImGuiContext*>,std::vector<Janela>*>> janelas;
 			
+			void desenharMenuArquivos();
+			void desenharMenuCena();
+			void desenharMenuEditar();
+			void desenharMenuCriarP();
 			void desenharProjetos(unsigned int depth);
 			void desenharEditor(unsigned int depth);
 			void desenharPreview(unsigned int depth);
@@ -49,18 +61,18 @@ namespace Bubble
 			void desenharInspetor(unsigned int depth);
 			void desenharArquivos(unsigned int depth);
 			void desenharEntidades(unsigned int depth);
-			void iniciarJanelas();
+			void iniciarJanelas(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*> j);
 			void desenharComponente(Comum::Componente* componente);
-			const char* desktopPath();
-			void menuBar();
+			std::wstring desktopPath();
 		public:
-			UI();
-			~UI();
+			UI(){};
 			void inicializarImGui(Nucleo::Gerenciador& gen);
 			void renderizar();
-			void limpar();
-			void novoContexto(GLFWwindow* w);
-			void novaJanela(Janela j);
+			void limpar(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*>j);
+			void pullevents();
+			void novoContexto(GLFWwindow* w, Estilo = Vazio);
+			void novaJanela(GLFWwindow* w, Janela j);
+			bool gameloop = true;
 		};
 	}
 }

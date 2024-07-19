@@ -8,7 +8,7 @@ namespace Bubble {
 
         Scene::Scene(const char* name) : Name(name) {
             std::string msg = std::string(name) + " criada";
-            Debug::emitir(Debug::Tipo::Mensagem, msg.c_str());
+            Debug::emitir("CENA", msg.c_str());
         }
         
         Scene::~Scene() {}
@@ -78,6 +78,45 @@ namespace Bubble {
             }
 
             doc->AddMember("entidades", arr, doc->GetAllocator());
+        }
+
+        bool Scene::parse(rapidjson::Document& document)
+        {
+            // Verifica se o documento tem o membro "nome" e se é uma string
+            if (document.HasMember("nome") && document["nome"].IsString())
+            {
+                Name = document["nome"].GetString();
+                Debug::emitir("CENA", Name + std::string(":"));
+            }
+            else
+            {
+                Debug::emitir(Debug::Erro, "O membro 'nome' não foi encontrado na cena");
+                return false;
+            }
+            // Analisa entidades
+            if (document.HasMember("entidades") && document["entidades"].IsArray())
+            {
+                rapidjson::Value& entidades = document["entidades"];
+                for (rapidjson::SizeType i = 0; i < entidades.Size(); ++i)
+                {
+                    std::shared_ptr<Entidades::Entidade> entidadetmp = std::make_shared<Entidades::Entidade>();
+                    if (!entidadetmp->parse(entidades[i]))
+                    {
+                        Debug::emitir(Debug::Erro, "parse de entidades");
+                        return false;
+                    }
+                    else
+                    {
+                        adicionarEntidade(entidadetmp);
+                    }
+                }
+            }
+            else
+            {
+                Debug::emitir(Debug::Erro, "parse de entidades");
+                return false;
+            }
+            return true;
         }
 
         std::string Scene::nome() const {

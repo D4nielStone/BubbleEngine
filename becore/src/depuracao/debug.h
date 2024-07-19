@@ -15,6 +15,7 @@ namespace Debug
     };
 
     BECORE_DLL_API void emitir(Tipo t, std::string msg);
+    BECORE_DLL_API void emitir(std::string t, std::string msg);
     
     BECORE_DLL_API std::vector<std::pair<Debug::Tipo, const char*>>* obterMensagems();
 }

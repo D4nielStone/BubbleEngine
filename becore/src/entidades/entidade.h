@@ -47,6 +47,7 @@ namespace Bubble {
 			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
 			
 			rapidjson::Value serializar(rapidjson::Document* a);
+			bool parse(rapidjson::Value& v);
 
 		private:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;

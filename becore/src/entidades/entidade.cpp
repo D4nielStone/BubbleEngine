@@ -85,5 +85,11 @@ namespace Bubble {
 			obj.AddMember("transformacao", array, v->GetAllocator());
 			return obj;
 		}
+		bool Entidade::parse(rapidjson::Value& entidade)
+		{
+			Nome = entidade["nome"].GetString();
+			Debug::emitir("ENTIDADE", "  " + Nome + ":");
+			return true;
+		}
 	}
 }

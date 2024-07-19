@@ -5,7 +5,7 @@
 
 InputMode Inputs::getInputMode() const
 {
-    return currentMode;
+    return InputMode::Editor;
 }
 
 Inputs::Inputs() : currentMode(InputMode::Editor) {
@@ -65,7 +65,7 @@ bool Inputs::isKeyPressed(Key key) {
 }
 
 void Inputs::handleKey(Key key) {
-    if (currentMode == InputMode::Game) {
+    if (currentMode == Game) {
         handleGameKey(key);
     }
     else {
@@ -90,16 +90,16 @@ void Inputs::handleGameKey(Key key) {
 
 void Inputs::handleEditorKey(Key key) {
     if (isKeyPressed(Key::Shift)) {
-        std::cout << "Handling editor key with Shift: " << static_cast<int>(key) << std::endl;
+        std::cout << "Handling InputMode::Editor key with Shift: " << static_cast<int>(key) << std::endl;
     }
     else if (isKeyPressed(Key::Ctrl)) {
-        std::cout << "Handling editor key with Ctrl: " << static_cast<int>(key) << std::endl;
+        std::cout << "Handling InputMode::Editor key with Ctrl: " << static_cast<int>(key) << std::endl;
     }
     else if (isKeyPressed(Key::Alt)) {
-        std::cout << "Handling editor key with Alt: " << static_cast<int>(key) << std::endl;
+        std::cout << "Handling InputMode::Editor key with Alt: " << static_cast<int>(key) << std::endl;
     }
     else {
-        std::cout << "Handling editor key: " << static_cast<int>(key) << std::endl;
+        std::cout << "Handling InputMode::Editor key: " << static_cast<int>(key) << std::endl;
     }
 }
 

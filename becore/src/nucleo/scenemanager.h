@@ -37,12 +37,13 @@ namespace Bubble {
             float corCeu[3]{0.3f, 0.3f, 1.f};
 
             Scene() : Name("Cena sem nome") {}
+            Scene(const char* name);
             ~Scene();
-            explicit Scene(const char* name);
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void atualizar(Modo m, float deltaTime,float aspecto);
             void carregar();
             void serializar(rapidjson::Document* doc) const;
+            bool parse(rapidjson::Document& doc);
             std::string nome() const;
         };
 

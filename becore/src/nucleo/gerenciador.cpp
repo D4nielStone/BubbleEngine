@@ -4,6 +4,7 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include "rapidjson/ostreamwrapper.h"
 #include "src/arquivadores/imageloader.h"
 #include "filesystem"
 
@@ -15,32 +16,38 @@ namespace Bubble::Nucleo
     //@Initialize GLFW and GLAD
     bool Engine::inicializacao()
     {
+        //inicia glfw
         if (!glfwInit())
+        {
+            Debug::emitir(Debug::Erro, "GLFW não inicializado");
             return false;
+        }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
         glfwWindow = glfwCreateWindow(800, 500, "MotorBubble-Editor", NULL, NULL);
+        glfwMakeContextCurrent(glfwWindow);
         if (!glfwWindow)
         {
+            Debug::emitir(Debug::Erro, "Janela não inicializada");
             glfwTerminate();
             return false;
         }
-
-
+        //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            Debug::emitir(Debug::Erro, "GLAD não inicializado");
             return false;
-
+        }
+        //define o ícone da janela
         auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
         GLFWimage icone = icone_.converterParaGlfw();
         if (icone_.carregado)
         {
             glfwSetWindowIcon(glfwWindow, 1, &icone);
         }
-
-        glfwMakeContextCurrent(glfwWindow);
         glfwSetWindowUserPointer(glfwWindow, &inputs);
         glfwSetKeyCallback(glfwWindow, keyCallback);
-
 
         return true;
     }
@@ -50,34 +57,44 @@ namespace Bubble::Nucleo
     }
     void Engine::renderizar(Modo m, ImVec2 viewportPos, ImVec2 viewportSize)
     {
-        glfwMakeContextCurrent(glfwWindow);
         float st = glfwGetTime();
         auto cena = gerenciadorDeCenas.cenaAtual();
         Componentes::Camera* cam = nullptr;
+
         if (m == Modo::Editor)
             cam = &cena->camera_editor;
-        else if(cena->camera_principal)
+        else if (cena->camera_principal)
             cam = cena->camera_principal;
 
         if (cam)
         {
-            //fix framebuffer resolution
+            // Bind framebuffer
             glBindFramebuffer(GL_FRAMEBUFFER, cam->FBO);
 
+            // Redimensionar o texture color buffer
             glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.x, viewportSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
             glBindTexture(GL_TEXTURE_2D, 0);
 
+            // Redimensionar o renderbuffer
             glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
             glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y);
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
-        }
-        //render scene
-        deltaTime = glfwGetTime() - st;
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Limpar framebuffer
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Atualizar cena
             gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportPos.x), static_cast<float>(viewportPos.y), static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y));
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+            // Desligar framebuffer
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        }
+
+        // Calcular deltaTime
+        deltaTime = glfwGetTime() - st;
     }
+
     void Engine::limpar() const {
         glfwDestroyWindow(glfwWindow);
         glfwTerminate();
@@ -118,36 +135,70 @@ namespace Bubble::Nucleo
             Debug::emitir(Debug::Erro, "Não foi possível carregar o projeto: " + proj.nome);
             return false;
         }
-        std::ifstream ifs("projetos.json");
-        if (!ifs.is_open()) {
-            std::cerr << "Não foi possível abrir o arquivo 'projetos.json'." << std::endl;
-            return 1;
+
+        std::vector<std::filesystem::path> sceneFiles;
+        std::vector<std::shared_ptr<Scene>> cenas;
+
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(proj.path))
+        {
+            if (entry.is_regular_file() && entry.path().extension() == ".bs")
+            {
+                sceneFiles.push_back(entry.path());
+                Debug::emitir("CENA", "Arquivo de cena encontrado : " + entry.path().string());
+            }
         }
 
-        // Leia o conteúdo do arquivo
-        std::string jsonContent((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-        ifs.close();
+        if (sceneFiles.empty())
+        {
+            Debug::emitir(Debug::Mensagem, "Nenhum arquivo de cena encontrado no projeto: " + proj.nome);
+        }
+        else
+        {
+            Debug::emitir(Debug::Mensagem, "Arquivos de cena carregados para o projeto: " + proj.nome);
+            for (const auto& sceneFile : sceneFiles)
+            {
+                // Carregangdo o arquivo de cena para a classe
+                std::ifstream ifs(sceneFile);
+                if (!ifs.is_open()) {
+                    Debug::emitir(Debug::Erro, "Não foi possível abrir o arquivo de cena: " + sceneFile.filename().string());
+                    return false;
+                }
 
-        // Parseie o documento JSON
-        rapidjson::Document document;
-        document.Parse(jsonContent.c_str());
-            //if(!engine)
-        //    engine = new Engine();
-        //
-        //engine->projeto = proj;
-        //if (!engine->inicializacao())
-        //    return -1;
-        //
-        //while (!engine->pararloop())
-        //{
-        //    ui.novoFrame(engine->glfwWindow, Interface::Engine);
-        //    ui.renderizar();
-        //}
+                // Leia o conteúdo do arquivo
+                std::string jsonContent((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+                ifs.close();
+
+                // Parseie o documento JSON
+                rapidjson::Document document;
+                document.Parse(jsonContent.c_str());
+
+                // parse da cena
+                std::shared_ptr<Scene> cenatmp = std::make_shared<Scene>();
+                if (cenatmp->parse(document))
+                    cenas.push_back(cenatmp);
+                else {
+                    Debug::emitir(Debug::Erro, "Parse da cena");
+                    return false;
+                }
+            }
+        }
+
+        // Adiciona nova engine para o projeto
+        Engine* eng = new Engine();
+        eng->obterProjeto()->nome = proj.nome;
+        eng->obterProjeto()->path = proj.path;
+        for (const auto& cena: cenas)
+        {
+            eng->obterGC()->adicionarCena(cena);
+        }
+        eng->obterGC()->carregarCena(0);
+        eng->inicializacao();
+        engines.push_back(eng);
+
         return true;
     }
-    bool Gerenciador::salvarProjetos() {
-        //salva arquivos(cenas etc.)
 
+    bool Gerenciador::salvarListaProjetos() {
         //salvando lista de projetos
         rapidjson::Document document;
         document.SetObject();
@@ -180,8 +231,9 @@ namespace Bubble::Nucleo
     }
     bool Gerenciador::criarProjeto(const std::string& rootpath, const std::string& nome, bool criarCenaPadra)
     {
-        Projeto proj{ nome, rootpath };
+        Projeto proj{ nome, rootpath + "/" + nome};
         Projetos.push_back(proj);
+        salvarListaProjetos();
 
         // Criar cena
         Scene cena("Cena1");
@@ -224,7 +276,7 @@ namespace Bubble::Nucleo
             std::ifstream ifs("projetos.json");
             if (!ifs.is_open()) {
                 std::cerr << "Não foi possível abrir o arquivo 'projetos.json'." << std::endl;
-                return 1;
+                return false;
             }
 
             // Leia o conteúdo do arquivo
@@ -236,36 +288,67 @@ namespace Bubble::Nucleo
             document.Parse(jsonContent.c_str());
 
             // Verifique e leia o array de projetos
-            if (document.HasMember("projetos") && document["projetos"].IsArray()) 
+            if (document.HasMember("projetos") && document["projetos"].IsArray())
             {
-                const rapidjson::Value& projetos = document["projetos"];
-                for (rapidjson::SizeType i = 0; i < projetos.Size(); ++i) {
+                rapidjson::Value& projetos = document["projetos"];
+                rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+                for (rapidjson::SizeType i = 0; i < projetos.Size();)
+                {
                     if (projetos[i].HasMember("nome") && projetos[i]["nome"].IsString() &&
-                        projetos[i].HasMember("path") && projetos[i]["path"].IsString()) {
-                        std::cout << "Projeto " << i + 1 << ": " << std::endl;
-                        std::cout << "  Nome: " << projetos[i]["nome"].GetString() << std::endl;
-                        std::cout << "  Path: " << projetos[i]["path"].GetString() << std::endl;
-                        Projetos.push_back(Projeto{ projetos[i]["nome"].GetString(), projetos[i]["path"].GetString() });
+                        projetos[i].HasMember("path") && projetos[i]["path"].IsString())
+                    {
+                        if (std::filesystem::exists(projetos[i]["path"].GetString()))
+                        {
+                            Debug::emitir("PROJETO", "Projeto " + std::to_string(i + 1) + ":");
+                            Debug::emitir("PROJETO", "  Nome: " + std::string(projetos[i]["nome"].GetString()));
+                            Debug::emitir("PROJETO", "  Path: " + std::string(projetos[i]["path"].GetString()));
+                            Projetos.push_back(Projeto{ projetos[i]["nome"].GetString(), projetos[i]["path"].GetString() });
+                        }
+                        else
+                        {
+                            Debug::emitir(Debug::Erro, "O diretório do projeto " + std::string(projetos[i]["nome"].GetString()) + " não existe");
+                            projetos.Erase(projetos.Begin() + i);
+                        }
+                        ++i;
                     }
-                    else {
-                        std::cerr << "O projeto " << i + 1 << " não tem os campos 'nome' e 'path' corretamente definidos." << std::endl;
-                        return -1;
+                    else
+                    {
+                        Debug::emitir(Debug::Erro, "O projeto " + std::to_string(i + 1) + " não tem os campos 'nome' e 'path' corretamente definidos.");
+                        return false;
                     }
                 }
             }
-            else {
-                std::cerr << "O membro 'projetos' não foi encontrado ou não é um array." << std::endl;
-                return -1;
+            else
+            {
+                Debug::emitir(Debug::Erro, "O membro 'projetos' não foi encontrado ou não é um array");
+                return false;
             }
-            Debug::emitir(Debug::Mensagem, "Projetos escaneados");
-            return 1;
+
+            // Escreve o documento JSON de volta ao arquivo
+            std::ofstream ofs("projetos.json");
+            if (!ofs.is_open()) {
+                std::cerr << "Não foi possível abrir o arquivo 'projetos.json' para escrita." << std::endl;
+                return false;
+            }
+            rapidjson::OStreamWrapper osw(ofs);
+            rapidjson::Writer<rapidjson::OStreamWrapper> writer(osw);
+            document.Accept(writer);
+
+            Debug::emitir(Debug::Mensagem, "Projetos escaneados e atualizados");
+            return true;
         }
         else
         {
+            std::ofstream ofs("projetos.json");
+            if (!ofs.is_open()) {
+                std::cerr << "Não foi possível abrir o arquivo 'projetos.json' para escrita." << std::endl;
+                return false;
+            }
             Debug::emitir(Debug::Mensagem, "Nenhum projeto existente");
         }
         return true;
     }
+
     bool Gerenciador::inicializacao()
     {
         //inicia glfw
@@ -287,10 +370,8 @@ namespace Bubble::Nucleo
         }
 
         //inicia UI
-        Interface::UI ui;
         ui.inicializarImGui(*this);
         ui.novoContexto(janelaGerenciador);
-        ui.novaJanela(Interface::Projetos);
         
         //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -299,7 +380,7 @@ namespace Bubble::Nucleo
             return false;
         }
         
-        //defini o ícone da janela
+        //define o ícone da janela
         auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
         GLFWimage icone = icone_.converterParaGlfw();
         if (icone_.carregado)
@@ -310,15 +391,25 @@ namespace Bubble::Nucleo
         escanearProjetos();
 
         //loop principal
-        while (!glfwWindowShouldClose(janelaGerenciador))
+        while (ui.gameloop)
         {
+            ui.pullevents();
+            for (const auto& engine : engines)
+            {
+                engineAtual = engine;
+                ui.novoContexto(engine->obterJanela(), Interface::Engine);
+                auto it = std::find(engines.begin(), engines.end(), engine);
+                if (it != engines.end())
+                {
+                    engines.erase(it);
+                }
+            }
             ui.renderizar();
         }
         return 1;
     }
     void Gerenciador::limpar()
     {
-        glfwDestroyWindow(janelaGerenciador);
         glfwTerminate();
     }
     std::vector<Projeto>* Gerenciador::obterProjetos()

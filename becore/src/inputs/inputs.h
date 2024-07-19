@@ -34,7 +34,7 @@ namespace std {
 }
 
 
-enum class BECORE_DLL_API InputMode {
+enum BECORE_DLL_API InputMode {
     Editor,
     Game
 };
@@ -55,7 +55,7 @@ protected:
     virtual void handleEditorKey(Key key);
 
 private:
-    InputMode currentMode;
+    InputMode currentMode = InputMode::Editor;
     std::unordered_map<Key, bool> keyStates;
 };
 
