@@ -68,7 +68,7 @@ namespace Bubble::Interface
             break;
         }
         janelas.push_back(std::make_pair(std::make_pair(window, contexto), configuracao_jnl));
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        //ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init("#version 330");
     }
     void UI::pullevents()

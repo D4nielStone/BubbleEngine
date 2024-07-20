@@ -2,13 +2,14 @@
 #define TERRENO_H
 #include "src/comum/componente.h"
 #include "src/util/includes.h"
+#include "becore.h"
 #include "vector"
 
 namespace Bubble
 {
 	namespace Componentes
 	{
-		class Terreno : public Comum::Componente
+		class BECORE_DLL_API Terreno : public Comum::Componente
 		{
 		private:
 			Vertex mVertex; Material mMaterial;

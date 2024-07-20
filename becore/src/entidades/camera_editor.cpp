@@ -31,55 +31,55 @@ namespace Bubble {
 
         void CameraEditor::atualizar(float dt)
         {
-            //if (inputs && inputs->getInputMode() == Editor)
-            //{
-            //    // Movimento
-            //    frente = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)),
-            //        sin(glm::radians(pitch)),
-            //        sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
-            //    if (inputs->isKeyPressed(Key::W))
-            //    {
-            //        transformacao->Move(frente * velocidadeDeMovimento);
-            //    }
-            //    if (inputs->isKeyPressed(Key::S))
-            //    {
-                    transformacao->Move(-frente * velocidadeDeMovimento);
-            //    }
-            //    if (inputs->isKeyPressed(Key::A))
-            //    {
-            //        transformacao->Move(glm::normalize(glm::cross(glm::vec3(0, 1, 0), frente)) * velocidadeDeMovimento);
-            //    }
-            //    if (inputs->isKeyPressed(Key::D))
-            //    {
-            //        transformacao->Move(glm::normalize(glm::cross(frente, glm::vec3(0, 1, 0))) * velocidadeDeMovimento);
-            //    }
-            //
-            //    // Rotação
-            //    if (inputs->isKeyPressed(Key::UP))
-            //    {
-            //        pitch += sensibilidadeDeRotacao;
-            //        if (pitch > 89.0f)
-            //            pitch = 89.0f;
-            //        atualizarDirecao();
-            //    }
-            //    if (inputs->isKeyPressed(Key::DOWN))
-            //    {
-            //        pitch -= sensibilidadeDeRotacao;
-            //        if (pitch < -89.0f)
-            //            pitch = -89.0f;
-            //        atualizarDirecao();
-            //    }
-            //    if (inputs->isKeyPressed(Key::LEFT))
-            //    {
-            //        yaw -= sensibilidadeDeRotacao;
-            //        atualizarDirecao();
-            //    }
-            //    if (inputs->isKeyPressed(Key::RIGHT))
-            //    {
-            //        yaw += sensibilidadeDeRotacao;
-            //        atualizarDirecao();
-            //    }
-            //}
+            if (inputs && inputs->getInputMode() == Editor)
+            {
+                // Movimento
+                frente = glm::normalize(glm::vec3(cos(glm::radians(yaw)) * cos(glm::radians(pitch)),
+                    sin(glm::radians(pitch)),
+                    sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
+                if (inputs->isKeyPressed(Key::W))
+                {
+                    transformacao->Move(frente * velocidadeDeMovimento);
+                }
+                if (inputs->isKeyPressed(Key::S))
+                {
+                  transformacao->Move(-frente * velocidadeDeMovimento);
+                }
+                if (inputs->isKeyPressed(Key::A))
+                {
+                    transformacao->Move(glm::normalize(glm::cross(glm::vec3(0, 1, 0), frente)) * velocidadeDeMovimento);
+                }
+                if (inputs->isKeyPressed(Key::D))
+                {
+                    transformacao->Move(glm::normalize(glm::cross(frente, glm::vec3(0, 1, 0))) * velocidadeDeMovimento);
+                }
+            
+                // Rotação
+                if (inputs->isKeyPressed(Key::UP))
+                {
+                    pitch += sensibilidadeDeRotacao;
+                    if (pitch > 89.0f)
+                        pitch = 89.0f;
+                    atualizarDirecao();
+                }
+                if (inputs->isKeyPressed(Key::DOWN))
+                {
+                    pitch -= sensibilidadeDeRotacao;
+                    if (pitch < -89.0f)
+                        pitch = -89.0f;
+                    atualizarDirecao();
+                }
+                if (inputs->isKeyPressed(Key::LEFT))
+                {
+                    yaw -= sensibilidadeDeRotacao;
+                    atualizarDirecao();
+                }
+                if (inputs->isKeyPressed(Key::RIGHT))
+                {
+                    yaw += sensibilidadeDeRotacao;
+                    atualizarDirecao();
+                }
+            }
 
             glClearColor(ceu[0], ceu[1], ceu[2], 1);
 

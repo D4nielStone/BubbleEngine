@@ -2,6 +2,7 @@
 #define TRANSFORMACAO_H
 #include "src/comum/componente.h"
 #include "src/depuracao/debug.h"
+#include "becore.h"
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,7 +18,7 @@ namespace Bubble {
             ESTATICO,
             DINAMICO
         };
-        class Transformacao : public Bubble::Comum::Componente {
+        class BECORE_DLL_API Transformacao : public Bubble::Comum::Componente {
         private:
             glm::vec3 posicao;
             glm::vec3 escala;

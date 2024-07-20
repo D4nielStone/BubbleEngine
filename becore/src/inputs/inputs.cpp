@@ -7,7 +7,7 @@
 
 InputMode Inputs::getInputMode() const
 {
-    return InputMode::Editor;
+    return currentMode;
 }
 
 Inputs::Inputs() : currentMode(InputMode::Editor) {

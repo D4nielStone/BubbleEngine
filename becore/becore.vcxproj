@@ -179,6 +179,7 @@
     <ClInclude Include="src\arquivadores\arquivo3d.h" />
     <ClInclude Include="src\arquivadores\shader.h" />
     <ClInclude Include="src\componentes\transformacao\transformacao.h" />
+    <ClInclude Include="src\util\includes.h" />
     <ClInclude Include="src\util\skybox.h" />
   </ItemGroup>
   <ItemGroup>

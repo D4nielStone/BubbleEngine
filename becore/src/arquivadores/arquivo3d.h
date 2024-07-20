@@ -2,6 +2,7 @@
 #define ARQUIVO_3D_H
 #include <string>
 #include <vector>
+#include "becore.h"
 #include "src/util/includes.h"
 #include <iostream>
 #include <assimp/Importer.hpp>
@@ -10,7 +11,7 @@
 
 namespace Bubble {
     namespace Arquivadores {
-        class Arquivo3d {
+        class BECORE_DLL_API Arquivo3d {
         public:
             std::string Caminho;
             std::vector<Vertex> vertices;

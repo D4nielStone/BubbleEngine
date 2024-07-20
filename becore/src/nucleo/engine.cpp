@@ -40,9 +40,9 @@ namespace Bubble::Nucleo
         {
             glfwSetWindowIcon(glfwWindow, 1, &icone);
         }
+
         glfwSetWindowUserPointer(glfwWindow, &inputs);
         glfwSetKeyCallback(glfwWindow, keyCallback);
-
         return true;
     }
     int Engine::pararloop() const
@@ -57,36 +57,42 @@ namespace Bubble::Nucleo
 
         if (m == Modo::Editor)
             cam = &cena->camera_editor;
+            
         else if (cena->camera_principal)
             cam = cena->camera_principal;
 
         if (cam)
         {
-            // Bind framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER, cam->FBO);
-
-            // Redimensionar o texture color buffer
-            glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.x, viewportSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-            glBindTexture(GL_TEXTURE_2D, 0);
-
-            // Redimensionar o renderbuffer
-            glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y);
-            glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
-            // Limpar framebuffer
+            //// Bind framebuffer
+            //glBindFramebuffer(GL_FRAMEBUFFER, cam->FBO);
+            //
+            //// Redimensionar o texture color buffer
+            //glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
+            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.x, viewportSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+            //glBindTexture(GL_TEXTURE_2D, 0);
+            //
+            //// Redimensionar o renderbuffer
+            //glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
+            //glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y);
+            //glBindRenderbuffer(GL_RENDERBUFFER, 0);
+            //
+            //// Limpar framebuffer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // Atualizar cena
+            gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = &inputs;
+
             gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportPos.x), static_cast<float>(viewportPos.y), static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y));
 
             // Desligar framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            //glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
 
         // Calcular deltaTime
         deltaTime = glfwGetTime() - st;
+
+        glfwSwapBuffers(glfwWindow);
+        glfwPollEvents();
     }
 
     void Engine::limpar() const {

@@ -33,14 +33,8 @@ namespace Bubble {
 		}
 
 		void Entidade::carregarModelo(Bubble::Arquivadores::Arquivo3d object_file) {
-			int m = 0;
-			for (const auto& vertex : object_file.vertices) {
-				if (m < object_file.materiais.size()) {
-					auto renderizador = std::make_shared<Bubble::Componentes::Renderizador>(vertex, object_file.materiais[m]);
-					adicionarComponente(renderizador);
-					m++;
-				}
-			}
+			auto renderizador = std::make_shared<Bubble::Componentes::Renderizador>(object_file);
+			adicionarComponente(renderizador);
 		}
 
 		std::shared_ptr<Bubble::Comum::Componente> Entidade::obterComponente(const std::string& nome) {

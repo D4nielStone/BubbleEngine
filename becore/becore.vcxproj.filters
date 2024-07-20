@@ -120,6 +120,9 @@
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\util\includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\phong.vert">

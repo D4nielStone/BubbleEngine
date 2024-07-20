@@ -17,6 +17,7 @@ struct Vertex {
     std::vector<unsigned int> indices;
     std::vector<float> uvs;
     std::vector<float> normals;
+    unsigned int VAO, EBO, VBO;
 };
 struct Projeto
 {
