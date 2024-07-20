@@ -28,7 +28,7 @@ int INIT
     camera->adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
     camera->obterTransformacao()->definirPosicao(glm::vec3(10, 10, 10));
     //Cria e configura entidade Esfera
-    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/modelos/a/a.obj"));
     
     scene->adicionarEntidade(esfera);
     scene->adicionarEntidade(camera);
@@ -39,7 +39,7 @@ int INIT
 
     while (!engine.pararloop())
     {
-        engine.renderizar(Modo::Editor, ImVec2(0, 0), ImVec2(640, 480));
+        engine.renderizar(Modo::Editor);
     }
 
     engine.limpar();

@@ -9,10 +9,11 @@ namespace Bubble{
     namespace Componentes {
         class Renderizador : public Bubble::Comum::Componente {
         private:
-            Arquivadores::Arquivo3d* arquivo_obj;
-            void configurarBuffers(Vertex v);
-            void desenharModelo(Vertex v);
-            void atualizarCores(Material m);
+            std::vector<Material>materiais;
+            std::vector<Vertex>vertices;
+            void configurarBuffers(Vertex& v);
+            void desenharModelo(Vertex& v);
+            void atualizarCores(Material& m);
         public:
             Renderizador();
             explicit Renderizador(Arquivadores::Arquivo3d& objf);

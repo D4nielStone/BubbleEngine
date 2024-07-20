@@ -81,7 +81,11 @@ namespace Bubble::Nucleo
 
             // Atualizar cena
             gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = &inputs;
-
+            int width = 0, height = 0;
+            glfwGetFramebufferSize(glfwWindow, &width, &height);
+            if(viewportSize.x == 0 && viewportSize.y == 0)
+            gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, 0, 0, static_cast<float>(width), static_cast<float>(height));
+            else
             gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportPos.x), static_cast<float>(viewportPos.y), static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y));
 
             // Desligar framebuffer

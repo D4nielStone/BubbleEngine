@@ -31,7 +31,7 @@ void Bubble::Arquivadores::Arquivo3d::carregarModelo(const std::string& caminho)
     }
     
     Assimp::Importer importador;
-    cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_FlipUVs);
+    cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType | aiProcess_FlipUVs);
 
     if (!cena || cena->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !cena->mRootNode) {
         std::cerr << "ERROR::ASSIMP:: " << importador.GetErrorString() << std::endl;

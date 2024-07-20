@@ -17,6 +17,7 @@ namespace Bubble {
             std::vector<Vertex> vertices;
             std::vector<Material> materiais;
 
+            Arquivo3d(){}
             Arquivo3d(std::string caminho) : Caminho(caminho) {
                 carregarModelo(Caminho);
             }

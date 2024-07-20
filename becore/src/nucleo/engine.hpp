@@ -26,7 +26,7 @@ namespace Bubble
 			GLFWwindow* obterJanela() { return glfwWindow; };
 			bool inicializacao();
 			int pararloop() const;
-			void renderizar(Modo m, ImVec2 viewportPos, ImVec2 viewportSize);
+			void renderizar(Modo m, ImVec2 viewportPos = ImVec2(0, 0), ImVec2 viewportSize = ImVec2(0, 0));
 			void limpar() const;
 			bool salvarCena(unsigned int idx);
 			Engine();
