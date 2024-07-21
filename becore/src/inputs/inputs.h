@@ -3,7 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "imgui.h"
+#include "src/util/includes.h"
 #include "becore.h"
 class GLFWwindow;
 enum class BECORE_DLL_API Key {
@@ -37,28 +37,37 @@ enum BECORE_DLL_API InputMode {
     Editor,
     Game
 };
+namespace Bubble
+{
+    namespace Inputs
+    {
 
-class BECORE_DLL_API Inputs {
-public:
-    Inputs();
+        class BECORE_DLL_API Inputs {
+        public:
+            Inputs();
 
-    void setInputMode(InputMode mode);
-    void keyPressed(Key key);
-    void keyReleased(Key key);
-    bool isKeyPressed(Key key);
-    InputMode getInputMode() const;
-
-protected:
-    virtual void handleKey(Key key);
-    virtual void handleGameKey(Key key);
-    virtual void handleEditorKey(Key key);
-
-private:
-    InputMode currentMode = InputMode::Editor;
-    std::unordered_map<Key, bool> keyStates;
-};
+            void setInputMode(InputMode mode);
+            void keyPressed(Key key);
+            void keyReleased(Key key);
+            bool isKeyPressed(Key key);
+            InputMode getInputMode() const;
+            double mousex, mousey;
+            int mouseEnter;
+            bool mouseClick;
+        protected:
+            virtual void handleKey(Key key);
+            virtual void handleGameKey(Key key);
+            virtual void handleEditorKey(Key key);
+        private:
+            InputMode currentMode = InputMode::Editor;
+            std::unordered_map<Key, bool> keyStates;
+        };
+    }
+}
 
 // Callback de teclado GLFW
 extern "C" BECORE_DLL_API void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+extern "C" BECORE_DLL_API void mousePosCallBack(GLFWwindow* window, double x, double y);
+extern "C" BECORE_DLL_API void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
 
 #endif // INPUTS_H

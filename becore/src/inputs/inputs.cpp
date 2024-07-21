@@ -2,8 +2,10 @@
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
+#include <src/depuracao/debug.h>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+using namespace Bubble::Inputs;
 
 InputMode Inputs::getInputMode() const
 {
@@ -15,7 +17,6 @@ Inputs::Inputs() : currentMode(InputMode::Editor) {
         keyStates[static_cast<Key>(i)] = false;
     }
 }
-
 void Inputs::setInputMode(InputMode mode) {
     currentMode = mode;
 }
@@ -128,7 +129,7 @@ Key glfwKeyToKey(int glfwKey) {
 }
 
 // Callback de teclado GLFW
-void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+BECORE_DLL_API void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
 
     if (inputs) {
@@ -141,6 +142,32 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
                 inputs->keyReleased(mappedKey);
             }
         }
+    }
+    else {
+        std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
+    }
+}
+
+BECORE_DLL_API void mousePosCallBack(GLFWwindow* window, double x, double y)
+{
+    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+
+    if (inputs) {
+        inputs->mousey = y;
+        inputs->mousex = x;
+    }
+    else {
+        std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
+    }
+}
+// Callback de clique do mouse
+void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
+{
+    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+    
+    if (inputs) {
+        inputs->mouseEnter = action;
+        
     }
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;

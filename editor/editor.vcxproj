@@ -140,6 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\scripts\rotacionar.lua" />
+    <None Include="assets\shaders\layout.frag" />
+    <None Include="assets\shaders\layout.vert" />
     <None Include="assets\shaders\phong.frag" />
     <None Include="assets\shaders\phong.vert" />
     <None Include="assets\shaders\skybox.frag" />

@@ -15,6 +15,7 @@ namespace Bubble {
 			std::vector<Engine*> engines;
 			Scene criarCenaPadrao();
 			bool escanearProjetos();
+			bool salvarListaProjetos();
 		public:
 			Engine* engineAtual = nullptr;
 			GLFWwindow* obterJanela() { return janelaGerenciador; };
@@ -24,9 +25,9 @@ namespace Bubble {
 			bool inicializacao();
 			bool carregarProjeto(Projeto proj);
 			bool criarProjeto(const std::string& path, const std::string& nome, bool criarCenaPadrao = true);
-			bool salvarListaProjetos();
+			void renderizar();
+			int pararLoop();
 			Gerenciador() {};
-			~Gerenciador() { limpar(); };
 		};
 	}
 }

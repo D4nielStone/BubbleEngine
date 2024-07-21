@@ -58,6 +58,15 @@
     <ClCompile Include="src\componentes\renderizador\renderizador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\interface\base\quadrado.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interface\layout\layout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\interface\imagem\imagem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.h">
@@ -87,7 +96,7 @@
     <ClInclude Include="src\inputs\gameinputs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\nucleo\gerenciador.h">
+    <ClInclude Include="src\nucleo\gerenciador.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\inputs\inputs.h">
@@ -111,7 +120,7 @@
     <ClInclude Include="src\util\skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\interface\ui.h">
+    <ClInclude Include="src\interface\ui.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\nucleo\engine.hpp">
@@ -121,6 +130,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\util\includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interface\base\quadrado.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interface\layout\layout.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\interface\imagem\imagem.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

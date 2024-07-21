@@ -4,10 +4,59 @@
 #include <iostream>
 #include <cstdio>
 
-struct Color {
-    float r = 0.7f, g = 0.7f, b = 0.7f;
+enum class Janela
+{
+	Editor,
+	Projetos,
+	Preview,
+	Entidades,
+	Arquivos,
+	Inpetor,
+	Console,
+	MENU_Arquivos,
+	MENU_CriarProjeto,
+	MENU_Cena,
+	MENU_Editar
+};
+#include <iostream>
+
+// Definição da estrutura Vector2
+struct Vector2
+{
+    float x = 0, y = 0;
+
+    Vector2 operator+(const Vector2& other) const
+    {
+        return Vector2{ x + other.x, y + other.y };
+    };
+    Vector2 operator-(const Vector2& other) const
+    {
+        return Vector2{ x - other.x, y - other.y };
+    };
+
+    Vector2& operator+=(const Vector2& other)
+    {
+        x += other.x;
+        y += other.y;
+        return *this;
+    };
+    Vector2& operator-=(const Vector2& other)
+    {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    };
 };
 
+struct Vector3
+{
+    float x = 1, y = 1, z = 1;
+};
+
+struct Color 
+{
+    float r = 0.7f, g = 0.7f, b = 0.7f;
+};
 struct Material {
     Color difusa;
 };

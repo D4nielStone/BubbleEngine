@@ -29,6 +29,12 @@
     </None>
     <None Include="assets\shaders\skybox.frag" />
     <None Include="assets\shaders\skybox.vert" />
+    <None Include="assets\shaders\layout.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="assets\shaders\layout.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">

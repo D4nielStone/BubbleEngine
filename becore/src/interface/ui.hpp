@@ -1,10 +1,10 @@
-#ifndef UI_H
-#define UI_H
+#ifndef UI_HPP
+#define UI_HPP
 #include "vector"
+#include "unordered_map"
 #include "src/util/includes.h"
 #include "src/arquivadores/imageloader.h"
-#include "imgui.h"
-
+#include "src/inputs/inputs.h"
 
 class GLFWwindow;
 namespace Bubble
@@ -20,35 +20,23 @@ namespace Bubble
 	}
 	namespace Interface
 	{
-		enum BECORE_DLL_API Janela
-		{
-			Editor,
-			Projetos,
-			Preview,
-			Entidades,
-			Arquivos,
-			Inpetor,
-			Console,
-			MENU_Arquivos,
-			MENU_CriarProjeto,
-			MENU_Cena,
-			MENU_Editar
-		};
+		class Layout;
 		enum BECORE_DLL_API Estilo
 		{
 			Motor,
-			Vazio
+			Gerenciador
 		};
 		class BECORE_DLL_API UI
 		{
 		private:
-			ImFont* notosans;
+			//ImFont* notosans;
 			char nomeBuffer[64];
 			char pathBuffer[1024];
 			bool criarPadrao = true;
 
 			Nucleo::Gerenciador* gerenciador;
-			std::vector<std::pair<std::pair<GLFWwindow*, ImGuiContext*>,std::vector<Janela>*>> janelas;
+			std::vector<Layout*>layouts;
+			GLFWwindow* contexto;
 			
 			void desenharMenuArquivos();
 			void desenharMenuCena();
@@ -61,18 +49,18 @@ namespace Bubble
 			void desenharInspetor(unsigned int depth);
 			void desenharArquivos(unsigned int depth);
 			void desenharEntidades(unsigned int depth);
-			void iniciarJanelas(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*> j);
+			void iniciarJanelas();
 			void desenharComponente(Comum::Componente* componente);
+			void limpar();
 			std::wstring desktopPath();
 		public:
 			UI(){};
-			void inicializarImGui(Nucleo::Gerenciador& gen);
+			void pollevents();
+			void inicializarImGui(Nucleo::Gerenciador* gen, GLFWwindow* win);
 			void renderizar();
-			void limpar(std::pair<std::pair<GLFWwindow*, ImGuiContext*>, std::vector<Janela>*>j);
-			void pullevents();
-			void novoContexto(GLFWwindow* w, Estilo = Vazio);
-			void novaJanela(GLFWwindow* w, Janela j);
-			bool gameloop = true;
+			void contextoAtual(GLFWwindow* w, Estilo = Gerenciador);
+			void novaJanela(Janela j);
+			Inputs::Inputs inputs;
 		};
 	}
 }

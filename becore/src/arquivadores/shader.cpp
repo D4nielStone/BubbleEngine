@@ -112,6 +112,10 @@ void Shader::setMat3(const std::string& name, const GLfloat* value) const {
 void Shader::setVec3(const std::string& name, float r, float g, float b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
+void Shader::setVec2(const std::string& name, float r, float g) const
+{
+    glUniform2f(glGetUniformLocation(ID, name.c_str()), r, g);
+}
 bool Shader::checkCompileErrors(GLuint shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];

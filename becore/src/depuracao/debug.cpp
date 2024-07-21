@@ -23,7 +23,7 @@ void Debug::emitir(Debug::Tipo t, std::string msg)
 }
 void Debug::emitir(std::string t, std::string msg)
 {
-    fmt::print(fg(fmt::color::violet), "[{}]", t);
+    fmt::print(fg(fmt::color::dark_gray), "[{}]", t);
     fmt::print(fg(fmt::color::white), "{}\n", msg);
 }
 std::vector<std::pair<Debug::Tipo, const char*>>* Debug::obterMensagems()

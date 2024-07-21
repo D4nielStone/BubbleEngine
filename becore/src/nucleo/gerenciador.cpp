@@ -1,4 +1,5 @@
-#include "gerenciador.h"
+#include "gerenciador.hpp"
+#include "src/interface/ui.hpp"
 #include "engine.hpp"
 #include <glad/glad.h>
 #include "glfw/glfw3.h"
@@ -104,7 +105,6 @@ namespace Bubble::Nucleo
 
         return true;
     }
-
     bool Gerenciador::salvarListaProjetos() {
         //salvando lista de projetos
         rapidjson::Document document;
@@ -175,7 +175,6 @@ namespace Bubble::Nucleo
 
         return true;
     }
-
     bool Gerenciador::escanearProjetos()
     {
         if (std::filesystem::exists("projetos.json"))
@@ -255,7 +254,10 @@ namespace Bubble::Nucleo
         }
         return true;
     }
-
+    int Gerenciador::pararLoop()
+    {
+        return glfwWindowShouldClose(janelaGerenciador);
+    }
     bool Gerenciador::inicializacao()
     {
         //inicia glfw
@@ -276,10 +278,14 @@ namespace Bubble::Nucleo
             return false;
         }
 
-        //inicia UI
-        ui.inicializarImGui(*this);
-        ui.novoContexto(janelaGerenciador);
-        
+        glfwSetWindowUserPointer(janelaGerenciador, &ui.inputs);
+        glfwSetCursorPosCallback(janelaGerenciador, mousePosCallBack);
+        glfwSetKeyCallback(janelaGerenciador, keyCallback);
+        glfwSetMouseButtonCallback(janelaGerenciador, mouseButtonCallBack);
+       
+        // inicia UI
+        ui.inicializarImGui(this, janelaGerenciador);
+
         //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
@@ -290,33 +296,39 @@ namespace Bubble::Nucleo
         //define o ícone da janela
         auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
         GLFWimage icone = icone_.converterParaGlfw();
+
         if (icone_.carregado)
         {
             glfwSetWindowIcon(janelaGerenciador, 1, &icone);
         }
 
         escanearProjetos();
+        
+        return true;
+    }
+    void Gerenciador::renderizar()
+    {
+        glfwPollEvents();
+        ui.pollevents();
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        //for (const auto& engine : engines)
+        //{
+        //    engineAtual = engine;
+        //    ui.novoContexto(engine->obterJanela(), Interface::Motor);
+        //    auto it = std::find(engines.begin(), engines.end(), engine);
+        //    if (it != engines.end())
+        //    {
+        //        engines.erase(it);
+        //    }
+        //}
 
-        //loop principal
-        while (ui.gameloop)
-        {
-            ui.pullevents();
-            for (const auto& engine : engines)
-            {
-                engineAtual = engine;
-                ui.novoContexto(engine->obterJanela(), Interface::Motor);
-                auto it = std::find(engines.begin(), engines.end(), engine);
-                if (it != engines.end())
-                {
-                    engines.erase(it);
-                }
-            }
-            ui.renderizar();
-        }
-        return 1;
+        ui.renderizar();
+        glfwSwapBuffers(janelaGerenciador);
+
     }
     void Gerenciador::limpar()
     {
+        glfwDestroyWindow(janelaGerenciador);
         glfwTerminate();
     }
     std::vector<Projeto>* Gerenciador::obterProjetos()

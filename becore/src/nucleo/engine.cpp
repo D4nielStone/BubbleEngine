@@ -1,5 +1,4 @@
 #include "engine.hpp"
-#include "imgui.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
@@ -49,7 +48,7 @@ namespace Bubble::Nucleo
     {
         return glfwWindowShouldClose(glfwWindow);
     }
-    void Engine::renderizar(Modo m, ImVec2 viewportPos, ImVec2 viewportSize)
+    void Engine::renderizar(Modo m, Vector2 viewportPos, Vector2 viewportSize)
     {
         float st = glfwGetTime();
         auto cena = gerenciadorDeCenas.cenaAtual();
@@ -99,7 +98,8 @@ namespace Bubble::Nucleo
         glfwPollEvents();
     }
 
-    void Engine::limpar() const {
+    void Engine::limpar() const 
+    {
         glfwDestroyWindow(glfwWindow);
         glfwTerminate();
     }

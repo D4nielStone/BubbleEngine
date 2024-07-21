@@ -129,6 +129,8 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,7 +167,10 @@
     <ClInclude Include="src\componentes\prototipo\terreno.h" />
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
     <ClInclude Include="src\entidades\camera_editor.h" />
-    <ClInclude Include="src\interface\ui.h" />
+    <ClInclude Include="src\interface\base\quadrado.hpp" />
+    <ClInclude Include="src\interface\imagem\imagem.hpp" />
+    <ClInclude Include="src\interface\layout\layout.hpp" />
+    <ClInclude Include="src\interface\ui.hpp" />
     <ClInclude Include="src\nucleo\engine.hpp" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
@@ -173,7 +178,7 @@
     <ClInclude Include="src\arquivadores\imageloader.h" />
     <ClInclude Include="src\componentes\camera\camera.h" />
     <ClInclude Include="src\componentes\codigo\codigo.h" />
-    <ClInclude Include="src\nucleo\gerenciador.h" />
+    <ClInclude Include="src\nucleo\gerenciador.hpp" />
     <ClInclude Include="src\entidades\entidade.h" />
     <ClInclude Include="src\comum\componente.h" />
     <ClInclude Include="src\arquivadores\arquivo3d.h" />
@@ -189,6 +194,9 @@
     <ClCompile Include="src\componentes\renderizador\renderizador.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\camera_editor.cpp" />
+    <ClCompile Include="src\interface\base\quadrado.cpp" />
+    <ClCompile Include="src\interface\imagem\imagem.cpp" />
+    <ClCompile Include="src\interface\layout\layout.cpp" />
     <ClCompile Include="src\interface\ui.cpp" />
     <ClCompile Include="src\nucleo\engine.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />

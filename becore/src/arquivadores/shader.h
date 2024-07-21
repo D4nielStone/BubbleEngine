@@ -35,6 +35,7 @@ public:
     void setInt(const std::string& name, int value) const;
     void setFloat(const std::string& name, float value) const;
     void setVec3(const std::string& name, float r, float g, float b) const;
+    void setVec2(const std::string& name, float r, float g) const;
     void setMat4(const std::string& name, const float* value) const;
     void setMat3(const std::string& name, const float* value) const;
     bool checkCompileErrors(unsigned int shader, const std::string& type);

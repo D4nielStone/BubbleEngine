@@ -4,9 +4,8 @@
 #include "src/util/includes.h"
 #include "src/inputs/gameinputs.h"
 #include "src/nucleo/scenemanager.h"
-#include "src/interface/ui.h"
+#include "src/interface/ui.hpp"
 
-struct ImVec2;
 class GLFWwindow;
 namespace Bubble
 {
@@ -26,7 +25,7 @@ namespace Bubble
 			GLFWwindow* obterJanela() { return glfwWindow; };
 			bool inicializacao();
 			int pararloop() const;
-			void renderizar(Modo m, ImVec2 viewportPos = ImVec2(0, 0), ImVec2 viewportSize = ImVec2(0, 0));
+			void renderizar(Modo m, Vector2 viewportPos = { 0, 0 }, Vector2 viewportSize = { 0, 0 });
 			void limpar() const;
 			bool salvarCena(unsigned int idx);
 			Engine();

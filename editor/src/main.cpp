@@ -1,4 +1,4 @@
-#include "src/nucleo/engine.hpp"
+#include "src/nucleo/gerenciador.hpp"
 #include "src/componentes/prototipo/terreno.h"
 #include "src/arquivadores/arquivo3d.h"
 #include "memory"
@@ -14,35 +14,16 @@ using namespace Bubble::Nucleo;
 
 int INIT 
 {
-    Engine engine;
-    if(!engine.inicializacao())
+    Gerenciador gerenciador;
+    if(!gerenciador.inicializacao())
         return -1;
-    //Cria cena
-    auto scene = std::make_shared<Scene>("Cena1");
-    //Cira e configura entidade Terreno
-    auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
-    terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
-    
-    //Cria e configura entidade Camera
-    auto camera = std::make_shared<Bubble::Entidades::Entidade>("Cam");
-    camera->adicionarComponente(std::make_shared<Bubble::Componentes::Camera>());
-    camera->obterTransformacao()->definirPosicao(glm::vec3(10, 10, 10));
-    //Cria e configura entidade Esfera
-    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/modelos/a/a.obj"));
-    
-    scene->adicionarEntidade(esfera);
-    scene->adicionarEntidade(camera);
-    scene->adicionarEntidade(terreno);
 
-    engine.obterGC()->adicionarCena(scene);
-    engine.obterGC()->carregarCena(0);
-
-    while (!engine.pararloop())
+    while (!gerenciador.pararLoop())
     {
-        engine.renderizar(Modo::Editor);
+        gerenciador.renderizar();
     }
 
-    engine.limpar();
+    gerenciador.limpar();
 
     return 0;   
 }
