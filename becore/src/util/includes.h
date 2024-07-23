@@ -3,27 +3,13 @@
 #include <vector>
 #include <iostream>
 #include <cstdio>
-
-enum class Janela
-{
-	Editor,
-	Projetos,
-	Preview,
-	Entidades,
-	Arquivos,
-	Inpetor,
-	Console,
-	MENU_Arquivos,
-	MENU_CriarProjeto,
-	MENU_Cena,
-	MENU_Editar
-};
 #include <iostream>
 
 // Definição da estrutura Vector2
 struct Vector2
 {
-    float x = 0, y = 0;
+    float x = 1, y = 1;
+    int w = 0, h = 0;
 
     Vector2 operator+(const Vector2& other) const
     {
@@ -44,6 +30,18 @@ struct Vector2
     {
         x -= other.x;
         y -= other.y;
+        return *this;
+    };
+    Vector2 operator*=(const Vector2& other)
+    {
+        x *= other.x;
+        y *= other.y;
+        return *this;
+    };
+    Vector2 operator*=(float other)
+    {
+        x *= other;
+        y *= other;
         return *this;
     };
 };

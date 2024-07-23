@@ -4,6 +4,7 @@
 #include "unordered_map"
 #include "src/util/includes.h"
 #include "src/arquivadores/imageloader.h"
+#include "src/interface/layout/layout.hpp"
 #include "src/inputs/inputs.h"
 
 class GLFWwindow;
@@ -20,7 +21,6 @@ namespace Bubble
 	}
 	namespace Interface
 	{
-		class Layout;
 		enum BECORE_DLL_API Estilo
 		{
 			Motor,
@@ -37,29 +37,17 @@ namespace Bubble
 			Nucleo::Gerenciador* gerenciador;
 			std::vector<Layout*>layouts;
 			GLFWwindow* contexto;
+			Layout* janela_editor;
 			
-			void desenharMenuArquivos();
-			void desenharMenuCena();
-			void desenharMenuEditar();
-			void desenharMenuCriarP();
-			void desenharProjetos(unsigned int depth);
-			void desenharEditor(unsigned int depth);
-			void desenharPreview(unsigned int depth);
-			void desenharConsole(unsigned int depth);
-			void desenharInspetor(unsigned int depth);
-			void desenharArquivos(unsigned int depth);
-			void desenharEntidades(unsigned int depth);
-			void iniciarJanelas();
-			void desenharComponente(Comum::Componente* componente);
 			void limpar();
 			std::wstring desktopPath();
 		public:
 			UI(){};
 			void pollevents();
-			void inicializarImGui(Nucleo::Gerenciador* gen, GLFWwindow* win);
+			void inicializar(Nucleo::Gerenciador* gen, GLFWwindow* win);
 			void renderizar();
 			void contextoAtual(GLFWwindow* w, Estilo = Gerenciador);
-			void novaJanela(Janela j);
+			Layout* novaJanela(TipoLayout j);
 			Inputs::Inputs inputs;
 		};
 	}

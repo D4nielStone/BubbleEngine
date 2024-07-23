@@ -8,7 +8,7 @@
 
 namespace Bubble {
     namespace Entidades {
-        CameraEditor::CameraEditor(Bubble::Inputs::GameInputs* input)
+        CameraEditor::CameraEditor(Bubble::Inputs::Inputs* input)
             : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(1.0f), sensibilidadeDeRotacao(1.f),
             yaw(-90.0f), pitch(0.0f) {
             FOV = 45.0f;
@@ -43,6 +43,7 @@ namespace Bubble {
                 }
                 if (inputs->isKeyPressed(Key::S))
                 {
+                    Debug::emitir("TECLA", "TACLA TECLADA");
                   transformacao->Move(-frente * velocidadeDeMovimento);
                 }
                 if (inputs->isKeyPressed(Key::A))
@@ -80,8 +81,6 @@ namespace Bubble {
                     atualizarDirecao();
                 }
             }
-
-            glClearColor(ceu[0], ceu[1], ceu[2], 1);
 
             matrizProjecao = glm::perspective(
                 glm::radians(FOV),

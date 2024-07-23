@@ -6,6 +6,7 @@
 #include "src/nucleo/scenemanager.h"
 #include "src/interface/ui.hpp"
 
+class Gerenciador;
 class GLFWwindow;
 namespace Bubble
 {
@@ -15,15 +16,15 @@ namespace Bubble
 		{
 		private:
 			Projeto projeto;
-			Inputs::GameInputs inputs;
+			Inputs::Inputs* inputs;
 			SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
 		public:
 			Projeto* obterProjeto() { return &projeto; };
-			Inputs::GameInputs* obterGI() { return &inputs; };
+			Inputs::Inputs* obterGI() { return inputs; };
 			SceneManager* obterGC() { return &gerenciadorDeCenas; };
 			GLFWwindow* obterJanela() { return glfwWindow; };
-			bool inicializacao();
+			bool inicializacao(Gerenciador* w);
 			int pararloop() const;
 			void renderizar(Modo m, Vector2 viewportPos = { 0, 0 }, Vector2 viewportSize = { 0, 0 });
 			void limpar() const;

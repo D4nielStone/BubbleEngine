@@ -14,7 +14,7 @@ using namespace Bubble::Nucleo;
 
 int INIT 
 {
-    Gerenciador gerenciador;
+    Bubble::Nucleo::Gerenciador gerenciador;
     if(!gerenciador.inicializacao())
         return -1;
 

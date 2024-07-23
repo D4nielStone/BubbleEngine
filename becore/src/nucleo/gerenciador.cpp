@@ -100,8 +100,7 @@ namespace Bubble::Nucleo
             eng->obterGC()->adicionarCena(cena);
         }
         eng->obterGC()->carregarCena(0);
-        eng->inicializacao();
-        engines.push_back(eng);
+        eng->inicializacao(this);
 
         return true;
     }
@@ -283,9 +282,18 @@ namespace Bubble::Nucleo
         glfwSetKeyCallback(janelaGerenciador, keyCallback);
         glfwSetMouseButtonCallback(janelaGerenciador, mouseButtonCallBack);
        
-        // inicia UI
-        ui.inicializarImGui(this, janelaGerenciador);
+        engineAtual = new Engine();
+        std::shared_ptr<Scene> cena = std::make_shared<Scene>();
+        cena->adicionarEntidade(std::make_shared<Entidades::Entidade>(Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae")));
 
+        engineAtual->obterGC()->adicionarCena(cena);
+        engineAtual->obterGC()->carregarCena(0);
+
+        if (!engineAtual->inicializacao(this))
+            return -1;
+
+        // inicia UI
+        ui.inicializar(this, janelaGerenciador);
         //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
@@ -306,11 +314,13 @@ namespace Bubble::Nucleo
         
         return true;
     }
+
+
     void Gerenciador::renderizar()
     {
         glfwPollEvents();
         ui.pollevents();
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        engineAtual->renderizar(Modo::Editor);
         //for (const auto& engine : engines)
         //{
         //    engineAtual = engine;

@@ -1,5 +1,4 @@
 #include "ui.hpp"
-#include "layout/layout.hpp"
 #include "src/nucleo/gerenciador.hpp"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -12,62 +11,9 @@
 #include <glm/gtx/transform.hpp>
 #include "filesystem"
 
-// PRIVADO
-void Bubble::Interface::UI::desenharMenuArquivos()
-{
-}
-
-void Bubble::Interface::UI::desenharMenuCena()
-{
-}
-
-void Bubble::Interface::UI::desenharMenuEditar()
-{
-}
-
-void Bubble::Interface::UI::desenharMenuCriarP()
-{
-}
-
-void Bubble::Interface::UI::desenharProjetos(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharEditor(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharPreview(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharConsole(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharInspetor(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharArquivos(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::desenharEntidades(unsigned int depth)
-{
-}
-
-void Bubble::Interface::UI::iniciarJanelas()
-{
-}
-
-void Bubble::Interface::UI::desenharComponente(Comum::Componente* componente)
-{
-}
-
 void Bubble::Interface::UI::limpar()
 { 
-   
+	layouts.clear();
 }
 
 std::wstring Bubble::Interface::UI::desktopPath()
@@ -82,7 +28,7 @@ void Bubble::Interface::UI::pollevents()
 		lay->atualizar();
 	}
 }
-void Bubble::Interface::UI::inicializarImGui(Nucleo::Gerenciador* gen, GLFWwindow* win)
+void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen, GLFWwindow* win)
 {
 	if (gen)
 		gerenciador = gen;
@@ -91,28 +37,31 @@ void Bubble::Interface::UI::inicializarImGui(Nucleo::Gerenciador* gen, GLFWwindo
 		Debug::emitir("INTERFACE", "pobteiro so Gerenciador Nulo");
 		return;
 	}
-	novaJanela(Janela::MENU_CriarProjeto);
+	novaJanela(TipoLayout::L_MENU);
+	janela_editor = novaJanela(TipoLayout::L_JANELA);
+	auto img = Bubble::Interface::Imagem(gerenciador->engineAtual->obterGC()->cenaAtual()->camera_editor.textureColorbuffer);
+	janela_editor->adicImagem(img);
 }
 
 void Bubble::Interface::UI::renderizar()
 {
+	glDisable(GL_DEPTH_TEST);
 	for (Layout* lay : layouts)
 	{
 		lay->renderizar();
 	}
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Bubble::Interface::UI::contextoAtual(GLFWwindow* w, Estilo)
 {
-
 }
 
-void Bubble::Interface::UI::novaJanela(Janela j)
+Bubble::Interface::Layout* Bubble::Interface::UI::novaJanela(TipoLayout j)
 {
 	Layout* lay = new Layout(j);
-	Quadrado q(Vector2(0,0), Vector2(0.2,0.2));
-	q.defCor(Color(1,1,1));
-	lay->adicItem(q);
+
 	lay->defInputs(&inputs);
 	layouts.push_back(lay);
+	return lay;
 }

@@ -19,9 +19,12 @@ void Bubble::Componentes::Camera::configurar() {
     // Create a texture to attach to the framebuffer
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+    glActiveTexture(GL_TEXTURE0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 700, 480, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     // Attach the texture to the framebuffer

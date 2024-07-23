@@ -17,8 +17,8 @@ namespace Bubble {
 			glm::vec3 frente;
 		public:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
-			Bubble::Inputs::GameInputs* inputs;
-			CameraEditor(Bubble::Inputs::GameInputs* input);
+			Bubble::Inputs::Inputs* inputs;
+			CameraEditor(Bubble::Inputs::Inputs* input);
 			~CameraEditor();
 			CameraEditor();
 			void atualizarDirecao();

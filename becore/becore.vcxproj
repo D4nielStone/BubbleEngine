@@ -168,7 +168,7 @@
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
     <ClInclude Include="src\entidades\camera_editor.h" />
     <ClInclude Include="src\interface\base\quadrado.hpp" />
-    <ClInclude Include="src\interface\imagem\imagem.hpp" />
+    <ClInclude Include="src\interface\imagem\Imagem.h" />
     <ClInclude Include="src\interface\layout\layout.hpp" />
     <ClInclude Include="src\interface\ui.hpp" />
     <ClInclude Include="src\nucleo\engine.hpp" />
@@ -195,7 +195,7 @@
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\camera_editor.cpp" />
     <ClCompile Include="src\interface\base\quadrado.cpp" />
-    <ClCompile Include="src\interface\imagem\imagem.cpp" />
+    <ClCompile Include="src\interface\imagem\Imagem.cpp" />
     <ClCompile Include="src\interface\layout\layout.cpp" />
     <ClCompile Include="src\interface\ui.cpp" />
     <ClCompile Include="src\nucleo\engine.cpp" />

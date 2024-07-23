@@ -24,9 +24,9 @@ namespace Bubble::Nucleo
     }
     void Scene::desenharCeu()
     {
+        glClearColor(1, 1, 1, 1);
     }
     void Scene::atualizar(Modo m, float deltaTime, float aspecto) {
-
         desenharCeu();
 
         // Atualizar a câmera
@@ -54,7 +54,7 @@ namespace Bubble::Nucleo
 
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
+        //glCullFace(GL_BACK);
         //skybox.configurarBuffers();
 
         for (auto& obj : Entidades) {
@@ -159,6 +159,9 @@ namespace Bubble::Nucleo
         return Name;
     }
     std::shared_ptr<Scene> SceneManager::cenaAtual() const {
-        return scenes[currentSceneIndex];
+        if (scenes.size() > 0)
+            return scenes[currentSceneIndex];
+        else
+            Debug::emitir(Debug::Erro, "não tem cena atual calaio");
     }
 }

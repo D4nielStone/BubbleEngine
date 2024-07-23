@@ -64,7 +64,7 @@
     <ClCompile Include="src\interface\layout\layout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\interface\imagem\imagem.cpp">
+    <ClCompile Include="src\interface\imagem\Imagem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -138,7 +138,7 @@
     <ClInclude Include="src\interface\layout\layout.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\interface\imagem\imagem.hpp">
+    <ClInclude Include="src\interface\imagem\Imagem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
