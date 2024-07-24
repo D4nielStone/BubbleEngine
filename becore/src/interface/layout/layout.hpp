@@ -8,15 +8,10 @@ namespace Bubble
 {
 	namespace Interface
 	{
-		enum TipoLayout
-		{
-			L_MENU,
-			L_JANELA
-		};
 		class BECORE_DLL_API Layout : public Quadrado
 		{
 		public:
-			Layout(TipoLayout j);
+			Layout();
 			void adicImagem(Imagem& img);
 			void renderizar() override;
 			void atualizar() override;
@@ -25,7 +20,6 @@ namespace Bubble
 			Quadrado abajanela;
 			std::vector<Imagem> imagems;
 			std::string label;
-			TipoLayout tipo_layout;
 		};
 	}
 }

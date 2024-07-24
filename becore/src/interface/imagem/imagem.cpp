@@ -5,6 +5,9 @@
 
 Bubble::Interface::Imagem::Imagem(std::string path, float escala)
 {
+	escala *= 0.001f;
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	// Carregar os dados da imagem
 	Arquivadores::ImageLoader imageLoader(path);
 	unsigned char* data = imageLoader.obterDados();
@@ -18,7 +21,9 @@ Bubble::Interface::Imagem::Imagem(std::string path, float escala)
 	// Definir o formato e os dados da textura
 	glActiveTexture(GL_TEXTURE0);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	tamanho *= (escala / 100.f);
+	tamanhoOri = Vector2{ static_cast<float>(width), static_cast<float>(height) };
+	tamanhoOri *= escala;
+
 	// Configurar parâmetros de filtragem e envolvimento da textura
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -29,7 +34,8 @@ Bubble::Interface::Imagem::Imagem(std::string path, float escala)
 }
 Bubble::Interface::Imagem::Imagem(unsigned int id) : ID(id)
 {
-	tamanho *= (escala / 100.f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 void Bubble::Interface::Imagem::renderizar()
 {
@@ -50,4 +56,27 @@ void Bubble::Interface::Imagem::renderizar()
 void Bubble::Interface::Imagem::atualizar()
 {
 	Quadrado::atualizar();
+	tamanho = tamanhoOri;
+	if (preenchervar)
+	{
+		float aspectImg = tamanhoOri.x / tamanhoOri.y;
+		if (aspect > aspectImg)
+		{
+			tamanho.x = (2.0f * aspect);
+			tamanho.y = tamanhoOri.y * (tamanho.x / tamanhoOri.x);
+		}
+		else
+		{
+			tamanho.y = (2.0f);
+			tamanho.x = tamanhoOri.x * (tamanho.y / tamanhoOri.y);
+		}
+		posicao = Vector2{ -tamanho.x / 2, -tamanho.y / 2 };
+		Debug::emitir("ASPECT", std::to_string(aspect));
+	}
+}
+
+
+void Bubble::Interface::Imagem::preencher(bool pre)
+{
+	preenchervar = pre;
 }

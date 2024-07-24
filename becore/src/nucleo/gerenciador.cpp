@@ -11,6 +11,7 @@
 #include "src/arquivadores/imageloader.h"
 #include "filesystem"
 
+
 namespace Bubble::Nucleo
 {
     std::vector<Projeto> Projetos;
@@ -192,6 +193,12 @@ namespace Bubble::Nucleo
             rapidjson::Document document;
             document.Parse(jsonContent.c_str());
 
+            if (document.HasParseError())
+            {
+                Debug::emitir(Debug::Erro, "Erros de análise de projetos");
+                return false;
+            }
+
             // Verifique e leia o array de projetos
             if (document.HasMember("projetos") && document["projetos"].IsArray())
             {
@@ -293,7 +300,7 @@ namespace Bubble::Nucleo
             return -1;
 
         // inicia UI
-        ui.inicializar(this, janelaGerenciador);
+        ui.inicializar(this);
         //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
@@ -321,16 +328,6 @@ namespace Bubble::Nucleo
         glfwPollEvents();
         ui.pollevents();
         engineAtual->renderizar(Modo::Editor);
-        //for (const auto& engine : engines)
-        //{
-        //    engineAtual = engine;
-        //    ui.novoContexto(engine->obterJanela(), Interface::Motor);
-        //    auto it = std::find(engines.begin(), engines.end(), engine);
-        //    if (it != engines.end())
-        //    {
-        //        engines.erase(it);
-        //    }
-        //}
 
         ui.renderizar();
         glfwSwapBuffers(janelaGerenciador);

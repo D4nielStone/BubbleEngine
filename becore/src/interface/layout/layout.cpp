@@ -8,27 +8,18 @@
 #include "GLFW/glfw3.h"
 #include "src/interface/imagem/Imagem.h"
 
-Bubble::Interface::Layout::Layout(TipoLayout j)
+Bubble::Interface::Layout::Layout()
 {
 	cursorMao = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
-	tipo_layout = j;
-	switch (j)
-	{
-	case Bubble::Interface::L_MENU:
-		tamanho = { 2, 0.05 };
-		cor = { 0.15f, 0.15f, 0.15f };
-		posicao = {-1, 0.95};
-		break;
-	case Bubble::Interface::L_JANELA:
-		cor = { 0.55f, 0.55f, 0.55f };
-		tamanho = { 1, 0.2};
-		posicao = Vector2{ abajanela.obtPos().x, abajanela.obtPos().y - tamanho.y };
-		abajanela.defPos(Vector2{ -0.5, 0 });
-		abajanela.defCor(Color{ 0.3, 0, 0.5 });
-		break;
-	default:
-		break;
-	}
+
+	cor = { 0.55f, 0.55f, 0.55f };
+	tamanho = { 1, 0.2 };
+	posicao = Vector2{ abajanela.obtPos().x, abajanela.obtPos().y - tamanho.y };
+	abajanela.defPos(Vector2{ -0.5, 0 });
+	abajanela.defCor(Color{0, 0, 0 });
+	auto logo = Imagem("ICON.ico", 0.2f);
+	logo.defPos(Vector2{ 0.f, tamanho.y });
+	adicImagem(logo);
 }
 void Bubble::Interface::Layout::adicImagem(Imagem& quad)
 {
@@ -36,52 +27,31 @@ void Bubble::Interface::Layout::adicImagem(Imagem& quad)
 }
 void Bubble::Interface::Layout::renderizar()
 {
-	switch (tipo_layout)
+
+	Quadrado::renderizar();
+	abajanela.renderizar();
+	for (Imagem& quad : imagems)
 	{
-	case Bubble::Interface::L_MENU:
-		posicao = { -1 * aspect * tamanho_ui, 0.95 };
-		tamanho = { 2*aspect*tamanho_ui, 0.05 };
-		Quadrado::renderizar();
-		break;
-	case Bubble::Interface::L_JANELA:
-		Quadrado::renderizar();
-		abajanela.renderizar();
-		for (Imagem& quad : imagems)
-		{
-			quad.renderizar();
-		}
-		break;
-	default:
-		break;
+		quad.renderizar();
 	}
+
 }
 void Bubble::Interface::Layout::atualizar()
 {
-	switch (tipo_layout)
+	// atualiza aba da janela
+	abajanela.defTam(Vector2{ tamanho.x, 0.05f });
+	if (abajanela.arrastando())
+		abajanela.defPos(abajanela.ArrastoPos);
+		posicao = Vector2{ abajanela.obtPos().x, abajanela.obtPos().y - tamanho.y };
+	Quadrado::atualizar();
+	abajanela.defInputs(inputs);
+	abajanela.atualizar();
+	// atualiza items dentro do layout
+	glEnable(GL_SCISSOR_TEST);
+	glScissor(posicao.x, posicao.y, tamanho.x, tamanho.y);
+	for (Imagem& quad : imagems)
 	{
-	case Bubble::Interface::L_MENU:
-		Quadrado::atualizar();
-		break;
-	case Bubble::Interface::L_JANELA:
-		// atualiza aba da janela
-		abajanela.defTam(Vector2{ tamanho.x, 0.05f });
-		if (abajanela.arrastando())
-			abajanela.defPos(abajanela.ArrastoPos);
-			posicao = Vector2{ abajanela.obtPos().x, abajanela.obtPos().y - tamanho.y };
-		Quadrado::atualizar();
-		abajanela.defInputs(inputs);
-		abajanela.atualizar();
-		// atualiza items
-		// items dentro do layout
-		//glEnable(GL_SCISSOR_TEST);
-		//glScissor(posicao.x, posicao.y, tamanho.x, tamanho.y);
-		for (Imagem& quad : imagems)
-		{
-			quad.atualizar();
-		}
-		//glDisable(GL_SCISSOR_TEST);
-		break;
-	default:
-		break;
+		quad.atualizar();
 	}
+	glDisable(GL_SCISSOR_TEST);
 }

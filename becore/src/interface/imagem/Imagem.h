@@ -14,8 +14,11 @@ namespace Bubble
             Imagem(unsigned int id);
             void renderizar() override;
             void atualizar() override;
+            void preencher(bool = true);
         private:
             unsigned int ID, escala = 32;
+            Vector2 tamanhoOri;
+            bool preenchervar;
         };
     }
 }

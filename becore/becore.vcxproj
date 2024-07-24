@@ -166,6 +166,7 @@
     <ClInclude Include="src\componentes\prototipo\perlinnoise.h" />
     <ClInclude Include="src\componentes\prototipo\terreno.h" />
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
+    <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\entidades\camera_editor.h" />
     <ClInclude Include="src\interface\base\quadrado.hpp" />
     <ClInclude Include="src\interface\imagem\Imagem.h" />

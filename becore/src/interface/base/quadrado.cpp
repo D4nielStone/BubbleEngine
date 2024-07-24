@@ -2,7 +2,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "src/depuracao/debug.h"
-#include "cassert"
+#include "src/depuracao/assert.hpp"
 
 Bubble::Interface::Quadrado::Quadrado() : janelaglfw(glfwGetCurrentContext())
 {
@@ -90,8 +90,8 @@ void Bubble::Interface::Quadrado::definirBuffer()
 
 void Bubble::Interface::Quadrado::converterMouse(Vector2* mousepos)
 {
-    assert(inputs != nullptr); // Defina inputs para o quadrado
-    assert(mousepos != nullptr); // Argumento nulo
+    ASSERT(inputs != nullptr); // Defina inputs para o quadrado
+    ASSERT(mousepos != nullptr); // Argumento nulo
 
     // Convertendo para coordenadas normalizadas OpenGL (-1 a 1)
     float mouseX = (inputs->mousex / janelaTam.w) * 2.0f - 1.0f;
@@ -109,7 +109,6 @@ bool Bubble::Interface::Quadrado::mouseEmCima(Vector2 mouse)
     if (mouse.x > posicao.x && mouse.x < posicao.x + tamanho.x &&
         mouse.y > posicao.y && mouse.y < posicao.y + tamanho.y)
     {
-        Debug::emitir("MOUSE", "Mouse em cima");
         return true;
     }
     return false;
@@ -174,16 +173,21 @@ void Bubble::Interface::Quadrado::atualizar()
     if (once) {
         inputs->mouseClick = false;
     }
-    
-    //projeção ortográfica
-    aspect = janelaTam.w / janelaTam.h;
-    glViewport(0, 0, janelaTam.w, janelaTam.h);
+    // Atualiza a matriz de projeção somente se a dimensão da janela mudar
+    if (janelaTam.w != ultimoTam.w || janelaTam.h != ultimoTam.y) {
+        ultimoTam.w = janelaTam.w;
+        ultimoTam.y = janelaTam.h;
 
-    float left = -aspect;
-    float right = aspect;
-    float bottom = -1.0f;
-    float top = 1.0f;
-    projecao = glm::ortho(left * tamanho_ui, right * tamanho_ui, bottom * tamanho_ui, top * tamanho_ui, 0.1f * tamanho_ui, -1.0f * tamanho_ui);
+        aspect = static_cast<float>(janelaTam.w) / janelaTam.h;
+        tamanho_ui = 1.0f;
+
+        left = -aspect * tamanho_ui;
+        right = aspect * tamanho_ui;
+        bottom = -1.0f * tamanho_ui;
+        top = 1.0f * tamanho_ui;
+
+        projecao = glm::ortho(left, right, bottom, top, 0.1f, -1.0f);
+    }
 }
 
 Bubble::Interface::Quadrado* Bubble::Interface::Quadrado::obtPai()

@@ -43,6 +43,7 @@ namespace Bubble
 			Color cor;
 			GLFWwindow* janelaglfw;
 			Vector2 janelaTam;
+			Vector2 ultimoTam;
 			// click
 			void converterMouse(Vector2* mousepos);
 			bool mouseEmCima(Vector2 mouse);
@@ -51,6 +52,7 @@ namespace Bubble
 		private:
 			bool once;
 			unsigned int VBO, EBO;
+			float left, right, bottom, top;
 			void definirBuffer();
 		};
 	}

@@ -43,10 +43,10 @@ void Bubble::Arquivadores::ImageLoader::carregarImagem(const std::string& filepa
         carregado = true;
         return;
     }
-    // Inicializa o FreeImage
+    // Inicializa o FreeImage  
     FreeImage_Initialise();
 
-    // Determina o formato da imagem
+    // Determina o formato da imagem  
     FREE_IMAGE_FORMAT format = FreeImage_GetFileType(path, 0);
     if (format == FIF_UNKNOWN) {
         format = FreeImage_GetFIFFromFilename(path);
@@ -57,14 +57,14 @@ void Bubble::Arquivadores::ImageLoader::carregarImagem(const std::string& filepa
         return;
     }
 
-    // Carrega a imagem
+    // Carrega a imagem  
     FIBITMAP* bitmap = FreeImage_Load(format, path);
     if (!bitmap) {
         Debug::emitir(Debug::Tipo::Erro, std::string(std::string("erro ao carregar imagem: ") + filepath).c_str());
         return;
     }
 
-    // Converte a imagem para 32 bits
+    // Converte a imagem para 32 bits  
     FIBITMAP* converted = FreeImage_ConvertTo32Bits(bitmap);
     FreeImage_Unload(bitmap);
 
@@ -73,25 +73,31 @@ void Bubble::Arquivadores::ImageLoader::carregarImagem(const std::string& filepa
         return;
     }
 
-    // Obtém as dimensões da imagem
+    // Obtém as dimensões da imagem  
     width = FreeImage_GetWidth(converted);
     height = FreeImage_GetHeight(converted);
-    channels = 4;  // RGBA
+    channels = 4;  // RGBA  
 
-    // Aloca memória para os dados da imagem
+    // Aloca memória para os dados da imagem  
     data = new unsigned char[width * height * channels];
-    memcpy(data, FreeImage_GetBits(converted), width * height * channels);
+    unsigned char* bits = FreeImage_GetBits(converted);
 
-    // Flipa a imagem no eixo Y
-    flipVertical();
+    // Copia os dados e corrige a ordem dos canais (ARGB para RGBA)  
+    for (int i = 0; i < width * height; ++i) {
+        data[i * 4 + 0] = bits[i * 4 + 2]; // R  
+        data[i * 4 + 1] = bits[i * 4 + 1]; // G  
+        data[i * 4 + 2] = bits[i * 4 + 0]; // B  
+        data[i * 4 + 3] = bits[i * 4 + 3]; // A  
+    }
+
 
     FreeImage_Unload(converted);
 
-    // Indica que a imagem foi carregada com sucesso
+    // Indica que a imagem foi carregada com sucesso  
     carregado = true;
     imagens_carregadas.insert(std::pair(path, this));
 
-    // Finaliza o FreeImage
+    // Finaliza o FreeImage  
     FreeImage_DeInitialise();
 }
 
@@ -102,6 +108,8 @@ GLFWimage Bubble::Arquivadores::ImageLoader::converterParaGlfw()
         Debug::emitir(Debug::Tipo::Erro, "tentativa de converter imagem não carregada para GLFW");
         return image;
     }
+
+    flipVertical();
 
     image.width = width;
     image.height = height;

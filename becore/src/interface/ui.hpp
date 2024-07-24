@@ -19,6 +19,11 @@ namespace Bubble
 	{
 		class Componente;
 	}
+	enum TipoLayout
+	{
+		L_MENU,
+		L_JANELA
+	};
 	namespace Interface
 	{
 		enum BECORE_DLL_API Estilo
@@ -35,19 +40,21 @@ namespace Bubble
 			bool criarPadrao = true;
 
 			Nucleo::Gerenciador* gerenciador;
-			std::vector<Layout*>layouts;
+			std::vector<Quadrado*>layouts;
 			GLFWwindow* contexto;
 			Layout* janela_editor;
+			Imagem* pano_de_fundo;
 			
 			void limpar();
 			std::wstring desktopPath();
 		public:
 			UI(){};
+			void definirPanoDeFundo(std::string = "R.jfif");
 			void pollevents();
-			void inicializar(Nucleo::Gerenciador* gen, GLFWwindow* win);
+			void inicializar(Nucleo::Gerenciador* = nullptr);
 			void renderizar();
-			void contextoAtual(GLFWwindow* w, Estilo = Gerenciador);
-			Layout* novaJanela(TipoLayout j);
+			void contextoAtual(GLFWwindow*, Estilo = Gerenciador);
+			Quadrado* novaJanela(TipoLayout);
 			Inputs::Inputs inputs;
 		};
 	}

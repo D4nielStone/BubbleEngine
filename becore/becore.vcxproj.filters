@@ -141,6 +141,9 @@
     <ClInclude Include="src\interface\imagem\Imagem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\depuracao\assert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\phong.vert">

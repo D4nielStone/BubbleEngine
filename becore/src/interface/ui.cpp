@@ -10,6 +10,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/transform.hpp>
 #include "filesystem"
+#include "src/depuracao/ASSERT.hpp"
 
 void Bubble::Interface::UI::limpar()
 { 
@@ -20,35 +21,38 @@ std::wstring Bubble::Interface::UI::desktopPath()
 {
 	return std::wstring();
 }
+void Bubble::Interface::UI::definirPanoDeFundo(std::string path)
+{
+	pano_de_fundo = new Imagem(path, 1.f); pano_de_fundo->defInputs(&inputs);
+	pano_de_fundo->preencher();
+}
 // PUBLICO
 void Bubble::Interface::UI::pollevents()
 {
-	for (Layout* lay : layouts)
+	pano_de_fundo->atualizar();
+	for (Quadrado* quad : layouts)
 	{
-		lay->atualizar();
+		quad->atualizar();
 	}
 }
-void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen, GLFWwindow* win)
+void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen)
 {
-	if (gen)
-		gerenciador = gen;
-	else
-	{
-		Debug::emitir("INTERFACE", "pobteiro so Gerenciador Nulo");
-		return;
-	}
+	ASSERT(gen != nullptr);
+	gerenciador = gen;
+
+	definirPanoDeFundo();
+
 	novaJanela(TipoLayout::L_MENU);
-	janela_editor = novaJanela(TipoLayout::L_JANELA);
-	auto img = Bubble::Interface::Imagem(gerenciador->engineAtual->obterGC()->cenaAtual()->camera_editor.textureColorbuffer);
-	janela_editor->adicImagem(img);
+	janela_editor = static_cast<Layout*>(novaJanela(TipoLayout::L_JANELA));
 }
 
 void Bubble::Interface::UI::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
-	for (Layout* lay : layouts)
+	pano_de_fundo->renderizar();
+	for (Quadrado* quad : layouts)
 	{
-		lay->renderizar();
+		quad->renderizar();
 	}
 	glEnable(GL_DEPTH_TEST);
 }
@@ -57,11 +61,20 @@ void Bubble::Interface::UI::contextoAtual(GLFWwindow* w, Estilo)
 {
 }
 
-Bubble::Interface::Layout* Bubble::Interface::UI::novaJanela(TipoLayout j)
+Bubble::Interface::Quadrado* Bubble::Interface::UI::novaJanela(TipoLayout j)
 {
-	Layout* lay = new Layout(j);
-
-	lay->defInputs(&inputs);
-	layouts.push_back(lay);
-	return lay;
+	Quadrado* quad;
+	switch (j)
+	{
+	case Bubble::L_MENU:
+		break;
+	case Bubble::L_JANELA:
+		quad = new Layout();
+		quad->defInputs(&inputs);
+		layouts.push_back(quad);
+		return quad;
+		break;
+	default:
+		break;
+	}
 }

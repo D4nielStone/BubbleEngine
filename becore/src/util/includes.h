@@ -38,6 +38,12 @@ struct Vector2
         y *= other.y;
         return *this;
     };
+    Vector2 operator*(float other)
+    {
+        x * other;
+        y * other;
+        return *this;
+    };
     Vector2 operator*=(float other)
     {
         x *= other;
