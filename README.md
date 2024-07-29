@@ -11,6 +11,7 @@ vcpkg install glfw3
 vcpkg install glad
 vcpkg install assimp
 vcpkg install freeimage
+vcpkg install rapidjson
 ```
 ## Contribuição
 pull requests são bem-vindas. Para maiores alterações, por favor abra um problema primeiro para discutir o que você gostaria de mudar.
