@@ -3,7 +3,7 @@ Bubble é um projeto individual criado por mim para estudo, e futuramente criar 
 ## Instalação
 De preferência usando o vcpkg, instale as seguintes bibliotecas:
 ```bash
-vcpkg install imgui[core,docking-experimental,glfw-binding,opengl3-binding]
+vcpkg install fmt
 vcpkg install lua
 vcpkg install imguizmo
 vcpkg install glm      
