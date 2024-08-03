@@ -34,6 +34,7 @@ Bubble::Interface::Imagem::Imagem(std::string path, float escala)
 }
 Bubble::Interface::Imagem::Imagem(unsigned int id) : ID(id)
 {
+	glActiveTexture(GL_TEXTURE0);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
@@ -55,9 +56,12 @@ void Bubble::Interface::Imagem::renderizar()
 
 void Bubble::Interface::Imagem::atualizar()
 {
+	//nem sei que porra é essa. só quero que funcione
 	Quadrado::atualizar();
+	if (pai && preenchervar)
+		tamanhoOri = pai->obtTam();
 	tamanho = tamanhoOri;
-	if (preenchervar)
+	if (preenchervar && pai == nullptr)
 	{
 		float aspectImg = tamanhoOri.x / tamanhoOri.y;
 		if (aspect > aspectImg)

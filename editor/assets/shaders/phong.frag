@@ -4,7 +4,7 @@ in vec3 Normal;
 
 out vec4 FragColor;
 
-uniform vec3 viewPos;
+vec3 viewPos = vec3(2, 0, 0);
 vec3 lightColor = vec3(1,1,1);
 uniform vec3 objectColor;
 

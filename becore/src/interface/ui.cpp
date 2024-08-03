@@ -44,6 +44,9 @@ void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen)
 
 	novaJanela(TipoLayout::L_MENU);
 	janela_editor = static_cast<Layout*>(novaJanela(TipoLayout::L_JANELA));
+	Imagem buffer_editor(gerenciador->engineAtual->obterGC()->cenaAtual()->camera_editor.textureColorbuffer);
+	buffer_editor.preencher();
+	janela_editor->adicImagem(buffer_editor);
 }
 
 void Bubble::Interface::UI::renderizar()

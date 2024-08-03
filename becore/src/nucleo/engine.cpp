@@ -49,12 +49,12 @@ namespace Bubble::Nucleo
             
             // Redimensionar o texture color buffer
             glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.x, viewportSize.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 400, 400, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
             glBindTexture(GL_TEXTURE_2D, 0);
             
             // Redimensionar o renderbuffer
             glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.x, viewportSize.y);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 400, 400);
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
             glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
