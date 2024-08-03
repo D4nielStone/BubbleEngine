@@ -327,7 +327,7 @@ namespace Bubble::Nucleo
     {
         glfwPollEvents();
         ui.pollevents();
-        engineAtual->renderizar(Modo::Editor);
+        engineAtual->renderizar(Modo::Editor, ui.viewportEditor);
 
         ui.renderizar();
         glfwSwapBuffers(janelaGerenciador);

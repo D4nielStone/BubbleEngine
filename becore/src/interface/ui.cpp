@@ -29,6 +29,7 @@ void Bubble::Interface::UI::definirPanoDeFundo(std::string path)
 // PUBLICO
 void Bubble::Interface::UI::pollevents()
 {
+	viewportEditor = janela_editor->obtNorm();
 	pano_de_fundo->atualizar();
 	for (Quadrado* quad : layouts)
 	{

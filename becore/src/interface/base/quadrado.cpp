@@ -7,6 +7,7 @@
 Bubble::Interface::Quadrado::Quadrado() : janelaglfw(glfwGetCurrentContext())
 {
     // Inicializar valores padrão, se necessário
+    glfwGetFramebufferSize(janelaglfw, &inicioJanelaTam.w, &inicioJanelaTam.h);
     this->posicao = Vector2(0.0f, 0.0f);
     this->tamanho = Vector2(1.0f, 1.0f);
     definirBuffer();
@@ -41,6 +42,23 @@ Vector2 Bubble::Interface::Quadrado::obtPos() const
 Vector2 Bubble::Interface::Quadrado::obtTam() const
 {
     return tamanho;
+}
+Vector2 Bubble::Interface::Quadrado::obtPosNorm() const
+{
+    return Vector2();
+}
+Vector2 Bubble::Interface::Quadrado::obtTamNorm() const
+{
+    return Vector2();
+}
+Vector2 Bubble::Interface::Quadrado::obtNorm() const
+{
+    Vector2 norm;
+    norm.x = ((posicao.x + 1) * inicioJanelaTam.w) / 2;
+    norm.y = ((posicao.y + 1) * inicioJanelaTam.h) / 2;
+    norm.w = ((tamanho.x + 1) * inicioJanelaTam.w) / 2;
+    norm.h = ((tamanho.y + 1) * inicioJanelaTam.h) / 2;
+    return norm;
 }
 Color Bubble::Interface::Quadrado::obtCor() const
 {
@@ -116,6 +134,7 @@ bool Bubble::Interface::Quadrado::mouseEmCima(Vector2 mouse)
 
 void Bubble::Interface::Quadrado::renderizar()
 {
+    glViewport(0, 0, janelaTam.w, janelaTam.h);
     shader.use();
     shader.setInt("imagem", 0);
     shader.setVec2("quadrado.tamanho", tamanho.x , tamanho.y );

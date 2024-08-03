@@ -48,6 +48,7 @@ namespace Bubble
 			void limpar();
 			std::wstring desktopPath();
 		public:
+			Vector2 viewportEditor;
 			UI(){};
 			void definirPanoDeFundo(std::string = "R.jfif");
 			void pollevents();

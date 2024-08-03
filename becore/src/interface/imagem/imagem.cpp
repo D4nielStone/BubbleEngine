@@ -40,6 +40,7 @@ Bubble::Interface::Imagem::Imagem(unsigned int id) : ID(id)
 }
 void Bubble::Interface::Imagem::renderizar()
 {
+	glViewport(0, 0, janelaTam.w, janelaTam.h);
 	shader.use();
 	glBindTexture(GL_TEXTURE_2D, ID);
 	shader.setInt("imagem", 1);

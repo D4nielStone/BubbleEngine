@@ -23,7 +23,10 @@ namespace Bubble
 			void defTam(Vector2 tam);
 			void defCor(Color cor);
 			Vector2 obtPos() const;
+			Vector2 obtPosNorm() const;
 			Vector2 obtTam() const;
+			Vector2 obtTamNorm() const;
+			Vector2 obtNorm() const;
 			Color obtCor() const;
 			Quadrado* obtPai();
 			void defPai(Quadrado* pai);
@@ -42,8 +45,7 @@ namespace Bubble
 			Vector2 posicaoG, tamanho, posicao;
 			Color cor;
 			GLFWwindow* janelaglfw;
-			Vector2 janelaTam;
-			Vector2 ultimoTam;
+			Vector2 janelaTam, ultimoTam, inicioJanelaTam;
 			// click
 			void converterMouse(Vector2* mousepos);
 			bool mouseEmCima(Vector2 mouse);

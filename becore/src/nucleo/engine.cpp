@@ -29,7 +29,7 @@ namespace Bubble::Nucleo
     {
         return glfwWindowShouldClose(glfwWindow);
     }
-    void Engine::renderizar(Modo m, Vector2 viewportPos, Vector2 viewportSize)
+    void Engine::renderizar(Modo m, Vector2 viewportSize)
     {
         float st = glfwGetTime();
         auto cena = gerenciadorDeCenas.cenaAtual();
@@ -49,12 +49,12 @@ namespace Bubble::Nucleo
             
             // Redimensionar o texture color buffer
             glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 400, 400, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.w, viewportSize.h, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
             glBindTexture(GL_TEXTURE_2D, 0);
             
             // Redimensionar o renderbuffer
             glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 400, 400);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.w, viewportSize.h);
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
             glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
@@ -65,7 +65,7 @@ namespace Bubble::Nucleo
             if(viewportSize.x == 0 && viewportSize.y == 0)
             gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, 0, 0, static_cast<float>(width), static_cast<float>(height));
             else
-            gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportPos.x), static_cast<float>(viewportPos.y), static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y));
+            gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y), static_cast<float>(viewportSize.w), static_cast<float>(viewportSize.h));
 
             // Desligar framebuffer
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
