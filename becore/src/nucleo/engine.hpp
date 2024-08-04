@@ -6,8 +6,7 @@
 #include "src/nucleo/scenemanager.h"
 #include "src/interface/ui.hpp"
 
-class Gerenciador;
-class GLFWwindow;
+struct GLFWwindow;
 namespace Bubble
 {
 	namespace Nucleo
@@ -15,24 +14,22 @@ namespace Bubble
 		class BECORE_DLL_API Engine
 		{
 		private:
-			Projeto projeto;
 			Inputs::Inputs* inputs;
 			SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
 		public:
 			void defInputs(Inputs::Inputs* inp);
-			Projeto* obterProjeto() { return &projeto; };
 			Inputs::Inputs* obterGI() { return inputs; };
 			SceneManager* obterGC() { return &gerenciadorDeCenas; };
 			GLFWwindow* obterJanela() { return glfwWindow; };
-			bool inicializacao(Gerenciador* w);
+			bool inicializacao();
 			int pararloop() const;
 			void limpar() const;
 			bool salvarCena(unsigned int idx);
 			Engine();
 			~Engine() { limpar(); };
 			void atualizar();
-			void renderizar(Modo m, Vector2 viewportSize);
+			void renderizar();
 		};
 	}
 }

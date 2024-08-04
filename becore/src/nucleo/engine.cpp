@@ -6,14 +6,12 @@
 float deltaTime = 0;
 namespace Bubble::Nucleo 
 {
-    Engine::Engine() {}
-    void Engine::defInputs(Inputs::Inputs* inp)
+    Engine::Engine() 
     {
-        inputs = inp;
-        gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = inp;
+        inicializacao();
     }
     // inicialização GLFW e GLAD
-    bool Engine::inicializacao(Gerenciador* w)
+    bool Engine::inicializacao()
     {
         // inicia glfw
         if (!glfwInit())
@@ -24,65 +22,64 @@ namespace Bubble::Nucleo
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-        glfwWindow = w->obterJanela();
+        glfwWindow = glfwCreateWindow(600, 480, "BubbleEngine", NULL, NULL);
 
-        defInputs(&w->ui.inputs);
+        glfwMakeContextCurrent(glfwWindow);
+
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            std::cout << "Failed to initialize GLAD" << std::endl;
+            return -1;
+        }
+
+        defInputs(new Inputs::Inputs());
 
         return true;
     }
+    // Deve definir inputs
+    void Engine::defInputs(Inputs::Inputs* inp)
+    {
+        inputs = inp;
+        gerenciadorDeCenas.defIputs(inp);
+        glfwSetWindowUserPointer(glfwWindow, inputs);
+        glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
+        glfwSetKeyCallback(glfwWindow, keyCallback);
+        glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
+    }
+    // Deve retornar se deve fechar janela
     int Engine::pararloop() const
     {
         return glfwWindowShouldClose(glfwWindow);
     }
+    // Deve Atualizar cena atual
     void Engine::atualizar()
     {
+        glfwPollEvents();
         float st = glfwGetTime();
         // Atualizar cena
         gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
         // Calcular deltaTime
         deltaTime = glfwGetTime() - st;
     }
-    void Engine::renderizar(Modo m, Vector2 viewportSize)
+    // Deve renderizar cena Atual
+    void Engine::renderizar()
     {
-        auto cena = gerenciadorDeCenas.cenaAtual();
-        Componentes::Camera* cam = nullptr;
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        //gerenciadorDeCenas.cenaAtual()->camera_editor.desenharFrame();
 
-        if (m == Modo::Editor)
-            cam = &cena->camera_editor;
+        gerenciadorDeCenas.renderizarCenaAtual(Vector2{0, 0, 600, 480});
             
-        else if (cena->camera_principal)
-            cam = cena->camera_principal;
-
-        if (cam)
-        {
-            glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-            // Bind framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER, cam->FBO);
-            
-            // Redimensionar o texture color buffer
-            glBindTexture(GL_TEXTURE_2D, cam->textureColorbuffer);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportSize.w, viewportSize.h, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-            glBindTexture(GL_TEXTURE_2D, 0);
-            
-            // Redimensionar o renderbuffer
-            glBindRenderbuffer(GL_RENDERBUFFER, cam->rbo);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportSize.w, viewportSize.h);
-            glBindRenderbuffer(GL_RENDERBUFFER, 0);
-            glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
-            gerenciadorDeCenas.renderizarCenaAtual(viewportSize);
-            
-            // Desligar framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        }
-
+        // Desligar framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glfwSwapBuffers(glfwWindow);
     }
-
+    // Deve limpar engine
     void Engine::limpar() const 
     {
         glfwDestroyWindow(glfwWindow);
         glfwTerminate();
     }
+    // Deve salvar Cena 
     bool Engine::salvarCena(unsigned int idx)
     {
         return true;

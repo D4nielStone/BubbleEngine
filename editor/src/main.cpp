@@ -14,16 +14,14 @@ using namespace Bubble::Nucleo;
 
 int INIT 
 {
-    Bubble::Nucleo::Gerenciador gerenciador;
-    if(!gerenciador.inicializacao())
-        return -1;
+    Bubble::Nucleo::Engine engine;
 
-    while (!gerenciador.pararLoop())
+    engine.obterGC()->novaCena();
+
+    while (!engine.pararloop())
     {
-        gerenciador.renderizar();
+        engine.atualizar();
+        engine.renderizar();
     }
-
-    gerenciador.limpar();
-
     return 0;   
 }

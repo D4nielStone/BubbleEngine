@@ -3,6 +3,7 @@
 #include "src/depuracao/debug.h"
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+#include <src/componentes/prototipo/terreno.h>
 
 namespace Bubble::Nucleo
 {
@@ -14,6 +15,14 @@ namespace Bubble::Nucleo
     {
     }
     SceneManager::~SceneManager() {}
+    void SceneManager::defIputs(Inputs::Inputs* inp)
+    {
+        inputs = inp;
+        for (auto& scene : scenes)
+        {
+            scene->camera_editor.inputs = inp;
+        }
+    }
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
         if (!existeEntidade(gameObject.get())) {
             for (auto& c : gameObject->listaDeComponentes()) {
@@ -28,15 +37,15 @@ namespace Bubble::Nucleo
     }
     void Scene::renderizar(float aspecto) {
 
-        //desenharCeu();
+        desenharCeu();
         camera_editor.atualizarAspecto(aspecto);
-        camera_editor.atualizar();
         for (auto& obj : Entidades) {
             obj->renderizar();
         }
     }
     void Scene::atualizar(float deltaTime)
     {
+        camera_editor.atualizar(deltaTime);
         for (auto& obj : Entidades) {
             obj->atualizar(deltaTime);
             if (obj->obterComponente("Camera"))
@@ -70,11 +79,13 @@ namespace Bubble::Nucleo
 
         doc->AddMember("entidades", arr, doc->GetAllocator());
     }
-    void SceneManager::adicionarCena(std::shared_ptr<Scene> scene) {
+    void SceneManager::adicionarCena(Scene* scene) 
+    {
         scenes.push_back(scene);
     }
     void SceneManager::carregarCena(int sceneIndex) {
         if (sceneIndex >= 0 && sceneIndex < scenes.size()) {
+            scenes[sceneIndex]->camera_editor.inputs = inputs;
             currentSceneIndex = sceneIndex;
 
             std::string msg("Carregando cena ");
@@ -88,7 +99,7 @@ namespace Bubble::Nucleo
             Debug::emitir(Debug::Tipo::Erro, "índice da cena não é válido");
         }
     }
-    void SceneManager::renderizarCenaAtual(Vector2 viewportSize)
+    void SceneManager::renderizarCenaAtual(Vector2 viewportSize) const
     {
         float aspecto;
         if (viewportSize.h != 0)
@@ -100,13 +111,38 @@ namespace Bubble::Nucleo
 
         cenaAtual()->renderizar(aspecto);
     }
-    void SceneManager::atualizarCenaAtual(float deltaTime)
+    void SceneManager::atualizarCenaAtual(float deltaTime) const
     {
         cenaAtual()->atualizar(deltaTime);
     }
+    Scene* SceneManager::criarCenaPadrao(std::string Nome)
+    {
+        //Cria cena
+        Scene* scene = new Scene(Nome.c_str());
+        //Cira e configura entidade Terreno
+        auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
+        terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
+
+        //Cria e configura entidade Esfera
+        auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+
+        // Adiciona Entidades
+        scene->adicionarEntidade(esfera);
+        scene->adicionarEntidade(terreno);
+
+        return scene;
+    }
+    void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
+    {
+        if (cenaPadrao)
+            adicionarCena(criarCenaPadrao(Nome));
+        else
+            adicionarCena(new Scene(Nome.c_str()));
+        carregarCena(numeroDeCenas() - 1);
+    }
     bool Scene::parse(rapidjson::Document& document)
     {
-        // Verifica se o documento tem o membro "nome" e se é uma string
+        // Deve verificar se o documento tem o membro "nome" e se é uma string
         if (document.HasMember("nome") && document["nome"].IsString())
         {
             Name = document["nome"].GetString();
@@ -117,7 +153,7 @@ namespace Bubble::Nucleo
             Debug::emitir(Debug::Erro, "O membro 'nome' não foi encontrado na cena");
             return false;
         }
-        // Analisa entidades
+        // Deve analisar entidades
         if (document.HasMember("entidades") && document["entidades"].IsArray())
         {
             rapidjson::Value& entidades = document["entidades"];
@@ -159,10 +195,10 @@ namespace Bubble::Nucleo
     std::string Scene::nome() const {
         return Name;
     }
-    std::shared_ptr<Scene> SceneManager::cenaAtual() const {
-        if (scenes.size() > 0)
+    Scene* SceneManager::cenaAtual() const {
+        if (scenes.size() > 0 && currentSceneIndex > -1)
             return scenes[currentSceneIndex];
         else
-            Debug::emitir(Debug::Erro, "não tem cena atual calaio");
+            Debug::emitir(Debug::Erro, "Não tem cena atual");
     }
 }

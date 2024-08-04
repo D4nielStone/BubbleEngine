@@ -10,14 +10,14 @@ struct Vector2
 {
     float x = 1, y = 1;
     int w = 0, h = 0;
-    //soma
+    // Deve somar
     Vector2 operator+(const Vector2& other) const
     {
-        return Vector2{ x + other.x, y + other.y };
+        return Vector2{ x + other.x, y + other.y, static_cast<int>(w + other.w), static_cast<int>(h + other.h) };
     };
     Vector2 operator+(const float other) const
     {
-        return Vector2{ x + other, y + other };
+        return Vector2{ x + other, y + other, static_cast<int>(w + other), static_cast<int>(h + other) };
     };
     Vector2& operator+=(const Vector2& other)
     {
@@ -25,16 +25,31 @@ struct Vector2
         y += other.y;
         return *this;
     };
-    //sub
+    Vector2& operator+=(const float other)
+    {
+        x += other;
+        y += other;
+        return *this;
+    };
+    // Deve subtrair
     Vector2 operator-(const Vector2& other) const
     {
-        return Vector2{ x - other.x, y - other.y };
+        return Vector2{ x - other.x, y - other.y, static_cast<int>(w - other.w), static_cast<int>(h - other.h) };
     };
-
+    Vector2 operator-(const float other) const
+    {
+        return Vector2{ x - other, y - other, static_cast<int>(w - other), static_cast<int>(h - other) };
+    };
     Vector2& operator-=(const Vector2& other)
     {
         x -= other.x;
         y -= other.y;
+        return *this;
+    };
+    Vector2& operator-=(const float other)
+    {
+        x -= other;
+        y -= other;
         return *this;
     };
     //multi
@@ -46,9 +61,7 @@ struct Vector2
     };
     Vector2 operator*(float other)
     {
-        x * other;
-        y * other;
-        return *this;
+        return Vector2{x * other, y * other, static_cast<int>( w * other), static_cast<int>( h * other)};
     };
     Vector2 operator*=(float other)
     {

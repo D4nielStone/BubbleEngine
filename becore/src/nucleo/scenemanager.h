@@ -50,26 +50,22 @@ namespace Bubble {
 
         class BECORE_DLL_API SceneManager {
         private:
-            std::vector<std::shared_ptr<Scene>> scenes; 
+            std::vector<Scene*> scenes; 
             int currentSceneIndex;
-
+            Scene* criarCenaPadrao(std::string Nome);
+            Inputs::Inputs* inputs = nullptr;
         public:
             SceneManager();
-
             ~SceneManager();
-
+            void defIputs(Inputs::Inputs*);
             int numeroDeCenas() const;
-
-            void adicionarCena(std::shared_ptr<Scene> scene);
-
+            void adicionarCena(Scene* scene);
             int cenaAtualIdx() const;
-            
-            std::shared_ptr<Scene> cenaAtual() const;
-
+            Scene* cenaAtual() const;
             void carregarCena(int sceneIndex);
-
-            void renderizarCenaAtual(Vector2 viewportSize);
-            void atualizarCenaAtual(float deltaTime);
+            void renderizarCenaAtual(Vector2 viewportSize) const;
+            void atualizarCenaAtual(float deltaTime) const;
+            void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
         };
 
     } // namespace Nucleo

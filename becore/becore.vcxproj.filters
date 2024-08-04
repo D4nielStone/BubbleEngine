@@ -19,9 +19,6 @@
     <ClCompile Include="src\entidades\entidade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\nucleo\gerenciador.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\arquivadores\imageloader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -91,9 +88,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\entidades\entidade.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\nucleo\gerenciador.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\inputs\inputs.h">

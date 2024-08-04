@@ -179,7 +179,6 @@
     <ClInclude Include="src\arquivadores\imageloader.h" />
     <ClInclude Include="src\componentes\camera\camera.h" />
     <ClInclude Include="src\componentes\codigo\codigo.h" />
-    <ClInclude Include="src\nucleo\gerenciador.hpp" />
     <ClInclude Include="src\entidades\entidade.h" />
     <ClInclude Include="src\comum\componente.h" />
     <ClInclude Include="src\arquivadores\arquivo3d.h" />
@@ -206,7 +205,6 @@
     <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\componentes\camera\camera.cpp" />
     <ClCompile Include="src\componentes\codigo\codigo.cpp" />
-    <ClCompile Include="src\nucleo\gerenciador.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />

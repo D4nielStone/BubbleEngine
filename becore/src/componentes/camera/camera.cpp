@@ -46,9 +46,32 @@ void Bubble::Componentes::Camera::configurar() {
 void Bubble::Componentes::Camera::atualizarAspecto(float aspect)
 {
     aspecto = aspect;
+    matrizProjecao = glm::perspective(
+        glm::radians(FOV),
+        aspecto,
+        zNear,
+        zFar
+    );
+    shader->setMat4("projection", glm::value_ptr(matrizProjecao));
+}
+void Bubble::Componentes::Camera::desenharFrame(Vector2 viewportRect)
+{
+    // Bind framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+
+    // Redimensionar o texture color buffer
+    glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w, viewportRect.h, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    // Redimensionar o renderbuffer
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w, viewportRect.h);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClearColor(ceu[0], ceu[1], ceu[2], 1);
 }
 void Bubble::Componentes::Camera::atualizar(float deltaTime) {
-    glClearColor(ceu[0], ceu[1], ceu[2], 1);
     matrizProjecao = glm::perspective(
         glm::radians(FOV),
         aspecto,
