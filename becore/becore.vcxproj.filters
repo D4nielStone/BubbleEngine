@@ -19,9 +19,6 @@
     <ClCompile Include="src\entidades\entidade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\inputs\gameinputs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\nucleo\gerenciador.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
     <ClCompile Include="src\interface\imagem\Imagem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\EngineThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.h">
@@ -91,9 +91,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\entidades\entidade.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\inputs\gameinputs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\nucleo\gerenciador.hpp">
@@ -142,6 +139,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\depuracao\assert.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\util\EngineThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

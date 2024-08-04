@@ -10,10 +10,8 @@
 
 Bubble::Interface::Layout::Layout()
 {
-	cursorMao = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
-
 	cor = { 0.55f, 0.55f, 0.55f };
-	tamanho = { 1, 0.2 };
+	tamanho = { 1, 1 };
 	posicao = Vector2{ abajanela.obtPos().x, abajanela.obtPos().y - tamanho.y };
 	abajanela.defPos(Vector2{ -0.5, 0 });
 	abajanela.defCor(Color{0, 0, 0 });

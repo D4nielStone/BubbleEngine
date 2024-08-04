@@ -27,7 +27,7 @@ namespace Bubble {
         public:
             Transformacao();
 
-            void atualizar(float deltaTime) override;
+            void atualizar(float deltaTime = 1) override;
             void configurar() override;
             float* obterMatrizGlobal() const;
             rapidjson::Value serializar(rapidjson::Document* doc) override;

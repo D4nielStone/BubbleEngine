@@ -54,10 +54,11 @@ Vector2 Bubble::Interface::Quadrado::obtTamNorm() const
 Vector2 Bubble::Interface::Quadrado::obtNorm() const
 {
     Vector2 norm;
-    norm.x = ((posicao.x + 1) * inicioJanelaTam.w) / 2;
-    norm.y = ((posicao.y + 1) * inicioJanelaTam.h) / 2;
-    norm.w = ((tamanho.x + 1) * inicioJanelaTam.w) / 2;
-    norm.h = ((tamanho.y + 1) * inicioJanelaTam.h) / 2;
+    norm.x = posicao.x * (inicioJanelaTam.w / 2) + (inicioJanelaTam.w / 2);
+    norm.y = posicao.y * (inicioJanelaTam.h / 2) + (inicioJanelaTam.h / 2);
+    norm.w = tamanho.x * inicioJanelaTam.w;
+    norm.h = tamanho.y * inicioJanelaTam.h;
+
     return norm;
 }
 Color Bubble::Interface::Quadrado::obtCor() const
@@ -72,9 +73,9 @@ void Bubble::Interface::Quadrado::definirBuffer()
     float vertices[] = {
         // Posições         // Coordenadas de textura
         0.0f, 0.0f,         0.0f, 0.0f,
-        tamanho.x, 0.0f,    1.0f, 0.0f,
-        tamanho.x, tamanho.y, 1.0f, 1.0f,
-        0.0f, tamanho.y,    0.0f, 1.0f
+       1, 0.0f,    1.0f, 0.0f,
+       1, 1, 1.0f, 1.0f,
+        0.0f, 1,    0.0f, 1.0f
     };
 
     unsigned int indices[] = {

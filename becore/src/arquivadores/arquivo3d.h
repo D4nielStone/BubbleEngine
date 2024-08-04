@@ -15,7 +15,7 @@ namespace Bubble {
         public:
             std::string Caminho;
             std::vector<Vertex> vertices;
-            std::vector<Material> materiais;
+            std::vector<Material*> materiais;
 
             Arquivo3d(){}
             Arquivo3d(std::string caminho) : Caminho(caminho) {

@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="becore.h" />
+    <ClInclude Include="src\util\EngineThread.h" />
     <ClInclude Include="src\componentes\prototipo\perlinnoise.h" />
     <ClInclude Include="src\componentes\prototipo\terreno.h" />
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
@@ -175,7 +176,6 @@
     <ClInclude Include="src\nucleo\engine.hpp" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
-    <ClInclude Include="src\inputs\gameinputs.h" />
     <ClInclude Include="src\arquivadores\imageloader.h" />
     <ClInclude Include="src\componentes\camera\camera.h" />
     <ClInclude Include="src\componentes\codigo\codigo.h" />
@@ -189,6 +189,7 @@
     <ClInclude Include="src\util\skybox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\util\EngineThread.cpp" />
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
     <ClCompile Include="src\componentes\prototipo\perlinnoise.cpp" />
     <ClCompile Include="src\componentes\prototipo\terreno.cpp" />
@@ -202,7 +203,6 @@
     <ClCompile Include="src\nucleo\engine.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
-    <ClCompile Include="src\inputs\gameinputs.cpp" />
     <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\componentes\camera\camera.cpp" />
     <ClCompile Include="src\componentes\codigo\codigo.cpp" />

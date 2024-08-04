@@ -1,4 +1,5 @@
 #include "renderizador.hpp"
+#include "src/arquivadores/imageloader.h"
 #include <glad/glad.h>
 #include <algorithm>
 
@@ -6,25 +7,61 @@ namespace Bubble::Componentes
 {
     void Renderizador::configurar()
     {
-        std::for_each(vertices.begin(), vertices.end(), [this](Vertex& vertex) {
-            configurarBuffers(vertex);
-            });
+        for (size_t i = 0; i < vertices.size(); i++)
+        {
+            if(materiais.size() <= i+1)
+                configurarBuffers(vertices[i], materiais[i]);
+            else
+                configurarBuffers(vertices[i]);
+        };
         Debug::emitir(Debug::Tipo::Mensagem, "Renderizador configurado");
     }
 
     void Renderizador::atualizar(float deltaTime)
     {
-        std::for_each(materiais.begin(), materiais.end(), [this](Material& material) {
-            atualizarCores(material);
-            });
-
-        std::for_each(vertices.begin(), vertices.end(), [this](Vertex& vertex) {
-            desenharModelo(vertex);
-            });
+        for (size_t i = 0; i < vertices.size(); i++)
+        {
+            if (materiais.size() <= i + 1)
+            {
+                atualizarCores(*materiais[i]);
+                desenharModelo(vertices[i]);
+            }
+            else
+                desenharModelo(vertices[i]);
+        };
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    void Renderizador::configurarBuffers(Vertex& mesh)
+    void Renderizador::configurarBuffers(Vertex& mesh, Material* mat)
     {
+        //textura
+
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            // Carregar os dados da imagem
+            Arquivadores::ImageLoader imageLoader("R.jfif");
+            unsigned char* data = imageLoader.obterDados();
+            int width = imageLoader.getWidth();
+            int height = imageLoader.getHeight();
+
+            // Gerar e vincular a textura
+            glGenTextures(1, &ID);
+            glBindTexture(GL_TEXTURE_2D, ID);
+
+            // Definir o formato e os dados da textura
+            glActiveTexture(GL_TEXTURE0);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+
+            // Configurar parâmetros de filtragem e envolvimento da textura
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            // Desvincular a textura
+            glBindTexture(GL_TEXTURE_2D, 0);
+        
+        //vertex buffer
         glGenVertexArrays(1, &mesh.VAO);
         glGenBuffers(1, &mesh.VBO);
         glGenBuffers(1, &mesh.EBO);
@@ -81,7 +118,9 @@ namespace Bubble::Componentes
         if (shader)
         {
             shader->use();
+            glBindTexture(GL_TEXTURE_2D, ID);
             shader->setVec3("objectColor", material.difusa.r, material.difusa.g, material.difusa.b);
+            shader->setInt("textura_difusa", 0);
         }
     }
 
@@ -98,4 +137,18 @@ namespace Bubble::Componentes
         vertices = objf.vertices;
         Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
     }
+    Renderizador::~Renderizador() {
+        // Liberar texturas e buffers
+        for (auto& mat : materiais) {
+            if (mat->textura_difusa.gerado) {
+                glDeleteTextures(1, &ID);
+            }
+        }
+        for (auto& vertex : vertices) {
+            glDeleteVertexArrays(1, &vertex.VAO);
+            glDeleteBuffers(1, &vertex.VBO);
+            glDeleteBuffers(1, &vertex.EBO);
+        }
+    }
+
 }

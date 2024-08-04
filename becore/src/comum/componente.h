@@ -19,7 +19,7 @@ namespace Bubble {
 		public:
 			Componente() {};
 			const char* nome() const { return Nome; }
-			virtual void configurar() = 0; virtual void atualizar(float deltaTime) = 0;
+			virtual void configurar() = 0; virtual void atualizar(float deltaTime = 0)  = 0;
 			void definirPai(Bubble::Entidades::Entidade* ent) {
 				meuObjeto = ent;
 			}

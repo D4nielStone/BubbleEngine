@@ -1,7 +1,7 @@
 #include "arquivo3d.h"
 #include "src/depuracao/debug.h"
 
-std::vector<std::pair<std::pair<std::vector<Vertex>, std::vector<Material>>, std::string>> arquivos;
+std::vector<std::pair<std::pair<std::vector<Vertex>, std::vector<Material*>>, std::string>> arquivos;
 
 void Bubble::Arquivadores::Arquivo3d::exibirInformacoes() 
 {
@@ -93,14 +93,20 @@ void Bubble::Arquivadores::Arquivo3d::extrairMateriais() {
     if (!cena) return;
     for (unsigned int i = 0; i < cena->mNumMaterials; ++i) {
         aiMaterial* material = cena->mMaterials[i];
-        Material mat;
+        Material* mat = new Material();
 
         aiString nome;
 
         aiColor3D cor;
 
+        aiString path;
+        // extrair textura difusa
+        if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &path)) {
+            mat->textura_difusa.path = path.C_Str(); // Armazena o caminho da textura
+        }
+        // extrair cor difusa
         if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, cor)) {
-            mat.difusa = { cor.r, cor.g, cor.b };
+            mat->difusa = { cor.r, cor.g, cor.b };
         }
 
         materiais.push_back(mat);

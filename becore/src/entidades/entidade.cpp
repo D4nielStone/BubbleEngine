@@ -20,11 +20,21 @@ namespace Bubble {
 		Entidade::Entidade() : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()) {
 			adicionarComponente(std::make_shared<Bubble::Componentes::Transformacao>());
 		};
-		void Entidade::atualizar(Modo m, float deltaTime, float aspecto) {
-			for (auto c : Componentes) 
+		void Entidade::atualizar(float deltaTime) {
+			for (auto& c : Componentes) 
 			{
-				if(ativado && !dynamic_cast<Componentes::Camera*>(c.get()))
+				if(ativado && !dynamic_cast<Componentes::Camera*>(c.get()) && !dynamic_cast<Componentes::Renderizador*>(c.get()))
 				c->atualizar(deltaTime);
+			}
+		}
+
+		void Entidade::renderizar()
+		{
+			for (auto& c : Componentes)
+			{
+				if (ativado && dynamic_cast<Componentes::Renderizador*>(c.get()))
+					obterTransformacao()->atualizar();
+					c->atualizar();
 			}
 		}
 

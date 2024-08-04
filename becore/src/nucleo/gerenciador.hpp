@@ -1,15 +1,17 @@
 #ifndef GERENCIADOR_H
 #define GERENCIADOR_H
-#include "src/nucleo/engine.hpp"
+#include "src/util/EngineThread.h"
 #include "becore.h"
 
-class GLFWindow;
+struct GLFWindow;
 namespace Bubble {
 	namespace Nucleo
 	{
 		class BECORE_DLL_API Gerenciador
 		{
 		private:
+			Util::EngineThread engineThread;
+			Util::UIThread uiThread;
 			GLFWwindow* janelaGerenciador;
 			Scene criarCenaPadrao();
 			bool escanearProjetos();

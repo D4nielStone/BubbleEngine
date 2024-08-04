@@ -2,7 +2,7 @@
 #include "src/componentes/camera/camera.h"
 #include "src/componentes/transformacao/transformacao.h"
 #include "becore.h"
-#include "src/inputs/gameinputs.h"
+#include "src/inputs/inputs.h"
 
 namespace Bubble {
 	namespace Entidades {
@@ -23,7 +23,7 @@ namespace Bubble {
 			CameraEditor();
 			void atualizarDirecao();
 			void configurar() override;
-			void atualizar(float deltaTime) override;
+			void atualizar(float deltaTime = 1) override;
 			void olharPara(glm::vec3 pov);
 		};
 	}

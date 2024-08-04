@@ -43,7 +43,6 @@ namespace Bubble {
                 }
                 if (inputs->isKeyPressed(Key::S))
                 {
-                    Debug::emitir("TECLA", "TACLA TECLADA");
                   transformacao->Move(-frente * velocidadeDeMovimento);
                 }
                 if (inputs->isKeyPressed(Key::A))
@@ -100,6 +99,10 @@ namespace Bubble {
                     shader->use();
                     shader->setMat4("projection", glm::value_ptr(matrizProjecao));
                     shader->setMat4("view", glm::value_ptr(matrizVisualizacao));
+                    shader->setVec3("viewPos",
+                        posicaoCamera.x,
+                        posicaoCamera.y,
+                        posicaoCamera.z);
                 }
             }
             else {

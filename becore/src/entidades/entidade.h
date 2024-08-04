@@ -13,8 +13,6 @@
 #include <stdexcept>
 #include "rapidjson/document.h"
 
-enum class Modo;
-
 namespace Bubble {
 	namespace Entidades {
 		class BECORE_DLL_API Entidade {
@@ -23,7 +21,8 @@ namespace Bubble {
 			Entidade();
 			~Entidade();
 			Entidade(const char* name);
-			void atualizar(Modo m, float deltaTime, float aspecto);
+			void atualizar(float deltaTime);
+			void renderizar();
 			std::string* nome();
 			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);

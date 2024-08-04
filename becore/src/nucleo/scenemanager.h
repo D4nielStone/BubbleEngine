@@ -40,7 +40,8 @@ namespace Bubble {
             Scene(const char* name);
             ~Scene();
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
-            void atualizar(Modo m, float deltaTime,float aspecto);
+            void renderizar(float aspecto);
+            void atualizar(float deltaTime);
             void carregar();
             void serializar(rapidjson::Document* doc) const;
             bool parse(rapidjson::Document& doc);
@@ -67,7 +68,8 @@ namespace Bubble {
 
             void carregarCena(int sceneIndex);
 
-            void atualizarCenaAtual(Modo m, float deltaTime, int window_x, int window_y, int fb_w, int fb_h);
+            void renderizarCenaAtual(Vector2 viewportSize);
+            void atualizarCenaAtual(float deltaTime);
         };
 
     } // namespace Nucleo

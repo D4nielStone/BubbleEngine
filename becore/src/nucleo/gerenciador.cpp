@@ -10,7 +10,7 @@
 #include "rapidjson/ostreamwrapper.h"
 #include "src/arquivadores/imageloader.h"
 #include "filesystem"
-
+#include "thread"
 
 namespace Bubble::Nucleo
 {
@@ -291,7 +291,7 @@ namespace Bubble::Nucleo
        
         engineAtual = new Engine();
         std::shared_ptr<Scene> cena = std::make_shared<Scene>();
-        cena->adicionarEntidade(std::make_shared<Entidades::Entidade>(Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae")));
+        cena->adicionarEntidade(std::make_shared<Entidades::Entidade>(Arquivadores::Arquivo3d("assets/modelos/laptop/Lowpoly_Notebook_2.obj")));
 
         engineAtual->obterGC()->adicionarCena(cena);
         engineAtual->obterGC()->carregarCena(0);
@@ -301,6 +301,7 @@ namespace Bubble::Nucleo
 
         // inicia UI
         ui.inicializar(this);
+
         //inicia glad
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
@@ -318,6 +319,9 @@ namespace Bubble::Nucleo
         }
 
         escanearProjetos();
+
+        uiThread.start(&ui);
+        engineThread.start(engineAtual);
         
         return true;
     }
@@ -326,15 +330,16 @@ namespace Bubble::Nucleo
     void Gerenciador::renderizar()
     {
         glfwPollEvents();
-        ui.pollevents();
+
         engineAtual->renderizar(Modo::Editor, ui.viewportEditor);
 
-        ui.renderizar();
         glfwSwapBuffers(janelaGerenciador);
-
+        std::this_thread::sleep_for(std::chrono::milliseconds(16));
     }
     void Gerenciador::limpar()
     {
+        engineThread.stop();
+        uiThread.stop();
         glfwDestroyWindow(janelaGerenciador);
         glfwTerminate();
     }

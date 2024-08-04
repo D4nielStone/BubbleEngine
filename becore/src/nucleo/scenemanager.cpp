@@ -3,11 +3,11 @@
 #include "src/depuracao/debug.h"
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+
 namespace Bubble::Nucleo
 {
     Scene::Scene(const char* name) : Name(name) {
-        std::string msg = std::string(name) + " criada";
-        Debug::emitir("CENA", msg.c_str());
+        Debug::emitir("CENA", std::string(name) + " criada");
     }
     Scene::~Scene() {}
     SceneManager::SceneManager() : currentSceneIndex(-1)
@@ -26,22 +26,19 @@ namespace Bubble::Nucleo
     {
         glClearColor(1, 1, 1, 1);
     }
-    void Scene::atualizar(Modo m, float deltaTime, float aspecto) {
-        desenharCeu();
+    void Scene::renderizar(float aspecto) {
 
-        // Atualizar a câmera
-        if (m == Modo::Editor) {
-            camera_editor.atualizarAspecto(aspecto);
-            camera_editor.atualizar(deltaTime);
-        }
-        else if (camera_principal)
-        {
-            camera_principal->atualizarAspecto(aspecto);
-            camera_principal->atualizar(deltaTime);
-        }
-
+        //desenharCeu();
+        camera_editor.atualizarAspecto(aspecto);
+        camera_editor.atualizar();
         for (auto& obj : Entidades) {
-            obj->atualizar(m, deltaTime, aspecto);
+            obj->renderizar();
+        }
+    }
+    void Scene::atualizar(float deltaTime)
+    {
+        for (auto& obj : Entidades) {
+            obj->atualizar(deltaTime);
             if (obj->obterComponente("Camera"))
             {
                 camera_principal = dynamic_cast<Bubble::Componentes::Camera*>(obj->obterComponente("Camera").get());
@@ -52,9 +49,8 @@ namespace Bubble::Nucleo
         entidadeSelecionada = Entidades[Entidades.size() - 1].get();
         camera_editor.configurar();
 
-        glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        //glCullFace(GL_BACK);
+        glCullFace(GL_BACK);
         //skybox.configurarBuffers();
 
         for (auto& obj : Entidades) {
@@ -92,16 +88,21 @@ namespace Bubble::Nucleo
             Debug::emitir(Debug::Tipo::Erro, "índice da cena não é válido");
         }
     }
-    void SceneManager::atualizarCenaAtual(Modo m, float deltaTime, int window_x, int window_y, int fb_w, int fb_h)
+    void SceneManager::renderizarCenaAtual(Vector2 viewportSize)
     {
-        float aspecto = static_cast<float>(fb_w) / fb_h;
+        float aspecto;
+        if (viewportSize.h != 0)
+            aspecto = static_cast<float>(viewportSize.w) / viewportSize.h;
+        else
+            aspecto = 1;
+        glViewport(0, 0, viewportSize.w, viewportSize.h);
+        glEnable(GL_DEPTH_TEST);
 
-        glViewport(0, 0, fb_w, fb_h);
-
-        // Update the current scene if it exists
-        if (currentSceneIndex >= 0 && currentSceneIndex < scenes.size()) {
-            scenes[currentSceneIndex]->atualizar(m, deltaTime, aspecto);
-        }
+        cenaAtual()->renderizar(aspecto);
+    }
+    void SceneManager::atualizarCenaAtual(float deltaTime)
+    {
+        cenaAtual()->atualizar(deltaTime);
     }
     bool Scene::parse(rapidjson::Document& document)
     {

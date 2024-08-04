@@ -76,7 +76,6 @@ void Bubble::Interface::Imagem::atualizar()
 			tamanho.x = tamanhoOri.x * (tamanho.y / tamanhoOri.y);
 		}
 		posicao = Vector2{ -tamanho.x / 2, -tamanho.y / 2 };
-		Debug::emitir("ASPECT", std::to_string(aspect));
 	}
 }
 

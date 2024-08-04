@@ -7,6 +7,11 @@ float deltaTime = 0;
 namespace Bubble::Nucleo 
 {
     Engine::Engine() {}
+    void Engine::defInputs(Inputs::Inputs* inp)
+    {
+        inputs = inp;
+        gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = inp;
+    }
     // inicialização GLFW e GLAD
     bool Engine::inicializacao(Gerenciador* w)
     {
@@ -21,7 +26,7 @@ namespace Bubble::Nucleo
 
         glfwWindow = w->obterJanela();
 
-        inputs = &w->ui.inputs;
+        defInputs(&w->ui.inputs);
 
         return true;
     }
@@ -29,9 +34,16 @@ namespace Bubble::Nucleo
     {
         return glfwWindowShouldClose(glfwWindow);
     }
-    void Engine::renderizar(Modo m, Vector2 viewportSize)
+    void Engine::atualizar()
     {
         float st = glfwGetTime();
+        // Atualizar cena
+        gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
+        // Calcular deltaTime
+        deltaTime = glfwGetTime() - st;
+    }
+    void Engine::renderizar(Modo m, Vector2 viewportSize)
+    {
         auto cena = gerenciadorDeCenas.cenaAtual();
         Componentes::Camera* cam = nullptr;
 
@@ -58,21 +70,12 @@ namespace Bubble::Nucleo
             glBindRenderbuffer(GL_RENDERBUFFER, 0);
             glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-            // Atualizar cena
-            gerenciadorDeCenas.cenaAtual()->camera_editor.inputs = inputs;
-            int width = 0, height = 0;
-            glfwGetFramebufferSize(glfwWindow, &width, &height);
-            if(viewportSize.x == 0 && viewportSize.y == 0)
-            gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, 0, 0, static_cast<float>(width), static_cast<float>(height));
-            else
-            gerenciadorDeCenas.atualizarCenaAtual(m, deltaTime, static_cast<float>(viewportSize.x), static_cast<float>(viewportSize.y), static_cast<float>(viewportSize.w), static_cast<float>(viewportSize.h));
-
+            gerenciadorDeCenas.renderizarCenaAtual(viewportSize);
+            
             // Desligar framebuffer
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
         }
 
-        // Calcular deltaTime
-        deltaTime = glfwGetTime() - st;
     }
 
     void Engine::limpar() const 

@@ -43,6 +43,7 @@ void Bubble::Arquivadores::ImageLoader::carregarImagem(const std::string& filepa
         carregado = true;
         return;
     }
+    Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
     // Inicializa o FreeImage  
     FreeImage_Initialise();
 

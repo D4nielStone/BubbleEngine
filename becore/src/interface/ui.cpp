@@ -36,6 +36,15 @@ void Bubble::Interface::UI::pollevents()
 		quad->atualizar();
 	}
 }
+void Bubble::Interface::UI::renderizar()
+{
+	glDisable(GL_DEPTH_TEST);
+	pano_de_fundo->renderizar();
+	for (Quadrado* quad : layouts)
+	{
+		quad->renderizar();
+	}
+}
 void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen)
 {
 	ASSERT(gen != nullptr);
@@ -50,16 +59,6 @@ void Bubble::Interface::UI::inicializar(Nucleo::Gerenciador* gen)
 	janela_editor->adicImagem(buffer_editor);
 }
 
-void Bubble::Interface::UI::renderizar()
-{
-	glDisable(GL_DEPTH_TEST);
-	pano_de_fundo->renderizar();
-	for (Quadrado* quad : layouts)
-	{
-		quad->renderizar();
-	}
-	glEnable(GL_DEPTH_TEST);
-}
 
 void Bubble::Interface::UI::contextoAtual(GLFWwindow* w, Estilo)
 {
