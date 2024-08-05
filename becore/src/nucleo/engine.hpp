@@ -4,7 +4,7 @@
 #include "src/util/includes.h"
 #include "src/inputs/inputs.h"
 #include "src/nucleo/scenemanager.h"
-#include "src/interface/ui.hpp"
+#include "src/interface/uimanager.hpp"
 
 struct GLFWwindow;
 namespace Bubble

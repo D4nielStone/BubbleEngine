@@ -163,7 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="becore.h" />
-    <ClInclude Include="src\util\EngineThread.h" />
+    <ClInclude Include="src\nucleo\Scene.hpp" />
     <ClInclude Include="src\componentes\prototipo\perlinnoise.h" />
     <ClInclude Include="src\componentes\prototipo\terreno.h" />
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
@@ -172,7 +172,7 @@
     <ClInclude Include="src\interface\base\quadrado.hpp" />
     <ClInclude Include="src\interface\imagem\Imagem.h" />
     <ClInclude Include="src\interface\layout\layout.hpp" />
-    <ClInclude Include="src\interface\ui.hpp" />
+    <ClInclude Include="src\interface\uimanager.hpp" />
     <ClInclude Include="src\nucleo\engine.hpp" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
@@ -186,9 +186,10 @@
     <ClInclude Include="src\componentes\transformacao\transformacao.h" />
     <ClInclude Include="src\util\includes.h" />
     <ClInclude Include="src\util\skybox.h" />
+    <ClInclude Include="src\interface\texto\Texto.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\util\EngineThread.cpp" />
+    <ClCompile Include="src\nucleo\Scene.cpp" />
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
     <ClCompile Include="src\componentes\prototipo\perlinnoise.cpp" />
     <ClCompile Include="src\componentes\prototipo\terreno.cpp" />
@@ -198,7 +199,7 @@
     <ClCompile Include="src\interface\base\quadrado.cpp" />
     <ClCompile Include="src\interface\imagem\Imagem.cpp" />
     <ClCompile Include="src\interface\layout\layout.cpp" />
-    <ClCompile Include="src\interface\ui.cpp" />
+    <ClCompile Include="src\interface\uimanager.cpp" />
     <ClCompile Include="src\nucleo\engine.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
+    <ClCompile Include="src\interface\texto\Texto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\phong.frag" />

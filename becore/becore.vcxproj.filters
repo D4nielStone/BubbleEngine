@@ -43,7 +43,7 @@
     <ClCompile Include="src\util\skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\interface\ui.cpp">
+    <ClCompile Include="src\interface\uimanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\nucleo\engine.cpp">
@@ -61,7 +61,10 @@
     <ClCompile Include="src\interface\imagem\Imagem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\EngineThread.cpp">
+    <ClCompile Include="src\interface\texto\Texto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nucleo\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,7 +114,7 @@
     <ClInclude Include="src\util\skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\interface\ui.hpp">
+    <ClInclude Include="src\interface\uimanager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\nucleo\engine.hpp">
@@ -135,7 +138,10 @@
     <ClInclude Include="src\depuracao\assert.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\EngineThread.h">
+    <ClInclude Include="src\interface\texto\Texto.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nucleo\Scene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

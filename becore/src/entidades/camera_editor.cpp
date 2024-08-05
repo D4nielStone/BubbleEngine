@@ -9,9 +9,9 @@
 namespace Bubble {
     namespace Entidades {
         CameraEditor::CameraEditor(Bubble::Inputs::Inputs* input)
-            : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(1.0f), sensibilidadeDeRotacao(1.f),
+            : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(0.8f), sensibilidadeDeRotacao(1.f),
             yaw(-90.0f), pitch(0.0f) {
-            FOV = 45.0f;
+            FOV = 75.f;
             aspecto = 4.0f / 3.0f;
             zNear = 0.1f;
             zFar = 300.0f;
@@ -19,9 +19,9 @@ namespace Bubble {
             atualizarDirecao();
         }
         CameraEditor::CameraEditor()
-            : alvoCamera(0, 0, 0), velocidadeDeMovimento(1.0f), sensibilidadeDeRotacao(1.f),
+            : alvoCamera(0, 0, 0), velocidadeDeMovimento(0.8f), sensibilidadeDeRotacao(1.f),
             yaw(-90.0f), pitch(0.0f) {
-            FOV = 45.0f;
+            FOV = 75.f;
             aspecto = 4.0f / 3.0f;
             zNear = 0.1f;
             zFar = 300.0f;

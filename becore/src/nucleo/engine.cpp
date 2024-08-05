@@ -1,5 +1,5 @@
 #include "engine.hpp"
-#include "gerenciador.hpp"
+#include "src/arquivadores/imageloader.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
@@ -10,7 +10,7 @@ namespace Bubble::Nucleo
     {
         inicializacao();
     }
-    // inicialização GLFW e GLAD
+    // Inicialização GLFW e GLAD
     bool Engine::inicializacao()
     {
         // inicia glfw
@@ -31,7 +31,14 @@ namespace Bubble::Nucleo
             std::cout << "Failed to initialize GLAD" << std::endl;
             return -1;
         }
+        // define o ícone da janela
+        auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
+        GLFWimage icone = icone_.converterParaGlfw();
 
+        if (icone_.carregado)
+        {
+            glfwSetWindowIcon(glfwWindow, 1, &icone);
+        }
         defInputs(new Inputs::Inputs());
 
         return true;
