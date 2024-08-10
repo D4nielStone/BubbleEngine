@@ -103,15 +103,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECORE_EXPORTS;BEUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/becore;$(SolutionDir)/bubbleui;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/becore;$(SolutionDir)/bubbleui;$(SolutionDir)/becommons;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>becore.lib;bubbleui.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>becore.lib;bubbleui.lib;becommons.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)x64/Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

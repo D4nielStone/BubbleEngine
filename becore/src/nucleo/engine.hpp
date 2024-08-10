@@ -1,12 +1,10 @@
-#ifndef ENGINE_HPP
-#define ENGINE_HPP
-
-#include "src/inputs/inputs.h"
-#include "src/nucleo/scenemanager.h"
+#pragma once
+#include "src/inputs/inputs.hpp"
+#include "src/cena/scenemanager.hpp"
 #include "src/ui/manager.hpp"
-#include "src/util/includes.h"
-
-struct GLFWwindow;
+#include "src/util/includes.hpp"
+#include "becore.hpp"
+class GLFWwindow;
 namespace Bubble
 {
 	namespace Nucleo
@@ -15,14 +13,14 @@ namespace Bubble
 		{
 		private:
 			Inputs::Inputs* inputs;
-			SceneManager gerenciadorDeCenas;
+			Cena::SceneManager gerenciadorDeCenas;
 			GLFWwindow* glfwWindow;
 			BubbleUI::Manager* gerenciadorUi = nullptr;
 		public:
-			void defInputs(Inputs::Inputs* inp);
-			Inputs::Inputs* obterGI() { return inputs; };
-			SceneManager* obterGC() { return &gerenciadorDeCenas; };
+			Inputs::Inputs* obterGI() const;
+			Cena::SceneManager* obterGC() { return &gerenciadorDeCenas; };
 			GLFWwindow* obterJanela() { return glfwWindow; };
+			void defInputs(Inputs::Inputs* inp);
 			bool inicializacao();
 			int pararloop() const;
 			void limpar() const;
@@ -34,4 +32,3 @@ namespace Bubble
 		};
 	}
 }
-#endif

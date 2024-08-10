@@ -1,6 +1,6 @@
 #pragma once
-#include "bubbleui.h"
-#include "src/util/includes.h"
+#include "bubbleui.hpp"
+#include "src/util/includes.hpp"
 #include "src/ui/contexto/contexto.hpp"
 
 namespace BubbleUI

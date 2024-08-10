@@ -1,18 +1,18 @@
-#include "engine.hpp"
-#include "src/arquivadores/imageloader.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "src/arquivadores/imageloader.hpp"
+#include "engine.hpp"
 
 float deltaTime = 0;
-namespace Bubble::Nucleo 
-{
-    Engine::Engine()
+using namespace Bubble::Nucleo;
+
+Engine::Engine()
     {
         inicializacao();
         gerenciadorUi = new BubbleUI::Manager(this);
     }
-    // Inicialização GLFW e GLAD
-    bool Engine::inicializacao()
+// Inicialização GLFW e GLAD
+bool Engine::inicializacao()
     {
         // inicia glfw
         if (!glfwInit())
@@ -44,23 +44,27 @@ namespace Bubble::Nucleo
 
         return true;
     }
-    // Deve definir inputs
-    void Engine::defInputs(Inputs::Inputs* inp)
-    {
-        inputs = inp;
-        gerenciadorDeCenas.defIputs(inp);
-        glfwSetWindowUserPointer(glfwWindow, inputs);
-        glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
-        glfwSetKeyCallback(glfwWindow, keyCallback);
-        glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
-    }
-    // Deve retornar se deve fechar janela
-    int Engine::pararloop() const
+Bubble::Inputs::Inputs* Engine::obterGI() const
+{
+    return inputs;
+};
+// Deve definir inputs
+void Engine::defInputs(Inputs::Inputs* inp)
+{
+    inputs = inp;
+    gerenciadorDeCenas.defIputs(inp);
+    glfwSetWindowUserPointer(glfwWindow, inputs);
+    glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
+    glfwSetKeyCallback(glfwWindow, keyCallback);
+    glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
+}
+// Deve retornar se deve fechar janela
+int Engine::pararloop() const
     {
         return glfwWindowShouldClose(glfwWindow);
     }
-    // Deve Atualizar cena atual
-    void Engine::atualizar()
+// Deve Atualizar cena atual
+void Engine::atualizar()
     {
         glfwPollEvents();
         float st = glfwGetTime();
@@ -71,8 +75,8 @@ namespace Bubble::Nucleo
         // Calcular deltaTime
         deltaTime = glfwGetTime() - st;
     }
-    // Deve renderizar cena Atual
-    void Engine::renderizar()
+// Deve renderizar cena Atual
+void Engine::renderizar()
     {
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         //gerenciadorDeCenas.cenaAtual()->camera_editor.desenharFrame();
@@ -87,15 +91,14 @@ namespace Bubble::Nucleo
 
         glfwSwapBuffers(glfwWindow);
     }
-    // Deve limpar engine
-    void Engine::limpar() const 
+// Deve limpar engine
+void Engine::limpar() const 
     {
         glfwDestroyWindow(glfwWindow);
         glfwTerminate();
     }
-    // Deve salvar Cena 
-    bool Engine::salvarCena(unsigned int idx)
+// Deve salvar Cena 
+bool Engine::salvarCena(unsigned int idx)
     {
         return true;
     }
-}

@@ -1,30 +1,27 @@
-#include "rect.hpp"
-#include "src/depuracao/debug.h"
-#include "src/depuracao/assert.hpp"
 #include "glad/glad.h"
+#include "rect.hpp"
+#include "src/depuracao/debug.hpp"
+#include "src/depuracao/assert.hpp"
 
 using namespace BubbleUI::Formas;
 Rect::Rect(Vector4 rect, Contexto* ctx) : retangulo(rect), contexto(ctx)
 {
-    definirBuffers(vertex);
+    definirBuffers();
 }
-
-BubbleUI::Formas::Rect::Rect(Contexto* ctx) : contexto(ctx)
+Rect::Rect(Contexto* ctx) : contexto(ctx)
 {
 }
-
-Vector4 BubbleUI::Formas::Rect::obtRect() const
+Vector4 Rect::obtRect() const
 {
     return retangulo;
 }
-
 void Rect::atualizar(float deltaTime)
 {
     contexto->shader.use();
-    contexto->shader.setVec2("quadrado.tamanho", retangulo.w, retangulo.h);
+    contexto->shader.setVec2("quadrado.tamanho", static_cast<float>(retangulo.w), static_cast<float>(retangulo.h));
     contexto->shader.setVec2("quadrado.posicao", retangulo.x, retangulo.y);
 }
-void BubbleUI::Formas::Rect::renderizar()
+void Rect::renderizar()
 {
     contexto->shader.use();
     glBindVertexArray(vertex.VAO);

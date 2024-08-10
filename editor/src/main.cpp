@@ -1,6 +1,4 @@
 #include "src/nucleo/engine.hpp"
-#include "src/componentes/prototipo/terreno.h"
-#include "src/arquivadores/arquivo3d.h"
 #include "memory"
 #include "Windows.h"
 

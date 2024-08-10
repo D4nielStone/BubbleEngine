@@ -1,7 +1,7 @@
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include "manager.hpp"
 #include "src/nucleo/engine.hpp"
-#include "glad/glad.h"4
-#include "GLFW/glfw3.h"
 
 void BubbleUI::Manager::iniPaineisPadrao()
 {
@@ -18,7 +18,6 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 void BubbleUI::Manager::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
-	glClearColor(0,0,0,1);
 	retangulotest->renderizar();
 }
 

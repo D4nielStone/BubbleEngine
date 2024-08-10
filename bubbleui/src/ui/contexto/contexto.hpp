@@ -1,11 +1,10 @@
 #pragma once
-#include "src/util/includes.h"
-#include <src/arquivadores/shader.h>
-#include "src/inputs/inputs.h"
-#include "bubbleui.h"
+#include "src/util/includes.hpp"
+#include <src/arquivadores/shader.hpp>
+#include "src/inputs/inputs.hpp"
+#include "bubbleui.hpp"
+#include "glfw/glfw3.h"
 
-struct GLFWwindow;
-struct GLFWcursor;
 namespace BubbleUI
 {
     struct BEUI_DLL_API Contexto

@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BEUI_EXPORTS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)becore;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>becore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>becommons.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <PerUserRedirection>true</PerUserRedirection>
       <AdditionalLibraryDirectories>$(SolutionDir)x64/Debug</AdditionalLibraryDirectories>
     </Link>
@@ -129,20 +129,15 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)x64/Release</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="bubbleui.h" />
-    <ClInclude Include="src\arquivadores\imageloader.h" />
-    <ClInclude Include="src\arquivadores\shader.h" />
-    <ClInclude Include="src\inputs\inputs.h" />
+    <ClInclude Include="bubbleui.hpp" />
     <ClInclude Include="src\ui\contexto\contexto.hpp" />
     <ClInclude Include="src\ui\formas\rect.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\arquivadores\imageloader.cpp" />
-    <ClCompile Include="src\arquivadores\shader.cpp" />
-    <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\ui\contexto\contexto.cpp" />
     <ClCompile Include="src\ui\formas\rect.cpp" />
   </ItemGroup>
