@@ -30,7 +30,7 @@ namespace Bubble {
             int cenaAtualIdx() const;
             Scene* cenaAtual() const;
             void carregarCena(int sceneIndex);
-            void renderizarCenaAtual(Vector2 viewportSize) const;
+            void renderizarCenaAtual(Vector4 viewportSize) const;
             void atualizarCenaAtual(float deltaTime) const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
         };

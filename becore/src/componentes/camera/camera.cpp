@@ -54,7 +54,7 @@ void Bubble::Componentes::Camera::atualizarAspecto(float aspect)
     );
     shader->setMat4("projection", glm::value_ptr(matrizProjecao));
 }
-void Bubble::Componentes::Camera::desenharFrame(Vector2 viewportRect)
+void Bubble::Componentes::Camera::desenharFrame(Vector4 viewportRect)
 {
     // Bind framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);

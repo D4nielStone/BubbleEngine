@@ -15,5 +15,5 @@ void main()
     {
         result *= texture(textura, Uv).rgba;
     }
-    FragColor = result;
+    FragColor = vec4(0,0,0,1);
 }

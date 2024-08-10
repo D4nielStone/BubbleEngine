@@ -35,32 +35,6 @@ namespace Bubble::Componentes
 
     void Renderizador::configurarBuffers(Vertex& mesh, Material* mat)
     {
-        //textura
-
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            // Carregar os dados da imagem
-            Arquivadores::ImageLoader imageLoader("R.jfif");
-            unsigned char* data = imageLoader.obterDados();
-            int width = imageLoader.getWidth();
-            int height = imageLoader.getHeight();
-
-            // Gerar e vincular a textura
-            glGenTextures(1, &ID);
-            glBindTexture(GL_TEXTURE_2D, ID);
-
-            // Definir o formato e os dados da textura
-            glActiveTexture(GL_TEXTURE0);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-
-            // Configurar parâmetros de filtragem e envolvimento da textura
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            // Desvincular a textura
-            glBindTexture(GL_TEXTURE_2D, 0);
-        
         //vertex buffer
         glGenVertexArrays(1, &mesh.VAO);
         glGenBuffers(1, &mesh.VBO);

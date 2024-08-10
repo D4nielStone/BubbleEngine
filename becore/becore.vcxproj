@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -125,9 +125,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECORE_EXPORTS;BEUI_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)bubbleui;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalOptions>/FS %(AdditionalOptions)</AdditionalOptions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -135,9 +135,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;gdi32.lib;kernel32.lib;shell32.lib;user32.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)x64/Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;gdi32.lib;kernel32.lib;shell32.lib;user32.lib;bubbleui.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -148,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;BECORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)bubbleui;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -169,10 +168,6 @@
     <ClInclude Include="src\componentes\renderizador\renderizador.hpp" />
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\entidades\camera_editor.h" />
-    <ClInclude Include="src\interface\base\quadrado.hpp" />
-    <ClInclude Include="src\interface\imagem\Imagem.h" />
-    <ClInclude Include="src\interface\layout\layout.hpp" />
-    <ClInclude Include="src\interface\uimanager.hpp" />
     <ClInclude Include="src\nucleo\engine.hpp" />
     <ClInclude Include="src\nucleo\scenemanager.h" />
     <ClInclude Include="src\inputs\inputs.h" />
@@ -184,9 +179,9 @@
     <ClInclude Include="src\arquivadores\arquivo3d.h" />
     <ClInclude Include="src\arquivadores\shader.h" />
     <ClInclude Include="src\componentes\transformacao\transformacao.h" />
+    <ClInclude Include="src\ui\manager.hpp" />
     <ClInclude Include="src\util\includes.h" />
     <ClInclude Include="src\util\skybox.h" />
-    <ClInclude Include="src\interface\texto\Texto.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\nucleo\Scene.cpp" />
@@ -196,10 +191,6 @@
     <ClCompile Include="src\componentes\renderizador\renderizador.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\camera_editor.cpp" />
-    <ClCompile Include="src\interface\base\quadrado.cpp" />
-    <ClCompile Include="src\interface\imagem\Imagem.cpp" />
-    <ClCompile Include="src\interface\layout\layout.cpp" />
-    <ClCompile Include="src\interface\uimanager.cpp" />
     <ClCompile Include="src\nucleo\engine.cpp" />
     <ClCompile Include="src\nucleo\scenemanager.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
@@ -209,8 +200,8 @@
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\componentes\transformacao\transformacao.cpp" />
+    <ClCompile Include="src\ui\manager.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
-    <ClCompile Include="src\interface\texto\Texto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\phong.frag" />

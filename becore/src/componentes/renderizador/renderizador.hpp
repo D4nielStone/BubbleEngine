@@ -1,9 +1,9 @@
 #ifndef RENDERIZADOR_H
 #define RENDERIZADOR_H
 #include "src/comum/componente.h"
-#include "src/util/includes.h"
 #include "src/depuracao/debug.h"
 #include "src/arquivadores/arquivo3d.h"
+#include "src/util/includes.h"
 
 namespace Bubble{
     namespace Componentes {

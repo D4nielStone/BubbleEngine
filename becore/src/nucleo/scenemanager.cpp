@@ -69,7 +69,7 @@ namespace Bubble::Nucleo
         }
     }
     // Deve renderizar cena atual
-    void SceneManager::renderizarCenaAtual(Vector2 viewportSize) const
+    void SceneManager::renderizarCenaAtual(Vector4 viewportSize) const
     {
         float aspecto;
         if (viewportSize.h != 0)

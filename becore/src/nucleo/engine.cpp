@@ -6,9 +6,10 @@
 float deltaTime = 0;
 namespace Bubble::Nucleo 
 {
-    Engine::Engine() 
+    Engine::Engine()
     {
         inicializacao();
+        gerenciadorUi = new BubbleUI::Manager(this);
     }
     // Inicialização GLFW e GLAD
     bool Engine::inicializacao()
@@ -65,6 +66,8 @@ namespace Bubble::Nucleo
         float st = glfwGetTime();
         // Atualizar cena
         gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
+        // Atualizar UI
+        gerenciadorUi->atualizar(deltaTime);
         // Calcular deltaTime
         deltaTime = glfwGetTime() - st;
     }
@@ -74,10 +77,14 @@ namespace Bubble::Nucleo
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         //gerenciadorDeCenas.cenaAtual()->camera_editor.desenharFrame();
 
-        gerenciadorDeCenas.renderizarCenaAtual(Vector2{0, 0, 600, 480});
+        gerenciadorDeCenas.renderizarCenaAtual(Vector4{0, 0, 600, 480});
             
         // Desligar framebuffer
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        // Renderizar UI
+        gerenciadorUi->renderizar();
+
         glfwSwapBuffers(glfwWindow);
     }
     // Deve limpar engine

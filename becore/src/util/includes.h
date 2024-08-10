@@ -5,75 +5,101 @@
 #include <cstdio>
 #include <iostream>
 
-// Definição da estrutura Vector2
-struct Vector2
+// Definição da estrutura Vector4
+struct Vector4
 {
     float x = 1, y = 1;
     int w = 0, h = 0;
+
     // Deve somar
-    Vector2 operator+(const Vector2& other) const
+    Vector4 operator+(const Vector4& other) const
     {
-        return Vector2{ x + other.x, y + other.y, static_cast<int>(w + other.w), static_cast<int>(h + other.h) };
+        return Vector4{ x + other.x, y + other.y, static_cast<int>(w + other.w), static_cast<int>(h + other.h) };
     };
-    Vector2 operator+(const float other) const
+    Vector4 operator+(const float other) const
     {
-        return Vector2{ x + other, y + other, static_cast<int>(w + other), static_cast<int>(h + other) };
+        return Vector4{ x + other, y + other, static_cast<int>(w + other), static_cast<int>(h + other) };
     };
-    Vector2& operator+=(const Vector2& other)
+    Vector4& operator+=(const Vector4& other)
     {
         x += other.x;
         y += other.y;
         return *this;
     };
-    Vector2& operator+=(const float other)
+    Vector4& operator+=(const float other)
     {
         x += other;
         y += other;
         return *this;
     };
     // Deve subtrair
-    Vector2 operator-(const Vector2& other) const
+    Vector4 operator-(const Vector4& other) const
     {
-        return Vector2{ x - other.x, y - other.y, static_cast<int>(w - other.w), static_cast<int>(h - other.h) };
+        return Vector4{ x - other.x, y - other.y, static_cast<int>(w - other.w), static_cast<int>(h - other.h) };
     };
-    Vector2 operator-(const float other) const
+    Vector4 operator-(const float other) const
     {
-        return Vector2{ x - other, y - other, static_cast<int>(w - other), static_cast<int>(h - other) };
+        return Vector4{ x - other, y - other, static_cast<int>(w - other), static_cast<int>(h - other) };
     };
-    Vector2& operator-=(const Vector2& other)
+    Vector4& operator-=(const Vector4& other)
     {
         x -= other.x;
         y -= other.y;
         return *this;
     };
-    Vector2& operator-=(const float other)
+    Vector4& operator-=(const float other)
     {
         x -= other;
         y -= other;
         return *this;
     };
-    //multi
-    Vector2 operator*=(const Vector2& other)
+    // Deve multiplicar
+    Vector4 operator*(const Vector4& other)
+    {
+        return Vector4{x * other.x, y * other.y, static_cast<int>( w * other.w), static_cast<int>( h * other.h)};
+    };
+    Vector4 operator*(float other)
+    {
+        return Vector4{x * other, y * other, static_cast<int>( w * other), static_cast<int>( h * other)};
+    };
+    Vector4 operator*=(const Vector4& other)
     {
         x *= other.x;
         y *= other.y;
         return *this;
     };
-    Vector2 operator*(float other)
-    {
-        return Vector2{x * other, y * other, static_cast<int>( w * other), static_cast<int>( h * other)};
-    };
-    Vector2 operator*=(float other)
+    Vector4 operator*=(float other)
     {
         x *= other;
         y *= other;
         return *this;
     };
+    // Deve dividir
+    Vector4 operator/(const Vector4& other)
+    {
+        return Vector4{x / other.x, y / other.y, static_cast<int>( w / other.w), static_cast<int>( h / other.h)};
+    };
+    Vector4 operator/(float other)
+    {
+        return Vector4{x / other, y / other, static_cast<int>( w / other), static_cast<int>( h / other)};
+    };
+    Vector4 operator/=(const Vector4& other)
+    {
+        x /= other.x;
+        y /= other.y;
+        return *this;
+    };
+    Vector4 operator/=(float other)
+    {
+        x /= other;
+        y /= other;
+        return *this;
+    };
 };
 
-struct Vector3
+struct Size
 {
-    float x = 1, y = 1, z = 1;
+    int width = 1, height = 1;
 };
 
 struct Color 
@@ -97,12 +123,13 @@ struct Vertex {
     std::vector<unsigned int> indices;
     std::vector<float> uvs;
     std::vector<float> normals;
-    unsigned int VAO, EBO, VBO;
-    // tem que adicionar se já foi criado buffers (bool)
+    unsigned int VAO = 0, EBO = 0, VBO = 0;
+    bool carregado = false;
 };
 struct Projeto
 {
     std::string nome;
     std::string path;
 };
+
 #endif // !INCLUDES_H
