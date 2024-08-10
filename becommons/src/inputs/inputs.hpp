@@ -65,5 +65,5 @@ namespace Bubble
 
 // Callback de teclado GLFW
 extern "C" BECOMMONS_DLL_API void mousePosCallBack(GLFWwindow* window, double x, double y);
-extern "C" BECOMMONS_DLL_API void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+extern "C" BECOMMONS_DLL_API void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
 extern "C" BECOMMONS_DLL_API void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);

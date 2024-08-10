@@ -82,7 +82,8 @@ Key glfwKeyToKey(int glfwKey) {
     return it != keyMap.end() ? it->second : Key::Count;
 }
 // Callback de teclado GLFW
-void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods) {
+void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
+{
     Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
 
     if (inputs) {
@@ -101,7 +102,8 @@ void keyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
     }
 }
 // Callback de posição do mouse
-void mousePosCallBack(GLFWwindow* window, double x, double y) {
+void mousePosCallBack(GLFWwindow* window, double x, double y) 
+{
     Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
 
     if (inputs) {
@@ -113,7 +115,8 @@ void mousePosCallBack(GLFWwindow* window, double x, double y) {
     }
 }
 // Callback de clique do mouse
-void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods) {
+void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods) 
+{
     Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
 
     if (inputs) {

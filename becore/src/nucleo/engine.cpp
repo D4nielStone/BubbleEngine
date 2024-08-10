@@ -55,7 +55,7 @@ void Engine::defInputs(Inputs::Inputs* inp)
     gerenciadorDeCenas.defIputs(inp);
     glfwSetWindowUserPointer(glfwWindow, inputs);
     glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
-    glfwSetKeyCallback(glfwWindow, keyCallback);
+    glfwSetKeyCallback(glfwWindow, callbackKey);
     glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
 }
 // Deve retornar se deve fechar janela
