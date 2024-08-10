@@ -15,12 +15,15 @@ namespace BubbleUI
 			Rect(Contexto* ctx);
 			Rect(Vector4 rect, Contexto* ctx);
 			Vector4 obtRect() const;
-			virtual void atualizar(float deltaTime);
-			virtual void renderizar();
+			void defCor(Color cor);
+			void atualizar(float deltaTime);
+			void renderizar();
 		protected:
 			Contexto* contexto;
 			Vector4 retangulo;
+			Color cor_base;
 		private:
+			Vector4f paraNDC();
 			void definirBuffers();
 			Vertex vertex;
 		};

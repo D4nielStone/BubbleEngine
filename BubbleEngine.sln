@@ -4,10 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "becore", "becore\becore.vcxproj", "{43F2E8CA-EBD9-4E23-B6B9-A87341710C99}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91DD1161-9ED2-420A-B1D9-9B2A7216D14F} = {91DD1161-9ED2-420A-B1D9-9B2A7216D14F}
+		{91E17E70-99B7-4C6F-8F10-AB35B4A51D71} = {91E17E70-99B7-4C6F-8F10-AB35B4A51D71}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcxproj", "{EE4DCCFD-0B6B-491A-806B-DBC8A393313C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91DD1161-9ED2-420A-B1D9-9B2A7216D14F} = {91DD1161-9ED2-420A-B1D9-9B2A7216D14F}
+		{91E17E70-99B7-4C6F-8F10-AB35B4A51D71} = {91E17E70-99B7-4C6F-8F10-AB35B4A51D71}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bubbleui", "bubbleui\bubbleui.vcxproj", "{91DD1161-9ED2-420A-B1D9-9B2A7216D14F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91E17E70-99B7-4C6F-8F10-AB35B4A51D71} = {91E17E70-99B7-4C6F-8F10-AB35B4A51D71}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "becommons", "becommons\becommons.vcxproj", "{91E17E70-99B7-4C6F-8F10-AB35B4A51D71}"
 EndProject

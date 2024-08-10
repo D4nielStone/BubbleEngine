@@ -11,6 +11,7 @@ namespace BubbleUI
     {
         GLFWwindow* glfwWindow;
         Size tamanho;
+        Size tamanho_ini;
         Shader shader;
         GLFWcursor* cursor;
         Bubble::Inputs::Inputs* inputs;

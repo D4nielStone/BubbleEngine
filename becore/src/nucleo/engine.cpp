@@ -81,7 +81,7 @@ void Engine::renderizar()
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         //gerenciadorDeCenas.cenaAtual()->camera_editor.desenharFrame();
 
-        gerenciadorDeCenas.renderizarCenaAtual(Vector4{0, 0, 600, 480});
+         gerenciadorDeCenas.renderizarCenaAtual(Vector4{0, 0, 600, 480});
             
         // Desligar framebuffer
         //glBindFramebuffer(GL_FRAMEBUFFER, 0);

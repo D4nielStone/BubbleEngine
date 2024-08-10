@@ -4,7 +4,8 @@
 #include "src/ui/manager.hpp"
 #include "src/util/includes.hpp"
 #include "becore.hpp"
-class GLFWwindow;
+#include "glfw/glfw3.h"
+
 namespace Bubble
 {
 	namespace Nucleo
@@ -25,10 +26,10 @@ namespace Bubble
 			int pararloop() const;
 			void limpar() const;
 			bool salvarCena(unsigned int idx);
-			Engine();
-			~Engine() { limpar(); };
 			void atualizar();
 			void renderizar();
+			Engine();
+			~Engine() { limpar(); };
 		};
 	}
 }

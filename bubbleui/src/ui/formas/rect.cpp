@@ -4,52 +4,85 @@
 #include "src/depuracao/assert.hpp"
 
 using namespace BubbleUI::Formas;
+
 Rect::Rect(Vector4 rect, Contexto* ctx) : retangulo(rect), contexto(ctx)
 {
     definirBuffers();
 }
 Rect::Rect(Contexto* ctx) : contexto(ctx)
 {
+    definirBuffers();
 }
+
+// Deve retornar o tamanho/posicao
 Vector4 Rect::obtRect() const
 {
     return retangulo;
 }
+// Deve definir cor base
+void BubbleUI::Formas::Rect::defCor(Color cor)
+{
+    cor_base = cor;
+}
+// Deve atualizar
+// \param deltaTime
 void Rect::atualizar(float deltaTime)
 {
+    Vector4f coord_ndc = paraNDC();
+
     contexto->shader.use();
-    contexto->shader.setVec2("quadrado.tamanho", static_cast<float>(retangulo.w), static_cast<float>(retangulo.h));
-    contexto->shader.setVec2("quadrado.posicao", retangulo.x, retangulo.y);
+    contexto->shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
+    contexto->shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
+    contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
 }
+// Deve renderizar
 void Rect::renderizar()
 {
     contexto->shader.use();
     glBindVertexArray(vertex.VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
+// Deve transformar coordenadas pixel para NDC
+Vector4f BubbleUI::Formas::Rect::paraNDC()
+{
+    Vector4f coord_ndc;
+
+    coord_ndc.z = (retangulo.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.w = (2.0f * -retangulo.h) / contexto->tamanho.height;
+    coord_ndc.x = (retangulo.x * 2.f) / contexto->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * retangulo.y) / contexto->tamanho.height;
+
+    return coord_ndc;
+}
+// deve definir buffers do quadrado
 void Rect::definirBuffers()
 {
-    if (vertex.carregado)
-        return;
-    // Define os vértices para um quadrado
-    vertex.vertices = {
-        // Posições     // Coordenadas de textura
-        0.0f, 0.0f,     0.0f, 0.0f,
-        1, 0.0f,        1.0f, 0.0f,
-        1, 1,           1.0f, 1.0f,
-        0.0f, 1,        0.0f, 1.0f
-    };
-
-    vertex.indices = {
-        0, 1, 2, // Primeiro triângulo
-        2, 3, 0  // Segundo triângulo
-    };
-    if (!gladLoadGL()) 
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         Debug::emitir(Debug::Erro, "Glad");
         return;
     }
+    if (vertex.carregado)
+    {
+        Debug::emitir(Debug::Mensagem, "Vertex já carregado");
+        return;
+    }
+
+    // Define os vértices para um quadrado
+    vertex.vertices = {
+        // Posições     // Coordenadas de textura
+        0.f, 0.f,     0.0f, 0.0f,
+        1.f, 0.f,     1.0f, 0.0f,
+        1.f, 1.f,     1.0f, 1.0f,
+        0.f, 1.f,     0.0f, 1.0f
+    };
+
+    vertex.indices = {
+        0, 2, 1, // Primeiro triângulo
+        2, 0, 3  // Segundo triângulo
+    };
+
     glGenVertexArrays(1, &vertex.VAO);
     glGenBuffers(1, &vertex.VBO);
     glGenBuffers(1, &vertex.EBO);
@@ -57,10 +90,10 @@ void Rect::definirBuffers()
     glBindVertexArray(vertex.VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, vertex.VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex.vertices), vertex.vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertex.vertices.size() * sizeof(float), vertex.vertices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertex.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(vertex.indices), vertex.indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex.indices.size() * sizeof(unsigned int), vertex.indices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
 
     // Atributos de posição
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);

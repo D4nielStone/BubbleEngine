@@ -96,6 +96,21 @@ struct Vector4
         return *this;
     };
 };
+struct Vector4f
+{
+    float x = 1, y = 1, z = 1, w = 1;
+
+    // Deve somar
+    Vector4f operator+(const Vector4f& other) const
+    {
+        return Vector4f{ x + other.x, y + other.y, z + other.z, w + other.w };
+    };
+    Vector4f operator+(const float other) const
+    {
+        return Vector4f{ x + other, y + other, z + other, w + other };
+    };
+};
+
 
 struct Size
 {

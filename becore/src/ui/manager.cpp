@@ -5,24 +5,33 @@
 
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	retangulotest = new BubbleUI::Formas::Rect({ 0, 0, 100, 100 }, &contexto);
+	lista_paineis.push_back(new Painel(&contexto));
 }
 
 BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 {
 	contexto.glfwWindow = engine->obterJanela();
 	contexto.inputs = engine->obterGI();
+	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho_ini.width, &contexto.tamanho_ini.height);
 	iniPaineisPadrao();
 }
 
 void BubbleUI::Manager::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
-	retangulotest->renderizar();
+	glViewport(0, 0, contexto.tamanho.width, contexto.tamanho.height);
+
+	for (Painel* painel : lista_paineis)
+	{
+		painel->renderizar();
+	}
 }
 
 void BubbleUI::Manager::atualizar(float deltaTime)
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
-	retangulotest->atualizar(deltaTime);
+	for (Painel* painel : lista_paineis)
+	{
+		painel->atualizar(deltaTime);
+	}
 }

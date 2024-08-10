@@ -1,10 +1,10 @@
 #version 330 core
 
 in vec2 Uv;
+in vec3 cor;
 
 out vec4 FragColor;
 
-uniform vec3 cor;
 uniform sampler2D textura;
 uniform bool imagem;
 
@@ -15,5 +15,5 @@ void main()
     {
         result *= texture(textura, Uv).rgba;
     }
-    FragColor = vec4(0,0,0,1);
+    FragColor = result;
 }

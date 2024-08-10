@@ -1,5 +1,5 @@
 #pragma once
-#include "src/ui/formas/rect.hpp"
+#include "src/ui/painel/painel.hpp"
 #include "src/ui/contexto/contexto.hpp"
 
 namespace Bubble
@@ -14,7 +14,7 @@ namespace BubbleUI
 	class Manager
 	{
 	private:
-		Formas::Rect* retangulotest = nullptr;
+		std::vector<Painel*> lista_paineis;
 		Bubble::Nucleo::Engine* engine = nullptr;
 		Contexto contexto;
 		void iniPaineisPadrao();
