@@ -9,21 +9,17 @@ namespace BubbleUI
 	namespace Formas
 	{
 
-		class BEUI_DLL_API Rect
+		class BEUI_DLL_API Linha
 		{
 		public:
-			Rect() = default;
-			Rect(Contexto* ctx);
-			Rect(Vector4 rect, Contexto* ctx);
-			Vector4 obtRect() const;
-			void defTam(Vector2 tam);
-			void defPos(Vector2 pos);
+			Linha(Vector4f posicoes, Contexto* ctx);
+			void defPos(Vector4f posicoes);
 			void defCor(Color cor);
 			void atualizar(float deltaTime);
-			void renderizar(GLenum modo);
+			void renderizar();
 		protected:
 			Contexto* contexto;
-			Vector4 retangulo;
+			Vector4f posicoes;
 			Color cor_base;
 		private:
 			Vector4f paraNDC();

@@ -1,4 +1,3 @@
-#include "glad/glad.h"
 #include "rect.hpp"
 #include "src/depuracao/debug.hpp"
 #include "src/depuracao/assert.hpp"
@@ -19,28 +18,39 @@ Vector4 Rect::obtRect() const
 {
     return retangulo;
 }
+void Rect::defTam(Vector2 tam)
+{
+    retangulo.w = tam.x;
+    retangulo.h = tam.y;
+}
+
+void Rect::defPos(Vector2 pos)
+{
+    retangulo.x = pos.x;
+    retangulo.y = pos.y;
+}
 // Deve definir cor base
 void BubbleUI::Formas::Rect::defCor(Color cor)
 {
     cor_base = cor;
+    contexto->shader.use();
+    contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
 }
 // Deve atualizar
 // \param deltaTime
 void Rect::atualizar(float deltaTime)
 {
-    Vector4f coord_ndc = paraNDC();
-
+    coord_ndc = paraNDC();
+}
+// Deve renderizar
+void Rect::renderizar(GLenum modo)
+{
     contexto->shader.use();
     contexto->shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     contexto->shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
-}
-// Deve renderizar
-void Rect::renderizar()
-{
-    contexto->shader.use();
     glBindVertexArray(vertex.VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
+    glDrawElements(modo, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 // Deve transformar coordenadas pixel para NDC

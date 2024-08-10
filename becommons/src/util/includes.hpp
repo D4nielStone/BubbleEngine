@@ -111,6 +111,10 @@ struct Vector4f
     };
 };
 
+struct Vector2
+{
+    float x = 0, y = 0;
+};
 
 struct Size
 {
