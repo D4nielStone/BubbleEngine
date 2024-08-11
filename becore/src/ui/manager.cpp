@@ -25,6 +25,8 @@ void BubbleUI::Manager::renderizar()
 	{
 		painel->renderizar();
 	}
+
+	glfwSetCursor(contexto.glfwWindow, contexto.cursor);
 }
 
 void BubbleUI::Manager::atualizar(float deltaTime)

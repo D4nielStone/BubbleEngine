@@ -46,7 +46,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -123,6 +123,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>BEUI_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,9 +132,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)x64/Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>becommons.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\formas\colisao2d.hpp" />
     <ClInclude Include="src\ui\painel\borda.hpp" />
     <ClInclude Include="bubbleui.hpp" />
     <ClInclude Include="src\ui\formas\linha.hpp" />
@@ -141,6 +145,7 @@
     <ClInclude Include="src\ui\formas\rect.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\formas\colisao2d.cpp" />
     <ClCompile Include="src\ui\painel\borda.cpp" />
     <ClCompile Include="src\ui\formas\linha.cpp" />
     <ClCompile Include="src\ui\painel\painel.cpp" />

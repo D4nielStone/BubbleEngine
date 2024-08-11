@@ -1,5 +1,6 @@
 #pragma once
 #include "src/ui/formas/linha.hpp"
+#include "src/ui/formas/colisao2d.hpp"
 #include "bubbleui.hpp"
 
 enum Lado
@@ -16,9 +17,13 @@ namespace BubbleUI
 		Borda(Lado side, Painel* painel);
 		void atualizar(float deltaTime);
 		void renderizar();
+		bool cursor();
 	private:
-		Formas::Linha* linha;
+		Colisao2d* colisao = nullptr;
+		Formas::Linha* linha = nullptr;
 		Painel* painel = nullptr;
 		Lado lado;
+		void atualizarColisao();
+		void atualizarCursor();
 	};
 }

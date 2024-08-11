@@ -16,8 +16,8 @@ namespace BubbleUI
 			Rect(Contexto* ctx);
 			Rect(Vector4 rect, Contexto* ctx);
 			Vector4 obtRect() const;
-			void defTam(Vector2 tam);
-			void defPos(Vector2 pos);
+			void defTam(Vector2f tam);
+			void defPos(Vector2f pos);
 			void defCor(Color cor);
 			void atualizar(float deltaTime);
 			void renderizar(GLenum modo);

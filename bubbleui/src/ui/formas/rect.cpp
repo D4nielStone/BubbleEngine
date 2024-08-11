@@ -18,13 +18,13 @@ Vector4 Rect::obtRect() const
 {
     return retangulo;
 }
-void Rect::defTam(Vector2 tam)
+void Rect::defTam(Vector2f tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
 }
 
-void Rect::defPos(Vector2 pos)
+void Rect::defPos(Vector2f pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;

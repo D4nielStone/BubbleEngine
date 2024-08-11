@@ -10,8 +10,8 @@ namespace BubbleUI
 	public:
 		Painel() = default;
 		Painel(Contexto* ctx);
-		void defTam(Vector2 tam);
-		void defPos(Vector2 pos);
+		void defTam(Vector2f tam);
+		void defPos(Vector2f pos);
 		Vector4f obtRect() const;
 		Contexto* obtCtx() const;
 		void atualizar(float deltaTime);

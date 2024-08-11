@@ -113,6 +113,10 @@ struct Vector4f
 
 struct Vector2
 {
+    int x = 0, y = 0;
+};
+struct Vector2f
+{
     float x = 0, y = 0;
 };
 

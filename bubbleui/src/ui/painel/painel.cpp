@@ -1,9 +1,9 @@
 #include "painel.hpp"
 
-BubbleUI::Painel::Painel(Contexto* ctx) : corpo_rect(new Formas::Rect({100, 100, 200, 150}, ctx)), contexto(ctx)
+BubbleUI::Painel::Painel(Contexto* ctx) : corpo_rect(new Formas::Rect({100, 100, 300, 150}, ctx)), contexto(ctx)
 {
 	// Customizacao do painel
-	retangulo = { 100, 100, 200, 150 };
+	retangulo = { 100, 100, 300, 150 };
 	corpo_rect->defCor({0.23f, 0.23f, 0.23f});
 	borda_c = new Borda(CIMA, this);
 	borda_b = new Borda(BAIXO, this);
@@ -11,13 +11,13 @@ BubbleUI::Painel::Painel(Contexto* ctx) : corpo_rect(new Formas::Rect({100, 100,
 	borda_d = new Borda(DIREITA, this);
 }
 
-void BubbleUI::Painel::defTam(Vector2 tam)
+void BubbleUI::Painel::defTam(Vector2f tam)
 {
 	retangulo.z = tam.x;
 	retangulo.w = tam.y;
 }
 
-void BubbleUI::Painel::defPos(Vector2 pos)
+void BubbleUI::Painel::defPos(Vector2f pos)
 {
 	retangulo.x = pos.x;
 	retangulo.y = pos.y;
@@ -38,6 +38,16 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 	corpo_rect->defPos({ retangulo.x, retangulo.y });
 	corpo_rect->defTam({ retangulo.z, retangulo.w });
 	corpo_rect->atualizar(deltaTime);
+
+	// Verifica se nenhuma borda está tocada pelo cursor e muda para cursor normal
+	if (!borda_e->cursor()
+		&& !borda_d->cursor()
+		&& !borda_c->cursor()
+		&& !borda_b->cursor())
+	{
+		contexto->cursor = contexto->cursor_normal;
+	}
+
 	borda_c->atualizar(deltaTime);
 	borda_b->atualizar(deltaTime);
 	borda_e->atualizar(deltaTime);

@@ -10,6 +10,9 @@ namespace BubbleUI
     struct BEUI_DLL_API Contexto
     {
         GLFWwindow* glfwWindow;
+        GLFWcursor* cursor_horizontal;
+        GLFWcursor* cursor_vertical;
+        GLFWcursor* cursor_normal;
         Size tamanho;
         Size tamanho_ini;
         Shader shader;
