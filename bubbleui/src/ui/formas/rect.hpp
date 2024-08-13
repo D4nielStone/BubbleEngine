@@ -18,6 +18,8 @@ namespace BubbleUI
 			Vector4 obtRect() const;
 			void defTam(Vector2f tam);
 			void defPos(Vector2f pos);
+			void adiTam(Vector2 tam);
+			void adiPos(Vector2 tam);
 			void defCor(Color cor);
 			void atualizar(float deltaTime);
 			void renderizar(GLenum modo);

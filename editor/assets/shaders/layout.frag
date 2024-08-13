@@ -6,7 +6,8 @@ in vec3 cor;
 out vec4 FragColor;
 
 uniform sampler2D textura;
-uniform bool imagem;
+uniform bool imagem, texto;
+uniform vec3 cor_texto;
 
 void main()
 {
@@ -14,6 +15,11 @@ void main()
     if (imagem)
     {
         result *= texture(textura, Uv).rgba;
+    }
+    else if(texto)
+    {
+        vec4 sampled = vec4(1.0, 1.0, 1.0, texture(textura, Uv).r);
+        result = vec4(cor_texto, 1.0) * sampled;
     }
     FragColor = result;
 }

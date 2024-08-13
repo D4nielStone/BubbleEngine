@@ -52,7 +52,7 @@ namespace Bubble
             bool isKeyPressed(Key key) const;
             InputMode getInputMode() const;
             double mousex, mousey;
-            int mouseEnter;
+            int mouseEnter = 0;
             bool mouseClick;
         protected:
             virtual void handleKey(Key key);

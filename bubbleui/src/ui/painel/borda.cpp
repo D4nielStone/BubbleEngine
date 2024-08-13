@@ -1,31 +1,43 @@
 #include "borda.hpp"
 #include "painel.hpp"
+#include <src/depuracao/debug.hpp>
 
 using namespace BubbleUI;
 
 Borda::Borda(Lado side, Painel* p) : lado(side), painel(p), linha(new Formas::Linha({}, p->obtCtx()))
 {
 	glLineWidth(2.f);
-	linha->defCor({0.4f, 0.f, 0.4f});
 	colisao = new Colisao2d({}, p->obtCtx());
 }
 
 void BubbleUI::Borda::atualizar(float deltaTime)
 {
 	atualizarColisao();
-	atualizarCursor();
-
 	linha->atualizar(deltaTime);
+
+	if (painel->selecionado)
+	{
+		atualizarCursor();
+		atualizarArrasto();
+	}
 }
 
 void BubbleUI::Borda::renderizar()
 {
+	if (painel->selecionado)
+		linha->defCor({ 0.4f, 0.f, 0.4f });
+	else
+		linha->defCor({ 0.4f, 0.4f, 0.4f });
+
 	linha->renderizar();
 }
 
 bool BubbleUI::Borda::cursor()
 {
-	return colisao->mouseEmCima();
+	if (colisao->mouseEmCima() || colisao->mouseEmCima() && arrastando)
+		return true;
+	else
+		return false;
 }
 
 void BubbleUI::Borda::atualizarColisao()
@@ -34,16 +46,16 @@ void BubbleUI::Borda::atualizarColisao()
 	{
 	case DIREITA:
 		linha->defPos({
-			painel->obtRect().x + painel->obtRect().z,
+			painel->obtRect().x + painel->obtRect().w,
 			painel->obtRect().y - 1.f,
 			0,
-			painel->obtRect().w + 2.f
+			painel->obtRect().h + 2.f
 			});
 		colisao->defRect({
-			painel->obtRect().x + painel->obtRect().z,
+			painel->obtRect().x + painel->obtRect().w -2.f,
 			painel->obtRect().y,
-			static_cast<int>(painel->obtRect().x + painel->obtRect().z + 10),
-			static_cast<int>(painel->obtRect().w + painel->obtRect().y)
+			10,
+			painel->obtRect().h
 			});
 		break;
 	case ESQUERDA:
@@ -51,41 +63,41 @@ void BubbleUI::Borda::atualizarColisao()
 			painel->obtRect().x,
 			painel->obtRect().y - 1.f,
 			0,
-			painel->obtRect().w + 2.f
+			painel->obtRect().h + 2.f
 			});
 		colisao->defRect({
 			painel->obtRect().x - 10,
 			painel->obtRect().y,
-			static_cast<int>(painel->obtRect().x),
-			static_cast<int>(painel->obtRect().w + painel->obtRect().y)
+			12,
+			painel->obtRect().h
 			});
 		break;
 	case CIMA:
 		linha->defPos({
 			painel->obtRect().x,
 			painel->obtRect().y,
-			painel->obtRect().z,
+			static_cast<float>(painel->obtRect().w),
 			0
 			});
 		colisao->defRect({
 			painel->obtRect().x,
 			painel->obtRect().y - 10.f,
-			static_cast<int>(painel->obtRect().x + painel->obtRect().z),
-			static_cast<int>(painel->obtRect().y)
+			painel->obtRect().w,
+			12
 			});
 		break;
 	case BAIXO:
 		linha->defPos({
 			painel->obtRect().x,
-			painel->obtRect().y + painel->obtRect().w,
-			painel->obtRect().z,
+			painel->obtRect().y + painel->obtRect().h,
+			static_cast<float>(painel->obtRect().w),
 			0
 			});
 		colisao->defRect({
 			painel->obtRect().x,
-			painel->obtRect().y + painel->obtRect().w,
-			static_cast<int>(painel->obtRect().x + painel->obtRect().z),
-			static_cast<int>(painel->obtRect().y+ painel->obtRect().w+10.f)
+			painel->obtRect().y + painel->obtRect().h - 2.f,
+			painel->obtRect().w,
+			12
 			});
 		break;
 	default:
@@ -114,5 +126,50 @@ void BubbleUI::Borda::atualizarCursor()
 		default:
 			break;
 		}
+		if (painel->obtCtx()->inputs->mouseEnter == GLFW_RELEASE)
+			mouse_1click = true;
+		if (mouse_1click && painel->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+		{
+			arrastando = true;
+			mouse_1click = false;
+		}
 	}
+	else
+		mouse_1click = false;
+
+}
+
+void BubbleUI::Borda::atualizarArrasto()
+{
+	if (arrastando && painel->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+	{
+		painel->arrastando = true;
+		painel->redimen_atual = lado;
+		switch (lado)
+		{
+		case DIREITA:
+			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
+			painel->adiTam({ static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			break;
+		case ESQUERDA:
+			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
+			painel->adiPos({ static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			painel->adiTam({ -static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			break;
+		case CIMA:
+			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
+			painel->adiPos({ 0,static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			painel->adiTam({ 0,-static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			break;
+		case BAIXO:
+			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
+			painel->adiTam({ 0, static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			break;
+		default:
+			break;
+		}
+	}
+	else
+		arrastando = false;
+	mouse_pos_ini = { static_cast<int>(painel->obtCtx()->inputs->mousex), static_cast<int>(painel->obtCtx()->inputs->mousey) };
 }

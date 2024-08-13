@@ -22,12 +22,26 @@ void Rect::defTam(Vector2f tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
+    coord_ndc = paraNDC();
 }
 
 void Rect::defPos(Vector2f pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;
+    coord_ndc = paraNDC();
+}
+void BubbleUI::Formas::Rect::adiTam(Vector2 tam)
+{
+    retangulo.w += tam.x;
+    retangulo.h += tam.y;
+    coord_ndc = paraNDC();
+}
+void BubbleUI::Formas::Rect::adiPos(Vector2 pos)
+{
+    retangulo.x += pos.x;
+    retangulo.y += pos.y;
+    coord_ndc = paraNDC();
 }
 // Deve definir cor base
 void BubbleUI::Formas::Rect::defCor(Color cor)
@@ -52,6 +66,8 @@ void Rect::renderizar(GLenum modo)
     glBindVertexArray(vertex.VAO);
     glDrawElements(modo, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+    contexto->shader.setBool("imagem", false);
+    contexto->shader.setBool("texto", false);
 }
 // Deve transformar coordenadas pixel para NDC
 Vector4f BubbleUI::Formas::Rect::paraNDC()
@@ -59,7 +75,7 @@ Vector4f BubbleUI::Formas::Rect::paraNDC()
     Vector4f coord_ndc;
 
     coord_ndc.z = (retangulo.w * 2.f) / contexto->tamanho.width;
-    coord_ndc.w = (2.0f * -retangulo.h) / contexto->tamanho.height;
+    coord_ndc.w = -(2.0f * retangulo.h) / contexto->tamanho.height;
     coord_ndc.x = (retangulo.x * 2.f) / contexto->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * retangulo.y) / contexto->tamanho.height;
 

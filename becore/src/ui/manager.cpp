@@ -1,14 +1,47 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "manager.hpp"
+#include "src/ui/widgets/texto.hpp"
 #include "src/nucleo/engine.hpp"
 
 void BubbleUI::Manager::iniPaineisPadrao()
 {
+	Painel* painel_com_texto = new Painel({ 200, 2, 50, 50 }, &contexto);
+	painel_com_texto->adiWidget(new BubbleUI::Widgets::Texto("Pega no meu pau", 16));
+
 	lista_paineis.push_back(new Painel(&contexto));
+	lista_paineis.push_back(new Painel({100, 2, 50, 50}, &contexto));
+	lista_paineis.push_back(painel_com_texto);
 }
 
-BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
+void BubbleUI::Manager::painelSelecionado(Painel* painel)
+{
+	painel->selecionado = true;
+
+	// Guarda index do painel
+	size_t idx_painel = 0;
+	for (size_t i = 0; i < lista_paineis.size(); i++)
+	{
+		if (lista_paineis[i] == painel)
+		{
+			idx_painel = i;
+		}
+		else
+			lista_paineis[i]->selecionado = false;
+	}
+
+	// Traz todos os paineis á frente para o index inicial
+	for (size_t i = idx_painel; i < lista_paineis.size(); i++)
+	{
+		if(i+1 != lista_paineis.size())
+		lista_paineis[i] = lista_paineis[i+1];
+	}
+
+	// Leva o painel selecionado para frente
+	lista_paineis[lista_paineis.size()-1] = painel;
+}
+
+BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_painel({}, &contexto)
 {
 	contexto.glfwWindow = engine->obterJanela();
 	contexto.inputs = engine->obterGI();
@@ -32,8 +65,27 @@ void BubbleUI::Manager::renderizar()
 void BubbleUI::Manager::atualizar(float deltaTime)
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
-	for (Painel* painel : lista_paineis)
+	bool cursor = true, selecionado = false, arrastando = false;
+	for (size_t i = lista_paineis.size(); i > 0; i--)
 	{
+		Painel* painel = lista_paineis[i-1];
+		// Atualiza Painel
 		painel->atualizar(deltaTime);
+
+		// Verifica se o painel foi selecionado
+		if (painel->arrastando)
+			arrastando = true;
+
+		colisao_painel.defRect(painel->obtRect());
+		if (colisao_painel.mouseEmCima() && contexto.inputs->mouseEnter == GLFW_PRESS && !selecionado && !arrastando)
+		{
+			painelSelecionado(painel);
+			selecionado = true;
+		}
+		// Faz correção do cursor
+		if (!painel->cursorNormal())
+			cursor = false;
 	}
+	if(cursor)
+		contexto.cursor = contexto.cursor_normal;
 }

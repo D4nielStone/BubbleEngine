@@ -3,9 +3,10 @@
 
 namespace BubbleUI
 {
-	class Colisao2d
+	class BEUI_DLL_API Colisao2d
 	{
 	public:
+		Colisao2d() = default;
 		Colisao2d(Vector4 quadrado, Contexto* ctx);
 		Colisao2d(short int raio, Contexto* ctx);
 		void defRect(Vector4 quad);

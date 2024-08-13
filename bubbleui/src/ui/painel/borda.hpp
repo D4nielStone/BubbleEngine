@@ -23,7 +23,10 @@ namespace BubbleUI
 		Formas::Linha* linha = nullptr;
 		Painel* painel = nullptr;
 		Lado lado;
+		bool mouse_1click, arrastando;
+		Vector2 arrasto_pos, mouse_pos_ini;
 		void atualizarColisao();
 		void atualizarCursor();
+		void atualizarArrasto();
 	};
 }

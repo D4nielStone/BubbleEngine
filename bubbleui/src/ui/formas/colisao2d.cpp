@@ -16,10 +16,11 @@ void BubbleUI::Colisao2d::defRect(Vector4 quad)
 
 bool BubbleUI::Colisao2d::mouseEmCima()
 {
-	if (contexto->inputs->mousex > quadrado.x 
-		&& contexto->inputs->mousex < quadrado.w 
+	if (   contexto->inputs->mousex > quadrado.x 
+		&& contexto->inputs->mousex < (quadrado.x + quadrado.w)
 		&& contexto->inputs->mousey > quadrado.y 
-		&& contexto->inputs->mousey < quadrado.h)
+		&& contexto->inputs->mousey < (quadrado.y + quadrado.h)
+	   )
 		return true;
 	else
 		return false;

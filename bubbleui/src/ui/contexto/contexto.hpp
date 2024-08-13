@@ -20,4 +20,6 @@ namespace BubbleUI
         Bubble::Inputs::Inputs* inputs;
         Contexto();
     };
+    Contexto* obtContextoPadrao();
+    void defContextoPadrao(Contexto* ctx);
 }
