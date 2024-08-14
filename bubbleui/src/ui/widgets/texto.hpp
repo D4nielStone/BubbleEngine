@@ -1,39 +1,31 @@
 #pragma once
-#include "src/ui/widgets/widget.hpp"
 #include "string"
+#include "src/ui/widgets/widget.hpp"
 #include "src/ui/formas/rect.hpp"
-#include <ft2build.h>
-#include "glm/glm.hpp"
-#include <map>
+#include "src/arquivadores/fonte.hpp"
 
-#include FT_FREETYPE_H
+
 namespace BubbleUI
 {
 	namespace Widgets
 	{
-		struct Character {
-			unsigned int TextureID;  // ID handle of the glyph texture
-			glm::ivec2   Size;       // Size of glyph
-			glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
-			unsigned int Advance;    // Offset to advance to next glyph
-		};
-
-		std::map<char, Character> Characters;
-
 		class BEUI_DLL_API Texto : public Widget
 		{
 		public:
+			Texto(std::string* label);
+			Texto(std::string* label, unsigned int resolucao);
 			Texto(std::string label);
-			Texto(std::string label, unsigned int pxl);
+			Texto(std::string label, unsigned int resolucao);
 			~Texto();
 			void atualizar(float deltaTime) override;
 			void renderizar() override;
+			void defPainel(Painel*) override;
 		private:
-			FT_Face face;
-			FT_Library library;
+			void configurar(unsigned int resolucao = 16, std::string font_path = "assets/fontes/noto-sans/notosans-bold.ttf");
 			Formas::Rect* corpo_do_texto = nullptr;
 			unsigned int resolucao, texturaID;
-			std::string label;
+			std::string* label;
+			Vector2 pos_texto;
 		};
 	}
 }

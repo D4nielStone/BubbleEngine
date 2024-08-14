@@ -10,7 +10,7 @@ namespace BubbleUI
 		Widget() = default;
 		virtual void atualizar(float deltaTime) = 0;
 		virtual void renderizar() = 0;
-		void defPainel(Painel*);
+		virtual void defPainel(Painel*);
 	protected:
 		Painel* pai;
 	};

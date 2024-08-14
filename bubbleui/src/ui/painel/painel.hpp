@@ -24,17 +24,21 @@ namespace BubbleUI
 		void renderizar();
 		bool cursorNormal();
 		Lado redimen_atual;
-		bool selecionado, arrastando;
-	private:
-		std::vector<Widget*> lista_widgets;
-		void corrigirLimite();
+		bool selecionado = false, arrastando, mouse1click;
+		Vector2 widget_pos;
+	protected:
 		Contexto* contexto;
-		Vector4 retangulo;
-		Vector2 limite_min_tam;
-		Formas::Rect* corpo_rect;
 		Borda* borda_e = nullptr;
 		Borda* borda_d = nullptr;
 		Borda* borda_c = nullptr;
 		Borda* borda_b = nullptr;
+		void configurar(Contexto* ctx, Vector4 rect = { 2, 2, 50, 50 });
+		virtual void preAtualizacao();
+		virtual void preRenderizacao();
+		std::vector<Widget*> lista_widgets;
+		void corrigirLimite();
+		Vector4 retangulo;
+		Vector2 limite_min_tam;
+		Formas::Rect* corpo_rect;
 	};
 }

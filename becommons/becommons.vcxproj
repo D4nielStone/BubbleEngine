@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\arquivadores\fonte.cpp" />
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
     <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="src\arquivadores\textura.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\arquivo3d.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />
     <ClInclude Include="src\arquivadores\shader.hpp" />

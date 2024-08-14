@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\painel\depurador.hpp" />
     <ClInclude Include="src\ui\formas\colisao2d.hpp" />
     <ClInclude Include="src\ui\painel\borda.hpp" />
     <ClInclude Include="bubbleui.hpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\painel\depurador.cpp" />
     <ClCompile Include="src\ui\formas\colisao2d.cpp" />
     <ClCompile Include="src\ui\painel\borda.cpp" />
     <ClCompile Include="src\ui\formas\linha.cpp" />

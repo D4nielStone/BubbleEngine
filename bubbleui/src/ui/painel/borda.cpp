@@ -34,7 +34,7 @@ void BubbleUI::Borda::renderizar()
 
 bool BubbleUI::Borda::cursor()
 {
-	if (colisao->mouseEmCima() || colisao->mouseEmCima() && arrastando)
+	if (colisao->mouseEmCima())
 		return true;
 	else
 		return false;

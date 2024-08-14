@@ -1,31 +1,13 @@
 #include "painel.hpp"
 
-BubbleUI::Painel::Painel(Contexto* ctx) : 
-	corpo_rect(new Formas::Rect({2, 2, 50, 50}, ctx)),
-	contexto(ctx), retangulo({ 2, 2, 50, 50 }),
-	limite_min_tam({ 50, 50 }),
-	selecionado(false)
+BubbleUI::Painel::Painel(Contexto* ctx)
 {
-	// Customizacao do painel
-	corpo_rect->defCor({0.23f, 0.23f, 0.23f});
-	borda_c = new Borda(CIMA, this);
-	borda_b = new Borda(BAIXO, this);
-	borda_e = new Borda(ESQUERDA, this);
-	borda_d = new Borda(DIREITA, this);
+	configurar(ctx);
 }
 
-BubbleUI::Painel::Painel(Vector4 rect, Contexto* ctx) : 
-	corpo_rect(new Formas::Rect(rect, ctx)),
-	contexto(ctx), retangulo(rect),
-	limite_min_tam({ 50, 50 }),
-	selecionado(false)
+BubbleUI::Painel::Painel(Vector4 rect, Contexto* ctx)
 {
-	// Customizacao do painel
-	corpo_rect->defCor({0.23f, 0.23f, 0.23f});
-	borda_c = new Borda(CIMA, this);
-	borda_b = new Borda(BAIXO, this);
-	borda_e = new Borda(ESQUERDA, this);
-	borda_d = new Borda(DIREITA, this);
+	configurar(ctx, rect);
 }
 
 void BubbleUI::Painel::defTam(Vector2 tam)
@@ -75,23 +57,25 @@ BubbleUI::Contexto* BubbleUI::Painel::obtCtx() const
 
 void BubbleUI::Painel::atualizar(float deltaTime)
 {
+	preAtualizacao();
+
+	borda_c->atualizar(deltaTime);
+	borda_b->atualizar(deltaTime);
+	borda_e->atualizar(deltaTime);
+	borda_d->atualizar(deltaTime);
+
 	corrigirLimite();
-
-	corpo_rect->defPos({ retangulo.x, retangulo.y });
-	corpo_rect->defTam({ static_cast<float>(retangulo.w), static_cast<float>(retangulo.h) });
-	corpo_rect->atualizar(deltaTime);
-
-	arrastando = false;
 
 	for (Widget* widget : lista_widgets)
 	{
 		widget->atualizar(deltaTime);
 	}
 
-	borda_c->atualizar(deltaTime);
-	borda_b->atualizar(deltaTime);
-	borda_e->atualizar(deltaTime);
-	borda_d->atualizar(deltaTime);
+	corpo_rect->defPos({ retangulo.x, retangulo.y });
+	corpo_rect->defTam({ static_cast<float>(retangulo.w), static_cast<float>(retangulo.h) });
+	corpo_rect->atualizar(deltaTime);
+
+	arrastando = false;
 }
 
 void BubbleUI::Painel::renderizar()
@@ -101,10 +85,35 @@ void BubbleUI::Painel::renderizar()
 	borda_b->renderizar();
 	borda_e->renderizar();
 	borda_d->renderizar();
+	preRenderizacao();
+
+	widget_pos = {static_cast<int>(retangulo.x), static_cast<int>(retangulo.y)};
 	for (Widget* widget : lista_widgets)
 	{
 		widget->renderizar();
 	}
+}
+
+void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
+{
+	// Customizacao do painel
+	contexto = ctx;
+	limite_min_tam = { 50, 50 };
+	retangulo = rect;
+	corpo_rect = new Formas::Rect(retangulo, ctx);
+	corpo_rect->defCor({ 0.23f, 0.23f, 0.23f });
+	borda_c = new Borda(CIMA, this);
+	borda_b = new Borda(BAIXO, this);
+	borda_e = new Borda(ESQUERDA, this);
+	borda_d = new Borda(DIREITA, this);
+}
+
+void BubbleUI::Painel::preAtualizacao()
+{
+}
+
+void BubbleUI::Painel::preRenderizacao()
+{
 }
 
 // Defini limite para redimensionamento

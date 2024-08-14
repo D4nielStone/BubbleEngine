@@ -5,7 +5,7 @@
 #include "src/util/includes.hpp"
 #include "becommons.hpp"
 
-class GLFWwindow;
+struct GLFWwindow;
 enum BECOMMONS_DLL_API Key {
     W,
     A,

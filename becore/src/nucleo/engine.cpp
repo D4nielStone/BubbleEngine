@@ -65,16 +65,16 @@ int Engine::pararloop() const
     }
 // Deve Atualizar cena atual
 void Engine::atualizar()
-    {
-        glfwPollEvents();
-        float st = glfwGetTime();
-        // Atualizar cena
-        gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
-        // Atualizar UI
-        gerenciadorUi->atualizar(deltaTime);
-        // Calcular deltaTime
-        deltaTime = glfwGetTime() - st;
-    }
+{
+    float st = glfwGetTime();
+    glfwPollEvents();
+    // Calcular deltaTime
+    deltaTime = glfwGetTime() - st;
+    // Atualizar cena
+    gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
+    // Atualizar UI
+    gerenciadorUi->atualizar(deltaTime);
+}
 // Deve renderizar cena Atual
 void Engine::renderizar()
     {

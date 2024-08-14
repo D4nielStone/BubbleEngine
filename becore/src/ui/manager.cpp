@@ -1,17 +1,14 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "manager.hpp"
-#include "src/ui/widgets/texto.hpp"
 #include "src/nucleo/engine.hpp"
+#include "src/ui/painel/depurador.hpp"
 
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	Painel* painel_com_texto = new Painel({ 200, 2, 50, 50 }, &contexto);
-	painel_com_texto->adiWidget(new BubbleUI::Widgets::Texto("Pega no meu pau", 16));
-
-	lista_paineis.push_back(new Painel(&contexto));
+	lista_paineis.push_back(new Painel({ 200, 2, 50, 50 },&contexto));
 	lista_paineis.push_back(new Painel({100, 2, 50, 50}, &contexto));
-	lista_paineis.push_back(painel_com_texto);
+	lista_paineis.push_back(new Paineis::Depurador(&contexto));
 }
 
 void BubbleUI::Manager::painelSelecionado(Painel* painel)
@@ -47,6 +44,8 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_paine
 	contexto.inputs = engine->obterGI();
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho_ini.width, &contexto.tamanho_ini.height);
 	iniPaineisPadrao();
+	if (lista_paineis.size() > 0)
+		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
 }
 
 void BubbleUI::Manager::renderizar()
@@ -65,23 +64,32 @@ void BubbleUI::Manager::renderizar()
 void BubbleUI::Manager::atualizar(float deltaTime)
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
-	bool cursor = true, selecionado = false, arrastando = false;
+	bool cursor = true, depth = false;
 	for (size_t i = lista_paineis.size(); i > 0; i--)
 	{
 		Painel* painel = lista_paineis[i-1];
 		// Atualiza Painel
 		painel->atualizar(deltaTime);
 
-		// Verifica se o painel foi selecionado
-		if (painel->arrastando)
-			arrastando = true;
-
+		// Seleciona o painel se está na frente, e for clicado na hora certa
 		colisao_painel.defRect(painel->obtRect());
-		if (colisao_painel.mouseEmCima() && contexto.inputs->mouseEnter == GLFW_PRESS && !selecionado && !arrastando)
+
+		if (colisao_painel.mouseEmCima() && !depth && cursor)
 		{
-			painelSelecionado(painel);
-			selecionado = true;
+			if (contexto.inputs->mouseEnter == GLFW_RELEASE)
+			{
+				painel->mouse1click = true;
+			}
+			if (contexto.inputs->mouseEnter == GLFW_PRESS && painel->mouse1click)
+			{
+				painelSelecionado(painel);
+				depth = true;
+				painel->mouse1click = false;
+			}
 		}
+		else
+			painel->mouse1click = false;
+
 		// Faz correção do cursor
 		if (!painel->cursorNormal())
 			cursor = false;
