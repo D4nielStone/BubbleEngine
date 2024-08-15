@@ -49,26 +49,20 @@ void BubbleUI::Widgets::Texto::renderizar()
             pai->widget_pos = { static_cast<int>(pai->obtRect().x), static_cast<int>(ypos + pai->widget_pos.y + h) };
             continue;
         }
-        // Atualiza o retângulo do corpo_do_texto para o caractere
-        corpo_do_texto->defPos({ xpos + pai->widget_pos.x, ypos + pai->widget_pos.y });
-        corpo_do_texto->defTam({ w, h });
+        // Atualiza o retângulo do corpo_do_widget para o caractere
+        corpo_do_widget->defPos({ xpos + pai->widget_pos.x, ypos + pai->widget_pos.y });
+        corpo_do_widget->defTam({ w, h });
 
         pai->obtCtx()->shader.use();
         pai->obtCtx()->shader.setBool("texto", true);
         pai->obtCtx()->shader.setVec3("cor_texto", 1, 1, 1);
         pai->obtCtx()->shader.setInt("textura", 0);
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        corpo_do_texto->renderizar(GL_TRIANGLES);
+        corpo_do_widget->renderizar(GL_TRIANGLES);
 
         x += (ch.Advance >> 6); // 1/64 pixels
 
     }
-}
-
-void BubbleUI::Widgets::Texto::defPainel(Painel* p)
-{
-    pai = p;
-    corpo_do_texto = new Formas::Rect(pai->obtCtx());
 }
 
 void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)

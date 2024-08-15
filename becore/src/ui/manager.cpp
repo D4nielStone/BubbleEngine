@@ -3,14 +3,17 @@
 #include "manager.hpp"
 #include "src/nucleo/engine.hpp"
 #include "src/ui/painel/depurador.hpp"
+#include "src/ui/painel/editor.hpp"
 
+// Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(new Painel({ 200, 2, 50, 50 },&contexto));
-	lista_paineis.push_back(new Painel({100, 2, 50, 50}, &contexto));
+	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {10, 10, 400, 300}));
 	lista_paineis.push_back(new Paineis::Depurador(&contexto));
 }
 
+// Seleciona o painel
+// \param Painel
 void BubbleUI::Manager::painelSelecionado(Painel* painel)
 {
 	painel->selecionado = true;
@@ -38,6 +41,7 @@ void BubbleUI::Manager::painelSelecionado(Painel* painel)
 	lista_paineis[lista_paineis.size()-1] = painel;
 }
 
+// Inicia manager
 BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_painel({}, &contexto)
 {
 	contexto.glfwWindow = engine->obterJanela();
@@ -48,6 +52,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_paine
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
 }
 
+// Renderiza paineis
 void BubbleUI::Manager::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
@@ -61,6 +66,7 @@ void BubbleUI::Manager::renderizar()
 	glfwSetCursor(contexto.glfwWindow, contexto.cursor);
 }
 
+// Atualiza paineis
 void BubbleUI::Manager::atualizar(float deltaTime)
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);

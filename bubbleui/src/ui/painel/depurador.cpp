@@ -4,10 +4,8 @@
 BubbleUI::Paineis::Depurador::Depurador(Contexto* ctx) : fps_display("FPS: ")
 {
 	configurar(ctx);
-	adiWidget(new Widgets::Texto(&fps_display, 13));
-	adiWidget(new Widgets::Texto("\naaaa\n", 13));
-	adiWidget(new Widgets::Texto("aaaa\n", 13));
-	adiWidget(new Widgets::Texto("aaaa\n", 13));
+	adiWidget(new Widgets::Texto(&fps_display, 12));
+	adiWidget(new Widgets::Texto("\n", 12));
 }
 
 void BubbleUI::Paineis::Depurador::preAtualizacao()

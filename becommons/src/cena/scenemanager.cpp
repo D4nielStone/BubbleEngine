@@ -16,7 +16,10 @@ Scene* SceneManager::cenaAtual() const {
     if (scenes.size() > 0 && currentSceneIndex > -1)
         return scenes[currentSceneIndex];
     else
+    {
         Debug::emitir(Debug::Erro, "Não tem cena atual");
+        return nullptr;
+    }
 }
 // Deve criar cena padrao, com terreno e esfera
 Scene* SceneManager::criarCenaPadrao(std::string Nome)
@@ -29,7 +32,8 @@ Scene* SceneManager::criarCenaPadrao(std::string Nome)
 
     //Cria e configura entidade Esfera
     auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
-
+    
+    scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
     // Adiciona Entidades
     scene->adicionarEntidade(esfera);
     scene->adicionarEntidade(terreno);

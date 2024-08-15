@@ -1,5 +1,6 @@
 #pragma once
 #include "bubbleui.hpp"
+#include "src/ui/formas/rect.hpp"
 
 namespace BubbleUI
 {
@@ -12,6 +13,7 @@ namespace BubbleUI
 		virtual void renderizar() = 0;
 		virtual void defPainel(Painel*);
 	protected:
+		Formas::Rect* corpo_do_widget = nullptr;
 		Painel* pai;
 	};
 }

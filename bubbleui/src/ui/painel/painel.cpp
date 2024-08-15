@@ -66,32 +66,38 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 
 	corrigirLimite();
 
+
+	if (renderizar_corpo)
+	{
+		corpo_rect->defPos({ retangulo.x, retangulo.y });
+		corpo_rect->defTam({ static_cast<float>(retangulo.w), static_cast<float>(retangulo.h) });
+		corpo_rect->atualizar(deltaTime);
+	}
+
 	for (Widget* widget : lista_widgets)
 	{
 		widget->atualizar(deltaTime);
 	}
-
-	corpo_rect->defPos({ retangulo.x, retangulo.y });
-	corpo_rect->defTam({ static_cast<float>(retangulo.w), static_cast<float>(retangulo.h) });
-	corpo_rect->atualizar(deltaTime);
 
 	arrastando = false;
 }
 
 void BubbleUI::Painel::renderizar()
 {
-	corpo_rect->renderizar(GL_TRIANGLES);
-	borda_c->renderizar();
-	borda_b->renderizar();
-	borda_e->renderizar();
-	borda_d->renderizar();
-	preRenderizacao();
+	if (renderizar_corpo)
+		corpo_rect->renderizar(GL_TRIANGLES);
 
+	preRenderizacao();
 	widget_pos = {static_cast<int>(retangulo.x), static_cast<int>(retangulo.y)};
 	for (Widget* widget : lista_widgets)
 	{
 		widget->renderizar();
 	}
+
+	borda_c->renderizar();
+	borda_b->renderizar();
+	borda_e->renderizar();
+	borda_d->renderizar();
 }
 
 void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)

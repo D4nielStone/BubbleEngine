@@ -27,7 +27,7 @@ namespace Bubble
 			void limpar() const;
 			bool salvarCena(unsigned int idx);
 			void atualizar();
-			void renderizar();
+			void renderizar(Vector4 rect_size = {0, 0, 640, 480});
 			Engine();
 			~Engine() { limpar(); };
 		};

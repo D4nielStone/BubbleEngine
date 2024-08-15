@@ -27,6 +27,7 @@ namespace BubbleUI
 		bool selecionado = false, arrastando, mouse1click;
 		Vector2 widget_pos;
 	protected:
+		bool renderizar_corpo = true;
 		Contexto* contexto;
 		Borda* borda_e = nullptr;
 		Borda* borda_d = nullptr;

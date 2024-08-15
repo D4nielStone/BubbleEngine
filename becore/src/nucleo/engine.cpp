@@ -11,7 +11,7 @@ Engine::Engine()
         inicializacao();
         gerenciadorUi = new BubbleUI::Manager(this);
     }
-// Inicialização GLFW e GLAD
+// Inicialização
 bool Engine::inicializacao()
     {
         // inicia glfw
@@ -76,21 +76,15 @@ void Engine::atualizar()
     gerenciadorUi->atualizar(deltaTime);
 }
 // Deve renderizar cena Atual
-void Engine::renderizar()
-    {
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-        //gerenciadorDeCenas.cenaAtual()->camera_editor.desenharFrame();
+void Engine::renderizar(Vector4 rect_size)
+{
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-         gerenciadorDeCenas.renderizarCenaAtual(Vector4{0, 0, 600, 480});
-            
-        // Desligar framebuffer
-        //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    // Renderizar UI
+    gerenciadorUi->renderizar();
 
-        // Renderizar UI
-        gerenciadorUi->renderizar();
-
-        glfwSwapBuffers(glfwWindow);
-    }
+    glfwSwapBuffers(glfwWindow);
+}
 // Deve limpar engine
 void Engine::limpar() const 
     {

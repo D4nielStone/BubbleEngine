@@ -1,7 +1,6 @@
 #pragma once
 #include "string"
 #include "src/ui/widgets/widget.hpp"
-#include "src/ui/formas/rect.hpp"
 #include "src/arquivadores/fonte.hpp"
 
 
@@ -19,10 +18,8 @@ namespace BubbleUI
 			~Texto();
 			void atualizar(float deltaTime) override;
 			void renderizar() override;
-			void defPainel(Painel*) override;
 		private:
 			void configurar(unsigned int resolucao = 16, std::string font_path = "assets/fontes/noto-sans/notosans-bold.ttf");
-			Formas::Rect* corpo_do_texto = nullptr;
 			unsigned int resolucao, texturaID;
 			std::string* label;
 			Vector2 pos_texto;
