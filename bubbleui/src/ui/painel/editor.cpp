@@ -2,6 +2,7 @@
 
 BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager), buffer(new Widgets::Imagem(0))
 {
+	Nome = "Editor";
 	renderizar_corpo = false;
 	configurar(ctx, rect);
 	adiWidget(buffer);

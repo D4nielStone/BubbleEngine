@@ -18,7 +18,7 @@ void BubbleUI::Widgets::Imagem::atualizar(float deltaTime)
 void BubbleUI::Widgets::Imagem::renderizar()
 {
     corpo_do_widget->defPos({ static_cast<float>(pai->widget_pos.x), static_cast<float>(pai->widget_pos.y) });
-    corpo_do_widget->defTam({ static_cast<float>(tamanho.x), static_cast<float>(tamanho.y) });
+    corpo_do_widget->defTam({ static_cast<float>(tamanho.x), static_cast<float>(tamanho.y - ( pai->widget_pos.y - pai->obtRect().y)) });
     pai->obtCtx()->shader.use();
     pai->obtCtx()->shader.setBool("imagem", true);
     pai->obtCtx()->shader.setInt("textura", 0);

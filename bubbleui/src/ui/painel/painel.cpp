@@ -74,6 +74,7 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 		corpo_rect->atualizar(deltaTime);
 	}
 
+	m_aba->atualizar(deltaTime);
 	for (Widget* widget : lista_widgets)
 	{
 		widget->atualizar(deltaTime);
@@ -84,15 +85,21 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 
 void BubbleUI::Painel::renderizar()
 {
+	glEnable(GL_SCISSOR_TEST);
+	glScissor(retangulo.x, (contexto->tamanho.height - retangulo.y - retangulo.h), retangulo.w, retangulo.h);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.1, 0.1, 0.1, 1);
+
 	if (renderizar_corpo)
 		corpo_rect->renderizar(GL_TRIANGLES);
-
 	preRenderizacao();
-	widget_pos = {static_cast<int>(retangulo.x), static_cast<int>(retangulo.y)};
 	for (Widget* widget : lista_widgets)
 	{
 		widget->renderizar();
 	}
+	m_aba->renderizar();
+
+	glDisable(GL_SCISSOR_TEST);
 
 	borda_c->renderizar();
 	borda_b->renderizar();
@@ -104,7 +111,8 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 {
 	// Customizacao do painel
 	contexto = ctx;
-	limite_min_tam = { 50, 50 };
+	widget_padding = {5, 5};
+	limite_min_tam = { 100, 50 };
 	retangulo = rect;
 	corpo_rect = new Formas::Rect(retangulo, ctx);
 	corpo_rect->defCor({ 0.23f, 0.23f, 0.23f });
@@ -112,6 +120,7 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 	borda_b = new Borda(BAIXO, this);
 	borda_e = new Borda(ESQUERDA, this);
 	borda_d = new Borda(DIREITA, this);
+	m_aba = new Aba(this);
 }
 
 void BubbleUI::Painel::preAtualizacao()
@@ -157,4 +166,9 @@ bool BubbleUI::Painel::cursorNormal()
 	}
 	else
 		return false;
+}
+
+std::string BubbleUI::Painel::nome() const
+{
+	return Nome;
 }

@@ -1,9 +1,9 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "src/arquivadores/imageloader.hpp"
+#include "src/tempo/delta_time.hpp"
 #include "engine.hpp"
 
-float deltaTime = 0;
 using namespace Bubble::Nucleo;
 
 Engine::Engine()
@@ -66,14 +66,11 @@ int Engine::pararloop() const
 // Deve Atualizar cena atual
 void Engine::atualizar()
 {
-    float st = glfwGetTime();
     glfwPollEvents();
-    // Calcular deltaTime
-    deltaTime = glfwGetTime() - st;
     // Atualizar cena
-    gerenciadorDeCenas.atualizarCenaAtual(deltaTime);
+    gerenciadorDeCenas.atualizarCenaAtual(Tempo::delta_time);
     // Atualizar UI
-    gerenciadorUi->atualizar(deltaTime);
+    gerenciadorUi->atualizar(Tempo::delta_time);
 }
 // Deve renderizar cena Atual
 void Engine::renderizar(Vector4 rect_size)
@@ -84,6 +81,8 @@ void Engine::renderizar(Vector4 rect_size)
     gerenciadorUi->renderizar();
 
     glfwSwapBuffers(glfwWindow);
+    Tempo::endDT();
+    Tempo::iniDT();
 }
 // Deve limpar engine
 void Engine::limpar() const 

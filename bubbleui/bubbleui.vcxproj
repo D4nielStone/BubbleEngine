@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\painel\aba.hpp" />
     <ClInclude Include="src\ui\painel\editor.hpp" />
     <ClInclude Include="src\ui\widgets\imagem.hpp" />
     <ClInclude Include="src\ui\painel\depurador.hpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\painel\aba.cpp" />
     <ClCompile Include="src\ui\painel\editor.cpp" />
     <ClCompile Include="src\ui\widgets\imagem.cpp" />
     <ClCompile Include="src\ui\painel\depurador.cpp" />

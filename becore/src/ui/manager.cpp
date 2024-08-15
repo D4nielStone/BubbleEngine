@@ -57,7 +57,6 @@ void BubbleUI::Manager::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, contexto.tamanho.width, contexto.tamanho.height);
-
 	for (Painel* painel : lista_paineis)
 	{
 		painel->renderizar();

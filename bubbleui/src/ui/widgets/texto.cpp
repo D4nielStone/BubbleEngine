@@ -5,7 +5,7 @@
 
 using namespace Bubble::Arquivadores;
 
-BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), resolucao(16)
+BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), resolucao(12)
 {
     configurar();
 }
@@ -50,7 +50,7 @@ void BubbleUI::Widgets::Texto::renderizar()
             continue;
         }
         // Atualiza o retângulo do corpo_do_widget para o caractere
-        corpo_do_widget->defPos({ xpos + pai->widget_pos.x, ypos + pai->widget_pos.y });
+        corpo_do_widget->defPos({ xpos + (pai->widget_pos.x + pai->widget_padding.x), ypos + (pai->widget_pos.y + pai->widget_padding.y)});
         corpo_do_widget->defTam({ w, h });
 
         pai->obtCtx()->shader.use();

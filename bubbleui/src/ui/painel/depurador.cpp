@@ -3,6 +3,7 @@
 
 BubbleUI::Paineis::Depurador::Depurador(Contexto* ctx) : fps_display("FPS: ")
 {
+	Nome = "Depurador";
 	configurar(ctx);
 	adiWidget(new Widgets::Texto(&fps_display, 12));
 	adiWidget(new Widgets::Texto("\n", 12));

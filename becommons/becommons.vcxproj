@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\tempo\delta_time.cpp" />
     <ClCompile Include="src\arquivadores\fonte.cpp" />
     <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
     <ClCompile Include="src\arquivadores\imageloader.cpp" />
@@ -151,6 +152,7 @@
     <ClCompile Include="src\arquivadores\textura.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\tempo\delta_time.hpp" />
     <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\arquivo3d.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />

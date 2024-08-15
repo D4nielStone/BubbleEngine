@@ -18,8 +18,8 @@ namespace BubbleUI
 			~Texto();
 			void atualizar(float deltaTime) override;
 			void renderizar() override;
+			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/noto-sans/notosans-bold.ttf");
 		private:
-			void configurar(unsigned int resolucao = 16, std::string font_path = "assets/fontes/noto-sans/notosans-bold.ttf");
 			unsigned int resolucao, texturaID;
 			std::string* label;
 			Vector2 pos_texto;
