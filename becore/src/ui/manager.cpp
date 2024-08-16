@@ -4,12 +4,14 @@
 #include "src/nucleo/engine.hpp"
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/editor.hpp"
+#include "src/ui/painel/entidades.hpp"
 
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
 	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {10, 10, 400, 300}));
 	lista_paineis.push_back(new Paineis::Depurador(&contexto));
+	lista_paineis.push_back(new Paineis::Entidades(&contexto, engine->obterGC(), {300, 10, 400, 300}));
 }
 
 // Seleciona o painel

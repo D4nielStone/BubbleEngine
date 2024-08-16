@@ -42,12 +42,19 @@ bool Engine::inicializacao()
         }
         defInputs(new Inputs::Inputs());
 
+        obterGC()->novaCena();
+
         return true;
     }
 Bubble::Inputs::Inputs* Engine::obterGI() const
 {
     return inputs;
-};
+}
+BubbleUI::Manager* Bubble::Nucleo::Engine::obterGU() const
+{
+    return gerenciadorUi;
+}
+;
 // Deve definir inputs
 void Engine::defInputs(Inputs::Inputs* inp)
 {

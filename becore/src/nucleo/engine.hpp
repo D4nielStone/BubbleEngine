@@ -19,8 +19,9 @@ namespace Bubble
 			BubbleUI::Manager* gerenciadorUi = nullptr;
 		public:
 			Inputs::Inputs* obterGI() const;
+			BubbleUI::Manager* obterGU() const;
 			Cena::SceneManager* obterGC() { return &gerenciadorDeCenas; };
-			GLFWwindow* obterJanela() { return glfwWindow; };
+			GLFWwindow* obterJanela() const { return glfwWindow; };
 			void defInputs(Inputs::Inputs* inp);
 			bool inicializacao();
 			int pararloop() const;

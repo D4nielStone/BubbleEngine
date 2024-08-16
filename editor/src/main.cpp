@@ -14,8 +14,6 @@ int INIT
 {
     Bubble::Nucleo::Engine engine;
 
-    engine.obterGC()->novaCena();
-
     while (!engine.pararloop())
     {
         engine.atualizar();

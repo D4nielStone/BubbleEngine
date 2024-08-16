@@ -87,13 +87,11 @@ void BubbleUI::Painel::renderizar()
 {
 	glEnable(GL_SCISSOR_TEST);
 	glScissor(retangulo.x, (contexto->tamanho.height - retangulo.y - retangulo.h), retangulo.w, retangulo.h);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.1, 0.1, 0.1, 1);
 
 	if (renderizar_corpo)
 		corpo_rect->renderizar(GL_TRIANGLES);
 	preRenderizacao();
-	for (Widget* widget : lista_widgets)
+	for (auto& widget : lista_widgets)
 	{
 		widget->renderizar();
 	}
@@ -136,21 +134,21 @@ void BubbleUI::Painel::corrigirLimite()
 {
 	if (retangulo.w < limite_min_tam.x && redimen_atual == DIREITA)
 	{
-		defTam({ limite_min_tam.x, retangulo.h });
+		retangulo = { retangulo.x, retangulo.y, limite_min_tam.x, retangulo.h };
 	}
 	if (retangulo.h < limite_min_tam.y && redimen_atual == BAIXO)
 	{
-		defTam({ retangulo.w, limite_min_tam.y });
+		retangulo = { retangulo.x, retangulo.y, retangulo.w, limite_min_tam.y };
 	}
 	if (retangulo.w < limite_min_tam.x && redimen_atual == ESQUERDA)
 	{
-		defPos({ static_cast<int>(retangulo.x) + retangulo.w - limite_min_tam.x, static_cast<int>(retangulo.y) });
-		defTam({ limite_min_tam.x, retangulo.h });
+		retangulo = { retangulo.x + retangulo.w - limite_min_tam.x, retangulo.y , retangulo.w, retangulo.h};
+		retangulo = { retangulo.x, retangulo.y , limite_min_tam.x, retangulo.h };
 	}
 	if (retangulo.h < limite_min_tam.y && redimen_atual == CIMA)
 	{
-		defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) + retangulo.h - limite_min_tam.y });
-		defTam({ retangulo.w, limite_min_tam.y });
+		retangulo = {retangulo.x, retangulo.y + retangulo.h - limite_min_tam.y , 0, 0};
+		retangulo = { retangulo.x, retangulo.y, retangulo.w, limite_min_tam.y };
 	}
 }
 
