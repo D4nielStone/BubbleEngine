@@ -16,7 +16,7 @@ void BubbleUI::Painel::defTam(Vector2 tam)
 	retangulo.h = tam.y;
 }
 
-void BubbleUI::Painel::defPos(Vector2 pos)
+void BubbleUI::Painel::defPos(Vector2f pos)
 {
 	retangulo.x = pos.x;
 	retangulo.y = pos.y;
@@ -28,7 +28,7 @@ void BubbleUI::Painel::adiTam(Vector2 tam)
 	retangulo.h += tam.y;
 }
 
-void BubbleUI::Painel::adiPos(Vector2 pos)
+void BubbleUI::Painel::adiPos(Vector2f pos)
 {
 	retangulo.x += pos.x;
 	retangulo.y += pos.y;
@@ -57,23 +57,20 @@ BubbleUI::Contexto* BubbleUI::Painel::obtCtx() const
 
 void BubbleUI::Painel::atualizar(float deltaTime)
 {
-	preAtualizacao();
 
-	borda_c->atualizar(deltaTime);
-	borda_b->atualizar(deltaTime);
-	borda_e->atualizar(deltaTime);
-	borda_d->atualizar(deltaTime);
+	borda_c->atualizar();
+	borda_b->atualizar();
+	borda_e->atualizar();
+	borda_d->atualizar();
 
 	corrigirLimite();
+	
 
+	moldura->defPos({ retangulo.x, retangulo.y });
+	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
+	moldura->atualizar(deltaTime);
 
-	if (renderizar_corpo)
-	{
-		corpo_rect->defPos({ retangulo.x, retangulo.y });
-		corpo_rect->defTam({ static_cast<float>(retangulo.w), static_cast<float>(retangulo.h) });
-		corpo_rect->atualizar(deltaTime);
-	}
-
+	preAtualizacao();
 	m_aba->atualizar(deltaTime);
 	for (Widget* widget : lista_widgets)
 	{
@@ -85,11 +82,9 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 
 void BubbleUI::Painel::renderizar()
 {
-	glEnable(GL_SCISSOR_TEST);
-	glScissor(retangulo.x, (contexto->tamanho.height - retangulo.y - retangulo.h), retangulo.w, retangulo.h);
+	glScissor(retangulo.x -1, (contexto->tamanho.height - (retangulo.y - 1) - retangulo.h), retangulo.w + 1, retangulo.h + 1);
 
-	if (renderizar_corpo)
-		corpo_rect->renderizar(GL_TRIANGLES);
+	moldura->renderizar(GL_TRIANGLES);
 	preRenderizacao();
 	for (auto& widget : lista_widgets)
 	{
@@ -97,12 +92,6 @@ void BubbleUI::Painel::renderizar()
 	}
 	m_aba->renderizar();
 
-	glDisable(GL_SCISSOR_TEST);
-
-	borda_c->renderizar();
-	borda_b->renderizar();
-	borda_e->renderizar();
-	borda_d->renderizar();
 }
 
 void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
@@ -110,19 +99,21 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 	// Customizacao do painel
 	contexto = ctx;
 	widget_padding = {5, 5};
-	limite_min_tam = { 100, 50 };
+	limite_min_tam = { 100, 15 };
 	retangulo = rect;
-	corpo_rect = new Formas::Rect(retangulo, ctx);
-	corpo_rect->defCor({ 0.23f, 0.23f, 0.23f });
-	borda_c = new Borda(CIMA, this);
-	borda_b = new Borda(BAIXO, this);
-	borda_e = new Borda(ESQUERDA, this);
-	borda_d = new Borda(DIREITA, this);
+	borda_c = new Separador(CIMA, this);
+	borda_b = new Separador(BAIXO, this);
+	borda_e = new Separador(ESQUERDA, this);
+	borda_d = new Separador(DIREITA, this);
+	moldura = new Formas::Moldura(contexto);
+	moldura->defCor({ 0.2f, 0.2f, 0.2f });
 	m_aba = new Aba(this);
 }
 
 void BubbleUI::Painel::preAtualizacao()
 {
+	widget_pos.x += widget_padding.x;
+	widget_pos.y += widget_padding.y;
 }
 
 void BubbleUI::Painel::preRenderizacao()
@@ -147,7 +138,7 @@ void BubbleUI::Painel::corrigirLimite()
 	}
 	if (retangulo.h < limite_min_tam.y && redimen_atual == CIMA)
 	{
-		retangulo = {retangulo.x, retangulo.y + retangulo.h - limite_min_tam.y , 0, 0};
+		retangulo = {retangulo.x, retangulo.y + retangulo.h - limite_min_tam.y , retangulo.w, retangulo.h};
 		retangulo = { retangulo.x, retangulo.y, retangulo.w, limite_min_tam.y };
 	}
 }

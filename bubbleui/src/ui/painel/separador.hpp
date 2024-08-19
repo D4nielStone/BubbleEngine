@@ -10,17 +10,15 @@ enum Lado
 namespace BubbleUI
 {
 	class Painel;
-	class BEUI_DLL_API Borda
+	class BEUI_DLL_API Separador
 	{
 	public:
-		Borda() = default;
-		Borda(Lado side, Painel* painel);
-		void atualizar(float deltaTime);
-		void renderizar();
+		Separador() = default;
+		Separador(Lado side, Painel* painel);
+		void atualizar();
 		bool cursor();
 	private:
 		Colisao2d* colisao = nullptr;
-		Formas::Linha* linha = nullptr;
 		Painel* painel = nullptr;
 		Lado lado;
 		bool mouse_1click, arrastando;

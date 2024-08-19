@@ -1,5 +1,5 @@
 #include "entidades.hpp"
-#include "src/ui/widgets/texto.hpp"
+#include "src/ui/widgets/caixa_de_texto.hpp"
 
 BubbleUI::Paineis::Entidades::Entidades(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager)
 {
@@ -15,20 +15,5 @@ void BubbleUI::Paineis::Entidades::recarregar()
 		delete widget;
 	}
 	lista_widgets.clear();
-	if (scenemanager->cenaAtualIdx() != -1)
-	{
-		for (auto& entidade : scenemanager->cenaAtual()->Entidades)
-		{
-			adiWidget(new Widgets::Texto(entidade->nome(), 12));
-			adiWidget(new Widgets::Texto("\n", 12));
-		}
-	}
-	else
-	{
-		Debug::emitir(Debug::Erro, "Painel entidades: Sem cena Atual");
-	}
-}
-
-void BubbleUI::Paineis::Entidades::preAtualizacao()
-{
+	adiWidget(new Widgets::CaixaTexto());
 }

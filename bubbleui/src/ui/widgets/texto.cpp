@@ -34,31 +34,30 @@ void BubbleUI::Widgets::Texto::atualizar(float deltaTime)
 
 void BubbleUI::Widgets::Texto::renderizar()
 {
-    float x = 0.0f;
-    float y = 0.0f;
+    int x = 0, y = 0, xpos = 0, ypos = 0, w = 0 , h = 0;
     for (char c : *label) {
         Character ch = (*obterCaracteres())[c];
 
-        float xpos = x + ch.Bearing.x;
-        float ypos = resolucao + (y - ch.Bearing.y);
-        float w = ch.Size.x;
-        float h = ch.Size.y;
-
+        h = ch.Size.y;
+        ypos = resolucao + (y - ch.Bearing.y);
         if (c == '\n') {
             x = 0.0f;
-            pai->widget_pos = { static_cast<int>(pai->obtRect().x), static_cast<int>(ypos + pai->widget_pos.y + h) };
+            pai->widget_pos = { pai->obtRect().x, ypos + pai->widget_pos.y };
             continue;
         }
+        xpos = x + ch.Bearing.x;
+        w = ch.Size.x;
+
         // Atualiza o retângulo do corpo_do_widget para o caractere
-        corpo_do_widget->defPos({ xpos + (pai->widget_pos.x + pai->widget_padding.x), ypos + (pai->widget_pos.y + pai->widget_padding.y)});
-        corpo_do_widget->defTam({ w, h });
+        corpo_do_widget.defPos({ xpos + (pai->widget_pos.x + pai->widget_padding.x), ypos + (pai->widget_pos.y + pai->widget_padding.y)});
+        corpo_do_widget.defTam({ (float)w, (float)h });
 
         pai->obtCtx()->shader.use();
         pai->obtCtx()->shader.setBool("texto", true);
         pai->obtCtx()->shader.setVec3("cor_texto", 1, 1, 1);
         pai->obtCtx()->shader.setInt("textura", 0);
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        corpo_do_widget->renderizar(GL_TRIANGLES);
+        corpo_do_widget.renderizar(GL_TRIANGLES);
 
         x += (ch.Advance >> 6); // 1/64 pixels
 

@@ -4,5 +4,6 @@
 void BubbleUI::Widget::defPainel(Painel* p)
 {
 	pai = p;	
-	corpo_do_widget = new Formas::Rect(pai->obtCtx());
+	corpo_do_widget = Formas::Rect(pai->obtCtx());
+	moldura = Formas::Moldura(pai->obtCtx());
 }

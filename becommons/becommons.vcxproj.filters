@@ -72,6 +72,9 @@
     <ClCompile Include="src\tempo\delta_time.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="src\util\includes.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.hpp">

@@ -85,11 +85,13 @@ Key glfwKeyToKey(int glfwKey) {
 void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
     Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+    inputs->mods = mods;
+    inputs->teclado_action = action;
 
     if (inputs) {
         Key mappedKey = glfwKeyToKey(key);
         if (mappedKey != Key::Count) {
-            if (action == GLFW_PRESS) {
+            if (action == GLFW_PRESS || action == GLFW_REPEAT) {
                 inputs->keyPressed(mappedKey);
             }
             else if (action == GLFW_RELEASE) {
@@ -100,6 +102,28 @@ void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
     }
+    // Captura caracteres imprimíveis
+    if ((key >= GLFW_KEY_A && key <= GLFW_KEY_Z) || (key >= GLFW_KEY_0 && key <= GLFW_KEY_9) || key == GLFW_KEY_SPACE)
+    {
+        inputs->letra = static_cast<char>(key);
+
+        // Ajusta para letras minúsculas se a tecla SHIFT não estiver pressionada
+        if (mods & GLFW_MOD_SHIFT)
+        {
+            inputs->letra = toupper(inputs->letra);
+            inputs->mods = 0;
+        }
+        else
+        {
+            inputs->letra = tolower(inputs->letra);
+        }
+
+    }
+    else if (key == GLFW_KEY_BACKSPACE)
+    {
+        inputs->letra = '\b';
+    }
+
 }
 // Callback de posição do mouse
 void mousePosCallBack(GLFWwindow* window, double x, double y) 

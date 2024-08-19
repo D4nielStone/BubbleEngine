@@ -21,17 +21,15 @@ namespace BubbleUI
 			void adiTam(Vector2 tam);
 			void adiPos(Vector2 tam);
 			void defCor(Color cor);
-			void atualizar(float deltaTime);
-			void renderizar(GLenum modo);
+			virtual void atualizar(float deltaTime);
+			virtual void renderizar(GLenum modo);
 		protected:
 			Contexto* contexto;
 			Vector4 retangulo;
 			Color cor_base;
-		private:
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			void definirBuffers();
-			Vertex vertex;
 		};
 	}
 }

@@ -13,6 +13,7 @@ namespace BubbleUI
 		{
 		public:
 			Linha(Vector4f posicoes, Contexto* ctx);
+			Linha() = default;
 			void defPos(Vector4f posicoes);
 			void defCor(Color cor);
 			void atualizar(float deltaTime);
@@ -25,7 +26,6 @@ namespace BubbleUI
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			void definirBuffers();
-			Vertex vertex;
 		};
 	}
 }

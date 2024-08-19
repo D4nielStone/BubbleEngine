@@ -13,7 +13,7 @@ BubbleUI::Aba::Aba(Painel* painel) : painel(painel)
 void BubbleUI::Aba::atualizar(float deltaTime)
 {
     corpo_rect->defPos({painel->obtRect().x, painel->obtRect().y});
-    corpo_rect->defTam({static_cast<float>(painel->obtRect().w), 15});
+    corpo_rect->defTam({ (float)painel->obtRect().w, 15});
     corpo_rect->atualizar(deltaTime);
 }
 
@@ -25,20 +25,18 @@ void BubbleUI::Aba::renderizar()
 
 void BubbleUI::Aba::renderizar_texto()
 {
-    float x = 0.0f;
-    float y = 0.0f;
-    float ypos, h;
+    int x = 0, y = 0, ypos = 0, h = 0, w = 0, xpos = 0;
     for (char c : painel->nome()) {
         Bubble::Arquivadores::Character ch = (*Bubble::Arquivadores::obterCaracteres())[c];
 
-        float xpos = x + ch.Bearing.x;
+        xpos = x + ch.Bearing.x;
         ypos = 12 + (y - ch.Bearing.y);
-        float w = ch.Size.x;
+        w = ch.Size.x;
         h = ch.Size.y;
 
         // Atualiza o retângulo do corpo_do_texto para o caractere
         corpo_do_texto->defPos({ xpos + (painel->obtRect().x + painel->widget_padding.x), ypos + (painel->obtRect().y) });
-        corpo_do_texto->defTam({ w, h });
+        corpo_do_texto->defTam({ (float)w, (float)h });
 
         painel->obtCtx()->shader.use();
         painel->obtCtx()->shader.setBool("texto", true);
@@ -50,5 +48,5 @@ void BubbleUI::Aba::renderizar_texto()
         x += (ch.Advance >> 6); // 1/64 pixels
 
     }
-    painel->widget_pos = { static_cast<int>(painel->obtRect().x), static_cast<int>(painel->obtRect().y + corpo_rect->obtRect().h) };
+    painel->widget_pos = { painel->obtRect().x, painel->obtRect().y + corpo_rect->obtRect().h };
 }

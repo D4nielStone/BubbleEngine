@@ -6,6 +6,7 @@ using namespace BubbleUI::Formas;
 Linha::Linha(Vector4f pos, Contexto* ctx) : posicoes(pos), contexto(ctx)
 {
 	definirBuffers();
+    defCor({ 0.4f, 0.0f, 0.4f });
 }
 void Linha::defPos(Vector4f pos)
 {
@@ -21,34 +22,39 @@ void Linha::defCor(Color cor)
 // deve definir buffers da linha
 void Linha::definirBuffers()
 {
-    if (vertex.carregado)
+    if (linha_vertex.carregado)
     {
-        Debug::emitir(Debug::Mensagem, "Vertex já carregado");
         return;
     }
 
     // Define os vértices para uma linha
-    vertex.vertices = {
+    linha_vertex.vertices = {
         // Posições
         0.f, 0.f,      
         1.f, 1.f
     };
 
-    vertex.indices = {
+    linha_vertex.indices = {
         0, 1, 
     };
 
-    glGenVertexArrays(1, &vertex.VAO);
-    glGenBuffers(1, &vertex.VBO);
-    glGenBuffers(1, &vertex.EBO);
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        return;
+    }
 
-    glBindVertexArray(vertex.VAO);
+    glGenVertexArrays(1, &linha_vertex.VAO);
+    glGenBuffers(1, &linha_vertex.VBO);
+    glGenBuffers(1, &linha_vertex.EBO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vertex.VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertex.vertices.size() * sizeof(float), vertex.vertices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
+    glBindVertexArray(linha_vertex.VAO);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertex.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex.indices.size() * sizeof(unsigned int), vertex.indices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
+    glBindBuffer(GL_ARRAY_BUFFER, linha_vertex.VBO);
+    glBufferData(GL_ARRAY_BUFFER, linha_vertex.vertices.size() * sizeof(float), linha_vertex.vertices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, linha_vertex.EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, linha_vertex.indices.size() * sizeof(unsigned int), linha_vertex.indices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
 
     // Atributos de posição
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
@@ -57,7 +63,7 @@ void Linha::definirBuffers()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    vertex.carregado = true;
+    linha_vertex.carregado = true;
 }
 // Deve transformar coordenadas pixel para NDC
 Vector4f Linha::paraNDC()
@@ -82,7 +88,7 @@ void Linha::renderizar()
     contexto->shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     contexto->shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
-    glBindVertexArray(vertex.VAO);
-    glDrawElements(GL_LINES, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(linha_vertex.VAO);
+    glDrawElements(GL_LINES, linha_vertex.indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdio>
 #include <iostream>
+#include <becommons.hpp>
 
 // Definição da estrutura Vector4
 struct Vector4
@@ -95,6 +96,7 @@ struct Vector4
         y /= other;
         return *this;
     };
+    
 };
 struct Vector4f
 {
@@ -114,10 +116,32 @@ struct Vector4f
 struct Vector2
 {
     int x = 0, y = 0;
+    // Operador de igualdade (==)
+    bool operator==(const Vector2& other) const
+    {
+        return x == other.x && y == other.y;
+    }
+
+    // Operador de diferença (!=)
+    bool operator!=(const Vector2& other) const
+    {
+        return !(*this == other);
+    }
 };
 struct Vector2f
 {
     float x = 0, y = 0;
+    // Operador de igualdade (==)
+    bool operator==(const Vector2f& other) const
+    {
+        return x == other.x && y == other.y;
+    }
+
+    // Operador de diferença (!=)
+    bool operator!=(const Vector2f& other) const
+    {
+        return !(*this == other);
+    }
 };
 
 struct Size
@@ -154,5 +178,7 @@ struct Projeto
     std::string nome;
     std::string path;
 };
+extern BECOMMONS_DLL_API Vertex rect_vertex;
+extern BECOMMONS_DLL_API Vertex linha_vertex;
 
 #endif // !INCLUDES_H

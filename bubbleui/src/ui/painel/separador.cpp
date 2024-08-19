@@ -1,38 +1,26 @@
-#include "borda.hpp"
+#include "separador.hpp"
 #include "painel.hpp"
 #include <src/depuracao/debug.hpp>
 
 using namespace BubbleUI;
 
-Borda::Borda(Lado side, Painel* p) : lado(side), painel(p), linha(new Formas::Linha({}, p->obtCtx()))
+Separador::Separador(Lado side, Painel* p) : lado(side), painel(p)
 {
-	glLineWidth(2.f);
 	colisao = new Colisao2d({}, p->obtCtx());
 }
 
-void BubbleUI::Borda::atualizar(float deltaTime)
+void BubbleUI::Separador::atualizar()
 {
 	atualizarColisao();
-	linha->atualizar(deltaTime);
+	atualizarCursor();
 
 	if (painel->selecionado)
 	{
-		atualizarCursor();
 		atualizarArrasto();
 	}
 }
 
-void BubbleUI::Borda::renderizar()
-{
-	if (painel->selecionado)
-		linha->defCor({ 0.4f, 0.f, 0.4f });
-	else
-		linha->defCor({ 0.4f, 0.4f, 0.4f });
-
-	linha->renderizar();
-}
-
-bool BubbleUI::Borda::cursor()
+bool BubbleUI::Separador::cursor()
 {
 	if (colisao->mouseEmCima())
 		return true;
@@ -40,17 +28,11 @@ bool BubbleUI::Borda::cursor()
 		return false;
 }
 
-void BubbleUI::Borda::atualizarColisao()
+void BubbleUI::Separador::atualizarColisao()
 {
 	switch (lado)
 	{
 	case DIREITA:
-		linha->defPos({
-			painel->obtRect().x + painel->obtRect().w,
-			painel->obtRect().y - 1.f,
-			0,
-			painel->obtRect().h + 2.f
-			});
 		colisao->defRect({
 			painel->obtRect().x + painel->obtRect().w -2.f,
 			painel->obtRect().y,
@@ -59,12 +41,6 @@ void BubbleUI::Borda::atualizarColisao()
 			});
 		break;
 	case ESQUERDA:
-		linha->defPos({
-			painel->obtRect().x,
-			painel->obtRect().y - 1.f,
-			0,
-			painel->obtRect().h + 2.f
-			});
 		colisao->defRect({
 			painel->obtRect().x - 10,
 			painel->obtRect().y,
@@ -73,12 +49,6 @@ void BubbleUI::Borda::atualizarColisao()
 			});
 		break;
 	case CIMA:
-		linha->defPos({
-			painel->obtRect().x,
-			painel->obtRect().y,
-			static_cast<float>(painel->obtRect().w),
-			0
-			});
 		colisao->defRect({
 			painel->obtRect().x,
 			painel->obtRect().y - 10.f,
@@ -87,12 +57,6 @@ void BubbleUI::Borda::atualizarColisao()
 			});
 		break;
 	case BAIXO:
-		linha->defPos({
-			painel->obtRect().x,
-			painel->obtRect().y + painel->obtRect().h,
-			static_cast<float>(painel->obtRect().w),
-			0
-			});
 		colisao->defRect({
 			painel->obtRect().x,
 			painel->obtRect().y + painel->obtRect().h - 2.f,
@@ -105,9 +69,9 @@ void BubbleUI::Borda::atualizarColisao()
 	}
 }
 
-void BubbleUI::Borda::atualizarCursor()
+void BubbleUI::Separador::atualizarCursor()
 {
-	if (colisao->mouseEmCima())
+	if (colisao->mouseEmCima() && painel->selecionado)
 	{
 		switch (lado)
 		{
@@ -139,7 +103,7 @@ void BubbleUI::Borda::atualizarCursor()
 
 }
 
-void BubbleUI::Borda::atualizarArrasto()
+void BubbleUI::Separador::atualizarArrasto()
 {
 	if (arrastando && painel->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
 	{
@@ -149,16 +113,16 @@ void BubbleUI::Borda::atualizarArrasto()
 		{
 		case DIREITA:
 			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
-			painel->adiTam({ static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			painel->adiTam({ static_cast<int>(painel->obtCtx()->inputs->mousex) - mouse_pos_ini.x, 0 });
 			break;
 		case ESQUERDA:
 			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
-			painel->adiPos({ static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			painel->adiPos({ static_cast<float>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
 			painel->adiTam({ -static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
 			break;
 		case CIMA:
 			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
-			painel->adiPos({ 0,static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			painel->adiPos({ 0,static_cast<float>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
 			painel->adiTam({ 0,-static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
 			break;
 		case BAIXO:

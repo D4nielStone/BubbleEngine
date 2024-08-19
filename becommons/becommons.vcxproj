@@ -148,6 +148,7 @@
     <ClCompile Include="src\entidades\camera_editor.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
+    <ClCompile Include="src\util\includes.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
     <ClCompile Include="src\arquivadores\textura.cpp" />
   </ItemGroup>

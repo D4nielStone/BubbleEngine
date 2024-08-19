@@ -30,7 +30,7 @@
     <ClInclude Include="src\ui\formas\linha.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\painel\borda.hpp">
+    <ClInclude Include="src\ui\painel\separador.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\formas\colisao2d.hpp">
@@ -57,6 +57,12 @@
     <ClInclude Include="src\ui\painel\entidades.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="src\ui\widgets\caixa_de_texto.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ui\formas\moldura.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ui\formas\rect.cpp">
@@ -71,7 +77,7 @@
     <ClCompile Include="src\ui\formas\linha.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\painel\borda.cpp">
+    <ClCompile Include="src\ui\painel\separador.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\formas\colisao2d.cpp">
@@ -96,6 +102,12 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\painel\entidades.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\widgets\caixa_de_texto.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ui\formas\moldura.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>

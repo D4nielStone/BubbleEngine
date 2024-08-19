@@ -136,13 +136,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\formas\moldura.hpp" />
+    <ClInclude Include="src\ui\widgets\caixa_de_texto.hpp" />
     <ClInclude Include="src\ui\painel\entidades.hpp" />
     <ClInclude Include="src\ui\painel\aba.hpp" />
     <ClInclude Include="src\ui\painel\editor.hpp" />
     <ClInclude Include="src\ui\widgets\imagem.hpp" />
     <ClInclude Include="src\ui\painel\depurador.hpp" />
     <ClInclude Include="src\ui\formas\colisao2d.hpp" />
-    <ClInclude Include="src\ui\painel\borda.hpp" />
+    <ClInclude Include="src\ui\painel\separador.hpp" />
     <ClInclude Include="bubbleui.hpp" />
     <ClInclude Include="src\ui\formas\linha.hpp" />
     <ClInclude Include="src\ui\painel\painel.hpp" />
@@ -152,13 +154,15 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\formas\moldura.cpp" />
+    <ClCompile Include="src\ui\widgets\caixa_de_texto.cpp" />
     <ClCompile Include="src\ui\painel\entidades.cpp" />
     <ClCompile Include="src\ui\painel\aba.cpp" />
     <ClCompile Include="src\ui\painel\editor.cpp" />
     <ClCompile Include="src\ui\widgets\imagem.cpp" />
     <ClCompile Include="src\ui\painel\depurador.cpp" />
     <ClCompile Include="src\ui\formas\colisao2d.cpp" />
-    <ClCompile Include="src\ui\painel\borda.cpp" />
+    <ClCompile Include="src\ui\painel\separador.cpp" />
     <ClCompile Include="src\ui\formas\linha.cpp" />
     <ClCompile Include="src\ui\painel\painel.cpp" />
     <ClCompile Include="src\ui\contexto\contexto.cpp" />

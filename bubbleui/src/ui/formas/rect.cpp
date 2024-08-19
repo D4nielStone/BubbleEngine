@@ -47,6 +47,7 @@ void BubbleUI::Formas::Rect::adiPos(Vector2 pos)
 void BubbleUI::Formas::Rect::defCor(Color cor)
 {
     cor_base = cor;
+    ASSERT(contexto);
     contexto->shader.use();
     contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
 }
@@ -63,8 +64,8 @@ void Rect::renderizar(GLenum modo)
     contexto->shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     contexto->shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
-    glBindVertexArray(vertex.VAO);
-    glDrawElements(modo, static_cast<GLsizei>(vertex.indices.size()), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(rect_vertex.VAO);
+    glDrawElements(modo, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
     contexto->shader.setBool("imagem", false);
     contexto->shader.setBool("texto", false);
@@ -89,14 +90,13 @@ void Rect::definirBuffers()
         Debug::emitir(Debug::Erro, "Glad");
         return;
     }
-    if (vertex.carregado)
+    if (rect_vertex.carregado)
     {
-        Debug::emitir(Debug::Mensagem, "Vertex já carregado");
         return;
     }
 
     // Define os vértices para um quadrado
-    vertex.vertices = {
+    rect_vertex.vertices = {
         // Posições     // Coordenadas de textura
         0.f, 0.f,     0.0f, 0.0f,
         1.f, 0.f,     1.0f, 0.0f,
@@ -104,22 +104,22 @@ void Rect::definirBuffers()
         0.f, 1.f,     0.0f, 1.0f
     };
 
-    vertex.indices = {
+    rect_vertex.indices = {
         0, 2, 1, // Primeiro triângulo
         2, 0, 3  // Segundo triângulo
     };
 
-    glGenVertexArrays(1, &vertex.VAO);
-    glGenBuffers(1, &vertex.VBO);
-    glGenBuffers(1, &vertex.EBO);
+    glGenVertexArrays(1, &rect_vertex.VAO);
+    glGenBuffers(1, &rect_vertex.VBO);
+    glGenBuffers(1, &rect_vertex.EBO);
 
-    glBindVertexArray(vertex.VAO);
+    glBindVertexArray(rect_vertex.VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vertex.VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertex.vertices.size() * sizeof(float), vertex.vertices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
+    glBindBuffer(GL_ARRAY_BUFFER, rect_vertex.VBO);
+    glBufferData(GL_ARRAY_BUFFER, rect_vertex.vertices.size() * sizeof(float), rect_vertex.vertices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vertex.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, vertex.indices.size() * sizeof(unsigned int), vertex.indices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, rect_vertex.EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, rect_vertex.indices.size() * sizeof(unsigned int), rect_vertex.indices.data(), GL_STATIC_DRAW); // Corrigido para tamanho em bytes
 
     // Atributos de posição
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
@@ -132,5 +132,5 @@ void Rect::definirBuffers()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    vertex.carregado = true;
+    rect_vertex.carregado = true;
 }

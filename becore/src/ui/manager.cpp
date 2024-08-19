@@ -9,9 +9,9 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {10, 10, 400, 300}));
 	lista_paineis.push_back(new Paineis::Depurador(&contexto));
 	lista_paineis.push_back(new Paineis::Entidades(&contexto, engine->obterGC(), {300, 10, 400, 300}));
+	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {10, 10, 400, 300}));
 }
 
 // Seleciona o painel
@@ -59,10 +59,13 @@ void BubbleUI::Manager::renderizar()
 {
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, contexto.tamanho.width, contexto.tamanho.height);
+
+	glEnable(GL_SCISSOR_TEST);
 	for (Painel* painel : lista_paineis)
 	{
 		painel->renderizar();
 	}
+	glDisable(GL_SCISSOR_TEST);
 
 	glfwSetCursor(contexto.glfwWindow, contexto.cursor);
 }
