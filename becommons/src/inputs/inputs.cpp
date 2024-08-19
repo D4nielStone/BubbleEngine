@@ -75,7 +75,10 @@ Key glfwKeyToKey(int glfwKey) {
         {GLFW_KEY_LEFT_CONTROL, Key::Ctrl},
         {GLFW_KEY_RIGHT_CONTROL, Key::Ctrl},
         {GLFW_KEY_LEFT_ALT, Key::Alt},
-        {GLFW_KEY_RIGHT_ALT, Key::Alt}
+        {GLFW_KEY_RIGHT_ALT, Key::Alt},
+        {GLFW_KEY_BACKSPACE, Key::BS},
+        {GLFW_KEY_ENTER, Key::ENTER},
+        {GLFW_KEY_KP_ENTER, Key::ENTER}
     };
 
     auto it = keyMap.find(glfwKey);
@@ -102,28 +105,6 @@ void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
     }
-    // Captura caracteres imprimíveis
-    if ((key >= GLFW_KEY_A && key <= GLFW_KEY_Z) || (key >= GLFW_KEY_0 && key <= GLFW_KEY_9) || key == GLFW_KEY_SPACE)
-    {
-        inputs->letra = static_cast<char>(key);
-
-        // Ajusta para letras minúsculas se a tecla SHIFT não estiver pressionada
-        if (mods & GLFW_MOD_SHIFT)
-        {
-            inputs->letra = toupper(inputs->letra);
-            inputs->mods = 0;
-        }
-        else
-        {
-            inputs->letra = tolower(inputs->letra);
-        }
-
-    }
-    else if (key == GLFW_KEY_BACKSPACE)
-    {
-        inputs->letra = '\b';
-    }
-
 }
 // Callback de posição do mouse
 void mousePosCallBack(GLFWwindow* window, double x, double y) 
@@ -150,4 +131,43 @@ void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
     }
+}
+
+// Callback para caracteres
+void charCallback(GLFWwindow* window, unsigned int codepoint)
+{
+    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+
+    // Converte o código Unicode para um caractere UTF-8
+    std::string utf8_char;
+    if (codepoint <= 0x7F) {
+        // Caracteres ASCII
+        utf8_char.push_back(static_cast<char>(codepoint));
+    }
+    else if (codepoint <= 0x7FF) {
+        // Caracteres UTF-8 com 2 bytes
+        utf8_char.push_back(static_cast<char>(0xC0 | (codepoint >> 6)));
+        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    }
+    else if (codepoint <= 0xFFFF) {
+        // Caracteres UTF-8 com 3 bytes
+        utf8_char.push_back(static_cast<char>(0xE0 | (codepoint >> 12)));
+        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
+        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    }
+    else if (codepoint <= 0x10FFFF) {
+        // Caracteres UTF-8 com 4 bytes
+        utf8_char.push_back(static_cast<char>(0xF0 | (codepoint >> 18)));
+        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 12) & 0x3F)));
+        utf8_char.push_back(static_cast<char>(0x80 | ((codepoint >> 6) & 0x3F)));
+        utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
+    }
+
+    // Ajusta para letras maiúsculas/minúsculas se a tecla SHIFT estiver pressionada
+    if (inputs->mods & GLFW_MOD_SHIFT && utf8_char.length() == 1) {
+        utf8_char[0] = toupper(utf8_char[0]);
+    }
+
+    inputs->letra = utf8_char.empty() ? '\0' : utf8_char[0];
+    inputs->char_press = true;
 }

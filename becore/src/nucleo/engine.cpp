@@ -64,6 +64,7 @@ void Engine::defInputs(Inputs::Inputs* inp)
     glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
     glfwSetKeyCallback(glfwWindow, callbackKey);
     glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
+    glfwSetCharCallback(glfwWindow, charCallback);
 }
 // Deve retornar se deve fechar janela
 int Engine::pararloop() const

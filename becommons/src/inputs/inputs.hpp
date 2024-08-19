@@ -20,6 +20,8 @@ enum BECOMMONS_DLL_API Key {
     Shift,
     Ctrl,
     Alt,
+    BS,
+    ENTER,
     Count
 };
 
@@ -53,8 +55,8 @@ namespace Bubble
             InputMode getInputMode() const;
             double mousex, mousey;
             int mouseEnter = 0, teclado_action = 0, mods = 0;
-            char letra = 'a';
-            bool mouseClick;
+            char letra = '\0';
+            bool mouseClick, char_press = false;
         protected:
             virtual void handleKey(Key key);
         private:
@@ -68,3 +70,4 @@ namespace Bubble
 extern "C" BECOMMONS_DLL_API void mousePosCallBack(GLFWwindow* window, double x, double y);
 extern "C" BECOMMONS_DLL_API void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
 extern "C" BECOMMONS_DLL_API void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
+extern "C" BECOMMONS_DLL_API void charCallback(GLFWwindow* window, unsigned int codepoint);

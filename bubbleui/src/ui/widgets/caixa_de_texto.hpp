@@ -11,18 +11,15 @@ namespace BubbleUI
         class BEUI_DLL_API CaixaTexto : public Texto
         {
         public:
-            CaixaTexto();
+            CaixaTexto(std::string mensagem = "");
 
             void atualizar(float deltaTime) override;
             void renderizar() override;
         private:
-            void renderizar_texto();
             void processarEntrada(char c);
+            std::string mensagem;
             bool gatilho1, gatilho2;
             double cronometro;
-            int largura, xori, yori, altura_frase;
-            Vector2 letra_padding;
-            char letra_antiga;
         };
     }
 }

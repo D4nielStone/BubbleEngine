@@ -15,5 +15,5 @@ void BubbleUI::Paineis::Entidades::recarregar()
 		delete widget;
 	}
 	lista_widgets.clear();
-	adiWidget(new Widgets::CaixaTexto());
+	adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
 }

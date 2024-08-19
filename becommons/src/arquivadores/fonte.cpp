@@ -44,10 +44,10 @@ BECOMMONS_DLL_API void Bubble::Arquivadores::definirResolucao(int resolution)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
 
-    for (unsigned char c = 0; c < 128; c++)
+    for (unsigned long charcode = 0x20; charcode <= 0x7E; ++charcode)
     {
         // load character glyph 
-        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        if (FT_Load_Char(face, charcode, FT_LOAD_RENDER))
         {
             Debug::emitir(Debug::Erro, "FREETYTPE: Failed to load Glyph");
             continue;
@@ -79,6 +79,6 @@ BECOMMONS_DLL_API void Bubble::Arquivadores::definirResolucao(int resolution)
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
             face->glyph->advance.x
         };
-        Characters.insert(std::pair<char, Character>(c, character));
+        Characters.insert(std::pair<char, Character>(charcode, character));
     }
 }
