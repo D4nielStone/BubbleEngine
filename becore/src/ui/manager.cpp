@@ -48,7 +48,6 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_paine
 {
 	contexto.glfwWindow = engine->obterJanela();
 	contexto.inputs = engine->obterGI();
-	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho_ini.width, &contexto.tamanho_ini.height);
 	iniPaineisPadrao();
 	if (lista_paineis.size() > 0)
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;

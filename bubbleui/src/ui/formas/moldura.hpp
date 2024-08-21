@@ -12,7 +12,8 @@ namespace BubbleUI
 			Moldura() = default;
 			void atualizar(float deltaTime) override;
 			void renderizar(GLenum) override;
-		private:
+		protected:
+			virtual void preAtualizacao() {};
 			Linha* linha_d,* linha_e,* linha_c,* linha_b;
 		};
 	}

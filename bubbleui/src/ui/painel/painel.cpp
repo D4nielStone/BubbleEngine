@@ -69,6 +69,7 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 	moldura->defPos({ retangulo.x, retangulo.y });
 	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
 	moldura->atualizar(deltaTime);
+	menu_de_contexto->atualizar(deltaTime);
 
 	preAtualizacao();
 	m_aba->atualizar(deltaTime);
@@ -92,6 +93,7 @@ void BubbleUI::Painel::renderizar()
 	}
 	m_aba->renderizar();
 
+	menu_de_contexto->renderizar(GL_TRIANGLES);
 }
 
 void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
@@ -106,7 +108,8 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 	borda_e = new Separador(ESQUERDA, this);
 	borda_d = new Separador(DIREITA, this);
 	moldura = new Formas::Moldura(contexto);
-	moldura->defCor({ 0.2f, 0.2f, 0.2f });
+	menu_de_contexto = new Util::PopUp(contexto);
+	moldura->defCor({ 0.1f, 0.1f, 0.1f });
 	m_aba = new Aba(this);
 }
 

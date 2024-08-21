@@ -19,7 +19,7 @@ namespace BubbleUI
 			~Texto();
 			void atualizar(float deltaTime) override;
 			void renderizar() override;
-			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/noto-sans/notosans-bold.ttf");
+			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/arial/arialbd.ttf");
 		protected:
 			void renderizar_texto();
 			unsigned int resolucao, texturaID;
@@ -29,6 +29,9 @@ namespace BubbleUI
 			std::string texto, frase;
 			Color cor;
 			Vector2 pos_texto;
+			Vector4 char_rect;
+			Vector4f paraNDC();
+			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
 		private:
 			std::string* label;
 

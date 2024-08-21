@@ -4,49 +4,64 @@
 
 BubbleUI::Aba::Aba(Painel* painel) : painel(painel)
 {
-	Widgets::Texto::configurar(12, "assets/fontes/noto-sans/notosans-bold.ttf");
-    corpo_do_texto = new Formas::Rect(painel->obtCtx());
+    frase = painel->nome();
+    pai = painel;
+    resolucao = 12;
+    configurar();
     corpo_rect = new Formas::Rect(painel->obtCtx());
     corpo_rect->defCor({0.4, 0, 0.4});
 }
 
 void BubbleUI::Aba::atualizar(float deltaTime)
 {
+    Texto::atualizar(deltaTime);
     corpo_rect->defPos({painel->obtRect().x, painel->obtRect().y});
     corpo_rect->defTam({ (float)painel->obtRect().w, 15});
+    box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
+    box_size = { (float)corpo_rect->obtRect().w, (float)corpo_rect->obtRect().h };
+    painel->widget_pos = { painel->obtRect().x, painel->obtRect().y + corpo_rect->obtRect().h };
     corpo_rect->atualizar(deltaTime);
 }
 
 void BubbleUI::Aba::renderizar()
 {
     corpo_rect->renderizar(GL_TRIANGLES);
-	renderizar_texto();
-}
+    int h_letter = 0, w_letter = 0, x_letter = 0, y_letter = 0, w_line = 0;
+    line_pos.y = 0;
+    line_pos.x = letra_padding.x;
 
-void BubbleUI::Aba::renderizar_texto()
-{
-    int x = 0, y = 0, ypos = 0, h = 0, w = 0, xpos = 0;
-    for (char c : painel->nome()) {
-        Bubble::Arquivadores::Character ch = (*Bubble::Arquivadores::obterCaracteres())[c];
+    Bubble::Arquivadores::Character ch;
 
-        xpos = x + ch.Bearing.x;
-        ypos = 12 + (y - ch.Bearing.y);
-        w = ch.Size.x;
-        h = ch.Size.y;
+    for (char c : frase) {
+        ch = (*Bubble::Arquivadores::obterCaracteres())[c];
 
-        // Atualiza o retângulo do corpo_do_texto para o caractere
-        corpo_do_texto->defPos({ xpos + (painel->obtRect().x + painel->widget_padding.x), ypos + (painel->obtRect().y) });
-        corpo_do_texto->defTam({ (float)w, (float)h });
+        w_letter = ch.Size.x;
+        h_letter = ch.Size.y;
+        y_letter = y_letter = (box_pos.y + resolucao - ch.Bearing.y);
+        x_letter = w_line + ch.Bearing.x;
 
-        painel->obtCtx()->shader.use();
-        painel->obtCtx()->shader.setBool("texto", true);
-        painel->obtCtx()->shader.setVec3("cor_texto", 0.8, 0.8, 0.8);
-        painel->obtCtx()->shader.setInt("textura", 0);
+        // Verifica quebra de linha
+
+        // Defini retângulo da letra
+        char_rect.x = box_pos.x + x_letter + line_pos.x;
+        char_rect.y = y_letter + line_pos.y;
+        char_rect.w = w_letter;
+        char_rect.h = h_letter;
+
+        // renderiza letra
+        Vector4f char_rectf = paraNDC();
+
+        shader.use();
+        shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
+        shader.setVec2("quadrado.posicao", char_rectf.x, char_rectf.y);
+        shader.setVec2("quadrado.tamanho", char_rectf.z, char_rectf.w);
+        shader.setInt("textura", 0);
+
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        corpo_do_texto->renderizar(GL_TRIANGLES);
-
-        x += (ch.Advance >> 6); // 1/64 pixels
-
+        glBindVertexArray(rect_vertex.VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        w_line += (ch.Advance >> 6); // 1/64 pixels
     }
-    painel->widget_pos = { painel->obtRect().x, painel->obtRect().y + corpo_rect->obtRect().h };
 }

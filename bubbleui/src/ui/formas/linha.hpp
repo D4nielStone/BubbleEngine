@@ -25,7 +25,7 @@ namespace BubbleUI
 		private:
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
-			void definirBuffers();
+			Shader shader = Shader("assets/shaders/linha.vert", "assets/shaders/linha.frag");
 		};
 	}
 }

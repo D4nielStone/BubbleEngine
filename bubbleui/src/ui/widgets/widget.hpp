@@ -14,7 +14,6 @@ namespace BubbleUI
 		virtual void renderizar() = 0;
 		virtual void defPainel(Painel*);
 	protected:
-		Formas::Rect corpo_do_widget;
 		Formas::Moldura moldura;
 		Vector2f posicao_antiga;
 		Painel* pai;

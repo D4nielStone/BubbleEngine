@@ -12,6 +12,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string mensagem)
     resolucao = (12);
     lines_box_limite = 3;
     configurar();
+    moldura.defCor({ 0.13, 0.13, 0.13 });
 }
 
 void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
@@ -64,10 +65,12 @@ void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
 void BubbleUI::Widgets::CaixaTexto::renderizar()
 {
     moldura.renderizar(GL_TRIANGLES);
+    box_pos.x = pai->widget_padding.x + pai->widget_pos.x;
+    box_pos.y = pai->widget_padding.y + pai->widget_pos.y;
     if (texto.empty())
     {
         frase = mensagem;
-        cor = { 0.5, 0.5, 0.5 };
+        cor = { 0.7, 0.7, 0.7 };
     }
     else
     {

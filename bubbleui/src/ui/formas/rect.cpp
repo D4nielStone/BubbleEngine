@@ -47,9 +47,8 @@ void BubbleUI::Formas::Rect::adiPos(Vector2 pos)
 void BubbleUI::Formas::Rect::defCor(Color cor)
 {
     cor_base = cor;
-    ASSERT(contexto);
-    contexto->shader.use();
-    contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
+    shader.use();
+    shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
 }
 // Deve atualizar
 // \param deltaTime
@@ -60,15 +59,13 @@ void Rect::atualizar(float deltaTime)
 // Deve renderizar
 void Rect::renderizar(GLenum modo)
 {
-    contexto->shader.use();
-    contexto->shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
-    contexto->shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
-    contexto->shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
+    shader.use();
+    shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
+    shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
+    shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
     glBindVertexArray(rect_vertex.VAO);
     glDrawElements(modo, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-    contexto->shader.setBool("imagem", false);
-    contexto->shader.setBool("texto", false);
 }
 // Deve transformar coordenadas pixel para NDC
 Vector4f BubbleUI::Formas::Rect::paraNDC()

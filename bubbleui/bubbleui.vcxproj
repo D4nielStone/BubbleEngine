@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\util\pop_up.hpp" />
     <ClInclude Include="src\ui\formas\moldura.hpp" />
     <ClInclude Include="src\ui\widgets\caixa_de_texto.hpp" />
     <ClInclude Include="src\ui\painel\entidades.hpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\util\pop_up.cpp" />
     <ClCompile Include="src\ui\formas\moldura.cpp" />
     <ClCompile Include="src\ui\widgets\caixa_de_texto.cpp" />
     <ClCompile Include="src\ui\painel\entidades.cpp" />

@@ -24,11 +24,12 @@ namespace BubbleUI
 			virtual void atualizar(float deltaTime);
 			virtual void renderizar(GLenum modo);
 		protected:
-			Contexto* contexto;
+			Contexto* contexto{ nullptr };
 			Vector4 retangulo;
-			Color cor_base;
+			Color cor_base{ 0.2, 0.2, 0.2 };
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
+			Shader shader{ Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
 			void definirBuffers();
 		};
 	}

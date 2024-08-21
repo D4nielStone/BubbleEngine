@@ -140,12 +140,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\scripts\rotacionar.lua" />
-    <None Include="assets\shaders\layout.frag" />
-    <None Include="assets\shaders\layout.vert" />
+    <None Include="assets\shaders\imagem.frag" />
+    <None Include="assets\shaders\imagem.vert" />
+    <None Include="assets\shaders\linha.frag" />
+    <None Include="assets\shaders\linha.vert" />
+    <None Include="assets\shaders\quad.frag" />
+    <None Include="assets\shaders\quad.vert" />
     <None Include="assets\shaders\phong.frag" />
     <None Include="assets\shaders\phong.vert" />
     <None Include="assets\shaders\skybox.frag" />
     <None Include="assets\shaders\skybox.vert" />
+    <None Include="assets\shaders\texto.frag" />
+    <None Include="assets\shaders\texto.vert" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -154,6 +160,12 @@
     <ProjectReference Include="..\becore\becore.vcxproj">
       <Project>{43f2e8ca-ebd9-4e23-b6b9-a87341710c99}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

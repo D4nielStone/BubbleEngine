@@ -13,10 +13,10 @@ namespace Bubble
 		class BECORE_DLL_API Engine
 		{
 		private:
-			Inputs::Inputs* inputs;
+			Inputs::Inputs* inputs{ nullptr };
 			Cena::SceneManager gerenciadorDeCenas;
-			GLFWwindow* glfwWindow;
-			BubbleUI::Manager* gerenciadorUi = nullptr;
+			GLFWwindow* glfwWindow{ nullptr };
+			BubbleUI::Manager* gerenciadorUi{ nullptr };
 		public:
 			Inputs::Inputs* obterGI() const;
 			BubbleUI::Manager* obterGU() const;

@@ -69,20 +69,42 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
         }
 
         // Defini retângulo da letra
-        corpo_do_widget.defPos({ box_pos.x + (float)x_letter + line_pos.x, (float)y_letter + line_pos.y});
-        corpo_do_widget.defTam({ (float)w_letter, (float)h_letter });
+        char_rect.x = box_pos.x + x_letter + line_pos.x;
+        char_rect.y = y_letter + line_pos.y;
+        char_rect.w = w_letter;
+        char_rect.h = h_letter;
 
         // renderiza letra
-        pai->obtCtx()->shader.use();
-        pai->obtCtx()->shader.setBool("texto", true);
-        pai->obtCtx()->shader.setVec3("cor_texto", cor.r, cor.g, cor.b);
-        pai->obtCtx()->shader.setInt("textura", 0);
+        Vector4f char_rectf = paraNDC();
+
+        shader.use();
+        shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
+        shader.setVec2("quadrado.posicao", char_rectf.x, char_rectf.y);
+        shader.setVec2("quadrado.tamanho", char_rectf.z, char_rectf.w);
+        shader.setInt("textura", 0);
+
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        corpo_do_widget.renderizar(GL_TRIANGLES);
+        glBindVertexArray(rect_vertex.VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
 
         w_line += (ch.Advance >> 6); // 1/64 pixels
     }
             box_size.y = line_pos.y + resolucao + letra_padding.y;
+}
+
+// Deve transformar coordenadas pixel para NDC
+Vector4f BubbleUI::Widgets::Texto::paraNDC()
+{
+    Vector4f coord_ndc;
+
+    coord_ndc.z = (char_rect.w * 2.f) / pai->obtCtx()->tamanho.width;
+    coord_ndc.w = -(2.0f * char_rect.h) / pai->obtCtx()->tamanho.height;
+    coord_ndc.x = (char_rect.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * char_rect.y) / pai->obtCtx()->tamanho.height;
+
+    return coord_ndc;
 }
 
 void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)

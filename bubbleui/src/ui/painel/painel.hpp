@@ -4,6 +4,7 @@
 #include "separador.hpp"
 #include "bubbleui.hpp"
 #include "aba.hpp"
+#include "src/ui/util/pop_up.hpp"
 
 namespace BubbleUI
 {
@@ -30,16 +31,21 @@ namespace BubbleUI
 		Vector2f widget_pos;
 		Vector2 widget_padding;
 	protected:
-		std::string Nome = "Painel";
-		Formas::Moldura* moldura;
-		bool renderizar_corpo = true;
-		Contexto* contexto;
-		Separador* borda_e, *borda_d, *borda_c, *borda_b;
-		Aba* m_aba;
 		void configurar(Contexto* ctx, Vector4 rect = { 2, 2, 100, 50 });
 		virtual void preAtualizacao();
 		virtual void preRenderizacao();
 		void corrigirLimite();
+
+		std::string Nome = "Painel";
+		Formas::Moldura* moldura{ nullptr };
+		Util::PopUp* menu_de_contexto{ nullptr };
+		bool renderizar_corpo{ true };
+		Contexto* contexto{nullptr};
+		Separador* borda_e{ nullptr },
+			* borda_d{ nullptr },
+			* borda_c{ nullptr },
+			* borda_b{ nullptr };
+		Aba* m_aba{ nullptr };
 		std::vector<Widget*> lista_widgets;
 		Vector4 retangulo;
 		Vector2 limite_min_tam;

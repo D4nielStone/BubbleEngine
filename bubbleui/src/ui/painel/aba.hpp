@@ -1,19 +1,19 @@
 #pragma once
-#include "src/ui/formas/rect.hpp"
+#include "src/ui/widgets/texto.hpp"
 #include "bubbleui.hpp"
 
 namespace BubbleUI
 {
 	class Painel;
-	class BEUI_DLL_API Aba
+	class BEUI_DLL_API Aba : public Widgets::Texto
 	{
 	public:
 		Aba(Painel* painel);
-		void atualizar(float deltaTime);
-		void renderizar();
+		Aba() = default;
+		void atualizar(float deltaTime) override;
+		void renderizar() override;
 	private:
-		void renderizar_texto();
 		Painel* painel;
-		Formas::Rect* corpo_do_texto, *corpo_rect;
+		Formas::Rect *corpo_rect;
 	};
 }
