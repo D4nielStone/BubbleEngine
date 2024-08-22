@@ -26,8 +26,8 @@ namespace BubbleUI
 		void renderizar();
 		bool cursorNormal();
 		std::string nome() const;
+		bool selecionado {false}, arrastando{false}, mouse1click{false}, mostrar_popup{false}, esconder_popup{false};
 		Lado redimen_atual;
-		bool selecionado = false, arrastando, mouse1click;
 		Vector2f widget_pos;
 		Vector2 widget_padding;
 	protected:

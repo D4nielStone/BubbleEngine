@@ -49,6 +49,11 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
         adicionarCena(new Scene(Nome.c_str()));
     carregarCena(numeroDeCenas() - 1);
 }
+
+void Bubble::Cena::SceneManager::defViewport(Vector4 rect)
+{
+    viewport_rect = rect;
+}
 // Deve adicionar cena à lista
 void SceneManager::adicionarCena(Scene* scene) 
 {
@@ -72,17 +77,21 @@ void SceneManager::carregarCena(int sceneIndex) {
     }
 }
 // Deve renderizar cena atual
-void SceneManager::renderizarCenaAtual(Vector4 viewportSize) const
+void SceneManager::renderizarCenaAtual() const
 {
+
     float aspecto;
-    if (viewportSize.h != 0)
-        aspecto = static_cast<float>(viewportSize.w) / viewportSize.h;
+    if (viewport_rect.h != 0)
+        aspecto = static_cast<float>(viewport_rect.w) / viewport_rect.h;
     else
         aspecto = 1;
-    glViewport(0, 0, viewportSize.w, viewportSize.h);
+    glViewport(0, 0, viewport_rect.w, viewport_rect.h);
     glEnable(GL_DEPTH_TEST);
 
+    cenaAtual()->camera_editor.desenharFrame(viewport_rect);
     cenaAtual()->renderizar(aspecto);
+    // Desligar framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 // Deve atualizar cena atual
 void SceneManager::atualizarCenaAtual(float deltaTime) const

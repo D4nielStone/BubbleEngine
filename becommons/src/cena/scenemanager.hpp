@@ -18,6 +18,7 @@ namespace Bubble {
             int currentSceneIndex;
             Scene* criarCenaPadrao(std::string Nome);
             Inputs::Inputs* inputs = nullptr;
+            Vector4 viewport_rect;
         public:
             SceneManager();
             ~SceneManager();
@@ -27,9 +28,10 @@ namespace Bubble {
             int cenaAtualIdx() const;
             Scene* cenaAtual() const;
             void carregarCena(int sceneIndex);
-            void renderizarCenaAtual(Vector4 viewportSize) const;
+            void renderizarCenaAtual() const;
             void atualizarCenaAtual(float deltaTime) const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
+            void defViewport(Vector4 rect = {0, 0, 0, 0});
         };
 
     } // namespace Nucleo

@@ -142,6 +142,11 @@ struct Vector2f
     {
         return !(*this == other);
     }
+    // Operador de soma (+)
+    Vector2f operator+(const Vector2f& other) const
+    {
+        return {x + other.x, y+other.y};
+    }
 };
 
 struct Size

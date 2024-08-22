@@ -85,6 +85,9 @@ void Engine::renderizar(Vector4 rect_size)
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
+    // Renderizar cena
+    gerenciadorDeCenas.renderizarCenaAtual();
+
     // Renderizar UI
     gerenciadorUi->renderizar();
 

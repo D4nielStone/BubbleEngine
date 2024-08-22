@@ -54,13 +54,13 @@ namespace Bubble
             bool isKeyPressed(Key key) const;
             InputMode getInputMode() const;
             double mousex, mousey;
-            int mouseEnter = 0, teclado_action = 0, mods = 0;
-            char letra = '\0';
-            bool mouseClick, char_press = false;
+            int mouseEnter {0}, teclado_action{0}, mods{0}, mouseButton{0};
+            char letra{ '\0' };
+            bool mouseClick{false}, char_press{false};
         protected:
             virtual void handleKey(Key key);
         private:
-            InputMode currentMode = InputMode::Editor;
+            InputMode currentMode{ InputMode::Editor };
             std::unordered_map<Key, bool> keyStates;
         };
     }

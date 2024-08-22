@@ -8,8 +8,12 @@ namespace BubbleUI
 		{
 		public:
 			PopUp(Contexto*);
+			void mostrar();
+			void esconder();
+			void renderizar(GLenum) override;
 		private:
 			void preAtualizacao() override;
+			bool vmostrar{ false };
 			Bubble::Inputs::Inputs* inputs{ nullptr };
 		};
 	}

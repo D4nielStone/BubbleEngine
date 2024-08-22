@@ -13,12 +13,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
 	if (scenemanager->cenaAtualIdx() != -1)
 	{
 		Vector4 rect_size = buffer->obtRect();
-		scenemanager->cenaAtual()->camera_editor.desenharFrame(rect_size);
-
-		scenemanager->renderizarCenaAtual(rect_size);
-
-		// Desligar framebuffer
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		scenemanager->defViewport(rect_size);
 		buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
 	}
 }

@@ -92,9 +92,15 @@ void BubbleUI::Manager::atualizar(float deltaTime)
 			if (contexto.inputs->mouseEnter == GLFW_PRESS && painel->mouse1click)
 			{
 				painelSelecionado(painel);
+
 				depth = true;
 				painel->mouse1click = false;
 			}
+			if (contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
+			{
+				painel->mostrar_popup = true;
+			}else if(contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
+				painel->esconder_popup= true;
 		}
 		else
 			painel->mouse1click = false;

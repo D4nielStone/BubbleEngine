@@ -19,7 +19,6 @@ void BubbleUI::Aba::atualizar(float deltaTime)
     corpo_rect->defTam({ (float)painel->obtRect().w, 15});
     box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
     box_size = { (float)corpo_rect->obtRect().w, (float)corpo_rect->obtRect().h };
-    painel->widget_pos = { painel->obtRect().x, painel->obtRect().y + corpo_rect->obtRect().h };
     corpo_rect->atualizar(deltaTime);
 }
 
@@ -64,4 +63,5 @@ void BubbleUI::Aba::renderizar()
         glBindTexture(GL_TEXTURE_2D, 0);
         w_line += (ch.Advance >> 6); // 1/64 pixels
     }
+    painel->widget_pos = { 0, (float)corpo_rect->obtRect().h };
 }

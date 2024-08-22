@@ -13,5 +13,21 @@ BubbleUI::Util::PopUp::PopUp(Contexto* contexto)
 
 void BubbleUI::Util::PopUp::preAtualizacao()
 {
-	this->retangulo = {(float)inputs->mousex, (float)inputs->mousey, 50, 50};
+}
+
+void BubbleUI::Util::PopUp::mostrar()
+{
+	this->retangulo = { (float)inputs->mousex, (float)inputs->mousey, 50, 50 };
+	vmostrar = true;
+}
+
+void BubbleUI::Util::PopUp::esconder()
+{
+	vmostrar = false;
+}
+
+void BubbleUI::Util::PopUp::renderizar(GLenum mode)
+{
+	if (vmostrar)
+		Moldura::renderizar(mode);
 }

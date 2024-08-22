@@ -69,7 +69,20 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 	moldura->defPos({ retangulo.x, retangulo.y });
 	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
 	moldura->atualizar(deltaTime);
+
+	if (mostrar_popup)
+	{
+		menu_de_contexto->mostrar();
+		mostrar_popup = false;
+	}
+	else if (esconder_popup)
+	{
+		menu_de_contexto->esconder();
+		esconder_popup = false;
+	}
+
 	menu_de_contexto->atualizar(deltaTime);
+
 
 	preAtualizacao();
 	m_aba->atualizar(deltaTime);
@@ -83,15 +96,16 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 
 void BubbleUI::Painel::renderizar()
 {
-	glScissor(retangulo.x -1, (contexto->tamanho.height - (retangulo.y - 1) - retangulo.h), retangulo.w + 1, retangulo.h + 1);
+	glScissor(retangulo.x, (contexto->tamanho.height - (retangulo.y) - retangulo.h), retangulo.w, retangulo.h);
 
 	moldura->renderizar(GL_TRIANGLES);
 	preRenderizacao();
+	widget_pos = { 0, 0 };
+	m_aba->renderizar();
 	for (auto& widget : lista_widgets)
 	{
 		widget->renderizar();
 	}
-	m_aba->renderizar();
 
 	menu_de_contexto->renderizar(GL_TRIANGLES);
 }
@@ -115,8 +129,6 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 
 void BubbleUI::Painel::preAtualizacao()
 {
-	widget_pos.x += widget_padding.x;
-	widget_pos.y += widget_padding.y;
 }
 
 void BubbleUI::Painel::preRenderizacao()

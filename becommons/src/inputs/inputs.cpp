@@ -127,6 +127,7 @@ void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
     if (inputs) {
         // Processar o clique do mouse
          inputs->mouseEnter = action;
+         inputs->mouseButton = button;
     }
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;

@@ -33,10 +33,6 @@ void BubbleUI::Widgets::Texto::atualizar(float deltaTime)
 {
     if(label)
     frase = *label;
-    // posiciona a moldura no widgetpos
-    box_pos.x = pai->widget_pos.x;
-    box_pos.y = pai->widget_pos.y;
-    box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
 }
 
 void BubbleUI::Widgets::Texto::renderizar()
@@ -46,9 +42,15 @@ void BubbleUI::Widgets::Texto::renderizar()
 
 void BubbleUI::Widgets::Texto::renderizar_texto()
 {
+    // posiciona a moldura no widgetpos
+    box_pos.x = pai->obtRect().x + pai->widget_padding.x + pai->widget_pos.x;
+    box_pos.y =pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
+    box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
+    // Dimenções da letra
     int h_letter = 0, w_letter = 0, x_letter = 0, y_letter = 0, w_line = 0;
     line_pos.y = 0;
     line_pos.x = letra_padding.x;
+    largura_texto = 0;
 
     Bubble::Arquivadores::Character ch;
 
@@ -90,8 +92,13 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
         glBindTexture(GL_TEXTURE_2D, 0);
 
         w_line += (ch.Advance >> 6); // 1/64 pixels
+        if (w_line > largura_texto)
+            largura_texto = w_line;
     }
-            box_size.y = line_pos.y + resolucao + letra_padding.y;
+    // Próximo widget
+    box_size.y = line_pos.y + resolucao + letra_padding.y;
+    pai->widget_pos.x = 0;
+    pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
 }
 
 // Deve transformar coordenadas pixel para NDC

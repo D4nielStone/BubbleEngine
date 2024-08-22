@@ -2,6 +2,7 @@
 #include "bubbleui.hpp"
 #include "src/ui/formas/rect.hpp"
 #include "src/ui/formas/moldura.hpp"
+#include "src/ui/formas/colisao2d.hpp"
 
 namespace BubbleUI
 {
@@ -14,8 +15,9 @@ namespace BubbleUI
 		virtual void renderizar() = 0;
 		virtual void defPainel(Painel*);
 	protected:
+		Colisao2d* colisao{ nullptr };
 		Formas::Moldura moldura;
 		Vector2f posicao_antiga;
-		Painel* pai;
+		Painel* pai{ nullptr };
 	};
 }

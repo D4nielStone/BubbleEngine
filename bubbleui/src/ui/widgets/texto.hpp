@@ -23,7 +23,7 @@ namespace BubbleUI
 		protected:
 			void renderizar_texto();
 			unsigned int resolucao, texturaID;
-			int lines_box_limite;
+			int lines_box_limite, largura_texto;
 			Vector2f box_size, box_pos, line_pos;
 			Vector2 letra_padding;
 			std::string texto, frase;

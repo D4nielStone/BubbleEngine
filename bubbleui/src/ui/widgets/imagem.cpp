@@ -24,10 +24,10 @@ void BubbleUI::Widgets::Imagem::atualizar(float deltaTime)
 {
     if (preencher)
     {
-        rect.w = pai->obtRect().w - 1;
-        rect.h = pai->obtRect().h - 2;
+        rect.w = pai->obtRect().w;
+        rect.h = pai->obtRect().h;
     }
-    rect = { pai->widget_pos.x, pai->widget_pos.y, rect.w , (int)(rect.h - (pai->widget_pos.y - pai->obtRect().y)) };
+    rect = { pai->obtRect().x + pai->widget_pos.x, pai->obtRect().y + pai->widget_pos.y, rect.w , rect.h };
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem

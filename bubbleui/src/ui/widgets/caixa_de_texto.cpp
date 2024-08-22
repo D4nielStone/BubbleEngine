@@ -65,8 +65,6 @@ void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
 void BubbleUI::Widgets::CaixaTexto::renderizar()
 {
     moldura.renderizar(GL_TRIANGLES);
-    box_pos.x = pai->widget_padding.x + pai->widget_pos.x;
-    box_pos.y = pai->widget_padding.y + pai->widget_pos.y;
     if (texto.empty())
     {
         frase = mensagem;
