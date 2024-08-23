@@ -5,24 +5,24 @@
 
 using namespace Bubble::Arquivadores;
 
-BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), texto(""), letra_padding({ 5, 4 })
+BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), texto(""), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     configurar();
 }
 
-BubbleUI::Widgets::Texto::Texto(std::string* label, unsigned int pxl) : label(label), resolucao(pxl)
+BubbleUI::Widgets::Texto::Texto(std::string* label, unsigned int pxl) : label(label), resolucao(pxl), letra_padding({ 0, 0 })
 {
     configurar(resolucao);
 }
-BubbleUI::Widgets::Texto::Texto(std::string l) : resolucao(16)
+BubbleUI::Widgets::Texto::Texto(std::string l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     label = new std::string(l);
     configurar();
 }
 
-BubbleUI::Widgets::Texto::Texto(std::string l, unsigned int pxl) : resolucao(pxl)
+BubbleUI::Widgets::Texto::Texto(std::string l, unsigned int pxl) : resolucao(pxl), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     label = new std::string(l);
@@ -39,14 +39,15 @@ void BubbleUI::Widgets::Texto::renderizar()
 {
     renderizar_texto();
 }
-
 void BubbleUI::Widgets::Texto::renderizar_texto()
 {
-    // posiciona a moldura no widgetpos
+    // Posiciona o box dentro do widget, com padding do pai
     box_pos.x = pai->obtRect().x + pai->widget_padding.x + pai->widget_pos.x;
-    box_pos.y =pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
+    box_pos.y = pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
     box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
-    // Dimenções da letra
+    box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
+
+    // Dimensões da letra
     int h_letter = 0, w_letter = 0, x_letter = 0, y_letter = 0, w_line = 0;
     line_pos.y = 0;
     line_pos.x = letra_padding.x;
@@ -59,7 +60,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
 
         w_letter = ch.Size.x;
         h_letter = ch.Size.y;
-        y_letter = y_letter = (box_pos.y + resolucao - ch.Bearing.y);
+        y_letter = (box_pos.y + resolucao - ch.Bearing.y);
         x_letter = w_line + ch.Bearing.x;
 
         // Verifica quebra de linha
@@ -76,7 +77,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
         char_rect.w = w_letter;
         char_rect.h = h_letter;
 
-        // renderiza letra
+        // Renderiza letra
         Vector4f char_rectf = paraNDC();
 
         shader.use();
@@ -96,10 +97,10 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
             largura_texto = w_line;
     }
     // Próximo widget
-    box_size.y = line_pos.y + resolucao + letra_padding.y;
-    pai->widget_pos.x = 0;
+    box_size.y = line_pos.y + resolucao + letra_padding.y;  // Altura do texto mais padding
     pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
 }
+
 
 // Deve transformar coordenadas pixel para NDC
 Vector4f BubbleUI::Widgets::Texto::paraNDC()

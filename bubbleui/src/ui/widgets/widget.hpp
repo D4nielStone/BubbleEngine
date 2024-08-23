@@ -17,7 +17,6 @@ namespace BubbleUI
 	protected:
 		Colisao2d* colisao{ nullptr };
 		Formas::Moldura moldura;
-		Vector2f posicao_antiga;
 		Painel* pai{ nullptr };
 	};
 }

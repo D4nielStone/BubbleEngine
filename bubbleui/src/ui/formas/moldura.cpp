@@ -8,6 +8,10 @@ BubbleUI::Formas::Moldura::Moldura(Contexto* contexto, Vector4 retangulo)
 	linha_b = new Linha({0, 0, 0, 0}, contexto);
 	linha_e = new Linha({0, 0, 0, 0}, contexto);
 	linha_c = new Linha({0, 0, 0, 0}, contexto);
+	linha_d->defCor({ 0.35, 0.35, 0.35 });
+	linha_b->defCor({ 0.35, 0.35, 0.35 });
+	linha_e->defCor({ 0.55, 0.55, 0.55 });
+	linha_c->defCor({ 0.55, 0.55, 0.55 });
 }
 
 void BubbleUI::Formas::Moldura::atualizar(float deltaTime)
@@ -21,14 +25,14 @@ void BubbleUI::Formas::Moldura::atualizar(float deltaTime)
 			retangulo.y + retangulo.h
 		});
 	linha_e->defPos({
-			retangulo.x,
+			retangulo.x + 1,
 			retangulo.y,
 			retangulo.x,
 			retangulo.y + retangulo.h
 		});
 	linha_c->defPos({
 			retangulo.x,
-			retangulo.y,
+			retangulo.y - 1,
 			retangulo.x + retangulo.w,
 			retangulo.y
 		});
@@ -48,7 +52,12 @@ void BubbleUI::Formas::Moldura::renderizar(GLenum mode)
 {
 	Rect::renderizar(mode);
 	linha_c->renderizar();
-	linha_d->renderizar();
 	linha_e->renderizar();
+	linha_d->renderizar();
 	linha_b->renderizar();
+}
+
+BubbleUI::Contexto* BubbleUI::Formas::Moldura::obtCtx() const
+{
+	return contexto;
 }

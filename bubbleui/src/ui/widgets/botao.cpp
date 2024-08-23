@@ -17,6 +17,7 @@ void BubbleUI::Widgets::Botao::atualizar(float deltaTime)
 
 void BubbleUI::Widgets::Botao::renderizar()
 {
+    cor = { 1, 1, 1 };
     moldura.renderizar(GL_TRIANGLES);
     renderizar_texto();
     colisao->defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y});

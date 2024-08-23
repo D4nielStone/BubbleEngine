@@ -12,9 +12,16 @@ namespace BubbleUI
 			Moldura() = default;
 			void atualizar(float deltaTime) override;
 			void renderizar(GLenum) override;
+			Contexto* obtCtx() const;
+			Vector2f widget_pos;
+			Vector2 widget_padding{ 3, 3 };
 		protected:
 			virtual void preAtualizacao() {};
-			Linha* linha_d,* linha_e,* linha_c,* linha_b;
+			Linha
+				* linha_d{ nullptr },
+				* linha_e{ nullptr },
+				* linha_c{ nullptr }, 
+				* linha_b{ nullptr };
 		};
 	}
 }

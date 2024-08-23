@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\items\item_menu.hpp" />
     <ClInclude Include="src\ui\widgets\botao.hpp" />
     <ClInclude Include="src\ui\util\pop_up.hpp" />
     <ClInclude Include="src\ui\formas\moldura.hpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\items\item_menu.cpp" />
     <ClCompile Include="src\ui\widgets\botao.cpp" />
     <ClCompile Include="src\ui\util\pop_up.cpp" />
     <ClCompile Include="src\ui\formas\moldura.cpp" />
