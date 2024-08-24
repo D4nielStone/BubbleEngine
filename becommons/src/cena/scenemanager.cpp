@@ -28,8 +28,8 @@ Scene* SceneManager::criarCenaPadrao(std::string Nome)
     Scene* scene = new Scene(Nome.c_str());
     //Cira e configura entidade Terreno
     auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
-    terreno->adicionarComponente(std::make_shared<Bubble::Componentes::Terreno>());
-
+    auto componente = std::make_shared<Bubble::Componentes::Terreno>();
+    terreno->adicionarComponente(componente);
     //Cria e configura entidade Esfera
     auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
     

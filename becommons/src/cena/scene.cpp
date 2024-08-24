@@ -12,7 +12,11 @@ namespace Bubble::Cena
     // Deve adicionar entidade
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
         if (!existeEntidade(gameObject.get())) {
-            Entidades.push_back(gameObject);
+            for (auto& c : gameObject->listaDeComponentes()) {
+                if (!c->carregado())
+                    c->configurar();
+            }
+            Entidades.insert(std::move(gameObject));
         }
     }
     // Deve desenhar céu ( skybox, clear color ... )
@@ -23,7 +27,6 @@ namespace Bubble::Cena
     // Deve renderizar Cena
     void Scene::renderizar(float aspecto) {
 
-        desenharCeu();
         camera_editor.atualizarAspecto(aspecto);
         for (auto& obj : Entidades) {
             obj->renderizar();
@@ -43,18 +46,15 @@ namespace Bubble::Cena
     }
     // Deve carregar Cena
     void Scene::carregar() {
-        entidadeSelecionada = Entidades[Entidades.size() - 1].get();
         camera_editor.configurar();
 
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        //skybox.configurarBuffers();
-
-        for (auto& obj : Entidades) {
-            for (auto& c : obj->listaDeComponentes()) {
-                c->configurar();
-            }
+        for(auto& entidade : Entidades)
+        for (auto& c : entidade->listaDeComponentes()) {
+            c->configurar();
         }
+        //skybox.configurarBuffers();
     }
     // Deve serializar ela mesma ( isso é, passar para o documento json seus dados )
     void Scene::serializar(rapidjson::Document* doc) const {

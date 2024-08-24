@@ -14,6 +14,7 @@ void Terreno::configurar()
     {
         gerarHeightMap();
         configurarBuffers();
+        carregadov = true;
         Debug::emitir("TERRENO", "Terreno configurado");
     }
 void Terreno::atualizarMaterial()

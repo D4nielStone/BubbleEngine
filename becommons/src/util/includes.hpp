@@ -158,16 +158,17 @@ struct Color
 {
     float r = 0.7f, g = 0.7f, b = 0.7f;
 };
+
 struct Textura
 {
-    unsigned int ID;
-    const char* path = "R.jfif";
-    bool gerado = false;
+    unsigned int ID{ 0 };
+    bool carregado{ false };
+    const char* path{ "" };
 };
 
 struct Material {
     Color difusa;
-    Textura textura_difusa;
+    Textura* textura_difusa{ new Textura()};
 };
 
 struct Vertex {

@@ -24,16 +24,16 @@ namespace Bubble {
 			std::string* nome();
 			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
 			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);
-			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
+			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
 			std::shared_ptr<Bubble::Componentes::Transformacao> obterTransformacao();
-			const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
+			const std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
 			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
 			bool ativado;
 		private:
 			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
-			std::vector<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
+			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
 			std::string Nome = "SemNome";
 		};
 	}

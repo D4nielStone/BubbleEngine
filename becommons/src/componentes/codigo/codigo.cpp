@@ -26,6 +26,7 @@ void Codigo::configurar() {
             std::cerr << lua_tostring(L, -1) << "\n";
         }
     }
+    carregadov = true;
 }
 // Deve atualizar o script
 void Codigo::atualizar(float deltaTime) {

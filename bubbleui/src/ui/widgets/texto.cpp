@@ -1,5 +1,4 @@
 #include "texto.hpp"
-#include "src/arquivadores/textura.hpp"
 #include "src/ui/painel/painel.hpp"
 #include "src/depuracao/debug.hpp"
 

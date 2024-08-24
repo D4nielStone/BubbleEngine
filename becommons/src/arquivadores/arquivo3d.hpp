@@ -17,7 +17,9 @@ namespace Bubble {
 
             Arquivo3d();
             Arquivo3d(std::string caminho);
+            Arquivo3d(std::wstring caminho);
             void exibirInformacoes();
+            std::string nome() const;
         private:
             const aiScene* cena;
             void carregarModelo(const std::string& caminho);

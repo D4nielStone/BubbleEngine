@@ -44,6 +44,7 @@ void Camera::configurar() {
     Debug::emitir(Debug::Tipo::Erro, "Framebuffer incompleto");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     Debug::emitir(Debug::Tipo::Mensagem, "Camera configurada");
+    carregadov = true;
 }
 void Camera::atualizarAspecto(float aspect)
 {
@@ -71,7 +72,6 @@ void Camera::desenharFrame(Vector4 viewportRect) const
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w, viewportRect.h);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    glClearColor(ceu[0], ceu[1], ceu[2], 1);
 }
 void Camera::atualizar(float deltaTime) {
     matrizProjecao = glm::perspective(

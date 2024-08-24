@@ -1,5 +1,4 @@
 #include "item_menu.hpp"
-#include "src/arquivadores/textura.hpp"
 #include "src/depuracao/debug.hpp"
 #include <src/tempo/delta_time.hpp>
 
@@ -35,10 +34,19 @@ void BubbleUI::Items::ItemMenu::atualizar()
     altura = box_pos.y + box_size.y - pai->obtRect().y;
     if (label)
         frase = *label;
+    clicado = false;
     if (!colisao->mouseEmCima())
+    {
+        mouseEmCima = true;
         moldura.defCor({ 0.298f, 0.286f, 0.322f });
+    }
     else
+    {
+        if (pai->obtCtx()->inputs->mouseEnter == GLFW_PRESS && pai->obtCtx()->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
+            clicado = true;
+        mouseEmCima = false;
         moldura.defCor({ 0.4, 0.4, 0.4 });
+    }
     moldura.defPos({ box_pos.x, box_pos.y});
     moldura.defTam({ (float)largura_texto + letra_padding.x * 2, (float)box_size.y });
     moldura.atualizar(Bubble::Tempo::delta_time);

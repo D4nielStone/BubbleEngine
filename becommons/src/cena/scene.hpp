@@ -20,8 +20,7 @@ namespace Bubble {
             bool existeEntidade(Entidades::Entidade* entidade) const;
             void desenharCeu();
         public:
-            std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
-            Entidades::Entidade* entidadeSelecionada = nullptr;
+            std::unordered_set<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
             Bubble::Entidades::CameraEditor camera_editor;
             Bubble::Componentes::Camera* camera_principal = nullptr;
 

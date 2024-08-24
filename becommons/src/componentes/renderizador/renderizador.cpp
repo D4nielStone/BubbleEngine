@@ -13,6 +13,7 @@ void Renderizador::configurar()
             else
                 configurarBuffers(vertices[i]);
         };
+        carregadov = true;
         Debug::emitir(Debug::Tipo::Mensagem, "Renderizador configurado");
     }
 void Renderizador::atualizar(float deltaTime)
@@ -21,7 +22,7 @@ void Renderizador::atualizar(float deltaTime)
         {
             if (materiais.size() <= i + 1)
             {
-                atualizarCores(*materiais[i]);
+                atualizarCores(materiais[i]);
                 desenharModelo(vertices[i]);
             }
             else
@@ -82,38 +83,28 @@ void Renderizador::desenharModelo(Vertex& mesh)
         glBindVertexArray(mesh.VAO);
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mesh.indices.size()), GL_UNSIGNED_INT, 0);
     }
-void Renderizador::atualizarCores(Material& material)
+void Renderizador::atualizarCores(Material* material)
     {
-        if (shader)
+        if (shader && material)
         {
             shader->use();
-            glBindTexture(GL_TEXTURE_2D, ID);
-            shader->setVec3("objectColor", material.difusa.r, material.difusa.g, material.difusa.b);
+            shader->setVec3("objectColor", material->difusa.r, material->difusa.g, material->difusa.b);
             shader->setInt("textura_difusa", 0);
         }
     }
-Renderizador::Renderizador()
-    {
-        Nome = "Renderizador";
-        Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
-    }
-Renderizador::Renderizador(Arquivadores::Arquivo3d& objf)
+Renderizador::Renderizador(const Arquivadores::Arquivo3d& objf)
     {
         Nome = "Renderizador";
         materiais = objf.materiais;
         vertices = objf.vertices;
         Debug::emitir(Debug::Tipo::Mensagem, "Renderizador criado");
     }
-Renderizador::~Renderizador() {
-        // Liberar texturas e buffers
-        for (auto& mat : materiais) {
-            if (mat->textura_difusa.gerado) {
-                glDeleteTextures(1, &ID);
-            }
-        }
-        for (auto& vertex : vertices) {
-            glDeleteVertexArrays(1, &vertex.VAO);
-            glDeleteBuffers(1, &vertex.VBO);
-            glDeleteBuffers(1, &vertex.EBO);
-        }
+Renderizador::~Renderizador()
+{
+    // Liberar texturas e buffers
+    for (auto& vertex : vertices) {
+        glDeleteVertexArrays(1, &vertex.VAO);
+        glDeleteBuffers(1, &vertex.VBO);
+        glDeleteBuffers(1, &vertex.EBO);
     }
+}

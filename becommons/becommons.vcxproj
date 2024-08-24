@@ -150,7 +150,6 @@
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\util\includes.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
-    <ClCompile Include="src\arquivadores\textura.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\tempo\delta_time.hpp" />
@@ -175,7 +174,6 @@
     <ClInclude Include="src\inputs\inputs.hpp" />
     <ClInclude Include="src\util\includes.hpp" />
     <ClInclude Include="src\util\skybox.hpp" />
-    <ClInclude Include="src\arquivadores\textura.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #include "arquivo3d.hpp"
 #include "src/depuracao/debug.hpp"
 #include "iostream"
+#include "filesystem"
 #include "utility"
 
 using namespace Bubble::Arquivadores;
@@ -13,10 +14,15 @@ Arquivo3d::Arquivo3d(std::string caminho) : Caminho(caminho)
     carregarModelo(Caminho);
 }
 
+Bubble::Arquivadores::Arquivo3d::Arquivo3d(std::wstring caminho) : Caminho(std::filesystem::path(caminho).string())
+{
+    carregarModelo(std::filesystem::path(caminho).string());
+}
+
 void Arquivo3d::exibirInformacoes() 
 {
      Debug::emitir("IMPORTADOR", "Extensão do arquivo: " + obterExtensaoArquivo(Caminho));
-     Debug::emitir("IMPORTADOR", "Nome da cena: " + *cena->mName.C_Str());
+     Debug::emitir("IMPORTADOR", "Nome da cena: " + std::string(cena->mName.C_Str()));
      Debug::emitir("IMPORTADOR", ">> Número de malhas: " + std::to_string(cena->mNumMeshes));
      for (size_t i = 0; i < vertices.size(); ++i) {
          Debug::emitir("IMPORTADOR", ">> Malha " + std::to_string(i));
@@ -30,13 +36,14 @@ void Arquivo3d::carregarModelo(const std::string& caminho) {
     
     for (const auto& arquivo : arquivos)
     {
-        if (arquivo.second == caminho)
-        {
+        if (arquivo.second == caminho) {
             Debug::emitir(Debug::Alerta, "Arquivo 3d já existente, re-utilizando");
             vertices = arquivo.first.first;
             materiais = arquivo.first.second;
             Caminho = arquivo.second;
+            return;
         }
+
     }
     
     Assimp::Importer importador;
@@ -48,8 +55,7 @@ void Arquivo3d::carregarModelo(const std::string& caminho) {
     }
 
     extrairDados();
-
-    arquivos.push_back(std::pair(std::pair(vertices, materiais), caminho));
+    arquivos.push_back(std::make_pair(std::make_pair(vertices, materiais), caminho));
 }
 void Arquivo3d::extrairDados() {
     if (!cena) return;
@@ -58,6 +64,7 @@ void Arquivo3d::extrairDados() {
 
     for (unsigned int i = 0; i < cena->mNumMeshes; ++i) {
         aiMesh* mesh = cena->mMeshes[i];
+        if (!mesh) continue;
 
         Vertex dadosVertices;
 
@@ -111,7 +118,7 @@ void Arquivo3d::extrairMateriais() {
         aiString path;
         // extrair textura difusa
         if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &path)) {
-            mat->textura_difusa.path = path.C_Str(); // Armazena o caminho da textura
+           mat->textura_difusa->path = path.C_Str(); // Armazena a textura
         }
         // extrair cor difusa
         if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, cor)) {
@@ -120,6 +127,10 @@ void Arquivo3d::extrairMateriais() {
 
         materiais.push_back(mat);
     }
+}
+std::string Bubble::Arquivadores::Arquivo3d::nome() const
+{
+    return cena->mName.C_Str();
 }
 std::string Arquivo3d::obterExtensaoArquivo(std::string& caminho) {
     size_t posPonto = caminho.find_last_of('.');
