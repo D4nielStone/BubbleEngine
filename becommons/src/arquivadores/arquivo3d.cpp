@@ -111,14 +111,13 @@ void Arquivo3d::extrairMateriais() {
         aiMaterial* material = cena->mMaterials[i];
         Material* mat = new Material();
 
-        aiString nome;
-
         aiColor3D cor;
 
         aiString path;
         // extrair textura difusa
         if (AI_SUCCESS == material->GetTexture(aiTextureType_DIFFUSE, 0, &path)) {
            mat->textura_difusa->path = path.C_Str(); // Armazena a textura
+           Debug::emitir("Textura Difusa", material->GetName().C_Str() + std::string(": ") + path.C_Str());
         }
         // extrair cor difusa
         if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, cor)) {
