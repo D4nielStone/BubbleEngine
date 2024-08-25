@@ -9,7 +9,7 @@ namespace Bubble
 		class BECOMMONS_DLL_API Skybox
 		{
 		private:
-			Vertex mVertex;
+			Vertex* mVertex;
 			const char* Path = nullptr;
 			unsigned int cubemapTexture, VBO, VAO, EBO;
 		public:

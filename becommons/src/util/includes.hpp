@@ -159,16 +159,21 @@ struct Color
     float r = 0.7f, g = 0.7f, b = 0.7f;
 };
 
-struct Textura
-{
+struct Textura {
     unsigned int ID{ 0 };
-    bool carregado{ false };
+    std::string tipo{ "" };
     const char* path{ "" };
+
+    // Operador de igualdade
+    bool operator==(const Textura& other) const {
+        return ID == other.ID && tipo == other.tipo && std::string(path) == std::string(other.path);
+    }
 };
 
 struct Material {
     Color difusa;
-    Textura* textura_difusa{ new Textura()};
+    std::vector<Textura> texturas;
+    std::string nome{ "material sem nome" };
 };
 
 struct Vertex {
@@ -176,14 +181,19 @@ struct Vertex {
     std::vector<unsigned int> indices;
     std::vector<float> uvs;
     std::vector<float> normals;
+    Material material;
+    std::string nome = "malha sem nome";
     unsigned int VAO = 0, EBO = 0, VBO = 0;
     bool carregado = false;
 };
-struct Projeto
+
+struct Node
 {
-    std::string nome;
-    std::string path;
+    std::vector<Node> filhos;
+    std::vector<Vertex> malhas;
+    std::string nome = "node sem nome";
 };
+
 extern BECOMMONS_DLL_API Vertex rect_vertex;
 extern BECOMMONS_DLL_API Vertex linha_vertex;
 

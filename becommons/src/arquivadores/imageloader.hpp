@@ -26,5 +26,7 @@ namespace Bubble {
             int width, height, channels;
             unsigned char* data;
         };
+        BECOMMONS_DLL_API unsigned int TextureFromFile(const char* path, const std::string& directory);
+        BECOMMONS_DLL_API unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height);
     }
 }

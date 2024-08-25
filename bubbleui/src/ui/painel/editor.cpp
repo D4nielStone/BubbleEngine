@@ -37,7 +37,7 @@ BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* sce
 	renderizar_corpo = false;
 	configurar(ctx, rect);
 	adiWidget(buffer);
-	menu_de_contexto->adiItem(new Items::Botao("adicionar objeto 3D", &abrirSelecionar));
+	menu_de_contexto->adiItem(new Items::Botao("importar objeto 3D", &abrirSelecionar));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()

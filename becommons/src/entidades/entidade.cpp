@@ -1,4 +1,3 @@
-#include "becommons.hpp"
 #include "entidade.hpp"
 #include "rapidjson/stringbuffer.h"
 #include "src/cena/scenemanager.hpp"
@@ -10,15 +9,15 @@ Entidade::~Entidade() = default;
 Entidade::Entidade(const char* name)
     : ativado(true), Nome(name), transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
-Entidade::Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto)
+Entidade::Entidade(const Arquivadores::Arquivo3d& arquivo_objeto)
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {
-    carregarModelo(std::move(arquivo_objeto));
+    carregarNode(arquivo_objeto.RootNode);
 }
 
 Entidade::Entidade()
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
-void Entidade::atualizar(float deltaTime) {
+void Entidade::atualizar(float deltaTime) const {
     if (!ativado) return;
 
     for (const auto& componente : Componentes) {
@@ -28,7 +27,7 @@ void Entidade::atualizar(float deltaTime) {
     }
 }
 
-void Entidade::renderizar() {
+void Entidade::renderizar() const {
     if (!ativado) return;
 
     for (const auto& componente : Componentes) {
@@ -39,14 +38,28 @@ void Entidade::renderizar() {
     }
 }
 
-std::string* Entidade::nome() {
-    return &Nome;
+std::string Entidade::nome() const
+{
+    return Nome;
 }
 
-void Entidade::carregarModelo(Bubble::Arquivadores::Arquivo3d object_file) {
-    auto renderizador = std::make_shared<Bubble::Componentes::Renderizador>(std::move(object_file));
-    adicionarComponente(renderizador);
-    Nome = renderizador->nome();
+void Entidade::carregarNode(const Node& node)
+{
+    Nome = node.nome;
+    if (node.malhas.size() > 0)
+    {
+        for (auto& malha : node.malhas)
+        {
+            auto renderizador = std::make_shared<Bubble::Componentes::Renderizador>(malha);
+            adicionarComponente(renderizador);
+        }
+    }
+    for (auto& no_filho : node.filhos)
+    {
+        auto entidade_filho = std::make_shared<Entidade>();
+        entidade_filho->carregarNode(no_filho);
+        filhos.push_back(std::move(entidade_filho));
+    }
 }
 
 std::shared_ptr<Bubble::Comum::Componente> Entidade::obterComponente(const std::string& nome) {
@@ -65,7 +78,13 @@ std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterCo
     return comps;
 }
 
-std::shared_ptr<Bubble::Componentes::Transformacao> Entidade::obterTransformacao() {
+const std::vector<std::shared_ptr<Entidade>>& Bubble::Entidades::Entidade::obterFilhos() const
+{
+    return filhos;
+}
+
+std::shared_ptr<Bubble::Componentes::Transformacao> Entidade::obterTransformacao() const 
+{
     return transformacao;
 }
 

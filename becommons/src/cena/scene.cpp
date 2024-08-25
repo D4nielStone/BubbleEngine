@@ -10,15 +10,23 @@ namespace Bubble::Cena
     }
     Scene::~Scene() {}
     // Deve adicionar entidade
-    void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
-        if (!existeEntidade(gameObject.get())) {
-            for (auto& c : gameObject->listaDeComponentes()) {
-                if (!c->carregado())
-                    c->configurar();
-            }
-            Entidades.insert(std::move(gameObject));
+    void Scene::carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade) {
+        for (auto& componente : entidade->listaDeComponentes()) {
+            if (!componente->carregado())
+                componente->configurar();
+        }
+        for (auto& filho : entidade->obterFilhos()) {
+            carregarComponentes(filho);
         }
     }
+
+    void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
+        if (!existeEntidade(gameObject.get())) {
+            carregarComponentes(gameObject);  // Carrega os componentes da entidade e dos filhos
+            Entidades.insert(std::move(gameObject));  // Adiciona objeto à lista de entidades
+        }
+    }
+
     // Deve desenhar céu ( skybox, clear color ... )
     void Scene::desenharCeu()
     {
@@ -30,20 +38,38 @@ namespace Bubble::Cena
         camera_editor.atualizarAspecto(aspecto);
         for (auto& obj : Entidades) {
             obj->renderizar();
+            renderizarFilhos(obj, aspecto);
+        }
+    }
+    void Scene::renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float aspecto)
+    {
+        for (auto& filho : entidade->obterFilhos()) {
+            filho->renderizar();
+            atualizarFilhos(filho, aspecto);
         }
     }
     // Deve atualizar Cena
-    void Scene::atualizar(float deltaTime)
-    {
+    void Scene::atualizar(float deltaTime) {
         camera_editor.atualizar(deltaTime);
         for (auto& obj : Entidades) {
             obj->atualizar(deltaTime);
-            if (obj->obterComponente("Camera"))
-            {
-                camera_principal = dynamic_cast<Bubble::Componentes::Camera*>(obj->obterComponente("Camera").get());
+            if (auto camera = dynamic_cast<Bubble::Componentes::Camera*>(obj->obterComponente("Camera").get())) {
+                camera_principal = camera;
             }
+            atualizarFilhos(obj, deltaTime);
         }
     }
+
+    void Scene::atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime) {
+        for (auto& filho : entidade->obterFilhos()) {
+            filho->atualizar(deltaTime);
+            if (auto camera = dynamic_cast<Bubble::Componentes::Camera*>(filho->obterComponente("Camera").get())) {
+                camera_principal = camera;
+            }
+            atualizarFilhos(filho, deltaTime);
+        }
+    }
+
     // Deve carregar Cena
     void Scene::carregar() {
         camera_editor.configurar();
@@ -110,12 +136,25 @@ namespace Bubble::Cena
     // Deve retornar se a entidade existe na lista de entidades
     bool Scene::existeEntidade(Entidades::Entidade* entidade) const {
         for (const auto& obj : Entidades) {
-            if (obj.get() == entidade) {
+            if (entidadeExisteRecursivo(obj, entidade)) {
                 return true;
             }
         }
         return false;
     }
+
+    bool Scene::entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const {
+        if (obj.get() == entidade) {
+            return true;
+        }
+        for (const auto& filho : obj->obterFilhos()) {
+            if (entidadeExisteRecursivo(filho, entidade)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Deve retornar nome
     std::string Scene::nome() const {
         return Name;

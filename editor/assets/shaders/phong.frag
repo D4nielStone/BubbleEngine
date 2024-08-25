@@ -8,6 +8,7 @@ out vec4 FragColor;
 
 uniform vec3 viewPos;
 uniform sampler2D textura_difusa;
+uniform bool difusa_ativo;
 
 void main()
 {
@@ -32,6 +33,10 @@ void main()
     vec3 result = ambient + diffuse + specular;
 
     // Apply texture
-    vec4 texColor = texture(textura_difusa, TexCoords);
+    if(difusa_ativo)
+    {
+    FragColor = vec4(result, 1.0) * texture(textura_difusa, TexCoords);
+    return;
+    }
     FragColor = vec4(result, 1.0);
 }

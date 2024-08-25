@@ -15,25 +15,27 @@ namespace Bubble {
 	namespace Entidades {
 		class BECOMMONS_DLL_API Entidade {
 		public:
-			explicit Entidade(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
+			Entidade(const Arquivadores::Arquivo3d& arquivo_objeto);
+			Entidade(const char* name);
 			Entidade();
 			~Entidade();
-			Entidade(const char* name);
-			void atualizar(float deltaTime);
-			void renderizar();
-			std::string* nome();
-			void carregarModelo(Bubble::Arquivadores::Arquivo3d arquivo_objeto);
-			std::shared_ptr<Bubble::Comum::Componente> obterComponente(const std::string& nome);
-			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome);
-			std::shared_ptr<Bubble::Componentes::Transformacao> obterTransformacao();
-			const std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>>& listaDeComponentes() const;
-			void adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente);
+			void atualizar(float deltaTime) const;
+			void renderizar() const;
+			std::string nome() const;
+			void carregarNode(const Node& node);
+			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
+			std::unordered_set<std::shared_ptr<Comum::Componente>> obterComponentes(const std::string& nome);
+			const std::vector<std::shared_ptr<Entidade>>& obterFilhos() const;
+			std::shared_ptr<Componentes::Transformacao> obterTransformacao() const;
+			const std::unordered_set<std::shared_ptr<Comum::Componente>>& listaDeComponentes() const;
+			void adicionarComponente(std::shared_ptr<Comum::Componente> componente);
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
 			bool ativado;
 		private:
-			std::shared_ptr<Bubble::Componentes::Transformacao> transformacao;
-			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Componentes;
+			std::shared_ptr<Componentes::Transformacao> transformacao;
+			std::unordered_set<std::shared_ptr<Comum::Componente>> Componentes;
+			std::vector<std::shared_ptr<Entidade>> filhos;
 			std::string Nome = "SemNome";
 		};
 	}

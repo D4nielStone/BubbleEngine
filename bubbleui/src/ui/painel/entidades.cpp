@@ -16,9 +16,22 @@ void BubbleUI::Paineis::Entidades::recarregar()
 		delete widget;
 	}
 	lista_widgets.clear();
-	adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
+	//adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
-		adiWidget(new Widgets::Botao(*entidade->nome()));
+		adiWidget(new Widgets::Botao(entidade->nome()));
+		for (auto& filho : entidade->obterFilhos())
+		{
+			recursivo(filho);
+		}
+	}
+}
+
+void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade)
+{
+	adiWidget(new Widgets::Botao(entidade->nome()));
+	for (auto& filho : entidade->obterFilhos())
+	{
+		recursivo(filho);
 	}
 }

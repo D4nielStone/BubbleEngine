@@ -14,6 +14,7 @@ namespace BubbleUI
 			void recarregar();
 		private:
 			Bubble::Cena::SceneManager* scenemanager;
+			void recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade);
 		};
 	}
 }

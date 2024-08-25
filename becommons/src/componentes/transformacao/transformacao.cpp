@@ -48,7 +48,6 @@ void Transformacao::configurar() {
     glm::translate(matriz_de_modelo, posicao);
     matriz_de_modelo *= glm::toMat4(rotacao);
     glm::scale(matriz_de_modelo, escala);
-    Debug::emitir(Debug::Tipo::Mensagem, "Transformacao configurada");
 }
 void Transformacao::definirPosicao(const glm::vec3& newPosition) { posicao = newPosition; }
 void Transformacao::definirRotacao(const glm::quat& newRotation) { rotacao = newRotation; }

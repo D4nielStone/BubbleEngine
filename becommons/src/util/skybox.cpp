@@ -6,6 +6,12 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/glm.hpp"
 
+////////////
+// 
+// TODO: Consertar essa classe, não está funcionando
+// 
+// 
+
 namespace Bubble::Util
 {
     Skybox::Skybox() : Path("assets/texturas/cubemap.jpg") {
@@ -16,7 +22,6 @@ namespace Bubble::Util
 
         // Configurar modelo do cubo
         auto object_file = Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/cube.dae");
-        mVertex = object_file.vertices[0];
 
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
@@ -27,42 +32,42 @@ namespace Bubble::Util
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
         // Calcular tamanho total necessário para vértices, normais e UVs
-        size_t vertexSize = mVertex.vertices.size() * sizeof(float);
-        size_t normalSize = mVertex.normals.size() * sizeof(float);
-        size_t uvSize = mVertex.uvs.size() * sizeof(float);
+        size_t vertexSize = mVertex->vertices.size() * sizeof(float);
+        size_t normalSize = mVertex->normals.size() * sizeof(float);
+        size_t uvSize = mVertex->uvs.size() * sizeof(float);
         size_t totalSize = vertexSize + normalSize + uvSize;
 
         // Alocar buffer com tamanho total
         glBufferData(GL_ARRAY_BUFFER, totalSize, nullptr, GL_STATIC_DRAW);
 
         // Preencher buffer com dados de vértices
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertexSize, &mVertex.vertices[0]);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, vertexSize, &mVertex->vertices[0]);
 
         // Preencher buffer com dados de normais se disponíveis
-        if (!mVertex.normals.empty()) {
-            glBufferSubData(GL_ARRAY_BUFFER, vertexSize, normalSize, &mVertex.normals[0]);
+        if (!mVertex->normals.empty()) {
+            glBufferSubData(GL_ARRAY_BUFFER, vertexSize, normalSize, &mVertex->normals[0]);
         }
 
         // Preencher buffer com dados de UVs se disponíveis
-        if (!mVertex.uvs.empty()) {
-            glBufferSubData(GL_ARRAY_BUFFER, vertexSize + normalSize, uvSize, &mVertex.uvs[0]);
+        if (!mVertex->uvs.empty()) {
+            glBufferSubData(GL_ARRAY_BUFFER, vertexSize + normalSize, uvSize, &mVertex->uvs[0]);
         }
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, mVertex.indices.size() * sizeof(unsigned int), &mVertex.indices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, mVertex->indices.size() * sizeof(unsigned int), &mVertex->indices[0], GL_STATIC_DRAW);
 
         // Atributo de posição
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
         // Atributo de normal
-        if (!mVertex.normals.empty()) {
+        if (!mVertex->normals.empty()) {
             glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(vertexSize));
             glEnableVertexAttribArray(1);
         }
 
         // Atributo de UV
-        if (!mVertex.uvs.empty()) {
+        if (!mVertex->uvs.empty()) {
             glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(vertexSize + normalSize));
             glEnableVertexAttribArray(2);
         }
@@ -83,7 +88,7 @@ namespace Bubble::Util
         shader.setInt("texturea", 1);
 
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex->indices.size()), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
     }
     unsigned int Skybox::loadCubemapFromSingleTexture(const char* path) {

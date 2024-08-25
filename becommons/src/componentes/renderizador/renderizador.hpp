@@ -9,13 +9,13 @@ namespace Bubble{
     namespace Componentes {
         class BECOMMONS_DLL_API Renderizador : public Bubble::Comum::Componente {
         private:
-            std::vector<Material*>materiais;
-            std::vector<Vertex>vertices;
-            void configurarBuffers(Vertex& v, Material* m = new Material());
-            void desenharModelo(Vertex& v);
-            void atualizarCores(Material* m);
+            void configurarBuffers();
+            void desenharModelo() const;
+            void atualizarMaterial() const;
+            Vertex malha;
         public:
-            Renderizador(const Arquivadores::Arquivo3d& objf);
+            Renderizador(const Vertex& malha);
+            Renderizador() = default;
             ~Renderizador();
             void configurar() override;
             void atualizar(float deltaTime) override;

@@ -18,6 +18,7 @@ namespace Bubble {
             Bubble::Util::Skybox skybox;
 
             bool existeEntidade(Entidades::Entidade* entidade) const;
+            bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
             void desenharCeu();
         public:
             std::unordered_set<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
@@ -29,9 +30,12 @@ namespace Bubble {
             Scene() : Name("Cena sem nome") {}
             Scene(const char* name);
             ~Scene();
+            void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(float aspecto);
+            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime);
             void atualizar(float deltaTime);
+            void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime);
             void carregar();
             void serializar(rapidjson::Document* doc) const;
             bool parse(rapidjson::Document& doc);

@@ -1,7 +1,9 @@
 #include "imageloader.hpp"
 #include "src/depuracao/debug.hpp"
 #include <freeimage.h>
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include <iostream>
 
 using namespace Bubble::Arquivadores;
 
@@ -133,4 +135,78 @@ int ImageLoader::getChannels() const
 unsigned char* ImageLoader::obterDados() const
 {
     return data;
+}
+
+unsigned int Bubble::Arquivadores::TextureFromFile(const char* path, const std::string& directory) {
+    // Concatena o diretório e o caminho do arquivo para obter o caminho completo
+    std::string filename = std::string(path);
+    filename = directory + '/' + filename;
+
+    Debug::emitir("TextureFromFile", filename);
+    // Gera um ID de textura e carrega a imagem
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+
+    int width, height, nrComponents;
+    ImageLoader img(filename.c_str());
+    auto data = img.obterDados();
+    nrComponents = img.getChannels();
+    width = img.getWidth();
+    height = img.getHeight();
+    if (data) {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
+
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glActiveTexture(GL_TEXTURE0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    else {
+        std::cerr << "Failed to load texture: " << filename << std::endl;
+    }
+
+    return textureID;
+}
+
+unsigned int Bubble::Arquivadores::TextureFromFile(unsigned char* data, unsigned int width, unsigned int height)
+{
+    Debug::emitir("TextureFromFile", "Textura embutida");
+    // Gera um ID de textura e carrega a imagem
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+
+    unsigned int nrComponents = 4;
+    if (data) {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
+
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glActiveTexture(GL_TEXTURE0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    else {
+        std::cerr << "Failed to load texture: " << "Textura embutida" << std::endl;
+    }
+
+    return textureID;
 }

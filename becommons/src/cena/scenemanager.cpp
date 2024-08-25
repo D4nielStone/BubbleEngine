@@ -26,17 +26,14 @@ Scene* SceneManager::criarCenaPadrao(std::string Nome)
 {
     //Cria cena
     Scene* scene = new Scene(Nome.c_str());
-    //Cira e configura entidade Terreno
-    auto terreno = std::make_shared<Bubble::Entidades::Entidade>("Terreno");
-    auto componente = std::make_shared<Bubble::Componentes::Terreno>();
-    terreno->adicionarComponente(componente);
     //Cria e configura entidade Esfera
-    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d("assets/primitivas/modelos/sphere.dae"));
+    Bubble::Arquivadores::Arquivo3d modelo("assets/primitivas/modelos/sphere.dae");
+    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(modelo);
     
     scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
-    // Adiciona Entidades
+    scene->camera_editor.transformacao->Rotacionar(0.f, -45.f, -45.f);
+    // Adiciona Entidade
     scene->adicionarEntidade(esfera);
-    scene->adicionarEntidade(terreno);
 
     return scene;
 }
