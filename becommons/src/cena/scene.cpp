@@ -34,7 +34,6 @@ namespace Bubble::Cena
     }
     // Deve renderizar Cena
     void Scene::renderizar(float aspecto) {
-
         camera_editor.atualizarAspecto(aspecto);
         for (auto& obj : Entidades) {
             obj->renderizar();
@@ -45,7 +44,7 @@ namespace Bubble::Cena
     {
         for (auto& filho : entidade->obterFilhos()) {
             filho->renderizar();
-            atualizarFilhos(filho, aspecto);
+            renderizarFilhos(filho, aspecto);
         }
     }
     // Deve atualizar Cena
@@ -53,8 +52,8 @@ namespace Bubble::Cena
         camera_editor.atualizar(deltaTime);
         for (auto& obj : Entidades) {
             obj->atualizar(deltaTime);
-            if (auto camera = dynamic_cast<Bubble::Componentes::Camera*>(obj->obterComponente("Camera").get())) {
-                camera_principal = camera;
+            if (obj->obterComponente("Camera")) {
+                camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
             }
             atualizarFilhos(obj, deltaTime);
         }
@@ -63,8 +62,8 @@ namespace Bubble::Cena
     void Scene::atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime) {
         for (auto& filho : entidade->obterFilhos()) {
             filho->atualizar(deltaTime);
-            if (auto camera = dynamic_cast<Bubble::Componentes::Camera*>(filho->obterComponente("Camera").get())) {
-                camera_principal = camera;
+            if (filho->obterComponente("Camera")) {
+                camera_principal = static_cast<Componentes::Camera*>(filho->obterComponente("Camera").get());
             }
             atualizarFilhos(filho, deltaTime);
         }

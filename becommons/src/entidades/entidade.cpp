@@ -21,7 +21,7 @@ void Entidade::atualizar(float deltaTime) const {
     if (!ativado) return;
 
     for (const auto& componente : Componentes) {
-        if (!dynamic_cast<Componentes::Camera*>(componente.get()) && !dynamic_cast<Componentes::Renderizador*>(componente.get())) {
+        if (componente->nome() != "Renderizador" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
             componente->atualizar(deltaTime);
         }
     }
@@ -31,9 +31,10 @@ void Entidade::renderizar() const {
     if (!ativado) return;
 
     for (const auto& componente : Componentes) {
-        if (auto renderizador = dynamic_cast<Componentes::Renderizador*>(componente.get())) {
-            obterTransformacao()->atualizar();
-            renderizador->atualizar(0);
+        if (componente->nome() == "Renderizador")
+        {
+            transformacao->atualizar();
+            componente->atualizar(0);
         }
     }
 }
@@ -46,6 +47,11 @@ std::string Entidade::nome() const
 void Entidade::carregarNode(const Node& node)
 {
     Nome = node.nome;
+    transformacao->definirMatriz(node.transformacao);
+    if (pai)
+    {
+        transformacao->definirMatriz(node.transformacao * pai->obterTransformacao()->obterMatriz());
+    }
     if (node.malhas.size() > 0)
     {
         for (auto& malha : node.malhas)
@@ -58,7 +64,8 @@ void Entidade::carregarNode(const Node& node)
     {
         auto entidade_filho = std::make_shared<Entidade>();
         entidade_filho->carregarNode(no_filho);
-        filhos.push_back(std::move(entidade_filho));
+        entidade_filho->pai = this;
+        filhos.emplace_back(std::move(entidade_filho));
     }
 }
 

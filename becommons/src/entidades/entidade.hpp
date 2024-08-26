@@ -32,6 +32,7 @@ namespace Bubble {
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
 			bool ativado;
+			Entidade* pai{ nullptr };
 		private:
 			std::shared_ptr<Componentes::Transformacao> transformacao;
 			std::unordered_set<std::shared_ptr<Comum::Componente>> Componentes;

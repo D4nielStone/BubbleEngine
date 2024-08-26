@@ -28,6 +28,7 @@ namespace Bubble {
             void atualizar(float deltaTime = 1) override;
             void configurar() override;
             float* obterMatrizGlobal() const;
+            glm::mat4 obterMatriz() const;
             rapidjson::Value serializar(rapidjson::Document* doc) override;
 
             glm::vec3 obterPosicao() const;
@@ -44,6 +45,8 @@ namespace Bubble {
 
             void decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale);
             void comporMatriz(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale);
+
+            void definirMatriz(glm::mat4 matriz_nova);
 
             Estado estado = DINAMICO;
         };

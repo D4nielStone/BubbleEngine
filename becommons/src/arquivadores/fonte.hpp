@@ -17,7 +17,7 @@ namespace Bubble
 			glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
 			unsigned int Advance;    // Offset to advance to next glyph
 		};
-		BECOMMONS_DLL_API std::map<char, Character>* obterCaracteres();
+		BECOMMONS_DLL_API std::map<char32_t, Character>* obterCaracteres();
 		BECOMMONS_DLL_API void carregarFonte(std::string path);
 		BECOMMONS_DLL_API void definirResolucao(int resolution);
 	}

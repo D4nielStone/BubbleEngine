@@ -26,14 +26,9 @@ Scene* SceneManager::criarCenaPadrao(std::string Nome)
 {
     //Cria cena
     Scene* scene = new Scene(Nome.c_str());
-    //Cria e configura entidade Esfera
-    Bubble::Arquivadores::Arquivo3d modelo("assets/primitivas/modelos/sphere.dae");
-    auto esfera = std::make_shared<Bubble::Entidades::Entidade>(modelo);
     
     scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
     scene->camera_editor.transformacao->Rotacionar(0.f, -45.f, -45.f);
-    // Adiciona Entidade
-    scene->adicionarEntidade(esfera);
 
     return scene;
 }

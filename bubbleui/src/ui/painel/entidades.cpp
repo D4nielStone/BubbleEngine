@@ -1,4 +1,4 @@
-#include "entidades.hpp"
+﻿#include "entidades.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
 #include "src/ui/widgets/botao.hpp"
 
@@ -16,7 +16,7 @@ void BubbleUI::Paineis::Entidades::recarregar()
 		delete widget;
 	}
 	lista_widgets.clear();
-	//adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
+	adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
 		adiWidget(new Widgets::Botao(entidade->nome()));

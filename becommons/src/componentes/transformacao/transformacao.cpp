@@ -36,6 +36,10 @@ glm::vec3 Transformacao::obterDirecao() const {
 float* Transformacao::obterMatrizGlobal() const {
     return (float*)glm::value_ptr(matriz_de_modelo);
 }
+glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
+{
+    return matriz_de_modelo;
+}
 void Transformacao::atualizar(float deltaTime) {
     if (shader && estado == DINAMICO) {
         shader->use();
@@ -57,9 +61,7 @@ void Transformacao::Move(glm::vec3 pos) {
     glm::translate(matriz_de_modelo, posicao);
 }
 void Transformacao::Rotacionar(const float x, const float y, const float z) {
-    glm::quat quaternionRotation = glm::quat(glm::radians(glm::vec3(x, y, z)));
-    rotacao = quaternionRotation * rotacao;
-    rotacao = glm::normalize(rotacao);
+    rotacao = glm::normalize(glm::vec3(x, y, z));
     matriz_de_modelo *= glm::toMat4(rotacao);
 }
 void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) {
@@ -76,4 +78,9 @@ void Transformacao::comporMatriz(const glm::vec3& position, const glm::vec3& rot
     matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
     matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     matriz_de_modelo = glm::scale(matriz_de_modelo, scale);
+}
+
+void Bubble::Componentes::Transformacao::definirMatriz(glm::mat4 matriz_nova)
+{
+    matriz_de_modelo = matriz_nova;
 }

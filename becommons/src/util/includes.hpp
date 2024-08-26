@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <iostream>
 #include <becommons.hpp>
+#include "glm/glm.hpp"
 
 // Definição da estrutura Vector4
 struct Vector4
@@ -192,6 +193,7 @@ struct Node
     std::vector<Node> filhos;
     std::vector<Vertex> malhas;
     std::string nome = "node sem nome";
+    glm::mat4 transformacao;
 };
 
 extern BECOMMONS_DLL_API Vertex rect_vertex;
