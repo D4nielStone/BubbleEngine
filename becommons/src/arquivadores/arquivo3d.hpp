@@ -11,7 +11,7 @@
 namespace Bubble {
     namespace Arquivadores {
         class BECOMMONS_DLL_API Arquivo3d {
-        public:
+        public: 
             std::string Caminho;                    // Caminho para o arquivo 3D
             Node RootNode;            // Estrutura hierárquica de nós na cena
 

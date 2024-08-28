@@ -81,7 +81,7 @@ void Arquivo3d::carregar(const std::string& caminho) {
     }
 
     Assimp::Importer importador;
-    cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_SortByPType | aiProcess_FlipUVs | aiProcess_OptimizeMeshes);
+    cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_FlipUVs);
 
     if (!cena || (cena->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !cena->mRootNode) {
         std::cerr << "ERROR::ASSIMP:: " << importador.GetErrorString() << std::endl;
@@ -120,7 +120,6 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
         Vertex malha;
         malha.nome = mesh->mName.C_Str();
         // Extrair vértices
-        malha.vertices.reserve(mesh->mNumVertices * 3);  // Reservar espaço para os vértices
         for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
             malha.vertices.push_back(mesh->mVertices[j].x);
             malha.vertices.push_back(mesh->mVertices[j].y);
@@ -128,7 +127,6 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
         }
 
         // Extrair índices
-        malha.indices.reserve(mesh->mNumFaces * 3);  // Reservar espaço para os índices
         for (unsigned int j = 0; j < mesh->mNumFaces; ++j) {
             const aiFace& face = mesh->mFaces[j];
             for (unsigned int k = 0; k < face.mNumIndices; ++k) {
@@ -138,7 +136,6 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
 
         // Extrair UVs
         if (mesh->mTextureCoords[0]) {
-            malha.uvs.reserve(mesh->mNumVertices * 2);  // Reservar espaço para UVs
             for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
                 malha.uvs.push_back(mesh->mTextureCoords[0][j].x);
                 malha.uvs.push_back(mesh->mTextureCoords[0][j].y);
@@ -147,7 +144,6 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
 
         // Extrair normais
         if (mesh->HasNormals()) {
-            malha.normals.reserve(mesh->mNumVertices * 3);  // Reservar espaço para normais
             for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
                 malha.normals.push_back(mesh->mNormals[j].x);
                 malha.normals.push_back(mesh->mNormals[j].y);
