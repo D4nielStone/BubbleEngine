@@ -1,14 +1,16 @@
 #include "editor.hpp"
 #include "src/ui/items/item_botao.hpp"
+#include "src/ui/items/item_arvore.hpp"
 #include "windows.h"
 
 std::wstring path = L"";
+// Função para selecionar objeto 3D
 static void abrirSelecionar()
 {
     // Estrutura para armazenar as informações do diálogo
     OPENFILENAME ofn;
     wchar_t szFile[260] = { 0 };
-    wchar_t filtros[47] = L"Todos os Arquivos\0*.*\0Arquivos de Texto\0*.TXT\0";
+    wchar_t filtros[89] = L"Todos os Arquivos\0*.*\Modelo FBX\0*.FBX\Modelo OBJ\0*.OBJ\Modelo GLTF\0*.GLTF\Modelo DAE\0*.DAE\0";
 
     // Inicializa a estrutura com zeros
     ZeroMemory(&ofn, sizeof(ofn));
@@ -31,19 +33,40 @@ static void abrirSelecionar()
         path = ofn.lpstrFile;
     }
 }
+// Função para adicionar Cubo
+static void adicionarCubo()
+{
+    path = L"assets/primitivas/modelos/cube.dae";
+}
+// Função para adicionar Esfera
+static void adicionarEsfera()
+{
+    path = L"assets/primitivas/modelos/sphere.dae";
+}
+
 BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager), buffer(new Widgets::Imagem(0))
 {
 	Nome = "Editor";
 	renderizar_corpo = false;
 	configurar(ctx, rect);
 	adiWidget(buffer);
+
+    // Popup para adicionar primitivas
+    auto popup_primitivas = new Util::PopUp(ctx);
+    popup_primitivas->adiItem(new Items::Botao("adicionar Cubo", &adicionarCubo));
+    popup_primitivas->adiItem(new Items::Botao("adicionar Esfera", &adicionarEsfera));
+    popup_primitivas->adiItem(new Items::Botao("adicionar Cilindro", &abrirSelecionar));
+    popup_primitivas->adiItem(new Items::Botao("adicionar Plano", &abrirSelecionar));
+    // Popup principal
 	menu_de_contexto->adiItem(new Items::Botao("importar objeto 3D", &abrirSelecionar));
+	menu_de_contexto->adiItem(new Items::Arvore("adicionar primitiva", popup_primitivas));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
 	if (scenemanager->cenaAtualIdx() != -1)
 	{
+        // Adicionar objeto caso "path" esteja preenchido
         if (path != L"")
         {
             scenemanager->cenaAtual()->adicionarEntidade(std::make_unique<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d(path)));

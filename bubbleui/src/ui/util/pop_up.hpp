@@ -1,4 +1,5 @@
 #include "src/ui/formas/moldura.hpp"
+#include "src/ui/formas/colisao2d.hpp"
 
 namespace BubbleUI
 {
@@ -16,11 +17,13 @@ namespace BubbleUI
 			void esconder();
 			void renderizar(GLenum) override;
 			void adiItem(Items::ItemMenu* item);
+			bool mouseEmCima{ false };
 		private:
 			int largura{ 0 }, altura{ 0 };
 			void preAtualizacao() override;
 			bool vmostrar{ false };
 			Bubble::Inputs::Inputs* inputs{ nullptr };
+			Colisao2d* colisao{ nullptr };
 			std::vector<Items::ItemMenu*> lista_items;
 		};
 	}

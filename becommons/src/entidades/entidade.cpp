@@ -47,10 +47,13 @@ std::string Entidade::nome() const
 void Entidade::carregarNode(const Node& node)
 {
     Nome = node.nome;
-    transformacao->definirMatriz(node.transformacao);
     if (pai)
     {
         transformacao->definirMatriz(node.transformacao * pai->obterTransformacao()->obterMatriz());
+    }
+    else
+    {
+    transformacao->definirMatriz(node.transformacao);
     }
     if (node.malhas.size() > 0)
     {
@@ -63,8 +66,8 @@ void Entidade::carregarNode(const Node& node)
     for (auto& no_filho : node.filhos)
     {
         auto entidade_filho = std::make_shared<Entidade>();
-        entidade_filho->carregarNode(no_filho);
         entidade_filho->pai = this;
+        entidade_filho->carregarNode(no_filho);
         filhos.emplace_back(std::move(entidade_filho));
     }
 }

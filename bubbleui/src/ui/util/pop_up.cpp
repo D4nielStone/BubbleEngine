@@ -6,6 +6,7 @@ BubbleUI::Util::PopUp::PopUp(Contexto* contexto)
 	this->contexto = contexto;
 	inputs = contexto->inputs;
 	this->retangulo = {2, 2, 50, 50};
+	colisao = new Colisao2d({}, contexto);
 	linha_d = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
 	linha_b = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
 	linha_e = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
@@ -18,14 +19,16 @@ BubbleUI::Util::PopUp::PopUp(Contexto* contexto)
 
 void BubbleUI::Util::PopUp::preAtualizacao()
 {
+	altura = 0;
 	for (auto& item : lista_items)
 	{
 		item->atualizar();
 			if (item->largura > largura)
 				largura = item->largura;
-			if (item->altura > altura)
-				altura = item->altura;
+			altura += item->altura;
 	}
+	colisao->defRect(retangulo);
+	mouseEmCima = colisao->mouseEmCima();
 }
 
 void BubbleUI::Util::PopUp::mostrar()

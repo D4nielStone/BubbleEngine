@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\items\item_arvore.hpp" />
     <ClInclude Include="src\ui\items\item_botao.hpp" />
     <ClInclude Include="src\ui\items\item_menu.hpp" />
     <ClInclude Include="src\ui\widgets\botao.hpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\items\item_arvore.cpp" />
     <ClCompile Include="src\ui\items\item_botao.cpp" />
     <ClCompile Include="src\ui\items\item_menu.cpp" />
     <ClCompile Include="src\ui\widgets\botao.cpp" />

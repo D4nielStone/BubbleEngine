@@ -3,7 +3,7 @@
 using namespace Bubble::Componentes;
 
 Transformacao::Transformacao()
-    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(1.0f)
+    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(0.1f)
 {
     Nome = "Transformacao";
 }

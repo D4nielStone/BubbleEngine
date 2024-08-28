@@ -66,9 +66,6 @@ vec3 calculateLighting(vec3 norm, vec3 viewDir, vec3 albedo, float metallic, flo
     vec3 F0 = mix(vec3(0.04), albedo, metallic);
     vec3 F = F0 + (1.0 - F0) * pow(1.0 - NdotH, 5.0);
 
-    // Specular
-    vec3 specular = D * G * F / (4.0 * NdotL * NdotV + 0.001);
-
     // kS is equal to Fresnel
     vec3 kS = F;
     vec3 kD = vec3(1.0) - kS;
@@ -79,7 +76,7 @@ vec3 calculateLighting(vec3 norm, vec3 viewDir, vec3 albedo, float metallic, flo
     vec3 diffuse = kD * albedo / 3.14159265;
     vec3 ambient = texture(textura_ambient_occlusion, TexCoords).rgb;
 
-    return ambient + (diffuse + specular) * irradiance + emissive;
+    return ambient + (diffuse) * irradiance + emissive;
 }
 
 void main()
@@ -97,6 +94,6 @@ void main()
     vec3 lighting = calculateLighting(norm, viewDir, albedo, metallic, roughness, emissive);
 
     // Brightness multiplier
-    vec3 ambient_color = vec3(0.1f);
-    FragColor = vec4(lighting * material.cor_difusa + ambient_color, 1.0);
+    vec3 ambient_color = vec3(0.9f);
+    FragColor = vec4(lighting * material.cor_difusa * ambient_color, 1.0);
 }
