@@ -20,6 +20,11 @@ namespace Bubble::Cena
         }
     }
 
+    void Scene::criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade)
+    {
+        adicionarEntidade(std::make_shared<Entidades::Entidade>(*arquivo_3d.get()));
+    }
+
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
         if (!existeEntidade(gameObject.get())) {
             carregarComponentes(gameObject);  // Carrega os componentes da entidade e dos filhos

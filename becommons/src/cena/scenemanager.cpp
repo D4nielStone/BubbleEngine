@@ -3,6 +3,8 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <src/componentes/prototipo/terreno.hpp>
+#include <queue>
+#include <mutex>
 
 using namespace Bubble::Cena;
 
@@ -85,9 +87,18 @@ void SceneManager::renderizarCenaAtual() const
     // Desligar framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
+// Fila de tarefas para o thread principal
+std::queue<std::function<void()>> filaDeTarefas;
+std::mutex filaMutex;
 // Deve atualizar cena atual
 void SceneManager::atualizarCenaAtual(float deltaTime) const
 {
+    // Processar fila de tarefas na thread principal
+    while (!filaDeTarefas.empty()) {
+        filaDeTarefas.front()(); // Executar a tarefa
+        filaDeTarefas.pop();      // Remover a tarefa da fila
+    }
+
     cenaAtual()->atualizar(deltaTime);
 }
 // Deve retornar numero de cenas
@@ -108,3 +119,14 @@ void SceneManager::defIputs(Inputs::Inputs* inp)
     }
 }
 
+// Função para adicionar uma tarefa na fila
+static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
+{
+    std::lock_guard<std::mutex> lock(filaMutex);
+    filaDeTarefas.push(tarefa);
+}
+
+void Bubble::Cena::criarEntidade(SceneManager* scenemanager, std::wstring path)
+{
+    scenemanager->cenaAtual()->criarEntidade(std::make_unique<Arquivadores::Arquivo3d>(path));
+}

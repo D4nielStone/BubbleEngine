@@ -1,7 +1,7 @@
 #include "item_arvore.hpp"
 #include "src/ui/util/pop_up.hpp"
 
-BubbleUI::Items::Arvore::Arvore(std::string l, Util::PopUp* popup) : m_popup(popup)
+BubbleUI::Items::Arvore::Arvore(std::string l, std::shared_ptr<Util::PopUp> popup) : m_popup(popup)
 {
 	ItemMenu::ItemMenu(l + " -");
 	label = new std::string(l + " -");

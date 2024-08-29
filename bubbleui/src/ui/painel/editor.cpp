@@ -10,7 +10,7 @@ static void abrirSelecionar()
     // Estrutura para armazenar as informações do diálogo
     OPENFILENAME ofn;
     wchar_t szFile[260] = { 0 };
-    wchar_t filtros[89] = L"Todos os Arquivos\0*.*\Modelo FBX\0*.FBX\Modelo OBJ\0*.OBJ\Modelo GLTF\0*.GLTF\Modelo DAE\0*.DAE\0";
+    wchar_t filtros[120] = L"Todos os Arquivos\0*.*\0Modelo FBX\0*.FBX\0Modelo OBJ\0*.OBJ\0Modelo GLTF\0*.GLTF\0Modelo DAE\0*.DAE\0Modelo Blender\0*.BLEND\0";
 
     // Inicializa a estrutura com zeros
     ZeroMemory(&ofn, sizeof(ofn));
@@ -44,7 +44,7 @@ static void adicionarEsfera()
     path = L"assets/primitivas/modelos/sphere.dae";
 }
 
-BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager), buffer(new Widgets::Imagem(0))
+BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager), buffer(std::make_shared<Widgets::Imagem>(0))
 {
 	Nome = "Editor";
 	renderizar_corpo = false;
@@ -52,14 +52,14 @@ BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* sce
 	adiWidget(buffer);
 
     // Popup para adicionar primitivas
-    auto popup_primitivas = new Util::PopUp(ctx);
-    popup_primitivas->adiItem(new Items::Botao("adicionar Cubo", &adicionarCubo));
-    popup_primitivas->adiItem(new Items::Botao("adicionar Esfera", &adicionarEsfera));
-    popup_primitivas->adiItem(new Items::Botao("adicionar Cilindro", &abrirSelecionar));
-    popup_primitivas->adiItem(new Items::Botao("adicionar Plano", &abrirSelecionar));
+    auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cubo", &adicionarCubo));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Esfera", &adicionarEsfera));
+    //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cilindro", &abrirSelecionar));
+    //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
     // Popup principal
-	menu_de_contexto->adiItem(new Items::Botao("importar objeto 3D", &abrirSelecionar));
-	menu_de_contexto->adiItem(new Items::Arvore("adicionar primitiva", popup_primitivas));
+	menu_de_contexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
+	menu_de_contexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
@@ -69,11 +69,14 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
         // Adicionar objeto caso "path" esteja preenchido
         if (path != L"")
         {
-            scenemanager->cenaAtual()->adicionarEntidade(std::make_unique<Bubble::Entidades::Entidade>(Bubble::Arquivadores::Arquivo3d(path)));
+            Bubble::Cena::adicionarTarefaNaFila([this]() 
+                {
+                    Bubble::Cena::criarEntidade(scenemanager, path);
+                });
             path = L"";
         }
+		buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
 		Vector4 rect_size = buffer->obtRect();
 		scenemanager->defViewport(rect_size);
-		buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
 	}
 }

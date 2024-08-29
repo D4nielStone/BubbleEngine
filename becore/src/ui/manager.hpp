@@ -21,8 +21,10 @@ namespace BubbleUI
 		void iniPaineisPadrao();
 		void painelSelecionado(Painel* painel);
 	public:
+		GLFWcursor* cursor_antigo{ nullptr };
 		Manager(Bubble::Nucleo::Engine*);
 		void atualizar(float deltaTime);
+		void verificarSelecionado();
 		void renderizar();
 	};
 }

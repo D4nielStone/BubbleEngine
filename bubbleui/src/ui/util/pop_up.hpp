@@ -16,7 +16,7 @@ namespace BubbleUI
 			void mostrar();
 			void esconder();
 			void renderizar(GLenum) override;
-			void adiItem(Items::ItemMenu* item);
+			void adiItem(std::shared_ptr<Items::ItemMenu> item);
 			bool mouseEmCima{ false };
 		private:
 			int largura{ 0 }, altura{ 0 };
@@ -24,7 +24,7 @@ namespace BubbleUI
 			bool vmostrar{ false };
 			Bubble::Inputs::Inputs* inputs{ nullptr };
 			Colisao2d* colisao{ nullptr };
-			std::vector<Items::ItemMenu*> lista_items;
+			std::vector<std::shared_ptr<Items::ItemMenu>> lista_items;
 		};
 	}
 }

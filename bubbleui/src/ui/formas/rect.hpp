@@ -26,7 +26,7 @@ namespace BubbleUI
 		protected:
 			Contexto* contexto{ nullptr };
 			Vector4 retangulo;
-			Color cor_base{ 0.2, 0.2, 0.2 };
+			Color cor_base{ 0.2f, 0.2f, 0.2f };
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			Shader shader{ Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };

@@ -18,11 +18,11 @@ namespace BubbleUI
 		void defPos(Vector2f pos);
 		void adiTam(Vector2 tam);
 		void adiPos(Vector2f pos);
-		void adiWidget(Widget* widget);
+		void adiWidget(std::shared_ptr<Widget> widget);
 		Vector4 obtRect() const;
 		Vector2 obtTamMin() const;
 		Contexto* obtCtx() const;
-		void atualizar(float deltaTime);
+		void atualizar();
 		void renderizar();
 		bool cursorNormal();
 		std::string nome() const;
@@ -46,7 +46,7 @@ namespace BubbleUI
 			* borda_c{ nullptr },
 			* borda_b{ nullptr };
 		Aba* m_aba{ nullptr };
-		std::vector<Widget*> lista_widgets;
+		std::vector<std::shared_ptr<Widget>> lista_widgets;
 		Vector4 retangulo;
 		Vector2 limite_min_tam;
 	};

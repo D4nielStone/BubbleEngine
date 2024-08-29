@@ -47,8 +47,6 @@ void BubbleUI::Formas::Rect::adiPos(Vector2 pos)
 void BubbleUI::Formas::Rect::defCor(Color cor)
 {
     cor_base = cor;
-    shader.use();
-    shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
 }
 // Deve atualizar
 // \param deltaTime

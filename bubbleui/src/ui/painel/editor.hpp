@@ -14,7 +14,7 @@ namespace BubbleUI
 			void preAtualizacao() override;
 		private: 
 			Bubble::Cena::SceneManager* scenemanager;
-			Widgets::Imagem* buffer;
+			std::shared_ptr<Widgets::Imagem> buffer;
 		};
 	}
 }

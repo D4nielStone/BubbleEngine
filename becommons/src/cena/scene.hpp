@@ -31,6 +31,7 @@ namespace Bubble {
             Scene(const char* name);
             ~Scene();
             void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
+            void criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(float aspecto);
             void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime);

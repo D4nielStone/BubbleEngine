@@ -196,6 +196,12 @@ struct Node
     glm::mat4 transformacao;
 };
 
+struct LetraRect
+{
+    Vector4f rect;
+    unsigned int ID;
+};
+
 extern BECOMMONS_DLL_API Vertex rect_vertex;
 extern BECOMMONS_DLL_API Vertex linha_vertex;
 

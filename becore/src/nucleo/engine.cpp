@@ -3,6 +3,7 @@
 #include "src/arquivadores/imageloader.hpp"
 #include "src/tempo/delta_time.hpp"
 #include "engine.hpp"
+#include <queue>
 
 using namespace Bubble::Nucleo;
 
@@ -75,10 +76,9 @@ int Engine::pararloop() const
 void Engine::atualizar()
 {
     glfwPollEvents();
+
     // Atualizar cena
     gerenciadorDeCenas.atualizarCenaAtual(Tempo::delta_time);
-    // Atualizar UI
-    gerenciadorUi->atualizar(Tempo::delta_time);
 }
 // Deve renderizar cena Atual
 void Engine::renderizar(Vector4 rect_size)
@@ -87,9 +87,8 @@ void Engine::renderizar(Vector4 rect_size)
 
     // Renderizar cena
     gerenciadorDeCenas.renderizarCenaAtual();
-
-    // Renderizar UI
-    gerenciadorUi->renderizar();
+    // Atualiza e renderiza UI
+    gerenciadorUi->atualizar(Tempo::delta_time);
 
     glfwSwapBuffers(glfwWindow);
     Tempo::endDT();

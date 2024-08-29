@@ -31,10 +31,9 @@ namespace BubbleUI
 			Vector2 pos_texto;
 			Vector4 char_rect;
 			Vector4f paraNDC();
+			std::vector<LetraRect> letras_rect;
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
-		private:
 			std::string* label;
-
 		};
 	}
 }

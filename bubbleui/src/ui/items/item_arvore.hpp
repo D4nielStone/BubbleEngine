@@ -13,11 +13,11 @@ namespace BubbleUI
 
 		public:
 			Arvore() = default;
-			Arvore(std::string label, Util::PopUp* popup);
+			Arvore(std::string label, std::shared_ptr<Util::PopUp> popup);
 			void atualizar() override;
 			void renderizar() override;
 		private:
-			Util::PopUp* m_popup{ nullptr };
+			std::shared_ptr<Util::PopUp> m_popup{ nullptr };
 		};
 	}
 }

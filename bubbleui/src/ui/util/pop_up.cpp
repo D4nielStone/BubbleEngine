@@ -59,7 +59,7 @@ void BubbleUI::Util::PopUp::renderizar(GLenum mode)
 	}
 }
 
-void BubbleUI::Util::PopUp::adiItem(BubbleUI::Items::ItemMenu* item)
+void BubbleUI::Util::PopUp::adiItem(std::shared_ptr<BubbleUI::Items::ItemMenu> item)
 {
 	item->defMoldura(this);
 	lista_items.push_back(item);

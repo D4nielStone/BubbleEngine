@@ -32,12 +32,27 @@ void BubbleUI::Widgets::Texto::atualizar(float deltaTime)
 {
     if(label)
     frase = *label;
+    renderizar_texto();
 }
 
 void BubbleUI::Widgets::Texto::renderizar()
 {
-    renderizar_texto();
+    for(auto& letra : letras_rect)
+    {
+        shader.use();
+        shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
+        shader.setVec2("quadrado.posicao", letra.rect.x, letra.rect.y);
+        shader.setVec2("quadrado.tamanho", letra.rect.z, letra.rect.w);
+        shader.setInt("textura", 0);
+
+        glBindTexture(GL_TEXTURE_2D, letra.ID);
+        glBindVertexArray(rect_vertex.VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
 }
+
 void BubbleUI::Widgets::Texto::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
@@ -53,6 +68,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     largura_texto = 0;
 
     Bubble::Arquivadores::Character ch;
+    letras_rect.clear();
 
     for (char c : frase) {
         ch = (*Bubble::Arquivadores::obterCaracteres())[c];
@@ -77,19 +93,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
         char_rect.h = h_letter;
 
         // Renderiza letra
-        Vector4f char_rectf = paraNDC();
-
-        shader.use();
-        shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
-        shader.setVec2("quadrado.posicao", char_rectf.x, char_rectf.y);
-        shader.setVec2("quadrado.tamanho", char_rectf.z, char_rectf.w);
-        shader.setInt("textura", 0);
-
-        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
-        glBindVertexArray(rect_vertex.VAO);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
-        glBindTexture(GL_TEXTURE_2D, 0);
+        letras_rect.push_back({ paraNDC(), ch.TextureID });
 
         w_line += (ch.Advance >> 6); // 1/64 pixels
         if (w_line > largura_texto)
@@ -99,7 +103,6 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     box_size.y = line_pos.y + resolucao + letra_padding.y;  // Altura do texto mais padding
     pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
 }
-
 
 // Deve transformar coordenadas pixel para NDC
 Vector4f BubbleUI::Widgets::Texto::paraNDC()
@@ -117,7 +120,6 @@ Vector4f BubbleUI::Widgets::Texto::paraNDC()
 void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)
 {
     carregarFonte(font_path);
-    definirResolucao(resolucao);
 }
 // Destrutor para liberar recursos
 BubbleUI::Widgets::Texto::~Texto() 

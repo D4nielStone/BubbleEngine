@@ -6,12 +6,16 @@ using namespace BubbleUI::Formas;
 Linha::Linha(Vector4f pos, Contexto* ctx) : posicoes(pos), contexto(ctx)
 {
     defCor({ 0.4f, 0.0f, 0.4f });
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        std::cout << "Failed to initialize GLAD" << std::endl;
-    glGenBuffers(1, &linha_vertex.VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, linha_vertex.VBO);
-    glGenVertexArrays(1, &linha_vertex.VAO);
-    glBindVertexArray(linha_vertex.VAO);
+    if (!linha_vertex.carregado)
+    {
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            std::cout << "Failed to initialize GLAD" << std::endl;
+        glGenBuffers(1, &linha_vertex.VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, linha_vertex.VBO);
+        glGenVertexArrays(1, &linha_vertex.VAO);
+        glBindVertexArray(linha_vertex.VAO);
+        linha_vertex.carregado = true;
+    }
 }
 void Linha::defPos(Vector4f pos)
 {

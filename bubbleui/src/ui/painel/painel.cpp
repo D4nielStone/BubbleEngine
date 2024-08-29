@@ -1,4 +1,5 @@
 #include "painel.hpp"
+#include <src/tempo/delta_time.cpp>
 
 BubbleUI::Painel::Painel(Contexto* ctx)
 {
@@ -34,7 +35,7 @@ void BubbleUI::Painel::adiPos(Vector2f pos)
 	retangulo.y += pos.y;
 }
 
-void BubbleUI::Painel::adiWidget(Widget* widget)
+void BubbleUI::Painel::adiWidget(std::shared_ptr<Widget> widget)
 {
 	widget->defPainel(this);
 	lista_widgets.push_back(widget);
@@ -55,7 +56,7 @@ BubbleUI::Contexto* BubbleUI::Painel::obtCtx() const
 	return contexto;
 }
 
-void BubbleUI::Painel::atualizar(float deltaTime)
+void BubbleUI::Painel::atualizar()
 {
 
 	borda_c->atualizar();
@@ -68,7 +69,7 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 
 	moldura->defPos({ retangulo.x, retangulo.y });
 	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
-	moldura->atualizar(deltaTime);
+	moldura->atualizar(Bubble::Tempo::delta_time);
 
 	if (mostrar_popup)
 	{
@@ -81,14 +82,14 @@ void BubbleUI::Painel::atualizar(float deltaTime)
 		esconder_popup = false;
 	}
 
-	menu_de_contexto->atualizar(deltaTime);
+	menu_de_contexto->atualizar(Bubble::Tempo::delta_time);
 
 
 	preAtualizacao();
-	m_aba->atualizar(deltaTime);
-	for (Widget* widget : lista_widgets)
+	m_aba->atualizar(Bubble::Tempo::delta_time);
+	for (auto& widget : lista_widgets)
 	{
-		widget->atualizar(deltaTime);
+		widget->atualizar(Bubble::Tempo::delta_time);
 	}
 
 	arrastando = false;

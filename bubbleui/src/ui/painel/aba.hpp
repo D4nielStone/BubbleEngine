@@ -14,6 +14,7 @@ namespace BubbleUI
 		void renderizar() override;
 	private:
 		Painel* painel;
+		std::vector<LetraRect> letras_rect;
 		Formas::Rect *corpo_rect;
 	};
 }

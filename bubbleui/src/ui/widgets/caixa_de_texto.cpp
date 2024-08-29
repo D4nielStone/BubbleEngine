@@ -59,12 +59,6 @@ void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
             cronometro = 0.0f; // Reseta o cronômetro após cada repetição
         }
     }
-
-}
-
-void BubbleUI::Widgets::CaixaTexto::renderizar()
-{
-    moldura.renderizar(GL_TRIANGLES);
     if (texto.empty())
     {
         frase = mensagem;
@@ -75,10 +69,15 @@ void BubbleUI::Widgets::CaixaTexto::renderizar()
         frase = texto;
         cor = { 1, 1, 1 };
     }
-    renderizar_texto();
     moldura.defTam(box_size);
     moldura.defPos(box_pos);
     moldura.atualizar(Bubble::Tempo::delta_time);
+}
+
+void BubbleUI::Widgets::CaixaTexto::renderizar()
+{
+    moldura.renderizar(GL_TRIANGLES);
+    renderizar_texto();
 }
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)

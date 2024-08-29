@@ -5,6 +5,7 @@
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/editor.hpp"
 #include "src/ui/painel/entidades.hpp"
+#include <future>
 
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
@@ -60,25 +61,55 @@ void BubbleUI::Manager::renderizar()
 	glViewport(0, 0, contexto.tamanho.width, contexto.tamanho.height);
 
 	glEnable(GL_SCISSOR_TEST);
-	for (Painel* painel : lista_paineis)
+	for (auto& painel : lista_paineis)
 	{
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
 
-	glfwSetCursor(contexto.glfwWindow, contexto.cursor);
+	if (contexto.cursor != cursor_antigo)
+	{
+		cursor_antigo = contexto.cursor;
+		glfwSetCursor(contexto.glfwWindow, contexto.cursor);
+	}
 }
 
 // Atualiza paineis
 void BubbleUI::Manager::atualizar(float deltaTime)
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
+	
+	verificarSelecionado();
+
+	std::vector<std::future<void>> futures;
+
+	for (auto& painel : lista_paineis)
+	{
+		futures.push_back(std::async(std::launch::async, [&painel]() {
+			try {
+				painel->atualizar();
+			}
+			catch (const std::exception& e) {
+				Debug::emitir(Debug::Erro, "Não foi possível atualizar painel");
+				return;
+			}
+			}));
+	}
+	// Esperar todos os painéis terminarem de atualizar
+	for (auto& future : futures) {
+		future.get();
+	}
+
+	renderizar();
+}
+
+// Verifica Painel selecionado
+void BubbleUI::Manager::verificarSelecionado()
+{
 	bool cursor = true, depth = false;
 	for (size_t i = lista_paineis.size(); i > 0; i--)
 	{
-		Painel* painel = lista_paineis[i-1];
-		// Atualiza Painel
-		painel->atualizar(deltaTime);
+		auto painel = lista_paineis[i - 1];
 
 		// Seleciona o painel se está na frente, e for clicado na hora certa
 		colisao_painel.defRect(painel->obtRect());
@@ -99,8 +130,9 @@ void BubbleUI::Manager::atualizar(float deltaTime)
 			if (contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
 			{
 				painel->mostrar_popup = true;
-			}else if(contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
-				painel->esconder_popup= true;
+			}
+			else if (contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
+				painel->esconder_popup = true;
 		}
 		else
 			painel->mouse1click = false;
@@ -109,6 +141,6 @@ void BubbleUI::Manager::atualizar(float deltaTime)
 		if (!painel->cursorNormal())
 			cursor = false;
 	}
-	if(cursor)
+	if (cursor)
 		contexto.cursor = contexto.cursor_normal;
 }

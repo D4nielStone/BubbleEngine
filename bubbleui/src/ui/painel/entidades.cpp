@@ -1,6 +1,5 @@
 ﻿#include "entidades.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
-#include "src/ui/widgets/botao.hpp"
 
 BubbleUI::Paineis::Entidades::Entidades(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager)
 {
@@ -11,27 +10,30 @@ BubbleUI::Paineis::Entidades::Entidades(Contexto* ctx, Bubble::Cena::SceneManage
 
 void BubbleUI::Paineis::Entidades::recarregar()
 {
-	for (auto& widget : lista_widgets)
-	{
-		delete widget;
-	}
 	lista_widgets.clear();
-	adiWidget(new Widgets::CaixaTexto("Procurar entidade"));
+
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
-		adiWidget(new Widgets::Botao(entidade->nome()));
+		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome());
 		for (auto& filho : entidade->obterFilhos())
 		{
-			recursivo(filho);
+			recursivo(filho, *arvore.get());
 		}
+		adiWidget(arvore);
+		numero_entidades = scenemanager->cenaAtual()->Entidades.size();
 	}
 }
 
-void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade)
+void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
-	adiWidget(new Widgets::Botao(entidade->nome()));
+	if (numero_entidades != scenemanager->cenaAtual()->Entidades.size() && selecionado)
+		recarregar();
+}
+
+void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, Widgets::Arvore& arvore)
+{
 	for (auto& filho : entidade->obterFilhos())
 	{
-		recursivo(filho);
+		recursivo(filho, arvore);
 	}
 }

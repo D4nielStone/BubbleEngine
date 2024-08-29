@@ -161,7 +161,6 @@ Vector4f BubbleUI::Items::ItemMenu::paraNDC()
 void BubbleUI::Items::ItemMenu::configurar(unsigned int resolucao, std::string font_path)
 {
     carregarFonte(font_path); // Carrega a fonte especificada
-    definirResolucao(resolucao); // Define a resolução da fonte
 }
 
 // Método para definir a moldura do ItemMenu
