@@ -24,7 +24,7 @@ void BubbleUI::Items::Arvore::atualizar()
 		label->push_back('+');
 		m_popup->esconder();
 	}
-	m_popup->atualizar(0);
+	m_popup->atualizar();
 }
 
 void BubbleUI::Items::Arvore::renderizar()

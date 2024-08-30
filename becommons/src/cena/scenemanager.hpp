@@ -29,11 +29,11 @@ namespace Bubble {
             Scene* cenaAtual() const;
             void carregarCena(int sceneIndex);
             void renderizarCenaAtual() const;
-            void atualizarCenaAtual(float deltaTime) const;
+            void atualizarCenaAtual() const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
             void defViewport(Vector4 rect = {0, 0, 0, 0});
         };
         BECOMMONS_DLL_API void adicionarTarefaNaFila(std::function<void()> tarefa);
-        BECOMMONS_DLL_API void criarEntidade(SceneManager* scenemanager, std::wstring path);
+        BECOMMONS_DLL_API void criarEntidade(SceneManager* scenemanager, std::string path);
     } // namespace Cena
 } // namespace Bubble

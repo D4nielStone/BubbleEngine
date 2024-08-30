@@ -9,6 +9,6 @@ void Bubble::Tempo::iniDT()
 }
 void Bubble::Tempo::endDT()
 {
-    // Calcular deltaTime
+    // Calcular delta time
     delta_time = glfwGetTime() - st;
 }

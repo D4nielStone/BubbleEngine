@@ -9,7 +9,7 @@ void Renderizador::configurar()
     configurarBuffers();
     carregadov = true;
 }
-void Renderizador::atualizar(float deltaTime)
+void Renderizador::atualizar()
 {
     atualizarMaterial();       // Atualiza material    
     desenharModelo();       // Desenha VAO

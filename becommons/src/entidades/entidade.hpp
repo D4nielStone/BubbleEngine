@@ -19,7 +19,7 @@ namespace Bubble {
 			Entidade(const char* name);
 			Entidade();
 			~Entidade();
-			void atualizar(float deltaTime) const;
+			void atualizar() const;
 			void renderizar() const;
 			std::string nome() const;
 			void carregarNode(const Node& node);

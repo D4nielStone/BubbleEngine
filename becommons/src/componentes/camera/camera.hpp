@@ -13,7 +13,7 @@ namespace Bubble {
             Camera();
             ~Camera();
             void configurar() override;
-            void atualizar(float deltaTime = 1) override;
+            void atualizar() override;
             void atualizarAspecto(float aspect);
             void desenharFrame(Vector4 viewportRect) const;
             const float* obterViewMatrix();

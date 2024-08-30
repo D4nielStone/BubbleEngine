@@ -25,7 +25,7 @@ namespace Bubble {
         public:
             Transformacao();
 
-            void atualizar(float deltaTime = 1) override;
+            void atualizar() override;
             void configurar() override;
             float* obterMatrizGlobal() const;
             glm::mat4 obterMatriz() const;

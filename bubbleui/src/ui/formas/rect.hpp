@@ -21,7 +21,7 @@ namespace BubbleUI
 			void adiTam(Vector2 tam);
 			void adiPos(Vector2 tam);
 			void defCor(Color cor);
-			virtual void atualizar(float deltaTime);
+			virtual void atualizar();
 			virtual void renderizar(GLenum modo);
 		protected:
 			Contexto* contexto{ nullptr };

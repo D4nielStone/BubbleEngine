@@ -10,7 +10,7 @@ namespace BubbleUI
 		public:
 			Imagem(unsigned int id, Vector2 size = {100, 100}, bool auto_resize = true);
 			Vector4f paraNDC();
-			void atualizar(float deltaTime) override;
+			void atualizar() override;
 			void renderizar() override;
 			void defID(unsigned int newID);
 			Vector4 obtRect() const;

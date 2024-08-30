@@ -17,12 +17,12 @@ Entidade::Entidade(const Arquivadores::Arquivo3d& arquivo_objeto)
 Entidade::Entidade()
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
-void Entidade::atualizar(float deltaTime) const {
+void Entidade::atualizar() const {
     if (!ativado) return;
 
     for (const auto& componente : Componentes) {
         if (componente->nome() != "Renderizador" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
-            componente->atualizar(deltaTime);
+            componente->atualizar();
         }
     }
 }
@@ -34,7 +34,7 @@ void Entidade::renderizar() const {
         if (componente->nome() == "Renderizador")
         {
             transformacao->atualizar();
-            componente->atualizar(0);
+            componente->atualizar();
         }
     }
 }

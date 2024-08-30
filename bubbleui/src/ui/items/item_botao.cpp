@@ -10,11 +10,12 @@ BubbleUI::Items::Botao::Botao(std::string l, std::function<void()> funcao_click)
 void BubbleUI::Items::Botao::atualizar()
 {
 	ItemMenu::atualizar();
-	if (clicado)
+	if (clicado && gatilho)
 	{
 		if (funcao_click_)
 		{
 			funcao_click_();
+			gatilho = false;
 		}
 	}
 }

@@ -24,7 +24,7 @@ namespace Bubble
 			~Terreno();
 			void gerarHeightMap();
 			void configurar() override;
-			void atualizar(float deltaTime) override;
+			void atualizar() override;
 		};
 	}
 }

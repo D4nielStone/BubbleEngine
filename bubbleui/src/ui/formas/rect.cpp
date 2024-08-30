@@ -49,8 +49,8 @@ void BubbleUI::Formas::Rect::defCor(Color cor)
     cor_base = cor;
 }
 // Deve atualizar
-// \param deltaTime
-void Rect::atualizar(float deltaTime)
+// \param delta time
+void Rect::atualizar()
 {
     coord_ndc = paraNDC();
 }

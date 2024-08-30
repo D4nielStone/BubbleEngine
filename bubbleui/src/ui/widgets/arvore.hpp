@@ -7,9 +7,15 @@ namespace BubbleUI
 		{
 		public:
 			Arvore(std::string label);
-			void atualizar(float deltaTime) override;
+			void atualizar() override;
 			void renderizar() override;
+			void defPainel(Painel* painel) override;
+			void adiFilho(std::shared_ptr<Arvore> filho);
+			Arvore* arvore_pai{ nullptr };
 		private:
+			std::vector<std::shared_ptr<Arvore>> filhos;
+			Color cor;
+			bool aberto{ true };
 		};
 	}
 }

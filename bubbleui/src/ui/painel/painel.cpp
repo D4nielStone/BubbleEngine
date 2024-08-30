@@ -69,7 +69,7 @@ void BubbleUI::Painel::atualizar()
 
 	moldura->defPos({ retangulo.x, retangulo.y });
 	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
-	moldura->atualizar(Bubble::Tempo::delta_time);
+	moldura->atualizar();
 
 	if (mostrar_popup)
 	{
@@ -82,14 +82,16 @@ void BubbleUI::Painel::atualizar()
 		esconder_popup = false;
 	}
 
-	menu_de_contexto->atualizar(Bubble::Tempo::delta_time);
+	menu_de_contexto->atualizar();
 
+	if (!selecionado)
+		menu_de_contexto->esconder();
 
 	preAtualizacao();
-	m_aba->atualizar(Bubble::Tempo::delta_time);
+	m_aba->atualizar();
 	for (auto& widget : lista_widgets)
 	{
-		widget->atualizar(Bubble::Tempo::delta_time);
+		widget->atualizar();
 	}
 
 	arrastando = false;

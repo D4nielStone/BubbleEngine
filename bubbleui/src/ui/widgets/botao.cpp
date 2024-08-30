@@ -10,9 +10,9 @@ BubbleUI::Widgets::Botao::Botao(std::string label)
     letra_padding = {5, 5};
 }
 
-void BubbleUI::Widgets::Botao::atualizar(float deltaTime)
+void BubbleUI::Widgets::Botao::atualizar()
 {
-    Texto::atualizar(Bubble::Tempo::delta_time);
+    Texto::atualizar();
 }
 
 void BubbleUI::Widgets::Botao::renderizar()
@@ -27,5 +27,5 @@ void BubbleUI::Widgets::Botao::renderizar()
     moldura.defCor({ 0.4, 0.4, 0.4});
     moldura.defPos(box_pos);
     moldura.defTam({ (float)largura_texto + letra_padding.x * 2, box_size.y});
-    moldura.atualizar(Bubble::Tempo::delta_time);
+    moldura.atualizar();
 }

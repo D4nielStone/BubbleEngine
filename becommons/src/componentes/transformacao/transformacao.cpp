@@ -40,7 +40,7 @@ glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
 {
     return matriz_de_modelo;
 }
-void Transformacao::atualizar(float deltaTime) {
+void Transformacao::atualizar() {
     if (shader && estado == DINAMICO) {
         shader->use();
         glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));

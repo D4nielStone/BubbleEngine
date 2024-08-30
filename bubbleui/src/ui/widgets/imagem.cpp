@@ -20,7 +20,7 @@ Vector4f BubbleUI::Widgets::Imagem::paraNDC()
 }
 
 
-void BubbleUI::Widgets::Imagem::atualizar(float deltaTime)
+void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {

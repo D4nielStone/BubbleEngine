@@ -13,12 +13,12 @@ namespace BubbleUI
         public:
             CaixaTexto(std::string mensagem = "");
 
-            void atualizar(float deltaTime) override;
+            void atualizar() override;
             void renderizar() override;
         private:
             void processarEntrada(char c);
             std::string mensagem;
-            bool gatilho1, gatilho2;
+            bool gatilho1, gatilho2, selecionado{ false };
             double cronometro;
         };
     }

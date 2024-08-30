@@ -27,7 +27,7 @@ CameraEditor::CameraEditor()
     transformacao = std::make_shared<Componentes::Transformacao>();
     atualizarDirecao();
 }
-void CameraEditor::atualizar(float dt)
+void CameraEditor::atualizar()
 {
     if (inputs && inputs->getInputMode() == Editor)
     {

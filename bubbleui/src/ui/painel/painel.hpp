@@ -30,6 +30,7 @@ namespace BubbleUI
 		Lado redimen_atual;
 		Vector2f widget_pos;
 		Vector2 widget_padding;
+		Color arvore_cor{ 0.1f, 0.1f, 0.1f };
 	protected:
 		void configurar(Contexto* ctx, Vector4 rect = { 2, 2, 100, 50 });
 		virtual void preAtualizacao();

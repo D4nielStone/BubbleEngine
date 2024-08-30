@@ -6,7 +6,7 @@
 #include "perlinnoise.hpp"
 
 using namespace Bubble::Componentes;
-void Terreno::atualizar(float deltaTime)
+void Terreno::atualizar()
     {
         desenharModelo();
     }

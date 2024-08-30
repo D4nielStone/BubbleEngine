@@ -22,7 +22,7 @@ namespace Bubble::Cena
 
     void Scene::criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade)
     {
-        adicionarEntidade(std::make_shared<Entidades::Entidade>(*arquivo_3d.get()));
+        adicionarEntidade(std::make_shared<Entidades::Entidade>(*arquivo_3d));
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
@@ -53,24 +53,24 @@ namespace Bubble::Cena
         }
     }
     // Deve atualizar Cena
-    void Scene::atualizar(float deltaTime) {
-        camera_editor.atualizar(deltaTime);
+    void Scene::atualizar() {
+        camera_editor.atualizar();
         for (auto& obj : Entidades) {
-            obj->atualizar(deltaTime);
+            obj->atualizar();
             if (obj->obterComponente("Camera")) {
                 camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
             }
-            atualizarFilhos(obj, deltaTime);
+            atualizarFilhos(obj);
         }
     }
 
-    void Scene::atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime) {
+    void Scene::atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade) {
         for (auto& filho : entidade->obterFilhos()) {
-            filho->atualizar(deltaTime);
+            filho->atualizar();
             if (filho->obterComponente("Camera")) {
                 camera_principal = static_cast<Componentes::Camera*>(filho->obterComponente("Camera").get());
             }
-            atualizarFilhos(filho, deltaTime);
+            atualizarFilhos(filho);
         }
     }
 

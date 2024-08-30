@@ -12,14 +12,15 @@ void BubbleUI::Paineis::Entidades::recarregar()
 {
 	lista_widgets.clear();
 
+	adiWidget(std::make_shared<Widgets::CaixaTexto>());
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
 		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome());
+		adiWidget(arvore);
 		for (auto& filho : entidade->obterFilhos())
 		{
-			recursivo(filho, *arvore.get());
+			recursivo(filho, *arvore);
 		}
-		adiWidget(arvore);
 		numero_entidades = scenemanager->cenaAtual()->Entidades.size();
 	}
 }
@@ -32,8 +33,10 @@ void BubbleUI::Paineis::Entidades::preAtualizacao()
 
 void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, Widgets::Arvore& arvore)
 {
+	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nome());
+	arvore.adiFilho(arvore_recursiva);
 	for (auto& filho : entidade->obterFilhos())
 	{
-		recursivo(filho, arvore);
+		recursivo(filho, *arvore_recursiva);
 	}
 }

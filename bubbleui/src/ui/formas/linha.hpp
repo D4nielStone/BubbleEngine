@@ -16,7 +16,7 @@ namespace BubbleUI
 			Linha() = default;
 			void defPos(Vector4f posicoes);
 			void defCor(Color cor);
-			void atualizar(float deltaTime);
+			void atualizar();
 			void renderizar();
 		protected:
 			Contexto* contexto;

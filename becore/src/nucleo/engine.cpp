@@ -78,7 +78,7 @@ void Engine::atualizar()
     glfwPollEvents();
 
     // Atualizar cena
-    gerenciadorDeCenas.atualizarCenaAtual(Tempo::delta_time);
+    gerenciadorDeCenas.atualizarCenaAtual();
 }
 // Deve renderizar cena Atual
 void Engine::renderizar(Vector4 rect_size)
@@ -88,7 +88,7 @@ void Engine::renderizar(Vector4 rect_size)
     // Renderizar cena
     gerenciadorDeCenas.renderizarCenaAtual();
     // Atualiza e renderiza UI
-    gerenciadorUi->atualizar(Tempo::delta_time);
+    gerenciadorUi->atualizar();
 
     glfwSwapBuffers(glfwWindow);
     Tempo::endDT();

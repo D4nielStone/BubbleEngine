@@ -23,7 +23,7 @@ namespace Bubble {
 			CameraEditor();
 			void atualizarDirecao();
 			void configurar() override;
-			void atualizar(float deltaTime = 1) override;
+			void atualizar() override;
 			void olharPara(glm::vec3 pov);
 		};
 	}

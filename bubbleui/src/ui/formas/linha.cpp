@@ -41,7 +41,7 @@ Vector4f Linha::paraNDC()
     return coord_ndc;
 }
 
-void Linha::atualizar(float deltaTime)
+void Linha::atualizar()
 {
     paraNDC();
 }

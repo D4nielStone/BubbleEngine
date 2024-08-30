@@ -29,7 +29,7 @@ void Codigo::configurar() {
     carregadov = true;
 }
 // Deve atualizar o script
-void Codigo::atualizar(float deltaTime) {
+void Codigo::atualizar() {
     //mais tare vou criar a api
     lua_getglobal(L, "atualizar");
     if (luaL_loadfile(L, scriptPath.c_str()) || lua_pcall(L, 0, 0, 0)) {

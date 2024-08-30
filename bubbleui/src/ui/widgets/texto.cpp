@@ -28,7 +28,7 @@ BubbleUI::Widgets::Texto::Texto(std::string l, unsigned int pxl) : resolucao(pxl
     configurar(resolucao);
 }
 
-void BubbleUI::Widgets::Texto::atualizar(float deltaTime)
+void BubbleUI::Widgets::Texto::atualizar()
 {
     if(label)
     frase = *label;

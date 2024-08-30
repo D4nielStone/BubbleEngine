@@ -10,7 +10,7 @@ namespace BubbleUI
 	public:
 		Aba(Painel* painel);
 		Aba() = default;
-		void atualizar(float deltaTime) override;
+		void atualizar() override;
 		void renderizar() override;
 	private:
 		Painel* painel;

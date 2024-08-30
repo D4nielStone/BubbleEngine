@@ -12,13 +12,13 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string mensagem)
     resolucao = (12);
     lines_box_limite = 3;
     configurar();
-    moldura.defCor({ 0.13, 0.13, 0.13 });
+    moldura.defCor({ 0.05f, 0.05f, 0.05f});
 }
 
-void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
+void BubbleUI::Widgets::CaixaTexto::atualizar()
 {
-    Texto::atualizar(deltaTime);
-    cronometro += deltaTime;
+    Texto::atualizar();
+    cronometro += Bubble::Tempo::delta_time;
     auto* inputs = pai->obtCtx()->inputs; // Simplifica o acesso
 
     if (inputs->isKeyPressed(BS) && !texto.empty() && !gatilho1) // Backspace
@@ -71,13 +71,13 @@ void BubbleUI::Widgets::CaixaTexto::atualizar(float deltaTime)
     }
     moldura.defTam(box_size);
     moldura.defPos(box_pos);
-    moldura.atualizar(Bubble::Tempo::delta_time);
+    moldura.atualizar();
 }
 
 void BubbleUI::Widgets::CaixaTexto::renderizar()
 {
     moldura.renderizar(GL_TRIANGLES);
-    renderizar_texto();
+    Texto::renderizar();
 }
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)

@@ -42,6 +42,7 @@ namespace BubbleUI
 			Colisao2d* colisao{ nullptr };
 			Formas::Moldura moldura, * pai{ nullptr };
 			std::vector<LetraRect> letras_rect;
+			bool gatilho{ true };
 			bool clicado{ false }, mouseEmCima{ false };
 			std::string* label;
 		};

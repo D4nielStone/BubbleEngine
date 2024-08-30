@@ -1,7 +1,8 @@
 #include "editor.hpp"
 #include "src/ui/items/item_botao.hpp"
 #include "src/ui/items/item_arvore.hpp"
-#include "windows.h"
+#include <windows.h>
+#include <filesystem>
 
 std::wstring path = L"";
 // Função para selecionar objeto 3D
@@ -64,19 +65,17 @@ BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* sce
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
-	if (scenemanager->cenaAtualIdx() != -1)
-	{
-        // Adicionar objeto caso "path" esteja preenchido
-        if (path != L"")
-        {
-            Bubble::Cena::adicionarTarefaNaFila([this]() 
-                {
-                    Bubble::Cena::criarEntidade(scenemanager, path);
-                });
-            path = L"";
-        }
-		buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
-		Vector4 rect_size = buffer->obtRect();
-		scenemanager->defViewport(rect_size);
-	}
+    // Adicionar objeto caso "path" esteja preenchido
+    if (!path.empty())
+    {
+        std::string novo_path = std::filesystem::path(path).string();
+        Bubble::Cena::adicionarTarefaNaFila([this, novo_path]()
+            {
+                Bubble::Cena::criarEntidade(scenemanager, novo_path);
+            });
+        path = L"";
+    }
+    buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
+    Vector4 rect_size = buffer->obtRect();
+    scenemanager->defViewport(rect_size);
 }

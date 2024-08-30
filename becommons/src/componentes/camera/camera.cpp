@@ -73,7 +73,7 @@ void Camera::desenharFrame(Vector4 viewportRect) const
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
-void Camera::atualizar(float deltaTime) {
+void Camera::atualizar() {
     matrizProjecao = glm::perspective(
         glm::radians(FOV),
         aspecto,

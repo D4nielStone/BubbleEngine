@@ -17,7 +17,7 @@ namespace BubbleUI
 			Texto(std::string label, unsigned int resolucao);
 			Texto() = default;
 			~Texto();
-			void atualizar(float deltaTime) override;
+			void atualizar() override;
 			void renderizar() override;
 			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/arial/arialbd.ttf");
 		protected:
@@ -33,7 +33,7 @@ namespace BubbleUI
 			Vector4f paraNDC();
 			std::vector<LetraRect> letras_rect;
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
-			std::string* label;
+			std::string* label{ nullptr };
 		};
 	}
 }

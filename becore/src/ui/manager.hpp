@@ -23,7 +23,7 @@ namespace BubbleUI
 	public:
 		GLFWcursor* cursor_antigo{ nullptr };
 		Manager(Bubble::Nucleo::Engine*);
-		void atualizar(float deltaTime);
+		void atualizar();
 		void verificarSelecionado();
 		void renderizar();
 	};

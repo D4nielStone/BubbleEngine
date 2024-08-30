@@ -7,10 +7,10 @@ BubbleUI::Util::PopUp::PopUp(Contexto* contexto)
 	inputs = contexto->inputs;
 	this->retangulo = {2, 2, 50, 50};
 	colisao = new Colisao2d({}, contexto);
-	linha_d = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
-	linha_b = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
-	linha_e = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
-	linha_c = new Formas::Linha({ 0, 0, 0, 0 }, contexto);
+	linha_d = std::make_unique<Formas::Linha>(Vector4f{ 0, 0, 0, 0 }, contexto);
+	linha_b = std::make_unique<Formas::Linha>(Vector4f{ 0, 0, 0, 0 }, contexto);
+	linha_e = std::make_unique<Formas::Linha>(Vector4f{ 0, 0, 0, 0 }, contexto);
+	linha_c = std::make_unique<Formas::Linha>(Vector4f{ 0, 0, 0, 0 }, contexto);
 	linha_d->defCor({ 0.35, 0.35, 0.35 });
 	linha_b->defCor({ 0.35, 0.35, 0.35 });
 	linha_e->defCor({ 0.55, 0.55, 0.55 });

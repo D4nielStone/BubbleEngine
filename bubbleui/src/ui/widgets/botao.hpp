@@ -7,7 +7,7 @@ namespace BubbleUI
 		{
 		public:
 			Botao(std::string label);
-			void atualizar(float deltaTime) override;
+			void atualizar() override;
 			void renderizar() override;
 		private:
 		};

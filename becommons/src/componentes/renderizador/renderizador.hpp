@@ -18,7 +18,7 @@ namespace Bubble{
             Renderizador() = default;
             ~Renderizador();
             void configurar() override;
-            void atualizar(float deltaTime) override;
+            void atualizar() override;
         };
     }
 }

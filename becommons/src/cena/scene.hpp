@@ -34,9 +34,9 @@ namespace Bubble {
             void criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(float aspecto);
-            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime);
-            void atualizar(float deltaTime);
-            void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float deltaTime);
+            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float aspecto);
+            void atualizar();
+            void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade);
             void carregar();
             void serializar(rapidjson::Document* doc) const;
             bool parse(rapidjson::Document& doc);

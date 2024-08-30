@@ -12,9 +12,9 @@ BubbleUI::Aba::Aba(Painel* painel) : painel(painel)
     corpo_rect->defCor({0.4, 0, 0.4});
 }
 
-void BubbleUI::Aba::atualizar(float deltaTime)
+void BubbleUI::Aba::atualizar()
 {
-    Texto::atualizar(deltaTime);
+    Texto::atualizar();
 
     painel->widget_pos = { 0, -(float)pai->widget_padding.y };
 
@@ -26,7 +26,7 @@ void BubbleUI::Aba::atualizar(float deltaTime)
     corpo_rect->defTam({ (float)painel->obtRect().w, 15});
     box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
     box_size = { (float)corpo_rect->obtRect().w, (float)corpo_rect->obtRect().h };
-    corpo_rect->atualizar(deltaTime);
+    corpo_rect->atualizar();
 }
 
 void BubbleUI::Aba::renderizar()

@@ -12,7 +12,7 @@ namespace Bubble {
             ~Codigo();
 
             void configurar() override;
-            void atualizar(float deltaTime) override;
+            void atualizar() override;
 
         private:
             std::string scriptPath;

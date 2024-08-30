@@ -91,7 +91,7 @@ void SceneManager::renderizarCenaAtual() const
 std::queue<std::function<void()>> filaDeTarefas;
 std::mutex filaMutex;
 // Deve atualizar cena atual
-void SceneManager::atualizarCenaAtual(float deltaTime) const
+void SceneManager::atualizarCenaAtual() const
 {
     // Processar fila de tarefas na thread principal
     while (!filaDeTarefas.empty()) {
@@ -99,7 +99,7 @@ void SceneManager::atualizarCenaAtual(float deltaTime) const
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
 
-    cenaAtual()->atualizar(deltaTime);
+    cenaAtual()->atualizar();
 }
 // Deve retornar numero de cenas
 size_t SceneManager::numeroDeCenas() const {
@@ -126,7 +126,7 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
     filaDeTarefas.push(tarefa);
 }
 
-void Bubble::Cena::criarEntidade(SceneManager* scenemanager, std::wstring path)
+void Bubble::Cena::criarEntidade(SceneManager* scenemanager, std::string path)
 {
     scenemanager->cenaAtual()->criarEntidade(std::make_unique<Arquivadores::Arquivo3d>(path));
 }

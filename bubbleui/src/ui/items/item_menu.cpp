@@ -55,10 +55,13 @@ void BubbleUI::Items::ItemMenu::atualizar()
         mouseEmCima = false; // Marca que o mouse não está mais sobre o item
         moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
     }
+    // Verifica gatilho para toque
+    if (pai->obtCtx()->inputs->mouseEnter == GLFW_RELEASE)
+        gatilho = true;
     // Atualiza a posição e tamanho da moldura
     moldura.defPos({ box_pos.x, box_pos.y });
     moldura.defTam({ (float)largura_texto + letra_padding.x * 2, (float)box_size.y });
-    moldura.atualizar(Bubble::Tempo::delta_time); // Atualiza a moldura com base no delta time
+    moldura.atualizar(); // Atualiza a moldura
 }
 
 // Método para renderizar o ItemMenu na tela

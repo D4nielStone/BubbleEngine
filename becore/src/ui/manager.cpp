@@ -75,7 +75,7 @@ void BubbleUI::Manager::renderizar()
 }
 
 // Atualiza paineis
-void BubbleUI::Manager::atualizar(float deltaTime)
+void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
 	
