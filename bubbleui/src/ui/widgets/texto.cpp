@@ -4,7 +4,7 @@
 
 using namespace Bubble::Arquivadores;
 
-BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), texto(""), letra_padding({ 0, 0 })
+BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     configurar();
@@ -14,6 +14,7 @@ BubbleUI::Widgets::Texto::Texto(std::string* label, unsigned int pxl) : label(la
 {
     configurar(resolucao);
 }
+
 BubbleUI::Widgets::Texto::Texto(std::string l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
@@ -30,15 +31,28 @@ BubbleUI::Widgets::Texto::Texto(std::string l, unsigned int pxl) : resolucao(pxl
 
 void BubbleUI::Widgets::Texto::atualizar()
 {
-    if(label)
-    frase = *label;
+    if (label)
+        frase = *label;
     renderizar_texto();
 }
 
 void BubbleUI::Widgets::Texto::renderizar()
 {
-    for(auto& letra : letras_rect)
+    for (auto& letra : letras_rect)
     {
+        // Renderiza o fundo da letra selecionada
+        if (letra.letra_selecionada)
+        {
+            shaderQuad.use();
+            shaderQuad.setCor("quadrado.cor", letra.cor_de_fundo);
+            shaderQuad.setVec2("quadrado.posicao", letra.fundo_rect.x, letra.fundo_rect.y);
+            shaderQuad.setVec2("quadrado.tamanho", letra.fundo_rect.z, letra.fundo_rect.w);
+            glBindVertexArray(rect_vertex.VAO);
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
+        }
+
+        // Renderiza a letra
         shader.use();
         shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
         shader.setVec2("quadrado.posicao", letra.rect.x, letra.rect.y);
@@ -59,7 +73,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     box_pos.x = pai->obtRect().x + pai->widget_padding.x + pai->widget_pos.x;
     box_pos.y = pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
     box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
-    box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
+    box_size.y = 0; // Inicialize como 0, será atualizado com a altura do texto
 
     // Dimensões da letra
     int h_letter = 0, w_letter = 0, x_letter = 0, y_letter = 0, w_line = 0;
@@ -86,42 +100,75 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
             x_letter = w_line + ch.Bearing.x;
         }
 
-        // Defini retângulo da letra
+        // Definir retângulo da letra
         char_rect.x = box_pos.x + x_letter + line_pos.x;
         char_rect.y = y_letter + line_pos.y;
         char_rect.w = w_letter;
         char_rect.h = h_letter;
 
-        // Renderiza letra
-        letras_rect.push_back({ paraNDC(), ch.TextureID });
+        // Ajustar o retângulo de fundo para lidar com seleções invertidas
+        char_fundo_rect.x = char_rect.x;
+        char_fundo_rect.y = line_pos.y + box_pos.y;
+        char_fundo_rect.h = resolucao + letra_padding.y;
 
-        w_line += (ch.Advance >> 6); // 1/64 pixels
+        // Verificar se o retângulo de fundo precisa ser ajustado
+        if (char_fundo_rect.w < 0) {
+            char_fundo_rect.x += char_fundo_rect.w;
+            char_fundo_rect.w = -char_fundo_rect.w; // Tornar w positivo
+        }
+        else {
+            char_fundo_rect.w = char_rect.w;
+        }
+
+        // Verifica se a letra está na área de seleção
+        if (char_rect.x + char_rect.w >= area_de_selecao.x &&
+            char_rect.x <= area_de_selecao.w &&
+            char_rect.y + char_rect.h >= area_de_selecao.y &&
+            char_rect.y <= area_de_selecao.h)
+        {
+            cor_de_selecao = { 0, 0, 1, 0.5 }; // Cor de fundo para seleção
+            letra_selecionada = true;
+        }
+        else
+        {
+            cor_de_selecao = { 0, 0, 0, 0 }; // Transparente para não selecionado
+            letra_selecionada = false;
+        }
+
+        letras_rect.push_back({ paraNDC(char_rect), paraNDC(char_fundo_rect), ch.TextureID, cor_de_selecao, letra_selecionada });
+
+        // Atualizar a largura da linha
+        w_line += (ch.Advance >> 6); // Avanço em 1/64 pixels
         if (w_line > largura_texto)
             largura_texto = w_line;
     }
-    // Próximo widget
-    box_size.y = line_pos.y + resolucao + letra_padding.y;  // Altura do texto mais padding
+
+    // Atualizar o tamanho da caixa de texto com a altura total
+    box_size.y = line_pos.y + resolucao + letra_padding.y;
     pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
 }
 
-// Deve transformar coordenadas pixel para NDC
-Vector4f BubbleUI::Widgets::Texto::paraNDC()
+// Converte coordenadas de pixel para NDC (Normalized Device Coordinates)
+Vector4f BubbleUI::Widgets::Texto::paraNDC(Vector4 coord)
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (char_rect.w * 2.f) / pai->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * char_rect.h) / pai->obtCtx()->tamanho.height;
-    coord_ndc.x = (char_rect.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * char_rect.y) / pai->obtCtx()->tamanho.height;
+    coord_ndc.z = (coord.w * 2.f) / pai->obtCtx()->tamanho.width;
+    coord_ndc.w = -(2.0f * coord.h) / pai->obtCtx()->tamanho.height;
+    coord_ndc.x = (coord.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * coord.y) / pai->obtCtx()->tamanho.height;
 
     return coord_ndc;
 }
 
+// Configura o texto com a fonte e resolução especificada
 void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)
 {
     carregarFonte(font_path);
 }
+
 // Destrutor para liberar recursos
-BubbleUI::Widgets::Texto::~Texto() 
+BubbleUI::Widgets::Texto::~Texto()
 {
+    if (label) delete[] label;
 }

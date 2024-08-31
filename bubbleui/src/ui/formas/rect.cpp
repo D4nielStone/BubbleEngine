@@ -60,7 +60,7 @@ void Rect::renderizar(GLenum modo)
     shader.use();
     shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
-    shader.setVec3("quadrado.cor", cor_base.r, cor_base.g, cor_base.b);
+    shader.setCor("quadrado.cor", cor_base);
     glBindVertexArray(rect_vertex.VAO);
     glDrawElements(modo, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

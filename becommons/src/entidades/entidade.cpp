@@ -44,6 +44,11 @@ std::string Entidade::nome() const
     return Nome;
 }
 
+std::string* Bubble::Entidades::Entidade::nomeptr()
+{
+    return &Nome;
+}
+
 void Entidade::carregarNode(const Node& node)
 {
     Nome = node.nome;

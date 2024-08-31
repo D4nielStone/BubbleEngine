@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include "Shader.hpp"
 #include "src/depuracao/debug.hpp"
+#include <src/util/includes.hpp>
 
 std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
@@ -108,6 +109,9 @@ void Shader::setMat4(const std::string& name, const float* value) const {
 }
 void Shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
+}
+void Shader::setCor(const std::string& name, Color cor) const {
+    glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 void Shader::setVec3(const std::string& name, float r, float g, float b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);

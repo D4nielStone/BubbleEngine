@@ -157,7 +157,7 @@ struct Size
 
 struct Color 
 {
-    float r = 0.7f, g = 0.7f, b = 0.7f;
+    float r = 0.7f, g = 0.7f, b = 0.7f, a = 1.f;
 };
 
 struct Textura {
@@ -199,7 +199,10 @@ struct Node
 struct LetraRect
 {
     Vector4f rect;
+    Vector4f fundo_rect;
     unsigned int ID;
+    Color cor_de_fundo{ 0, 0, 0 ,0 };
+    bool letra_selecionada;
 };
 
 extern BECOMMONS_DLL_API Vertex rect_vertex;

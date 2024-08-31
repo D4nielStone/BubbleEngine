@@ -34,6 +34,7 @@ namespace BubbleUI
 	protected:
 		void configurar(Contexto* ctx, Vector4 rect = { 2, 2, 100, 50 });
 		virtual void preAtualizacao();
+		virtual void posAtualizacao();
 		virtual void preRenderizacao();
 		void corrigirLimite();
 

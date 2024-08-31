@@ -12,6 +12,7 @@ namespace BubbleUI
     {
         GLFWwindow* glfwWindow{ nullptr }; // Janela glfw do contexto em questão
         GLFWcursor* cursor_horizontal{ nullptr };   // Cursor glfw
+        GLFWcursor* cursor_texto{ nullptr };        // Cursor glfw
         GLFWcursor* cursor_vertical{ nullptr };     // Cursor glfw
         GLFWcursor* cursor_normal{ nullptr };       // Cursor glfw
         GLFWcursor* cursor{ nullptr }; // Cursor à ser usado

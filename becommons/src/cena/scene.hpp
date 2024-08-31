@@ -21,7 +21,7 @@ namespace Bubble {
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
             void desenharCeu();
         public:
-            std::unordered_set<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
+            std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
             Bubble::Entidades::CameraEditor camera_editor;
             Bubble::Componentes::Camera* camera_principal = nullptr;
 

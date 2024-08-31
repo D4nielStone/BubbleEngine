@@ -5,14 +5,16 @@
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/editor.hpp"
 #include "src/ui/painel/entidades.hpp"
+#include "src/ui/painel/inspetor.hpp"
 #include <future>
 
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
 	lista_paineis.push_back(new Paineis::Depurador(&contexto));
-	lista_paineis.push_back(new Paineis::Entidades(&contexto, engine->obterGC(), {300, 10, 400, 300}));
-	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {10, 10, 400, 300}));
+	lista_paineis.push_back(new Paineis::Entidades(&contexto, engine->obterGC(), {2, 2, 100, 478 }));
+	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {112, 2, 300, 478 }));
+	lista_paineis.push_back(new Paineis::Inspetor(&contexto, engine->obterGC(), {422, 2, 218, 478}));
 }
 
 // Seleciona o painel

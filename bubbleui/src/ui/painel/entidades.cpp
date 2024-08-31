@@ -21,14 +21,16 @@ void BubbleUI::Paineis::Entidades::recarregar()
 		{
 			recursivo(filho, *arvore);
 		}
-		numero_entidades = scenemanager->cenaAtual()->Entidades.size();
 	}
 }
 
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
-	if (numero_entidades != scenemanager->cenaAtual()->Entidades.size() && selecionado)
-		recarregar();
+	if (selecionado && !gatilho_recarregar)
+	{
+		recarregar(); gatilho_recarregar = true;
+	}
+	if (!selecionado) gatilho_recarregar = false;
 }
 
 void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, Widgets::Arvore& arvore)

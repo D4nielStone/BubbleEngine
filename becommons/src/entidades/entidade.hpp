@@ -22,6 +22,7 @@ namespace Bubble {
 			void atualizar() const;
 			void renderizar() const;
 			std::string nome() const;
+			std::string* nomeptr();
 			void carregarNode(const Node& node);
 			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
 			std::unordered_set<std::shared_ptr<Comum::Componente>> obterComponentes(const std::string& nome);

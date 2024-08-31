@@ -58,12 +58,10 @@ BubbleUI::Contexto* BubbleUI::Painel::obtCtx() const
 
 void BubbleUI::Painel::atualizar()
 {
-
-	borda_c->atualizar();
-	borda_b->atualizar();
-	borda_e->atualizar();
-	borda_d->atualizar();
-
+	if (selecionado)
+	{
+		borda_c->atualizar(); borda_b->atualizar(); borda_e->atualizar(); borda_d->atualizar();
+	}
 	corrigirLimite();
 	
 
@@ -84,8 +82,7 @@ void BubbleUI::Painel::atualizar()
 
 	menu_de_contexto->atualizar();
 
-	if (!selecionado)
-		menu_de_contexto->esconder();
+	if (!selecionado) menu_de_contexto->esconder();
 
 	preAtualizacao();
 	m_aba->atualizar();
@@ -93,6 +90,7 @@ void BubbleUI::Painel::atualizar()
 	{
 		widget->atualizar();
 	}
+	posAtualizacao();
 
 	arrastando = false;
 }
@@ -131,6 +129,10 @@ void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
 }
 
 void BubbleUI::Painel::preAtualizacao()
+{
+}
+
+void BubbleUI::Painel::posAtualizacao()
 {
 }
 

@@ -28,7 +28,7 @@ namespace Bubble::Cena
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
         if (!existeEntidade(gameObject.get())) {
             carregarComponentes(gameObject);  // Carrega os componentes da entidade e dos filhos
-            Entidades.insert(std::move(gameObject));  // Adiciona objeto à lista de entidades
+            Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
         }
     }
 
