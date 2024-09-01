@@ -13,8 +13,8 @@ namespace BubbleUI
 		private:
 			void recarregar();
 			void preAtualizacao() override;
+			Bubble::Entidades::Entidade* entidade_selecionada{ nullptr };
 			Bubble::Cena::SceneManager* scenemanager;
-			bool gatilho_recarregar{ false };
 			std::string* nome_atual;
 		};
 	}

@@ -15,8 +15,8 @@ namespace BubbleUI
 			void recarregar();
 			void preAtualizacao() override;
 		private:
-			bool gatilho_recarregar{ false };
 			Bubble::Cena::SceneManager* scenemanager;
+			int quantidade_entidades{ 0 };
 			void recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, Widgets::Arvore& arvore);
 		};
 	}

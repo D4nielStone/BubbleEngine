@@ -19,7 +19,7 @@ void Renderizador::atualizar()
     for (auto& textura : malha.material.texturas)
     {
         glBindTexture(GL_TEXTURE_2D, textura.ID);
-        shader->setInt(textura.tipo + "_.ativado", 0);
+        shader.setInt(textura.tipo + "_.ativado", 0);
     }
 }
 void Renderizador::configurarBuffers()
@@ -77,16 +77,13 @@ void Renderizador::desenharModelo() const
     }
 void Renderizador::atualizarMaterial() const
 {
-    if (shader)
+    shader.use();
+    shader.setVec3("material.cor_difusa", malha.material.difusa.r, malha.material.difusa.g, malha.material.difusa.b);
+    for (auto& textura : malha.material.texturas)
     {
-        shader->use();
-        shader->setVec3("material.cor_difusa", malha.material.difusa.r, malha.material.difusa.g, malha.material.difusa.b);
-        for (auto& textura : malha.material.texturas)
-        {
-            glBindTexture(GL_TEXTURE_2D, textura.ID);
-            shader->setInt(textura.tipo + "_.ativado", 1);
-            shader->setInt(textura.tipo, 0);
-        }
+        glBindTexture(GL_TEXTURE_2D, textura.ID);
+        shader.setInt(textura.tipo + "_.ativado", 1);
+        shader.setInt(textura.tipo, 0);
     }
 }
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)

@@ -7,7 +7,8 @@ Transformacao::Transformacao()
 {
     Nome = "Transformacao";
 }
-rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) {
+rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const 
+{
     rapidjson::Value obj(rapidjson::kObjectType);
     rapidjson::Value positionarr(rapidjson::kArrayType);
     positionarr.PushBack(rapidjson::Value().SetFloat(posicao.x), doc->GetAllocator());
@@ -41,12 +42,13 @@ glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
     return matriz_de_modelo;
 }
 void Transformacao::atualizar() {
-    if (shader && estado == DINAMICO) {
-        shader->use();
-        glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
-        shader->setMat4("model", glm::value_ptr(matriz_de_modelo));
-        shader->setMat3("normalMatrix", glm::value_ptr(normalMatrix));
-    }
+    if (estado != DINAMICO)
+        return;
+
+    shader.use();
+    glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
+    shader.setMat4("model", glm::value_ptr(matriz_de_modelo));
+    shader.setMat3("normalMatrix", glm::value_ptr(normalMatrix));
 }
 void Transformacao::configurar() {
     glm::translate(matriz_de_modelo, posicao);

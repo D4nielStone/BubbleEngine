@@ -27,7 +27,7 @@ namespace BubbleUI
             std::string* mensagem{ nullptr };
             std::string* buffer_texto{ nullptr };
             std::string texto;
-            bool gatilho1, gatilho2, selecionado{ false }, selecionando_texto{ false };
+            bool gatilho1, gatilho2, selecionado{ false };
             Vector2 mouse_pos_ini;
             double cronometro;
         };

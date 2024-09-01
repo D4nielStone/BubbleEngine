@@ -5,7 +5,7 @@ BubbleUI::Paineis::Depurador::Depurador(Contexto* ctx) : fps_display("FPS: ")
 {
 	Nome = "Depurador";
 	configurar(ctx);
-	adiWidget(std::make_shared<Widgets::Texto>(&fps_display, 12));
+	adiWidget(std::make_shared<Widgets::Texto>(&fps_display));
 }
 
 void BubbleUI::Paineis::Depurador::preAtualizacao()

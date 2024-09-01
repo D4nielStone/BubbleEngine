@@ -19,7 +19,7 @@ void Terreno::configurar()
     }
 void Terreno::atualizarMaterial()
     {
-        shader->setVec3("objectColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
+        shader.setVec3("objectColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
     }
 void Terreno::configurarBuffers() {
         glGenVertexArrays(1, &mVertex.VAO);
@@ -107,13 +107,12 @@ void Terreno::gerarHeightMap()
         calcularNormais();
     }
 void Terreno::desenharModelo()
-    {
-        if (shader)
-            shader->use();
-        atualizarMaterial();
-        glBindVertexArray(mVertex.VAO);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
-    }
+{
+    shader.use();
+    atualizarMaterial();
+    glBindVertexArray(mVertex.VAO);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
+}
 void Terreno::calcularNormais()
     {
         mVertex.normals.resize(mVertex.vertices.size(), 0.0f);
@@ -155,7 +154,6 @@ void Terreno::calcularNormais()
 Terreno::Terreno() : scale(50.0), width(100), depth(100)
     {
         Nome = "Terreno";
-        shader = new Shader();
     }
 Terreno::~Terreno()
     {

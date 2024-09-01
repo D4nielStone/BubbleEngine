@@ -16,7 +16,9 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string mensagem)
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, std::string mensagem)
     : mensagem(new std::string(mensagem)), buffer_texto(buffer) 
 {
-    if (buffer) texto = buffer->c_str();
+    if (buffer) {
+        texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
+    }
     letra_padding = { 5, 5 };
     resolucao = 12;
     lines_box_limite = 3;
@@ -26,17 +28,22 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, std::string mensa
 
 void BubbleUI::Widgets::CaixaTexto::atualizar()
 {
-    if (colisao->mouseEmCima()) {
-        contexto->cursor = contexto->cursor_texto;
-        if (inputs->mouseEnter == GLFW_PRESS)iniciarSelecao();
-        else selecionando_texto = false;
+    if (pai->selecionado) 
+    {
+        if (colisao->mouseEmCima()) {
+            contexto->cursor = contexto->cursor_texto;
+            if (inputs->mouseEnter == GLFW_PRESS)iniciarSelecao();
+            else selecionando_texto = false;
+        } // atualiza Cursor
+        if (selecionado) atualizarInputs(); // Atualiza entrada
+        if (selecionando_texto) area_de_selecao = { (float)mouse_pos_ini.x, (float)mouse_pos_ini.y, (int)inputs->mousex, (int)inputs->mousey };
     }
-    if (selecionado && pai->selecionado) atualizarInputs(); // Atualiza entrada
-
-    if (selecionando_texto) area_de_selecao = { (float)mouse_pos_ini.x, (float)mouse_pos_ini.y, (int)inputs->mousex, (int)inputs->mousey };
-    else area_de_selecao = { 0, 0, 0 ,0 };
     Texto::atualizar(); // Atualiza texto
 
+    for (auto& letra : letras_rect) // Desenha cursor do texto
+    {
+        if (letra.index == texto_cursor_index) texto_cursor_pos = letra.rect; texto_cursor_pos.w = 1;
+    }
     // Atribui texto da frase para o buffer
     if (buffer_texto)
     {
@@ -66,25 +73,39 @@ void BubbleUI::Widgets::CaixaTexto::renderizar()
 {
     moldura.renderizar(0x0004);
     Texto::renderizar();
+    // Renderiza o cursor
+    if (Bubble::Tempo::s_passados % 2 == 0)
+    {
+        shaderQuad.use();
+        shaderQuad.setCor("quadrado.cor", { 1, 1, 1, 0.95f });
+        shaderQuad.setVec2("quadrado.posicao", texto_cursor_pos.x, texto_cursor_pos.y);
+        shaderQuad.setVec2("quadrado.tamanho", texto_cursor_pos.z, texto_cursor_pos.w);
+
+        glBindVertexArray(rect_vertex.VAO);
+        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
+    }
 }
 
 void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
 {
-    BubbleUI::Widget::defPainel(painel);
+    BubbleUI::Widgets::Texto::defPainel(painel);
     contexto = painel->obtCtx();
     inputs = pai->obtCtx()->inputs; // Simplifica o acesso
 }
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
 {
-    if (c == '\b' && !texto.empty()) // Backspace
+    if (c == '\b' && !texto.empty() && texto_cursor_index != 0) // Backspace
     {
         texto.pop_back();
+        texto_cursor_index = texto.size();
         return;
     }
     else if (c != '\b')
     {
-        texto.push_back(c);
+        texto.insert(texto_cursor_index, 1, c);
+        texto_cursor_index++;
     }
 }
 
@@ -133,5 +154,6 @@ void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
 }
 void BubbleUI::Widgets::CaixaTexto::iniciarSelecao()
 {
-    if (!selecionando_texto) { mouse_pos_ini = { (int)inputs->mousex, (int)inputs->mousey }; selecionando_texto = true; }
+    if (!selecionando_texto) { selecionado = false; mouse_pos_ini = { (int)inputs->mousex, (int)inputs->mousey }; selecionando_texto = true; }
+    else selecionado = true;
 }

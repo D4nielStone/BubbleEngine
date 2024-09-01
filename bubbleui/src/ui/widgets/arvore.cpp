@@ -3,7 +3,7 @@
 #include "src/ui/painel/painel.hpp"
 
 // Construtor da classe Arvore, inicializa os membros da classe.
-BubbleUI::Widgets::Arvore::Arvore(std::string l)
+BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorno)
 {
     // Define a frase que será exibida na árvore, precedida por "[-]"
     frase = "[-]" + l;
@@ -21,10 +21,6 @@ BubbleUI::Widgets::Arvore::Arvore(std::string l)
 // Método para atualizar o estado do widget Arvore a cada frame
 void BubbleUI::Widgets::Arvore::atualizar()
 {
-    // Se as linhas da moldura não estiverem ocultas, oculta-as
-    if (!moldura.ocultar_linhas)
-        moldura.ocultar_linhas = true;
-
     // Salva o padding antigo do pai
     float padding_antigoy = pai->widget_padding.y;
 
@@ -48,12 +44,29 @@ void BubbleUI::Widgets::Arvore::atualizar()
     colisao->defRect({ box_pos.x, box_pos.y, pai->obtRect().w, (int)box_size.y });
 
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
-    if (!colisao->mouseEmCima())
-        moldura.defCor(cor);
-    else
-        // Se o mouse estiver sobre o widget, altera a cor da moldura
-        moldura.defCor({ 0.2f, 0.2f, 0.2f });
-
+        if (!colisao->mouseEmCima())
+        {
+            moldura.defCor(cor);
+            if (pai->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+            {
+                *retorno = false;
+                moldura.ocultar_linhas = true;
+            }
+        }
+        else if (pai->selecionado)
+        {
+            {
+                // Se o mouse estiver sobre o widget, altera a cor da moldura
+                moldura.defCor({ 0.2f, 0.2f, 0.2f });
+                if (pai->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+                {
+                    *retorno = true;
+                    moldura.ocultar_linhas = false;
+                    if (aberto) aberto = false;
+                    else aberto = true;
+                }
+            }
+        }
     // Define a posição e o tamanho da moldura
     moldura.defPos({ pai->obtRect().x + pai->widget_padding.x, box_pos.y });
     moldura.defTam({ (float)pai->obtRect().w - pai->widget_padding.x * 2, box_size.y });

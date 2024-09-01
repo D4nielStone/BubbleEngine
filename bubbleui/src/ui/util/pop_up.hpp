@@ -20,7 +20,7 @@ namespace BubbleUI
 			bool mouseEmCima{ false };
 		private:
 			int largura{ 0 }, altura{ 0 };
-			void preAtualizacao() override;
+			void posAtualizacao() override;
 			bool vmostrar{ false };
 			Bubble::Inputs::Inputs* inputs{ nullptr };
 			Colisao2d* colisao{ nullptr };

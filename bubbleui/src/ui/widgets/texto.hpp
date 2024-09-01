@@ -12,23 +12,23 @@ namespace BubbleUI
 		{
 		public:
 			Texto(std::string* label);
-			Texto(std::string* label, unsigned int resolucao);
-			Texto(std::string label);
-			Texto(std::string label, unsigned int resolucao);
+			Texto(const std::string& label);
 			Texto() = default;
 			~Texto();
 			void atualizar() override;
 			void renderizar() override;
-			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/arial/arialbd.ttf");
+			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.ttf");
 		protected:
+			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
 			void renderizar_texto();
+			size_t texto_cursor_index{ 0 }; Vector4f texto_cursor_pos;
+			bool selecionando_texto{ false };
 			unsigned int resolucao, texturaID;
 			int lines_box_limite, largura_texto;
 			Vector2f box_size, box_pos, line_pos;
 			Vector2 letra_padding;
 			std::string frase;
-			Color cor, cor_de_selecao;
-			bool letra_selecionada{ false };
+			Color cor, cor_de_selecao{ 0.678, 0.847, 0.902, 1.0};
 			Vector2 pos_texto;
 			Vector4 char_rect, char_fundo_rect;
 			Vector4f paraNDC(Vector4);

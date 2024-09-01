@@ -22,7 +22,7 @@ bool Engine::inicializacao()
             return false;
         }
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
         glfwWindow = glfwCreateWindow(600, 480, "BubbleEngine", NULL, NULL);
 

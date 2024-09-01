@@ -82,8 +82,17 @@ void BubbleUI::Painel::atualizar()
 
 	menu_de_contexto->atualizar();
 
-	if (!selecionado) menu_de_contexto->esconder();
+	if (!selecionado)
+	{
+		menu_de_contexto->esconder();
+		m_aba->obterCorpo()->defCor({0.1f, 0.1f, 0.1f, 1});
+	}
+	else
+	{
+		m_aba->obterCorpo()->defCor({0.4f, 0.0f, 0.4f, 1});
+	}
 
+	widget_pos = { 0, 0 };
 	preAtualizacao();
 	m_aba->atualizar();
 	for (auto& widget : lista_widgets)
@@ -97,11 +106,11 @@ void BubbleUI::Painel::atualizar()
 
 void BubbleUI::Painel::renderizar()
 {
-	glScissor(retangulo.x, (contexto->tamanho.height - (retangulo.y) - retangulo.h), retangulo.w, retangulo.h);
+	glScissor(retangulo.x, (contexto->tamanho.height - (retangulo.y-1) - retangulo.h), retangulo.w, retangulo.h+2);
 
+	widget_pos = { 0, 0 };
 	moldura->renderizar(GL_TRIANGLES);
 	preRenderizacao();
-	widget_pos = { 0, 0 };
 	m_aba->renderizar();
 	for (auto& widget : lista_widgets)
 	{

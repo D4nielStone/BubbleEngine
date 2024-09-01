@@ -201,6 +201,7 @@ struct LetraRect
     Vector4f rect;
     Vector4f fundo_rect;
     unsigned int ID;
+    size_t index;
     Color cor_de_fundo{ 0, 0, 0 ,0 };
     bool letra_selecionada;
 };

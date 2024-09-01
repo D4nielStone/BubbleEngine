@@ -1,5 +1,6 @@
 ﻿#include "entidades.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
+#include <src/tempo/delta_time.hpp>
 
 BubbleUI::Paineis::Entidades::Entidades(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager)
 {
@@ -10,12 +11,13 @@ BubbleUI::Paineis::Entidades::Entidades(Contexto* ctx, Bubble::Cena::SceneManage
 
 void BubbleUI::Paineis::Entidades::recarregar()
 {
+	arvore_cor = { 1.f, 1.f, 1.f, 1 };
 	lista_widgets.clear();
 
 	adiWidget(std::make_shared<Widgets::CaixaTexto>());
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
-		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome());
+		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome(), &entidade->selecionada);
 		adiWidget(arvore);
 		for (auto& filho : entidade->obterFilhos())
 		{
@@ -26,16 +28,17 @@ void BubbleUI::Paineis::Entidades::recarregar()
 
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
-	if (selecionado && !gatilho_recarregar)
+	// Recarrega no momento certo
+	if (quantidade_entidades != scenemanager->cenaAtual()->Entidades.size())
 	{
-		recarregar(); gatilho_recarregar = true;
+		recarregar();
+		quantidade_entidades = scenemanager->cenaAtual()->Entidades.size();
 	}
-	if (!selecionado) gatilho_recarregar = false;
 }
 
 void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, Widgets::Arvore& arvore)
 {
-	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nome());
+	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nome(), &entidade->selecionada);
 	arvore.adiFilho(arvore_recursiva);
 	for (auto& filho : entidade->obterFilhos())
 	{

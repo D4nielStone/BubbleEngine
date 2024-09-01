@@ -57,6 +57,7 @@ namespace Bubble::Cena
         camera_editor.atualizar();
         for (auto& obj : Entidades) {
             obj->atualizar();
+            if (obj->selecionada)entidade_selecionada = obj;
             if (obj->obterComponente("Camera")) {
                 camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
             }
@@ -66,6 +67,7 @@ namespace Bubble::Cena
 
     void Scene::atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade) {
         for (auto& filho : entidade->obterFilhos()) {
+            if (filho->selecionada)entidade_selecionada = filho;
             filho->atualizar();
             if (filho->obterComponente("Camera")) {
                 camera_principal = static_cast<Componentes::Camera*>(filho->obterComponente("Camera").get());
@@ -81,7 +83,8 @@ namespace Bubble::Cena
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         for(auto& entidade : Entidades)
-        for (auto& c : entidade->listaDeComponentes()) {
+        for (auto& c : entidade->listaDeComponentes()) 
+        {
             c->configurar();
         }
         //skybox.configurarBuffers();

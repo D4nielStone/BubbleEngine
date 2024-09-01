@@ -13,7 +13,7 @@ namespace Bubble {
 
 		class BECOMMONS_DLL_API Componente {
 		protected:
-			Shader* shader = new Shader();
+			Shader shader;
 			Bubble::Entidades::Entidade* meuObjeto = nullptr;
 			const char* Nome = "componente_base";
 			bool carregadov{ false };
@@ -22,13 +22,14 @@ namespace Bubble {
 			const char* nome() const { return Nome; }
 			bool carregado() const { return carregadov; };
 			virtual void configurar() = 0; virtual void atualizar()  = 0;
-			void definirPai(Bubble::Entidades::Entidade* ent) {
+			void definirPai(Bubble::Entidades::Entidade* ent) 
+			{
 				meuObjeto = ent;
 			}
-			void definirShader(Shader* shade) {
+			void definirShader(const Shader& shade) {
 				shader = shade;
 			}
-			virtual rapidjson::Value serializar(rapidjson::Document* doc)
+			virtual rapidjson::Value serializar(rapidjson::Document* doc) const
 			{
 				return rapidjson::Value();
 			};

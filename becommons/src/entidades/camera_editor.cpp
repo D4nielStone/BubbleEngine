@@ -93,15 +93,14 @@ void CameraEditor::atualizar()
         // Calcular a matriz de visualização
         matrizVisualizacao = glm::lookAt(posicaoCamera, posicaoCamera + frente, vetorCima);
 
-        if (shader) {
-            shader->use();
-            shader->setMat4("projection", glm::value_ptr(matrizProjecao));
-            shader->setMat4("view", glm::value_ptr(matrizVisualizacao));
-            shader->setVec3("viewPos",
-                posicaoCamera.x,
-                posicaoCamera.y,
-                posicaoCamera.z);
-        }
+        shader.use();
+        shader.setMat4("projection", glm::value_ptr(matrizProjecao));
+        shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
+        shader.setVec3("viewPos",
+            posicaoCamera.x,
+            posicaoCamera.y,
+            posicaoCamera.z);
+
     }
     else {
         Debug::emitir(Debug::Tipo::Erro, "transformacao não está definida");

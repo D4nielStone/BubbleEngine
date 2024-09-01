@@ -17,7 +17,7 @@ BubbleUI::Util::PopUp::PopUp(Contexto* contexto)
 	linha_c->defCor({ 0.55, 0.55, 0.55 });
 }
 
-void BubbleUI::Util::PopUp::preAtualizacao()
+void BubbleUI::Util::PopUp::posAtualizacao()
 {
 	altura = 0;
 	for (auto& item : lista_items)
@@ -62,5 +62,5 @@ void BubbleUI::Util::PopUp::renderizar(GLenum mode)
 void BubbleUI::Util::PopUp::adiItem(std::shared_ptr<BubbleUI::Items::ItemMenu> item)
 {
 	item->defMoldura(this);
-	lista_items.push_back(item);
+	lista_items.emplace_back(item);
 }

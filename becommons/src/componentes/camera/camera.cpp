@@ -55,7 +55,7 @@ void Camera::atualizarAspecto(float aspect)
         zNear,
         zFar
     );
-    shader->setMat4("projection", glm::value_ptr(matrizProjecao));
+    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
 }
 void Camera::desenharFrame(Vector4 viewportRect) const
 {
@@ -89,15 +89,14 @@ void Camera::atualizar() {
         // Calculate view matrix
         matrizVisualizacao = glm::lookAt(posicaoCamera, alvoCamera, vetorCima);
 
-        if (shader) {
-            shader->use();
-            shader->setMat4("projection", glm::value_ptr(matrizProjecao));
-            shader->setMat4("view", glm::value_ptr(matrizVisualizacao));
-            shader->setVec3("viewPos",
+        shader.use();
+        shader.setMat4("projection", glm::value_ptr(matrizProjecao));
+        shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
+        shader.setVec3("viewPos",
             posicaoCamera.x,
             posicaoCamera.y,
             posicaoCamera.z);
-        }
+
     }
     else {
         Debug::emitir(Debug::Tipo::Erro, "meuObjeto não está definido");

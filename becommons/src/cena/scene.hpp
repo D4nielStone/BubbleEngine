@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <memory>
 #include <iostream>
@@ -9,18 +10,20 @@
 #include "src/util/skybox.hpp"
 #include "becommons.hpp"
 
-namespace Bubble {
-    namespace Cena {
-
-        class BECOMMONS_DLL_API Scene {
+namespace Bubble
+{
+    namespace Cena
+    {
+        class BECOMMONS_DLL_API Scene
+        {
         private:
             const char* Name;
             Bubble::Util::Skybox skybox;
-
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
             void desenharCeu();
         public:
+            std::shared_ptr<Entidades::Entidade> entidade_selecionada{ nullptr };
             std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
             Bubble::Entidades::CameraEditor camera_editor;
             Bubble::Componentes::Camera* camera_principal = nullptr;

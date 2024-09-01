@@ -144,6 +144,8 @@
     <None Include="assets\shaders\imagem.vert" />
     <None Include="assets\shaders\linha.frag" />
     <None Include="assets\shaders\linha.vert" />
+    <None Include="assets\shaders\outline.frag" />
+    <None Include="assets\shaders\outline.vert" />
     <None Include="assets\shaders\quad.frag" />
     <None Include="assets\shaders\quad.vert" />
     <None Include="assets\shaders\phong.frag" />

@@ -18,6 +18,7 @@ namespace BubbleUI
 			bool ocultar_linhas{ false };
 		protected:
 			virtual void preAtualizacao() {};
+			virtual void posAtualizacao() {};
 			std::unique_ptr<Linha>
 				linha_d{ nullptr },
 				linha_e{ nullptr },

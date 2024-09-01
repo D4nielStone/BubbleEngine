@@ -66,6 +66,7 @@ BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* sce
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
     // Adicionar objeto caso "path" esteja preenchido
+    if (!selecionado)return;
     if (!path.empty())
     {
         std::string novo_path = std::filesystem::path(path).string();
@@ -78,4 +79,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defViewport(rect_size);
+
+    if (selecionado) contexto->inputs->setInputMode(InputMode::Editor);
+    else             contexto->inputs->setInputMode(InputMode::Default);
 }

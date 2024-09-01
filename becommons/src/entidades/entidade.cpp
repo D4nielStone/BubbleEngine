@@ -1,3 +1,4 @@
+#include "glad/glad.h"
 #include "entidade.hpp"
 #include "rapidjson/stringbuffer.h"
 #include "src/cena/scenemanager.hpp"
@@ -20,20 +21,53 @@ Entidade::Entidade()
 void Entidade::atualizar() const {
     if (!ativado) return;
 
-    for (const auto& componente : Componentes) {
+    for (const auto& componente : Componentes) 
+    {
         if (componente->nome() != "Renderizador" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
             componente->atualizar();
         }
     }
 }
-
-void Entidade::renderizar() const {
+// Método para renderizar Entidade
+void Entidade::renderizar() const
+{
     if (!ativado) return;
 
-    for (const auto& componente : Componentes) {
-        if (componente->nome() == "Renderizador")
+    if (selecionada) // Se selecionada, desenha outline
+    {
+        glDisable(GL_DEPTH_TEST);
+        shader_outline.use();
+        shader_outline.setMat4("projection", Cena::CameraEditorAtual()->obterProjMatrix());
+        shader_outline.setMat4("view", Cena::CameraEditorAtual()->obterViewMatrix());
+
+        transformacao->definirShader(shader_outline);
+        transformacao->atualizar();
+        for (auto& componente : Componentes)
         {
-            transformacao->atualizar();
+            if (componente->nome() == "Renderizador")
+            {
+                componente->definirShader(shader_outline);
+                componente->atualizar();
+            }
+        }
+        glEnable(GL_DEPTH_TEST);
+        transformacao->definirShader(shader_padrao);
+        transformacao->atualizar();
+        for (auto& componente : Componentes)
+        {
+            if (componente->nome() == "Renderizador")
+            {
+                componente->definirShader(shader_padrao);
+                componente->atualizar();
+            }
+        }
+    }
+    else // Se não estiver selecionada, renderiza normalmente
+    {
+        transformacao->atualizar();
+        for (auto& componente : Componentes)
+        {
+            if(componente->nome() == "Renderizador")
             componente->atualizar();
         }
     }
@@ -52,28 +86,25 @@ std::string* Bubble::Entidades::Entidade::nomeptr()
 void Entidade::carregarNode(const Node& node)
 {
     Nome = node.nome;
-    if (pai)
-    {
-        transformacao->definirMatriz(node.transformacao * pai->obterTransformacao()->obterMatriz());
-    }
-    else
-    {
-    transformacao->definirMatriz(node.transformacao);
-    }
-    if (node.malhas.size() > 0)
-    {
+    //if (pai)
+    //{
+    //    transformacao->definirMatriz(node.transformacao * pai->obterTransformacao()->obterMatriz());
+    //}
+    //else
+    //{
+    //transformacao->definirMatriz(node.transformacao);
+    //}
         for (auto& malha : node.malhas)
         {
-            auto renderizador = std::make_shared<Bubble::Componentes::Renderizador>(malha);
-            adicionarComponente(renderizador);
+            adicionarComponente(std::make_shared<Bubble::Componentes::Renderizador>(malha));
         }
-    }
+    
     for (auto& no_filho : node.filhos)
     {
         auto entidade_filho = std::make_shared<Entidade>();
         entidade_filho->pai = this;
         entidade_filho->carregarNode(no_filho);
-        filhos.emplace_back(std::move(entidade_filho));
+        filhos.push_back(entidade_filho);
     }
 }
 
@@ -83,7 +114,8 @@ std::shared_ptr<Bubble::Comum::Componente> Entidade::obterComponente(const std::
     return (it != Componentes.end()) ? *it : nullptr;
 }
 
-std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome) {
+std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome)
+const {
     std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> comps;
     for (const auto& componente : Componentes) {
         if (componente->nome() == nome) {

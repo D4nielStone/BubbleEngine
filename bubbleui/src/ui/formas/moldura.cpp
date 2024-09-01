@@ -48,6 +48,7 @@ void BubbleUI::Formas::Moldura::atualizar()
 	linha_c->atualizar();
 	linha_d->atualizar();
 	linha_e->atualizar();
+	posAtualizacao();
 }
 
 void BubbleUI::Formas::Moldura::renderizar(GLenum mode)

@@ -8,6 +8,8 @@
 
 using namespace Bubble::Cena;
 
+Bubble::Entidades::CameraEditor* camera_editor_atual;
+
 // O scenemanager gerencia as cenas de um projeto
 SceneManager::SceneManager() : currentSceneIndex(-1)
 {
@@ -99,6 +101,7 @@ void SceneManager::atualizarCenaAtual() const
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
 
+    camera_editor_atual = &cenaAtual()->camera_editor;
     cenaAtual()->atualizar();
 }
 // Deve retornar numero de cenas
@@ -117,6 +120,11 @@ void SceneManager::defIputs(Inputs::Inputs* inp)
     {
         scene->camera_editor.inputs = inp;
     }
+}
+
+Bubble::Entidades::CameraEditor* Bubble::Cena::CameraEditorAtual()
+{
+    return camera_editor_atual;
 }
 
 // Função para adicionar uma tarefa na fila

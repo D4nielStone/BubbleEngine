@@ -37,7 +37,8 @@ namespace std {
 
 enum BECOMMONS_DLL_API InputMode {
     Editor,
-    Game
+    Game,
+    Default
 };
 namespace Bubble
 {

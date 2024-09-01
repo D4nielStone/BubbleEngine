@@ -18,7 +18,7 @@ BubbleUI::Items::ItemMenu::ItemMenu(std::string* label, unsigned int pxl) : labe
 }
 
 // Construtor que inicializa o ItemMenu com uma label passada como string
-BubbleUI::Items::ItemMenu::ItemMenu(std::string l) : resolucao(16)
+BubbleUI::Items::ItemMenu::ItemMenu(std::string l) : resolucao(12)
 {
     lines_box_limite = 3; // Limite de linhas na caixa
     label = new std::string(l); // Cria uma nova string para a label
@@ -107,7 +107,7 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
     Bubble::Arquivadores::Character ch;
 
     // Itera sobre cada caractere na frase
-    for (char c : frase) {
+    for (char& c : frase) {
         ch = (*Bubble::Arquivadores::obterCaracteres())[c]; // Obtém o caractere atual
 
         // Define as dimensões e posição da letra
@@ -171,11 +171,8 @@ void BubbleUI::Items::ItemMenu::defMoldura(Formas::Moldura* m)
 {
     pai = m;
     moldura = Formas::Moldura(m->obtCtx()); // Define a moldura com base no contexto do pai
-    colisao = new Colisao2d({}, m->obtCtx()); // Cria uma nova instância de colisão 2D
+    colisao = std::make_unique<Colisao2d>(Vector4{}, m->obtCtx()); // Cria uma nova instância de colisão 2D
 }
 
 // Destrutor do ItemMenu que libera a memória alocada
-BubbleUI::Items::ItemMenu::~ItemMenu()
-{
-    delete colisao;
-}
+BubbleUI::Items::ItemMenu::~ItemMenu() = default;

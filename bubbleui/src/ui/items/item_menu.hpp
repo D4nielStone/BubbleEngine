@@ -24,7 +24,7 @@ namespace BubbleUI
 			~ItemMenu();
 			virtual void atualizar();
 			virtual void renderizar();
-			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/arial/arialbd.ttf");
+			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.ttf");
 			virtual void defMoldura(Formas::Moldura*);
 			int largura{ 0 }, altura{ 0 };
 		protected:
@@ -39,7 +39,7 @@ namespace BubbleUI
 			Vector4 char_rect{ 0, 0, 0 ,0 };
 			Vector4f paraNDC();
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
-			Colisao2d* colisao{ nullptr };
+			std::unique_ptr<Colisao2d> colisao{ nullptr };
 			Formas::Moldura moldura, * pai{ nullptr };
 			std::vector<LetraRect> letras_rect;
 			bool gatilho{ true };
