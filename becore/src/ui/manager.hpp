@@ -14,17 +14,17 @@ namespace BubbleUI
 	class Manager
 	{
 	private:
-		std::vector<Painel*> lista_paineis;
+		std::vector<std::shared_ptr<Painel>> lista_paineis;
 		Bubble::Nucleo::Engine* engine = nullptr;
-		Contexto contexto;
+		std::shared_ptr<Contexto> contexto{ nullptr };
 		Colisao2d colisao_painel;
 		void iniPaineisPadrao();
-		void painelSelecionado(Painel* painel);
+		void painelSelecionado(std::shared_ptr<Painel> painel);
 	public:
 		GLFWcursor* cursor_antigo{ nullptr };
 		Manager(Bubble::Nucleo::Engine*);
 		void atualizar();
 		void verificarSelecionado();
-		void renderizar();
+		void renderizar() const;
 	};
 }

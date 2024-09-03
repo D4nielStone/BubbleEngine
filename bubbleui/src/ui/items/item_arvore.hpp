@@ -10,12 +10,11 @@ namespace BubbleUI
 	{
 		class BEUI_DLL_API Arvore : public ItemMenu
 		{
-
 		public:
 			Arvore() = default;
-			Arvore(std::string label, std::shared_ptr<Util::PopUp> popup);
+			Arvore(const std::string &label, std::shared_ptr<Util::PopUp> popup);
 			void atualizar() override;
-			void renderizar() override;
+			void renderizar() const override;
 		private:
 			std::shared_ptr<Util::PopUp> m_popup{ nullptr };
 		};

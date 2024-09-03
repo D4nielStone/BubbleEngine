@@ -11,15 +11,15 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(new Paineis::Depurador(&contexto));
-	lista_paineis.push_back(new Paineis::Entidades(&contexto, engine->obterGC(), {2, 2, 100, 478 }));
-	lista_paineis.push_back(new Paineis::Editor(&contexto, engine->obterGC(), {112, 2, 300, 478 }));
-	lista_paineis.push_back(new Paineis::Inspetor(&contexto, engine->obterGC(), {422, 2, 218, 478}));
+	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto));
+	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 2, 100, 478 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{112, 2, 300, 478 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{422, 2, 218, 478}));
 }
 
 // Seleciona o painel
 // \param Painel
-void BubbleUI::Manager::painelSelecionado(Painel* painel)
+void BubbleUI::Manager::painelSelecionado(std::shared_ptr<Painel> painel)
 {
 	painel->selecionado = true;
 
@@ -47,20 +47,22 @@ void BubbleUI::Manager::painelSelecionado(Painel* painel)
 }
 
 // Inicia manager
-BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i), colisao_painel({}, &contexto)
+BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 {
-	contexto.glfwWindow = engine->obterJanela();
-	contexto.inputs = engine->obterGI();
+	contexto = std::make_shared<Contexto>();
+	colisao_painel = Colisao2d({}, contexto);
+	contexto->glfwWindow = engine->obterJanela();
+	contexto->inputs = engine->obterGI();
 	iniPaineisPadrao();
 	if (lista_paineis.size() > 0)
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
 }
 
 // Renderiza paineis
-void BubbleUI::Manager::renderizar()
+void BubbleUI::Manager::renderizar() const
 {
 	glDisable(GL_DEPTH_TEST);
-	glViewport(0, 0, contexto.tamanho.width, contexto.tamanho.height);
+	glViewport(0, 0, contexto->tamanho.width, contexto->tamanho.height);
 
 	glEnable(GL_SCISSOR_TEST);
 	for (auto& painel : lista_paineis)
@@ -68,18 +70,12 @@ void BubbleUI::Manager::renderizar()
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
-
-	if (contexto.cursor != cursor_antigo)
-	{
-		cursor_antigo = contexto.cursor;
-		glfwSetCursor(contexto.glfwWindow, contexto.cursor);
-	}
 }
 
 // Atualiza paineis
 void BubbleUI::Manager::atualizar()
 {
-	glfwGetFramebufferSize(contexto.glfwWindow, &contexto.tamanho.width, &contexto.tamanho.height);
+	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	
 	verificarSelecionado();
 
@@ -103,6 +99,11 @@ void BubbleUI::Manager::atualizar()
 	}
 
 	renderizar();
+	if (contexto->cursor != cursor_antigo)
+	{
+		cursor_antigo = contexto->cursor;
+		glfwSetCursor(contexto->glfwWindow, contexto->cursor);
+	}
 }
 
 // Verifica Painel selecionado
@@ -118,22 +119,22 @@ void BubbleUI::Manager::verificarSelecionado()
 
 		if (colisao_painel.mouseEmCima() && !depth && cursor)
 		{
-			if (contexto.inputs->mouseEnter == GLFW_RELEASE)
+			if (contexto->inputs->mouseEnter == GLFW_RELEASE)
 			{
 				painel->mouse1click = true;
 			}
-			if (contexto.inputs->mouseEnter == GLFW_PRESS && painel->mouse1click)
+			if (contexto->inputs->mouseEnter == GLFW_PRESS && painel->mouse1click)
 			{
 				painelSelecionado(painel);
 
 				depth = true;
 				painel->mouse1click = false;
 			}
-			if (contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
+			if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
 			{
 				painel->mostrar_popup = true;
 			}
-			else if (contexto.inputs->mouseEnter == GLFW_PRESS && contexto.inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
+			else if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
 				painel->esconder_popup = true;
 		}
 		else
@@ -144,5 +145,5 @@ void BubbleUI::Manager::verificarSelecionado()
 			cursor = false;
 	}
 	if (cursor)
-		contexto.cursor = contexto.cursor_normal;
+		contexto->cursor = contexto->cursor_normal;
 }

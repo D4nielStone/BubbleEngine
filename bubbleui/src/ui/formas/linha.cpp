@@ -3,13 +3,16 @@
 
 using namespace BubbleUI::Formas;
 
-Linha::Linha(Vector4f pos, Contexto* ctx) : posicoes(pos), contexto(ctx)
+Linha::Linha(const Vector4 &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos), contexto(ctx)
 {
-    defCor({ 0.4f, 0.0f, 0.4f });
+    cor_base = { 0.4f, 0.f, 0.4f, 0.9f };
     if (!linha_vertex.carregado)
     {
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            std::cout << "Failed to initialize GLAD" << std::endl;
+        {
+            Debug::emitir(Debug::Erro, "Failed to initialize GLAD");
+            return;
+        }
         glGenBuffers(1, &linha_vertex.VBO);
         glBindBuffer(GL_ARRAY_BUFFER, linha_vertex.VBO);
         glGenVertexArrays(1, &linha_vertex.VAO);
@@ -17,12 +20,12 @@ Linha::Linha(Vector4f pos, Contexto* ctx) : posicoes(pos), contexto(ctx)
         linha_vertex.carregado = true;
     }
 }
-void Linha::defPos(Vector4f pos)
+void Linha::defPos(const Vector4 &pos)
 {
     posicoes = pos;
 }
 // Deve definir cor base
-void Linha::defCor(Color cor)
+void Linha::defCor(const Color &cor)
 {
     cor_base = cor;
 }
@@ -36,8 +39,8 @@ Vector4f Linha::paraNDC()
     coord_ndc.y = 1.0f - (2.0f * posicoes.y / contexto->tamanho.height);
 
     // Calcular para as coordenadas da segunda posição (z, w)
-    coord_ndc.z = (posicoes.z * 2.f) / contexto->tamanho.width - 1.f;
-    coord_ndc.w = 1.0f - (2.0f * posicoes.w / contexto->tamanho.height);
+    coord_ndc.z = (posicoes.w * 2.f) / contexto->tamanho.width - 1.f;
+    coord_ndc.w = 1.0f - (2.0f * posicoes.h / contexto->tamanho.height);
     return coord_ndc;
 }
 
@@ -46,14 +49,13 @@ void Linha::atualizar()
     paraNDC();
 }
 // Deve renderizar
-void Linha::renderizar()
+void Linha::renderizar() const
 {
     shader.use();
     shader.setVec2("linha.pos1", coord_ndc.x, coord_ndc.y);
     shader.setVec2("linha.pos2", coord_ndc.z, coord_ndc.w);
-    shader.setVec3("cor", cor_base.r, cor_base.g, cor_base.b);
+    shader.setCor("cor", cor_base);
 
     glBindVertexArray(linha_vertex.VAO);
     glDrawArrays(GL_LINES, 0, 2);
-
 }

@@ -8,11 +8,11 @@ namespace BubbleUI
 		class BEUI_DLL_API Moldura : public Rect
 		{
 		public: 
-			Moldura(Contexto*, Vector4 retangulo = {0, 0, 100, 20});
+			Moldura(std::shared_ptr<Contexto>, const Vector4& retangulo = {0, 0, 100, 20});
 			Moldura() = default;
 			void atualizar() override;
-			void renderizar(GLenum) override;
-			Contexto* obtCtx() const;
+			void renderizar() const override;
+			std::shared_ptr<Contexto> obtCtx() const;
 			Vector2f widget_pos;
 			Vector2 widget_padding{ 3, 3 };
 			bool ocultar_linhas{ false };

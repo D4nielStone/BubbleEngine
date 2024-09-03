@@ -9,8 +9,9 @@ using namespace Bubble::Nucleo;
 
 Engine::Engine()
     {
+        gerenciadorDeCenas = std::make_shared<Cena::SceneManager>();
         inicializacao();
-        gerenciadorUi = new BubbleUI::Manager(this);
+        gerenciadorUi = std::make_shared< BubbleUI::Manager>(this);
     }
 // Inicialização
 bool Engine::inicializacao()
@@ -24,7 +25,7 @@ bool Engine::inicializacao()
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-        glfwWindow = glfwCreateWindow(600, 480, "BubbleEngine", NULL, NULL);
+        glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1.0-alpha.1", NULL, NULL);
 
         glfwMakeContextCurrent(glfwWindow);
 
@@ -41,27 +42,27 @@ bool Engine::inicializacao()
         {
             glfwSetWindowIcon(glfwWindow, 1, &icone);
         }
-        defInputs(new Inputs::Inputs());
+        defInputs(std::make_shared<Inputs::Inputs>());
 
         obterGC()->novaCena();
 
         return true;
     }
-Bubble::Inputs::Inputs* Engine::obterGI() const
+std::shared_ptr<Bubble::Inputs::Inputs> Engine::obterGI() const
 {
     return inputs;
 }
-BubbleUI::Manager* Bubble::Nucleo::Engine::obterGU() const
+std::shared_ptr < BubbleUI::Manager> Bubble::Nucleo::Engine::obterGU() const
 {
     return gerenciadorUi;
 }
-;
+
 // Deve definir inputs
-void Engine::defInputs(Inputs::Inputs* inp)
+void Engine::defInputs(std::shared_ptr<Inputs::Inputs> inp)
 {
     inputs = inp;
-    gerenciadorDeCenas.defIputs(inp);
-    glfwSetWindowUserPointer(glfwWindow, inputs);
+    gerenciadorDeCenas->defIputs(inp.get());
+    glfwSetWindowUserPointer(glfwWindow, inputs.get());
     glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
     glfwSetKeyCallback(glfwWindow, callbackKey);
     glfwSetMouseButtonCallback(glfwWindow, mouseButtonCallBack);
@@ -78,7 +79,7 @@ void Engine::atualizar()
     glfwPollEvents();
 
     // Atualizar cena
-    gerenciadorDeCenas.atualizarCenaAtual();
+    gerenciadorDeCenas->atualizarCenaAtual();
 }
 // Deve renderizar cena Atual
 void Engine::renderizar(Vector4 rect_size)
@@ -86,7 +87,7 @@ void Engine::renderizar(Vector4 rect_size)
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
     // Renderizar cena
-    gerenciadorDeCenas.renderizarCenaAtual();
+    gerenciadorDeCenas->renderizarCenaAtual();
     // Atualiza e renderiza UI
     gerenciadorUi->atualizar();
 

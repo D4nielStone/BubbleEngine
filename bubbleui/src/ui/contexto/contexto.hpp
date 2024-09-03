@@ -4,6 +4,7 @@
 #include "src/inputs/inputs.hpp"
 #include "bubbleui.hpp"
 #include <glfw/glfw3.h>
+#include <memory>
 
 namespace BubbleUI
 {
@@ -17,7 +18,7 @@ namespace BubbleUI
         GLFWcursor* cursor_normal{ nullptr };       // Cursor glfw
         GLFWcursor* cursor{ nullptr }; // Cursor à ser usado
         Size tamanho; // Tamanho da janela glfw
-        Bubble::Inputs::Inputs* inputs{ nullptr }; // Inputs da janela glfw
+        std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr }; // Inputs da janela glfw
 
         Contexto();
 

@@ -9,10 +9,4 @@ BubbleUI::Contexto::Contexto()
 	cursor = cursor_normal;
 }
 
-BubbleUI::Contexto::~Contexto()
-{
-	delete cursor_horizontal;
-	delete cursor_vertical;
-	delete cursor_normal;
-	delete cursor_texto;
-}
+BubbleUI::Contexto::~Contexto() = default;

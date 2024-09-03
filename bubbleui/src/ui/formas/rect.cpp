@@ -4,11 +4,7 @@
 
 using namespace BubbleUI::Formas;
 
-Rect::Rect(Vector4 rect, Contexto* ctx) : retangulo(rect), contexto(ctx)
-{
-    definirBuffers();
-}
-Rect::Rect(Contexto* ctx) : contexto(ctx)
+Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
 {
     definirBuffers();
 }
@@ -18,33 +14,36 @@ Vector4 Rect::obtRect() const
 {
     return retangulo;
 }
-void Rect::defTam(Vector2f tam)
+
+void Rect::defTam(const Vector2 &tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
     coord_ndc = paraNDC();
 }
 
-void Rect::defPos(Vector2f pos)
+void Rect::defPos(const Vector2 &pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;
     coord_ndc = paraNDC();
 }
-void BubbleUI::Formas::Rect::adiTam(Vector2 tam)
+
+void Rect::adiTam(const Vector2 &tam)
 {
     retangulo.w += tam.x;
     retangulo.h += tam.y;
     coord_ndc = paraNDC();
 }
-void BubbleUI::Formas::Rect::adiPos(Vector2 pos)
+
+void Rect::adiPos(const Vector2 &pos)
 {
     retangulo.x += pos.x;
     retangulo.y += pos.y;
     coord_ndc = paraNDC();
 }
 // Deve definir cor base
-void BubbleUI::Formas::Rect::defCor(Color cor)
+void Rect::defCor(const Color &cor)
 {
     cor_base = cor;
 }
@@ -55,18 +54,18 @@ void Rect::atualizar()
     coord_ndc = paraNDC();
 }
 // Deve renderizar
-void Rect::renderizar(GLenum modo)
+void Rect::renderizar() const
 {
     shader.use();
     shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     shader.setCor("quadrado.cor", cor_base);
     glBindVertexArray(rect_vertex.VAO);
-    glDrawElements(modo, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 // Deve transformar coordenadas pixel para NDC
-Vector4f BubbleUI::Formas::Rect::paraNDC()
+Vector4f Rect::paraNDC()
 {
     Vector4f coord_ndc;
 
@@ -80,13 +79,11 @@ Vector4f BubbleUI::Formas::Rect::paraNDC()
 // deve definir buffers do quadrado
 void Rect::definirBuffers()
 {
+    if (rect_vertex.carregado)    return;
+    
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         Debug::emitir(Debug::Erro, "Glad");
-        return;
-    }
-    if (rect_vertex.carregado)
-    {
         return;
     }
 

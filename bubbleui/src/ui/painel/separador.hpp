@@ -14,13 +14,15 @@ namespace BubbleUI
 	{
 	public:
 		Separador() = default;
-		Separador(Lado side, Painel* painel);
+		Separador(const Lado side, Painel* painel);
 		void atualizar();
-		bool cursor();
+		bool cursor() const;
 	private:
-		Colisao2d* colisao = nullptr;
+		Colisao2d colisao;
+		std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
+		std::shared_ptr<Contexto> contexto{ nullptr };
 		Painel* painel = nullptr;
-		Lado lado;
+		const Lado lado;
 		bool mouse_1click, arrastando;
 		Vector2 arrasto_pos, mouse_pos_ini;
 		void atualizarColisao();

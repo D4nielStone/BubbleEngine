@@ -22,7 +22,7 @@ namespace Bubble {
 			void atualizar() const;
 			void renderizar() const;
 			std::string nome() const;
-			std::string* nomeptr();
+			std::shared_ptr<std::string> nomeptr();
 			void carregarNode(const Node& node);
 			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
 			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome) const;
@@ -40,7 +40,7 @@ namespace Bubble {
 			std::shared_ptr<Componentes::Transformacao> transformacao;
 			std::unordered_set<std::shared_ptr<Comum::Componente>> Componentes;
 			std::vector<std::shared_ptr<Entidade>> filhos;
-			std::string Nome = "SemNome";
+			std::shared_ptr<std::string> Nome = std::make_shared<std::string>("SemNome");
 		};
 	}
 }

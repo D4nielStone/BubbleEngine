@@ -3,19 +3,19 @@ namespace BubbleUI
 {
 	namespace Widgets
 	{
-		class BEUI_DLL_API Arvore : public Texto
+		class BEUI_DLL_API Arvore : public Texto, public std::enable_shared_from_this<Arvore>
 		{
 		public:
 			Arvore(std::string label, bool* retorno);
 			void atualizar() override;
-			void renderizar() override;
+			void renderizar() const override;
 			void defPainel(Painel* painel) override;
 			void adiFilho(std::shared_ptr<Arvore> filho);
-			Arvore* arvore_pai{ nullptr };
+			std::shared_ptr<Arvore> arvore_pai{ nullptr };
 		private:
 			std::vector<std::shared_ptr<Arvore>> filhos;
 			Color cor;
-			bool aberto{ true }, * retorno{ nullptr };
+			bool aberto{ false }, * retorno{ nullptr }, gatilho_click{ false };
 		};
 	}
 }

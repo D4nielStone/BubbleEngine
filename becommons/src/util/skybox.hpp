@@ -6,18 +6,18 @@ namespace Bubble
 {
 	namespace Util
 	{
+		BECOMMONS_DLL_API unsigned int obterSkyboxTexture();
 		class BECOMMONS_DLL_API Skybox
 		{
 		private:
-			Vertex* mVertex;
+			Vertex malha;
 			const char* Path = nullptr;
-			unsigned int cubemapTexture, VBO, VAO, EBO;
 		public:
-			Shader shader;
+			Shader shader = Shader("assets/shaders/skybox.vert", "assets/shaders/skybox.frag");
 			Skybox(const char* path);
 			Skybox();
 			void configurarBuffers();
-			void renderizar();
+			void renderizar() const;
 			unsigned int loadCubemapFromSingleTexture(const char* path);
 		};
 	}

@@ -2,36 +2,35 @@
 #include "src/ui/widgets/texto.hpp"
 #include "painel.hpp"
 
-BubbleUI::Aba::Aba(Painel* painel) : painel(painel)
+BubbleUI::Aba::Aba(Painel *painel)
 {
     frase = painel->nome();
-    pai = painel;
+    this->painel = painel;
     resolucao = 14;
     letra_padding = {4, 4};
     configurar();
-    corpo_rect = std::make_unique<Formas::Rect>(painel->obtCtx());
+    Texto::Texto(frase);
+    corpo_rect = std::make_unique<Formas::Rect>(painel->obtCtx(), Vector4{});
 }
 
 void BubbleUI::Aba::atualizar()
 {
-    Texto::atualizar();
-
-    painel->widget_pos = { 0, -(float)pai->widget_padding.y - letra_padding.y };
+    painel->widget_pos = { 0, -letra_padding.y*2.f };
 
     renderizar_texto();
 
-    painel->widget_pos = { 0, (float)corpo_rect->obtRect().h };
+    painel->widget_pos = { 0, static_cast<float>(corpo_rect->obtRect().h) };
 
-    corpo_rect->defPos({painel->obtRect().x + 1, painel->obtRect().y});
-    corpo_rect->defTam({ (float)painel->obtRect().w - 2, 14});
+    corpo_rect->defPos({static_cast<int>(painel->obtRect().x + 1), static_cast<int>(painel->obtRect().y)});
+    corpo_rect->defTam({ painel->obtRect().w - 2, 14});
     box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
-    box_size = { (float)corpo_rect->obtRect().w, (float)corpo_rect->obtRect().h };
+    box_size = { static_cast<float>(corpo_rect->obtRect().w), static_cast<float>(corpo_rect->obtRect().h) };
     corpo_rect->atualizar();
 }
 
-void BubbleUI::Aba::renderizar()
+void BubbleUI::Aba::renderizar() const
 {
-    corpo_rect->renderizar(GL_TRIANGLES);
+    corpo_rect->renderizar();
     Texto::renderizar();
 }
 

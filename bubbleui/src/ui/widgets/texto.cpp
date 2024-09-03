@@ -21,30 +21,14 @@ BubbleUI::Widgets::Texto::Texto(const std::string& l) : resolucao(16), letra_pad
 // Método genérico de atualizacao
 void BubbleUI::Widgets::Texto::atualizar()
 {
-    if (label)
-        frase = *label;
+    // Renderiza texto de label, o ponteiro
+    if (label) frase = *label;
     renderizar_texto();
 }
 
 // Método para renderizar o texto
-void BubbleUI::Widgets::Texto::renderizar()
+void BubbleUI::Widgets::Texto::renderizar() const
 {
-    // Configura o shader para renderizar o fundo da letra
-    shaderQuad.use();
-    for (auto& letra : letras_rect)
-    {
-        if (letra.letra_selecionada)
-        {
-            shaderQuad.setCor("quadrado.cor", letra.cor_de_fundo);
-            shaderQuad.setVec2("quadrado.posicao", letra.fundo_rect.x, letra.fundo_rect.y);
-            shaderQuad.setVec2("quadrado.tamanho", letra.fundo_rect.z, letra.fundo_rect.w);
-
-            glBindVertexArray(rect_vertex.VAO);
-            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
-            glBindVertexArray(0);
-        }
-    }
-
     // Configura o shader para renderizar o texto
     shader.use();
     for (auto& letra : letras_rect)
@@ -66,9 +50,9 @@ void BubbleUI::Widgets::Texto::renderizar()
 void BubbleUI::Widgets::Texto::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x = pai->obtRect().x + pai->widget_padding.x + pai->widget_pos.x;
-    box_pos.y = pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
-    box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
+    box_pos.x = painel->obtRect().x + painel->widget_padding.x + painel->widget_pos.x;
+    box_pos.y = painel->obtRect().y + painel->widget_padding.y + painel->widget_pos.y;
+    box_size.x = painel->obtRect().w - painel->widget_padding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // Variáveis para as dimensões da letra
@@ -108,7 +92,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
         char_rect.h = h_letter;
 
         // Adiciona o retângulo da letra para renderização
-        letras_rect.push_back({ paraNDC(char_rect), paraNDC(char_fundo_rect), ch.TextureID, i, cor_de_selecao, 0});
+        letras_rect.push_back({ paraNDC(char_rect), ch.TextureID});
 
         w_line += (ch.Advance >> 6); // Incrementa a largura da linha com o avanço do caractere
         if (w_line > largura_texto)
@@ -116,18 +100,18 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     }
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
-    pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
+    painel->widget_pos.y = box_pos.y + box_size.y - painel->obtRect().y;
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)
-Vector4f BubbleUI::Widgets::Texto::paraNDC(Vector4 coord)
+Vector4f BubbleUI::Widgets::Texto::paraNDC(const Vector4& coord)
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (coord.w * 2.f) / pai->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * coord.h) / pai->obtCtx()->tamanho.height;
-    coord_ndc.x = (coord.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * coord.y) / pai->obtCtx()->tamanho.height;
+    coord_ndc.z = (coord.w * 2.f) / painel->obtCtx()->tamanho.width;
+    coord_ndc.w = -(2.0f * coord.h) / painel->obtCtx()->tamanho.height;
+    coord_ndc.x = (coord.x * 2.f) / painel->obtCtx()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * coord.y) / painel->obtCtx()->tamanho.height;
 
     return coord_ndc;
 }
@@ -136,12 +120,6 @@ Vector4f BubbleUI::Widgets::Texto::paraNDC(Vector4 coord)
 void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)
 {
     carregarFonte(font_path); // Carrega a fonte
-}
-
-// Destrutor para liberar recursos
-BubbleUI::Widgets::Texto::~Texto()
-{
-    if (label) delete label; // Libera string*
 }
 
 // Método para detextar caractéres selecionados

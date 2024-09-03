@@ -1,7 +1,7 @@
 #include "depurador.hpp"
 #include "src/ui/widgets/texto.hpp"
 
-BubbleUI::Paineis::Depurador::Depurador(Contexto* ctx) : fps_display("FPS: ")
+BubbleUI::Paineis::Depurador::Depurador(std::shared_ptr < Contexto> ctx) : fps_display("FPS: ")
 {
 	Nome = "Depurador";
 	configurar(ctx);

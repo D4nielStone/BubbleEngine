@@ -5,7 +5,7 @@ namespace Bubble::Cena
 {
     // Uma cena é criada
     // \param name: para o nome da cena
-    Scene::Scene(const char* name) : Name(name) {
+    Scene::Scene(const char* name) : Name(name), skybox(std::make_unique<Util::Skybox>()) {
         Debug::emitir("CENA", std::string(name) + " criada");
     }
     Scene::~Scene() {}
@@ -40,6 +40,7 @@ namespace Bubble::Cena
     // Deve renderizar Cena
     void Scene::renderizar(float aspecto) {
         camera_editor.atualizarAspecto(aspecto);
+        skybox->renderizar();
         for (auto& obj : Entidades) {
             obj->renderizar();
             renderizarFilhos(obj, aspecto);

@@ -35,6 +35,6 @@ namespace Bubble {
         };
         extern BECOMMONS_DLL_API Bubble::Entidades::CameraEditor* CameraEditorAtual();
         BECOMMONS_DLL_API void adicionarTarefaNaFila(std::function<void()> tarefa);
-        BECOMMONS_DLL_API void criarEntidade(SceneManager* scenemanager, std::string path);
+        BECOMMONS_DLL_API void criarEntidade(std::shared_ptr<SceneManager> scenemanager, std::string path);
     } // namespace Cena
 } // namespace Bubble

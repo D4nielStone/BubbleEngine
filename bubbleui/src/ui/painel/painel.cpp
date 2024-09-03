@@ -1,35 +1,30 @@
 #include "painel.hpp"
 #include <src/tempo/delta_time.cpp>
 
-BubbleUI::Painel::Painel(Contexto* ctx)
-{
-	configurar(ctx);
-}
-
-BubbleUI::Painel::Painel(Vector4 rect, Contexto* ctx)
+BubbleUI::Painel::Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect)
 {
 	configurar(ctx, rect);
 }
 
-void BubbleUI::Painel::defTam(Vector2 tam)
+void BubbleUI::Painel::defTam(const Vector2 &tam)
 {
 	retangulo.w = tam.x;
 	retangulo.h = tam.y;
 }
 
-void BubbleUI::Painel::defPos(Vector2f pos)
+void BubbleUI::Painel::defPos(const Vector2 &pos)
 {
 	retangulo.x = pos.x;
 	retangulo.y = pos.y;
 }
 
-void BubbleUI::Painel::adiTam(Vector2 tam)
+void BubbleUI::Painel::adiTam(const Vector2 &tam)
 {
 	retangulo.w += tam.x;
 	retangulo.h += tam.y;
 }
 
-void BubbleUI::Painel::adiPos(Vector2f pos)
+void BubbleUI::Painel::adiPos(const Vector2 &pos)
 {
 	retangulo.x += pos.x;
 	retangulo.y += pos.y;
@@ -51,7 +46,7 @@ Vector2 BubbleUI::Painel::obtTamMin() const
 	return limite_min_tam;
 }
 
-BubbleUI::Contexto* BubbleUI::Painel::obtCtx() const
+std::shared_ptr<BubbleUI::Contexto> BubbleUI::Painel::obtCtx() const
 {
 	return contexto;
 }
@@ -65,9 +60,9 @@ void BubbleUI::Painel::atualizar()
 	corrigirLimite();
 	
 
-	moldura->defPos({ retangulo.x, retangulo.y });
-	moldura->defTam({ (float)retangulo.w,(float)retangulo.h });
-	moldura->atualizar();
+	moldura.defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y )});
+	moldura.defTam({retangulo.w,retangulo.h });
+	moldura.atualizar();
 
 	if (mostrar_popup)
 	{
@@ -104,12 +99,11 @@ void BubbleUI::Painel::atualizar()
 	arrastando = false;
 }
 
-void BubbleUI::Painel::renderizar()
+void BubbleUI::Painel::renderizar() const
 {
-	glScissor(retangulo.x, (contexto->tamanho.height - (retangulo.y-1) - retangulo.h), retangulo.w, retangulo.h+2);
+	glScissor(retangulo.x, (contexto->tamanho.height - (retangulo.y-1) - retangulo.h), retangulo.w, retangulo.h+4);
 
-	widget_pos = { 0, 0 };
-	moldura->renderizar(GL_TRIANGLES);
+	moldura.renderizar();
 	preRenderizacao();
 	m_aba->renderizar();
 	for (auto& widget : lista_widgets)
@@ -117,24 +111,24 @@ void BubbleUI::Painel::renderizar()
 		widget->renderizar();
 	}
 
-	menu_de_contexto->renderizar(GL_TRIANGLES);
+	menu_de_contexto->renderizar();
 }
 
-void BubbleUI::Painel::configurar(Contexto* ctx, Vector4 rect)
+void BubbleUI::Painel::configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect)
 {
-	// Customizacao do painel
+	// configura do painel
 	contexto = ctx;
 	widget_padding = {5, 5};
 	limite_min_tam = { 100, 15 };
 	retangulo = rect;
-	borda_c = new Separador(CIMA, this);
-	borda_b = new Separador(BAIXO, this);
-	borda_e = new Separador(ESQUERDA, this);
-	borda_d = new Separador(DIREITA, this);
-	moldura = new Formas::Moldura(contexto);
-	menu_de_contexto = new Util::PopUp(contexto);
-	moldura->defCor({ 0.1f, 0.1f, 0.1f });
-	m_aba = new Aba(this);
+	borda_c = std::make_unique<Separador>(CIMA, this);
+	borda_b = std::make_unique<Separador>(BAIXO, this);
+	borda_e = std::make_unique<Separador>(ESQUERDA, this);
+	borda_d = std::make_unique<Separador>(DIREITA, this);
+	moldura = Formas::Moldura(contexto);
+	menu_de_contexto = std::make_unique<Util::PopUp>(contexto);
+	moldura.defCor({ 0.1f, 0.1f, 0.1f });
+	m_aba = std::make_unique<Aba>(this);
 }
 
 void BubbleUI::Painel::preAtualizacao()
@@ -145,7 +139,7 @@ void BubbleUI::Painel::posAtualizacao()
 {
 }
 
-void BubbleUI::Painel::preRenderizacao()
+void BubbleUI::Painel::preRenderizacao() const
 {
 }
 
@@ -173,12 +167,12 @@ void BubbleUI::Painel::corrigirLimite()
 }
 
 // Verifica se nenhuma borda está tocada pelo cursor e muda para cursor normal
-bool BubbleUI::Painel::cursorNormal()
+bool BubbleUI::Painel::cursorNormal() const
 {
 	if (!borda_e->cursor()
-		&& !borda_d->cursor()
+		&& !borda_b->cursor()
 		&& !borda_c->cursor()
-		&& !borda_b->cursor())
+		&& !borda_d->cursor())
 	{
 		return true;
 	}

@@ -12,17 +12,17 @@ namespace BubbleUI
 		class BEUI_DLL_API Linha
 		{
 		public:
-			Linha(Vector4f posicoes, Contexto* ctx);
 			Linha() = default;
-			void defPos(Vector4f posicoes);
-			void defCor(Color cor);
+			Linha(const Vector4 &posicoes, std::shared_ptr<Contexto> ctx);
+			void defPos(const Vector4 &posicoes);
+			void defCor(const Color &cor);
 			void atualizar();
-			void renderizar();
+			void renderizar() const;
 		protected:
-			Contexto* contexto;
-			Vector4f posicoes;
+			std::shared_ptr<Contexto> contexto;
+			Vector4 posicoes;
 			Color cor_base;
-		private:
+		private:	
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			Shader shader = Shader("assets/shaders/linha.vert", "assets/shaders/linha.frag");

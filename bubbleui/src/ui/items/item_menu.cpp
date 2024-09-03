@@ -5,44 +5,28 @@
 using namespace Bubble::Arquivadores;
 
 // Construtor que inicializa o ItemMenu com uma label e configurações padrão
-BubbleUI::Items::ItemMenu::ItemMenu(std::string* label) : label(label), texto(""), letra_padding({ 5, 4 })
+BubbleUI::Items::ItemMenu::ItemMenu(std::string* label) : resolucao(12), label(label), texto(""), letra_padding({ 4, 4 })
 {
-    lines_box_limite = 3; // Limite de linhas na caixa
     configurar(); // Configura o item com as configurações padrão
-}
-
-// Construtor que inicializa o ItemMenu com uma label e uma resolução especificada
-BubbleUI::Items::ItemMenu::ItemMenu(std::string* label, unsigned int pxl) : label(label), resolucao(pxl)
-{
-    configurar(resolucao); // Configura o item com a resolução especificada
 }
 
 // Construtor que inicializa o ItemMenu com uma label passada como string
-BubbleUI::Items::ItemMenu::ItemMenu(std::string l) : resolucao(12)
+BubbleUI::Items::ItemMenu::ItemMenu(const std::string &l) : resolucao(12), texto(l), label(new std::string(l)), letra_padding({5, 4})
 {
-    lines_box_limite = 3; // Limite de linhas na caixa
-    label = new std::string(l); // Cria uma nova string para a label
     configurar(); // Configura o item com as configurações padrão
-}
-
-// Construtor que inicializa o ItemMenu com uma label passada como string e uma resolução especificada
-BubbleUI::Items::ItemMenu::ItemMenu(std::string l, unsigned int pxl) : resolucao(pxl)
-{
-    lines_box_limite = 3; // Limite de linhas na caixa
-    label = new std::string(l); // Cria uma nova string para a label
-    configurar(resolucao); // Configura o item com a resolução especificada
 }
 
 // Método para atualizar o estado do ItemMenu, incluindo a lógica de interação
 void BubbleUI::Items::ItemMenu::atualizar()
 {
+    if (label)  frase = *label; // Atualiza a frase com o valor da label
     renderizar_texto(); // Renderiza o texto do item
-    if (label)
-        frase = *label; // Atualiza a frase com o valor da label
+    
     clicado = false; // Inicializa o estado de clique como falso
 
     // Verifica se o mouse está sobre o item
-    if (!colisao->mouseEmCima())
+    colisao.defRect({ box_pos.x, box_pos.y, largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
+    if (!colisao.mouseEmCima())
     {
         mouseEmCima = true; // Marca que o mouse está sobre o item
         moldura.defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
@@ -50,25 +34,24 @@ void BubbleUI::Items::ItemMenu::atualizar()
     else
     {
         // Verifica se o botão esquerdo do mouse foi pressionado
-        if (pai->obtCtx()->inputs->mouseEnter == GLFW_PRESS && pai->obtCtx()->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
-            clicado = true; // Marca que o item foi clicado
+        if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
         mouseEmCima = false; // Marca que o mouse não está mais sobre o item
         moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
-    if (pai->obtCtx()->inputs->mouseEnter == GLFW_RELEASE)
+    if (inputs->mouseEnter == GLFW_RELEASE)
         gatilho = true;
+
     // Atualiza a posição e tamanho da moldura
-    moldura.defPos({ box_pos.x, box_pos.y });
-    moldura.defTam({ (float)largura_texto + letra_padding.x * 2, (float)box_size.y });
+    moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+    moldura.defTam({ largura_texto + letra_padding.x * 2, box_size.y });
     moldura.atualizar(); // Atualiza a moldura
 }
 
 // Método para renderizar o ItemMenu na tela
-void BubbleUI::Items::ItemMenu::renderizar()
+void BubbleUI::Items::ItemMenu::renderizar() const
 {
-    moldura.renderizar(GL_TRIANGLES); // Renderiza a moldura usando triângulos
-    colisao->defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y }); // Define o retângulo de colisão
+    moldura.renderizar(); // Renderiza a moldura
 
     // Renderiza cada letra do texto
     for (auto& rect : letras_rect)
@@ -131,7 +114,7 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
         char_rect.h = h_letter;
 
         // Adiciona o retângulo da letra para renderização
-        letras_rect.push_back({ paraNDC(), ch.TextureID });
+        letras_rect.push_back({ paraNDC(), {}, ch.TextureID });
 
         w_line += (ch.Advance >> 6); // Incrementa a largura da linha com o avanço do caractere
         if (w_line > largura_texto)
@@ -161,7 +144,7 @@ Vector4f BubbleUI::Items::ItemMenu::paraNDC()
 }
 
 // Método para configurar o ItemMenu com uma resolução e um caminho de fonte
-void BubbleUI::Items::ItemMenu::configurar(unsigned int resolucao, std::string font_path)
+void BubbleUI::Items::ItemMenu::configurar(const std::string &font_path, unsigned int resolucao)
 {
     carregarFonte(font_path); // Carrega a fonte especificada
 }
@@ -171,7 +154,8 @@ void BubbleUI::Items::ItemMenu::defMoldura(Formas::Moldura* m)
 {
     pai = m;
     moldura = Formas::Moldura(m->obtCtx()); // Define a moldura com base no contexto do pai
-    colisao = std::make_unique<Colisao2d>(Vector4{}, m->obtCtx()); // Cria uma nova instância de colisão 2D
+    colisao = Colisao2d({}, m->obtCtx()); // Cria uma nova instância de colisão 2D
+    inputs = m->obtCtx()->inputs;
 }
 
 // Destrutor do ItemMenu que libera a memória alocada

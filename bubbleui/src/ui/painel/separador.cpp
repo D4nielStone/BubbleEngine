@@ -4,25 +4,22 @@
 
 using namespace BubbleUI;
 
-Separador::Separador(Lado side, Painel* p) : lado(side), painel(p)
+Separador::Separador(const Lado side, Painel* p) :contexto(p->obtCtx()), inputs(p->obtCtx()->inputs), lado(side), painel(p), colisao(Colisao2d({}, p->obtCtx()))
 {
-	colisao = new Colisao2d({}, p->obtCtx());
 }
 
 void BubbleUI::Separador::atualizar()
 {
+	if (!painel->selecionado)
+		return;
 	atualizarColisao();
+	atualizarArrasto();
 	atualizarCursor();
-
-	if (painel->selecionado)
-	{
-		atualizarArrasto();
-	}
 }
 
-bool BubbleUI::Separador::cursor()
+bool BubbleUI::Separador::cursor() const
 {
-	if (colisao->mouseEmCima())
+	if (colisao.mouseEmCima())
 		return true;
 	else
 		return false;
@@ -33,7 +30,7 @@ void BubbleUI::Separador::atualizarColisao()
 	switch (lado)
 	{
 	case DIREITA:
-		colisao->defRect({
+		colisao.defRect({
 			painel->obtRect().x + painel->obtRect().w -2.f,
 			painel->obtRect().y,
 			10,
@@ -41,7 +38,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case ESQUERDA:
-		colisao->defRect({
+		colisao.defRect({
 			painel->obtRect().x - 10,
 			painel->obtRect().y,
 			12,
@@ -49,7 +46,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case CIMA:
-		colisao->defRect({
+		colisao.defRect({
 			painel->obtRect().x,
 			painel->obtRect().y - 10.f,
 			painel->obtRect().w,
@@ -57,7 +54,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case BAIXO:
-		colisao->defRect({
+		colisao.defRect({
 			painel->obtRect().x,
 			painel->obtRect().y + painel->obtRect().h - 2.f,
 			painel->obtRect().w,
@@ -71,28 +68,28 @@ void BubbleUI::Separador::atualizarColisao()
 
 void BubbleUI::Separador::atualizarCursor()
 {
-	if (colisao->mouseEmCima() && painel->selecionado)
+	if (colisao.mouseEmCima() && painel->selecionado)
 	{
 		switch (lado)
 		{
 		case DIREITA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
+			contexto->cursor = contexto->cursor_horizontal;
 			break;
 		case ESQUERDA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
+			contexto->cursor = contexto->cursor_horizontal;
 			break;
 		case CIMA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
+			contexto->cursor = contexto->cursor_vertical;
 			break;
 		case BAIXO:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
+			contexto->cursor = contexto->cursor_vertical;
 			break;
 		default:
 			break;
 		}
-		if (painel->obtCtx()->inputs->mouseEnter == GLFW_RELEASE)
+		if (inputs->mouseEnter == GLFW_RELEASE)
 			mouse_1click = true;
-		if (mouse_1click && painel->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+		if (mouse_1click && inputs->mouseEnter == GLFW_PRESS)
 		{
 			arrastando = true;
 			mouse_1click = false;
@@ -105,29 +102,29 @@ void BubbleUI::Separador::atualizarCursor()
 
 void BubbleUI::Separador::atualizarArrasto()
 {
-	if (arrastando && painel->obtCtx()->inputs->mouseEnter == GLFW_PRESS)
+	if (arrastando && inputs->mouseEnter == GLFW_PRESS)
 	{
 		painel->arrastando = true;
 		painel->redimen_atual = lado;
 		switch (lado)
 		{
 		case DIREITA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
-			painel->adiTam({ static_cast<int>(painel->obtCtx()->inputs->mousex) - mouse_pos_ini.x, 0 });
+			contexto->cursor = contexto->cursor_horizontal;
+			painel->adiTam({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
 			break;
 		case ESQUERDA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_horizontal;
-			painel->adiPos({ static_cast<float>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
-			painel->adiTam({ -static_cast<int>(painel->obtCtx()->inputs->mousex - mouse_pos_ini.x), 0 });
+			contexto->cursor = contexto->cursor_horizontal;
+			painel->adiPos({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+			painel->adiTam({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
 			break;
 		case CIMA:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
-			painel->adiPos({ 0,static_cast<float>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
-			painel->adiTam({ 0,-static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			contexto->cursor = contexto->cursor_vertical;
+			painel->adiPos({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+			painel->adiTam({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		case BAIXO:
-			painel->obtCtx()->cursor = painel->obtCtx()->cursor_vertical;
-			painel->adiTam({ 0, static_cast<int>(painel->obtCtx()->inputs->mousey - mouse_pos_ini.y) });
+			contexto->cursor = contexto->cursor_vertical;
+			painel->adiTam({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		default:
 			break;
@@ -135,5 +132,5 @@ void BubbleUI::Separador::atualizarArrasto()
 	}
 	else
 		arrastando = false;
-	mouse_pos_ini = { static_cast<int>(painel->obtCtx()->inputs->mousex), static_cast<int>(painel->obtCtx()->inputs->mousey) };
+	mouse_pos_ini = { static_cast<int>(inputs->mousex), static_cast<int>(inputs->mousey) };
 }

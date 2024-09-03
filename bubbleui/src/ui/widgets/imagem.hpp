@@ -8,10 +8,10 @@ namespace BubbleUI
 		class BEUI_DLL_API Imagem : public Widget
 		{
 		public:
-			Imagem(unsigned int id, Vector2 size = {100, 100}, bool auto_resize = true);
-			Vector4f paraNDC();
+			Imagem(unsigned int id, const Vector2 &size = {100, 100}, const bool &auto_resize = true);
+			Vector4f paraNDC() const;
 			void atualizar() override;
-			void renderizar() override;
+			void renderizar() const override;
 			void defID(unsigned int newID);
 			Vector4 obtRect() const;
 		private:

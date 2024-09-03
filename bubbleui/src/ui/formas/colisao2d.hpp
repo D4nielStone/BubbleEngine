@@ -7,13 +7,13 @@ namespace BubbleUI
 	{
 	public:
 		Colisao2d() = default;
-		Colisao2d(Vector4 quadrado, Contexto* ctx);
-		Colisao2d(short int raio, Contexto* ctx);
-		void defRect(Vector4 quad);
-		bool mouseEmCima();
+		Colisao2d(const Vector4 &quadrado, std::shared_ptr<Contexto> ctx);
+		~Colisao2d() = default;
+		void defRect(const Vector4 &quad);
+		bool mouseEmCima() const;
 	private:
 		Vector4 quadrado;
-		Contexto* contexto;
+		std::shared_ptr<Contexto> contexto;
 		short int raio = 0;
 	};
 }

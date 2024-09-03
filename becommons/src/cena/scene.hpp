@@ -18,7 +18,7 @@ namespace Bubble
         {
         private:
             const char* Name;
-            Bubble::Util::Skybox skybox;
+            std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
             void desenharCeu();

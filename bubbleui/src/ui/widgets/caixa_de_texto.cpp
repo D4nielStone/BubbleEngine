@@ -3,8 +3,8 @@
 #include "src/tempo/delta_time.hpp"
 #include <src/depuracao/debug.hpp>
 
-BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string mensagem)
-    : gatilho1(false), gatilho2(false), mensagem(new std::string(mensagem))
+BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
+    : gatilho1(false), gatilho2(false), mensagem(mensagem)
 {
     letra_padding = { 5, 5 };
     resolucao = 12;
@@ -13,8 +13,8 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string mensagem)
     moldura.defCor({ 0.05f, 0.05f, 0.05f });
 }
 
-BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, std::string mensagem)
-    : mensagem(new std::string(mensagem)), buffer_texto(buffer) 
+BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& mensagem)
+    : mensagem(mensagem), buffer_texto(buffer) 
 {
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
@@ -28,22 +28,23 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, std::string mensa
 
 void BubbleUI::Widgets::CaixaTexto::atualizar()
 {
-    if (pai->selecionado) 
+    Texto::atualizar(); // Atualiza texto
+
+    if (painel->selecionado) 
     {
-        if (colisao->mouseEmCima()) {
+        if (colisao.mouseEmCima()) {
             contexto->cursor = contexto->cursor_texto;
             if (inputs->mouseEnter == GLFW_PRESS)iniciarSelecao();
             else selecionando_texto = false;
         } // atualiza Cursor
         if (selecionado) atualizarInputs(); // Atualiza entrada
-        if (selecionando_texto) area_de_selecao = { (float)mouse_pos_ini.x, (float)mouse_pos_ini.y, (int)inputs->mousex, (int)inputs->mousey };
+        if (selecionando_texto) area_de_selecao = { static_cast<float>(mouse_pos_ini.x), static_cast<float>(mouse_pos_ini.y), (int)inputs->mousex, (int)inputs->mousey };
     }
-    Texto::atualizar(); // Atualiza texto
 
-    for (auto& letra : letras_rect) // Desenha cursor do texto
-    {
-        if (letra.index == texto_cursor_index) texto_cursor_pos = letra.rect; texto_cursor_pos.w = 1;
-    }
+    //for (auto& letra : letras_rect) // Desenha cursor do texto
+    //{
+    //    if (letra.index == texto_cursor_index) texto_cursor_pos = letra.rect; texto_cursor_pos.w = 1;
+    //}
     // Atribui texto da frase para o buffer
     if (buffer_texto)
     {
@@ -54,7 +55,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
     // Defini mensagem caso texto vazio
     if (texto.empty())
     {
-        frase = *mensagem;
+        frase = mensagem;
         cor = { 0.7, 0.7, 0.7 };
     }
     else
@@ -64,34 +65,34 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
     }
 
     // Redimensiona moldura e colisao
-    colisao->defRect({box_pos.x, box_pos.y, (int)box_size.x, (int)box_size.y});
-    moldura.defTam(box_size);moldura.defPos(box_pos);
+    colisao.defRect({box_pos.x, box_pos.y, (int)box_size.x, (int)box_size.y});
+    moldura.defTam({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     moldura.atualizar();
 }
 
-void BubbleUI::Widgets::CaixaTexto::renderizar()
+void BubbleUI::Widgets::CaixaTexto::renderizar() const
 {
-    moldura.renderizar(0x0004);
+    moldura.renderizar();
     Texto::renderizar();
     // Renderiza o cursor
-    if (Bubble::Tempo::s_passados % 2 == 0)
-    {
-        shaderQuad.use();
-        shaderQuad.setCor("quadrado.cor", { 1, 1, 1, 0.95f });
-        shaderQuad.setVec2("quadrado.posicao", texto_cursor_pos.x, texto_cursor_pos.y);
-        shaderQuad.setVec2("quadrado.tamanho", texto_cursor_pos.z, texto_cursor_pos.w);
-
-        glBindVertexArray(rect_vertex.VAO);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0);
-    }
+    //if (Bubble::Tempo::s_passados % 2 == 0)
+    //{
+    //    shaderQuad.use();
+    //    shaderQuad.setCor("quadrado.cor", { 1, 1, 1, 0.95f });
+    //    shaderQuad.setVec2("quadrado.posicao", texto_cursor_pos.x, texto_cursor_pos.y);
+    //    shaderQuad.setVec2("quadrado.tamanho", texto_cursor_pos.z, texto_cursor_pos.w);
+    //
+    //    glBindVertexArray(rect_vertex.VAO);
+    //    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
+    //    glBindVertexArray(0);
+    //}
 }
 
 void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
 {
     BubbleUI::Widgets::Texto::defPainel(painel);
     contexto = painel->obtCtx();
-    inputs = pai->obtCtx()->inputs; // Simplifica o acesso
+    inputs = painel->obtCtx()->inputs; // Simplifica o acesso
 }
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)

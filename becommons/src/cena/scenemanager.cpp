@@ -134,7 +134,7 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
     filaDeTarefas.push(tarefa);
 }
 
-void Bubble::Cena::criarEntidade(SceneManager* scenemanager, std::string path)
+void Bubble::Cena::criarEntidade(std::shared_ptr < SceneManager >scenemanager, std::string path)
 {
     scenemanager->cenaAtual()->criarEntidade(std::make_unique<Arquivadores::Arquivo3d>(path));
 }

@@ -1,13 +1,14 @@
 #include "moldura.hpp"
 
-BubbleUI::Formas::Moldura::Moldura(Contexto* contexto, Vector4 retangulo)
+BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4& retangulo)
 {
 	this->contexto = contexto;
 	this->retangulo = retangulo;
-	linha_d = std::make_unique<Linha>(Vector4f{0, 0, 0, 0}, contexto);
-	linha_b = std::make_unique<Linha>(Vector4f{0, 0, 0, 0}, contexto);
-	linha_e = std::make_unique<Linha>(Vector4f{0, 0, 0, 0}, contexto);
-	linha_c = std::make_unique<Linha>(Vector4f{0, 0, 0, 0}, contexto);
+	Rect::Rect(contexto, retangulo);
+	linha_d = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
+	linha_b = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
+	linha_e = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
+	linha_c = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_d->defCor({ 0.35, 0.35, 0.35 });
 	linha_b->defCor({ 0.35, 0.35, 0.35 });
 	linha_e->defCor({ 0.55, 0.55, 0.55 });
@@ -23,26 +24,26 @@ void BubbleUI::Formas::Moldura::atualizar()
 	linha_d->defPos({
 			retangulo.x + retangulo.w,
 			retangulo.y,
-			retangulo.x + retangulo.w,
-			retangulo.y + retangulo.h
+			static_cast<int>(retangulo.x + retangulo.w),
+			static_cast<int>(retangulo.y + retangulo.h)
 		});
 	linha_e->defPos({
 			retangulo.x + 1,
 			retangulo.y,
-			retangulo.x,
-			retangulo.y + retangulo.h
+			static_cast<int>(retangulo.x),
+			static_cast<int>(retangulo.y + retangulo.h)
 		});
 	linha_c->defPos({
 			retangulo.x,
 			retangulo.y - 1,
-			retangulo.x + retangulo.w,
-			retangulo.y
+			static_cast<int>(retangulo.x + retangulo.w),
+			static_cast<int>(retangulo.y)
 		});
 	linha_b->defPos({
 			retangulo.x,
 			retangulo.y + retangulo.h,
-			retangulo.x + retangulo.w,
-			retangulo.y + retangulo.h
+			static_cast<int>(retangulo.x + retangulo.w),
+			static_cast<int>(retangulo.y + retangulo.h)
 		});
 	linha_b->atualizar();
 	linha_c->atualizar();
@@ -51,18 +52,17 @@ void BubbleUI::Formas::Moldura::atualizar()
 	posAtualizacao();
 }
 
-void BubbleUI::Formas::Moldura::renderizar(GLenum mode)
+void BubbleUI::Formas::Moldura::renderizar() const
 {
-	Rect::renderizar(mode);
-	if (ocultar_linhas)
-		return;
+	Rect::renderizar();
+	if (ocultar_linhas)return;
 	linha_c->renderizar();
 	linha_e->renderizar();
 	linha_d->renderizar();
 	linha_b->renderizar();
 }
 
-BubbleUI::Contexto* BubbleUI::Formas::Moldura::obtCtx() const
+std::shared_ptr<BubbleUI::Contexto> BubbleUI::Formas::Moldura::obtCtx() const
 {
 	return contexto;
 }

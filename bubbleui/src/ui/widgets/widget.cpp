@@ -1,9 +1,10 @@
 #include "widget.hpp"
 #include "src/ui/painel/painel.hpp"
 
-void BubbleUI::Widget::defPainel(Painel* p)
+void BubbleUI::Widget::defPainel(Painel* painel)
 {
-	pai = p;	
-	moldura = Formas::Moldura(pai->obtCtx());
-	colisao = new Colisao2d({}, pai->obtCtx());
+	this->painel = painel;	
+	moldura = Formas::Moldura(painel->obtCtx());
+	colisao = Colisao2d({}, painel->obtCtx());
+	inputs = inputs;
 }

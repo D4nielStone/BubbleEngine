@@ -45,7 +45,8 @@ static void adicionarEsfera()
     path = L"assets/primitivas/modelos/sphere.dae";
 }
 
-BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect) : scenemanager(scenemanager), buffer(std::make_shared<Widgets::Imagem>(0))
+BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0))
+, scenemanager(scenemanager)
 {
 	Nome = "Editor";
 	renderizar_corpo = false;
@@ -66,7 +67,6 @@ BubbleUI::Paineis::Editor::Editor(Contexto* ctx, Bubble::Cena::SceneManager* sce
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
     // Adicionar objeto caso "path" esteja preenchido
-    if (!selecionado)return;
     if (!path.empty())
     {
         std::string novo_path = std::filesystem::path(path).string();
@@ -76,10 +76,12 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
             });
         path = L"";
     }
-    buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defViewport(rect_size);
 
-    if (selecionado) contexto->inputs->setInputMode(InputMode::Editor);
+    if (selecionado) {
+        contexto->inputs->setInputMode(InputMode::Editor);
+        buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
+    }
     else             contexto->inputs->setInputMode(InputMode::Default);
 }

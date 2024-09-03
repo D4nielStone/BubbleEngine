@@ -8,13 +8,12 @@ namespace BubbleUI
 	class BEUI_DLL_API Aba : public Widgets::Texto
 	{
 	public:
-		Aba(Painel* painel);
 		Aba() = default;
+		Aba(Painel* painel);
 		void atualizar() override;
-		void renderizar() override;
+		void renderizar() const override;
 		Formas::Rect* obterCorpo() const;
 	private:
-		Painel* painel;
 		std::vector<LetraRect> letras_rect;
 		std::unique_ptr<Formas::Rect>corpo_rect;
 	};

@@ -1,10 +1,11 @@
 #include "item_botao.hpp"
 
-BubbleUI::Items::Botao::Botao(std::string l, std::function<void()> funcao_click) : funcao_click_(std::move(funcao_click))
+BubbleUI::Items::Botao::Botao(const std::string &l, std::function<void()> funcao_click) : funcao_click_(std::move(funcao_click))
 {
-	ItemMenu::ItemMenu(l);
+	resolucao = (12);
 	label = new std::string(l);
-	configurar();
+	texto = ("");
+	letra_padding = { 4, 4 };
 }
 
 void BubbleUI::Items::Botao::atualizar()

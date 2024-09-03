@@ -6,9 +6,9 @@ namespace BubbleUI
 		class BEUI_DLL_API Botao : public Texto
 		{
 		public:
-			Botao(std::string label);
+			Botao(const std::string &label);
 			void atualizar() override;
-			void renderizar() override;
+			void renderizar() const override;
 		private:
 		};
 	}

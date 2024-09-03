@@ -8,7 +8,7 @@ using namespace Bubble::Entidades;
 Entidade::~Entidade() = default;
 
 Entidade::Entidade(const char* name)
-    : ativado(true), Nome(name), transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
+    : ativado(true), Nome(std::make_shared<std::string>(name)), transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
 Entidade::Entidade(const Arquivadores::Arquivo3d& arquivo_objeto)
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {
@@ -35,7 +35,7 @@ void Entidade::renderizar() const
 
     if (selecionada) // Se selecionada, desenha outline
     {
-        glDisable(GL_DEPTH_TEST);
+        glDepthMask(GL_FALSE);
         shader_outline.use();
         shader_outline.setMat4("projection", Cena::CameraEditorAtual()->obterProjMatrix());
         shader_outline.setMat4("view", Cena::CameraEditorAtual()->obterViewMatrix());
@@ -50,7 +50,7 @@ void Entidade::renderizar() const
                 componente->atualizar();
             }
         }
-        glEnable(GL_DEPTH_TEST);
+        glDepthMask(GL_TRUE);
         transformacao->definirShader(shader_padrao);
         transformacao->atualizar();
         for (auto& componente : Componentes)
@@ -75,20 +75,20 @@ void Entidade::renderizar() const
 
 std::string Entidade::nome() const
 {
-    return Nome;
+    return *Nome.get();
 }
 
-std::string* Bubble::Entidades::Entidade::nomeptr()
+std::shared_ptr<std::string> Bubble::Entidades::Entidade::nomeptr()
 {
-    return &Nome;
+    return Nome;
 }
 
 void Entidade::carregarNode(const Node& node)
 {
-    Nome = node.nome;
+    *Nome = node.nome;
     //if (pai)
     //{
-    //    transformacao->definirMatriz(node.transformacao * pai->obterTransformacao()->obterMatriz());
+    //    transformacao->definirMatriz(node.transformacao * painel->obterTransformacao()->obterMatriz());
     //}
     //else
     //{
@@ -146,7 +146,7 @@ void Entidade::adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> co
 
 rapidjson::Value Entidade::serializar(rapidjson::Document* v) {
     rapidjson::Value obj(rapidjson::kObjectType);
-    obj.AddMember("nome", rapidjson::Value().SetString(Nome.c_str(), v->GetAllocator()), v->GetAllocator());
+    obj.AddMember("nome", rapidjson::Value().SetString(Nome->c_str(), v->GetAllocator()), v->GetAllocator());
 
     rapidjson::Value array(rapidjson::kArrayType);
     array.PushBack(transformacao->serializar(v), v->GetAllocator());
@@ -160,7 +160,7 @@ bool Entidade::parse(rapidjson::Value& entidade) {
         Debug::emitir("ENTIDADE", "  Erro: Entidade sem nome.");
         return false;
     }
-    Nome = entidade["nome"].GetString();
-    Debug::emitir("ENTIDADE", "  " + Nome + ":");
+    *Nome = entidade["nome"].GetString();
+    Debug::emitir("ENTIDADE", "  " + *Nome.get() + ":");
     return true;
 }

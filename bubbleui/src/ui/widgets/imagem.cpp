@@ -1,20 +1,20 @@
 #include "imagem.hpp"
 #include "src/ui/painel/painel.hpp"
 
-BubbleUI::Widgets::Imagem::Imagem(unsigned int id, Vector2 size, bool auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
+BubbleUI::Widgets::Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
 {
 }
 
 
 // Deve transformar coordenadas pixel para NDC
-Vector4f BubbleUI::Widgets::Imagem::paraNDC()
+Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (rect.w * 2.f) / pai->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * rect.h) / pai->obtCtx()->tamanho.height;
-    coord_ndc.x = (rect.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * rect.y) / pai->obtCtx()->tamanho.height;
+    coord_ndc.z = (rect.w * 2.f) / painel->obtCtx()->tamanho.width;
+    coord_ndc.w = -(2.0f * rect.h) / painel->obtCtx()->tamanho.height;
+    coord_ndc.x = (rect.x * 2.f) / painel->obtCtx()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * rect.y) / painel->obtCtx()->tamanho.height;
 
     return coord_ndc;
 }
@@ -24,14 +24,14 @@ void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = pai->obtRect().w;
-        rect.h = pai->obtRect().h - pai->widget_pos.y;
+        rect.w = painel->obtRect().w;
+        rect.h = painel->obtRect().h - painel->widget_pos.y;
     }
-    rect = { pai->obtRect().x + pai->widget_pos.x + 1, pai->obtRect().y + pai->widget_pos.y, rect.w - 2 , rect.h - 1 };
+    rect = { painel->obtRect().x + painel->widget_pos.x + 1, painel->obtRect().y + painel->widget_pos.y, rect.w - 2 , rect.h - 1 };
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem
-void BubbleUI::Widgets::Imagem::renderizar()
+void BubbleUI::Widgets::Imagem::renderizar() const
 {
     Vector4f rectf = paraNDC();
     shader.use();

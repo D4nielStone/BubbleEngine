@@ -2,6 +2,7 @@
 #include "src/arquivadores/imageloader.hpp"
 #include <glad/glad.h>
 #include <algorithm>
+#include <src/util/skybox.hpp>
 
 using namespace Bubble::Componentes;
 void Renderizador::configurar()
@@ -13,14 +14,6 @@ void Renderizador::atualizar()
 {
     atualizarMaterial();       // Atualiza material    
     desenharModelo();       // Desenha VAO
-
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-    for (auto& textura : malha.material.texturas)
-    {
-        glBindTexture(GL_TEXTURE_2D, textura.ID);
-        shader.setInt(textura.tipo + "_.ativado", 0);
-    }
 }
 void Renderizador::configurarBuffers()
     {
@@ -79,12 +72,8 @@ void Renderizador::atualizarMaterial() const
 {
     shader.use();
     shader.setVec3("material.cor_difusa", malha.material.difusa.r, malha.material.difusa.g, malha.material.difusa.b);
-    for (auto& textura : malha.material.texturas)
-    {
-        glBindTexture(GL_TEXTURE_2D, textura.ID);
-        shader.setInt(textura.tipo + "_.ativado", 1);
-        shader.setInt(textura.tipo, 0);
-    }
+    shader.setInt("skybox", 0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, Bubble::Util::obterSkyboxTexture());
 }
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)
 {

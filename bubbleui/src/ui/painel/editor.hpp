@@ -10,10 +10,10 @@ namespace BubbleUI
 		class BEUI_DLL_API Editor : public Painel
 		{
 		public:
-			Editor(Contexto* ctx, Bubble::Cena::SceneManager* scenemanager, Vector4 rect = {2, 2, 50, 50});
+			Editor(std::shared_ptr < Contexto>ctx, std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect = {2, 2, 50, 50});
 			void preAtualizacao() override;
 		private: 
-			Bubble::Cena::SceneManager* scenemanager;
+			std::shared_ptr<Bubble::Cena::SceneManager> scenemanager;
 			std::shared_ptr<Widgets::Imagem> buffer;
 		};
 	}
