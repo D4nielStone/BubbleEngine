@@ -32,29 +32,26 @@ namespace Bubble::Cena
         }
     }
 
-    // Deve desenhar céu ( skybox, clear color ... )
-    void Scene::desenharCeu()
-    {
-        glClearColor(1, 1, 1, 1);
-    }
     // Deve renderizar Cena
-    void Scene::renderizar(float aspecto) {
-        camera_editor.atualizarAspecto(aspecto);
+    void Scene::renderizar() const {
+        camera_editor.renderizar();
         skybox->renderizar();
         for (auto& obj : Entidades) {
             obj->renderizar();
-            renderizarFilhos(obj, aspecto);
+            renderizarFilhos(obj);
         }
     }
-    void Scene::renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float aspecto)
+    void Scene::renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade)
+        const
     {
         for (auto& filho : entidade->obterFilhos()) {
             filho->renderizar();
-            renderizarFilhos(filho, aspecto);
+            renderizarFilhos(filho);
         }
     }
     // Deve atualizar Cena
-    void Scene::atualizar() {
+    void Scene::atualizar(float aspecto) {
+        camera_editor.atualizarAspecto(aspecto);
         camera_editor.atualizar();
         for (auto& obj : Entidades) {
             obj->atualizar();
@@ -88,7 +85,6 @@ namespace Bubble::Cena
         {
             c->configurar();
         }
-        //skybox.configurarBuffers();
     }
     // Deve serializar ela mesma ( isso é, passar para o documento json seus dados )
     void Scene::serializar(rapidjson::Document* doc) const {

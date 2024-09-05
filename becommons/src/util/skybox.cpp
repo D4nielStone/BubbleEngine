@@ -14,7 +14,7 @@ namespace Bubble::Util
     {
         return cubemapTexture;
     }
-    Skybox::Skybox() : Path("assets/texturas/rock.png") {
+    Skybox::Skybox() : Path("assets/texturas/skybox/") {
         configurarBuffers();
     }
     Skybox::Skybox(const char* path) : Path(path) {}
@@ -94,9 +94,9 @@ namespace Bubble::Util
         shader.use();
         shader.setMat4("view", glm::value_ptr(view));
         shader.setMat4("projection", Bubble::Cena::CameraEditorAtual()->obterProjMatrix());
-        shader.setInt("skybox", 0);
-
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+
+        shader.setInt("skybox", 0);
         glDrawArrays(GL_TRIANGLES, 0, malha.vertices.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
         glDepthMask(GL_TRUE);
@@ -117,7 +117,7 @@ namespace Bubble::Util
         };
         for (unsigned int i = 0; i < faces.size(); i++)
         {
-            auto image = Bubble::Arquivadores::ImageLoader("assets/texturas/skybox/" + faces[i]);
+            auto image = Bubble::Arquivadores::ImageLoader(path + faces[i]);
             auto data = image.obterDados();
             int width = image.getWidth();
             int height = image.getHeight();

@@ -26,6 +26,7 @@
     <None Include="assets\shaders\phong.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

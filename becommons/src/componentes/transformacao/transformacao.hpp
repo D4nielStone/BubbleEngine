@@ -43,7 +43,7 @@ namespace Bubble {
             void Rotacionar(const float x, const float y, const float z);
             glm::vec3 obterDirecao() const;
 
-            void decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale);
+            void decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const;
             void comporMatriz(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale);
 
             void definirMatriz(glm::mat4 matriz_nova);

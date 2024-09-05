@@ -49,9 +49,9 @@ BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr
 , scenemanager(scenemanager)
 {
 	Nome = "Editor";
-	renderizar_corpo = false;
+	renderizarCorpo = false;
 	configurar(ctx, rect);
-	adiWidget(buffer);
+	adicionarWidget(buffer);
 
     // Popup para adicionar primitivas
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
@@ -60,8 +60,8 @@ BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr
     //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cilindro", &abrirSelecionar));
     //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
     // Popup principal
-	menu_de_contexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
-	menu_de_contexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
+	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
+	menuDeContexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
@@ -78,10 +78,10 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     }
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defViewport(rect_size);
+    buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
 
     if (selecionado) {
         contexto->inputs->setInputMode(InputMode::Editor);
-        buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
     }
     else             contexto->inputs->setInputMode(InputMode::Default);
 }

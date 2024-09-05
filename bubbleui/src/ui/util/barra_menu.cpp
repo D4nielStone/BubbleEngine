@@ -8,10 +8,10 @@ BubbleUI::Util::BarraMenu::BarraMenu(std::shared_ptr<Contexto> contexto)
 	linha_b = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
 	linha_e = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
 	linha_c = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_d->defCor({ 0.35, 0.35, 0.35 });
-	linha_b->defCor({ 0.35, 0.35, 0.35 });
-	linha_e->defCor({ 0.55, 0.55, 0.55 });
-	linha_c->defCor({ 0.55, 0.55, 0.55 });
+	linha_d->defCor({ 0.35f, 0.35f, 0.35f, 1.f });
+	linha_b->defCor({ 0.35f, 0.35f, 0.35f, 1.f });
+	linha_e->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
+	linha_c->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
 }
 
 void BubbleUI::Util::BarraMenu::renderizar() const

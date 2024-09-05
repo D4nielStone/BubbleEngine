@@ -11,14 +11,14 @@ BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Contexto>ctx, std::sha
 
 void BubbleUI::Paineis::Entidades::recarregar()
 {
-	arvore_cor = { 1.f, 1.f, 1.f, 1 };
+	arvoreCor = { 1.f, 1.f, 1.f, 1 };
 	lista_widgets.clear();
 
-	adiWidget(std::make_shared<Widgets::CaixaTexto>());
+	adicionarWidget(std::make_shared<Widgets::CaixaTexto>());
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
 		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome(), &entidade->selecionada);
-		adiWidget(arvore);
+		adicionarWidget(arvore);
 		for (auto& filho : entidade->obterFilhos())
 		{
 			recursivo(filho, arvore);

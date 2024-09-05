@@ -72,37 +72,36 @@ void SceneManager::carregarCena(int sceneIndex) {
         Debug::emitir(Debug::Tipo::Erro, "índice da cena não é válido");
     }
 }
-// Deve renderizar cena atual
-void SceneManager::renderizarCenaAtual() const
-{
-
-    float aspecto;
-    if (viewport_rect.h != 0)
-        aspecto = static_cast<float>(viewport_rect.w) / viewport_rect.h;
-    else
-        aspecto = 1;
-    glViewport(0, 0, viewport_rect.w, viewport_rect.h);
-    glEnable(GL_DEPTH_TEST);
-
-    cenaAtual()->camera_editor.desenharFrame(viewport_rect);
-    cenaAtual()->renderizar(aspecto);
-    // Desligar framebuffer
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
 // Fila de tarefas para o thread principal
 std::queue<std::function<void()>> filaDeTarefas;
 std::mutex filaMutex;
-// Deve atualizar cena atual
-void SceneManager::atualizarCenaAtual() const
+// Deve renderizar cena atual
+void SceneManager::renderizarCenaAtual() const
 {
     // Processar fila de tarefas na thread principal
     while (!filaDeTarefas.empty()) {
         filaDeTarefas.front()(); // Executar a tarefa
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
+    glViewport(0, 0, viewport_rect.w, viewport_rect.h);
+    glEnable(GL_DEPTH_TEST);
+
+    cenaAtual()->camera_editor.desenharFrame(viewport_rect);
+    cenaAtual()->renderizar();
+    // Desligar framebuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+// Deve atualizar cena atual
+void SceneManager::atualizarCenaAtual() const
+{
+    float aspecto;
+    if (viewport_rect.h != 0)
+        aspecto = static_cast<float>(viewport_rect.w) / viewport_rect.h;
+    else
+        aspecto = 1;
 
     camera_editor_atual = &cenaAtual()->camera_editor;
-    cenaAtual()->atualizar();
+    cenaAtual()->atualizar(aspecto);
 }
 // Deve retornar numero de cenas
 size_t SceneManager::numeroDeCenas() const {
@@ -113,7 +112,7 @@ int SceneManager::cenaAtualIdx() const {
     return currentSceneIndex;
 }
 // Deve definir inputs
-void SceneManager::defIputs(Inputs::Inputs* inp)
+void SceneManager::defIputs(std::shared_ptr<Inputs::Inputs> inp)
 {
     inputs = inp;
     for (auto& scene : scenes)

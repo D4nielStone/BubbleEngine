@@ -50,9 +50,9 @@ void BubbleUI::Widgets::Texto::renderizar() const
 void BubbleUI::Widgets::Texto::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x = painel->obtRect().x + painel->widget_padding.x + painel->widget_pos.x;
-    box_pos.y = painel->obtRect().y + painel->widget_padding.y + painel->widget_pos.y;
-    box_size.x = painel->obtRect().w - painel->widget_padding.x * 2;
+    box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;
+    box_pos.y = painel->obterRetangulo().y + painel->widgetPadding.y + painel->posicaoWidget.y;
+    box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // Variáveis para as dimensões da letra
@@ -100,7 +100,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     }
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
-    painel->widget_pos.y = box_pos.y + box_size.y - painel->obtRect().y;
+    painel->posicaoWidget.y = box_pos.y + box_size.y - painel->obterRetangulo().y;
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)
@@ -108,10 +108,10 @@ Vector4f BubbleUI::Widgets::Texto::paraNDC(const Vector4& coord)
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (coord.w * 2.f) / painel->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * coord.h) / painel->obtCtx()->tamanho.height;
-    coord_ndc.x = (coord.x * 2.f) / painel->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * coord.y) / painel->obtCtx()->tamanho.height;
+    coord_ndc.z = (coord.w * 2.f) / painel->obterContexto()->tamanho.width;
+    coord_ndc.w = -(2.0f * coord.h) / painel->obterContexto()->tamanho.height;
+    coord_ndc.x = (coord.x * 2.f) / painel->obterContexto()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * coord.y) / painel->obterContexto()->tamanho.height;
 
     return coord_ndc;
 }

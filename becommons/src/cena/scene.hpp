@@ -21,7 +21,6 @@ namespace Bubble
             std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
-            void desenharCeu();
         public:
             std::shared_ptr<Entidades::Entidade> entidade_selecionada{ nullptr };
             std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
@@ -36,9 +35,9 @@ namespace Bubble
             void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
             void criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
-            void renderizar(float aspecto);
-            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade, float aspecto);
-            void atualizar();
+            void renderizar() const;
+            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade) const;
+            void atualizar(float aspecto);
             void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade);
             void carregar();
             void serializar(rapidjson::Document* doc) const;

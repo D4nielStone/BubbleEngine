@@ -10,7 +10,7 @@ BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared
     configurar(ctx, rect);
 
     // Verifica se o contexto e o scenemanager são válidos antes de usar
-    if (scenemanager && ctx)    adiWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
+    if (scenemanager && ctx)    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
     else                        Debug::emitir(Debug::Erro, "Scenemanager ou contexto inválido");// Log de erro
 }
 
@@ -22,7 +22,7 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     // Verifica entidade selecionada e muda nome da entidade atual
     if (entidade_selecionada) nome_atual = entidade_selecionada->nomeptr();
     // Verifica se o contexto e o scenemanager são válidos antes de usar
-    adiWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
+    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
 }
 
 void BubbleUI::Paineis::Inspetor::preAtualizacao()

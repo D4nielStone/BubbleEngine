@@ -4,7 +4,7 @@
 
 using namespace BubbleUI;
 
-Separador::Separador(const Lado side, Painel* p) :contexto(p->obtCtx()), inputs(p->obtCtx()->inputs), lado(side), painel(p), colisao(Colisao2d({}, p->obtCtx()))
+Separador::Separador(const Lado side, Painel* p) :contexto(p->obterContexto()), inputs(p->obterContexto()->inputs), lado(side), painel(p), colisao(Colisao2d({}, p->obterContexto()))
 {
 }
 
@@ -19,10 +19,7 @@ void BubbleUI::Separador::atualizar()
 
 bool BubbleUI::Separador::cursor() const
 {
-	if (colisao.mouseEmCima())
-		return true;
-	else
-		return false;
+	return colisao.mouseEmCima();
 }
 
 void BubbleUI::Separador::atualizarColisao()
@@ -31,33 +28,33 @@ void BubbleUI::Separador::atualizarColisao()
 	{
 	case DIREITA:
 		colisao.defRect({
-			painel->obtRect().x + painel->obtRect().w -2.f,
-			painel->obtRect().y,
+			painel->obterRetangulo().x + painel->obterRetangulo().w -2.f,
+			painel->obterRetangulo().y,
 			10,
-			painel->obtRect().h
+			painel->obterRetangulo().h
 			});
 		break;
 	case ESQUERDA:
 		colisao.defRect({
-			painel->obtRect().x - 10,
-			painel->obtRect().y,
+			painel->obterRetangulo().x - 10,
+			painel->obterRetangulo().y,
 			12,
-			painel->obtRect().h
+			painel->obterRetangulo().h
 			});
 		break;
 	case CIMA:
 		colisao.defRect({
-			painel->obtRect().x,
-			painel->obtRect().y - 10.f,
-			painel->obtRect().w,
+			painel->obterRetangulo().x,
+			painel->obterRetangulo().y - 10.f,
+			painel->obterRetangulo().w,
 			12
 			});
 		break;
 	case BAIXO:
 		colisao.defRect({
-			painel->obtRect().x,
-			painel->obtRect().y + painel->obtRect().h - 2.f,
-			painel->obtRect().w,
+			painel->obterRetangulo().x,
+			painel->obterRetangulo().y + painel->obterRetangulo().h - 2.f,
+			painel->obterRetangulo().w,
 			12
 			});
 		break;
@@ -105,26 +102,26 @@ void BubbleUI::Separador::atualizarArrasto()
 	if (arrastando && inputs->mouseEnter == GLFW_PRESS)
 	{
 		painel->arrastando = true;
-		painel->redimen_atual = lado;
+		painel->redimensionamentoAtual = lado;
 		switch (lado)
 		{
 		case DIREITA:
 			contexto->cursor = contexto->cursor_horizontal;
-			painel->adiTam({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
+				painel->adicionarTamanho({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
 			break;
 		case ESQUERDA:
 			contexto->cursor = contexto->cursor_horizontal;
-			painel->adiPos({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
-			painel->adiTam({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+				painel->adicionarPosicao({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+				painel->adicionarTamanho({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
 			break;
 		case CIMA:
 			contexto->cursor = contexto->cursor_vertical;
-			painel->adiPos({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
-			painel->adiTam({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adicionarPosicao({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adicionarTamanho({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		case BAIXO:
 			contexto->cursor = contexto->cursor_vertical;
-			painel->adiTam({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adicionarTamanho({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		default:
 			break;

@@ -74,9 +74,9 @@ void BubbleUI::Items::ItemMenu::renderizar() const
 void BubbleUI::Items::ItemMenu::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x = pai->obtRect().x + pai->widget_padding.x + pai->widget_pos.x;
-    box_pos.y = pai->obtRect().y + pai->widget_padding.y + pai->widget_pos.y;
-    box_size.x = pai->obtRect().w - pai->widget_padding.x * 2;
+    box_pos.x = pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
+    box_pos.y = pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
+    box_size.x = pai->obtRect().w - pai->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // Variáveis para as dimensões da letra
@@ -122,11 +122,11 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
     }
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
-    altura = box_size.y + pai->widget_padding.y * 2;
-    pai->widget_pos.y = box_pos.y + box_size.y - pai->obtRect().y;
+    altura = box_size.y + pai->widgetPadding.y * 2;
+    pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obtRect().y;
 
     // Atualiza a largura para pop_up
-    largura = largura_texto + letra_padding.x * 2 + pai->widget_padding.x * 2;
+    largura = largura_texto + letra_padding.x * 2 + pai->widgetPadding.x * 2;
 }
 
 // Método para transformar coordenadas de pixel para NDC (Normalized Device Coordinates)

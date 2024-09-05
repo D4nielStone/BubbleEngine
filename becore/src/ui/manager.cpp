@@ -11,9 +11,10 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, 100, 478 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{112, 31, 300, 478 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{422, 31, 218, 478}));
+	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, contexto->tamanho.width/3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ (contexto->tamanho.width / 3)*2 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto));
 }
 
 // Seleciona o painel
@@ -53,6 +54,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 	barra_de_menu = Util::BarraMenu(contexto);
 	contexto->glfwWindow = engine->obterJanela();
 	contexto->inputs = engine->obterGI();
+	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
 	if (lista_paineis.size() > 0)
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
@@ -107,7 +109,6 @@ void BubbleUI::Manager::atualizar()
 		future.get();
 	}
 
-	renderizar();
 	if (contexto->cursor != cursor_antigo)
 	{
 		cursor_antigo = contexto->cursor;
@@ -121,10 +122,10 @@ void BubbleUI::Manager::verificarSelecionado()
 	bool cursor = true, depth = false;
 	for (size_t i = lista_paineis.size(); i > 0; i--)
 	{
-		auto painel = lista_paineis[i - 1];
+		auto &painel = lista_paineis[i - 1];
 
 		// Seleciona o painel se está na frente, e for clicado na hora certa
-		colisao_painel.defRect(painel->obtRect());
+		colisao_painel.defRect(painel->obterRetangulo());
 
 		if (colisao_painel.mouseEmCima() && !depth && cursor)
 		{
@@ -141,10 +142,10 @@ void BubbleUI::Manager::verificarSelecionado()
 			}
 			if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
 			{
-				painel->mostrar_popup = true;
+				painel->mostrarPopup = true;
 			}
 			else if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
-				painel->esconder_popup = true;
+				painel->esconderPopup = true;
 		}
 		else
 			painel->mouse1click = false;

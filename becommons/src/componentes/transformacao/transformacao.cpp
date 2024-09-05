@@ -45,8 +45,8 @@ void Transformacao::atualizar() {
     if (estado != DINAMICO)
         return;
 
-    shader.use();
     glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
+    shader.use();
     shader.setMat4("model", glm::value_ptr(matriz_de_modelo));
     shader.setMat3("normalMatrix", glm::value_ptr(normalMatrix));
 }
@@ -66,7 +66,7 @@ void Transformacao::Rotacionar(const float x, const float y, const float z) {
     rotacao = glm::normalize(glm::vec3(x, y, z));
     matriz_de_modelo *= glm::toMat4(rotacao);
 }
-void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) {
+void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const {
     glm::vec3 skew;
     glm::vec4 perspective;
     glm::quat orientation;

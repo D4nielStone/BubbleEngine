@@ -5,9 +5,10 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+#include "src/tempo/delta_time.hpp"
 
 using namespace Bubble::Entidades;
-CameraEditor::CameraEditor(Bubble::Inputs::Inputs* input)
+CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
     : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(0.8f), sensibilidadeDeRotacao(1.f),
     yaw(-90.0f), pitch(0.0f) {
     FOV = 75.f;
@@ -45,11 +46,11 @@ void CameraEditor::atualizar()
         }
         if (inputs->isKeyPressed(Key::A))
         {
-            transformacao->Move(glm::normalize(glm::cross(glm::vec3(0, 1, 0), frente)) * velocidadeDeMovimento);
+            transformacao->Move(glm::normalize(glm::cross(glm::vec3(0, 1, 0), frente)));
         }
         if (inputs->isKeyPressed(Key::D))
         {
-            transformacao->Move(glm::normalize(glm::cross(frente, glm::vec3(0, 1, 0))) * velocidadeDeMovimento);
+            transformacao->Move(glm::normalize(glm::cross(frente, glm::vec3(0, 1, 0))));
         }
     
         // Rotação
@@ -79,32 +80,27 @@ void CameraEditor::atualizar()
         }
     }
 
+
+
     matrizProjecao = glm::perspective(
         glm::radians(FOV),
         aspecto,
         zNear,
         zFar
     );
-
-    if (transformacao) {
-        glm::vec3 posicaoCamera = transformacao->obterPosicao();
         glm::vec3 vetorCima(0, 1, 0);
-
         // Calcular a matriz de visualização
-        matrizVisualizacao = glm::lookAt(posicaoCamera, posicaoCamera + frente, vetorCima);
-
-        shader.use();
-        shader.setMat4("projection", glm::value_ptr(matrizProjecao));
-        shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
-        shader.setVec3("viewPos",
-            posicaoCamera.x,
-            posicaoCamera.y,
-            posicaoCamera.z);
-
-    }
-    else {
-        Debug::emitir(Debug::Tipo::Erro, "transformacao não está definida");
-    }
+        matrizVisualizacao = glm::lookAt(transformacao->obterPosicao(), transformacao->obterPosicao() + frente, vetorCima);
+}
+void Bubble::Entidades::CameraEditor::renderizar() const
+{
+    shader.use();
+    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
+    shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
+    shader.setVec3("viewPos",
+        transformacao->obterPosicao().x,
+        transformacao->obterPosicao().y,
+        transformacao->obterPosicao().z);
 }
 void CameraEditor::configurar()
 {
@@ -112,7 +108,6 @@ void CameraEditor::configurar()
 }
 void CameraEditor::atualizarDirecao()
 {
-    glm::vec3 frente;
     frente.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     frente.y = sin(glm::radians(pitch));
     frente.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));

@@ -19,29 +19,29 @@ BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorn
 void BubbleUI::Widgets::Arvore::atualizar()
 {
     // Salva o padding antigo do pai
-    float padding_antigoy = painel->widget_padding.y;
+    float padding_antigoy = painel->widgetPadding.y;
 
     // Ajusta temporariamente o padding vertical do pai para 0
-    painel->widget_padding.y = 0;
+    painel->widgetPadding.y = 0;
 
     // Se houver uma árvore pai, ajusta o padding horizontal
     if (arvore_pai)
     {
-        painel->widget_pos.x = arvore_pai->box_pos.x - painel->obtRect().x + 7;
+        painel->posicaoWidget.x = arvore_pai->box_pos.x - painel->obterRetangulo().x + 7;
     }
 
     // Atualiza o texto
     renderizar_texto();
 
     // Restaura o padding original do pai
-    painel->widget_padding.y = padding_antigoy;
-    painel->widget_pos.x = 0;
+    painel->widgetPadding.y = padding_antigoy;
+    painel->posicaoWidget.x = 0;
 
     // Define o retângulo de colisão para a detecção de mouse
-    colisao.defRect({ box_pos.x, box_pos.y, painel->obtRect().w, (int)box_size.y });
+    colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
-    moldura.defPos({ static_cast<int>(painel->obtRect().x + painel->widget_padding.x), static_cast<int>(box_pos.y )});
-    moldura.defTam({ painel->obtRect().w - painel->widget_padding.x * 2, static_cast<int>(box_size.y) });
+    moldura.defPos({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y )});
+    moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
 
     // Reseta gatilho de click
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true;
@@ -120,19 +120,19 @@ void BubbleUI::Widgets::Arvore::defPainel(Painel* painel)
 {
     // Chama o método de base para associar o painel ao texto
     Texto::defPainel(painel);
-    inputs = painel->obtCtx()->inputs;
+    inputs = painel->obterContexto()->inputs;
 
     // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
-    if (painel->arvore_cor.r == 0.1f)
+    if (painel->arvoreCor.r == 0.1f)
     {
         cor = { 0.15f, 0.15f, 0.15f };
-        painel->arvore_cor = { 0.15f, 0.15f, 0.15f };
+        painel->arvoreCor = { 0.15f, 0.15f, 0.15f };
     }
     else
     {
         // Caso contrário, define a cor padrão mais escura
         cor = { 0.1f, 0.1f, 0.1f };
-        painel->arvore_cor = { 0.1f, 0.1f, 0.1f };
+        painel->arvoreCor = { 0.1f, 0.1f, 0.1f };
     }
 }
 

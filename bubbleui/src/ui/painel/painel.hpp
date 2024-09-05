@@ -6,47 +6,76 @@
 #include "bubbleui.hpp"
 #include "aba.hpp"
 #include <memory>
+#include <vector>
 
 namespace BubbleUI
 {
 	class BEUI_DLL_API Painel
 	{
 	public:
+		// Construtores
 		Painel() = default;
 		Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect);
-		void defTam(const Vector2 &tam);
-		void defPos(const Vector2 &pos);
-		void adiTam(const Vector2 &tam);
-		void adiPos(const Vector2 &pos);
-		void adiWidget(std::shared_ptr<Widget> widget);
-		Vector4 obtRect() const;
-		Vector2 obtTamMin() const;
-		std::shared_ptr<Contexto> obtCtx() const;
+
+		// Manipulação de Tamanho e Posição
+		void definirTamanho(const Vector2& tam);
+		void definirPosicao(const Vector2& pos);
+		void adicionarTamanho(const Vector2& tam);
+		void adicionarPosicao(const Vector2& pos);
+
+		// Widgets
+		void adicionarWidget(std::shared_ptr<Widget> widget);
+
+		// Obtenção de Dados
+		Vector4 obterRetangulo() const;
+		Vector2 obterTamanhoMinimo() const;
+		std::shared_ptr<Contexto> obterContexto() const;
+
+		// Atualização e Renderização
 		void atualizar();
 		void renderizar() const;
-		bool cursorNormal() const;
-		std::string nome() const;
-		bool selecionado {false}, arrastando{false}, mouse1click{false}, mostrar_popup{false}, esconder_popup{false};
-		Lado redimen_atual;
-		Vector2f widget_pos;
-		Vector2 widget_padding;
-		Color arvore_cor{ 0.1f, 0.1f, 0.1f };
-	protected:
-		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });
-		virtual void preAtualizacao();
-		virtual void posAtualizacao();
-		virtual void preRenderizacao() const;
-		void corrigirLimite();
-		bool renderizar_corpo{ true };
 
+		// Estado do Painel
+		bool cursorNormal() const;
+		std::string nome() const { return Nome; }
+
+		// Estado Interno
+		Vector2 widgetPadding, posicaoWidget;
+		Color arvoreCor{ 0.1f, 0.1f, 0.1f };
+
+		// Flags de Controle
+		Lado redimensionamentoAtual;
+		bool selecionado{ false };
+		bool arrastando{ false };
+		bool mouse1click{ false };
+		bool mostrarPopup{ false };
+		bool esconderPopup{ false };
+
+	protected:
+		// Métodos de Configuração e Ciclo de Vida
+		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });
+		virtual void preAtualizacao() {}
+		virtual void posAtualizacao() {}
+		virtual void preRenderizacao() const {}
+
+		void corrigirLimite();
+
+		// Atributos
 		std::string Nome = "Painel";
 		Formas::Moldura moldura;
-		std::unique_ptr<Util::PopUp> menu_de_contexto{ nullptr };
-		std::shared_ptr<Contexto> contexto{nullptr};
+		std::shared_ptr<Contexto> contexto{ nullptr };
 		std::vector<std::shared_ptr<Widget>> lista_widgets;
-		std::unique_ptr < Separador >borda_e, borda_d, borda_c, borda_b;
-		std::unique_ptr<Aba>m_aba{ nullptr };
+
+		// Componentes
+		std::unique_ptr<Util::PopUp> menuDeContexto{ nullptr };
+		std::unique_ptr<Separador> bordaEsq, bordaDir, bordaCima, bordaBaixo;
+		std::unique_ptr<Aba> aba{ nullptr };
+
+		// Dados de Geometria
 		Vector4 retangulo;
-		Vector2 limite_min_tam;
+		Vector2 tamanhoMinimo;
+		bool renderizarCorpo{ true };
+
 	};
-}
+
+} // namespace BubbleUI

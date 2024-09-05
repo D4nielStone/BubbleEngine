@@ -11,10 +11,10 @@ Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (rect.w * 2.f) / painel->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * rect.h) / painel->obtCtx()->tamanho.height;
-    coord_ndc.x = (rect.x * 2.f) / painel->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * rect.y) / painel->obtCtx()->tamanho.height;
+    coord_ndc.z = (rect.w * 2.f) / painel->obterContexto()->tamanho.width;
+    coord_ndc.w = -(2.0f * rect.h) / painel->obterContexto()->tamanho.height;
+    coord_ndc.x = (rect.x * 2.f) / painel->obterContexto()->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * rect.y) / painel->obterContexto()->tamanho.height;
 
     return coord_ndc;
 }
@@ -24,10 +24,10 @@ void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obtRect().w;
-        rect.h = painel->obtRect().h - painel->widget_pos.y;
+        rect.w = painel->obterRetangulo().w;
+        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
     }
-    rect = { painel->obtRect().x + painel->widget_pos.x + 1, painel->obtRect().y + painel->widget_pos.y, rect.w - 2 , rect.h - 1 };
+    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + 1, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w - 2 , rect.h - 1 };
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem

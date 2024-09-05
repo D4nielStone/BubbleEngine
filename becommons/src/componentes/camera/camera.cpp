@@ -49,13 +49,6 @@ void Camera::configurar() {
 void Camera::atualizarAspecto(float aspect)
 {
     aspecto = aspect;
-    matrizProjecao = glm::perspective(
-        glm::radians(FOV),
-        aspecto,
-        zNear,
-        zFar
-    );
-    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
 }
 void Camera::desenharFrame(Vector4 viewportRect) const
 {

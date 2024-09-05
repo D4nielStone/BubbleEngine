@@ -3,7 +3,8 @@
 #include "src/arquivadores/imageloader.hpp"
 #include "src/tempo/delta_time.hpp"
 #include "engine.hpp"
-#include <queue>
+#include <thread>
+#include <future>
 
 using namespace Bubble::Nucleo;
 
@@ -26,6 +27,7 @@ bool Engine::inicializacao()
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
         glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1.0-alpha.1", NULL, NULL);
+        glfwMaximizeWindow(glfwWindow);
 
         glfwMakeContextCurrent(glfwWindow);
 
@@ -61,7 +63,7 @@ std::shared_ptr < BubbleUI::Manager> Bubble::Nucleo::Engine::obterGU() const
 void Engine::defInputs(std::shared_ptr<Inputs::Inputs> inp)
 {
     inputs = inp;
-    gerenciadorDeCenas->defIputs(inp.get());
+    gerenciadorDeCenas->defIputs(inp);
     glfwSetWindowUserPointer(glfwWindow, inputs.get());
     glfwSetCursorPosCallback(glfwWindow, mousePosCallBack);
     glfwSetKeyCallback(glfwWindow, callbackKey);
@@ -73,27 +75,38 @@ int Engine::pararloop() const
     {
         return glfwWindowShouldClose(glfwWindow);
     }
+
 // Deve Atualizar cena atual
 void Engine::atualizar()
 {
-    glfwPollEvents();
+    glfwPollEvents();  // Processa eventos do GLFW
+    // Atualiza cena e UI em paralelo
+    auto cenaFuture = std::async(std::launch::async, [this]() {
+        gerenciadorDeCenas->atualizarCenaAtual();
+        });
 
-    // Atualizar cena
-    gerenciadorDeCenas->atualizarCenaAtual();
+    auto uiFuture = std::async(std::launch::async, [this]() {
+        gerenciadorUi->atualizar();
+        });
+
+    // Espera até que ambas as atualizações estejam concluídas
+    cenaFuture.get();
+    uiFuture.get();
+
+    Tempo::endDT();
+    Tempo::iniDT();
 }
+
 // Deve renderizar cena Atual
 void Engine::renderizar(Vector4 rect_size)
 {
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-    // Renderizar cena
+    // Renderizar cena e UI
     gerenciadorDeCenas->renderizarCenaAtual();
-    // Atualiza e renderiza UI
-    gerenciadorUi->atualizar();
+    gerenciadorUi->renderizar();
 
     glfwSwapBuffers(glfwWindow);
-    Tempo::endDT();
-    Tempo::iniDT();
 }
 // Deve limpar engine
 void Engine::limpar() const 

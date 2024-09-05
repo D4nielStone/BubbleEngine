@@ -91,8 +91,8 @@ void BubbleUI::Widgets::CaixaTexto::renderizar() const
 void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
 {
     BubbleUI::Widgets::Texto::defPainel(painel);
-    contexto = painel->obtCtx();
-    inputs = painel->obtCtx()->inputs; // Simplifica o acesso
+    contexto = painel->obterContexto();
+    inputs = painel->obterContexto()->inputs; // Simplifica o acesso
 }
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)

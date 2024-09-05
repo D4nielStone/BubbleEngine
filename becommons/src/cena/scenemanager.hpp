@@ -17,12 +17,13 @@ namespace Bubble {
             std::vector<Scene*> scenes; 
             int currentSceneIndex;
             Scene* criarCenaPadrao(std::string Nome);
-            Inputs::Inputs* inputs = nullptr;
+            std::shared_ptr<Inputs::Inputs> inputs{ nullptr };
+            // viewport para renderizacao
             Vector4 viewport_rect;
         public:
             SceneManager();
             ~SceneManager();
-            void defIputs(Inputs::Inputs*);
+            void defIputs(std::shared_ptr<Inputs::Inputs>);
             size_t numeroDeCenas() const;
             void adicionarCena(Scene* scene);
             int cenaAtualIdx() const;
