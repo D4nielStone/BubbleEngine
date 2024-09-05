@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\util\barra_menu.hpp" />
     <ClInclude Include="src\ui\painel\inspetor.hpp" />
     <ClInclude Include="src\ui\widgets\arvore.hpp" />
     <ClInclude Include="src\ui\items\item_arvore.hpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\util\barra_menu.cpp" />
     <ClCompile Include="src\ui\painel\inspetor.cpp" />
     <ClCompile Include="src\ui\widgets\arvore.cpp" />
     <ClCompile Include="src\ui\items\item_arvore.cpp" />

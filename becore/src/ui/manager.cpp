@@ -11,10 +11,9 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto));
-	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 2, 100, 478 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{112, 2, 300, 478 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{422, 2, 218, 478}));
+	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, 100, 478 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{112, 31, 300, 478 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{422, 31, 218, 478}));
 }
 
 // Seleciona o painel
@@ -51,6 +50,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 {
 	contexto = std::make_shared<Contexto>();
 	colisao_painel = Colisao2d({}, contexto);
+	barra_de_menu = Util::BarraMenu(contexto);
 	contexto->glfwWindow = engine->obterJanela();
 	contexto->inputs = engine->obterGI();
 	iniPaineisPadrao();
@@ -70,17 +70,26 @@ void BubbleUI::Manager::renderizar() const
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
+	barra_de_menu.renderizar();
 }
 
 // Atualiza paineis
 void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
-	
 	verificarSelecionado();
 
 	std::vector<std::future<void>> futures;
 
+	futures.push_back(std::async(std::launch::async, [this]() {
+		try {
+			barra_de_menu.atualizar();
+		}
+		catch (const std::exception& e) {
+			Debug::emitir(Debug::Erro, "Não foi possível atualizar painel");
+			return;
+		}
+		}));
 	for (auto& painel : lista_paineis)
 	{
 		futures.push_back(std::async(std::launch::async, [&painel]() {
