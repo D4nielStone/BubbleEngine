@@ -174,8 +174,34 @@ Material Arquivo3d::processarMateriais(aiMaterial* material) {
     else {
         mat.difusa = { 0.7f, 0.7f, 0.7f }; // Cor padrão se não encontrada
     }
+
+    aiColor3D corEspecular;
+    if (material->Get(AI_MATKEY_COLOR_SPECULAR, corEspecular) == AI_SUCCESS) {
+        mat.especular = { corEspecular.r, corEspecular.g, corEspecular.b };
+    }
+    else {
+        mat.especular = { 0.7f, 0.7f, 0.7f }; // Cor padrão se não encontrada
+    }
+
+    // Obter o brilho (shininess)
+    float shininess;
+    if (material->Get(AI_MATKEY_SHININESS, shininess) == AI_SUCCESS) {
+        mat.shininess = shininess;
+    }
+    else {
+        mat.shininess = 32.0f; // Valor padrão para shininess se não encontrado
+    }
+
+    // Obter a refletividade (reflexão)
+    float reflectivity;
+    if (material->Get(AI_MATKEY_REFLECTIVITY, reflectivity) == AI_SUCCESS) {
+        mat.reflexao = reflectivity;
+    }
+    else {
+        mat.reflexao = 0.0f; // Valor padrão de reflexão se não encontrado
+    }
     // Lista de tipos de texturas a serem processadas
-    std::vector<std::pair<aiTextureType, std::string>> tiposDeTexturas = {
+    /*std::vector<std::pair<aiTextureType, std::string>> tiposDeTexturas = {
         { aiTextureType_DIFFUSE, "textura_difusa" },
         { aiTextureType_SPECULAR, "textura_specular" },
         { aiTextureType_AMBIENT, "textura_ambient" },
@@ -193,7 +219,7 @@ Material Arquivo3d::processarMateriais(aiMaterial* material) {
     for (const auto& tipo : tiposDeTexturas) {
         auto texturas = processarTextura(material, tipo.first, tipo.second);
         mat.texturas.insert(mat.texturas.end(), texturas.begin(), texturas.end());
-    }
+    }*/
 
     return mat;
 }

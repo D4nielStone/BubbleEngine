@@ -14,6 +14,7 @@ namespace Bubble {
             ~Camera();
             void configurar() override;
             void atualizar() override;
+            virtual void renderizar() const;
             void atualizarAspecto(float aspect);
             void desenharFrame(Vector4 viewportRect) const;
             const float* obterViewMatrix();
@@ -27,6 +28,8 @@ namespace Bubble {
         protected:
             glm::mat4 matrizProjecao;
             glm::mat4 matrizVisualizacao;
+        private:
+            glm::vec3 alvoCamera = glm::vec3(0, 0, 0);
         };
     }
 }

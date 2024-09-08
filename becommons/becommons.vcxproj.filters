@@ -66,9 +66,6 @@
     <ClCompile Include="src\arquivadores\fonte.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\tempo\delta_time.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="src\util\includes.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -135,9 +132,6 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="src\arquivadores\fonte.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="src\tempo\delta_time.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

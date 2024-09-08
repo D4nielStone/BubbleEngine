@@ -24,7 +24,7 @@ namespace Bubble {
 			void atualizarDirecao();
 			void configurar() override;
 			void atualizar() override;
-			void renderizar() const;
+			void renderizar() const override;
 			void olharPara(glm::vec3 pov);
 		};
 	}

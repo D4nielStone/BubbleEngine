@@ -38,7 +38,7 @@ BECOMMONS_DLL_API void Bubble::Arquivadores::carregarFonte(std::string path)
             return;
         }
 
-        definirResolucao(14);  // Defina o tamanho inicial da resolução
+        definirResolucao(18);  // Defina o tamanho inicial da resolução
         ft_carregado = true;
     }
 }

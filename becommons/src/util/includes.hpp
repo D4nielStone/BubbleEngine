@@ -97,7 +97,16 @@ struct Vector4
         y /= other;
         return *this;
     };
-    
+    // Operador de igualdade (==)
+    bool operator==(const Vector4& other) const
+    {
+        return x == other.x && y == other.y && w == other.w && h == other.h;
+    }
+    // Operador de diferença (!=)
+    bool operator!=(const Vector4& other) const
+    {
+        return !(*this == other);
+    }
 };
 struct Vector4f
 {
@@ -112,6 +121,16 @@ struct Vector4f
     {
         return Vector4f{ x + other, y + other, z + other, w + other };
     };
+    // Operador de igualdade (==)
+    bool operator==(const Vector4f& other) const
+    {
+        return x == other.x && y == other.y && w == other.w && z == other.z;
+    }
+    // Operador de diferença (!=)
+    bool operator!=(const Vector4f& other) const
+    {
+        return !(*this == other);
+    }
 };
 
 struct Vector2
@@ -153,6 +172,16 @@ struct Vector2f
 struct Size
 {
     int width = 1, height = 1;
+    // Operador de igualdade (==)
+    bool operator==(const Size& other) const
+    {
+        return width == other.width && height == other.height;
+    }
+    // Operador de diferença (!=)
+    bool operator!=(const Size& other) const
+    {
+        return !(*this == other);
+    }
 };
 
 struct Color 
@@ -171,8 +200,18 @@ struct Textura {
     }
 };
 
+struct Luz
+{
+    glm::vec3 posicao;
+    Color cor_ambiente;
+    Color cor_difusa;
+    Color cor_especular;
+};
+
 struct Material {
     Color difusa;
+    Color especular;
+    float shininess = 32.f, reflexao = 0;
     std::vector<Textura> texturas;
     std::string nome{ "material sem nome" };
 };

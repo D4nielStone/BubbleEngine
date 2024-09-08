@@ -33,9 +33,15 @@ namespace Bubble::Cena
     }
 
     // Deve renderizar Cena
-    void Scene::renderizar() const {
-        camera_editor.renderizar();
-        skybox->renderizar();
+    void Scene::renderizar(const InputMode modo) const {
+        if (modo == Editor) {
+            camera_editor.renderizar();
+            skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
+        }
+        else {
+            camera_principal->renderizar();
+            skybox->renderizar(camera_principal->obterProjMatrixMat(), camera_principal->obterViewMatrixMat());
+        }
         for (auto& obj : Entidades) {
             obj->renderizar();
             renderizarFilhos(obj);
@@ -50,9 +56,13 @@ namespace Bubble::Cena
         }
     }
     // Deve atualizar Cena
-    void Scene::atualizar(float aspecto) {
-        camera_editor.atualizarAspecto(aspecto);
+    void Scene::atualizar(float aspectoDoEditor, float aspectoDoJogo) {
+        camera_editor.atualizarAspecto(aspectoDoEditor);
         camera_editor.atualizar();
+        if (camera_principal) {
+            camera_principal->atualizarAspecto(aspectoDoJogo);
+            camera_principal->atualizar();
+        }
         for (auto& obj : Entidades) {
             obj->atualizar();
             if (obj->selecionada)entidade_selecionada = obj;

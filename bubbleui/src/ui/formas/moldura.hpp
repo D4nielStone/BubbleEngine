@@ -13,7 +13,7 @@ namespace BubbleUI
 			void atualizar() override;
 			void renderizar() const override;
 			std::shared_ptr<Contexto> obtCtx() const;
-			Vector2f posicaoWidget;
+			Vector2f posicaoWidget{ 0, 0 };
 			Vector2 widgetPadding{ 3, 3 };
 			bool ocultar_linhas{ false };
 		protected:

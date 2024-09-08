@@ -9,6 +9,7 @@
 using namespace Bubble::Cena;
 
 Bubble::Entidades::CameraEditor* camera_editor_atual;
+std::shared_ptr<Bubble::Cena::SceneManager> scenemanager;
 
 // O scenemanager gerencia as cenas de um projeto
 SceneManager::SceneManager() : currentSceneIndex(-1)
@@ -46,9 +47,14 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
     carregarCena(numeroDeCenas() - 1);
 }
 
-void Bubble::Cena::SceneManager::defViewport(Vector4 rect)
+void Bubble::Cena::SceneManager::defJogoViewport(Vector4 rect)
 {
-    viewport_rect = rect;
+    viewportJogo = rect;
+}
+
+void Bubble::Cena::SceneManager::defEditorViewport(Vector4 rect)
+{
+    viewportEditor = rect;
 }
 // Deve adicionar cena à lista
 void SceneManager::adicionarCena(Scene* scene) 
@@ -83,25 +89,36 @@ void SceneManager::renderizarCenaAtual() const
         filaDeTarefas.front()(); // Executar a tarefa
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
-    glViewport(0, 0, viewport_rect.w, viewport_rect.h);
+    glViewport(0, 0, viewportEditor.w, viewportEditor.h);
     glEnable(GL_DEPTH_TEST);
 
-    cenaAtual()->camera_editor.desenharFrame(viewport_rect);
-    cenaAtual()->renderizar();
+    cenaAtual()->camera_editor.desenharFrame(viewportEditor);
+    cenaAtual()->renderizar(Editor);
+    if (cenaAtual()->camera_principal)
+    {
+    glViewport(0, 0, viewportJogo.w, viewportJogo.h);
+        cenaAtual()->camera_principal->desenharFrame(viewportJogo);
+        cenaAtual()->renderizar(Game);
+    }
     // Desligar framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 // Deve atualizar cena atual
 void SceneManager::atualizarCenaAtual() const
 {
-    float aspecto;
-    if (viewport_rect.h != 0)
-        aspecto = static_cast<float>(viewport_rect.w) / viewport_rect.h;
+    float aspectoDoEditor, aspectoDoJogo;
+    if (viewportEditor.h != 0)
+        aspectoDoEditor = static_cast<float>(viewportEditor.w) / viewportEditor.h;
     else
-        aspecto = 1;
+        aspectoDoEditor = 1;
+
+    if (viewportJogo.h != 0)
+        aspectoDoJogo = static_cast<float>(viewportJogo.w) / viewportJogo.h;
+    else
+        aspectoDoJogo= 1;
 
     camera_editor_atual = &cenaAtual()->camera_editor;
-    cenaAtual()->atualizar(aspecto);
+    cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
 }
 // Deve retornar numero de cenas
 size_t SceneManager::numeroDeCenas() const {
@@ -126,6 +143,16 @@ Bubble::Entidades::CameraEditor* Bubble::Cena::CameraEditorAtual()
     return camera_editor_atual;
 }
 
+std::shared_ptr<Bubble::Cena::SceneManager> Bubble::Cena::obterSceneManager()
+{
+    return scenemanager;
+}
+
+void Bubble::Cena::definirSceneManager(std::shared_ptr<SceneManager> scene_manager)
+{
+    scenemanager = scene_manager;
+}
+
 // Função para adicionar uma tarefa na fila
 static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
 {
@@ -133,7 +160,15 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
     filaDeTarefas.push(tarefa);
 }
 
-void Bubble::Cena::criarEntidade(std::shared_ptr < SceneManager >scenemanager, std::string path)
+void Bubble::Cena::criarEntidade(std::string path)
 {
     scenemanager->cenaAtual()->criarEntidade(std::make_unique<Arquivadores::Arquivo3d>(path));
+}
+
+void Bubble::Cena::criarCamera(glm::vec3 posicao)
+{
+    auto obj = std::make_shared<Entidades::Entidade>("Camera");
+    obj->obterTransformacao()->definirPosicao(posicao);
+    obj->adicionarComponente(std::make_shared<Componentes::Camera>());
+    scenemanager->cenaAtual()->adicionarEntidade(obj);
 }

@@ -87,15 +87,16 @@ namespace Bubble::Util
         // Carregar cubemap
         loadCubemapFromSingleTexture(Path);
     }
-    void Skybox::renderizar() const {
+    void Skybox::renderizar(const glm::mat4& projectionMat, const glm::mat4& viewMat) const
+    {
 
-        glm::mat4 view = glm::mat4(glm::mat3(Bubble::Cena::CameraEditorAtual()->obterViewMatrixMat()));
+        glm::mat4 view = glm::mat4(glm::mat3(viewMat));
         glDepthMask(GL_FALSE);
         shader.use();
         shader.setMat4("view", glm::value_ptr(view));
-        shader.setMat4("projection", Bubble::Cena::CameraEditorAtual()->obterProjMatrix());
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        shader.setMat4("projection", glm::value_ptr(projectionMat));
 
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
         shader.setInt("skybox", 0);
         glDrawArrays(GL_TRIANGLES, 0, malha.vertices.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
@@ -108,12 +109,12 @@ namespace Bubble::Util
 
         std::vector<std::string> faces
         {
-            "right.jpg",
-                "left.jpg",
-                "bottom.jpg",
-                "top.jpg",
-                "front.jpg",
-                "back.jpg"
+                "right.png",
+                 "left.png",
+               "bottom.png",
+                  "top.png",
+                "front.png",
+                 "back.png"
         };
         for (unsigned int i = 0; i < faces.size(); i++)
         {

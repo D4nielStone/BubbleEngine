@@ -20,11 +20,12 @@ namespace BubbleUI
 			void renderizar() const;
 		protected:
 			std::shared_ptr<Contexto> contexto;
-			Vector4 posicoes;
+			Vector4 posicoes, tamanhoAnterior;
 			Color cor_base;
 		private:	
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
+			Size tamanhoDoContextoAnterior;
 			Shader shader = Shader("assets/shaders/linha.vert", "assets/shaders/linha.frag");
 		};
 	}

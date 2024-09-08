@@ -1,5 +1,6 @@
 #pragma once
 #include "src/ui/formas/moldura.hpp"
+#include "src/ui/items/item_arvore.hpp"
 namespace BubbleUI
 {
 	namespace Util
@@ -13,6 +14,8 @@ namespace BubbleUI
 			void atualizar();
 		private:
 			int altura{ 30 };
+			std::unique_ptr<Items::ItemMenu> arvoreCena;
+			std::shared_ptr<Util::PopUp> popupCena{ nullptr };
 		};
 	}
 }

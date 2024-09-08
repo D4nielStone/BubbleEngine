@@ -33,9 +33,8 @@ void Entidade::renderizar() const
 {
     if (!ativado) return;
 
-    if (selecionada) // Se selecionada, desenha outline
+    /*if (selecionada) // Se selecionada, desenha outline
     {
-        glDepthMask(GL_FALSE);
         shader_outline.use();
         shader_outline.setMat4("projection", Cena::CameraEditorAtual()->obterProjMatrix());
         shader_outline.setMat4("view", Cena::CameraEditorAtual()->obterViewMatrix());
@@ -50,7 +49,6 @@ void Entidade::renderizar() const
                 componente->atualizar();
             }
         }
-        glDepthMask(GL_TRUE);
         transformacao->definirShader(shader_padrao);
         transformacao->atualizar();
         for (auto& componente : Componentes)
@@ -63,7 +61,7 @@ void Entidade::renderizar() const
         }
     }
     else // Se não estiver selecionada, renderiza normalmente
-    {
+    */{
         transformacao->atualizar();
         for (auto& componente : Componentes)
         {

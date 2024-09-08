@@ -5,7 +5,6 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-#include "src/tempo/delta_time.hpp"
 
 using namespace Bubble::Entidades;
 CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
@@ -38,11 +37,11 @@ void CameraEditor::atualizar()
             sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
         if (inputs->isKeyPressed(Key::W))
         {
-            transformacao->Move(frente * velocidadeDeMovimento);
+            transformacao->Move(frente * (velocidadeDeMovimento));
         }
         if (inputs->isKeyPressed(Key::S))
         {
-          transformacao->Move(-frente * velocidadeDeMovimento);
+          transformacao->Move(-frente * (velocidadeDeMovimento));
         }
         if (inputs->isKeyPressed(Key::A))
         {

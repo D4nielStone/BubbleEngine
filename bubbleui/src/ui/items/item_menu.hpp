@@ -12,8 +12,8 @@ namespace BubbleUI
 		class BEUI_DLL_API ItemMenu
 		{
 		public:
-			ItemMenu(std::string* label);
-			ItemMenu(const std::string &label);
+			ItemMenu(std::string* label_shared);
+			ItemMenu(const std::string &label_shared);
 			ItemMenu() = default;
 			~ItemMenu();
 			virtual void atualizar();
@@ -22,18 +22,19 @@ namespace BubbleUI
 			virtual void defMoldura(Formas::Moldura*);
 			int largura{ 0 }, altura{ 0 };
 		protected:
+			Vector2f box_pos{ 0, 0 }, line_pos{ 0, 0 };
 			void renderizar_texto();
 			unsigned int resolucao, texturaID;
 			int lines_box_limite, largura_texto;
-			Vector2f box_pos{ 0, 0 }, line_pos{ 0, 0 };
 			Vector2 box_size{ 0, 0 }, letra_padding{2, 2}, pos_texto{ 0, 0 };
 			std::string texto{ "" }, frase{ "" };
-			std::string* label{ nullptr };
+			std::string* label_shared{ nullptr };
 			Color cor{ 1, 1, 1 };
 			Vector4 char_rect{ 0, 0, 0 ,0 };
 			Vector4f paraNDC();
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
 			Colisao2d colisao;
+			std::shared_ptr<Contexto> contexto{ nullptr };
 			Formas::Moldura moldura;
 			Formas::Moldura *pai{ nullptr };
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };

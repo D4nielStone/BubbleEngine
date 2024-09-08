@@ -10,7 +10,7 @@ namespace BubbleUI
 
 		public:
 			Botao() = default;
-			Botao(const std::string &label, std::function<void()> funcao_click);
+			Botao(const std::string &label_shared, std::function<void()> funcao_click);
 			void atualizar() override;
 		private:
 			std::function<void()> funcao_click_;

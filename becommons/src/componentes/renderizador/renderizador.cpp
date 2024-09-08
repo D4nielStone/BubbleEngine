@@ -72,6 +72,9 @@ void Renderizador::atualizarMaterial() const
 {
     shader.use();
     shader.setVec3("material.cor_difusa", malha.material.difusa.r, malha.material.difusa.g, malha.material.difusa.b);
+    shader.setVec3("material.cor_especular", malha.material.especular.r, malha.material.especular.g, malha.material.especular.b);
+    shader.setFloat("material.shininess", malha.material.shininess);
+    shader.setFloat("material.reflexao", malha.material.reflexao);
     shader.setInt("skybox", 0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, Bubble::Util::obterSkyboxTexture());
 }

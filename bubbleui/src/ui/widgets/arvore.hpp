@@ -6,7 +6,8 @@ namespace BubbleUI
 		class BEUI_DLL_API Arvore : public Texto, public std::enable_shared_from_this<Arvore>
 		{
 		public:
-			Arvore(std::string label, bool* retorno);
+			Arvore(std::string label_shared, bool* retorno);
+			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno);
 			void atualizar() override;
 			void renderizar() const override;
 			void defPainel(Painel* painel) override;
@@ -15,6 +16,7 @@ namespace BubbleUI
 		private:
 			std::vector<std::shared_ptr<Arvore>> filhos;
 			Color cor;
+			std::shared_ptr<std::string> label_shared;
 			bool aberto{ false }, * retorno{ nullptr }, gatilho_click{ false };
 		};
 	}

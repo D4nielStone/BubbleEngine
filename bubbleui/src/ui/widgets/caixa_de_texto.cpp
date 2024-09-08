@@ -1,6 +1,5 @@
 #include "caixa_de_texto.hpp"
 #include "src/ui/painel/painel.hpp"
-#include "src/tempo/delta_time.hpp"
 #include <src/depuracao/debug.hpp>
 
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
@@ -97,7 +96,7 @@ void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
 
 void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
 {
-    if (c == '\b' && !texto.empty() && texto_cursor_index != 0) // Backspace
+    if (c == '\b' && texto_cursor_index != 0) // Backspace
     {
         texto.pop_back();
         texto_cursor_index = texto.size();
@@ -112,14 +111,14 @@ void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
 
 void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
 {
-    cronometro += Bubble::Tempo::delta_time;
+    cronometro +=0.1;
 
-    if (inputs->isKeyPressed(BS) && !frase.empty() && !gatilho1) // Backspace
+    if (inputs->isKeyPressed(BS) && !texto.empty() && !gatilho1) // Backspace
     {
         inputs->char_press = true;
         inputs->letra = '\b';
     }
-    if (inputs->isKeyPressed(ENTER) && !texto.empty() && !gatilho1) // Enter
+    if (inputs->isKeyPressed(ENTER) && !gatilho1) // Enter
     {
         inputs->char_press = true;
         inputs->letra = '\n';

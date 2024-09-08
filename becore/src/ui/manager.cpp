@@ -4,6 +4,7 @@
 #include "src/nucleo/engine.hpp"
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/editor.hpp"
+#include "src/ui/painel/jogo.hpp"
 #include "src/ui/painel/entidades.hpp"
 #include "src/ui/painel/inspetor.hpp"
 #include <future>
@@ -12,9 +13,9 @@
 void BubbleUI::Manager::iniPaineisPadrao()
 {
 	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, contexto->tamanho.width/3 - 5, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31.f + contexto->tamanho.height / 2,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height /2 }));
 	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ (contexto->tamanho.width / 3)*2 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto));
 }
 
 // Seleciona o painel
@@ -51,9 +52,9 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 {
 	contexto = std::make_shared<Contexto>();
 	colisao_painel = Colisao2d({}, contexto);
-	barra_de_menu = Util::BarraMenu(contexto);
 	contexto->glfwWindow = engine->obterJanela();
 	contexto->inputs = engine->obterGI();
+	barra_de_menu = Util::BarraMenu(contexto);
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
 	if (lista_paineis.size() > 0)
@@ -80,34 +81,11 @@ void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	verificarSelecionado();
-
-	std::vector<std::future<void>> futures;
-
-	futures.push_back(std::async(std::launch::async, [this]() {
-		try {
-			barra_de_menu.atualizar();
-		}
-		catch (const std::exception& e) {
-			Debug::emitir(Debug::Erro, "Não foi possível atualizar painel");
-			return;
-		}
-		}));
-	for (auto& painel : lista_paineis)
+	for (const auto& painel : lista_paineis)
 	{
-		futures.push_back(std::async(std::launch::async, [&painel]() {
-			try {
-				painel->atualizar();
-			}
-			catch (const std::exception& e) {
-				Debug::emitir(Debug::Erro, "Não foi possível atualizar painel");
-				return;
-			}
-			}));
+		painel->atualizar();
 	}
-	// Esperar todos os painéis terminarem de atualizar
-	for (auto& future : futures) {
-		future.get();
-	}
+	barra_de_menu.atualizar();
 
 	if (contexto->cursor != cursor_antigo)
 	{

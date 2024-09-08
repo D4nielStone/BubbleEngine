@@ -1,13 +1,24 @@
 #include "arvore.hpp"
-#include <src/tempo/delta_time.hpp>
 #include "src/ui/painel/painel.hpp"
 
 // Construtor da classe Arvore, inicializa os membros da classe.
 BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorno)
 {
-    // Define a frase que será exibida na árvore, precedida por "[-]"
+    // Define a frase que será exibida na árvore, precedida por "[+]"
     frase = "[+]" + l;
 
+    // Define a resolução padrão para o texto
+    resolucao = 12;
+
+    // Define o padding (espaçamento) ao redor do texto
+    letra_padding = { 5, 4 };
+}
+// Construtor da classe Arvore, inicializa os membros da classe.
+BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
+{
+    // Define a frase que será exibida na árvore, precedida por "[+]"
+    label_shared = l;
+    frase = "[+]";
     // Define a resolução padrão para o texto
     resolucao = 12;
 
@@ -18,6 +29,10 @@ BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorn
 // Método para atualizar o estado do widget Arvore a cada frame
 void BubbleUI::Widgets::Arvore::atualizar()
 {
+    if (label_shared)
+    {
+        frase = "[+]" + (*label_shared);
+    }
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
 
@@ -84,7 +99,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
             frase.erase(0, 3);
             frase.insert(0, "[-]");
         }
-        for (auto& filho : filhos)
+        for (const auto& filho : filhos)
         {
             filho->atualizar();
         }

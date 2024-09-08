@@ -4,12 +4,6 @@
 #include <iostream>
 #include "Scene.hpp"
 
-enum class BECOMMONS_DLL_API Modo
-{
-    Editor,
-    Jogo
-};
-
 namespace Bubble {
     namespace Cena {
         class BECOMMONS_DLL_API SceneManager {
@@ -19,7 +13,7 @@ namespace Bubble {
             Scene* criarCenaPadrao(std::string Nome);
             std::shared_ptr<Inputs::Inputs> inputs{ nullptr };
             // viewport para renderizacao
-            Vector4 viewport_rect;
+            Vector4 viewportEditor, viewportJogo;
         public:
             SceneManager();
             ~SceneManager();
@@ -32,10 +26,14 @@ namespace Bubble {
             void renderizarCenaAtual() const;
             void atualizarCenaAtual() const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
-            void defViewport(Vector4 rect = {0, 0, 0, 0});
+            void defEditorViewport(Vector4 rect = {0, 0, 0, 0});
+            void defJogoViewport(Vector4 rect = {0, 0, 0, 0});
         };
         extern BECOMMONS_DLL_API Bubble::Entidades::CameraEditor* CameraEditorAtual();
+        extern BECOMMONS_DLL_API std::shared_ptr<Bubble::Cena::SceneManager> obterSceneManager();
+        extern BECOMMONS_DLL_API void definirSceneManager(std::shared_ptr<SceneManager> scene_manager);
         BECOMMONS_DLL_API void adicionarTarefaNaFila(std::function<void()> tarefa);
-        BECOMMONS_DLL_API void criarEntidade(std::shared_ptr<SceneManager> scenemanager, std::string path);
+        BECOMMONS_DLL_API void criarEntidade(std::string path);
+        BECOMMONS_DLL_API void criarCamera(glm::vec3 posicao);
     } // namespace Cena
 } // namespace Bubble

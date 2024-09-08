@@ -10,8 +10,8 @@ namespace BubbleUI
 		class BEUI_DLL_API Texto : public Widget
 		{
 		public:
-			Texto(std::string* label);
-			Texto(const std::string& label);
+			Texto(std::string* label_shared);
+			Texto(const std::string& label_shared);
 			Texto() = default;
 			void atualizar() override;
 			void renderizar() const override;
@@ -33,7 +33,7 @@ namespace BubbleUI
 			std::vector<LetraRect> letras_rect;
 			Vector4 area_de_selecao;
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag"), shaderQuad = Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag");
-			std::string* label{ nullptr };
+			std::string* label_shared{ nullptr };
 		};
 	}
 }

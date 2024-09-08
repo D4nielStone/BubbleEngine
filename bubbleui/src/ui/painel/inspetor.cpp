@@ -1,7 +1,6 @@
 #include "inspetor.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
 #include <cstring> // Para std::strncpy
-#include <src/tempo/delta_time.hpp>
 
 BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
     : scenemanager(scenemanager), nome_atual(new std::string(""))

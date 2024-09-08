@@ -1,5 +1,4 @@
 #include "painel.hpp"
-#include <src/tempo/delta_time.cpp>
 
 namespace BubbleUI {
 

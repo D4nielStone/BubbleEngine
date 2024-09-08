@@ -1,10 +1,9 @@
 #include "botao.hpp"
-#include <src/tempo/delta_time.hpp>
 #include "src/ui/painel/painel.hpp"
 
-BubbleUI::Widgets::Botao::Botao(const std::string &label)
+BubbleUI::Widgets::Botao::Botao(const std::string &label_shared)
 {
-    frase = label;
+    frase = label_shared;
     resolucao = 12;
     configurar();
     letra_padding = {5, 5};

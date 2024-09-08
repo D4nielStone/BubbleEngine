@@ -19,28 +19,24 @@ void Rect::defTam(const Vector2 &tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
-    coord_ndc = paraNDC();
 }
 
 void Rect::defPos(const Vector2 &pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;
-    coord_ndc = paraNDC();
 }
 
 void Rect::adiTam(const Vector2 &tam)
 {
     retangulo.w += tam.x;
     retangulo.h += tam.y;
-    coord_ndc = paraNDC();
 }
 
 void Rect::adiPos(const Vector2 &pos)
 {
     retangulo.x += pos.x;
     retangulo.y += pos.y;
-    coord_ndc = paraNDC();
 }
 // Deve definir cor base
 void Rect::defCor(const Color &cor)
@@ -48,11 +44,16 @@ void Rect::defCor(const Color &cor)
     cor_base = cor;
 }
 // Deve atualizar
-// \param delta time
 void Rect::atualizar()
 {
-    coord_ndc = paraNDC();
+    if (tamanhoDoContextoAnterior != contexto->tamanho || tamanhoAnterior != retangulo)
+    {
+        paraNDC();
+        tamanhoAnterior = retangulo;
+        tamanhoDoContextoAnterior = contexto->tamanho;
+    }
 }
+
 // Deve renderizar
 void Rect::renderizar() const
 {
@@ -67,8 +68,6 @@ void Rect::renderizar() const
 // Deve transformar coordenadas pixel para NDC
 Vector4f Rect::paraNDC()
 {
-    Vector4f coord_ndc;
-
     coord_ndc.z = (retangulo.w * 2.f) / contexto->tamanho.width;
     coord_ndc.w = -(2.0f * retangulo.h) / contexto->tamanho.height;
     coord_ndc.x = (retangulo.x * 2.f) / contexto->tamanho.width - 1.f;

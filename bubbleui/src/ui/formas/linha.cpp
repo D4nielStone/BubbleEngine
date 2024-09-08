@@ -46,7 +46,12 @@ Vector4f Linha::paraNDC()
 
 void Linha::atualizar()
 {
-    paraNDC();
+    if (tamanhoDoContextoAnterior != contexto->tamanho || tamanhoAnterior != posicoes)
+    {
+        paraNDC();
+        tamanhoAnterior = posicoes;
+        tamanhoDoContextoAnterior = contexto->tamanho;
+    }
 }
 // Deve renderizar
 void Linha::renderizar() const

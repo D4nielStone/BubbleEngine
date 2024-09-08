@@ -4,7 +4,6 @@
 #include <windows.h>
 #include <filesystem>
 
-std::wstring path = L"";
 // Função para selecionar objeto 3D
 static void abrirSelecionar()
 {
@@ -31,18 +30,34 @@ static void abrirSelecionar()
     // Exibe o diálogo de seleção de arquivo
     if (GetOpenFileName(&ofn) == TRUE)
     {
-        path = ofn.lpstrFile;
+        Bubble::Cena::adicionarTarefaNaFila([ofn]()
+            {
+                Bubble::Cena::criarEntidade(std::filesystem::path(ofn.lpstrFile).string());
+            });
     }
 }
 // Função para adicionar Cubo
 static void adicionarCubo()
 {
-    path = L"assets/primitivas/modelos/cube.dae";
+    Bubble::Cena::adicionarTarefaNaFila([]()
+        {
+            Bubble::Cena::criarEntidade("assets/primitivas/modelos/cube.dae");
+        });
 }
 // Função para adicionar Esfera
 static void adicionarEsfera()
 {
-    path = L"assets/primitivas/modelos/sphere.dae";
+    Bubble::Cena::adicionarTarefaNaFila([]()
+        {
+            Bubble::Cena::criarEntidade("assets/primitivas/modelos/sphere.dae");
+        });
+}// Função para adicionar Camera
+static void adicionarCamera()
+{
+    Bubble::Cena::adicionarTarefaNaFila([]()
+        {
+            Bubble::Cena::criarCamera(Bubble::Cena::CameraEditorAtual()->transformacao->obterPosicao());
+        });
 }
 
 BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0))
@@ -57,7 +72,7 @@ BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cubo", &adicionarCubo));
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Esfera", &adicionarEsfera));
-    //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cilindro", &abrirSelecionar));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Camera", &adicionarCamera));
     //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
     // Popup principal
 	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
@@ -66,18 +81,8 @@ BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
-    // Adicionar objeto caso "path" esteja preenchido
-    if (!path.empty())
-    {
-        std::string novo_path = std::filesystem::path(path).string();
-        Bubble::Cena::adicionarTarefaNaFila([this, novo_path]()
-            {
-                Bubble::Cena::criarEntidade(scenemanager, novo_path);
-            });
-        path = L"";
-    }
     Vector4 rect_size = buffer->obtRect();
-    scenemanager->defViewport(rect_size);
+    scenemanager->defEditorViewport(rect_size);
     buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
 
     if (selecionado) {

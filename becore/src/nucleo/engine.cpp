@@ -1,7 +1,6 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "src/arquivadores/imageloader.hpp"
-#include "src/tempo/delta_time.hpp"
 #include "engine.hpp"
 #include <thread>
 #include <future>
@@ -11,6 +10,7 @@ using namespace Bubble::Nucleo;
 Engine::Engine()
     {
         gerenciadorDeCenas = std::make_shared<Cena::SceneManager>();
+        Bubble::Cena::definirSceneManager(gerenciadorDeCenas);
         inicializacao();
         gerenciadorUi = std::make_shared< BubbleUI::Manager>(this);
     }
@@ -26,7 +26,7 @@ bool Engine::inicializacao()
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 
-        glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1.0-alpha.1", NULL, NULL);
+        glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1-alpha", NULL, NULL);
         glfwMaximizeWindow(glfwWindow);
 
         glfwMakeContextCurrent(glfwWindow);
@@ -80,21 +80,10 @@ int Engine::pararloop() const
 void Engine::atualizar()
 {
     glfwPollEvents();  // Processa eventos do GLFW
-    // Atualiza cena e UI em paralelo
-    auto cenaFuture = std::async(std::launch::async, [this]() {
-        gerenciadorDeCenas->atualizarCenaAtual();
-        });
+    // Atualiza cena e UI
+    gerenciadorDeCenas->atualizarCenaAtual();
+    gerenciadorUi->atualizar();
 
-    auto uiFuture = std::async(std::launch::async, [this]() {
-        gerenciadorUi->atualizar();
-        });
-
-    // Espera até que ambas as atualizações estejam concluídas
-    cenaFuture.get();
-    uiFuture.get();
-
-    Tempo::endDT();
-    Tempo::iniDT();
 }
 
 // Deve renderizar cena Atual

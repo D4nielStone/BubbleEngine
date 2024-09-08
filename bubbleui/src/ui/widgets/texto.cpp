@@ -1,11 +1,10 @@
 #include "texto.hpp"
 #include "src/ui/painel/painel.hpp"
 #include "src/depuracao/debug.hpp"
-#include <src/tempo/delta_time.hpp>
 
 using namespace Bubble::Arquivadores;
 
-BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), letra_padding({ 0, 0 })
+BubbleUI::Widgets::Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     configurar();
@@ -14,15 +13,15 @@ BubbleUI::Widgets::Texto::Texto(std::string* label) : label(label), letra_paddin
 BubbleUI::Widgets::Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
-    label = new std::string(l);
+    label_shared = new std::string(l);
     configurar();
 }
 
 // Método genérico de atualizacao
 void BubbleUI::Widgets::Texto::atualizar()
 {
-    // Renderiza texto de label, o ponteiro
-    if (label) frase = *label;
+    // Renderiza texto de label_shared, o ponteiro
+    if (label_shared) frase = *label_shared;
     renderizar_texto();
 }
 

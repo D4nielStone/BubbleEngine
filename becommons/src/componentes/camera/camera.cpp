@@ -57,14 +57,20 @@ void Camera::desenharFrame(Vector4 viewportRect) const
 
     // Redimensionar o texture color buffer
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w, viewportRect.h, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w*0.8, viewportRect.h*0.8, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     // Redimensionar o renderbuffer
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w, viewportRect.h);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w*0.8, viewportRect.h*0.8);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+}
+void Camera::renderizar() const
+{
+    shader.use();
+    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
+    shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
 }
 void Camera::atualizar() {
     matrizProjecao = glm::perspective(
@@ -74,9 +80,7 @@ void Camera::atualizar() {
         zFar
     );
 
-    if (meuObjeto) {
         glm::vec3 posicaoCamera = meuObjeto->obterTransformacao()->obterPosicao();
-        glm::vec3 alvoCamera(0, 0, 0);
         glm::vec3 vetorCima(0, 1, 0);
 
         // Calculate view matrix
@@ -85,15 +89,7 @@ void Camera::atualizar() {
         shader.use();
         shader.setMat4("projection", glm::value_ptr(matrizProjecao));
         shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
-        shader.setVec3("viewPos",
-            posicaoCamera.x,
-            posicaoCamera.y,
-            posicaoCamera.z);
-
-    }
-    else {
-        Debug::emitir(Debug::Tipo::Erro, "meuObjeto não está definido");
-    }
+   
 }
 const float* Camera::obterViewMatrix()
     {

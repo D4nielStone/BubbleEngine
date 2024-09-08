@@ -1,6 +1,5 @@
 ﻿#include "entidades.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
-#include <src/tempo/delta_time.hpp>
 
 BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Contexto>ctx, std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect) : scenemanager(scenemanager)
 {
@@ -17,7 +16,7 @@ void BubbleUI::Paineis::Entidades::recarregar()
 	adicionarWidget(std::make_shared<Widgets::CaixaTexto>());
 	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
 	{
-		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nome(), &entidade->selecionada);
+		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada);
 		adicionarWidget(arvore);
 		for (auto& filho : entidade->obterFilhos())
 		{
@@ -38,7 +37,7 @@ void BubbleUI::Paineis::Entidades::preAtualizacao()
 
 void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, std::shared_ptr<Widgets::Arvore> arvore)
 {
-	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nome(), &entidade->selecionada);
+	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada);
 	arvore->adiFilho(arvore_recursiva);
 	for (auto& filho : entidade->obterFilhos())
 	{

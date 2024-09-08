@@ -1,17 +1,16 @@
 #include "item_menu.hpp"
 #include "src/depuracao/debug.hpp"
-#include <src/tempo/delta_time.hpp>
 
 using namespace Bubble::Arquivadores;
 
-// Construtor que inicializa o ItemMenu com uma label e configurações padrão
-BubbleUI::Items::ItemMenu::ItemMenu(std::string* label) : resolucao(12), label(label), texto(""), letra_padding({ 4, 4 })
+// Construtor que inicializa o ItemMenu com uma label_shared e configurações padrão
+BubbleUI::Items::ItemMenu::ItemMenu(std::string* label_shared) : resolucao(12), label_shared(label_shared), texto(""), letra_padding({ 4, 4 })
 {
     configurar(); // Configura o item com as configurações padrão
 }
 
-// Construtor que inicializa o ItemMenu com uma label passada como string
-BubbleUI::Items::ItemMenu::ItemMenu(const std::string &l) : resolucao(12), texto(l), label(new std::string(l)), letra_padding({5, 4})
+// Construtor que inicializa o ItemMenu com uma label_shared passada como string
+BubbleUI::Items::ItemMenu::ItemMenu(const std::string &l) : resolucao(12), frase(l), letra_padding({5, 4})
 {
     configurar(); // Configura o item com as configurações padrão
 }
@@ -19,7 +18,7 @@ BubbleUI::Items::ItemMenu::ItemMenu(const std::string &l) : resolucao(12), texto
 // Método para atualizar o estado do ItemMenu, incluindo a lógica de interação
 void BubbleUI::Items::ItemMenu::atualizar()
 {
-    if (label)  frase = *label; // Atualiza a frase com o valor da label
+    if (label_shared)  frase = *label_shared; // Atualiza a frase com o valor da label_shared
     renderizar_texto(); // Renderiza o texto do item
     
     clicado = false; // Inicializa o estado de clique como falso
@@ -28,14 +27,14 @@ void BubbleUI::Items::ItemMenu::atualizar()
     colisao.defRect({ box_pos.x, box_pos.y, largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
     if (!colisao.mouseEmCima())
     {
-        mouseEmCima = true; // Marca que o mouse está sobre o item
+        mouseEmCima = false; // Marca que o mouse está sobre o item
         moldura.defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
     }
     else
     {
         // Verifica se o botão esquerdo do mouse foi pressionado
         if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
-        mouseEmCima = false; // Marca que o mouse não está mais sobre o item
+        mouseEmCima = true; // Marca que o mouse não está mais sobre o item
         moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
@@ -135,10 +134,10 @@ Vector4f BubbleUI::Items::ItemMenu::paraNDC()
     Vector4f coord_ndc;
 
     // Calcula as coordenadas normalizadas
-    coord_ndc.z = (char_rect.w * 2.f) / pai->obtCtx()->tamanho.width;
-    coord_ndc.w = -(2.0f * char_rect.h) / pai->obtCtx()->tamanho.height;
-    coord_ndc.x = (char_rect.x * 2.f) / pai->obtCtx()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * char_rect.y) / pai->obtCtx()->tamanho.height;
+    coord_ndc.z = (char_rect.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.w = -(2.0f * char_rect.h) / contexto->tamanho.height;
+    coord_ndc.x = (char_rect.x * 2.f) / contexto->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * char_rect.y) / contexto->tamanho.height;
 
     return coord_ndc;
 }
@@ -153,9 +152,10 @@ void BubbleUI::Items::ItemMenu::configurar(const std::string &font_path, unsigne
 void BubbleUI::Items::ItemMenu::defMoldura(Formas::Moldura* m)
 {
     pai = m;
-    moldura = Formas::Moldura(m->obtCtx()); // Define a moldura com base no contexto do pai
-    colisao = Colisao2d({}, m->obtCtx()); // Cria uma nova instância de colisão 2D
-    inputs = m->obtCtx()->inputs;
+    contexto = m->obtCtx();
+    moldura = Formas::Moldura(contexto); // Define a moldura com base no contexto do pai
+    colisao = Colisao2d({}, contexto); // Cria uma nova instância de colisão 2D
+    inputs = contexto->inputs;
 }
 
 // Destrutor do ItemMenu que libera a memória alocada

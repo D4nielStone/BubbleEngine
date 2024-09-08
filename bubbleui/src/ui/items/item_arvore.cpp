@@ -5,8 +5,7 @@ BubbleUI::Items::Arvore::Arvore(const std::string &l, std::shared_ptr<Util::PopU
 {
 	ItemMenu::ItemMenu(l);
 	resolucao = (12);
-	label = new std::string(l);
-	texto = ("");
+	frase = (l);
 	letra_padding = { 4, 4 };
 }
 
@@ -15,7 +14,7 @@ void BubbleUI::Items::Arvore::atualizar()
 	ItemMenu::atualizar();
 	m_popup->defPos({ static_cast<int>(box_pos.x + box_size.x - 10), static_cast<int>(box_pos.y) });
 	m_popup->atualizar();
-	if (!mouseEmCima)	m_popup->mostrar();
+	if (mouseEmCima)	m_popup->mostrar();
 	else if(!m_popup->mouseEmCima)	m_popup->esconder();
 
 }
