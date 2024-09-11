@@ -3,14 +3,35 @@
 #include "src/ui/items/item_arvore.hpp"
 #include <windows.h>
 #include <filesystem>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
+glm::vec2 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
+    // Transformação para o espaço da câmera (view space)
+    glm::vec4 clipSpacePos = projectionMatrix * viewMatrix * glm::vec4(worldPos, 1.0);
+
+    // Convertemos para NDC (Normalized Device Coordinates)
+    if (clipSpacePos.w != 0.0f) {
+        clipSpacePos.x /= clipSpacePos.w;
+        clipSpacePos.y /= clipSpacePos.w;
+        clipSpacePos.z /= clipSpacePos.w;
+    }
+
+    // Mapeia as coordenadas NDC para coordenadas de tela
+    glm::vec2 screenPos;
+    screenPos.x = (clipSpacePos.x * 0.5f + 0.5f) * screenWidth;
+    screenPos.y = (1.0f - (clipSpacePos.y * 0.5f + 0.5f)) * screenHeight; // Inverte o Y para o espaço da tela
+
+    return screenPos;
+}
 // Função para selecionar objeto 3D
 static void abrirSelecionar()
 {
     // Estrutura para armazenar as informações do diálogo
     OPENFILENAME ofn;
     wchar_t szFile[260] = { 0 };
-    wchar_t filtros[120] = L"Todos os Arquivos\0*.*\0Modelo FBX\0*.FBX\0Modelo OBJ\0*.OBJ\0Modelo GLTF\0*.GLTF\0Modelo DAE\0*.DAE\0Modelo Blender\0*.BLEND\0";
+    wchar_t filtros[120] = L"Modelo FBX\0*.FBX\0Modelo OBJ\0*.OBJ\0Modelo GLTF\0*.GLTF\0Modelo DAE\0*.DAE\0Modelo Blender\0*.BLEND\0";
 
     // Inicializa a estrutura com zeros
     ZeroMemory(&ofn, sizeof(ofn));
@@ -60,13 +81,15 @@ static void adicionarCamera()
         });
 }
 
-BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0))
-, scenemanager(scenemanager)
+BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0)),
+imagem_camera(std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/cam.png", 15, &posicao_da_camera)),
+scenemanager(scenemanager)
 {
 	Nome = "Editor";
 	renderizarCorpo = false;
 	configurar(ctx, rect);
 	adicionarWidget(buffer);
+	adicionarWidget(imagem_camera);
 
     // Popup para adicionar primitivas
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
@@ -83,10 +106,23 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
 {
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defEditorViewport(rect_size);
-    buffer->defID(scenemanager->cenaAtual()->camera_editor.textureColorbuffer);
+    auto cenaAtual = scenemanager->cenaAtual();
+    buffer->defID(cenaAtual->camera_editor.textureColorbuffer);
 
     if (selecionado) {
         contexto->inputs->setInputMode(InputMode::Editor);
     }
     else             contexto->inputs->setInputMode(InputMode::Default);
+
+    if (scenemanager->cenaAtual()->camera_principal)
+    {
+        auto screen_pos = worldToScreen(
+            cenaAtual->camera_principal->meuObjeto->obterTransformacao()->obterPosicao(),
+            Bubble::Cena::CameraEditorAtual()->obterViewMatrixMat(),
+            Bubble::Cena::CameraEditorAtual()->obterProjMatrixMat(),
+            retangulo.w,
+            retangulo.h);
+        posicao_da_camera.x = screen_pos.x;
+        posicao_da_camera.y = screen_pos.y;
+    }
 }

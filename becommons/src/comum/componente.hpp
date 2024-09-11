@@ -14,10 +14,10 @@ namespace Bubble {
 		class BECOMMONS_DLL_API Componente {
 		protected:
 			Shader shader;
-			Bubble::Entidades::Entidade* meuObjeto = nullptr;
 			const char* Nome = "componente_base";
 			bool carregadov{ false };
 		public:
+			Bubble::Entidades::Entidade* meuObjeto = nullptr;
 			Componente() {};
 			const char* nome() const { return Nome; }
 			bool carregado() const { return carregadov; };

@@ -13,7 +13,7 @@
 void BubbleUI::Manager::iniPaineisPadrao()
 {
 	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, contexto->tamanho.width/3 - 5, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31.f + contexto->tamanho.height / 2,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31.f + contexto->tamanho.height / 2,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height/2 - 32 }));
 	lista_paineis.push_back(std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height /2 }));
 	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ (contexto->tamanho.width / 3)*2 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
 }
@@ -67,13 +67,14 @@ void BubbleUI::Manager::renderizar() const
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, contexto->tamanho.width, contexto->tamanho.height);
 
+	barra_de_menu.renderizar();
 	glEnable(GL_SCISSOR_TEST);
 	for (auto& painel : lista_paineis)
 	{
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
-	barra_de_menu.renderizar();
+
 }
 
 // Atualiza paineis
@@ -81,17 +82,25 @@ void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	verificarSelecionado();
+
+	std::vector<std::future<void>> futures;
+
+	// Atualiza cada painel de forma assíncrona
 	for (const auto& painel : lista_paineis)
 	{
-		painel->atualizar();
+		futures.push_back(std::async(std::launch::async, [&]() {
+			painel->atualizar();
+			}));
 	}
-	barra_de_menu.atualizar();
 
-	if (contexto->cursor != cursor_antigo)
+	// Aguarda todas as tarefas terminarem
+	for (auto& f : futures)
 	{
-		cursor_antigo = contexto->cursor;
-		glfwSetCursor(contexto->glfwWindow, contexto->cursor);
+		f.get();
 	}
+
+	// Atualiza a barra de menu
+	barra_de_menu.atualizar();
 }
 
 // Verifica Painel selecionado
@@ -134,4 +143,10 @@ void BubbleUI::Manager::verificarSelecionado()
 	}
 	if (cursor)
 		contexto->cursor = contexto->cursor_normal;
+	// Verifica se o cursor mudou e atualiza
+	if (contexto->cursor != cursor_antigo)
+	{
+		cursor_antigo = contexto->cursor;
+		glfwSetCursor(contexto->glfwWindow, contexto->cursor);
+	}
 }

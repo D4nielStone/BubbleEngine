@@ -20,11 +20,6 @@ void BubbleUI::Paineis::Jogo::preAtualizacao()
 
     if (scenemanager->cenaAtual()->camera_principal) {
         buffer->defID(scenemanager->cenaAtual()->camera_principal->textureColorbuffer);
-        renderizarCorpo = false;
-    }
-    else
-    {
-        renderizarCorpo = true;
     }
 
     if (selecionado) {

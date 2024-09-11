@@ -1,8 +1,33 @@
 #include "imagem.hpp"
 #include "src/ui/painel/painel.hpp"
+#include "src/arquivadores/imageloader.hpp"
 
 BubbleUI::Widgets::Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
 {
+}
+
+BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, Vector2 *posicao) : posicao_ptr(posicao)
+{
+    Bubble::Arquivadores::ImageLoader img(path);
+    auto data = img.obterDados();
+    auto channels = img.getChannels();
+    rect.w = img.getWidth() *(static_cast<float>(size_percentage)/100);
+    rect.h = img.getHeight()*(static_cast<float>(size_percentage)/100);
+
+    GLenum channel{ 0 };
+    if (channels == 3)
+        channel = GL_RGB;
+    else if (channels == 4)
+        channel = GL_RGBA;
+    glGenTextures(1, &ID);
+    glBindTexture(GL_TEXTURE_2D, ID);
+    glTexImage2D(GL_TEXTURE_2D, 0, channel, img.getWidth(), img.getHeight(), 0, channel, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glActiveTexture(GL_TEXTURE0);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
 
@@ -24,10 +49,15 @@ void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obterRetangulo().w;
-        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
+        rect.w = painel->obterRetangulo().w - 2;
+        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y - 2;
     }
-    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + 1, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w - 2 , rect.h - 1 };
+    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + 1, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
+    if (posicao_ptr)
+    {
+        rect.x += posicao_ptr->x - rect.w/2;
+        rect.y += posicao_ptr->y - rect.h/2;
+    }
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem

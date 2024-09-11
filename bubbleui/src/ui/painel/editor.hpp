@@ -14,7 +14,9 @@ namespace BubbleUI
 			void preAtualizacao() override;
 		private: 
 			std::shared_ptr<Bubble::Cena::SceneManager> scenemanager;
-			std::shared_ptr<Widgets::Imagem> buffer;
+			std::shared_ptr<Widgets::Imagem> buffer, imagem_camera;
+			Vector2 posicao_da_camera;
+			glm::vec3 pos_antiga;
 		};
 	}
 }
