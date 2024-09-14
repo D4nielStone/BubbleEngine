@@ -58,6 +58,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
     moldura.defPos({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y )});
     moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
 
+
     // Reseta gatilho de click
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true;
 
@@ -67,6 +68,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
         moldura.defCor(cor);
         if (inputs->mouseEnter == GLFW_PRESS)
         {
+            if(retorno)
             *retorno = false;
             moldura.ocultar_linhas = true;
         }
@@ -78,6 +80,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
             moldura.defCor({ 0.2f, 0.2f, 0.2f });
             if (inputs->mouseEnter == GLFW_PRESS)
             {
+                if(retorno)
                 *retorno = true;
                 moldura.ocultar_linhas = false;
                 if (aberto && gatilho_click) { aberto = false; gatilho_click = false; }
@@ -115,6 +118,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
 void BubbleUI::Widgets::Arvore::renderizar() const
 {
     // Renderiza a moldura utilizando triângulos
+    if (moldura.obtRect().y > box_pos.y + box_size.y)return;
     moldura.renderizar();
 
     // Renderiza o texto da árvore

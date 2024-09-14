@@ -147,6 +147,7 @@
     <ClCompile Include="src\entidades\camera_editor.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
+    <ClCompile Include="src\threadpool.inl" />
     <ClCompile Include="src\util\includes.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
   </ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="src\inputs\inputs.hpp" />
     <ClInclude Include="src\util\includes.hpp" />
     <ClInclude Include="src\util\skybox.hpp" />
+    <ClInclude Include="src\threadpool.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

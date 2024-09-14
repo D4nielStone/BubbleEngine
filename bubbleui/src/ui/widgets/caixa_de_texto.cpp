@@ -45,7 +45,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
     //    if (letra.index == texto_cursor_index) texto_cursor_pos = letra.rect; texto_cursor_pos.w = 1;
     //}
     // Atribui texto da frase para o buffer
-    if (buffer_texto)
+    if (buffer_texto.get())
     {
         buffer_texto->clear();
         for (size_t i = 0; i < texto.size(); i++)   buffer_texto->push_back(texto[i]);
@@ -109,9 +109,14 @@ void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
     }
 }
 
+double tempo_inicial = 0.0;
+
 void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
 {
-    cronometro +=0.1;
+    double tempo_atual = glfwGetTime(); // Obtenha o tempo atual
+    if (gatilho1) {
+        cronometro = tempo_atual - tempo_inicial;
+    }
 
     if (inputs->isKeyPressed(BS) && !texto.empty() && !gatilho1) // Backspace
     {
@@ -129,6 +134,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
         inputs->char_press = false;
         processarEntrada(inputs->letra);
         cronometro = 0.0f;
+        tempo_inicial = glfwGetTime(); // Armazene o tempo inicial
     }
 
     if (cronometro >= 0.4f) // Ativa repetição após o tempo inicial de 0.4 segundos
@@ -140,18 +146,21 @@ void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
     {
         gatilho2 = false;
         gatilho1 = false;
+        tempo_inicial = 0.0f;
     }
 
-    // Processa repetição com intervalo de 1 milissegundo
+    // Processa repetição com intervalo de 0.05 segundos
     if (gatilho1 && gatilho2)
     {
         if (cronometro >= 0.05f) // 5 centésimos de segundos
         {
             processarEntrada(inputs->letra);
-            cronometro = 0.0f; // Reseta o cronômetro após cada repetição
+            cronometro = 0.0f;
+            tempo_inicial = glfwGetTime(); // Reinicie o tempo inicial
         }
     }
 }
+
 void BubbleUI::Widgets::CaixaTexto::iniciarSelecao()
 {
     if (!selecionando_texto) { selecionado = false; mouse_pos_ini = { (int)inputs->mousex, (int)inputs->mousey }; selecionando_texto = true; }

@@ -15,23 +15,25 @@ BubbleUI::Util::BarraMenu::BarraMenu(std::shared_ptr<Contexto> contexto)
 	linha_e->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
 	linha_c->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
 
-	popupCena = std::make_shared<PopUp>(contexto);
-
-	arvoreCena = std::make_unique<Items::ItemMenu>("cena atual");
-	arvoreCena->defMoldura(this);
+	//popupCena = std::make_shared<PopUp>(contexto);
+	//popupCena->adiItem(std::make_shared<Items::ItemMenu>("salvar projeto atual"));
+	//popupCena->adiItem(std::make_shared<Items::ItemMenu>("abrir projeto"));
+	//popupCena->adiItem(std::make_shared<Items::ItemMenu>("salver cena atual"));
+	//arvoreCena = std::make_unique<Items::ItemMenu>("cena atual");
+	//arvoreCena->defMoldura(this);
 }
 
 void BubbleUI::Util::BarraMenu::renderizar() const
 {
 	Moldura::renderizar();
-	arvoreCena->renderizar();
+	//arvoreCena->renderizar();
 }
 
 void BubbleUI::Util::BarraMenu::atualizar()
 {
 	retangulo = { 0, 1, contexto->tamanho.width, altura };
-	posicaoWidget = { 0, 1 };
-	widgetPadding = { 3, 3 };
-	arvoreCena->atualizar();
+	posicaoWidget = { 0, 0 };
+	widgetPadding = { 3, 30 };
 	Moldura::atualizar();
+	//arvoreCena->atualizar();
 }

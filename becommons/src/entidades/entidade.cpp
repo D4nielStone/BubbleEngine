@@ -85,12 +85,12 @@ std::shared_ptr<Bubble::Comum::Componente> Entidade::obterComponente(const std::
     return (it != Componentes.end()) ? *it : nullptr;
 }
 
-std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome)
+std::vector<std::shared_ptr<Bubble::Comum::Componente>> Entidade::obterComponentes(const std::string& nome)
 const {
-    std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> comps;
+    std::vector<std::shared_ptr<Bubble::Comum::Componente>> comps;
     for (const auto& componente : Componentes) {
         if (componente->nome() == nome) {
-            comps.insert(componente);
+            comps.push_back(componente);
         }
     }
     return comps;
@@ -106,13 +106,13 @@ std::shared_ptr<Bubble::Componentes::Transformacao> Entidade::obterTransformacao
     return transformacao;
 }
 
-const std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>>& Entidade::listaDeComponentes() const {
+const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& Entidade::listaDeComponentes() const {
     return Componentes;
 }
 
 void Entidade::adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente) {
     componente->definirPai(this);
-    Componentes.insert(std::move(componente));
+    Componentes.push_back(componente);
 }
 
 rapidjson::Value Entidade::serializar(rapidjson::Document* v) {

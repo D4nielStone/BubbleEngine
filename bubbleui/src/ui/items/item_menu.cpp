@@ -73,8 +73,8 @@ void BubbleUI::Items::ItemMenu::renderizar() const
 void BubbleUI::Items::ItemMenu::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x = pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
-    box_pos.y = pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
+    box_pos.x =  pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
+    box_pos.y =  pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
     box_size.x = pai->obtRect().w - pai->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 

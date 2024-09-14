@@ -8,26 +8,10 @@ BubbleUI::Widgets::Imagem::Imagem(unsigned int id, const Vector2 &size, const bo
 
 BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, Vector2 *posicao) : posicao_ptr(posicao)
 {
-    Bubble::Arquivadores::ImageLoader img(path);
-    auto data = img.obterDados();
-    auto channels = img.getChannels();
-    rect.w = img.getWidth() *(static_cast<float>(size_percentage)/100);
-    rect.h = img.getHeight()*(static_cast<float>(size_percentage)/100);
-
-    GLenum channel{ 0 };
-    if (channels == 3)
-        channel = GL_RGB;
-    else if (channels == 4)
-        channel = GL_RGBA;
-    glGenTextures(1, &ID);
-    glBindTexture(GL_TEXTURE_2D, ID);
-    glTexImage2D(GL_TEXTURE_2D, 0, channel, img.getWidth(), img.getHeight(), 0, channel, GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    glActiveTexture(GL_TEXTURE0);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    auto &gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
+    ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
+    rect.w *= static_cast<float>(size_percentage) / 100;
+    rect.h *= static_cast<float>(size_percentage) / 100;
 }
 
 

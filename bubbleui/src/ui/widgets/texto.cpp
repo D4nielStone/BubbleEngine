@@ -54,6 +54,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
+    // não renderiza se não visível
     // Variáveis para as dimensões da letra
     int h_letter = 0, w_letter = 0, x_letter = 0, y_letter = 0, w_line = 0;
     line_pos.y = 0;
@@ -67,6 +68,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     // Itera sobre cada caractere na frase
     for (size_t i = 0; i < frase.size(); i++)
     {
+        if (box_pos.y > painel->obterRetangulo().y + painel->obterRetangulo().h)continue;
         char& c = frase[i];
         ch = (*Bubble::Arquivadores::obterCaracteres())[c]; // Obtém o caractere atual
 

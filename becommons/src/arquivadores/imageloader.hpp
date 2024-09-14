@@ -30,14 +30,14 @@ namespace Bubble {
             int width, height, channels;
             unsigned char* data;
         };
-        BECOMMONS_DLL_API unsigned int TextureFromFile(const std::string& directory);
+        BECOMMONS_DLL_API unsigned int TextureFromFile(const std::string& directory, int* width = nullptr, int* height = nullptr);
         BECOMMONS_DLL_API unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int format);
 
-        class TextureLoader
+        class BECOMMONS_DLL_API TextureLoader
         {
         public:
             static TextureLoader& getInstance();
-            GLuint carregarTextura(const std::string& caminho);
+            GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
             GLuint carregarAiTexture(const aiTexture* texture);
         private:
             std::unordered_map<std::string, GLuint> texturasCarregadas;

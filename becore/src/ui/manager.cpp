@@ -12,9 +12,15 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ 0, 31.f,  contexto->tamanho.width/2, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f, 31.f,  contexto->tamanho.width / 2, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto, Vector4{0, 100, 100, 30}));
+	int margem = 10;
+	lista_paineis.push_back(
+		std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ (float)margem, (float)margem,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height - margem * 2}));
+	lista_paineis.push_back(
+		std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2,  (float)margem,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height /2 - margem*2 }));
+	lista_paineis.push_back(
+		std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 }));
+	lista_paineis.push_back(
+		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f, contexto->tamanho.width / 2 - margem, contexto->tamanho.height/4 }));
 }
 
 // Seleciona o painel
@@ -53,7 +59,6 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 	colisao_painel = Colisao2d({}, contexto);
 	contexto->glfwWindow = engine->obterJanela();
 	contexto->inputs = engine->obterGI();
-	barra_de_menu = Util::BarraMenu(contexto);
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
 	if (lista_paineis.size() > 0)
@@ -72,11 +77,10 @@ void BubbleUI::Manager::renderizar() const
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
-
-	barra_de_menu.renderizar();
 }
 
-// Atualiza paineis
+#include "src/threadpool.hpp" // Assumindo que você salvou a implementação do thread pool em um arquivo
+
 void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
@@ -84,22 +88,17 @@ void BubbleUI::Manager::atualizar()
 
 	std::vector<std::future<void>> futures;
 
-	// Atualiza cada painel de forma assíncrona
-	for (const auto& painel : lista_paineis)
-	{
-		futures.push_back(std::async(std::launch::async, [&]() {
+	// Atualiza cada painel de forma assíncrona usando o future
+	for (const auto& painel : lista_paineis) {
+		futures.push_back(std::async(std::launch::async, [painel](){
 			painel->atualizar();
 			}));
 	}
 
 	// Aguarda todas as tarefas terminarem
-	for (auto& f : futures)
-	{
+	for (auto& f : futures) {
 		f.get();
 	}
-
-	// Atualiza a barra de menu
-	barra_de_menu.atualizar();
 }
 
 // Verifica Painel selecionado

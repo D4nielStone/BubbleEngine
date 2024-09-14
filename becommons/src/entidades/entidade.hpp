@@ -25,10 +25,10 @@ namespace Bubble {
 			std::shared_ptr<std::string> nomeptr();
 			void carregarNode(const Node& node);
 			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
-			std::unordered_set<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome) const;
+			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome) const;
 			const std::vector<std::shared_ptr<Entidade>>& obterFilhos() const;
 			std::shared_ptr<Componentes::Transformacao> obterTransformacao() const;
-			const std::unordered_set<std::shared_ptr<Comum::Componente>>& listaDeComponentes() const;
+			const std::vector<std::shared_ptr<Comum::Componente>>& listaDeComponentes() const;
 			void adicionarComponente(std::shared_ptr<Comum::Componente> componente);
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
@@ -39,7 +39,7 @@ namespace Bubble {
 			Shader shader_padrao = Shader("assets/shaders/phong.vert", "assets/shaders/phong.frag");
 			Shader shader_outline = Shader("assets/shaders/outline.vert", "assets/shaders/outline.frag");
 			std::shared_ptr<Componentes::Transformacao> transformacao;
-			std::unordered_set<std::shared_ptr<Comum::Componente>> Componentes;
+			std::vector<std::shared_ptr<Comum::Componente>> Componentes;
 			std::vector<std::shared_ptr<Entidade>> filhos;
 			std::shared_ptr<std::string> Nome = std::make_shared<std::string>("SemNome");
 		};

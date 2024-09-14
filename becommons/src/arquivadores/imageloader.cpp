@@ -135,7 +135,7 @@ unsigned char* ImageLoader::obterDados() const
     return data;
 }
 
-unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory) {
+unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -146,6 +146,8 @@ unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory)
     nrComponents = img.getChannels();
     width = img.getWidth();
     height = img.getHeight();
+    if (width_ptr) *width_ptr = width;
+    if (height_ptr) *height_ptr = height;
     if (data) {
         GLenum format;
         if (nrComponents == 1)
@@ -211,7 +213,7 @@ TextureLoader& TextureLoader::getInstance()
     return instance;
 }
 
-GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& caminho)
+GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
 {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -219,7 +221,7 @@ GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& c
     }
 
     // Carregar nova textura
-    GLuint id = Bubble::Arquivadores::TextureFromFile(caminho.c_str());
+    GLuint id = Bubble::Arquivadores::TextureFromFile(caminho.c_str(), width, height);
     texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
 
     return id;
