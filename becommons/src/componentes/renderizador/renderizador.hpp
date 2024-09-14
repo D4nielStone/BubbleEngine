@@ -10,15 +10,15 @@ namespace Bubble{
         class BECOMMONS_DLL_API Renderizador : public Bubble::Comum::Componente {
         private:
             void configurarBuffers();
-            void desenharModelo() const;
-            void atualizarMaterial() const;
             Vertex malha;
         public:
             Renderizador(const Vertex& malha);
             Renderizador() = default;
             ~Renderizador();
+            Vertex& obterMalha();
             void configurar() override;
             void atualizar() override;
         };
+        extern BECOMMONS_DLL_API void atualizarMaterial(Material material, Shader shader);
     }
 }

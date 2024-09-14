@@ -2,9 +2,6 @@
 #include "GLFW/glfw3.h"
 #include "src/arquivadores/imageloader.hpp"
 #include "engine.hpp"
-#include <thread>
-#include <future>
-
 using namespace Bubble::Nucleo;
 
 Engine::Engine()
@@ -83,14 +80,11 @@ void Engine::atualizar()
     // Atualiza cena e UI
     gerenciadorDeCenas->atualizarCenaAtual();
     gerenciadorUi->atualizar();
-
 }
 
 // Deve renderizar cena Atual
-void Engine::renderizar(Vector4 rect_size)
+void Engine::renderizar() const
 {
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-
     // Renderizar cena e UI
     gerenciadorDeCenas->renderizarCenaAtual();
     gerenciadorUi->renderizar();

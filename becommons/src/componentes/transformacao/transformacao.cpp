@@ -45,10 +45,8 @@ void Transformacao::atualizar() {
     if (estado != DINAMICO)
         return;
 
-    glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(matriz_de_modelo)));
     shader.use();
     shader.setMat4("model", glm::value_ptr(matriz_de_modelo));
-    shader.setMat3("normalMatrix", glm::value_ptr(normalMatrix));
 }
 void Transformacao::configurar() {
     glm::translate(matriz_de_modelo, posicao);

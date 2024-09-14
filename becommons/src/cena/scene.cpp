@@ -14,15 +14,22 @@ namespace Bubble::Cena
         for (auto& componente : entidade->listaDeComponentes()) {
             if (!componente->carregado())
                 componente->configurar();
+            if (componente->nome() == "Renderizador")
+            {
+                // adiciona o renderizador ao nome correspondente do material
+                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.nome].first.push_back(entidade);
+                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.nome].second = static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
+            }
         }
         for (auto& filho : entidade->obterFilhos()) {
             carregarComponentes(filho);
         }
     }
 
-    void Scene::criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade)
+    void Scene::criarEntidade(const std::string &path, const char* nome_entidade)
     {
-        adicionarEntidade(std::make_shared<Entidades::Entidade>(*arquivo_3d));
+        Arquivadores::Arquivo3d arquivo_3d(path); arquivo_3d.carregar();
+        adicionarEntidade(std::make_shared<Entidades::Entidade>(arquivo_3d));
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
@@ -31,9 +38,10 @@ namespace Bubble::Cena
             Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
         }
     }
-
+    bool carregou_arquivo3d{ false };
     // Deve renderizar Cena
     void Scene::renderizar(const InputMode modo) const {
+        
         if (modo == Editor) {
             camera_editor.renderizar();
             skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
@@ -42,21 +50,22 @@ namespace Bubble::Cena
             camera_principal->renderizar();
             skybox->renderizar(camera_principal->obterProjMatrixMat(), camera_principal->obterViewMatrixMat());
         }
-        for (auto& obj : Entidades) {
-            obj->renderizar();
-            renderizarFilhos(obj);
-        }
-    }
-    void Scene::renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade)
-        const
-    {
-        for (auto& filho : entidade->obterFilhos()) {
-            filho->renderizar();
-            renderizarFilhos(filho);
+        for (auto& material : entidadesParaRenderizar)
+        {
+            Componentes::atualizarMaterial(material.second.second, shader);
+            for (auto& malha : material.second.first)
+            {
+                malha->renderizar();
+            }
         }
     }
     // Deve atualizar Cena
     void Scene::atualizar(float aspectoDoEditor, float aspectoDoJogo) {
+        // Verifica se a tarefa já terminou sem bloquear e se não foi carregado ainda
+        //if (!carregou_arquivo3d && tarefaCriarEntidade.first.valid() && tarefaCriarEntidade.first.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready) {
+        //    adicionarEntidade(std::make_shared<Entidades::Entidade>(tarefaCriarEntidade.second));
+        //    carregou_arquivo3d = true; // Marca como carregado
+        //}
         camera_editor.atualizarAspecto(aspectoDoEditor);
         camera_editor.atualizar();
         if (camera_principal) {

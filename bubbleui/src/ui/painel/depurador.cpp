@@ -1,10 +1,11 @@
 #include "depurador.hpp"
 #include "src/ui/widgets/texto.hpp"
 
-BubbleUI::Paineis::Depurador::Depurador(std::shared_ptr < Contexto> ctx) : fps_display("FPS: ")
+BubbleUI::Paineis::Depurador::
+Depurador(std::shared_ptr < Contexto> ctx, const Vector4& retangulo) : fps_display("FPS: ")
 {
 	Nome = "Depurador";
-	configurar(ctx);
+	configurar(ctx, retangulo);
 	adicionarWidget(std::make_shared<Widgets::Texto>(&fps_display));
 }
 

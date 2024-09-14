@@ -6,8 +6,8 @@
 #include <vector>
 #include <utility>
 #include <glm/gtc/type_ptr.hpp>
-#include "src/util/includes.hpp"
 #include "becommons.hpp"
+struct Color;
 class ShaderException : public std::exception 
 {
 public:

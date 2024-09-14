@@ -100,6 +100,7 @@ void ImageLoader::carregarImagem(const std::string& filepath)
     // Indica que a imagem foi carregada com sucesso  
     carregado = true;
     imagens_carregadas.insert(std::pair(path, this));
+    flipVertical();
 
     // Finaliza o FreeImage  
     FreeImage_DeInitialise();
@@ -111,8 +112,6 @@ GLFWimage ImageLoader::converterParaGlfw()
         Debug::emitir(Debug::Tipo::Erro, "tentativa de converter imagem não carregada para GLFW");
         return image;
     }
-
-    flipVertical();
 
     image.width = width;
     image.height = height;
@@ -136,18 +135,13 @@ unsigned char* ImageLoader::obterDados() const
     return data;
 }
 
-unsigned int Bubble::Arquivadores::TextureFromFile(const char* path, const std::string& directory) {
-    // Concatena o diretório e o caminho do arquivo para obter o caminho completo
-    std::string filename = std::string(path);
-    filename = directory + '/' + filename;
-
-    Debug::emitir("TextureFromFile", filename);
+unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    ImageLoader img(filename.c_str());
+    ImageLoader img(directory.c_str());
     auto data = img.obterDados();
     nrComponents = img.getChannels();
     width = img.getWidth();
@@ -171,7 +165,7 @@ unsigned int Bubble::Arquivadores::TextureFromFile(const char* path, const std::
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
     else {
-        std::cerr << "Failed to load texture: " << filename << std::endl;
+        std::cerr << "Failed to load texture: " << directory << std::endl;
     }
 
     return textureID;
@@ -211,3 +205,52 @@ unsigned int Bubble::Arquivadores::TextureFromFile(unsigned char* data, unsigned
     return textureID;
 }
 
+TextureLoader& TextureLoader::getInstance()
+{
+    static TextureLoader instance;
+    return instance;
+}
+
+GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& caminho)
+{
+    // Verificar se a textura já foi carregada
+    if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
+        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+    }
+
+    // Carregar nova textura
+    GLuint id = Bubble::Arquivadores::TextureFromFile(caminho.c_str());
+    texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
+
+    return id;
+}
+
+GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* texture)
+{
+    GLuint ID{};
+    if (texture) {
+        FIMEMORY* fiMemory = FreeImage_OpenMemory(reinterpret_cast<BYTE*>(texture->pcData), texture->mWidth);
+        FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(fiMemory);
+
+        if (format != FIF_UNKNOWN) {
+            FIBITMAP* dib = FreeImage_LoadFromMemory(format, fiMemory);
+            if (dib) {
+                BYTE* data = FreeImage_GetBits(dib);
+                unsigned int width = FreeImage_GetWidth(dib);
+                unsigned int height = FreeImage_GetHeight(dib);
+                unsigned int bpp = FreeImage_GetBPP(dib);
+                int numChannels = bpp / 8;
+
+                // Usar GerenciadorDeTexturas para carregar a textura
+                ID = TextureFromFile(data, width, height, numChannels);
+
+                FreeImage_Unload(dib);
+            }
+            else {
+                Debug::emitir("Error", "Failed to load texture from memory.");
+            }
+        }
+        FreeImage_CloseMemory(fiMemory);
+    }
+    return ID;
+}

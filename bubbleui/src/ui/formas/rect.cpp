@@ -3,6 +3,17 @@
 #include "src/depuracao/assert.hpp"
 
 using namespace BubbleUI::Formas;
+// Dentro da classe Rect, adicione um buffer para instâncias
+unsigned int instanceVBO;
+
+// Vamos criar uma estrutura para armazenar as transformações de cada instância
+struct Instancia {
+    Vector2 posicao;
+    Vector2 tamanho;
+    Color cor;
+};
+
+std::vector<Instancia> instancias; // Armazena todas as instâncias
 
 Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
 {

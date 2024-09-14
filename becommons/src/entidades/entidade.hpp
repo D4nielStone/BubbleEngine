@@ -10,7 +10,7 @@
 #include <vector>
 #include <stdexcept>
 #include "rapidjson/document.h"
-
+#include <future>
 namespace Bubble {
 	namespace Entidades {
 		class BECOMMONS_DLL_API Entidade {
@@ -20,7 +20,7 @@ namespace Bubble {
 			Entidade();
 			~Entidade();
 			void atualizar() const;
-			void renderizar() const;
+			void renderizar();
 			std::string nome() const;
 			std::shared_ptr<std::string> nomeptr();
 			void carregarNode(const Node& node);
@@ -35,6 +35,7 @@ namespace Bubble {
 			bool ativado, selecionada{ false };
 			Entidade* pai{ nullptr };
 		private:
+			// Fila de tarefas para o segundo plano
 			Shader shader_padrao = Shader("assets/shaders/phong.vert", "assets/shaders/phong.frag");
 			Shader shader_outline = Shader("assets/shaders/outline.vert", "assets/shaders/outline.frag");
 			std::shared_ptr<Componentes::Transformacao> transformacao;

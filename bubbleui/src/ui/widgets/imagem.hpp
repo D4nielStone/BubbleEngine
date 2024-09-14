@@ -15,6 +15,7 @@ namespace BubbleUI
 			void renderizar() const override;
 			void defID(unsigned int newID);
 			Vector4 obtRect() const;
+			bool deveRenderizar{ true };
 		private:
 			unsigned int ID;
 			Vector2*posicao_ptr{ nullptr };

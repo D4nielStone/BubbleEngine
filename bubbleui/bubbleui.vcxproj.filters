@@ -87,9 +87,6 @@
     <ClInclude Include="src\ui\util\barra_menu.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="area_de_docking.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="src\ui\painel\jogo.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -162,9 +159,6 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\util\barra_menu.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="area_de_docking.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\painel\jogo.cpp">

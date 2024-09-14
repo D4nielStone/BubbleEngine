@@ -21,7 +21,6 @@ void Camera::configurar() {
     // Create a texture to attach to the framebuffer
     glGenTextures(1, &textureColorbuffer);
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-    glActiveTexture(GL_TEXTURE0);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 700, 480, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -50,22 +49,33 @@ void Camera::atualizarAspecto(float aspect)
 {
     aspecto = aspect;
 }
-void Camera::desenharFrame(Vector4 viewportRect) const
+void Camera::desenharFrame(const Vector4 &viewportRect) const
 {
     // Bind framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 
     // Redimensionar o texture color buffer
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w*0.8, viewportRect.h*0.8, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w * 0.8, viewportRect.h * 0.8, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     // Redimensionar o renderbuffer
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w*0.8, viewportRect.h*0.8);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w * 0.8, viewportRect.h * 0.8);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
+    // Check if framebuffer is still complete after resizing
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        Debug::emitir(Debug::Tipo::Erro, "Framebuffer incompleto após redimensionamento");
+    }
+
+    // Update the viewport after resizing
+    glViewport(0, 0, viewportRect.w, viewportRect.h);
+
+    // Clear buffers
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
+
 void Camera::renderizar() const
 {
     shader.use();

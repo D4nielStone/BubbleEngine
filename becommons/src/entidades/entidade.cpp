@@ -19,6 +19,8 @@ Entidade::Entidade()
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
 void Entidade::atualizar() const {
+
+    
     if (!ativado) return;
 
     for (const auto& componente : Componentes) 
@@ -29,46 +31,17 @@ void Entidade::atualizar() const {
     }
 }
 // Método para renderizar Entidade
-void Entidade::renderizar() const
+void Entidade::renderizar()
 {
     if (!ativado) return;
 
-    /*if (selecionada) // Se selecionada, desenha outline
+    transformacao->atualizar();
+    for (const auto& componente : Componentes)
     {
-        shader_outline.use();
-        shader_outline.setMat4("projection", Cena::CameraEditorAtual()->obterProjMatrix());
-        shader_outline.setMat4("view", Cena::CameraEditorAtual()->obterViewMatrix());
-
-        transformacao->definirShader(shader_outline);
-        transformacao->atualizar();
-        for (auto& componente : Componentes)
-        {
-            if (componente->nome() == "Renderizador")
-            {
-                componente->definirShader(shader_outline);
-                componente->atualizar();
-            }
-        }
-        transformacao->definirShader(shader_padrao);
-        transformacao->atualizar();
-        for (auto& componente : Componentes)
-        {
-            if (componente->nome() == "Renderizador")
-            {
-                componente->definirShader(shader_padrao);
-                componente->atualizar();
-            }
-        }
-    }
-    else // Se não estiver selecionada, renderiza normalmente
-    */{
-        transformacao->atualizar();
-        for (auto& componente : Componentes)
-        {
-            if(componente->nome() == "Renderizador")
+        if (componente->nome() == "Renderizador")
             componente->atualizar();
-        }
     }
+
 }
 
 std::string Entidade::nome() const
@@ -92,12 +65,12 @@ void Entidade::carregarNode(const Node& node)
     //{
     //transformacao->definirMatriz(node.transformacao);
     //}
-        for (auto& malha : node.malhas)
-        {
-            adicionarComponente(std::make_shared<Bubble::Componentes::Renderizador>(malha));
-        }
+    for (const auto& malha : node.malhas)
+    {
+        adicionarComponente(std::make_shared<Bubble::Componentes::Renderizador>(malha));
+    }
     
-    for (auto& no_filho : node.filhos)
+    for (const auto& no_filho : node.filhos)
     {
         auto entidade_filho = std::make_shared<Entidade>();
         entidade_filho->pai = this;

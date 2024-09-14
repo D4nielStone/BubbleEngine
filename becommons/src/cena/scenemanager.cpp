@@ -33,7 +33,6 @@ Scene* SceneManager::criarCenaPadrao(std::string Nome)
     Scene* scene = new Scene(Nome.c_str());
     
     scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
-    scene->camera_editor.transformacao->Rotacionar(0.f, -45.f, -45.f);
 
     return scene;
 }
@@ -89,14 +88,12 @@ void SceneManager::renderizarCenaAtual() const
         filaDeTarefas.front()(); // Executar a tarefa
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
-    glViewport(0, 0, viewportEditor.w, viewportEditor.h);
     glEnable(GL_DEPTH_TEST);
 
     cenaAtual()->camera_editor.desenharFrame(viewportEditor);
     cenaAtual()->renderizar(Editor);
     if (cenaAtual()->camera_principal)
     {
-    glViewport(0, 0, viewportJogo.w, viewportJogo.h);
         cenaAtual()->camera_principal->desenharFrame(viewportJogo);
         cenaAtual()->renderizar(Game);
     }
@@ -162,7 +159,7 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
 
 void Bubble::Cena::criarEntidade(std::string path)
 {
-    scenemanager->cenaAtual()->criarEntidade(std::make_unique<Arquivadores::Arquivo3d>(path));
+    scenemanager->cenaAtual()->criarEntidade(path);
 }
 
 void Bubble::Cena::criarCamera(glm::vec3 posicao)

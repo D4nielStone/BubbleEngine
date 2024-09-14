@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-glm::vec2 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
+static glm::vec3 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
     // Transformação para o espaço da câmera (view space)
     glm::vec4 clipSpacePos = projectionMatrix * viewMatrix * glm::vec4(worldPos, 1.0);
 
@@ -19,11 +19,11 @@ glm::vec2 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, 
     }
 
     // Mapeia as coordenadas NDC para coordenadas de tela
-    glm::vec2 screenPos;
+    glm::vec2 screenPos{};
     screenPos.x = (clipSpacePos.x * 0.5f + 0.5f) * screenWidth;
     screenPos.y = (1.0f - (clipSpacePos.y * 0.5f + 0.5f)) * screenHeight; // Inverte o Y para o espaço da tela
 
-    return screenPos;
+    return glm::vec3(screenPos, clipSpacePos.z);
 }
 // Função para selecionar objeto 3D
 static void abrirSelecionar()
@@ -53,7 +53,8 @@ static void abrirSelecionar()
     {
         Bubble::Cena::adicionarTarefaNaFila([ofn]()
             {
-                Bubble::Cena::criarEntidade(std::filesystem::path(ofn.lpstrFile).string());
+               // std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
+                Bubble::Cena::criarEntidade("C:/Users/DN/Downloads/9btvoxf8n0cg-3dt/Street environment_V01.obj");
             });
     }
 }
@@ -73,6 +74,7 @@ static void adicionarEsfera()
             Bubble::Cena::criarEntidade("assets/primitivas/modelos/sphere.dae");
         });
 }// Função para adicionar Camera
+// Adiciona camera
 static void adicionarCamera()
 {
     Bubble::Cena::adicionarTarefaNaFila([]()
@@ -112,7 +114,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     if (selecionado) {
         contexto->inputs->setInputMode(InputMode::Editor);
     }
-    else             contexto->inputs->setInputMode(InputMode::Default);
+    else if (contexto->inputs->getInputMode() != Game) contexto->inputs->setInputMode(Default);
 
     if (scenemanager->cenaAtual()->camera_principal)
     {
@@ -124,5 +126,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
             retangulo.h);
         posicao_da_camera.x = screen_pos.x;
         posicao_da_camera.y = screen_pos.y;
-    }
+        imagem_camera->deveRenderizar = true;
+    }else
+        imagem_camera->deveRenderizar = false;
 }

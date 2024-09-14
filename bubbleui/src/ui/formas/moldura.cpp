@@ -9,10 +9,10 @@ BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vec
 	linha_b = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_e = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_c = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
-	linha_d->defCor({ 0.35, 0.35, 0.35 });
-	linha_b->defCor({ 0.35, 0.35, 0.35 });
-	linha_e->defCor({ 0.55, 0.55, 0.55 });
-	linha_c->defCor({ 0.55, 0.55, 0.55 });
+	linha_d->defCor({ 0.35f, 0.35f, 0.35f });
+	linha_b->defCor({ 0.35f, 0.35f, 0.35f });
+	linha_e->defCor({ 0.55f, 0.55f, 0.55f });
+	linha_c->defCor({ 0.55f, 0.55f, 0.55f });
 }
 
 void BubbleUI::Formas::Moldura::atualizar()

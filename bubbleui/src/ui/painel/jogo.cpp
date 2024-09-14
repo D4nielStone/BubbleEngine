@@ -23,7 +23,7 @@ void BubbleUI::Paineis::Jogo::preAtualizacao()
     }
 
     if (selecionado) {
-        contexto->inputs->setInputMode(InputMode::Game);
+        contexto->inputs->setInputMode(Game);
     }
-    else             contexto->inputs->setInputMode(InputMode::Default);
+    else if(contexto->inputs->getInputMode() != Editor) contexto->inputs->setInputMode(Default);
 }

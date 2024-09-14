@@ -63,9 +63,15 @@ namespace BubbleUI {
         {
             bordaCima->atualizar(); bordaBaixo->atualizar();
             bordaEsq->atualizar(); bordaDir->atualizar();
+            corrigirLimite();
+            menuDeContexto->atualizar();
+            aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
         }
-
-        corrigirLimite();
+        else
+        {
+            menuDeContexto->esconder();
+            aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
+        }
 
         // Atualiza a moldura
         moldura.defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) });
@@ -80,19 +86,8 @@ namespace BubbleUI {
         }
         else if (esconderPopup)
         {
-            menuDeContexto  ->esconder();
-            esconderPopup= false;
-        }
-        menuDeContexto->atualizar();
-
-        if (!selecionado)
-        {
             menuDeContexto->esconder();
-            aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
-        }
-        else
-        {
-            aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
+            esconderPopup= false;
         }
 
         // Atualiza os widgets

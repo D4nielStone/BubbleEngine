@@ -17,7 +17,9 @@ namespace Bubble
         class BECOMMONS_DLL_API Scene
         {
         private:
+            Shader shader;
             const char* Name;
+            std::unordered_map<std::string, std::pair<std::vector<std::shared_ptr<Entidades::Entidade>>, Material>> entidadesParaRenderizar;
             std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
@@ -33,16 +35,16 @@ namespace Bubble
             Scene(const char* name);
             ~Scene();
             void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
-            void criarEntidade(std::unique_ptr<Arquivadores::Arquivo3d> arquivo_3d, const char* nome_entidade = "entidade sem nome");
+            void criarEntidade(const std::string &path, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(const InputMode modo) const;
-            void renderizarFilhos(std::shared_ptr<Entidades::Entidade> entidade) const;
             void atualizar(float aspectoDoEditor, float aspectoDoJogo);
             void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade);
             void carregar();
             void serializar(rapidjson::Document* doc) const;
             bool parse(rapidjson::Document& doc);
             std::string nome() const;
+            std::pair<std::future<void>, Arquivadores::Arquivo3d>tarefaCriarEntidade;
         };
     }
 }

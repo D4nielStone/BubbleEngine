@@ -111,8 +111,8 @@ namespace Bubble::Util
         {
                 "right.png",
                  "left.png",
-               "bottom.png",
                   "top.png",
+               "bottom.png",
                 "front.png",
                  "back.png"
         };

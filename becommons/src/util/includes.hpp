@@ -6,6 +6,7 @@
 #include <iostream>
 #include <becommons.hpp>
 #include "glm/glm.hpp"
+#include "src/arquivadores/shader.hpp"
 
 // Definição da estrutura Vector4
 struct Vector4

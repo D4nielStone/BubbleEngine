@@ -154,6 +154,7 @@
     <None Include="assets\shaders\skybox.vert" />
     <None Include="assets\shaders\texto.frag" />
     <None Include="assets\shaders\texto.vert" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -164,6 +165,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\texturas\cam.png" />
+    <Image Include="assets\texturas\cubemap.jpg" />
+    <Image Include="assets\texturas\rock.png" />
     <Image Include="ICON.ico" />
   </ItemGroup>
   <ItemGroup>

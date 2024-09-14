@@ -21,7 +21,6 @@ void Debug::emitir(Debug::Tipo t, std::string msg)
         break;
     }
     fmt::print(fg(fmt::color::white), "{}\n", msg);
-    msgs.push_back(std::pair(t, msg.c_str()));
 #endif // _DEBUG
 }
 

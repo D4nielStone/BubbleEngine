@@ -16,7 +16,7 @@ namespace Bubble {
             void atualizar() override;
             virtual void renderizar() const;
             void atualizarAspecto(float aspect);
-            void desenharFrame(Vector4 viewportRect) const;
+            void desenharFrame(const Vector4 &viewportRect) const;
             const float* obterViewMatrix();
             const float* obterProjMatrix();
             float ceu[3]{ 0.7f, 0.7f, 1.0f };

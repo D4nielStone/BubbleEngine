@@ -5,6 +5,7 @@
 #include <src/util/includes.hpp>
 
 std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
+GLuint shader_atual;
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 const char* ShaderException::what() const noexcept
 {
@@ -91,9 +92,13 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragmentShader);
 
     shaders.push_back(std::pair(std::pair(vertexPath, fragmentPath), ID));
-}
+}   
 void Shader::use() const {
-    glUseProgram(ID);
+    if (shader_atual != ID)
+    {
+        glUseProgram(ID);
+        shader_atual = ID;
+    }
 }
 void Shader::setBool(const std::string& name, bool value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);

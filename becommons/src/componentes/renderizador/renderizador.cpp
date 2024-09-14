@@ -11,9 +11,9 @@ void Renderizador::configurar()
     carregadov = true;
 }
 void Renderizador::atualizar()
-{
-    atualizarMaterial();       // Atualiza material    
-    desenharModelo();       // Desenha VAO
+{ 
+    glBindVertexArray(malha.VAO);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(malha.indices.size()), GL_UNSIGNED_INT, 0);
 }
 void Renderizador::configurarBuffers()
     {
@@ -63,21 +63,6 @@ void Renderizador::configurarBuffers()
         glBindVertexArray(0);
 
     }
-void Renderizador::desenharModelo() const
-    {
-        glBindVertexArray(malha.VAO);
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(malha.indices.size()), GL_UNSIGNED_INT, 0);
-    }
-void Renderizador::atualizarMaterial() const
-{
-    shader.use();
-    shader.setVec3("material.cor_difusa", malha.material.difusa.r, malha.material.difusa.g, malha.material.difusa.b);
-    shader.setVec3("material.cor_especular", malha.material.especular.r, malha.material.especular.g, malha.material.especular.b);
-    shader.setFloat("material.shininess", malha.material.shininess);
-    shader.setFloat("material.reflexao", malha.material.reflexao);
-    shader.setInt("skybox", 0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, Bubble::Util::obterSkyboxTexture());
-}
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)
 {
     Nome = "Renderizador";
@@ -89,4 +74,29 @@ Renderizador::~Renderizador()
     glDeleteVertexArrays(1, &malha.VAO);
     glDeleteBuffers(1, &malha.VBO);
     glDeleteBuffers(1, &malha.EBO);
+}
+
+Vertex& Bubble::Componentes::Renderizador::obterMalha()
+{
+    return malha;
+}
+void Bubble::Componentes::atualizarMaterial(Material material, Shader shader)
+{
+    Debug::emitir("Renderizador", "atualizando material: " + material.nome);
+    shader.use();
+    shader.setVec3("material.cor_difusa", material.difusa.r, material.difusa.g, material.difusa.b);
+    shader.setVec3("material.cor_especular", material.especular.r, material.especular.g, material.especular.b);
+    shader.setFloat("material.shininess", material.shininess);
+    shader.setFloat("material.reflexao", material.reflexao);
+    shader.setBool("textura_difusa_ativo", false);
+    shader.setInt("skybox", 0);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, Bubble::Util::obterSkyboxTexture());
+    for (size_t i = 0; i < material.texturas.size(); i++)
+    {
+        glActiveTexture(GL_TEXTURE1 + i);
+        glBindTexture(GL_TEXTURE_2D, material.texturas[i].ID);
+        shader.setInt(material.texturas[i].tipo, 1 + i);
+        shader.setBool(material.texturas[i].tipo + "_ativo", true);
+    }
+    glActiveTexture(GL_TEXTURE0);
 }

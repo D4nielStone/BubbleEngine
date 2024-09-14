@@ -12,67 +12,50 @@ std::vector<std::pair<Node, std::string>> arquivos;
 
 Arquivo3d::Arquivo3d() {}
 
-Arquivo3d::Arquivo3d(const std::string& caminho) {
-    carregar(caminho);
+Arquivo3d::Arquivo3d(const std::string& caminho) : PathCompleto(caminho) {
+    carregar();
 }
 
-Arquivo3d::Arquivo3d(const std::wstring& caminho) {
-    carregar(std::filesystem::path(caminho).string());
+Arquivo3d::Arquivo3d(const std::wstring& caminho) : PathCompleto(std::filesystem::path(caminho).string()) {
+    carregar();
 }
 
 
 std::vector<Textura> Arquivo3d::processarTextura(aiMaterial* mat, aiTextureType type, const std::string& typeName) {
     std::vector<Textura> textures;
+    auto& gerenciadorTexturas = TextureLoader::getInstance();
+
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
-        Textura texture;
+        Textura texture{};
 
         std::string filename = std::filesystem::path(str.C_Str()).filename().string();
         Debug::emitir("Importer", "Texture name: " + filename);
 
+        // Verifica textura interna
         if (str.C_Str()[0] == '*') {
             int textureIndex = std::atoi(str.C_Str() + 1);
             const aiTexture* texture_ = cena->mTextures[textureIndex];
 
-            if (texture_) {
-                // Verifica se é uma imagem comprimida no formato JPEG
-                FIMEMORY* fiMemory = FreeImage_OpenMemory(reinterpret_cast<BYTE*>(texture_->pcData), texture_->mWidth);
-                FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(fiMemory);
-
-                if (format != FIF_UNKNOWN) {
-                    FIBITMAP* dib = FreeImage_LoadFromMemory(format, fiMemory);
-                    if (dib) {
-                        BYTE* data = FreeImage_GetBits(dib);
-                        unsigned int width = FreeImage_GetWidth(dib);
-                        unsigned int height = FreeImage_GetHeight(dib);
-                        unsigned int bpp = FreeImage_GetBPP(dib);
-                        int numChannels = bpp / 8; // Número de canais
-
-                        texture.ID = TextureFromFile(data, width, height, numChannels);
-                        FreeImage_Unload(dib); // Libera a memória usada pelo FIBITMAP
-                    }
-                    else {
-                        Debug::emitir("Error", "Failed to load texture from memory.");
-                    }
-                }
-                FreeImage_CloseMemory(fiMemory); // Libera a memória usada pelo FIMEMORY
-            }
+            texture.ID = gerenciadorTexturas.carregarAiTexture(texture_);
         }
         else {
-            texture.ID = TextureFromFile(filename.c_str(), Caminho);  // Certifique-se de que "Caminho" esteja definido.
+            // Carrega textura usando o gerenciador de texturas.
+            texture.ID = gerenciadorTexturas.carregarTextura(filename);
         }
 
         texture.tipo = typeName;
-        texture.path = filename.c_str();  // Armazena a std::string diretamente.
+        texture.path = filename.c_str();
         textures.push_back(texture);
     }
     return textures;
 }
 
-void Arquivo3d::carregar(const std::string& caminho) {
+
+void Arquivo3d::carregar() {
     for (const auto& arquivo : arquivos) {      // Re-utiliza se já carregado
-        if (arquivo.second == caminho) {
+        if (arquivo.second == PathCompleto) {
             Debug::emitir(Debug::Alerta, "Arquivo 3D já existente, re-utilizando");
             RootNode = arquivo.first;
             Caminho = arquivo.second;
@@ -80,18 +63,23 @@ void Arquivo3d::carregar(const std::string& caminho) {
         }
     }
 
+    if(foi_carregado)
+    {
+        Debug::emitir("Importer", "Já foi carregado");
+        return;
+    }
     Assimp::Importer importador;
-    cena = importador.ReadFile(caminho, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_FlipUVs);
+    cena = importador.ReadFile(PathCompleto, aiProcess_Triangulate | aiProcess_JoinIdenticalVertices | aiProcess_FlipUVs);
 
     if (!cena || (cena->mFlags & AI_SCENE_FLAGS_INCOMPLETE) || !cena->mRootNode) {
         std::cerr << "ERROR::ASSIMP:: " << importador.GetErrorString() << std::endl;
         return;
     }
 
-    Caminho = std::filesystem::path(caminho).parent_path().string();
+    Caminho = std::filesystem::path(PathCompleto).parent_path().string();
 
     RootNode = processarNos(cena->mRootNode, 0); // Adiciona rootnode com seus filhos
-    arquivos.push_back(std::make_pair(RootNode, caminho));
+    arquivos.push_back(std::make_pair(RootNode, PathCompleto));
 }
 
 glm::mat4& ConvertToGLMMat4(const aiMatrix4x4& aiMat) {
@@ -201,7 +189,7 @@ Material Arquivo3d::processarMateriais(aiMaterial* material) {
         mat.reflexao = 0.0f; // Valor padrão de reflexão se não encontrado
     }
     // Lista de tipos de texturas a serem processadas
-    /*std::vector<std::pair<aiTextureType, std::string>> tiposDeTexturas = {
+    std::vector<std::pair<aiTextureType, std::string>> tiposDeTexturas = {
         { aiTextureType_DIFFUSE, "textura_difusa" },
         { aiTextureType_SPECULAR, "textura_specular" },
         { aiTextureType_AMBIENT, "textura_ambient" },
@@ -219,7 +207,7 @@ Material Arquivo3d::processarMateriais(aiMaterial* material) {
     for (const auto& tipo : tiposDeTexturas) {
         auto texturas = processarTextura(material, tipo.first, tipo.second);
         mat.texturas.insert(mat.texturas.end(), texturas.begin(), texturas.end());
-    }*/
+    }
 
     return mat;
 }

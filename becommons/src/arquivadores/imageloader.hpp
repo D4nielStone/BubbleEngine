@@ -3,11 +3,14 @@
 #include "unordered_map"
 #include "becommons.hpp"
 #include <freeimage.h>
+#include <assimp/scene.h>
+#include <glad/glad.h>
 
 class GLFWimage;
 namespace Bubble {
     namespace Arquivadores {
-        class BECOMMONS_DLL_API ImageLoader {
+        class BECOMMONS_DLL_API ImageLoader
+        {
         public:
             ImageLoader();
             ImageLoader(const std::string& filepath);
@@ -27,7 +30,24 @@ namespace Bubble {
             int width, height, channels;
             unsigned char* data;
         };
-        BECOMMONS_DLL_API unsigned int TextureFromFile(const char* path, const std::string& directory);
+        BECOMMONS_DLL_API unsigned int TextureFromFile(const std::string& directory);
         BECOMMONS_DLL_API unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int format);
+
+        class TextureLoader
+        {
+        public:
+            static TextureLoader& getInstance();
+            GLuint carregarTextura(const std::string& caminho);
+            GLuint carregarAiTexture(const aiTexture* texture);
+        private:
+            std::unordered_map<std::string, GLuint> texturasCarregadas;
+
+            // Construtor privado para Singleton
+            TextureLoader() {}
+
+            // Desabilitar cópia e atribuição
+            TextureLoader(const TextureLoader&) = delete;
+            void operator=(const TextureLoader&) = delete;
+        };
     }
 }

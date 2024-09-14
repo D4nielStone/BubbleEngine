@@ -12,10 +12,9 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	lista_paineis.push_back(std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{2, 31, contexto->tamanho.width/3 - 5, contexto->tamanho.height - 31 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31.f + contexto->tamanho.height / 2,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height/2 - 32 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 3 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height /2 }));
-	lista_paineis.push_back(std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ (contexto->tamanho.width / 3)*2 + 5.f, 31,  contexto->tamanho.width / 3 - 5, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ 0, 31.f,  contexto->tamanho.width/2, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f, 31.f,  contexto->tamanho.width / 2, contexto->tamanho.height - 31 }));
+	lista_paineis.push_back(std::make_shared<Paineis::Depurador>(contexto, Vector4{0, 100, 100, 30}));
 }
 
 // Seleciona o painel
@@ -67,7 +66,6 @@ void BubbleUI::Manager::renderizar() const
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, contexto->tamanho.width, contexto->tamanho.height);
 
-	barra_de_menu.renderizar();
 	glEnable(GL_SCISSOR_TEST);
 	for (auto& painel : lista_paineis)
 	{
@@ -75,6 +73,7 @@ void BubbleUI::Manager::renderizar() const
 	}
 	glDisable(GL_SCISSOR_TEST);
 
+	barra_de_menu.renderizar();
 }
 
 // Atualiza paineis

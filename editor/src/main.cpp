@@ -10,7 +10,7 @@ using namespace Bubble::Nucleo;
 #define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR lpCmdLine, int nCmdShow)
 #endif
 
-int INIT 
+static int INIT
 {
     Bubble::Nucleo::Engine engine;
 

@@ -49,6 +49,7 @@
     <None Include="assets\shaders\linha.frag" />
     <None Include="assets\shaders\outline.frag" />
     <None Include="assets\shaders\outline.vert" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -57,6 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="ICON.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\texturas\cam.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\texturas\rock.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\texturas\cubemap.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

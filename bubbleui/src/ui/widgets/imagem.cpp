@@ -63,6 +63,8 @@ void BubbleUI::Widgets::Imagem::atualizar()
 // Atualiza o retângulo do corpo_do_widget para a imagem
 void BubbleUI::Widgets::Imagem::renderizar() const
 {
+    if (!deveRenderizar)
+        return;
     Vector4f rectf = paraNDC();
     shader.use();
     shader.setVec2("quadrado.posicao", rectf.x, rectf.y);
