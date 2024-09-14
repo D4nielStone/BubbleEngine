@@ -167,6 +167,7 @@
   <ItemGroup>
     <Image Include="assets\texturas\cam.png" />
     <Image Include="assets\texturas\cubemap.jpg" />
+    <Image Include="assets\texturas\icons\check.png" />
     <Image Include="assets\texturas\rock.png" />
     <Image Include="ICON.ico" />
   </ItemGroup>

@@ -150,6 +150,7 @@
     <ClInclude Include="src\ui\painel\entidades.hpp" />
     <ClInclude Include="src\ui\painel\aba.hpp" />
     <ClInclude Include="src\ui\painel\editor.hpp" />
+    <ClInclude Include="src\ui\widgets\checkbox.hpp" />
     <ClInclude Include="src\ui\widgets\imagem.hpp" />
     <ClInclude Include="src\ui\painel\depurador.hpp" />
     <ClInclude Include="src\ui\formas\colisao2d.hpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="src\ui\painel\entidades.cpp" />
     <ClCompile Include="src\ui\painel\aba.cpp" />
     <ClCompile Include="src\ui\painel\editor.cpp" />
+    <ClCompile Include="src\ui\widgets\checkbox.cpp" />
     <ClCompile Include="src\ui\widgets\imagem.cpp" />
     <ClCompile Include="src\ui\painel\depurador.cpp" />
     <ClCompile Include="src\ui\formas\colisao2d.cpp" />

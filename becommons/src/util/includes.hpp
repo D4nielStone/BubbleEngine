@@ -137,6 +137,11 @@ struct Vector4f
 struct Vector2
 {
     int x = 0, y = 0;
+    // Operador de soma (+)
+    Vector2 operator+(const Vector2& other) const
+    {
+        return { x + other.x && y + other.y };
+    }
     // Operador de igualdade (==)
     bool operator==(const Vector2& other) const
     {

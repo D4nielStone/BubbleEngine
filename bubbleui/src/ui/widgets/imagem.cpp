@@ -54,6 +54,7 @@ void BubbleUI::Widgets::Imagem::renderizar() const
     shader.setVec2("quadrado.posicao", rectf.x, rectf.y);
     shader.setVec2("quadrado.tamanho", rectf.z, rectf.w);
     shader.setInt("textura", 0);
+    shader.setBool("flip", flip);
 
     glBindTexture(GL_TEXTURE_2D, ID);
     glBindVertexArray(rect_vertex.VAO);

@@ -15,6 +15,7 @@ namespace BubbleUI
 			Rect() = default;
 			Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect);
 			Vector4 obtRect() const;
+			Vector4f obtRectNDC() const;
 			void defTam(const Vector2 &tam);
 			void defPos(const Vector2 &pos);
 			void adiTam(const Vector2 &tam);

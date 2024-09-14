@@ -26,6 +26,11 @@ Vector4 Rect::obtRect() const
     return retangulo;
 }
 
+Vector4f BubbleUI::Formas::Rect::obtRectNDC() const
+{
+    return coord_ndc;
+}
+
 void Rect::defTam(const Vector2 &tam)
 {
     retangulo.w = tam.x;

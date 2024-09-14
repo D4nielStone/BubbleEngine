@@ -9,6 +9,7 @@ BubbleUI::Paineis::Jogo::Jogo(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bub
 {
 	Nome = "Jogo";
 	renderizarCorpo = false;
+    buffer->flip = true;
 	configurar(ctx, rect);
 	adicionarWidget(buffer);
 }

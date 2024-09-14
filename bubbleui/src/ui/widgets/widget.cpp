@@ -6,5 +6,5 @@ void BubbleUI::Widget::defPainel(Painel* painel)
 	this->painel = painel;	
 	moldura = Formas::Moldura(painel->obterContexto());
 	colisao = Colisao2d({}, painel->obterContexto());
-	inputs = inputs;
+	inputs = painel->obterContexto()->inputs;
 }

@@ -88,6 +88,7 @@ imagem_camera(std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/cam.p
 scenemanager(scenemanager)
 {
 	Nome = "Editor";
+    buffer->flip = true;
 	renderizarCorpo = false;
 	configurar(ctx, rect);
 	adicionarWidget(buffer);

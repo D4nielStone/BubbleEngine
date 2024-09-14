@@ -46,16 +46,23 @@ namespace Bubble::Cena
             camera_editor.renderizar();
             skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
         }
-        else {
+        else if(camera_principal->meuObjeto->ativado) {
             camera_principal->renderizar();
             skybox->renderizar(camera_principal->obterProjMatrixMat(), camera_principal->obterViewMatrixMat());
         }
-        for (auto& material : entidadesParaRenderizar)
+        else
         {
-            Componentes::atualizarMaterial(material.second.second, shader);
-            for (auto& malha : material.second.first)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            return;
+        }
+        for (auto& pair : entidadesParaRenderizar)
+        {
+            Componentes::atualizarMaterial(pair.second.second, shader);
+            for (auto& entidade : pair.second.first)
             {
-                malha->renderizar();
+                if (!entidade->ativado || !entidade->ativado_root)
+                    continue;
+                entidade->renderizar();
             }
         }
     }
@@ -72,10 +79,17 @@ namespace Bubble::Cena
             camera_principal->atualizarAspecto(aspectoDoJogo);
             camera_principal->atualizar();
         }
-        for (auto& obj : Entidades) {
+        bool existe_obj_selecionado{ false };
+        for (auto& obj : Entidades) 
+        {
+            // Verifica seleção e ativação do obj
+            if (obj->selecionada && !existe_obj_selecionado) { entidade_selecionada = obj; existe_obj_selecionado = true; }
+            // Ignora se não ativo
+            if (!obj->ativado || !obj->ativado_root)
+                continue;
             obj->atualizar();
-            if (obj->selecionada)entidade_selecionada = obj;
-            if (obj->obterComponente("Camera")) {
+            // defini camera atual
+            if ((!camera_principal || obj->selecionada)&& obj->obterComponente("Camera")) {
                 camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
             }
             atualizarFilhos(obj);

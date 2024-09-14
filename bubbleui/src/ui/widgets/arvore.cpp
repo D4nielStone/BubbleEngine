@@ -30,9 +30,8 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) 
 void BubbleUI::Widgets::Arvore::atualizar()
 {
     if (label_shared)
-    {
-        frase = "[+]" + (*label_shared);
-    }
+        frase = "   " + (*label_shared);
+    
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
 
@@ -81,7 +80,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
             if (inputs->mouseEnter == GLFW_PRESS)
             {
                 if(retorno)
-                *retorno = true;
+                    *retorno = aberto;
                 moldura.ocultar_linhas = false;
                 if (aberto && gatilho_click) { aberto = false; gatilho_click = false; }
                 else if (gatilho_click) {

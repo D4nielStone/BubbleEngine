@@ -91,7 +91,6 @@ namespace BubbleUI {
         }
 
         // Atualiza os widgets
-        posicaoWidget = { 0, 0 };
         preAtualizacao();
         aba->atualizar();
         for (auto& widget : lista_widgets)

@@ -89,7 +89,7 @@ void SceneManager::renderizarCenaAtual() const
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
     glEnable(GL_DEPTH_TEST);
-
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     cenaAtual()->camera_editor.desenharFrame(viewportEditor);
     cenaAtual()->renderizar(Editor);
     if (cenaAtual()->camera_principal)

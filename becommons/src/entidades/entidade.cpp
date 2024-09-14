@@ -19,9 +19,18 @@ Entidade::Entidade()
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
 void Entidade::atualizar() const {
-
     
-    if (!ativado) return;
+    if (!ativado || !ativado_root)
+    {
+        for (auto& filho : filhos)
+            filho->ativado_root = false;
+        return;
+    }
+    else
+    {
+        for (auto& filho : filhos)
+            filho->ativado_root = true;
+    }
 
     for (const auto& componente : Componentes) 
     {
@@ -33,7 +42,7 @@ void Entidade::atualizar() const {
 // Método para renderizar Entidade
 void Entidade::renderizar()
 {
-    if (!ativado) return;
+    if (!ativado || !ativado_root) return;
 
     transformacao->atualizar();
     for (const auto& componente : Componentes)

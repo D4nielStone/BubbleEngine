@@ -32,7 +32,7 @@ namespace Bubble {
 			void adicionarComponente(std::shared_ptr<Comum::Componente> componente);
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
-			bool ativado, selecionada{ false };
+			bool ativado{true}, selecionada{false}, ativado_root{true};
 			Entidade* pai{ nullptr };
 		private:
 			// Fila de tarefas para o segundo plano
