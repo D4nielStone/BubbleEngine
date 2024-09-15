@@ -39,8 +39,8 @@ void BubbleUI::Widgets::Imagem::atualizar()
     rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + 1, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
     if (posicao_ptr)
     {
-        rect.x += posicao_ptr->x - rect.w/2;
-        rect.y += posicao_ptr->y - rect.h/2;
+        rect.x += posicao_ptr->x + rect.w/2;
+        rect.y += posicao_ptr->y + rect.h/2;
     }
 }
 

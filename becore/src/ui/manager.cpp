@@ -20,7 +20,7 @@ void BubbleUI::Manager::iniPaineisPadrao()
 	lista_paineis.push_back(
 		std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 - margem}));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f, contexto->tamanho.width / 2 - margem, contexto->tamanho.height/4 }));
+		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f, contexto->tamanho.width / 4 - margem, contexto->tamanho.height/2 - margem }));
 }
 
 // Seleciona o painel

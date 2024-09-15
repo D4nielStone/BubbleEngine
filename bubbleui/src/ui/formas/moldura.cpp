@@ -22,13 +22,13 @@ void BubbleUI::Formas::Moldura::atualizar()
 	if (ocultar_linhas)
 		return;
 	linha_d->defPos({
-			retangulo.x + retangulo.w,
+			retangulo.x + retangulo.w + 1,
 			retangulo.y,
 			static_cast<int>(retangulo.x + retangulo.w),
 			static_cast<int>(retangulo.y + retangulo.h)
 		});
 	linha_e->defPos({
-			retangulo.x + 1,
+			retangulo.x - 1,
 			retangulo.y,
 			static_cast<int>(retangulo.x),
 			static_cast<int>(retangulo.y + retangulo.h)
@@ -41,7 +41,7 @@ void BubbleUI::Formas::Moldura::atualizar()
 		});
 	linha_b->defPos({
 			retangulo.x,
-			retangulo.y + retangulo.h,
+			retangulo.y + retangulo.h + 1,
 			static_cast<int>(retangulo.x + retangulo.w),
 			static_cast<int>(retangulo.y + retangulo.h)
 		});
