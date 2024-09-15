@@ -4,7 +4,6 @@
 // Construtor da classe Arvore, inicializa os membros da classe.
 BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorno)
 {
-    // Define a frase que será exibida na árvore, precedida por "[+]"
     frase = "[+]" + l;
 
     // Define a resolução padrão para o texto
@@ -16,8 +15,8 @@ BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorn
 // Construtor da classe Arvore, inicializa os membros da classe.
 BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 {
-    // Define a frase que será exibida na árvore, precedida por "[+]"
     label_shared = l;
+
     frase = "[+]";
     // Define a resolução padrão para o texto
     resolucao = 12;
@@ -29,8 +28,12 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) 
 // Método para atualizar o estado do widget Arvore a cada frame
 void BubbleUI::Widgets::Arvore::atualizar()
 {
+    moldura.defCor(cor);
     if (label_shared)
-        frase = "   " + (*label_shared);
+        if(aberto)
+        frase = "[-]" + (*label_shared);
+        else
+        frase = "[+]" + (*label_shared);
     
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
@@ -61,15 +64,15 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Reseta gatilho de click
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true;
 
+    moldura.defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
+    moldura.ocultar_linhas = true;
     if (!colisao.mouseEmCima() && painel->selecionado)
     {
-        moldura.defCor(cor);
         if (inputs->mouseEnter == GLFW_PRESS)
         {
             if(retorno)
             *retorno = false;
-            moldura.ocultar_linhas = true;
         }
     }
     else if (painel->selecionado)

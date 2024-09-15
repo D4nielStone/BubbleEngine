@@ -33,14 +33,14 @@ void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obterRetangulo().w - 2;
-        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y - 2;
+        rect.w = painel->obterRetangulo().w - 1;
+        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y - 1;
     }
-    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + 1, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
+    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
     if (posicao_ptr)
     {
-        rect.x += posicao_ptr->x - rect.w/2;
-        rect.y += posicao_ptr->y - rect.h/2;
+        rect.x += posicao_ptr->x + rect.w / static_cast<float>(2);
+        rect.y += posicao_ptr->y + rect.h / static_cast<float>(2);
     }
 }
 

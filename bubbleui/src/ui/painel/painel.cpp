@@ -105,7 +105,7 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Renderização
     void Painel::renderizar() const
     {
-        glScissor(retangulo.x, (contexto->tamanho.height - (static_cast<int>(retangulo.y) - 1) - retangulo.h), retangulo.w, retangulo.h + 4);
+        glScissor(retangulo.x -1, (contexto->tamanho.height - (static_cast<int>(retangulo.y) + 1) - retangulo.h), retangulo.w + 2, retangulo.h + 2);
 
         moldura.renderizar();
         preRenderizacao();
