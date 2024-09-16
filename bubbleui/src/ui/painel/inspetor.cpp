@@ -27,7 +27,11 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
     for (const auto& componente : entidade_selecionada->listaDeComponentes())
     {
-        adicionarWidget(std::make_shared<Widgets::Arvore>(componente->nome(), nullptr));
+        auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr);
+        adicionarWidget(arvore);
+        auto check_box = std::make_shared<Widgets::CheckBox>(nullptr);
+        check_box->quebrarLinha = true;
+        arvore->adiFilho(check_box);
     }
 }
 

@@ -11,8 +11,7 @@ namespace BubbleUI
 			void atualizar() override;
 			void renderizar() const override;
 			void defPainel(Painel* painel) override;
-			void adiFilho(std::shared_ptr<Arvore> filho);
-			std::shared_ptr<Arvore> arvore_pai{ nullptr };
+			void adiFilho(std::shared_ptr<Widget> filho);
 		private:
 			std::vector<std::shared_ptr<Widget>> filhos;
 			Color cor;

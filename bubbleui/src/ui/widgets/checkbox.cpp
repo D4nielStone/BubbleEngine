@@ -34,7 +34,10 @@ void BubbleUI::Widgets::CheckBox::atualizar()
         }
     }
     moldura.atualizar();
-    painel->posicaoWidget.x += size + painel->widgetPadding.x;
+    if (quebrarLinha)
+        painel->posicaoWidget.y += size + painel->widgetPadding.x * 2;
+    else
+        painel->posicaoWidget.x += size + painel->widgetPadding.x;
 }
 
 void BubbleUI::Widgets::CheckBox::renderizar() const

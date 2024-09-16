@@ -158,7 +158,7 @@ void BubbleUI::Widgets::Arvore::defPainel(Painel* painel)
 }
 
 // Método para adicionar um filho à árvore
-void BubbleUI::Widgets::Arvore::adiFilho(std::shared_ptr<Arvore> filho)
+void BubbleUI::Widgets::Arvore::adiFilho(std::shared_ptr<Widget> filho)
 {
     // Define a árvore pai do filho como a instância atual
     filho->arvore_pai = shared_from_this();
