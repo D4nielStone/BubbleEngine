@@ -14,7 +14,7 @@ namespace BubbleUI
 			void adiFilho(std::shared_ptr<Arvore> filho);
 			std::shared_ptr<Arvore> arvore_pai{ nullptr };
 		private:
-			std::vector<std::shared_ptr<Arvore>> filhos;
+			std::vector<std::shared_ptr<Widget>> filhos;
 			Color cor;
 			std::shared_ptr<std::string> label_shared;
 			bool aberto{ false }, * retorno{ nullptr }, gatilho_click{ false };

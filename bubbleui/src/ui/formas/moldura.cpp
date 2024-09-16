@@ -43,7 +43,7 @@ void BubbleUI::Formas::Moldura::atualizar()
 			retangulo.x,
 			retangulo.y + retangulo.h + 1,
 			static_cast<int>(retangulo.x + retangulo.w),
-			static_cast<int>(retangulo.y + retangulo.h)
+			static_cast<int>(retangulo.y + retangulo.h+1)
 		});
 	linha_b->atualizar();
 	linha_c->atualizar();

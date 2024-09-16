@@ -51,7 +51,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     // Posiciona o box dentro do widget, com padding do pai
     box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;
     box_pos.y = painel->obterRetangulo().y + painel->widgetPadding.y + painel->posicaoWidget.y;
-    box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2;
+    box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2 - painel->posicaoWidget.x;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // não renderiza se não visível
@@ -101,7 +101,7 @@ void BubbleUI::Widgets::Texto::renderizar_texto()
     }
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
-    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y) };
+    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y + 1) };
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)

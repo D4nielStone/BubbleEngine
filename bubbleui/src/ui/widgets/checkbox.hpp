@@ -14,7 +14,7 @@ namespace BubbleUI
 			Shader shaderImg = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
 			void renderizarImg() const;
 			bool* retorno{ nullptr }, gatilho{ false }, deveRenderizar{ true };
-			int size{ 20 }; unsigned int IDimagem;
+			int size{ 22 }; unsigned int IDimagem;
 		};
 	}
 }
