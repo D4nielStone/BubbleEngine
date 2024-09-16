@@ -1,3 +1,4 @@
+#pragma once
 #include "texto.hpp"
 namespace BubbleUI
 {

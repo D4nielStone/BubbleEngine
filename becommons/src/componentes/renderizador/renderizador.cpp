@@ -13,7 +13,12 @@ void Renderizador::configurar()
 void Renderizador::atualizar()
 { 
     glBindVertexArray(malha.VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(malha.indices.size()), GL_UNSIGNED_INT, 0);
+    GLenum mode{};
+    if (visualizarWireFrame)
+        mode = GL_LINE_LOOP;
+    else
+        mode = GL_TRIANGLES;
+    glDrawElements(mode, static_cast<GLsizei>(malha.indices.size()), GL_UNSIGNED_INT, 0);
 }
 void Renderizador::configurarBuffers()
     {

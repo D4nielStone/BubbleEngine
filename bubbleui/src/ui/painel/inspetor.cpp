@@ -29,9 +29,14 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     {
         auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr);
         adicionarWidget(arvore);
-        auto check_box = std::make_shared<Widgets::CheckBox>(nullptr);
-        check_box->quebrarLinha = true;
-        arvore->adiFilho(check_box);
+
+        if (dynamic_cast<Bubble::Componentes::Renderizador*>(componente.get()))
+        {
+            auto renderer = static_cast<Bubble::Componentes::Renderizador*>(componente.get());
+            auto check_box = std::make_shared<Widgets::CheckBox>(&renderer->visualizarWireFrame, "Visualizar como wireframe");
+            check_box->quebrarLinha = true;
+            arvore->adiFilho(check_box);
+        }
     }
 }
 

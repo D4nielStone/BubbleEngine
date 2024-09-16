@@ -2,8 +2,9 @@
 #include "src/ui/painel/painel.hpp"
 #include <src/arquivadores/imageloader.hpp>
 
-BubbleUI::Widgets::CheckBox::CheckBox(bool *retorno) : retorno(retorno)
+BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto) : retorno(retorno)
 {
+    frase = texto;
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
 }
@@ -14,6 +15,14 @@ void BubbleUI::Widgets::CheckBox::atualizar()
     moldura.defTam({ size, size });
     colisao.defRect(moldura.obtRect());
 
+    // salva posicao widget y
+    if (!frase.empty())
+    {
+        auto posicao_antiga = painel->posicaoWidget.y;
+        painel->posicaoWidget.x += size + painel->widgetPadding.x;
+        Texto::atualizar();
+        painel->posicaoWidget.y = posicao_antiga;
+    }
     if (inputs->mouseEnter == GLFW_RELEASE)
         gatilho = false;
 
@@ -43,9 +52,12 @@ void BubbleUI::Widgets::CheckBox::atualizar()
 void BubbleUI::Widgets::CheckBox::renderizar() const
 {
     moldura.renderizar();
+    if (!frase.empty())
+        Texto::renderizar();
     if (!deveRenderizar)
         return;
     renderizarImg();
+
 }
 
 void BubbleUI::Widgets::CheckBox::renderizarImg() const

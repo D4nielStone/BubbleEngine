@@ -2,6 +2,8 @@
 #include "src/ui/painel/painel.hpp"
 #include "src/depuracao/debug.hpp"
 
+// em src/ui/widgets/texto.cpp
+
 using namespace Bubble::Arquivadores;
 
 BubbleUI::Widgets::Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padding({ 0, 0 })
@@ -22,7 +24,7 @@ void BubbleUI::Widgets::Texto::atualizar()
 {
     // Renderiza texto de label_shared, o ponteiro
     if (label_shared) frase = *label_shared;
-    renderizar_texto();
+    renderizar_texto(frase);
 }
 
 // Método para renderizar o texto
@@ -46,7 +48,7 @@ void BubbleUI::Widgets::Texto::renderizar() const
 }
 
 // Método para atualizar retangulo das letras do texto
-void BubbleUI::Widgets::Texto::renderizar_texto()
+void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
 {
     // Posiciona o box dentro do widget, com padding do pai
     box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;

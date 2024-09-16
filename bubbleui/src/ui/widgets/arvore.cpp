@@ -48,7 +48,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
     }
 
     // Atualiza o texto
-    renderizar_texto();
+    renderizar_texto(frase);
 
     // Restaura o padding original do pai
     painel->widgetPadding.y = padding_antigoy;
