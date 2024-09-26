@@ -60,8 +60,6 @@ namespace Bubble::Cena
             Componentes::atualizarMaterial(pair.second.second, shader);
             for (auto& entidade : pair.second.first)
             {
-                if (!entidade->ativado || !entidade->ativado_root)
-                    continue;
                 entidade->renderizar();
             }
         }

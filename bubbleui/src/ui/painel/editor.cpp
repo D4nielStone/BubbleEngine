@@ -114,8 +114,4 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
         contexto->inputs->setInputMode(InputMode::Editor);
     }
     else if (contexto->inputs->getInputMode() != Game) contexto->inputs->setInputMode(Default);
-
-    if (scenemanager->cenaAtual()->camera_principal)
-    {
-    }
 }
