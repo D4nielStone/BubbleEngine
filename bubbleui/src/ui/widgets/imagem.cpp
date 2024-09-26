@@ -14,6 +14,14 @@ BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, 
     rect.h *= static_cast<float>(size_percentage) / 100;
 }
 
+BubbleUI::Widgets::Imagem::Imagem(const std::string& path, const Vector2& size)
+{
+    auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
+    ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
+    rect.w = size.x;
+    rect.h = size.y;
+}
+
 
 // Deve transformar coordenadas pixel para NDC
 Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
@@ -37,11 +45,21 @@ void BubbleUI::Widgets::Imagem::atualizar()
         rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y - 1;
     }
     rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
+    if (padding)
+    {
+        rect.x += painel->widgetPadding.x;
+        rect.y += painel->widgetPadding.y;
+    }
     if (posicao_ptr)
     {
         rect.x += posicao_ptr->x + rect.w / static_cast<float>(2);
         rect.y += posicao_ptr->y + rect.h / static_cast<float>(2);
     }
+
+    if (quebrarLinha)
+        painel->posicaoWidget.y += rect.y + painel->widgetPadding.x * 2;
+    else
+        painel->posicaoWidget.x += rect.w + painel->widgetPadding.x;
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem

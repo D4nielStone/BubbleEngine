@@ -79,26 +79,17 @@ void BubbleUI::Manager::renderizar() const
 	glDisable(GL_SCISSOR_TEST);
 }
 
-#include "src/threadpool.hpp" // Assumindo que você salvou a implementação do thread pool em um arquivo
-
 void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	verificarSelecionado();
 
-	std::vector<std::future<void>> futures;
 
 	// Atualiza cada painel de forma assíncrona usando o future
 	for (const auto& painel : lista_paineis) {
-		futures.push_back(std::async(std::launch::async, [painel](){
 			painel->atualizar();
-			}));
 	}
 
-	// Aguarda todas as tarefas terminarem
-	for (auto& f : futures) {
-		f.get();
-	}
 }
 
 // Verifica Painel selecionado

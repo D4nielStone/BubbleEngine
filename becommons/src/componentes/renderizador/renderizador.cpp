@@ -87,7 +87,7 @@ Vertex& Bubble::Componentes::Renderizador::obterMalha()
 }
 void Bubble::Componentes::atualizarMaterial(Material material, Shader shader)
 {
-    Debug::emitir("Renderizador", "atualizando material: " + material.nome);
+    //Debug::emitir("Renderizador", "atualizando material: " + material.nome);
     shader.use();
     shader.setVec3("material.cor_difusa", material.difusa.r, material.difusa.g, material.difusa.b);
     shader.setVec3("material.cor_especular", material.especular.r, material.especular.g, material.especular.b);

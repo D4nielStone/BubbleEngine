@@ -8,7 +8,7 @@
 
 using namespace Bubble::Entidades;
 CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
-    : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(0.8f), sensibilidadeDeRotacao(1.f),
+    : alvoCamera(0, 0, 0), inputs(input), velocidadeDeMovimento(100.f), sensibilidadeDeRotacao(100.f),
     yaw(-90.0f), pitch(0.0f) {
     FOV = 75.f;
     aspecto = 4.0f / 3.0f;
@@ -18,7 +18,7 @@ CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
     atualizarDirecao();
 }
 CameraEditor::CameraEditor()
-    : alvoCamera(0, 0, 0), velocidadeDeMovimento(0.8f), sensibilidadeDeRotacao(1.f),
+    : alvoCamera(0, 0, 0), velocidadeDeMovimento(100.f), sensibilidadeDeRotacao(100.f),
     yaw(-90.0f), pitch(0.0f) {
     FOV = 75.f;
     aspecto = 4.0f / 3.0f;
@@ -29,6 +29,8 @@ CameraEditor::CameraEditor()
 }
 void CameraEditor::atualizar()
 {
+    deltaTime = glfwGetTime() - tempoPassado;
+    tempoPassado = glfwGetTime();
     if (inputs && inputs->getInputMode() == Editor)
     {
         // Movimento
@@ -37,11 +39,11 @@ void CameraEditor::atualizar()
             sin(glm::radians(yaw)) * cos(glm::radians(pitch))));
         if (inputs->isKeyPressed(Key::W))
         {
-            transformacao->Move(frente * (velocidadeDeMovimento));
+            transformacao->Move(frente * static_cast<float>(velocidadeDeMovimento * deltaTime));
         }
         if (inputs->isKeyPressed(Key::S))
         {
-          transformacao->Move(-frente * (velocidadeDeMovimento));
+          transformacao->Move(-frente * static_cast<float>(velocidadeDeMovimento * deltaTime));
         }
         if (inputs->isKeyPressed(Key::A))
         {
@@ -55,26 +57,26 @@ void CameraEditor::atualizar()
         // Rotação
         if (inputs->isKeyPressed(Key::UP))
         {
-            pitch += sensibilidadeDeRotacao;
+            pitch += sensibilidadeDeRotacao* deltaTime;
             if (pitch > 89.0f)
                 pitch = 89.0f;
             atualizarDirecao();
         }
         if (inputs->isKeyPressed(Key::DOWN))
         {
-            pitch -= sensibilidadeDeRotacao;
+            pitch -= sensibilidadeDeRotacao* deltaTime;
             if (pitch < -89.0f)
                 pitch = -89.0f;
             atualizarDirecao();
         }
         if (inputs->isKeyPressed(Key::LEFT))
         {
-            yaw -= sensibilidadeDeRotacao;
+            yaw -= sensibilidadeDeRotacao* deltaTime;
             atualizarDirecao();
         }
         if (inputs->isKeyPressed(Key::RIGHT))
         {
-            yaw += sensibilidadeDeRotacao;
+            yaw += sensibilidadeDeRotacao* deltaTime;
             atualizarDirecao();
         }
     }

@@ -20,11 +20,13 @@ bool Engine::inicializacao()
             Debug::emitir(Debug::Erro, "GLFW não inicializado");
             return false;
         }
+        // dicas de janela
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        //glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
-        glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1-alpha", NULL, NULL);
-        glfwMaximizeWindow(glfwWindow);
+        glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor v0.1-alpha GL_3.1", NULL, NULL);
+        //glfwMaximizeWindow(glfwWindow);
 
         glfwMakeContextCurrent(glfwWindow);
 
@@ -35,7 +37,7 @@ bool Engine::inicializacao()
         }
         // define o ícone da janela
         auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
-        GLFWimage icone = icone_.converterParaGlfw();
+        const GLFWimage icone = icone_.converterParaGlfw();
 
         if (icone_.carregado)
         {

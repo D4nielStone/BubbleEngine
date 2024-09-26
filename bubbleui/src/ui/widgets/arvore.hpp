@@ -1,4 +1,5 @@
 #pragma once
+#include "imagem.hpp"
 #include "texto.hpp"
 namespace BubbleUI
 {
@@ -9,6 +10,7 @@ namespace BubbleUI
 		public:
 			Arvore(std::string label_shared, bool* retorno);
 			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno);
+			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno, const std::string &imagePath);
 			void atualizar() override;
 			void renderizar() const override;
 			void defPainel(Painel* painel) override;
@@ -17,6 +19,7 @@ namespace BubbleUI
 			std::vector<std::shared_ptr<Widget>> filhos;
 			Color cor;
 			std::shared_ptr<std::string> label_shared;
+			std::unique_ptr<Imagem> icone{ nullptr };
 			bool aberto{ false }, * retorno{ nullptr }, gatilho_click{ false };
 		};
 	}

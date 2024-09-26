@@ -26,6 +26,7 @@ namespace Bubble {
 			void atualizar() override;
 			void renderizar() const override;
 			void olharPara(glm::vec3 pov);
+			double tempoPassado{ 0.0 }, deltaTime{ 0.0 };
 		};
 	}
 }

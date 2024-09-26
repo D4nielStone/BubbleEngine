@@ -4,37 +4,48 @@
 // Construtor da classe Arvore, inicializa os membros da classe.
 BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorno)
 {
-    frase = "[+]" + l;
+    frase = l;
 
     // Define a resolução padrão para o texto
     resolucao = 12;
 
     // Define o padding (espaçamento) ao redor do texto
-    letra_padding = { 5, 4 };
+    letra_padding = { 4, 4 };
+}
+BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::string& imagePath)
+    : retorno(retorno)
+{
+    icone = std::make_unique<Imagem>(imagePath, Vector2{20, 20});
+    icone->padding = true;
+
+    label_shared = label;
+
+    frase = "";
+    // Define a resolução padrão para o texto
+    resolucao = 12;
+
+    // Define o padding (espaçamento) ao redor do texto
+    letra_padding = { 3, 4 };
 }
 // Construtor da classe Arvore, inicializa os membros da classe.
 BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 {
     label_shared = l;
 
-    frase = "[+]";
+    frase = "";
     // Define a resolução padrão para o texto
     resolucao = 12;
 
     // Define o padding (espaçamento) ao redor do texto
-    letra_padding = { 5, 4 };
+    letra_padding = { 3, 4 };
+
 }
 
 // Método para atualizar o estado do widget Arvore a cada frame
 void BubbleUI::Widgets::Arvore::atualizar()
 {
     moldura.defCor(cor);
-    if (label_shared)
-        if(aberto)
-        frase = "[-]" + (*label_shared);
-        else
-        frase = "[+]" + (*label_shared);
-    
+
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
 
@@ -44,12 +55,43 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Se houver uma árvore pai, ajusta o padding horizontal
     if (arvore_pai)
     {
-        painel->posicaoWidget.x = arvore_pai->box_pos.x - painel->obterRetangulo().x + 7;
+        painel->posicaoWidget.x = arvore_pai->box_pos.x - painel->obterRetangulo().x + 5;
     }
 
-    // Atualiza o texto
-    renderizar_texto(frase);
+    if(icone)
+    icone->atualizar();
 
+    // Atualiza o texto baseado no ponteiro
+    if (label_shared)
+        if (aberto)
+        {
+            frase = (*label_shared);
+            renderizar_texto(frase);
+
+            for (const auto& filho : filhos)
+            {
+                filho->atualizar();
+            }
+        }
+        else
+        {
+            frase = (*label_shared);
+            renderizar_texto(frase);
+        }
+    else
+        if (aberto)
+        {
+            renderizar_texto(frase);
+
+            for (const auto& filho : filhos)
+            {
+                filho->atualizar();
+            }
+        }
+        else
+        {
+            renderizar_texto(frase);
+        }
     // Restaura o padding original do pai
     painel->widgetPadding.y = padding_antigoy;
     painel->posicaoWidget.x = 0;
@@ -57,7 +99,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Define o retângulo de colisão para a detecção de mouse
     colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
-    moldura.defPos({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y )});
+    moldura.defPos({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
     moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
 
 
@@ -71,8 +113,8 @@ void BubbleUI::Widgets::Arvore::atualizar()
     {
         if (inputs->mouseEnter == GLFW_PRESS)
         {
-            if(retorno)
-            *retorno = false;
+            if (retorno)
+                *retorno = false;
         }
     }
     else if (painel->selecionado)
@@ -80,15 +122,12 @@ void BubbleUI::Widgets::Arvore::atualizar()
         {
             // Se o mouse estiver sobre o widget, altera a cor da moldura
             moldura.defCor({ 0.2f, 0.2f, 0.2f });
-            if (inputs->mouseEnter == GLFW_PRESS)
+            if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
             {
-                if(retorno)
-                    *retorno = aberto;
-                moldura.ocultar_linhas = false;
+                if (retorno)    *retorno = true; // ponteiro do retorno
+                moldura.ocultar_linhas = false; // não oculta linhas da moldura
                 if (aberto && gatilho_click) { aberto = false; gatilho_click = false; }
-                else if (gatilho_click) {
-                    aberto = true; gatilho_click = false;
-                }
+                else if (gatilho_click && !filhos.empty()) { aberto = true; gatilho_click = false; }
             }
         }
     }
@@ -96,32 +135,14 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Atualiza a moldura
     moldura.atualizar();
 
-    // Se a árvore estiver aberta, atualiza os filhos
-    if (aberto)
-    {
-        if (frase[1] != '-')
-        {
-            frase.erase(0, 3);
-            frase.insert(0, "[-]");
-        }
-        for (const auto& filho : filhos)
-        {
-            filho->atualizar();
-        }
-    }
-    else if(frase[1] != '+')
-    {
-        frase.erase(0, 3);
-        frase.insert(0, "[+]");
-    }
 }
-
 // Método para renderizar o widget Arvore na tela
 void BubbleUI::Widgets::Arvore::renderizar() const
 {
     // Renderiza a moldura utilizando triângulos
     if (moldura.obtRect().y > box_pos.y + box_size.y)return;
     moldura.renderizar();
+
 
     // Renderiza o texto da árvore
     Texto::renderizar();
@@ -134,6 +155,8 @@ void BubbleUI::Widgets::Arvore::renderizar() const
             filho->renderizar();
         }
     }
+    if (icone)
+        icone->renderizar();
 }
 
 // Método para definir o painel associado ao widget Arvore
@@ -143,6 +166,8 @@ void BubbleUI::Widgets::Arvore::defPainel(Painel* painel)
     Texto::defPainel(painel);
     inputs = painel->obterContexto()->inputs;
 
+    if (icone)
+    icone->defPainel(painel);
     // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
     if (painel->arvoreCor.r == 0.1f)
     {
