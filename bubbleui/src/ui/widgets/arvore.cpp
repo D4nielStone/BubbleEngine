@@ -2,7 +2,7 @@
 #include "src/ui/painel/painel.hpp"
 
 // Construtor da classe Arvore, inicializa os membros da classe.
-BubbleUI::Widgets::Arvore::Arvore(std::string l, bool* retorno) : retorno(retorno)
+BubbleUI::Widgets::Arvore::Arvore(const std::string &l, bool* retorno) : retorno(retorno)
 {
     frase = l;
 
@@ -21,6 +21,19 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* reto
     label_shared = label;
 
     frase = "";
+    // Define a resolução padrão para o texto
+    resolucao = 12;
+
+    // Define o padding (espaçamento) ao redor do texto
+    letra_padding = { 3, 4 };
+}
+BubbleUI::Widgets::Arvore::Arvore(const std::string& label, bool* retorno, const std::string& imagePath)
+    : retorno(retorno)
+{
+    icone = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
+    icone->padding = true;
+
+    frase = label;
     // Define a resolução padrão para o texto
     resolucao = 12;
 

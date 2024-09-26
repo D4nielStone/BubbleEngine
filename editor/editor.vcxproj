@@ -169,7 +169,8 @@
     <Image Include="assets\texturas\cubemap.jpg" />
     <Image Include="assets\texturas\icons\check.png" />
     <Image Include="assets\texturas\icons\cube.png" />
-    <Image Include="assets\texturas\icons\object.png" />
+    <Image Include="assets\texturas\icons\renderizador.png" />
+    <Image Include="assets\texturas\icons\transformacao.png" />
     <Image Include="assets\texturas\rock.png" />
     <Image Include="ICON.ico" />
   </ItemGroup>

@@ -75,7 +75,10 @@
     <Image Include="assets\texturas\icons\cube.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="assets\texturas\icons\object.png">
+    <Image Include="assets\texturas\icons\transformacao.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\texturas\icons\renderizador.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

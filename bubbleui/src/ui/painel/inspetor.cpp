@@ -27,7 +27,8 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
     for (const auto& componente : entidade_selecionada->listaDeComponentes())
     {
-        auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr);
+        const auto name = std::string("assets/texturas/icons/" + std::string(componente->nome()) + ".png");
+        auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr, name);
         adicionarWidget(arvore);
 
         if (dynamic_cast<Bubble::Componentes::Renderizador*>(componente.get()))

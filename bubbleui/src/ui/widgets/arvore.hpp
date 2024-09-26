@@ -8,7 +8,8 @@ namespace BubbleUI
 		class BEUI_DLL_API Arvore : public Texto, public std::enable_shared_from_this<Arvore>
 		{
 		public:
-			Arvore(std::string label_shared, bool* retorno);
+			Arvore(const std::string& label_shared, bool* retorno);
+			Arvore(const std::string& label_shared, bool* retorno, const std::string &imagePath);
 			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno);
 			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno, const std::string &imagePath);
 			void atualizar() override;
