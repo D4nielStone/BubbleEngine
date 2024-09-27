@@ -51,9 +51,9 @@ static void abrirSelecionar()
     // Exibe o diálogo de seleção de arquivo
     if (GetOpenFileName(&ofn) == TRUE)
     {
-        Bubble::Cena::adicionarTarefaNaFila([ofn]()
+        std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
+        Bubble::Cena::adicionarTarefaNaFila([ofn, filePath]()
             {
-                std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
                 Bubble::Cena::criarEntidade(filePath);
             });
     }

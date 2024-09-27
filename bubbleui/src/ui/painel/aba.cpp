@@ -15,7 +15,7 @@ BubbleUI::Aba::Aba(Painel *painel)
 
 void BubbleUI::Aba::atualizar()
 {
-    painel->posicaoWidget = { 0, -letra_padding.y };
+    painel->posicaoWidget = { 0, -letra_padding.y*2 + 1 };
 
     renderizar_texto(frase);
 
