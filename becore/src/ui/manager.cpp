@@ -116,12 +116,6 @@ void BubbleUI::Manager::verificarSelecionado()
 				depth = true;
 				painel->mouse1click = false;
 			}
-			if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
-			{
-				painel->mostrarPopup = true;
-			}
-			else if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
-				painel->esconderPopup = true;
 		}
 		else
 			painel->mouse1click = false;

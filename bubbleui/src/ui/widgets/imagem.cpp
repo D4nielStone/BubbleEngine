@@ -10,8 +10,8 @@ BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, 
 {
     auto &gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
-    rect.w *= static_cast<float>(size_percentage) / 100;
-    rect.h *= static_cast<float>(size_percentage) / 100;
+    rect.w *= static_cast<int>(static_cast<float>(size_percentage) / 100);
+    rect.h *= static_cast<int>(static_cast<float>(size_percentage) / 100);
 }
 
 BubbleUI::Widgets::Imagem::Imagem(const std::string& path, const Vector2& size)
@@ -28,10 +28,10 @@ Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
 {
     Vector4f coord_ndc;
 
-    coord_ndc.z = (rect.w * 2.f) / painel->obterContexto()->tamanho.width;
-    coord_ndc.w = -(2.0f * rect.h) / painel->obterContexto()->tamanho.height;
-    coord_ndc.x = (rect.x * 2.f) / painel->obterContexto()->tamanho.width - 1.f;
-    coord_ndc.y = 1.0f - (2.0f * rect.y) / painel->obterContexto()->tamanho.height;
+    coord_ndc.z = (rect.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.w = -(2.0f * rect.h) / contexto->tamanho.height;
+    coord_ndc.x = (rect.x * 2.f) / contexto->tamanho.width - 1.f;
+    coord_ndc.y = 1.0f - (2.0f * rect.y) / contexto->tamanho.height;
 
     return coord_ndc;
 }
@@ -41,8 +41,8 @@ void BubbleUI::Widgets::Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obterRetangulo().w - 1;
-        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y - 1;
+        rect.w = painel->obterRetangulo().w;
+        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
     }
     rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
     if (padding)

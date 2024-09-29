@@ -32,6 +32,13 @@ void BubbleUI::Util::PopUp::posAtualizacao()
 	}
 	colisao.defRect(retangulo);
 	mouseEmCima = colisao.mouseEmCima();
+	if (vmostrar && inputs->mouseEnter == GLFW_RELEASE)
+		podeEsconder = true;
+	if (vmostrar && inputs->mouseEnter == GLFW_PRESS && !mouseEmCima && podeEsconder)
+	{
+		esconder();
+		podeEsconder = false;
+	}
 }
 
 void BubbleUI::Util::PopUp::mostrar()

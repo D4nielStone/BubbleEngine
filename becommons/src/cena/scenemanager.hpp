@@ -8,9 +8,9 @@ namespace Bubble {
     namespace Cena {
         class BECOMMONS_DLL_API SceneManager {
         private:
-            std::vector<Scene*> scenes; 
+            std::vector<std::shared_ptr<Scene>> scenes; 
             int currentSceneIndex;
-            Scene* criarCenaPadrao(std::string Nome);
+            std::shared_ptr<Scene> criarCenaPadrao(std::string Nome);
             std::shared_ptr<Inputs::Inputs> inputs{ nullptr };
             // viewport para renderizacao
             Vector4 viewportEditor, viewportJogo;
@@ -19,9 +19,9 @@ namespace Bubble {
             ~SceneManager();
             void defIputs(std::shared_ptr<Inputs::Inputs>);
             size_t numeroDeCenas() const;
-            void adicionarCena(Scene* scene);
+            void adicionarCena(std::shared_ptr<Scene> scene);
             int cenaAtualIdx() const;
-            Scene* cenaAtual() const;
+            std::shared_ptr<Scene> cenaAtual() const;
             void carregarCena(int sceneIndex);
             void renderizarCenaAtual() const;
             void atualizarCenaAtual() const;

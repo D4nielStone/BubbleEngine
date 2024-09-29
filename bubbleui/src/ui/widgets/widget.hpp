@@ -30,6 +30,7 @@ namespace BubbleUI
 		Colisao2d colisao;
 		Formas::Moldura moldura;
 		Painel* painel{ nullptr };
+		std::shared_ptr<Contexto> contexto{ nullptr };
 		std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 	};
 }

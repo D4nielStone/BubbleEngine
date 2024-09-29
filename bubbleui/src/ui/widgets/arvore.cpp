@@ -57,8 +57,6 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) 
 // Método para atualizar o estado do widget Arvore a cada frame
 void BubbleUI::Widgets::Arvore::atualizar()
 {
-    moldura.defCor(cor);
-
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
 
@@ -118,6 +116,19 @@ void BubbleUI::Widgets::Arvore::atualizar()
 
     // Reseta gatilho de click
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true;
+
+    // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
+    if (painel->arvoreCor.r == 0.1f)
+    {
+        cor = { 0.15f, 0.15f, 0.15f };
+        painel->arvoreCor = { 0.15f, 0.15f, 0.15f };
+    }
+    else
+    {
+        // Caso contrário, define a cor padrão mais escura
+        cor = { 0.1f, 0.1f, 0.1f };
+        painel->arvoreCor = { 0.1f, 0.1f, 0.1f };
+    }
 
     moldura.defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
@@ -181,18 +192,6 @@ void BubbleUI::Widgets::Arvore::defPainel(Painel* painel)
 
     if (icone)
     icone->defPainel(painel);
-    // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
-    if (painel->arvoreCor.r == 0.1f)
-    {
-        cor = { 0.15f, 0.15f, 0.15f };
-        painel->arvoreCor = { 0.15f, 0.15f, 0.15f };
-    }
-    else
-    {
-        // Caso contrário, define a cor padrão mais escura
-        cor = { 0.1f, 0.1f, 0.1f };
-        painel->arvoreCor = { 0.1f, 0.1f, 0.1f };
-    }
 }
 
 // Método para adicionar um filho à árvore

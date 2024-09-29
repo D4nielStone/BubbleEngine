@@ -17,7 +17,7 @@ SceneManager::SceneManager() : currentSceneIndex(-1)
 }
 SceneManager::~SceneManager() {}
 // Deve retornar Cena atual
-Scene* SceneManager::cenaAtual() const {
+std::shared_ptr<Scene> SceneManager::cenaAtual() const {
     if (scenes.size() > 0 && currentSceneIndex > -1)
         return scenes[currentSceneIndex];
     else
@@ -27,12 +27,14 @@ Scene* SceneManager::cenaAtual() const {
     }
 }
 // Deve criar cena padrao, com terreno e esfera
-Scene* SceneManager::criarCenaPadrao(std::string Nome)
+std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
 {
     //Cria cena
-    Scene* scene = new Scene(Nome.c_str());
-    
-    scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
+    std::shared_ptr<Scene> scene = std::make_shared<Scene>(Nome.c_str());
+
+    scene->camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
+    scene->camera_editor.olharPara({0, 0, 0});
+    scene->criarEntidade("assets/primitivas/modelos/cube.dae", "exemplo de cubo :D");
 
     return scene;
 }
@@ -42,7 +44,7 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
     if (cenaPadrao)
         adicionarCena(criarCenaPadrao(Nome));
     else
-        adicionarCena(new Scene(Nome.c_str()));
+        adicionarCena(std::make_shared<Scene>(Nome.c_str()));
     carregarCena(numeroDeCenas() - 1);
 }
 
@@ -56,7 +58,7 @@ void Bubble::Cena::SceneManager::defEditorViewport(Vector4 rect)
     viewportEditor = rect;
 }
 // Deve adicionar cena à lista
-void SceneManager::adicionarCena(Scene* scene) 
+void SceneManager::adicionarCena(std::shared_ptr<Scene> scene) 
 {
     scenes.push_back(scene);
 }

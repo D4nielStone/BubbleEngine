@@ -56,12 +56,12 @@ void Camera::desenharFrame(const Vector4 &viewportRect) const
 
     // Redimensionar o texture color buffer
     glBindTexture(GL_TEXTURE_2D, textureColorbuffer);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w * 0.8, viewportRect.h * 0.8, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportRect.w * resolucaoDoFB, viewportRect.h * resolucaoDoFB, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     // Redimensionar o renderbuffer
     glBindRenderbuffer(GL_RENDERBUFFER, rbo);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w * 0.8, viewportRect.h * 0.8);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportRect.w * resolucaoDoFB, viewportRect.h * resolucaoDoFB);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
     // Check if framebuffer is still complete after resizing
@@ -73,6 +73,7 @@ void Camera::desenharFrame(const Vector4 &viewportRect) const
     glViewport(0, 0, viewportRect.w, viewportRect.h);
 
     // Clear buffers
+    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 }
 
