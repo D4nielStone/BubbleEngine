@@ -3,7 +3,12 @@
 #include "fmt/core.h"
 
 
-std::vector<std::pair<Debug::Tipo, const char*>> msgs;
+std::vector<std::string> msgs;
+
+void Debug::cout(const std::string& msg)
+{
+    msgs.push_back(msg + "\n");
+}
 
 void Debug::emitir(Debug::Tipo t, std::string msg)
 {
@@ -32,8 +37,8 @@ void Debug::emitir(std::string t, std::string msg)
 #endif // _DEBUG
 }
 
-std::vector<std::pair<Debug::Tipo, const char*>>* Debug::obterMensagems()
+std::vector<std::string> Debug::obterMensagems()
 {
-    return &msgs;
+    return msgs;
 }
 

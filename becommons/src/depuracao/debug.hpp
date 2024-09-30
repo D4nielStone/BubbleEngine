@@ -14,9 +14,10 @@ namespace Debug
         Alerta
     };
 
+    BECOMMONS_DLL_API void cout(const std::string &msg);
     BECOMMONS_DLL_API void emitir(Tipo t, std::string msg);
     BECOMMONS_DLL_API void emitir(std::string t, std::string msg);
     
-    BECOMMONS_DLL_API std::vector<std::pair<Debug::Tipo, const char*>>* obterMensagems();
+    BECOMMONS_DLL_API std::vector<std::string> obterMensagems();
 }
 #endif
