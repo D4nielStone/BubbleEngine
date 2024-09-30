@@ -13,7 +13,7 @@ namespace Bubble{
             Vertex malha;
         public:
             Renderizador(const Vertex& malha);
-            Renderizador() = default;
+            Renderizador() { Nome = "Renderizador"; };
             ~Renderizador();
             Vertex& obterMalha();
             void configurar() override;

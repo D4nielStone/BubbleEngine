@@ -13,13 +13,18 @@ void BubbleUI::Paineis::Entidades::recarregar()
 	lista_widgets.clear();
 
 	adicionarWidget(std::make_shared<Widgets::CaixaTexto>());
-	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
+	for (auto& cena : scenemanager->obterCenas())
 	{
-		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada, "assets/texturas/icons/cube.png");
-		adicionarWidget(arvore);
-		for (auto& filho : entidade->obterFilhos())
+		auto arvorecena = (std::make_shared<Widgets::Arvore>(cena->nomeptr(), nullptr, "assets/texturas/icons/scene.png"));
+		adicionarWidget(arvorecena);
+		for (auto& entidade : cena->Entidades)
 		{
-			recursivo(filho, arvore);
+			auto arvoreentidade = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada, "assets/texturas/icons/cube.png");
+			arvorecena->adiFilho(arvoreentidade);
+			for (auto& filho : entidade->obterFilhos())
+			{
+				recursivo(filho, arvoreentidade);
+			}
 		}
 	}
 }

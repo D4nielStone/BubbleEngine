@@ -78,7 +78,8 @@ Key glfwKeyToKey(int glfwKey) {
         {GLFW_KEY_RIGHT_ALT, Key::Alt},
         {GLFW_KEY_BACKSPACE, Key::BS},
         {GLFW_KEY_ENTER, Key::ENTER},
-        {GLFW_KEY_KP_ENTER, Key::ENTER}
+        {GLFW_KEY_KP_ENTER, Key::ENTER},
+        {GLFW_KEY_F5, Key::F5}
     };
 
     auto it = keyMap.find(glfwKey);

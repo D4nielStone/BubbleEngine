@@ -50,6 +50,7 @@ void BubbleUI::Manager::painelSelecionado(std::shared_ptr<Painel> painel)
 
 	// Leva o painel selecionado para frente
 	lista_paineis[lista_paineis.size()-1] = painel;
+
 }
 
 // Inicia manager
@@ -61,6 +62,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 	contexto->inputs = engine->obterGI();
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
+	barra_de_menu.defContexto(contexto);
 	if (lista_paineis.size() > 0)
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
 }
@@ -77,6 +79,7 @@ void BubbleUI::Manager::renderizar() const
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
+	barra_de_menu.renderizar();
 }
 
 void BubbleUI::Manager::atualizar()
@@ -90,6 +93,7 @@ void BubbleUI::Manager::atualizar()
 			painel->atualizar();
 	}
 
+	barra_de_menu.atualizar();
 }
 
 // Verifica Painel selecionado

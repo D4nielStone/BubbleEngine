@@ -18,11 +18,13 @@ namespace BubbleUI
 			void esconder();
 			void renderizar() const override;
 			void adiItem(std::shared_ptr<Items::ItemMenu> item);
+			bool temItems() const;
+			bool escondido() const;
 			bool mouseEmCima{ false };
 		private:
 			int largura{ 0 }, altura{ 0 };
 			void posAtualizacao() override;
-			bool vmostrar{ false }, podeEsconder{false};
+			bool vmostrar{ false }, podeEsconder{ false };
 			Colisao2d colisao;
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 			std::vector<std::shared_ptr<Items::ItemMenu>> lista_items;

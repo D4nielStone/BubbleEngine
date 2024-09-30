@@ -16,6 +16,11 @@ SceneManager::SceneManager() : currentSceneIndex(-1)
 {
 }
 SceneManager::~SceneManager() {}
+// Retorna lista de cenas
+std::vector<std::shared_ptr<Scene>> SceneManager::obterCenas() const
+{
+    return scenes;
+}
 // Deve retornar Cena atual
 std::shared_ptr<Scene> SceneManager::cenaAtual() const {
     if (scenes.size() > 0 && currentSceneIndex > -1)

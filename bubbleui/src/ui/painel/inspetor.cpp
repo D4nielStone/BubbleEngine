@@ -11,7 +11,15 @@ static void abrirPopupAdiComp()
 }
 static void adicionarComponenteCamera()
 {
-
+    BubbleUI::Paineis::msgAdiCam = true;
+}
+static void adicionarComponenteCodigo()
+{
+    BubbleUI::Paineis::msgAdiCode = true;
+}
+static void adicionarComponenteRender()
+{
+    BubbleUI::Paineis::msgAdiRender = true;
 }
 
 BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
@@ -22,8 +30,8 @@ BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared
     //popup componentes
     popup_comps = std::make_unique<Util::PopUp>(ctx);
     popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar camera", adicionarComponenteCamera));
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar codigo", adicionarComponenteCamera));
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar renderizador", adicionarComponenteCamera));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar codigo", adicionarComponenteCodigo));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar renderizador", adicionarComponenteRender));
     // Verifica se o contexto e o scenemanager são válidos antes de usar
     adicionarWidget(std::make_shared<Widgets::CheckBox>(nullptr));
     if (scenemanager && ctx)    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
@@ -45,27 +53,12 @@ void BubbleUI::Paineis::Inspetor::recarregar()
         const auto name = std::string("assets/texturas/icons/" + std::string(componente->nome()) + ".png");
         auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr, name);
         adicionarWidget(arvore);
-
-        if (dynamic_cast<Bubble::Componentes::Renderizador*>(componente.get()))
-        {
-            auto renderer = static_cast<Bubble::Componentes::Renderizador*>(componente.get());
-            auto check_box = std::make_shared<Widgets::CheckBox>(&renderer->visualizarWireFrame, "Visualizar como wireframe");
-            check_box->quebrarLinha = true;
-            arvore->adiFilho(check_box);
-        }
     }
     adicionarWidget(std::make_shared<Widgets::Botao>("Adicionar componente", abrirPopupAdiComp, "assets/texturas/icons/renderizador.png"));
 }
 
 void BubbleUI::Paineis::Inspetor::preAtualizacao()
 {
-    if (msgMostrarPopup)
-    {
-        msgMostrarPopup = false;
-        popup_comps->defPos({100, 100});
-        popup_comps->defTam({100, 100});
-        popup_comps->mostrar();
-    }
     // Recarrega no momento certo
     if (entidade_selecionada != scenemanager->cenaAtual()->entidade_selecionada)
     {
@@ -75,7 +68,30 @@ void BubbleUI::Paineis::Inspetor::preAtualizacao()
     //atualiza popup
     if (popup_comps)
         popup_comps->atualizar();
-}
+    // Mostra popup
+    if (msgMostrarPopup)
+    {
+        msgMostrarPopup = false;
+        popup_comps->mostrar();
+    }
+    // Adiciona camera
+    if (msgAdiCam) {
+        auto componente = std::make_shared<Bubble::Componentes::Camera>();
+        componente->configurar();
+        entidade_selecionada->adicionarComponente(componente); 
+        msgAdiCam = false; recarregar(); }
+    // Adiciona codigo
+    if (msgAdiCode) {
+        auto componente = std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua");
+        componente->configurar();
+        entidade_selecionada->adicionarComponente(componente); 
+        msgAdiCode = false; recarregar(); }
+    // Adiciona Renderizador
+    if (msgAdiRender) {
+        auto componente = std::make_shared<Bubble::Componentes::Renderizador>();
+        componente->configurar();
+        entidade_selecionada->adicionarComponente(componente); 
+        msgAdiRender = false; recarregar(); }}
 
 void BubbleUI::Paineis::Inspetor::posRenderizacao() const
 {

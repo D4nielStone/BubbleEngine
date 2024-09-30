@@ -20,5 +20,8 @@ namespace BubbleUI
 			std::shared_ptr<std::string> nome_atual{ nullptr };
 		};
 		static bool msgMostrarPopup{ false };
+		static bool msgAdiCam{ false };
+		static bool msgAdiCode{ false };
+		static bool msgAdiRender{ false };
 	}
 }

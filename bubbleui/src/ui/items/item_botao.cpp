@@ -19,7 +19,7 @@ BubbleUI::Items::Botao::Botao(const std::string& l, std::function<void()> funcao
 void BubbleUI::Items::Botao::atualizar()
 {
 	ItemMenu::atualizar();
-	if (clicado && gatilho)
+	if (clicado && gatilho && !escondido)
 	{
 		if (funcao_click_)
 		{

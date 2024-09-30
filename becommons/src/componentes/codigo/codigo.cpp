@@ -7,6 +7,7 @@ Codigo::Codigo(const std::string& path)
     : scriptPath(path) {
     L = luaL_newstate();
     luaL_openlibs(L);
+    Nome = "Codigo";
 }
 Codigo::~Codigo() {
     lua_close(L);
