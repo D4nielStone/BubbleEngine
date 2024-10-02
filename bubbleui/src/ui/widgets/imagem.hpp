@@ -14,7 +14,7 @@ namespace BubbleUI
 			Vector4f paraNDC() const;
 			void atualizar() override;
 			void renderizar() const override;
-			void defID(unsigned int newID);
+			bool defID(unsigned int newID);
 			Vector4 obtRect() const;
 			bool deveRenderizar{ true }, flip{ false }, padding{ false };
 		private:

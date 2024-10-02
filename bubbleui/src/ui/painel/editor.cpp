@@ -108,7 +108,8 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defEditorViewport(rect_size);
     auto cenaAtual = scenemanager->cenaAtual();
-    buffer->defID(cenaAtual->camera_editor.textureColorbuffer);
+    // verifica se a cena é válida
+    (cenaAtual != nullptr) && buffer->defID(cenaAtual->camera_editor.textureColorbuffer);
 
     if (selecionado) {
         contexto->inputs->setInputMode(InputMode::Editor);

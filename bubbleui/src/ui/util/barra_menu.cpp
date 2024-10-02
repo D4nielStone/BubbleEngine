@@ -2,13 +2,10 @@
 #include "src/ui/formas/linha.hpp"
 #include "pop_up.hpp"
 
-BubbleUI::Util::BarraMenu::BarraMenu(std::shared_ptr<Contexto> contexto)
-{
-}
-
 void BubbleUI::Util::BarraMenu::renderizar() const
 {
 	Moldura::renderizar();
+	texto_nome_projeto.renderizar();
 	for (const auto& botao : botoes)
 	{
 		botao->renderizar();
@@ -25,6 +22,7 @@ void BubbleUI::Util::BarraMenu::atualizar()
 	{
 		botao->atualizar();
 	}
+	texto_nome_projeto.atualizar();
 }
 
 void BubbleUI::Util::BarraMenu::adicionarBotao(std::unique_ptr<Items::ItemMenu> item)
@@ -53,4 +51,8 @@ void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 	popupCena->adiItem(std::make_shared<Items::ItemMenu>("salver cena atual"));
 
 	adicionarBotao(std::make_unique<Items::Arvore>("Configs.Cena", popupCena));
+	texto_nome_projeto = Items::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
+
+	texto_nome_projeto.defMoldura(this);
+	texto_nome_projeto.quebrarLinha(false);
 }

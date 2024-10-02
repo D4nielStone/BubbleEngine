@@ -10,9 +10,10 @@ namespace Bubble
 {
 	namespace Nucleo
 	{
-		class BECORE_DLL_API Engine
+		class BECORE_DLL_API Projeto
 		{
 		private:
+			std::string Nome = "Projeto sem nome", NomeGPU, VercaoGL;
 			std::shared_ptr<Inputs::Inputs> inputs{ nullptr };
 			std::shared_ptr < Cena::SceneManager> gerenciadorDeCenas{ nullptr };
 			GLFWwindow* glfwWindow{ nullptr };
@@ -21,7 +22,11 @@ namespace Bubble
 			std::shared_ptr<Inputs::Inputs> obterGI() const;
 			std::shared_ptr < BubbleUI::Manager> obterGU() const;
 			std::shared_ptr < Cena::SceneManager> obterGC() const { return gerenciadorDeCenas; };
+			std::string obterNome() const { return Nome; };
+			std::string obterNomeGPU() const { return NomeGPU; };
+			std::string obterVercaoGL() const { return VercaoGL; };
 			GLFWwindow* obterJanela() const { return glfwWindow; };
+
 			void defInputs(std::shared_ptr<Inputs::Inputs> inp);
 			bool inicializacao();
 			int pararloop() const;
@@ -29,8 +34,8 @@ namespace Bubble
 			bool salvarCena(unsigned int idx);
 			void atualizar();
 			void renderizar() const;
-			Engine();
-			~Engine() { limpar(); };
+			Projeto(const std::string &nome);
+			~Projeto() { limpar(); };
 		};
 	}
 }

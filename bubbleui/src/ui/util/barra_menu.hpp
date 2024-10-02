@@ -1,5 +1,6 @@
 #pragma once
 #include "src/ui/formas/moldura.hpp"
+#include "src/ui/items/item_texto.hpp"
 #include "src/ui/items/item_arvore.hpp"
 namespace BubbleUI
 {
@@ -9,7 +10,6 @@ namespace BubbleUI
 		{
 		public:
 			BarraMenu() {};
-			BarraMenu(std::shared_ptr<Contexto> contexto);
 			void renderizar() const;
 			void atualizar();
 			void adicionarBotao(std::unique_ptr<Items::ItemMenu> item);
@@ -17,6 +17,7 @@ namespace BubbleUI
 		private:
 			int altura{ 26 };
 			std::vector<std::unique_ptr<Items::ItemMenu>> botoes;
+			Items::Texto texto_nome_projeto;
 			std::shared_ptr<Util::PopUp> popupCena{ nullptr };
 		};
 	}

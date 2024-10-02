@@ -23,5 +23,6 @@ namespace BubbleUI
 		static bool msgAdiCam{ false };
 		static bool msgAdiCode{ false };
 		static bool msgAdiRender{ false };
+		static bool msgAdiTerr{ false };
 	}
 }

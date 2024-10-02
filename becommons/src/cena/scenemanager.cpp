@@ -39,7 +39,7 @@ std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
 
     scene->camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
     scene->camera_editor.olharPara({0, 0, 0});
-    scene->criarEntidade("assets/primitivas/modelos/cube.dae", "exemplo de cubo :D");
+    scene->criarEntidade("assets/primitivas/modelos/cube.obj", "exemplo de cubo :D");
 
     return scene;
 }
@@ -95,8 +95,8 @@ void SceneManager::renderizarCenaAtual() const
         filaDeTarefas.front()(); // Executar a tarefa
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
+    if (!cenaAtual()) return;
     glEnable(GL_DEPTH_TEST);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     cenaAtual()->camera_editor.desenharFrame(viewportEditor);
     cenaAtual()->renderizar(Editor);
     if (cenaAtual()->camera_principal)
@@ -120,9 +120,10 @@ void SceneManager::atualizarCenaAtual() const
         aspectoDoJogo = static_cast<float>(viewportJogo.w) / viewportJogo.h;
     else
         aspectoDoJogo= 1;
-
-    camera_editor_atual = &cenaAtual()->camera_editor;
-    cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
+    if (cenaAtualIdx() != -1) {
+        camera_editor_atual = &cenaAtual()->camera_editor;
+        cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
+    }
 }
 // Deve retornar numero de cenas
 size_t SceneManager::numeroDeCenas() const {
@@ -166,7 +167,7 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
 
 void Bubble::Cena::criarEntidade(std::string path)
 {
-    scenemanager->cenaAtual()->criarEntidade(path);
+    scenemanager->cenaAtual() && scenemanager->cenaAtual()->criarEntidade(path);
 }
 
 void Bubble::Cena::criarCamera(glm::vec3 posicao)

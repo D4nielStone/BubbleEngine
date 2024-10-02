@@ -57,11 +57,11 @@ void main()
     // Combina iluminação Phong com a reflexão
     vec3 result = ambient + diffuse + specular + reflection;
 
-    //if(textura_difusa_ativo)
-    //{
-    //FragColor = vec4(result, 1.0) * texture(textura_difusa, UV);
-    //return;
-    //}
+    if(textura_difusa_ativo)
+    {
+    FragColor = vec4(result, 1.0) * texture(textura_difusa, UV);
+    return;
+    }
 
 
     FragColor = vec4(result, 1.0);

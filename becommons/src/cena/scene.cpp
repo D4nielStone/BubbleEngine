@@ -26,10 +26,11 @@ namespace Bubble::Cena
         }
     }
 
-    void Scene::criarEntidade(const std::string &path, const char* nome_entidade)
+    bool Scene::criarEntidade(const std::string &path, const char* nome_entidade)
     {
         Arquivadores::Arquivo3d arquivo_3d(path); arquivo_3d.carregar();
         adicionarEntidade(std::make_shared<Entidades::Entidade>(arquivo_3d));
+        return true;
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {

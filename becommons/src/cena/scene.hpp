@@ -35,7 +35,7 @@ namespace Bubble
             Scene(const std::string &name);
             ~Scene();
             void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
-            void criarEntidade(const std::string &path, const char* nome_entidade = "entidade sem nome");
+            bool criarEntidade(const std::string &path, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(const InputMode modo) const;
             void atualizar(float aspectoDoEditor, float aspectoDoJogo);

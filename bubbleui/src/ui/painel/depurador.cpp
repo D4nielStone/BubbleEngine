@@ -7,6 +7,8 @@ Depurador(std::shared_ptr < Contexto> ctx, const Vector4& retangulo) : fps_displ
 {
 	Nome = "Depurador";
 	configurar(ctx, retangulo);
+	adicionarWidget(std::make_shared<Widgets::Texto>("Nome da GPU: " + contexto->NomeGpu));
+	adicionarWidget(std::make_shared<Widgets::Texto>("Vercao Opengl: " + contexto->VercaoOpengl));
 	adicionarWidget(std::make_shared<Widgets::Texto>(&fps_display));
 }
 
@@ -16,7 +18,7 @@ void BubbleUI::Paineis::Depurador::preAtualizacao()
 	elapsedTime = glfwGetTime() - lastTime;
 	// Atualizar FPS a cada segundo
 	if (elapsedTime >= 1.0f) {
-		if (lista_widgets.size() > 1)
+		if (lista_widgets.size() > 3)
 			lista_widgets.erase(lista_widgets.begin()+1, lista_widgets.end());
 		for (auto& str : Debug::obterMensagems())
 		{

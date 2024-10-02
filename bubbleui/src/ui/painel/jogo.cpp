@@ -19,9 +19,7 @@ void BubbleUI::Paineis::Jogo::preAtualizacao()
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defJogoViewport(rect_size);
 
-    if (scenemanager->cenaAtual()->camera_principal) {
-        buffer->defID(scenemanager->cenaAtual()->camera_principal->textureColorbuffer);
-    }
+    (scenemanager->cenaAtual() && scenemanager->cenaAtual()->camera_principal) && buffer->defID(scenemanager->cenaAtual()->camera_principal->textureColorbuffer);
 
     if (selecionado) {
         contexto->inputs->setInputMode(Game);

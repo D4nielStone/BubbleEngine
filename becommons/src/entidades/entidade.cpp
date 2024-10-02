@@ -34,7 +34,7 @@ void Entidade::atualizar() const {
 
     for (const auto& componente : Componentes) 
     {
-        if (componente->nome() != "Renderizador" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
+        if (componente->nome() != "Renderizador" &&componente->nome() != "Terreno" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
             componente->atualizar();
         }
     }
@@ -47,7 +47,7 @@ void Entidade::renderizar()
     transformacao->atualizar();
     for (const auto& componente : Componentes)
     {
-        if (componente->nome() == "Renderizador")
+        if (componente->nome() == "Renderizador" || componente->nome() == "Terreno")
             componente->atualizar();
     }
 
@@ -119,9 +119,10 @@ const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& Entidade::listaDe
     return Componentes;
 }
 
-void Entidade::adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente) {
+bool Entidade::adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente) {
     componente->definirPai(this);
     Componentes.push_back(componente);
+    return true;
 }
 
 rapidjson::Value Entidade::serializar(rapidjson::Document* v) {

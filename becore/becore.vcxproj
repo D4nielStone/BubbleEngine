@@ -161,11 +161,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="becore.hpp" />
-    <ClInclude Include="src\nucleo\engine.hpp" />
+    <ClInclude Include="src\nucleo\projeto.hpp" />
     <ClInclude Include="src\ui\manager.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\nucleo\engine.cpp" />
+    <ClCompile Include="src\nucleo\projeto.cpp" />
     <ClCompile Include="src\ui\manager.cpp" />
   </ItemGroup>
   <ItemGroup>

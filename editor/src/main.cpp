@@ -1,4 +1,4 @@
-#include "src/nucleo/engine.hpp"
+#include "src/nucleo/projeto.hpp"
 #include "memory"
 #include "Windows.h"
 
@@ -12,12 +12,12 @@ using namespace Bubble::Nucleo;
 
 int INIT
 {
-    Bubble::Nucleo::Engine engine;
+    Projeto projeto("Teste de Projeto");
 
-    while (!engine.pararloop())
+    while (!projeto.pararloop())
     {
-        engine.atualizar();
-        engine.renderizar();
+        projeto.atualizar();
+        projeto.renderizar();
     }
     return 0;   
 }

@@ -1,7 +1,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "manager.hpp"
-#include "src/nucleo/engine.hpp"
+#include "src/nucleo/projeto.hpp"
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/editor.hpp"
 #include "src/ui/painel/jogo.hpp"
@@ -14,13 +14,13 @@ void BubbleUI::Manager::iniPaineisPadrao()
 {
 	int margem = 10, y_start = 34;
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ (float)margem, (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height - margem * 2 - y_start }));
+		std::make_shared<Paineis::Editor>(contexto, projeto->obterGC(), Vector4{ (float)margem, (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height - margem * 2 - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2,  (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height /2 - margem*2 - y_start }));
+		std::make_shared<Paineis::Jogo>(contexto, projeto->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2,  (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height /2 - margem*2 - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f + y_start, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 - margem - y_start }));
+		std::make_shared<Paineis::Entidades>(contexto, projeto->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f + y_start, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 - margem - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f + y_start, contexto->tamanho.width / 4 - margem/2, contexto->tamanho.height/2 - margem - y_start }));
+		std::make_shared<Paineis::Inspetor>(contexto, projeto->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f + y_start, contexto->tamanho.width / 4 - margem/2, contexto->tamanho.height/2 - margem - y_start }));
 	lista_paineis.push_back(
 		std::make_shared<Paineis::Depurador>(contexto));
 }
@@ -56,12 +56,15 @@ void BubbleUI::Manager::painelSelecionado(std::shared_ptr<Painel> painel)
 }
 
 // Inicia manager
-BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
+BubbleUI::Manager::Manager(Bubble::Nucleo::Projeto* i) : projeto(i)
 {
 	contexto = std::make_shared<Contexto>();
 	colisao_painel = Colisao2d({}, contexto);
-	contexto->glfwWindow = engine->obterJanela();
-	contexto->inputs = engine->obterGI();
+	contexto->glfwWindow = projeto->obterJanela();
+	contexto->inputs = projeto->obterGI();
+	contexto->NomeDoProjeto = projeto->obterNome();
+	contexto->NomeGpu = projeto->obterNomeGPU();
+	contexto->VercaoOpengl = projeto->obterVercaoGL();
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
 	barra_de_menu.defContexto(contexto);

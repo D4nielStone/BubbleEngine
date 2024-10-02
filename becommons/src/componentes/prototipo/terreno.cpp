@@ -18,9 +18,10 @@ void Terreno::configurar()
         Debug::emitir("TERRENO", "Terreno configurado");
     }
 void Terreno::atualizarMaterial()
-    {
-        shader.setVec3("objectColor", mMaterial.difusa.r, mMaterial.difusa.g, mMaterial.difusa.b);
-    }
+{
+    glDisable(GL_CULL_FACE);
+    shader.setVec3("material.cor_difusa", mVertex.material.difusa.r, mVertex.material.difusa.g, mVertex.material.difusa.b);
+}
 void Terreno::configurarBuffers() {
         glGenVertexArrays(1, &mVertex.VAO);
         glGenBuffers(1, &mVertex.VBO);
@@ -108,7 +109,7 @@ void Terreno::gerarHeightMap()
     }
 void Terreno::desenharModelo()
 {
-    shader.use();
+    //shader.use();
     atualizarMaterial();
     glBindVertexArray(mVertex.VAO);
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);

@@ -81,9 +81,9 @@ void BubbleUI::Widgets::Imagem::renderizar() const
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void BubbleUI::Widgets::Imagem::defID(unsigned int newID)
+bool BubbleUI::Widgets::Imagem::defID(unsigned int newID)
 {
-    ID = newID;
+    return ID = newID;
 }
 
 Vector4 BubbleUI::Widgets::Imagem::obtRect() const

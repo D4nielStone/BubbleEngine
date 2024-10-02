@@ -59,7 +59,7 @@ void BubbleUI::Util::PopUp::esconder()
 
 void BubbleUI::Util::PopUp::renderizar() const
 {
-	if (escondido()) return;
+	if (escondido()) return; 
 	Moldura::renderizar();
 	for (auto& item : lista_items)
 	{

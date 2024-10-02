@@ -7,7 +7,7 @@ namespace Bubble
 {
 	namespace Nucleo
 	{
-		class Engine;
+		class Projeto;
 	}
 }
 namespace BubbleUI
@@ -17,14 +17,14 @@ namespace BubbleUI
 	private:
 		std::vector<std::shared_ptr<Painel>> lista_paineis;
 		Util::BarraMenu barra_de_menu;
-		Bubble::Nucleo::Engine* engine = nullptr;
+		Bubble::Nucleo::Projeto* projeto{ nullptr };
 		std::shared_ptr<Contexto> contexto{ nullptr };
 		Colisao2d colisao_painel;
 		void iniPaineisPadrao();
 		void painelSelecionado(std::shared_ptr<Painel> painel);
 	public:
 		GLFWcursor* cursor_antigo{ nullptr };
-		Manager(Bubble::Nucleo::Engine*);
+		Manager(Bubble::Nucleo::Projeto*);
 		void atualizar();
 		void verificarSelecionado();
 		void renderizar() const;

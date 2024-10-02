@@ -32,7 +32,7 @@ void BubbleUI::Paineis::Entidades::recarregar()
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
 	// Recarrega no momento certo
-	if (quantidade_entidades != scenemanager->cenaAtual()->Entidades.size())
+	if (scenemanager->cenaAtual() && quantidade_entidades != scenemanager->cenaAtual()->Entidades.size())
 	{
 		recarregar();
 		quantidade_entidades = scenemanager->cenaAtual()->Entidades.size();
