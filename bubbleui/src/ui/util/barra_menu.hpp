@@ -8,13 +8,15 @@ namespace BubbleUI
 		class BEUI_DLL_API BarraMenu : public Formas::Moldura
 		{
 		public:
-			BarraMenu() = default;
+			BarraMenu() {};
 			BarraMenu(std::shared_ptr<Contexto> contexto);
 			void renderizar() const;
 			void atualizar();
+			void adicionarBotao(std::unique_ptr<Items::ItemMenu> item);
+			void defContexto(std::shared_ptr<Contexto> ctx);
 		private:
-			int altura{ 30 };
-			std::unique_ptr<Items::ItemMenu> arvoreCena;
+			int altura{ 26 };
+			std::vector<std::unique_ptr<Items::ItemMenu>> botoes;
 			std::shared_ptr<Util::PopUp> popupCena{ nullptr };
 		};
 	}

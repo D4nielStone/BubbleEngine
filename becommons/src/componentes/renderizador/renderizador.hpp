@@ -13,11 +13,12 @@ namespace Bubble{
             Vertex malha;
         public:
             Renderizador(const Vertex& malha);
-            Renderizador() = default;
+            Renderizador() { Nome = "Renderizador"; };
             ~Renderizador();
             Vertex& obterMalha();
             void configurar() override;
             void atualizar() override;
+            bool visualizarWireFrame{ false };
         };
         extern BECOMMONS_DLL_API void atualizarMaterial(Material material, Shader shader);
     }

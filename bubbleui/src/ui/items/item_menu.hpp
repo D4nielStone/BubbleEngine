@@ -20,6 +20,8 @@ namespace BubbleUI
 			virtual void renderizar() const;
 			static void configurar(const std::string &font_path = "assets/fontes/consolas/consolas.ttf", unsigned int resolucao = 12);
 			virtual void defMoldura(Formas::Moldura*);
+			void definirEscondido(bool boleano);
+			void quebrarLinha(bool boleano);
 			int largura{ 0 }, altura{ 0 };
 		protected:
 			Vector2f box_pos{ 0, 0 }, line_pos{ 0, 0 };
@@ -39,7 +41,7 @@ namespace BubbleUI
 			Formas::Moldura *pai{ nullptr };
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 			std::vector<LetraRect> letras_rect;
-			bool gatilho{ true }, clicado{ false }, mouseEmCima{ false };
+			bool gatilho{ true }, clicado{ false }, mouseEmCima{ false }, escondido{ false }, vquebrarLinha{ true };
 		};
 	}
 }

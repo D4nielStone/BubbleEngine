@@ -18,7 +18,7 @@ namespace BubbleUI
 			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.ttf");
 		protected:
 			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
-			void renderizar_texto();
+			void renderizar_texto(std::string &frase);
 			size_t texto_cursor_index{ 0 }; Vector4f texto_cursor_pos;
 			bool selecionando_texto{ false };
 			unsigned int resolucao, texturaID;

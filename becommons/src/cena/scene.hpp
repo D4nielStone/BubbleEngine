@@ -18,7 +18,7 @@ namespace Bubble
         {
         private:
             Shader shader;
-            const char* Name;
+            std::shared_ptr<std::string> Name = std::make_shared<std::string>("Cena");
             std::unordered_map<std::string, std::pair<std::vector<std::shared_ptr<Entidades::Entidade>>, Material>> entidadesParaRenderizar;
             std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
@@ -31,8 +31,8 @@ namespace Bubble
 
             float corCeu[3]{ 0.3f, 0.3f, 1.f };
 
-            Scene() : Name("Cena sem nome") {}
-            Scene(const char* name);
+            Scene() {}
+            Scene(const std::string &name);
             ~Scene();
             void carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade);
             void criarEntidade(const std::string &path, const char* nome_entidade = "entidade sem nome");
@@ -44,6 +44,7 @@ namespace Bubble
             void serializar(rapidjson::Document* doc) const;
             bool parse(rapidjson::Document& doc);
             std::string nome() const;
+            std::shared_ptr<std::string> nomeptr();
             std::pair<std::future<void>, Arquivadores::Arquivo3d>tarefaCriarEntidade;
         };
     }

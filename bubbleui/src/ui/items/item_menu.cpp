@@ -27,14 +27,14 @@ void BubbleUI::Items::ItemMenu::atualizar()
     colisao.defRect({ box_pos.x, box_pos.y, largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
     if (!colisao.mouseEmCima())
     {
-        mouseEmCima = false; // Marca que o mouse está sobre o item
+        mouseEmCima = false; // Marca que o mouse não está sobre o item
         moldura.defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
     }
     else
     {
         // Verifica se o botão esquerdo do mouse foi pressionado
         if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
-        mouseEmCima = true; // Marca que o mouse não está mais sobre o item
+        mouseEmCima = true; // Marca que o mouse está mais sobre o item
         moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
@@ -122,10 +122,13 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
     altura = box_size.y + pai->widgetPadding.y * 2;
-    pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obtRect().y;
-
     // Atualiza a largura para pop_up
     largura = largura_texto + letra_padding.x * 2 + pai->widgetPadding.x * 2;
+    if(!vquebrarLinha)
+        pai->posicaoWidget.x += largura;
+    else
+        pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obtRect().y;
+
 }
 
 // Método para transformar coordenadas de pixel para NDC (Normalized Device Coordinates)
@@ -156,6 +159,16 @@ void BubbleUI::Items::ItemMenu::defMoldura(Formas::Moldura* m)
     moldura = Formas::Moldura(contexto); // Define a moldura com base no contexto do pai
     colisao = Colisao2d({}, contexto); // Cria uma nova instância de colisão 2D
     inputs = contexto->inputs;
+}
+
+void BubbleUI::Items::ItemMenu::definirEscondido(bool boleano)
+{
+    escondido = boleano;
+}
+
+void BubbleUI::Items::ItemMenu::quebrarLinha(bool boleano)
+{
+    vquebrarLinha = boleano;
 }
 
 // Destrutor do ItemMenu que libera a memória alocada

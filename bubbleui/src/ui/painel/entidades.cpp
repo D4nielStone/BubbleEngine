@@ -7,20 +7,24 @@ BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Contexto>ctx, std::sha
 	configurar(ctx, rect);
 	recarregar();
 }
-
 void BubbleUI::Paineis::Entidades::recarregar()
 {
 	arvoreCor = { 1.f, 1.f, 1.f, 1 };
 	lista_widgets.clear();
 
 	adicionarWidget(std::make_shared<Widgets::CaixaTexto>());
-	for (auto& entidade : scenemanager->cenaAtual()->Entidades)
+	for (auto& cena : scenemanager->obterCenas())
 	{
-		auto arvore = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada);
-		adicionarWidget(arvore);
-		for (auto& filho : entidade->obterFilhos())
+		auto arvorecena = (std::make_shared<Widgets::Arvore>(cena->nomeptr(), nullptr, "assets/texturas/icons/scene.png"));
+		adicionarWidget(arvorecena);
+		for (auto& entidade : cena->Entidades)
 		{
-			recursivo(filho, arvore);
+			auto arvoreentidade = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada, "assets/texturas/icons/cube.png");
+			arvorecena->adiFilho(arvoreentidade);
+			for (auto& filho : entidade->obterFilhos())
+			{
+				recursivo(filho, arvoreentidade);
+			}
 		}
 	}
 }
@@ -37,7 +41,7 @@ void BubbleUI::Paineis::Entidades::preAtualizacao()
 
 void BubbleUI::Paineis::Entidades::recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, std::shared_ptr<Widgets::Arvore> arvore)
 {
-	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada);
+	auto arvore_recursiva = std::make_shared<Widgets::Arvore>(entidade->nomeptr(), &entidade->selecionada, "assets/texturas/icons/cube.png");
 	arvore->adiFilho(arvore_recursiva);
 	for (auto& filho : entidade->obterFilhos())
 	{

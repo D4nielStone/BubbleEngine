@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-static glm::vec3 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
+/*static glm::vec3 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
     // Transformação para o espaço da câmera (view space)
     glm::vec4 clipSpacePos = projectionMatrix * viewMatrix * glm::vec4(worldPos, 1.0);
 
@@ -24,7 +24,7 @@ static glm::vec3 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewM
     screenPos.y = (1.0f - (clipSpacePos.y * 0.5f + 0.5f)) * screenHeight; // Inverte o Y para o espaço da tela
 
     return glm::vec3(screenPos, clipSpacePos.z);
-}
+}*/
 // Função para selecionar objeto 3D
 static void abrirSelecionar()
 {
@@ -51,10 +51,10 @@ static void abrirSelecionar()
     // Exibe o diálogo de seleção de arquivo
     if (GetOpenFileName(&ofn) == TRUE)
     {
-        Bubble::Cena::adicionarTarefaNaFila([ofn]()
+        std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
+        Bubble::Cena::adicionarTarefaNaFila([ofn, filePath]()
             {
-               // std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
-                Bubble::Cena::criarEntidade("C:/Users/DN/Downloads/9btvoxf8n0cg-3dt/Street environment_V01.obj");
+                Bubble::Cena::criarEntidade(filePath);
             });
     }
 }
@@ -84,7 +84,6 @@ static void adicionarCamera()
 }
 
 BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0)),
-imagem_camera(std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/cam.png", 15, &posicao_da_camera)),
 scenemanager(scenemanager)
 {
 	Nome = "Editor";
@@ -92,7 +91,6 @@ scenemanager(scenemanager)
 	renderizarCorpo = false;
 	configurar(ctx, rect);
 	adicionarWidget(buffer);
-	adicionarWidget(imagem_camera);
 
     // Popup para adicionar primitivas
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
@@ -116,18 +114,4 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
         contexto->inputs->setInputMode(InputMode::Editor);
     }
     else if (contexto->inputs->getInputMode() != Game) contexto->inputs->setInputMode(Default);
-
-    if (scenemanager->cenaAtual()->camera_principal)
-    {
-        auto screen_pos = worldToScreen(
-            cenaAtual->camera_principal->meuObjeto->obterTransformacao()->obterPosicao(),
-            Bubble::Cena::CameraEditorAtual()->obterViewMatrixMat(),
-            Bubble::Cena::CameraEditorAtual()->obterProjMatrixMat(),
-            retangulo.w,
-            retangulo.h);
-        posicao_da_camera.x = screen_pos.x;
-        posicao_da_camera.y = screen_pos.y;
-        imagem_camera->deveRenderizar = true;
-    }else
-        imagem_camera->deveRenderizar = false;
 }

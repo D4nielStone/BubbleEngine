@@ -12,15 +12,17 @@
 // Inicia paineis padrão
 void BubbleUI::Manager::iniPaineisPadrao()
 {
-	int margem = 10;
+	int margem = 10, y_start = 34;
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ (float)margem, (float)margem,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height - margem * 2}));
+		std::make_shared<Paineis::Editor>(contexto, engine->obterGC(), Vector4{ (float)margem, (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height - margem * 2 - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2,  (float)margem,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height /2 - margem*2 }));
+		std::make_shared<Paineis::Jogo>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2,  (float)margem+y_start,  contexto->tamanho.width / 2 - 15, contexto->tamanho.height /2 - margem*2 - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 - margem}));
+		std::make_shared<Paineis::Entidades>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2, contexto->tamanho.height / 2.f + y_start, contexto->tamanho.width / 4 - margem * 2, contexto->tamanho.height / 2 - margem - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f, contexto->tamanho.width / 4 - margem, contexto->tamanho.height/2 - margem }));
+		std::make_shared<Paineis::Inspetor>(contexto, engine->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f + y_start, contexto->tamanho.width / 4 - margem/2, contexto->tamanho.height/2 - margem - y_start }));
+	lista_paineis.push_back(
+		std::make_shared<Paineis::Depurador>(contexto));
 }
 
 // Seleciona o painel
@@ -50,6 +52,7 @@ void BubbleUI::Manager::painelSelecionado(std::shared_ptr<Painel> painel)
 
 	// Leva o painel selecionado para frente
 	lista_paineis[lista_paineis.size()-1] = painel;
+
 }
 
 // Inicia manager
@@ -61,6 +64,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Engine* i) : engine(i)
 	contexto->inputs = engine->obterGI();
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	iniPaineisPadrao();
+	barra_de_menu.defContexto(contexto);
 	if (lista_paineis.size() > 0)
 		lista_paineis[lista_paineis.size() - 1]->selecionado = true;
 }
@@ -77,28 +81,21 @@ void BubbleUI::Manager::renderizar() const
 		painel->renderizar();
 	}
 	glDisable(GL_SCISSOR_TEST);
+	barra_de_menu.renderizar();
 }
-
-#include "src/threadpool.hpp" // Assumindo que você salvou a implementação do thread pool em um arquivo
 
 void BubbleUI::Manager::atualizar()
 {
 	glfwGetFramebufferSize(contexto->glfwWindow, &contexto->tamanho.width, &contexto->tamanho.height);
 	verificarSelecionado();
 
-	std::vector<std::future<void>> futures;
 
 	// Atualiza cada painel de forma assíncrona usando o future
 	for (const auto& painel : lista_paineis) {
-		futures.push_back(std::async(std::launch::async, [painel](){
 			painel->atualizar();
-			}));
 	}
 
-	// Aguarda todas as tarefas terminarem
-	for (auto& f : futures) {
-		f.get();
-	}
+	barra_de_menu.atualizar();
 }
 
 // Verifica Painel selecionado
@@ -125,12 +122,6 @@ void BubbleUI::Manager::verificarSelecionado()
 				depth = true;
 				painel->mouse1click = false;
 			}
-			if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT)
-			{
-				painel->mostrarPopup = true;
-			}
-			else if (contexto->inputs->mouseEnter == GLFW_PRESS && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
-				painel->esconderPopup = true;
 		}
 		else
 			painel->mouse1click = false;

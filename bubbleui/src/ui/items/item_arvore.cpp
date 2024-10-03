@@ -12,7 +12,7 @@ BubbleUI::Items::Arvore::Arvore(const std::string &l, std::shared_ptr<Util::PopU
 void BubbleUI::Items::Arvore::atualizar()
 {
 	ItemMenu::atualizar();
-	m_popup->defPos({ static_cast<int>(box_pos.x + box_size.x - 10), static_cast<int>(box_pos.y) });
+	m_popup->defPos({ static_cast<int>(box_pos.x + largura - 10), static_cast<int>(box_pos.y) });
 	m_popup->atualizar();
 	if (mouseEmCima)	m_popup->mostrar();
 	else if(!m_popup->mouseEmCima)	m_popup->esconder();

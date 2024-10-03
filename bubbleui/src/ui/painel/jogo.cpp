@@ -27,4 +27,8 @@ void BubbleUI::Paineis::Jogo::preAtualizacao()
         contexto->inputs->setInputMode(Game);
     }
     else if(contexto->inputs->getInputMode() != Editor) contexto->inputs->setInputMode(Default);
+
+    // Detecta toque do ctrl F5 para iniciar janela
+    if (contexto->inputs->getInputMode() == Game && contexto->inputs->isKeyPressed(Ctrl) && contexto->inputs->isKeyPressed(F5))
+        Debug::emitir("Game", "F5");
 }

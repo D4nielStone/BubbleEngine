@@ -15,9 +15,9 @@ BubbleUI::Aba::Aba(Painel *painel)
 
 void BubbleUI::Aba::atualizar()
 {
-    painel->posicaoWidget = { 0, -letra_padding.y*2 };
+    painel->posicaoWidget = { 0, -letra_padding.y*2 + 1 };
 
-    renderizar_texto();
+    renderizar_texto(frase);
 
     painel->posicaoWidget = { 0, corpo_rect->obtRect().h };
 

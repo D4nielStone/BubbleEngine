@@ -22,6 +22,7 @@ enum BECOMMONS_DLL_API Key {
     Alt,
     BS,
     ENTER,
+    F5,
     Count
 };
 
