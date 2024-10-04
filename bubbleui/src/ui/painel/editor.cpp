@@ -82,6 +82,14 @@ static void adicionarCamera()
             Bubble::Cena::criarCamera(Bubble::Cena::CameraEditorAtual()->transformacao->obterPosicao());
         });
 }
+// Adiciona cena
+static void adicionarCena()
+{
+    Bubble::Cena::adicionarTarefaNaFila([]()
+        {
+            Bubble::Cena::adicionarCena();
+        });
+}
 
 BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0)),
 imagem_camera(std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/cam.png", 15, &posicao_da_camera)),
@@ -99,9 +107,10 @@ scenemanager(scenemanager)
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cubo", &adicionarCubo));
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Esfera", &adicionarEsfera));
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Camera", &adicionarCamera));
-    //popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
     // Popup principal
 	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
+	menuDeContexto->adiItem(std::make_shared<Items::Botao>("adicionar cena", &adicionarCena));
 	menuDeContexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
 }
 

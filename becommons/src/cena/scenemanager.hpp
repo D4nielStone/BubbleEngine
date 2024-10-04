@@ -35,5 +35,6 @@ namespace Bubble {
         BECOMMONS_DLL_API void adicionarTarefaNaFila(std::function<void()> tarefa);
         BECOMMONS_DLL_API void criarEntidade(std::string path);
         BECOMMONS_DLL_API void criarCamera(glm::vec3 posicao);
+        BECOMMONS_DLL_API void adicionarCena();
     } // namespace Cena
 } // namespace Bubble

@@ -169,3 +169,7 @@ void Bubble::Cena::criarCamera(glm::vec3 posicao)
     obj->adicionarComponente(std::make_shared<Componentes::Camera>());
     scenemanager->cenaAtual()->adicionarEntidade(obj);
 }
+void Bubble::Cena::adicionarCena()
+{
+    scenemanager->novaCena();
+}

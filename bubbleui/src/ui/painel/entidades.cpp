@@ -28,9 +28,14 @@ void BubbleUI::Paineis::Entidades::recarregar()
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
 	// Recarrega no momento certo
+<<<<<<< Updated upstream
 	if (quantidade_entidades != scenemanager->cenaAtual()->Entidades.size())
+=======
+	if (scenemanager->cenaAtual() && quantidade_entidades != scenemanager->cenaAtual()->Entidades.size() || scenemanager->numeroDeCenas() != nmr_cenas)
+>>>>>>> Stashed changes
 	{
 		recarregar();
+		nmr_cenas = scenemanager->numeroDeCenas();
 		quantidade_entidades = scenemanager->cenaAtual()->Entidades.size();
 	}
 }

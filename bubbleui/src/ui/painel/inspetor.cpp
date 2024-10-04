@@ -25,6 +25,7 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     // Verifica se o contexto e o scenemanager são válidos antes de usar
     adicionarWidget(std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado));
     adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
+    if(entidade_selecionada)
     for (const auto& componente : entidade_selecionada->listaDeComponentes())
     {
         adicionarWidget(std::make_shared<Widgets::Arvore>(componente->nome(), nullptr));
