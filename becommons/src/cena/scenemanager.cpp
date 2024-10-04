@@ -16,8 +16,13 @@ SceneManager::SceneManager() : currentSceneIndex(-1)
 {
 }
 SceneManager::~SceneManager() {}
+// Retorna lista de cenas
+std::vector<std::shared_ptr<Scene>> SceneManager::obterCenas() const
+{
+    return scenes;
+}
 // Deve retornar Cena atual
-Scene* SceneManager::cenaAtual() const {
+std::shared_ptr<Scene> SceneManager::cenaAtual() const {
     if (scenes.size() > 0 && currentSceneIndex > -1)
         return scenes[currentSceneIndex];
     else
@@ -27,12 +32,14 @@ Scene* SceneManager::cenaAtual() const {
     }
 }
 // Deve criar cena padrao, com terreno e esfera
-Scene* SceneManager::criarCenaPadrao(std::string Nome)
+std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
 {
     //Cria cena
-    Scene* scene = new Scene(Nome.c_str());
-    
-    scene->camera_editor.transformacao->definirPosicao({3, 3, 3});
+    std::shared_ptr<Scene> scene = std::make_shared<Scene>(Nome.c_str());
+
+    scene->camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
+    scene->camera_editor.olharPara({0, 0, 0});
+    scene->criarEntidade("assets/primitivas/modelos/cube.obj", "exemplo de cubo :D");
 
     return scene;
 }
@@ -42,7 +49,7 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
     if (cenaPadrao)
         adicionarCena(criarCenaPadrao(Nome));
     else
-        adicionarCena(new Scene(Nome.c_str()));
+        adicionarCena(std::make_shared<Scene>(Nome.c_str()));
     carregarCena(numeroDeCenas() - 1);
 }
 
@@ -56,7 +63,7 @@ void Bubble::Cena::SceneManager::defEditorViewport(Vector4 rect)
     viewportEditor = rect;
 }
 // Deve adicionar cena à lista
-void SceneManager::adicionarCena(Scene* scene) 
+void SceneManager::adicionarCena(std::shared_ptr<Scene> scene) 
 {
     scenes.push_back(scene);
 }
@@ -88,8 +95,8 @@ void SceneManager::renderizarCenaAtual() const
         filaDeTarefas.front()(); // Executar a tarefa
         filaDeTarefas.pop();      // Remover a tarefa da fila
     }
+    if (!cenaAtual()) return;
     glEnable(GL_DEPTH_TEST);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     cenaAtual()->camera_editor.desenharFrame(viewportEditor);
     cenaAtual()->renderizar(Editor);
     if (cenaAtual()->camera_principal)
@@ -113,9 +120,10 @@ void SceneManager::atualizarCenaAtual() const
         aspectoDoJogo = static_cast<float>(viewportJogo.w) / viewportJogo.h;
     else
         aspectoDoJogo= 1;
-
-    camera_editor_atual = &cenaAtual()->camera_editor;
-    cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
+    if (cenaAtualIdx() != -1) {
+        camera_editor_atual = &cenaAtual()->camera_editor;
+        cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
+    }
 }
 // Deve retornar numero de cenas
 size_t SceneManager::numeroDeCenas() const {
@@ -159,7 +167,7 @@ static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
 
 void Bubble::Cena::criarEntidade(std::string path)
 {
-    scenemanager->cenaAtual()->criarEntidade(path);
+    scenemanager->cenaAtual() && scenemanager->cenaAtual()->criarEntidade(path);
 }
 
 void Bubble::Cena::criarCamera(glm::vec3 posicao)

@@ -9,7 +9,6 @@ namespace Bubble {
 		class BECOMMONS_DLL_API CameraEditor : public Componentes::Camera
 		{
 		private:
-			glm::vec3 alvoCamera;
 			float velocidadeDeMovimento;
 			float sensibilidadeDeRotacao;
 			float elapsed = 0;
@@ -25,7 +24,8 @@ namespace Bubble {
 			void configurar() override;
 			void atualizar() override;
 			void renderizar() const override;
-			void olharPara(glm::vec3 pov);
+			void olharPara(const glm::vec3 &pov);
+			double tempoPassado{ 0.0 }, deltaTime{ 0.0 };
 		};
 	}
 }

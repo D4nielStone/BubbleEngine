@@ -46,7 +46,7 @@ void ImageLoader::carregarImagem(const std::string& filepath)
         carregado = true;
         return;
     }
-    Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
+   // Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
     // Inicializa o FreeImage  
     FreeImage_Initialise();
 

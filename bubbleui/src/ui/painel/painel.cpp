@@ -59,36 +59,25 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Atualização
     void Painel::atualizar()
     {
+        arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
         {
             bordaCima->atualizar(); bordaBaixo->atualizar();
             bordaEsq->atualizar(); bordaDir->atualizar();
             corrigirLimite();
-            menuDeContexto->atualizar();
             aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
         }
         else
         {
-            menuDeContexto->esconder();
             aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
         }
-
+        if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
+            menuDeContexto->mostrar();
+        menuDeContexto->atualizar();
         // Atualiza a moldura
         moldura.defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) });
         moldura.defTam({ retangulo.w, retangulo.h });
         moldura.atualizar();
-
-        // Controle de Pop-ups
-        if (mostrarPopup)
-        {
-            menuDeContexto->mostrar();
-            mostrarPopup= false;
-        }
-        else if (esconderPopup)
-        {
-            menuDeContexto->esconder();
-            esconderPopup= false;
-        }
 
         // Atualiza os widgets
         preAtualizacao();
@@ -118,6 +107,7 @@ namespace BubbleUI {
         }
 
         menuDeContexto->renderizar();
+        posRenderizacao();
     }
 
     // Configuração do Painel

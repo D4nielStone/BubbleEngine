@@ -29,7 +29,7 @@ namespace Bubble {
 			const std::vector<std::shared_ptr<Entidade>>& obterFilhos() const;
 			std::shared_ptr<Componentes::Transformacao> obterTransformacao() const;
 			const std::vector<std::shared_ptr<Comum::Componente>>& listaDeComponentes() const;
-			void adicionarComponente(std::shared_ptr<Comum::Componente> componente);
+			bool adicionarComponente(std::shared_ptr<Comum::Componente> componente);
 			rapidjson::Value serializar(rapidjson::Document* a);
 			bool parse(rapidjson::Value& v);
 			bool ativado{true}, selecionada{false}, ativado_root{true};

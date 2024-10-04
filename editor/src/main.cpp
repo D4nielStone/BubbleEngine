@@ -1,4 +1,4 @@
-#include "src/nucleo/engine.hpp"
+#include "src/nucleo/projeto.hpp"
 #include "memory"
 #include "Windows.h"
 
@@ -10,14 +10,14 @@ using namespace Bubble::Nucleo;
 #define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,PSTR lpCmdLine, int nCmdShow)
 #endif
 
-static int INIT
+int INIT
 {
-    Bubble::Nucleo::Engine engine;
+    Projeto projeto("Teste de Projeto");
 
-    while (!engine.pararloop())
+    while (!projeto.pararloop())
     {
-        engine.atualizar();
-        engine.renderizar();
+        projeto.atualizar();
+        projeto.renderizar();
     }
     return 0;   
 }

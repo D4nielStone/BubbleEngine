@@ -23,15 +23,15 @@ void BubbleUI::Formas::Moldura::atualizar()
 		return;
 	linha_d->defPos({
 			retangulo.x + retangulo.w + 1,
-			retangulo.y,
-			static_cast<int>(retangulo.x + retangulo.w),
-			static_cast<int>(retangulo.y + retangulo.h)
+			retangulo.y - 1,
+			static_cast<int>(retangulo.x + retangulo.w + 1),
+			static_cast<int>(retangulo.y + retangulo.h + 1)
 		});
 	linha_e->defPos({
-			retangulo.x - 1,
-			retangulo.y,
+			retangulo.x,
+			retangulo.y - 1,
 			static_cast<int>(retangulo.x),
-			static_cast<int>(retangulo.y + retangulo.h)
+			static_cast<int>(retangulo.y + retangulo.h + 1)
 		});
 	linha_c->defPos({
 			retangulo.x,

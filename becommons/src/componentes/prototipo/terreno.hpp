@@ -11,7 +11,7 @@ namespace Bubble
 		class BECOMMONS_DLL_API Terreno : public Comum::Componente
 		{
 		private:
-			Vertex mVertex; Material mMaterial;
+			Vertex mVertex;
 			std::vector<std::vector<float>> heightmap;
 			float scale;
 			int width, depth;

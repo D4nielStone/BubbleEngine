@@ -19,16 +19,15 @@ namespace Bubble {
             void desenharFrame(const Vector4 &viewportRect) const;
             const float* obterViewMatrix();
             const float* obterProjMatrix();
-            float ceu[3]{ 0.7f, 0.7f, 1.0f };
+            Color ceu{ 0.7f, 0.7f, 1.0f, 1 };
             glm::mat4 obterViewMatrixMat() const;
             glm::mat4 obterProjMatrixMat() const;
             bool corSolida;
             unsigned int FBO, textureColorbuffer, rbo;
-            float FOV, aspecto, zFar, zNear;
+            float FOV, aspecto, zFar, zNear, resolucaoDoFB{ 0.9f };
         protected:
             glm::mat4 matrizProjecao;
             glm::mat4 matrizVisualizacao;
-        private:
             glm::vec3 alvoCamera = glm::vec3(0, 0, 0);
         };
     }

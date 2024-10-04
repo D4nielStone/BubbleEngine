@@ -5,8 +5,8 @@ namespace Bubble::Cena
 {
     // Uma cena é criada
     // \param name: para o nome da cena
-    Scene::Scene(const char* name) : Name(name), skybox(std::make_unique<Util::Skybox>()) {
-        Debug::emitir("CENA", std::string(name) + " criada");
+    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)), skybox(std::make_unique<Util::Skybox>()) {
+        //Debug::emitir("CENA", std::string(name) + " criada");
     }
     Scene::~Scene() {}
     // Deve adicionar entidade
@@ -26,10 +26,11 @@ namespace Bubble::Cena
         }
     }
 
-    void Scene::criarEntidade(const std::string &path, const char* nome_entidade)
+    bool Scene::criarEntidade(const std::string &path, const char* nome_entidade)
     {
         Arquivadores::Arquivo3d arquivo_3d(path); arquivo_3d.carregar();
         adicionarEntidade(std::make_shared<Entidades::Entidade>(arquivo_3d));
+        return true;
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
@@ -60,8 +61,6 @@ namespace Bubble::Cena
             Componentes::atualizarMaterial(pair.second.second, shader);
             for (auto& entidade : pair.second.first)
             {
-                if (!entidade->ativado || !entidade->ativado_root)
-                    continue;
                 entidade->renderizar();
             }
         }
@@ -122,7 +121,7 @@ namespace Bubble::Cena
     // Deve serializar ela mesma ( isso é, passar para o documento json seus dados )
     void Scene::serializar(rapidjson::Document* doc) const {
         doc->SetObject();
-        doc->AddMember("nome", rapidjson::Value().SetString(Name, doc->GetAllocator()), doc->GetAllocator());
+        doc->AddMember("nome", rapidjson::Value().SetString(Name->c_str(), doc->GetAllocator()), doc->GetAllocator());
 
         rapidjson::Value arr(rapidjson::kArrayType);
         for (auto& entidade : Entidades) {
@@ -137,8 +136,8 @@ namespace Bubble::Cena
         // Deve verificar se o documento tem o membro "nome" e se é uma string
         if (document.HasMember("nome") && document["nome"].IsString())
         {
-            Name = document["nome"].GetString();
-            Debug::emitir("CENA", Name + std::string(":"));
+            *Name = document["nome"].GetString();
+            Debug::emitir("CENA", *Name + std::string(":"));
         }
         else
         {
@@ -192,8 +191,13 @@ namespace Bubble::Cena
         return false;
     }
 
+    // Deve retornar ponteiro do nome
+    std::shared_ptr<std::string> Scene::nomeptr()
+    {
+        return Name;
+    }
     // Deve retornar nome
     std::string Scene::nome() const {
-        return Name;
+        return *Name;
     }
 }

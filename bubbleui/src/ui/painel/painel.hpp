@@ -48,15 +48,13 @@ namespace BubbleUI
 		bool selecionado{ false };
 		bool arrastando{ false };
 		bool mouse1click{ false };
-		bool mostrarPopup{ false };
-		bool esconderPopup{ false };
-
 	protected:
 		// Métodos de Configuração e Ciclo de Vida
 		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });
 		virtual void preAtualizacao() {}
 		virtual void posAtualizacao() {}
 		virtual void preRenderizacao() const {}
+		virtual void posRenderizacao() const {}
 
 		void corrigirLimite();
 

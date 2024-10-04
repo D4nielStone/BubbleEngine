@@ -8,6 +8,10 @@
 namespace BubbleUI
 {
 	class Painel;
+	namespace Widgets 
+	{
+		class Arvore;
+	};
 	struct BEUI_DLL_API LetraRect
 	{
 		Vector4f rect;
@@ -20,10 +24,13 @@ namespace BubbleUI
 		virtual void atualizar() = 0;
 		virtual void renderizar() const = 0;
 		virtual void defPainel(Painel* painel);
+		std::shared_ptr<Widgets::Arvore> arvore_pai{ nullptr };
+		bool quebrarLinha{ false };
 	protected:
 		Colisao2d colisao;
 		Formas::Moldura moldura;
 		Painel* painel{ nullptr };
+		std::shared_ptr<Contexto> contexto{ nullptr };
 		std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 	};
 }
