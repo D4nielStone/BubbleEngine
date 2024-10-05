@@ -2,27 +2,53 @@
 #include "src/ui/painel/painel.hpp"
 #include <src/arquivadores/imageloader.hpp>
 
-BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto) : retorno(retorno)
+BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto, const Lado& alinhamento) 
+    : retorno(retorno)
 {
+    Alinhamento = alinhamento;
     frase = texto;
+    quebrarLinha = true;
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
 }
 
 void BubbleUI::Widgets::CheckBox::atualizar()
 {
-    moldura.defPos({ (int)painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x, (int)painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding .y});
+    int x = painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x;
+    int y = painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y;
+
+    switch (Alinhamento)
+    {
+    case ESQUERDA:
+        x = painel->obterRetangulo().x + painel->widgetPadding.x;  // Alinha à esquerda do painel
+        break;
+    case DIREITA:
+        x = painel->obterRetangulo().x + painel->obterRetangulo().w - size - painel->widgetPadding.x;  // Alinha à direita do painel
+        break;
+    }
+
+    moldura.defPos({ x, y });
     moldura.defTam({ size, size });
     colisao.defRect(moldura.obtRect());
 
-    // salva posicao widget y
+    // Atualiza o texto se houver
     if (!frase.empty())
     {
         auto posicao_antiga = painel->posicaoWidget.y;
-        painel->posicaoWidget.x += size + painel->widgetPadding.x;
+        switch (Alinhamento)
+        {
+        case ESQUERDA:
+            painel->posicaoWidget.x += size + painel->widgetPadding.x;
+            break;
+        case DIREITA:
+            painel->posicaoWidget.x = painel->widgetPadding.x;
+            break;
+        }
         Texto::atualizar();
         painel->posicaoWidget.y = posicao_antiga;
     }
+
+    // Lógica de clique no checkbox
     if (inputs->mouseEnter == GLFW_RELEASE)
         gatilho = false;
 
@@ -32,17 +58,18 @@ void BubbleUI::Widgets::CheckBox::atualizar()
         if (colisao.mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && *retorno)
         {
             gatilho = true;
-            if (retorno)
-                *retorno = false;
+            *retorno = false;
         }
         else if (colisao.mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && !*retorno)
         {
             gatilho = true;
-            if (retorno)
-                *retorno = true;
+            *retorno = true;
         }
     }
+
     moldura.atualizar();
+
+    // Controle da posição do widget no painel
     if (quebrarLinha)
         painel->posicaoWidget.y += size + painel->widgetPadding.x * 2;
     else

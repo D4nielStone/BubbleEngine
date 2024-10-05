@@ -102,18 +102,25 @@ scenemanager(scenemanager)
 
     // Popup para adicionar primitivas
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
-    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cubo", &adicionarCubo));
-    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Esfera", &adicionarEsfera));
-    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Camera", &adicionarCamera));
-    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", &abrirSelecionar));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Cubo", &callback_adicubo));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Esfera", &callback_adiesf));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Camera", &callback_adicam));
+    popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", nullptr));
     // Popup principal
-	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &abrirSelecionar));
-	menuDeContexto->adiItem(std::make_shared<Items::Botao>("adicionar cena", &adicionarCena));
+	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &callback_select));
+	menuDeContexto->adiItem(std::make_shared<Items::Botao>("adicionar cena", &callback_adicena));
 	menuDeContexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
+
+    if (callback_adicam)adicionarCamera();
+    if (callback_adicubo)adicionarCubo();
+    if (callback_adicena)adicionarCena();
+    if (callback_adiesf)adicionarEsfera();
+    if (callback_select)abrirSelecionar();
+
     Vector4 rect_size = buffer->obtRect();
     scenemanager->defEditorViewport(rect_size);
     auto cenaAtual = scenemanager->cenaAtual();

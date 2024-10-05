@@ -9,3 +9,8 @@ void BubbleUI::Widget::defPainel(Painel* painel)
 	colisao = Colisao2d({}, painel->obterContexto());
 	inputs = painel->obterContexto()->inputs;
 }
+
+void BubbleUI::Widget::defAlinhamento(const Lado& lado)
+{
+	Alinhamento = lado;
+}

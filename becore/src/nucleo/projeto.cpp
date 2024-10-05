@@ -52,6 +52,8 @@ bool Projeto::inicializacao()
     // defini inputs da janela
     defInputs(std::make_shared<Inputs::Inputs>());
 
+    //obterGC()->novaCena();
+
     return true;
 }
 std::shared_ptr<Bubble::Inputs::Inputs> Projeto::obterGI() const

@@ -71,7 +71,8 @@ void Renderizador::configurarBuffers()
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)
 {
     Nome = "Renderizador";
-    Debug::emitir("Renderizador", "malha: " + malha.nome);
+    variaveis.push_back(std::pair(&visualizarWireFrame, "modo de arame"));
+    variaveis.push_back(&this->malha.material.difusa);
 }
 Renderizador::~Renderizador()
 {

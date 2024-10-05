@@ -12,7 +12,7 @@ using namespace Bubble::Nucleo;
 
 int INIT
 {
-    Projeto projeto("Teste de Projeto");
+    Projeto projeto("Projeto");
 
     while (!projeto.pararloop())
     {

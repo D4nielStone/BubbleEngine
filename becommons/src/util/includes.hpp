@@ -8,6 +8,7 @@
 #include "glm/glm.hpp"
 #include "src/arquivadores/shader.hpp"
 
+using CheckBoxID = std::pair<bool*, const char*>;
 // Definição da estrutura Vector4
 struct Vector4
 {
@@ -150,6 +151,26 @@ struct Vector2
 
     // Operador de diferença (!=)
     bool operator!=(const Vector2& other) const
+    {
+        return !(*this == other);
+    }
+};
+struct Vector3
+{
+    int x = 0, y = 0, z = 0;
+    // Operador de soma (+)
+    Vector3 operator+(const Vector3& other) const
+    {
+        return { x + other.x && y + other.y && z + other.z };
+    }
+    // Operador de igualdade (==)
+    bool operator==(const Vector3& other) const
+    {
+        return x == other.x && y == other.y && z == other.z;
+    }
+
+    // Operador de diferença (!=)
+    bool operator!=(const Vector3& other) const
     {
         return !(*this == other);
     }

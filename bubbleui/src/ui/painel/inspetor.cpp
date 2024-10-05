@@ -10,22 +10,6 @@ static void abrirPopupAdiComp()
 {
     BubbleUI::Paineis::msgMostrarPopup = true;
 }
-static void adicionarComponenteCamera()
-{
-    BubbleUI::Paineis::msgAdiCam = true;
-}
-static void adicionarComponenteCodigo()
-{
-    BubbleUI::Paineis::msgAdiCode = true;
-}
-static void adicionarComponenteRender()
-{
-    BubbleUI::Paineis::msgAdiRender = true;
-}
-static void adicionarComponenteTerreno()
-{
-    BubbleUI::Paineis::msgAdiTerr = true;
-}
 
 BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
     : scenemanager(scenemanager), nome_atual(new std::string(""))
@@ -34,12 +18,15 @@ BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared
     configurar(ctx, rect);
     //popup componentes
     popup_comps = std::make_unique<Util::PopUp>(ctx);
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar camera", adicionarComponenteCamera));
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar codigo", adicionarComponenteCodigo));
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar renderizador", adicionarComponenteRender));
-    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar terreno", adicionarComponenteTerreno));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar camera", &msgAdiCam));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar codigo", &msgAdiCode));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar renderizador", &msgAdiRender));
+    popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar terreno", &msgAdiTerr));
+    // adiciona chackbox para ativar/desativar entidade
+    auto ent_atv_chk = std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado);
+    adicionarWidget(ent_atv_chk);
+    ent_atv_chk->quebrarLinha = false;
     // Verifica se o contexto e o scenemanager são válidos antes de usar
-    adicionarWidget(std::make_shared<Widgets::CheckBox>(nullptr));
     if (scenemanager && ctx)    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
     else                        Debug::emitir(Debug::Erro, "Scenemanager ou contexto inválido");// Log de erro
 }
@@ -51,15 +38,30 @@ void BubbleUI::Paineis::Inspetor::recarregar()
     lista_widgets.clear();
     // Verifica entidade selecionada e muda nome da entidade atual
     if (entidade_selecionada) nome_atual = entidade_selecionada->nomeptr();
-    // Verifica se o contexto e o scenemanager são válidos antes de usar
-    adicionarWidget(std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado));
+
+    // adiciona chackbox para ativar/desativar entidade
+    auto ent_atv_chk = std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado);
+    adicionarWidget(ent_atv_chk);
+    ent_atv_chk->quebrarLinha = false;
+    // adiciona caixa de texto para o nome da entidade
     adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, "Nome da entidade"));
+    // adiciona uma arvore para cada componente da entidade
     if(entidade_selecionada)
     for (const auto& componente : entidade_selecionada->listaDeComponentes())
     {
         const auto name = std::string("assets/texturas/icons/" + std::string(componente->nome()) + ".png");
         auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr, name);
         adicionarWidget(arvore);
+
+        // Verifica se possui check box
+        for (const auto& variavel : componente->variaveis)
+        {
+            if (variavel.type() == typeid(CheckBoxID))
+            {
+                auto newVar = variavel._Cast<CheckBoxID>();
+                arvore->adiFilho(std::make_shared<Widgets::CheckBox>(newVar->first, newVar->second, DIREITA));
+            }
+        }
     }
     adicionarWidget(std::make_shared<Widgets::Botao>("Adicionar componente", abrirPopupAdiComp, "assets/texturas/icons/renderizador.png"));
 }

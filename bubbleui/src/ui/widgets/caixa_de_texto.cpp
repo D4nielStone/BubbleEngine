@@ -5,7 +5,7 @@
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
     : gatilho1(false), gatilho2(false), mensagem(mensagem)
 {
-    letra_padding = { 5, 5 };
+    letra_padding = { 3, 3 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
@@ -18,7 +18,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, c
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 5, 5 };
+    letra_padding = { 3, 3 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();

@@ -8,14 +8,14 @@ namespace BubbleUI
 		class BEUI_DLL_API CheckBox : public Texto
 		{
 		public:
-			CheckBox(bool *retorno, const std::string &texto = "");
+			CheckBox(bool *retorno, const std::string &texto = "", const Lado& alinhamento = ESQUERDA);
 			void atualizar() override;
 			void renderizar() const override;
 		private:
 			Shader shaderImg = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
 			void renderizarImg() const;
 			bool* retorno{ nullptr }, gatilho{ false }, deveRenderizar{ true };
-			int size{ 16 }; unsigned int IDimagem;
+			int size{ 14 }; unsigned int IDimagem;
 		};
 	}
 }

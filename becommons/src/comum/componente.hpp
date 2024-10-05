@@ -1,13 +1,14 @@
 #pragma once
 #include "becommons.hpp"
 #include "src/arquivadores/shader.hpp"
-#include "rapidjson/document.h"
-#include "rapidjson/allocators.h"
+#include <rapidjson/document.h>
+#include <rapidjson/allocators.h>
+#include <any>
+#include <variant>
 
 namespace Bubble {
 	namespace Entidades {
-		class Entidade;
-		// Declaração antecipada da classe Entidade
+		class Entidade;	// Declaração antecipada da classe Entidade
 	}
 	namespace Comum {
 
@@ -17,6 +18,7 @@ namespace Bubble {
 			const char* Nome = "componente_base";
 			bool carregadov{ false };
 		public:
+			std::vector<std::any> variaveis;
 			Bubble::Entidades::Entidade* meuObjeto = nullptr;
 			Componente() {};
 			const char* nome() const { return Nome; }

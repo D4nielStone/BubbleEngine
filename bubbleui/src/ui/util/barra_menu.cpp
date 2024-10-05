@@ -1,6 +1,10 @@
 #include "barra_menu.hpp"
 #include "src/ui/formas/linha.hpp"
+#include "src/ui/items/item_botao.hpp"
+#include "src/cena/scenemanager.hpp"
+#include <rapidjson/writer.h>
 #include "pop_up.hpp"
+#include<filesystem>
 
 void BubbleUI::Util::BarraMenu::renderizar() const
 {
@@ -11,9 +15,33 @@ void BubbleUI::Util::BarraMenu::renderizar() const
 		botao->renderizar();
 	}
 }
+void BubbleUI::Util::BarraMenu::salvarCenaAtual() const
+{
+	// serializa cena no documento
+	rapidjson::Document documento;
+	if (Bubble::Cena::obterSceneManager()->cenaAtual())
+		Bubble::Cena::obterSceneManager()->cenaAtual()->serializar(&documento);
+	// puxa dados do documento para buffer de texto
+	rapidjson::StringBuffer stringbuffer;
+	rapidjson::Writer<rapidjson::StringBuffer> writer(stringbuffer);
+	documento.Accept(writer);
 
+	std::filesystem::create_directories(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto);
+	std::ofstream arquivo_de_cena(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto + "/" + Bubble::Cena::obterSceneManager()->cenaAtual()->nome() + ".bs");
+	
+	if (!arquivo_de_cena.is_open()) {
+		return;
+	}
+
+	// Escreve o conteúdo do buffer no arquivo
+	arquivo_de_cena << stringbuffer.GetString();
+	arquivo_de_cena.close();
+
+}
 void BubbleUI::Util::BarraMenu::atualizar()
 {
+	if (callbackSalvarCenaAtual)
+		salvarCenaAtual();
 	retangulo = { 0, 1, contexto->tamanho.width, altura };
 	Moldura::atualizar();
 	posicaoWidget = { 0, 0 };
@@ -46,11 +74,11 @@ void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 	linha_c->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
 
 	popupCena = std::make_shared<PopUp>(contexto);
-	popupCena->adiItem(std::make_shared<Items::ItemMenu>("salvar projeto atual"));
+	popupCena->adiItem(std::make_shared<Items::ItemMenu>("salvar projeto"));
 	popupCena->adiItem(std::make_shared<Items::ItemMenu>("abrir projeto"));
-	popupCena->adiItem(std::make_shared<Items::ItemMenu>("salver cena atual"));
+	popupCena->adiItem(std::make_shared<Items::Botao>("salver cena atual", &callbackSalvarCenaAtual));
 
-	adicionarBotao(std::make_unique<Items::Arvore>("Configs.Cena", popupCena));
+	adicionarBotao(std::make_unique<Items::Arvore>("Configs", popupCena));
 	texto_nome_projeto = Items::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
 
 	texto_nome_projeto.defMoldura(this);

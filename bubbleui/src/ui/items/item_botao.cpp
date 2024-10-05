@@ -1,6 +1,6 @@
 #include "item_botao.hpp"
 
-BubbleUI::Items::Botao::Botao(const std::string &l, std::function<void()> funcao_click) : funcao_click_(std::move(funcao_click))
+BubbleUI::Items::Botao::Botao(const std::string &l,bool* callback) : callback(callback)
 {
 	resolucao = (12);
 	label_shared = new std::string(l);
@@ -8,7 +8,7 @@ BubbleUI::Items::Botao::Botao(const std::string &l, std::function<void()> funcao
 	letra_padding = { 4, 4 };
 }
 
-BubbleUI::Items::Botao::Botao(const std::string& l, std::function<void()> funcao_click, const std::string& imagePath)
+BubbleUI::Items::Botao::Botao(const std::string& l,bool* callback, const std::string& imagePath) : callback(callback)
 {
 	resolucao = (12);
 	label_shared = new std::string(l);
@@ -19,11 +19,13 @@ BubbleUI::Items::Botao::Botao(const std::string& l, std::function<void()> funcao
 void BubbleUI::Items::Botao::atualizar()
 {
 	ItemMenu::atualizar();
+	if(callback)
+	*callback = false;
 	if (clicado && gatilho && !escondido)
 	{
-		if (funcao_click_)
+		if (callback)
 		{
-			funcao_click_();
+			*callback = true;
 			gatilho = false;
 		}
 	}
