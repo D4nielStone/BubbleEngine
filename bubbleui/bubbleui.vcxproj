@@ -161,6 +161,7 @@
     <ClInclude Include="src\ui\painel\painel.hpp" />
     <ClInclude Include="src\ui\contexto\contexto.hpp" />
     <ClInclude Include="src\ui\formas\rect.hpp" />
+    <ClInclude Include="src\ui\widgets\seletor_de_cor.hpp" />
     <ClInclude Include="src\ui\widgets\widget.hpp" />
     <ClInclude Include="src\ui\widgets\texto.hpp" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClCompile Include="src\ui\painel\painel.cpp" />
     <ClCompile Include="src\ui\contexto\contexto.cpp" />
     <ClCompile Include="src\ui\formas\rect.cpp" />
+    <ClCompile Include="src\ui\widgets\seletor_de_cor.cpp" />
     <ClCompile Include="src\ui\widgets\widget.cpp" />
     <ClCompile Include="src\ui\widgets\texto.cpp" />
   </ItemGroup>

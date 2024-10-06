@@ -1,7 +1,7 @@
 #include "texto.hpp"
 #include "src/ui/painel/painel.hpp"
 #include "src/depuracao/debug.hpp"
-
+#include <cstdlib>
 // em src/ui/widgets/texto.cpp
 
 using namespace Bubble::Arquivadores;
@@ -51,7 +51,10 @@ void BubbleUI::Widgets::Texto::renderizar() const
 void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;
+    if(alinhamentoHorizontal == Alinhamento::Esquerda)
+        box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;
+    else
+        box_pos.x = painel->obterRetangulo().x - painel->widgetPadding.x + painel->posicaoWidget.x;
     box_pos.y = painel->obterRetangulo().y + painel->widgetPadding.y + painel->posicaoWidget.y;
     box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2 - painel->posicaoWidget.x;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
@@ -68,9 +71,18 @@ void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
     Bubble::Arquivadores::Character ch;
 
     // Itera sobre cada caractere na frase
-    for (size_t i = 0; i < frase.size(); i++)
+    bool alinhamentoEsquerda = (alinhamentoHorizontal == Alinhamento::Esquerda);
+    size_t i = alinhamentoEsquerda ? 0 : frase.size() - 1;
+    size_t step = alinhamentoEsquerda ? 1 : -1;
+
+    // Loop até que i seja fora dos limites
+    while (i < frase.size() && i >= 0) // o limite superior é necessário apenas se `frase.size()` pode ser 0.
     {
-        if (box_pos.y > painel->obterRetangulo().y + painel->obterRetangulo().h)continue;
+        if (box_pos.y > painel->obterRetangulo().y + painel->obterRetangulo().h)
+        {
+            i += step;
+            continue;
+        }
         char& c = frase[i];
         ch = (*Bubble::Arquivadores::obterCaracteres())[c]; // Obtém o caractere atual
 
@@ -95,15 +107,24 @@ void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
         char_rect.h = h_letter;
 
         // Adiciona o retângulo da letra para renderização
-        letras_rect.push_back({ paraNDC(char_rect), ch.TextureID});
+        letras_rect.push_back({ paraNDC(char_rect), ch.TextureID, });
 
-        w_line += (ch.Advance >> 6); // Incrementa a largura da linha com o avanço do caractere
-        if (w_line > largura_texto)
-            largura_texto = w_line; // Atualiza a largura do texto
+        // Incrementa ou decrementa a largura da linha com o avanço do caractere
+        if (alinhamentoEsquerda)
+            w_line += (ch.Advance >> 6);
+        else
+            w_line -= (ch.Advance >> 6);
+
+        // Atualiza a largura do texto se necessário
+        if (abs(w_line) > largura_texto)
+            largura_texto = abs(w_line);
+
+        // Atualiza o índice para o próximo caractere
+        i += step;
     }
     // Atualiza o tamanho do box para o próximo widget
-    box_size.y = line_pos.y + 12 + letra_padding.y * 2;  // Altura do texto mais padding
-    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y + 1) };
+    box_size.y = line_pos.y + 13 + letra_padding.y * 2;  // Altura do texto mais padding
+    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y) };
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)

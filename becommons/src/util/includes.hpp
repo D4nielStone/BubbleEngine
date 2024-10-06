@@ -8,7 +8,6 @@
 #include "glm/glm.hpp"
 #include "src/arquivadores/shader.hpp"
 
-using CheckBoxID = std::pair<bool*, const char*>;
 // Definição da estrutura Vector4
 struct Vector4
 {
@@ -265,12 +264,13 @@ struct Node
 struct LetraRect
 {
     Vector4f rect;
-    Vector4f fundo_rect;
     unsigned int ID;
-    size_t index;
-    Color cor_de_fundo{ 0, 0, 0 ,0 };
-    bool letra_selecionada;
 };
+
+
+using CheckBoxID = std::pair<bool*, const char*>;
+using CaixaDeTextoID = std::pair<std::string*, const char*>;
+using SeletorDeCorID = std::pair<Color*, const char*>;
 
 extern BECOMMONS_DLL_API Vertex rect_vertex;
 extern BECOMMONS_DLL_API Vertex linha_vertex;

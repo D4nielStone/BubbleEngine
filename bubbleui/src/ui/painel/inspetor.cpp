@@ -3,6 +3,7 @@
 #include "src/ui/widgets/arvore.hpp"
 #include "src/ui/widgets/checkbox.hpp"
 #include "src/ui/widgets/botao.hpp"
+#include "src/ui/widgets/seletor_de_cor.hpp"
 #include "src/ui/items/item_botao.hpp"
 #include <src/componentes/prototipo/terreno.hpp>
 
@@ -59,7 +60,25 @@ void BubbleUI::Paineis::Inspetor::recarregar()
             if (variavel.type() == typeid(CheckBoxID))
             {
                 auto newVar = variavel._Cast<CheckBoxID>();
-                arvore->adiFilho(std::make_shared<Widgets::CheckBox>(newVar->first, newVar->second, DIREITA));
+                arvore->adiFilho(std::make_shared<Widgets::CheckBox>(newVar->first, newVar->second, Alinhamento::Direita));
+            }
+        }
+        // Verifica se possui caixa de texto
+        for (const auto& variavel : componente->variaveis)
+        {
+            if (variavel.type() == typeid(CaixaDeTextoID))
+            {
+                auto newVar = variavel._Cast<CaixaDeTextoID>();
+                arvore->adiFilho(std::make_shared<Widgets::CaixaTexto>(newVar->first, newVar->second));
+            }
+        }
+        // Verifica se possui seletor de cor
+        for (const auto& variavel : componente->variaveis)
+        {
+            if (variavel.type() == typeid(SeletorDeCorID))
+            {
+                auto newVar = variavel._Cast<SeletorDeCorID>();
+                arvore->adiFilho(std::make_shared<Widgets::SeletorDeCor>(newVar->first, newVar->second));
             }
         }
     }

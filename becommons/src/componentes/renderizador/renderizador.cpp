@@ -71,8 +71,13 @@ void Renderizador::configurarBuffers()
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)
 {
     Nome = "Renderizador";
-    variaveis.push_back(std::pair(&visualizarWireFrame, "modo de arame"));
-    variaveis.push_back(&this->malha.material.difusa);
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    variaveis.push_back(std::pair(&this->malha.material.difusa, "Cor difusa"));
+    variaveis.push_back(std::pair(&this->malha.material.especular, "Cor especular"));
 }
 Renderizador::~Renderizador()
 {
@@ -95,7 +100,7 @@ void Bubble::Componentes::atualizarMaterial(Material material, Shader shader)
     shader.setFloat("material.shininess", material.shininess);
     shader.setFloat("material.reflexao", material.reflexao);
     shader.setBool("textura_difusa_ativo", false);
-    for (size_t i = 0; i < material.texturas.size(); i++)
+    for (GLenum i = 0; i < material.texturas.size(); i++)
     {
         glActiveTexture(GL_TEXTURE1 + i);
         glBindTexture(GL_TEXTURE_2D, material.texturas[i].ID);

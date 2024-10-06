@@ -21,13 +21,10 @@ bool Projeto::inicializacao()
         Debug::emitir(Debug::Erro, "GLFW não inicializado");
         return false;
     }
-    // dicas de janela
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-    //glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
     glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor", NULL, NULL);
     glfwMaximizeWindow(glfwWindow);
+    glfwSwapInterval(1);
 
     glfwMakeContextCurrent(glfwWindow);
 
@@ -87,8 +84,8 @@ void Projeto::atualizar()
 {
     glfwPollEvents();  // Processa eventos do GLFW
     // Atualiza cena e UI
-    gerenciadorDeCenas->atualizarCenaAtual();
     gerenciadorUi->atualizar();
+    gerenciadorDeCenas->atualizarCenaAtual();
 }
 
 // Deve renderizar cena Atual
