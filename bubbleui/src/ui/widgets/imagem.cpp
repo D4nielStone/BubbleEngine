@@ -44,22 +44,35 @@ void BubbleUI::Widgets::Imagem::atualizar()
         rect.w = painel->obterRetangulo().w;
         rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
     }
-    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h};
-    if (padding)
+    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h };
+    
+    rect.y += padding ? painel->widgetPadding.y : 0;
+    switch (alinhamentoHorizontal)
     {
-        rect.x += painel->widgetPadding.x;
-        rect.y += painel->widgetPadding.y;
+    case Alinhamento::Esquerda:
+        rect.x += padding ? painel->widgetPadding.x : 0;
+        break;
+    case Alinhamento::Direita:
+        rect.x += painel->obterRetangulo().w - rect.w;
+        rect.x -= padding ? painel->widgetPadding.x : 0;
+        break;
+    case Alinhamento::Centro:
+        rect.x += painel->obterRetangulo().w / 2.f - rect.w / 2.f;
     }
     if (posicao_ptr)
     {
-        rect.x += posicao_ptr->x + rect.w / static_cast<float>(2);
-        rect.y += posicao_ptr->y + rect.h / static_cast<float>(2);
+        rect.x = posicao_ptr->x;
+        rect.y = posicao_ptr->y;
     }
-
     if (quebrarLinha)
-        painel->posicaoWidget.y += rect.y + painel->widgetPadding.x * 2;
+    {
+        painel->posicaoWidget.x = 0;
+        painel->posicaoWidget.y += rect.h + painel->widgetPadding.y*2;
+    }
     else
+    {
         painel->posicaoWidget.x += rect.w + painel->widgetPadding.x;
+    }
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem

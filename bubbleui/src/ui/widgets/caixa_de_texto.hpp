@@ -14,6 +14,7 @@ namespace BubbleUI
         public:
             CaixaTexto(const std::string &mensagem = "");
             CaixaTexto(std::shared_ptr<std::string> buffer,const std::string &mensagem);
+            CaixaTexto(std::string* buffer,const std::string &mensagem);
 
             void atualizar() override;
             void renderizar() const override;

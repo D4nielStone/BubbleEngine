@@ -113,7 +113,7 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
         char_rect.h = h_letter;
 
         // Adiciona o retângulo da letra para renderização
-        letras_rect.push_back({ paraNDC(), {}, ch.TextureID });
+        letras_rect.push_back({ paraNDC(), ch.TextureID });
 
         w_line += (ch.Advance >> 6); // Incrementa a largura da linha com o avanço do caractere
         if (w_line > largura_texto)

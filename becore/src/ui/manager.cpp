@@ -75,6 +75,7 @@ BubbleUI::Manager::Manager(Bubble::Nucleo::Projeto* i) : projeto(i)
 // Renderiza paineis
 void BubbleUI::Manager::renderizar() const
 {
+	glClearColor(0.2, 0.2, 0.2, 1);
 	glDisable(GL_DEPTH_TEST);
 	glViewport(0, 0, contexto->tamanho.width, contexto->tamanho.height);
 

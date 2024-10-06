@@ -18,12 +18,26 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, c
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 3, 3 };
+    letra_padding = { 2, 2 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
     moldura.defCor({ 0.05f, 0.05f, 0.05f });
 }
+
+BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
+    : mensagem(mensagem), buffer_texto(buffer)
+{
+    if (buffer) {
+        texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
+    }
+    letra_padding = { 2, 2 };
+    resolucao = 12;
+    lines_box_limite = 3;
+    configurar();
+    moldura.defCor({ 0.05f, 0.05f, 0.05f });
+}
+
 
 void BubbleUI::Widgets::CaixaTexto::atualizar()
 {
@@ -67,6 +81,8 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
     colisao.defRect({box_pos.x, box_pos.y, (int)box_size.x, (int)box_size.y});
     moldura.defTam({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     moldura.atualizar();
+
+    painel->posicaoWidget.y += painel->widgetPadding.y;
 }
 
 void BubbleUI::Widgets::CaixaTexto::renderizar() const

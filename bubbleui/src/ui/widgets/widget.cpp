@@ -10,7 +10,8 @@ void BubbleUI::Widget::defPainel(Painel* painel)
 	inputs = painel->obterContexto()->inputs;
 }
 
-void BubbleUI::Widget::defAlinhamento(const Lado& lado)
+void BubbleUI::Widget::defAlinhamento(const Alinhamento& lado)
 {
-	Alinhamento = lado;
+	alinhamentoHorizontal = lado;
+
 }

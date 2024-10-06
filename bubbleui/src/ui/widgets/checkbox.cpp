@@ -2,10 +2,10 @@
 #include "src/ui/painel/painel.hpp"
 #include <src/arquivadores/imageloader.hpp>
 
-BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto, const Lado& alinhamento) 
+BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& alinhamento) 
     : retorno(retorno)
 {
-    Alinhamento = alinhamento;
+    alinhamentoHorizontal = alinhamento;
     frase = texto;
     quebrarLinha = true;
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
@@ -17,12 +17,12 @@ void BubbleUI::Widgets::CheckBox::atualizar()
     int x = painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x;
     int y = painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y;
 
-    switch (Alinhamento)
+    switch (alinhamentoHorizontal)
     {
-    case ESQUERDA:
+    case Alinhamento::Esquerda:
         x = painel->obterRetangulo().x + painel->widgetPadding.x;  // Alinha à esquerda do painel
         break;
-    case DIREITA:
+    case Alinhamento::Direita:
         x = painel->obterRetangulo().x + painel->obterRetangulo().w - size - painel->widgetPadding.x;  // Alinha à direita do painel
         break;
     }
@@ -35,13 +35,14 @@ void BubbleUI::Widgets::CheckBox::atualizar()
     if (!frase.empty())
     {
         auto posicao_antiga = painel->posicaoWidget.y;
-        switch (Alinhamento)
+        painel->posicaoWidget.y += 3;
+        switch (alinhamentoHorizontal)
         {
-        case ESQUERDA:
+        case Alinhamento::Esquerda:
             painel->posicaoWidget.x += size + painel->widgetPadding.x;
             break;
-        case DIREITA:
-            painel->posicaoWidget.x = painel->widgetPadding.x;
+        case Alinhamento::Direita:
+            painel->posicaoWidget.x = painel->obterRetangulo().w - size - painel->widgetPadding.x*2;
             break;
         }
         Texto::atualizar();

@@ -3,15 +3,18 @@
 #include "src/ui/widgets/arvore.hpp"
 #include "src/ui/widgets/checkbox.hpp"
 #include "src/ui/widgets/botao.hpp"
+#include "src/ui/widgets/seletor_de_cor.hpp"
 #include "src/ui/items/item_botao.hpp"
 #include <src/componentes/prototipo/terreno.hpp>
+using namespace BubbleUI::Paineis;
+using namespace BubbleUI;
 
 static void abrirPopupAdiComp()
 {
-    BubbleUI::Paineis::msgMostrarPopup = true;
+    msgMostrarPopup = true;
 }
 
-BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
+Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
     : scenemanager(scenemanager), nome_atual(new std::string(""))
 {
     Nome = "Inspetor";
@@ -31,9 +34,9 @@ BubbleUI::Paineis::Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared
     else                        Debug::emitir(Debug::Erro, "Scenemanager ou contexto inválido");// Log de erro
 }
 
-BubbleUI::Paineis::Inspetor::~Inspetor() = default;
+Inspetor::~Inspetor() = default;
 
-void BubbleUI::Paineis::Inspetor::recarregar()
+void Inspetor::recarregar()
 {
     lista_widgets.clear();
     // Verifica entidade selecionada e muda nome da entidade atual
@@ -52,21 +55,13 @@ void BubbleUI::Paineis::Inspetor::recarregar()
         const auto name = std::string("assets/texturas/icons/" + std::string(componente->nome()) + ".png");
         auto arvore = std::make_shared<Widgets::Arvore>(componente->nome(), nullptr, name);
         adicionarWidget(arvore);
-
-        // Verifica se possui check box
-        for (const auto& variavel : componente->variaveis)
-        {
-            if (variavel.type() == typeid(CheckBoxID))
-            {
-                auto newVar = variavel._Cast<CheckBoxID>();
-                arvore->adiFilho(std::make_shared<Widgets::CheckBox>(newVar->first, newVar->second, DIREITA));
-            }
-        }
+        
+        desvendarWidgets(componente->variaveis, arvore);
     }
     adicionarWidget(std::make_shared<Widgets::Botao>("Adicionar componente", abrirPopupAdiComp, "assets/texturas/icons/renderizador.png"));
 }
 
-void BubbleUI::Paineis::Inspetor::preAtualizacao()
+void Inspetor::preAtualizacao()
 {
     // Recarrega no momento certo
     if (scenemanager->cenaAtual() && entidade_selecionada != scenemanager->cenaAtual()->entidade_selecionada)
@@ -110,9 +105,42 @@ void BubbleUI::Paineis::Inspetor::preAtualizacao()
     }
 }
 
-void BubbleUI::Paineis::Inspetor::posRenderizacao() const
+void Inspetor::posRenderizacao() const
 {
     //renderiza popup
     if (popup_comps)
         popup_comps->renderizar();
+}
+
+void Inspetor::desvendarWidgets(const std::vector<std::any>& variaveis, std::shared_ptr<Widgets::Arvore> arvore)
+{
+    // Verifica se possui arvore
+    for (const auto& variavel : variaveis)
+    {
+    //    if (variavel.type() == typeid(ArvoreID))
+    //    {
+    //        auto newVar = variavel._Cast<ArvoreID>();
+    //        auto arvore_recursiva = std::make_shared<Widgets::Arvore>(newVar->second, nullptr);
+    //        arvore->adiFilho(arvore_recursiva);
+    //        desvendarWidgets(newVar->first, arvore_recursiva);
+    //    }else
+    // Verifica se possui check box
+        if (variavel.type() == typeid(CheckBoxID))
+        {
+            auto newVar = variavel._Cast<CheckBoxID>();
+            arvore->adiFilho(std::make_shared<Widgets::CheckBox>(newVar->first, newVar->second, Alinhamento::Direita));
+        }else
+    // Verifica se possui caixa de texto
+        if (variavel.type() == typeid(CaixaDeTextoID))
+        {
+            auto newVar = variavel._Cast<CaixaDeTextoID>();
+            arvore->adiFilho(std::make_shared<Widgets::CaixaTexto>(newVar->first, newVar->second));
+        }else
+    // Verifica se possui seletor de cor
+        if (variavel.type() == typeid(SeletorDeCorID))
+        {
+            auto newVar = variavel._Cast<SeletorDeCorID>();
+            arvore->adiFilho(std::make_shared<Widgets::SeletorDeCor>(newVar->first, newVar->second));
+        }
+    }
 }

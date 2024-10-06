@@ -12,6 +12,7 @@ namespace BubbleUI
 			~Inspetor();
 		private:
 			void recarregar();
+			void desvendarWidgets(const std::vector<std::any>& variaveis, std::shared_ptr<Widgets::Arvore> arvore);
 			void preAtualizacao() override;
 			void posRenderizacao() const override;
 			std::unique_ptr<Util::PopUp> popup_comps{ nullptr };

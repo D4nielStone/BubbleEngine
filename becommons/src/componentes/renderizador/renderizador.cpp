@@ -71,8 +71,11 @@ void Renderizador::configurarBuffers()
 Renderizador::Renderizador(const Vertex& malha) : malha(malha)
 {
     Nome = "Renderizador";
-    variaveis.push_back(std::pair(&visualizarWireFrame, "modo de arame"));
-    variaveis.push_back(&this->malha.material.difusa);
+    variaveis.push_back(std::pair(&visualizarWireFrame, "Modo de arame"));
+    std::vector<std::any> arvore_material;
+    arvore_material.push_back(std::pair(&this->malha.material.nome, "Nome do material"));
+    arvore_material.push_back(std::pair(&this->malha.material.difusa, "Cor difusa"));
+    variaveis.push_back(std::pair(arvore_material, "Material"));
 }
 Renderizador::~Renderizador()
 {
@@ -86,21 +89,20 @@ Vertex& Bubble::Componentes::Renderizador::obterMalha()
 {
     return malha;
 }
-void Bubble::Componentes::atualizarMaterial(Material material, Shader shader)
+void Bubble::Componentes::atualizarMaterial(Material* material, Shader shader)
 {
-    //Debug::emitir("Renderizador", "atualizando material: " + material.nome);
     shader.use();
-    shader.setVec3("material.cor_difusa", material.difusa.r, material.difusa.g, material.difusa.b);
-    shader.setVec3("material.cor_especular", material.especular.r, material.especular.g, material.especular.b);
-    shader.setFloat("material.shininess", material.shininess);
-    shader.setFloat("material.reflexao", material.reflexao);
+    shader.setVec3("material.cor_difusa", material->difusa.r, material->difusa.g, material->difusa.b);
+    shader.setVec3("material.cor_especular", material->especular.r, material->especular.g, material->especular.b);
+    shader.setFloat("material.shininess", material->shininess);
+    shader.setFloat("material.reflexao", material->reflexao);
     shader.setBool("textura_difusa_ativo", false);
-    for (size_t i = 0; i < material.texturas.size(); i++)
+    for (GLenum i = 0; i < material->texturas.size(); i++)
     {
         glActiveTexture(GL_TEXTURE1 + i);
-        glBindTexture(GL_TEXTURE_2D, material.texturas[i].ID);
-        shader.setInt(material.texturas[i].tipo, 1 + i);
-        shader.setBool(material.texturas[i].tipo + "_ativo", true);
+        glBindTexture(GL_TEXTURE_2D, material->texturas[i].ID);
+        shader.setInt(material->texturas[i].tipo, 1 + i);
+        shader.setBool(material->texturas[i].tipo + "_ativo", true);
     }
     glActiveTexture(GL_TEXTURE0);
     shader.setInt("skybox", 0);

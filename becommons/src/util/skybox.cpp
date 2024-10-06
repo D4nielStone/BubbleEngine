@@ -95,7 +95,7 @@ namespace Bubble::Util
         shader.use();
         shader.setMat4("view", glm::value_ptr(view));
         shader.setMat4("projection", glm::value_ptr(projectionMat));
-
+        glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
         shader.setInt("skybox", 0);
         glDrawArrays(GL_TRIANGLES, 0, malha.vertices.size());

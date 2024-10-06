@@ -79,6 +79,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
             frase = (*label_shared);
             renderizar_texto(frase);
 
+            if (!filhos.empty()) painel->posicaoWidget.y += painel->widgetPadding.y;
             for (const auto& filho : filhos)
             {
                 filho->atualizar();

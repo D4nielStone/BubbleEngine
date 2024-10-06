@@ -17,8 +17,8 @@ namespace Bubble::Cena
             if (componente->nome() == "Renderizador")
             {
                 // adiciona o renderizador ao nome correspondente do material
-                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.nome].first.push_back(entidade);
-                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.nome].second = static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
+                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
+                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
             }
         }
         for (auto& filho : entidade->obterFilhos()) {
@@ -112,11 +112,8 @@ namespace Bubble::Cena
 
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
-        for(auto& entidade : Entidades)
-        for (auto& c : entidade->listaDeComponentes()) 
-        {
-            c->configurar();
-        }
+        for (auto& entidade : Entidades)
+            carregarComponentes(entidade);
     }
     // Deve serializar ela mesma ( isso é, passar para o documento json seus dados )
     void Scene::serializar(rapidjson::Document* doc) const {

@@ -39,7 +39,10 @@ std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
 
     scene->camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
     scene->camera_editor.olharPara({0, 0, 0});
-    scene->criarEntidade("assets/primitivas/modelos/cube.obj", "exemplo de cubo :D");
+    scene->criarEntidade("assets/primitivas/modelos/sphere.obj");
+    scene->criarEntidade("assets/primitivas/modelos/cube.obj");
+    scene->Entidades[1]->obterFilhos()[0]->obterTransformacao()->definirPosicao({0, -1, 0});
+    scene->Entidades[1]->obterFilhos()[0]->obterTransformacao()->definirEscala({2, 0.25, 2});
 
     return scene;
 }

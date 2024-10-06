@@ -20,6 +20,6 @@ namespace Bubble{
             void atualizar() override;
             bool visualizarWireFrame{ false };
         };
-        extern BECOMMONS_DLL_API void atualizarMaterial(Material material, Shader shader);
+        extern BECOMMONS_DLL_API void atualizarMaterial(Material* material, Shader shader);
     }
 }

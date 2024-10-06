@@ -27,7 +27,9 @@ void BubbleUI::Util::BarraMenu::salvarCenaAtual() const
 	documento.Accept(writer);
 
 	std::filesystem::create_directories(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto);
-	std::ofstream arquivo_de_cena(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto + "/" + Bubble::Cena::obterSceneManager()->cenaAtual()->nome() + ".bs");
+	std::filesystem::create_directories(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto + "/" + "Cenas");
+	std::filesystem::create_directories(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto + "/" + "Malhas");
+	std::ofstream arquivo_de_cena(contexto->dirDoProjeto + "/" + contexto->NomeDoProjeto + "/" + "Cenas/"+ Bubble::Cena::obterSceneManager()->cenaAtual()->nome() + ".cena");
 	
 	if (!arquivo_de_cena.is_open()) {
 		return;

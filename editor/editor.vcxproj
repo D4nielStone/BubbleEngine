@@ -143,6 +143,10 @@
       </Command>
     </CustomBuildStep>
     <PostBuildEvent />
+    <PostBuildEvent>
+      <Command> 
+xcopy "$(SolutionDir)editor\assets" "$(OutDir)assets" /e /y /i</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
@@ -176,10 +180,18 @@
   <ItemGroup>
     <Image Include="assets\texturas\cam.png" />
     <Image Include="assets\texturas\cubemap.jpg" />
+    <Image Include="assets\texturas\icons\arco_cor.png" />
     <Image Include="assets\texturas\icons\camera.png" />
     <Image Include="assets\texturas\icons\check.png" />
+    <Image Include="assets\texturas\icons\codigo.png" />
     <Image Include="assets\texturas\icons\cube.png" />
+    <Image Include="assets\texturas\icons\fisica.png" />
+    <Image Include="assets\texturas\icons\iluminacao.png" />
+    <Image Include="assets\texturas\icons\play.png" />
     <Image Include="assets\texturas\icons\renderizador.png" />
+    <Image Include="assets\texturas\icons\scene.png" />
+    <Image Include="assets\texturas\icons\stop.png" />
+    <Image Include="assets\texturas\icons\terreno.png" />
     <Image Include="assets\texturas\icons\transformacao.png" />
     <Image Include="assets\texturas\rock.png" />
     <Image Include="ICON.ico" />

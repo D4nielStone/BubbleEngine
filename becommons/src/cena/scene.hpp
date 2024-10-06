@@ -19,7 +19,7 @@ namespace Bubble
         private:
             Shader shader;
             std::shared_ptr<std::string> Name = std::make_shared<std::string>("Cena");
-            std::unordered_map<std::string, std::pair<std::vector<std::shared_ptr<Entidades::Entidade>>, Material>> entidadesParaRenderizar;
+            std::unordered_map<size_t, std::pair<std::vector<std::shared_ptr<Entidades::Entidade>>, Material*>> entidadesParaRenderizar;
             std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;

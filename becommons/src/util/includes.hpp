@@ -7,8 +7,8 @@
 #include <becommons.hpp>
 #include "glm/glm.hpp"
 #include "src/arquivadores/shader.hpp"
+#include <any>
 
-using CheckBoxID = std::pair<bool*, const char*>;
 // Definição da estrutura Vector4
 struct Vector4
 {
@@ -143,6 +143,11 @@ struct Vector2
     {
         return { x + other.x && y + other.y };
     }
+    // Operador de subtacao (-)
+    Vector2 operator-(const Vector2& other) const
+    {
+        return { x - other.x && y - other.y };
+    }
     // Operador de igualdade (==)
     bool operator==(const Vector2& other) const
     {
@@ -239,6 +244,7 @@ struct Material {
     Color difusa;
     Color especular;
     float shininess = 32.f, reflexao = 0;
+    size_t ID{};
     std::vector<Textura> texturas;
     std::string nome{ "material sem nome" };
 };
@@ -265,12 +271,14 @@ struct Node
 struct LetraRect
 {
     Vector4f rect;
-    Vector4f fundo_rect;
     unsigned int ID;
-    size_t index;
-    Color cor_de_fundo{ 0, 0, 0 ,0 };
-    bool letra_selecionada;
 };
+
+
+using CheckBoxID = std::pair<bool*, const char*>;
+using CaixaDeTextoID = std::pair<std::string*, const char*>;
+using SeletorDeCorID = std::pair<Color*, const char*>;
+using ArvoreID = std::pair<std::vector<std::any>, const char*>;
 
 extern BECOMMONS_DLL_API Vertex rect_vertex;
 extern BECOMMONS_DLL_API Vertex linha_vertex;

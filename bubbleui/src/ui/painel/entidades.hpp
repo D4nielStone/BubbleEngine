@@ -16,7 +16,7 @@ namespace BubbleUI
 			void preAtualizacao() override;
 		private:
 			std::shared_ptr<Bubble::Cena::SceneManager> scenemanager;
-			int quantidade_entidades{ 0 }, nmr_cenas{ 0 };
+			int quantidade_entidades{ 0 }, quantidade_cenas{ 0 };
 			void recursivo(std::shared_ptr<Bubble::Entidades::Entidade> entidade, std::shared_ptr < Widgets::Arvore> arvore);
 		};
 	}

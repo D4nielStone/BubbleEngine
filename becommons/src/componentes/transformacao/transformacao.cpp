@@ -3,7 +3,7 @@
 using namespace Bubble::Componentes;
 
 Transformacao::Transformacao()
-    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(1.0f, 0, 0, 0), escala(0.1f)
+    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(0, 0, 0), escala(0.1f)
 {
     Nome = "Transformacao";
 }
@@ -50,19 +50,19 @@ void Transformacao::atualizar() {
 }
 void Transformacao::configurar() {
     glm::translate(matriz_de_modelo, posicao);
-    matriz_de_modelo *= glm::toMat4(rotacao);
+    glm::rotate(matriz_de_modelo, 1.f, rotacao);
     glm::scale(matriz_de_modelo, escala);
 }
-void Transformacao::definirPosicao(const glm::vec3& newPosition) { posicao = newPosition; }
-void Transformacao::definirRotacao(const glm::quat& newRotation) { rotacao = newRotation; }
-void Transformacao::definirEscala(const glm::vec3& newScale) { escala = newScale; }
+void Transformacao::definirPosicao(const glm::vec3& newPosition) { posicao = newPosition;  comporMatriz(posicao, rotacao, escala);}
+void Transformacao::definirRotacao(const glm::vec3& newRotation) { rotacao = newRotation; comporMatriz(posicao, rotacao, escala); }
+void Transformacao::definirEscala(const glm::vec3& newScale) { escala = newScale;  comporMatriz(posicao, rotacao, escala); }
 void Transformacao::Move(glm::vec3 pos) {
     posicao += pos;
     glm::translate(matriz_de_modelo, posicao);
 }
 void Transformacao::Rotacionar(const float x, const float y, const float z) {
     rotacao = glm::normalize(glm::vec3(x, y, z));
-    matriz_de_modelo *= glm::toMat4(rotacao);
+    glm::rotate(matriz_de_modelo, 1.f, rotacao);
 }
 void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const {
     glm::vec3 skew;

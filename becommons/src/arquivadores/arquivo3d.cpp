@@ -10,6 +10,11 @@ using namespace Bubble::Arquivadores;
 
 std::vector<std::pair<Node, std::string>> arquivos;
 
+static std::size_t gerarId(const std::string& str) {
+    std::hash<std::string> hash_fn; // Função de hash para string
+    return hash_fn(str);            // Gera o hash
+}
+
 Arquivo3d::Arquivo3d() {}
 
 Arquivo3d::Arquivo3d(const std::string& caminho) : PathCompleto(caminho) {
@@ -42,11 +47,11 @@ std::vector<Textura> Arquivo3d::processarTextura(aiMaterial* mat, aiTextureType 
         }
         else {
             // Carrega textura usando o gerenciador de texturas.
-            texture.ID = gerenciadorTexturas.carregarTextura(filename);
+            texture.ID = gerenciadorTexturas.carregarTextura(str.C_Str());
         }
 
         texture.tipo = typeName;
-        texture.path = filename.c_str();
+        texture.path = str.C_Str();
         textures.push_back(texture);
     }
     return textures;
@@ -208,6 +213,8 @@ Material Arquivo3d::processarMateriais(aiMaterial* material) {
         auto texturas = processarTextura(material, tipo.first, tipo.second);
         mat.texturas.insert(mat.texturas.end(), texturas.begin(), texturas.end());
     }
+
+    mat.ID = gerarId(mat.nome);
 
     return mat;
 }

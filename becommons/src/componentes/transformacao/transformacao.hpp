@@ -21,7 +21,7 @@ namespace Bubble {
             glm::vec3 posicao;
             glm::vec3 escala;
             glm::mat4 matriz_de_modelo;
-            glm::quat rotacao;
+            glm::vec3 rotacao;
         public:
             Transformacao();
 
@@ -36,7 +36,7 @@ namespace Bubble {
             glm::vec3 obterEscala() const;
 
             void definirPosicao(const glm::vec3& newPosition);
-            void definirRotacao(const glm::quat& newRotation);
+            void definirRotacao(const glm::vec3& newRotation);
             void definirEscala(const glm::vec3& newScale);
 
             void Move(glm::vec3 pos);
