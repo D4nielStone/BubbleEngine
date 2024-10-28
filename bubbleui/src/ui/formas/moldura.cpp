@@ -5,14 +5,15 @@ BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vec
 	this->contexto = contexto;
 	this->retangulo = retangulo;
 	Rect::Rect(contexto, retangulo);
+	*cor_base = { 0.3f, 0.3f, 0.3f, 1.f };
 	linha_d = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_b = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_e = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
 	linha_c = std::make_unique<Linha>(Vector4{0, 0, 0, 0}, contexto);
-	linha_d->defCor({ 0.35f, 0.35f, 0.35f });
-	linha_b->defCor({ 0.35f, 0.35f, 0.35f });
-	linha_e->defCor({ 0.55f, 0.55f, 0.55f });
-	linha_c->defCor({ 0.55f, 0.55f, 0.55f });
+	linha_d->definirCorRef(cor_base);
+	linha_b->definirCorRef(cor_base);
+	linha_e->definirCorRef(cor_base);
+	linha_c->definirCorRef(cor_base);
 }
 
 void BubbleUI::Formas::Moldura::atualizar()

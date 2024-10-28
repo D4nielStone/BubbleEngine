@@ -30,12 +30,12 @@ public:
     void use() const;
     // utility uniform functions
     void compilar(const char* vertexPath, const char* fragmentPath);
-    void setBool(const std::string& name, bool value) const;
-    void setInt(const std::string& name, int value) const;
-    void setFloat(const std::string& name, float value) const;
-    void setCor(const std::string& name, Color cor) const;
-    void setVec3(const std::string& name, float r, float g, float b) const;
-    void setVec2(const std::string& name, float r, float g) const;
+    void setBool(const std::string& name, const bool &value) const;
+    void setInt(const std::string& name, const int &value) const;
+    void setFloat(const std::string& name, const float &value) const;
+    void setCor(const std::string& name, const Color &cor) const;
+    void setVec3(const std::string& name, const float &r, const float &g, const float &b) const;
+    void setVec2(const std::string& name, const float &r, const float &g) const;
     void setMat4(const std::string& name, const float* value) const;
     void setMat3(const std::string& name, const float* value) const;
     bool checkCompileErrors(unsigned int shader, const std::string& type);

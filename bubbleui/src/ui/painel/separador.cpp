@@ -10,7 +10,7 @@ Separador::Separador(const Lado side, Painel* p) :contexto(p->obterContexto()), 
 
 void BubbleUI::Separador::atualizar()
 {
-	if (!painel->selecionado)
+	if (!painel->selecionado || !painel->redimensionavel)
 		return;
 	atualizarColisao();
 	atualizarArrasto();

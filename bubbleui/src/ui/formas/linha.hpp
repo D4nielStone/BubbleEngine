@@ -16,12 +16,14 @@ namespace BubbleUI
 			Linha(const Vector4 &posicoes, std::shared_ptr<Contexto> ctx);
 			void defPos(const Vector4 &posicoes);
 			void defCor(const Color &cor);
+			void definirCorRef(Color* cor);
 			void atualizar();
 			void renderizar() const;
 		protected:
 			std::shared_ptr<Contexto> contexto;
 			Vector4 posicoes, tamanhoAnterior;
 			Color cor_base;
+			Color* cor_referencial{ nullptr };
 		private:	
 			Vector4f paraNDC();
 			Vector4f coord_ndc;

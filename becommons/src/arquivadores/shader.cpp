@@ -56,7 +56,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
         fragmentCode = fShaderStream.str();
     }
     catch (std::ifstream::failure& e) {
-        Debug::emitir(Debug::Erro, e.what());
+        std::cout << e.what() << "\n";
         return;
     }
 
@@ -100,13 +100,13 @@ void Shader::use() const {
         shader_atual = ID;
     }
 }
-void Shader::setBool(const std::string& name, bool value) const {
+void Shader::setBool(const std::string& name, const bool &value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
-void Shader::setFloat(const std::string& name, float value) const {
+void Shader::setFloat(const std::string& name, const float &value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
-void Shader::setInt(const std::string& name, int value) const {
+void Shader::setInt(const std::string& name, const int &value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 void Shader::setMat4(const std::string& name, const float* value) const {
@@ -115,13 +115,13 @@ void Shader::setMat4(const std::string& name, const float* value) const {
 void Shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
-void Shader::setCor(const std::string& name, Color cor) const {
+void Shader::setCor(const std::string& name, const Color &cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
-void Shader::setVec3(const std::string& name, float r, float g, float b) const {
+void Shader::setVec3(const std::string& name, const float &r, const float &g, const float &b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
-void Shader::setVec2(const std::string& name, float r, float g) const
+void Shader::setVec2(const std::string& name, const float &r, const float &g) const
 {
     glUniform2f(glGetUniformLocation(ID, name.c_str()), r, g);
 }
@@ -140,7 +140,7 @@ bool Shader::checkCompileErrors(unsigned int shader, const std::string& type) {
         glGetProgramiv(shader, GL_LINK_STATUS, &success);
         if (!success) {
             glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-            std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+            std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- --\n";
             return false;
         }
     }
@@ -152,7 +152,7 @@ bool Shader::checkLinkErrors(unsigned int program) {
     glGetProgramiv(program, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(program, 1024, NULL, infoLog);
-        Debug::emitir(Debug::Erro, "PROGRAM_LINKING_ERROR\n" + std::string(infoLog) + "\n-- -------------------------------------------------- - -- ");
+        std::cout << "PROGRAM_LINKING_ERROR\n" + std::string(infoLog) + "\n-- -------------------------------------------------- - -- \n";
         return false;
     }
     return true;

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{91dd1161-9ed2-420a-b1d9-9b2a7216d14f}</ProjectGuid>
-    <RootNamespace>bubbleui</RootNamespace>
+    <ProjectGuid>{55043d47-757c-4208-91e7-4e22db90e0ed}</ProjectGuid>
+    <RootNamespace>projetos</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,6 +70,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -102,17 +108,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BEUI_EXPORTS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)WIN32;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)bubbleui;$(SolutionDir)becommons;$(SolutionDir)becore;$(SolutionDir);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>becommons.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <PerUserRedirection>true</PerUserRedirection>
-      <AdditionalLibraryDirectories>$(SolutionDir)x64/Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>becore.lib;bubbleui.lib;becommons.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -121,80 +127,35 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BEUI_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;WIN32;%(PreprocessorDefinitions)WIN32;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)becommons;$(ProjectDir)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)bubbleui;$(SolutionDir)becommons;$(SolutionDir)becore;$(SolutionDir);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)x64/Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>becommons.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>becore.lib;bubbleui.lib;becommons.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\ui\items\item_texto.hpp" />
-    <ClInclude Include="src\ui\painel\jogo.hpp" />
-    <ClInclude Include="src\ui\util\barra_menu.hpp" />
-    <ClInclude Include="src\ui\painel\inspetor.hpp" />
-    <ClInclude Include="src\ui\widgets\arvore.hpp" />
-    <ClInclude Include="src\ui\items\item_arvore.hpp" />
-    <ClInclude Include="src\ui\items\item_botao.hpp" />
-    <ClInclude Include="src\ui\items\item_menu.hpp" />
-    <ClInclude Include="src\ui\widgets\botao.hpp" />
-    <ClInclude Include="src\ui\util\pop_up.hpp" />
-    <ClInclude Include="src\ui\formas\moldura.hpp" />
-    <ClInclude Include="src\ui\widgets\caixa_de_texto.hpp" />
-    <ClInclude Include="src\ui\painel\entidades.hpp" />
-    <ClInclude Include="src\ui\painel\aba.hpp" />
-    <ClInclude Include="src\ui\painel\editor.hpp" />
-    <ClInclude Include="src\ui\widgets\checkbox.hpp" />
-    <ClInclude Include="src\ui\widgets\imagem.hpp" />
-    <ClInclude Include="src\ui\painel\depurador.hpp" />
-    <ClInclude Include="src\ui\formas\colisao2d.hpp" />
-    <ClInclude Include="src\ui\painel\separador.hpp" />
-    <ClInclude Include="bubbleui.hpp" />
-    <ClInclude Include="src\ui\formas\linha.hpp" />
-    <ClInclude Include="src\ui\painel\painel.hpp" />
-    <ClInclude Include="src\ui\contexto\contexto.hpp" />
-    <ClInclude Include="src\ui\formas\rect.hpp" />
-    <ClInclude Include="src\ui\widgets\seletor_de_cor.hpp" />
-    <ClInclude Include="src\ui\widgets\widget.hpp" />
-    <ClInclude Include="src\ui\widgets\texto.hpp" />
-    <ClInclude Include="src\ui\painel\visualizador_de_projetos.hpp" />
+    <ClCompile Include="src\nucleo\janela.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\ui\items\item_texto.cpp" />
-    <ClCompile Include="src\ui\painel\jogo.cpp" />
-    <ClCompile Include="src\ui\util\barra_menu.cpp" />
-    <ClCompile Include="src\ui\painel\inspetor.cpp" />
-    <ClCompile Include="src\ui\widgets\arvore.cpp" />
-    <ClCompile Include="src\ui\items\item_arvore.cpp" />
-    <ClCompile Include="src\ui\items\item_botao.cpp" />
-    <ClCompile Include="src\ui\items\item_menu.cpp" />
-    <ClCompile Include="src\ui\widgets\botao.cpp" />
-    <ClCompile Include="src\ui\util\pop_up.cpp" />
-    <ClCompile Include="src\ui\formas\moldura.cpp" />
-    <ClCompile Include="src\ui\widgets\caixa_de_texto.cpp" />
-    <ClCompile Include="src\ui\painel\entidades.cpp" />
-    <ClCompile Include="src\ui\painel\aba.cpp" />
-    <ClCompile Include="src\ui\painel\editor.cpp" />
-    <ClCompile Include="src\ui\widgets\checkbox.cpp" />
-    <ClCompile Include="src\ui\widgets\imagem.cpp" />
-    <ClCompile Include="src\ui\painel\depurador.cpp" />
-    <ClCompile Include="src\ui\formas\colisao2d.cpp" />
-    <ClCompile Include="src\ui\painel\separador.cpp" />
-    <ClCompile Include="src\ui\formas\linha.cpp" />
-    <ClCompile Include="src\ui\painel\painel.cpp" />
-    <ClCompile Include="src\ui\contexto\contexto.cpp" />
-    <ClCompile Include="src\ui\formas\rect.cpp" />
-    <ClCompile Include="src\ui\widgets\seletor_de_cor.cpp" />
-    <ClCompile Include="src\ui\widgets\widget.cpp" />
-    <ClCompile Include="src\ui\widgets\texto.cpp" />
-    <ClCompile Include="src\ui\painel\visualizador_de_projetos.cpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\nucleo\janela.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ICON.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="projetos.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

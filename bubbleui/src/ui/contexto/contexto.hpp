@@ -21,9 +21,10 @@ namespace BubbleUI
         Size tamanho; // Tamanho da janela glfw
         std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr }; // Inputs da janela glfw
 
-        Contexto();
-
         // Destructor to manage resources
         ~Contexto();
+        Contexto();
+
+        void def_inputs(GLFWwindow* janela);
     };
 }

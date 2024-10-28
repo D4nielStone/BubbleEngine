@@ -1,5 +1,4 @@
-#ifndef INCLUDES_H
-#define INCLUDES_H
+#pragma once
 #include <vector>
 #include <iostream>
 #include <cstdio>
@@ -219,6 +218,14 @@ struct Size
 struct Color 
 {
     float r = 0.7f, g = 0.7f, b = 0.7f, a = 1.f;
+    Color( const float &r, const float &g, const float &b, const float &a) : r(r), g(g), b(b), a(a){};
+    Color( const float &r, const float &g, const float &b) : r(r), g(g), b(b){};
+    Color() = default;
+    // Operador de soma (+)
+    Color operator+(const float other) const
+    {
+        return { r + other, g + other, b + other, 1.f };
+    }
 };
 
 struct Textura {
@@ -282,5 +289,3 @@ using ArvoreID = std::pair<std::vector<std::any>, const char*>;
 
 extern BECOMMONS_DLL_API Vertex rect_vertex;
 extern BECOMMONS_DLL_API Vertex linha_vertex;
-
-#endif // !INCLUDES_H

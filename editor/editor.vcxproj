@@ -144,8 +144,8 @@
     </CustomBuildStep>
     <PostBuildEvent />
     <PostBuildEvent>
-      <Command> 
-xcopy "$(SolutionDir)editor\assets" "$(OutDir)assets" /e /y /i</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -170,9 +170,6 @@ xcopy "$(SolutionDir)editor\assets" "$(OutDir)assets" /e /y /i</Command>
     <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Resource.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\becore\becore.vcxproj">
       <Project>{43f2e8ca-ebd9-4e23-b6b9-a87341710c99}</Project>
     </ProjectReference>
@@ -195,9 +192,13 @@ xcopy "$(SolutionDir)editor\assets" "$(OutDir)assets" /e /y /i</Command>
     <Image Include="assets\texturas\icons\transformacao.png" />
     <Image Include="assets\texturas\rock.png" />
     <Image Include="ICON.ico" />
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="editor.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

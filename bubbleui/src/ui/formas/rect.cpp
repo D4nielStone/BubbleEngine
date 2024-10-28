@@ -3,17 +3,6 @@
 #include "src/depuracao/assert.hpp"
 
 using namespace BubbleUI::Formas;
-// Dentro da classe Rect, adicione um buffer para instâncias
-unsigned int instanceVBO;
-
-// Vamos criar uma estrutura para armazenar as transformações de cada instância
-struct Instancia {
-    Vector2 posicao;
-    Vector2 tamanho;
-    Color cor;
-};
-
-std::vector<Instancia> instancias; // Armazena todas as instâncias
 
 Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
 {
@@ -57,7 +46,7 @@ void Rect::adiPos(const Vector2 &pos)
 // Deve definir cor base
 void Rect::defCor(const Color &cor)
 {
-    cor_base = cor;
+    *cor_base = cor;
 }
 // Deve atualizar
 void Rect::atualizar()
@@ -76,7 +65,7 @@ void Rect::renderizar() const
     shader.use();
     shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
     shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
-    shader.setCor("quadrado.cor", cor_base);
+    shader.setCor("quadrado.cor", *cor_base);
     glBindVertexArray(rect_vertex.VAO);
     glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);

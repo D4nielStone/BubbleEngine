@@ -53,6 +53,7 @@ void BubbleUI::Util::BarraMenu::atualizar()
 		botao->atualizar();
 	}
 	texto_nome_projeto.atualizar();
+	glfwSetCursor(contexto->glfwWindow, contexto->cursor);
 }
 
 void BubbleUI::Util::BarraMenu::adicionarBotao(std::unique_ptr<Items::ItemMenu> item)
@@ -65,7 +66,7 @@ void BubbleUI::Util::BarraMenu::adicionarBotao(std::unique_ptr<Items::ItemMenu> 
 void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 {
 	this->contexto = ctx;
-	cor_base = { 0.1, 0.1, 0.1, 1 };
+	*cor_base = { 0.1f, 0.1f, 0.1f, 1.f };
 	linha_d = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
 	linha_b = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
 	linha_e = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
@@ -76,11 +77,10 @@ void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 	linha_c->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
 
 	popupCena = std::make_shared<PopUp>(contexto);
-	popupCena->adiItem(std::make_shared<Items::ItemMenu>("salvar projeto"));
-	popupCena->adiItem(std::make_shared<Items::ItemMenu>("abrir projeto"));
-	popupCena->adiItem(std::make_shared<Items::Botao>("salver cena atual", &callbackSalvarCenaAtual));
+	popupCena->adiItem(std::make_shared<Items::ItemMenu>("Novo projeto"));
+	popupCena->adiItem(std::make_shared<Items::ItemMenu>("Abrir projeto"));
 
-	adicionarBotao(std::make_unique<Items::Arvore>("Configs", popupCena));
+	adicionarBotao(std::make_unique<Items::Arvore>("Arquivo", popupCena));
 	texto_nome_projeto = Items::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
 
 	texto_nome_projeto.defMoldura(this);

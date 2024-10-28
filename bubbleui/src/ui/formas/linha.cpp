@@ -29,6 +29,10 @@ void Linha::defCor(const Color &cor)
 {
     cor_base = cor;
 }
+void BubbleUI::Formas::Linha::definirCorRef(Color* cor)
+{
+    cor_referencial = cor;
+}
 // Deve transformar coordenadas pixel para NDC
 Vector4f Linha::paraNDC()
 {
@@ -52,6 +56,7 @@ void Linha::atualizar()
         tamanhoAnterior = posicoes;
         tamanhoDoContextoAnterior = contexto->tamanho;
     }
+    if(cor_referencial)cor_base = (*cor_referencial) + 0.1f;
 }
 // Deve renderizar
 void Linha::renderizar() const

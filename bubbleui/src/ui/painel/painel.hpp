@@ -15,7 +15,7 @@ namespace BubbleUI
 	public:
 		// Construtores
 		Painel() = default;
-		Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect);
+		Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect = {0, 0, 100, 50});
 
 		// Manipulação de Tamanho e Posição
 		void definirTamanho(const Vector2& tam);
@@ -47,7 +47,7 @@ namespace BubbleUI
 		Lado redimensionamentoAtual;
 		bool selecionado{ false };
 		bool arrastando{ false };
-		bool mouse1click{ false };
+		bool mouse1click{ false }, redimensionavel{ true };
 	protected:
 		// Métodos de Configuração e Ciclo de Vida
 		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });

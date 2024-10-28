@@ -22,7 +22,7 @@ bool Projeto::inicializacao()
         return false;
     }
 
-    glfwWindow = glfwCreateWindow(800, 500, "BubbleEditor", NULL, NULL);
+    glfwWindow = glfwCreateWindow(800, 500, "Bubble Engine-Editor-copyright 2024 Daniel Oliveira", NULL, NULL);
     glfwMaximizeWindow(glfwWindow);
     glfwSwapInterval(1);
 
@@ -36,7 +36,7 @@ bool Projeto::inicializacao()
 
     NomeGPU = reinterpret_cast<const char*>(glGetString(GL_RENDERER));
     VercaoGL = reinterpret_cast<const char*>(glGetString(GL_VERSION));
-    glfwSetWindowTitle(glfwWindow, std::string("BubbleEditor | " + Nome + " | GL " + VercaoGL).c_str());
+    glfwSetWindowTitle(glfwWindow, std::string("Bubble Engine-Editor-copyright 2024 Daniel Oliveira | " + Nome + " | GL " + VercaoGL).c_str());
     // define o ícone da janela
     auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
     const GLFWimage icone = icone_.converterParaGlfw();
@@ -48,8 +48,6 @@ bool Projeto::inicializacao()
 
     // defini inputs da janela
     defInputs(std::make_shared<Inputs::Inputs>());
-
-    //obterGC()->novaCena();
 
     return true;
 }
