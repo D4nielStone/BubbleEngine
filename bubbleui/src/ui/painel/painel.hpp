@@ -10,42 +10,30 @@
 
 namespace BubbleUI
 {
-	class BEUI_DLL_API Painel
+	class BEUI_DLL_API Painel : public Formas::Moldura
 	{
 	public:
 		// Construtores
 		Painel() = default;
 		Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect = {0, 0, 100, 50});
 
-		// Manipulação de Tamanho e Posição
-		void definirTamanho(const Vector2& tam);
-		void definirPosicao(const Vector2& pos);
-		void adicionarTamanho(const Vector2& tam);
-		void adicionarPosicao(const Vector2& pos);
-
 		// Widgets
 		void adicionarWidget(std::shared_ptr<Widget> widget);
 
 		// Obtenção de Dados
-		Vector4 obterRetangulo() const;
 		Vector2 obterTamanhoMinimo() const;
 		std::shared_ptr<Contexto> obterContexto() const;
 
 		// Atualização e Renderização
-		void atualizar();
-		void renderizar() const;
+		void atualizar() override;
+		void renderizar() const override;
 
 		// Estado do Painel
 		bool cursorNormal() const;
 		std::string nome() const { return Nome; }
 
-		// Estado Interno
-		Vector2 widgetPadding, posicaoWidget;
-		Color arvoreCor{ 0.1f, 0.1f, 0.1f };
-
 		// Flags de Controle
 		Lado redimensionamentoAtual;
-		bool selecionado{ false };
 		bool arrastando{ false };
 		bool mouse1click{ false }, redimensionavel{ true }, mostrar_aba{ true };
 	protected:
@@ -60,8 +48,6 @@ namespace BubbleUI
 
 		// Atributos
 		std::string Nome = "Painel";
-		Formas::Moldura moldura;
-		std::shared_ptr<Contexto> contexto{ nullptr };
 		std::vector<std::shared_ptr<Widget>> lista_widgets;
 
 		// Componentes
@@ -70,7 +56,6 @@ namespace BubbleUI
 		std::unique_ptr<Aba> aba{ nullptr };
 
 		// Dados de Geometria
-		Vector4 retangulo;
 		Vector2 tamanhoMinimo;
 		bool renderizarCorpo{ true };
 

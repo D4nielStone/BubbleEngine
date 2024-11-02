@@ -27,9 +27,9 @@ void BubbleUI::Widgets::CheckBox::atualizar()
         break;
     }
 
-    moldura.defPos({ x, y });
-    moldura.defTam({ size, size });
-    colisao.defRect(moldura.obtRect());
+    Moldura::definirPosicao({ x, y });
+    Moldura::definirTamanho({ size, size });
+    colisao.defRect(Moldura::obterRetangulo());
 
     // Atualiza o texto se houver
     if (!frase.empty())
@@ -68,7 +68,7 @@ void BubbleUI::Widgets::CheckBox::atualizar()
         }
     }
 
-    moldura.atualizar();
+    Moldura::atualizar();
 
     // Controle da posição do widget no painel
     if (quebrarLinha)
@@ -79,7 +79,7 @@ void BubbleUI::Widgets::CheckBox::atualizar()
 
 void BubbleUI::Widgets::CheckBox::renderizar() const
 {
-    moldura.renderizar();
+    Moldura::renderizar();
     if (!frase.empty())
         Texto::renderizar();
     if (!deveRenderizar)
@@ -91,8 +91,8 @@ void BubbleUI::Widgets::CheckBox::renderizar() const
 void BubbleUI::Widgets::CheckBox::renderizarImg() const
 {
     shaderImg.use();
-    shaderImg.setVec2("quadrado.posicao", moldura.obtRectNDC().x, moldura.obtRectNDC().y);
-    shaderImg.setVec2("quadrado.tamanho", moldura.obtRectNDC().z, moldura.obtRectNDC().w);
+    shaderImg.setVec2("quadrado.posicao", Moldura::obtRectNDC().x, Moldura::obtRectNDC().y);
+    shaderImg.setVec2("quadrado.tamanho", Moldura::obtRectNDC().z, Moldura::obtRectNDC().w);
     shaderImg.setInt("textura", 0);
     shaderImg.setBool("flip", false);
 

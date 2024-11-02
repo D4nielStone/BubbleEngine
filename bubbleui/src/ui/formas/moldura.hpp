@@ -2,6 +2,7 @@
 #include "rect.hpp"
 #include "meio_circulo.hpp"
 #include "linha.hpp"
+
 namespace BubbleUI
 {
 	namespace Formas
@@ -13,17 +14,21 @@ namespace BubbleUI
 			Moldura() = default;
 			void atualizar() override;
 			void renderizar() const override;
-			void defTam(const Vector2& tam)	override;
-			void defPos(const Vector2& pos)	override;
+			void definirTamanho(const Vector2& tam)	override;
+			void definirPosicao(const Vector2& pos)	override;
 			void definirRetangulo(const Vector4& rect) override;
-			Vector4 obtRect() const override;
-			std::shared_ptr<Contexto> obtCtx() const;
-			Vector2f posicaoWidget{ 0, 0 };
+			Vector4 obterRetangulo() const override;
+			std::shared_ptr<Contexto> obterContexto() const;
+			Vector2 posicaoWidget{ 0, 0 };
 			Vector2 widgetPadding{ 3, 3 };
+			Color arvoreCor{ 0.1f, 0.1f, 0.1f };
+			bool selecionado{ true };
 			bool ocultar_linhas{ false };
 		protected:
 			virtual void preAtualizacao() {};
 			virtual void posAtualizacao() {};
+			// Define a espessura da borda
+			int espessuraBorda{ 8 };
 			void configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4& retangulo);
 			Vector4 retangulo_completo{};
 			std::unique_ptr<Rect>

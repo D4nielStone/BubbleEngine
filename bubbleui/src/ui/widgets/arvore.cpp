@@ -111,8 +111,8 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Define o retângulo de colisão para a detecção de mouse
     colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
-    moldura.defPos({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
-    moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
+    Moldura::definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
+    Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
 
 
     // Reseta gatilho de click
@@ -131,9 +131,9 @@ void BubbleUI::Widgets::Arvore::atualizar()
         painel->arvoreCor = { 0.1f, 0.1f, 0.1f };
     }
 
-    moldura.defCor(cor);
+    Moldura::defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
-    moldura.ocultar_linhas = true;
+    Moldura::ocultar_linhas = true;
     if (!colisao.mouseEmCima() && painel->selecionado)
     {
         if (inputs->mouseEnter == GLFW_PRESS)
@@ -146,11 +146,11 @@ void BubbleUI::Widgets::Arvore::atualizar()
     {
         {
             // Se o mouse estiver sobre o widget, altera a cor da moldura
-            moldura.defCor({ 0.2f, 0.2f, 0.2f });
+            Moldura::defCor({ 0.2f, 0.2f, 0.2f });
             if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
             {
                 if (retorno)    *retorno = true; // ponteiro do retorno
-                moldura.ocultar_linhas = false; // não oculta linhas da moldura
+                Moldura::ocultar_linhas = false; // não oculta linhas da moldura
                 if (aberto && gatilho_click) { aberto = false; gatilho_click = false; }
                 else if (gatilho_click && !filhos.empty()) { aberto = true; gatilho_click = false; }
             }
@@ -158,15 +158,15 @@ void BubbleUI::Widgets::Arvore::atualizar()
     }
 
     // Atualiza a moldura
-    moldura.atualizar();
+    Moldura::atualizar();
 
 }
 // Método para renderizar o widget Arvore na tela
 void BubbleUI::Widgets::Arvore::renderizar() const
 {
     // Renderiza a moldura utilizando triângulos
-    if (moldura.obtRect().y > box_pos.y + box_size.y)return;
-    moldura.renderizar();
+    if (Moldura::obterRetangulo().y > box_pos.y + box_size.y)return;
+    Moldura::renderizar();
 
 
     // Renderiza o texto da árvore
@@ -185,14 +185,14 @@ void BubbleUI::Widgets::Arvore::renderizar() const
 }
 
 // Método para definir o painel associado ao widget Arvore
-void BubbleUI::Widgets::Arvore::defPainel(Painel* painel)
+void BubbleUI::Widgets::Arvore::definirPai(Formas::Moldura* painel)
 {
     // Chama o método de base para associar o painel ao texto
-    Texto::defPainel(painel);
+    Texto::definirPai(painel);
     inputs = painel->obterContexto()->inputs;
 
     if (icone)
-    icone->defPainel(painel);
+    icone->definirPai(painel);
 }
 
 // Método para adicionar um filho à árvore
@@ -202,7 +202,7 @@ void BubbleUI::Widgets::Arvore::adiFilho(std::shared_ptr<Widget> filho)
     filho->arvore_pai = shared_from_this();
 
     // Associa o painel ao filho
-    filho->defPainel(painel);
+    filho->definirPai(painel);
 
     // Adiciona o filho à lista de filhos
     filhos.push_back(filho);

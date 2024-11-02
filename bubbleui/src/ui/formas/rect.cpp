@@ -10,7 +10,7 @@ Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect)
 }
 
 // Deve retornar o tamanho/posicao
-Vector4 Rect::obtRect() const
+Vector4 Rect::obterRetangulo() const
 {
     return retangulo;
 }
@@ -20,13 +20,13 @@ Vector4f BubbleUI::Formas::Rect::obtRectNDC() const
     return coord_ndc;
 }
 
-void Rect::defTam(const Vector2 &tam)
+void Rect::definirTamanho(const Vector2 &tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
 }
 
-void Rect::defPos(const Vector2 &pos)
+void Rect::definirPosicao(const Vector2 &pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;
@@ -50,6 +50,7 @@ void BubbleUI::Formas::Rect::definirRetangulo(const Vector4& rect)
 // Deve definir cor base
 void Rect::defCor(const Color &cor)
 {
+    if(*cor_base != cor)
     *cor_base = cor;
 }
 void BubbleUI::Formas::Rect::defCor(Color* cor)

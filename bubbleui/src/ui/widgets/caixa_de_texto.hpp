@@ -18,7 +18,7 @@ namespace BubbleUI
 
             void atualizar() override;
             void renderizar() const override;
-            void defPainel(Painel* painel) override;
+            void definirPai(Formas::Moldura* painel) override;
         private:
             void processarEntrada(char c);
             void atualizarInputs();

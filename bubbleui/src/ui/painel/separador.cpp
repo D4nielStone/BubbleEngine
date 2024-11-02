@@ -107,21 +107,21 @@ void BubbleUI::Separador::atualizarArrasto()
 		{
 		case DIREITA:
 			contexto->cursor = contexto->cursor_horizontal;
-				painel->adicionarTamanho({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
+				painel->adiTam({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
 			break;
 		case ESQUERDA:
 			contexto->cursor = contexto->cursor_horizontal;
-				painel->adicionarPosicao({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
-				painel->adicionarTamanho({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+				painel->adiPos({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+				painel->adiTam({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
 			break;
 		case CIMA:
 			contexto->cursor = contexto->cursor_vertical;
-				painel->adicionarPosicao({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
-				painel->adicionarTamanho({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adiPos({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adiTam({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		case BAIXO:
 			contexto->cursor = contexto->cursor_vertical;
-				painel->adicionarTamanho({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
+				painel->adiTam({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
 			break;
 		default:
 			break;

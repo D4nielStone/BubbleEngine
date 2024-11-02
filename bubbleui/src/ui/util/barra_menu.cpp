@@ -58,7 +58,7 @@ void BubbleUI::Util::BarraMenu::atualizar()
 
 void BubbleUI::Util::BarraMenu::adicionarBotao(std::unique_ptr<Items::ItemMenu> item)
 {
-	item->defMoldura(this);
+	item->definirPai(this);
 	item->quebrarLinha(false);
 	botoes.push_back(std::move(item));
 }
@@ -75,6 +75,6 @@ void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 	adicionarBotao(std::make_unique<Items::Arvore>("Arquivo", popupCena));
 	texto_nome_projeto = Items::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
 
-	texto_nome_projeto.defMoldura(this);
+	texto_nome_projeto.definirPai(this);
 	texto_nome_projeto.quebrarLinha(false);
 }

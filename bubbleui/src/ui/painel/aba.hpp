@@ -9,11 +9,12 @@ namespace BubbleUI
 	{
 	public:
 		Aba() = default;
-		Aba(Painel* painel);
+		Aba(Formas::Moldura* painel);
 		void atualizar() override;
 		void renderizar() const override;
 		Formas::Rect* obterCorpo() const;
 	private:
+		bool painel_flag{ true };
 		std::vector<LetraRect> letras_rect;
 		std::unique_ptr<Formas::Rect>corpo_rect;
 	};

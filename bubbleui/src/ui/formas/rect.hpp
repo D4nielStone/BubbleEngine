@@ -14,10 +14,10 @@ namespace BubbleUI
 		public:
 			Rect() = default;
 			Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect);
-			virtual Vector4 obtRect() const;
+			virtual Vector4 obterRetangulo() const;
 			Vector4f obtRectNDC() const;
-			virtual void defTam(const Vector2 &tam);
-			virtual void defPos(const Vector2 &pos);
+			virtual void definirTamanho(const Vector2 &tam);
+			virtual void definirPosicao(const Vector2 &pos);
 			void adiTam(const Vector2 &tam);
 			void adiPos(const Vector2 &tam);
 			virtual void definirRetangulo(const Vector4 &rect);

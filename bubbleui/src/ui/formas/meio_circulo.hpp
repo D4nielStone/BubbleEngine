@@ -16,8 +16,8 @@ namespace BubbleUI
 			MeioCirculo(std::shared_ptr<Contexto> ctx, const Vector4 &rect);
 			virtual Vector4 obtMeioCirculo() const;
 			Vector4f obtMeioCirculoNDC() const;
-			void defTam(const Vector2 &tam);
-			void defPos(const Vector2 &pos);
+			void definirTamanho(const Vector2 &tam);
+			void definirPosicao(const Vector2 &pos);
 			void adiTam(const Vector2 &tam);
 			void adiPos(const Vector2 &tam);
 			void definirRetangulo(const Vector4 &rect);

@@ -9,7 +9,6 @@ BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(std::shared_pt
 {
 	Nome = "Visualizador de Projetos";
 	mostrar_aba = false;
-	moldura.defCor({});
 	configurar(contexto, {0, 0});
 	if (preencher)
 	{
@@ -20,10 +19,13 @@ BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(std::shared_pt
 	auto banner = std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/icons/banner.png", 20);
 	banner->quebrarLinha = true;
 	adicionarWidget(banner);
-	adicionarWidget(std::make_shared<BubbleUI::Widgets::Filtro>("Filtrar Projetos"));
+	auto filtro = std::make_shared<BubbleUI::Widgets::Filtro>("Filtrar Projetos");
+	adicionarWidget(filtro);
+	filtro->recarregar();
 }
 
 void BubbleUI::Paineis::VisualizadorDeProjetos::posAtualizacao()
 {
-	definirTamanho({contexto->tamanho.width - static_cast<int>(retangulo.x), contexto->tamanho.height - static_cast<int>(retangulo.y) });
+	definirPosicao({0, 0});
+	definirTamanho({contexto->tamanho.width - static_cast<int>(obterRetangulo().x), contexto->tamanho.height - static_cast<int>(obterRetangulo().y)});
 }

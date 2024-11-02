@@ -46,9 +46,9 @@ void BubbleUI::Items::Texto::renderizar() const
 void BubbleUI::Items::Texto::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x =  pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
-    box_pos.y =  pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
-    box_size.x = pai->obtRect().w - pai->widgetPadding.x * 2;
+    box_pos.x =  pai->obterRetangulo().x + pai->widgetPadding.x + pai->posicaoWidget.x;
+    box_pos.y =  pai->obterRetangulo().y + pai->widgetPadding.y + pai->posicaoWidget.y;
+    box_size.x = pai->obterRetangulo().w - pai->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // Variáveis para as dimensões da letra
@@ -100,7 +100,7 @@ void BubbleUI::Items::Texto::renderizar_texto()
     if(!vquebrarLinha)
         pai->posicaoWidget.x += largura;
     else
-        pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obtRect().y;
+        pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obterRetangulo().y;
 
 }
 
@@ -125,10 +125,10 @@ void BubbleUI::Items::Texto::configurar(const std::string &font_path, unsigned i
 }
 
 // Método para definir a moldura do Texto
-void BubbleUI::Items::Texto::defMoldura(Formas::Moldura* m)
+void BubbleUI::Items::Texto::definirPai(Formas::Moldura* m)
 {
     pai = m;
-    contexto = m->obtCtx();
+    contexto = m->obterContexto();
 }
 
 void BubbleUI::Items::Texto::definirEscondido(bool boleano)

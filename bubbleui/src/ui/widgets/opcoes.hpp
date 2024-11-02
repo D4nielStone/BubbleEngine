@@ -1,26 +1,23 @@
 #pragma once
 #include "widget.hpp"
 #include "caixa_de_texto.hpp"
-#include "opcoes.hpp"
 #include "botao.hpp"
 
-namespace BubbleUI 
+namespace BubbleUI
 {
 	namespace Widgets
 	{
-		class BEUI_DLL_API Filtro : public Widget
+		class BEUI_DLL_API Opcoes : public Widget
 		{
 		public:
-			Filtro(const std::string &label);
+			Opcoes();
 			void atualizar() override;
 			void renderizar() const override;
 			void recarregar();
 		private:
 			std::vector<std::unique_ptr<Botao>> botoes;
-			void adiBotao(const std::string &label);
+			void adiBotao(const std::string& label);
 			std::unique_ptr<CaixaTexto> text_box{ nullptr };
-			std::string label;
-			std::unique_ptr<Opcoes> projetos{ nullptr };
 		};
 	}
 }
