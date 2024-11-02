@@ -14,7 +14,7 @@ namespace BubbleUI
 		public:
 			Linha() = default;
 			Linha(const Vector4 &posicoes, std::shared_ptr<Contexto> ctx);
-			void defPos(const Vector4 &posicoes);
+			void definirPosicao(const Vector4 &posicoes);
 			void defCor(const Color &cor);
 			void definirCorRef(Color* cor);
 			void atualizar();

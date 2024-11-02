@@ -19,7 +19,7 @@ namespace BubbleUI
 			virtual void atualizar();
 			virtual void renderizar() const;
 			static void configurar(const std::string &font_path = "assets/fontes/consolas/consolas.ttf", unsigned int resolucao = 12);
-			virtual void defMoldura(Formas::Moldura*);
+			virtual void definirPai(Formas::Moldura*);
 			void definirEscondido(bool boleano);
 			void quebrarLinha(bool boleano);
 			int largura{ 0 }, altura{ 0 };

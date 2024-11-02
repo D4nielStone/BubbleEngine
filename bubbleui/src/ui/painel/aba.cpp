@@ -2,9 +2,10 @@
 #include "src/ui/widgets/texto.hpp"
 #include "painel.hpp"
 
-BubbleUI::Aba::Aba(Painel *painel)
+BubbleUI::Aba::Aba(Formas::Moldura *painel)
 {
-    frase = painel->nome();
+    frase = static_cast<Painel*>(painel) ? static_cast<Painel*>(painel)->nome() : "Moldura sem nome";
+    if (frase == "Moldura sem nome")painel_flag = false;
     this->painel = painel;
     resolucao = 14;
     letra_padding = {4, 4};
@@ -19,12 +20,12 @@ void BubbleUI::Aba::atualizar()
 
     renderizar_texto(frase);
 
-    painel->posicaoWidget = { 0, corpo_rect->obtRect().h };
+    painel->posicaoWidget = { 0, corpo_rect->obterRetangulo().h };
 
-    corpo_rect->defPos({static_cast<int>(painel->obterRetangulo().x), static_cast<int>(painel->obterRetangulo().y)});
-    corpo_rect->defTam({ painel->obterRetangulo().w, 15});
-    box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
-    box_size = { static_cast<float>(corpo_rect->obtRect().w), static_cast<float>(corpo_rect->obtRect().h) };
+    corpo_rect->definirPosicao({static_cast<int>(painel->obterRetangulo().x), static_cast<int>(painel->obterRetangulo().y)});
+    corpo_rect->definirTamanho({ painel->obterRetangulo().w, 15});
+    box_pos = {corpo_rect->obterRetangulo().x, corpo_rect->obterRetangulo().y};
+    box_size = { static_cast<float>(corpo_rect->obterRetangulo().w), static_cast<float>(corpo_rect->obterRetangulo().h) };
     corpo_rect->atualizar();
 }
 

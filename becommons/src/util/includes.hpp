@@ -226,6 +226,16 @@ struct Color
     {
         return { r + other, g + other, b + other, 1.f };
     }
+    // Operador de igualdade (==)
+    bool operator==(const Color& other) const
+    {
+        return r == other.r && g == other.g && b == other.b && a == other.a;
+    }
+    // Operador de diferença (!=)
+    bool operator!=(const Color& other) const
+    {
+        return !(*this == other);
+    }
 };
 
 struct Textura {

@@ -1,13 +1,13 @@
 #include "widget.hpp"
 #include "src/ui/painel/painel.hpp"
 
-void BubbleUI::Widget::defPainel(Painel* painel)
+void BubbleUI::Widget::definirPai(Formas::Moldura* p)
 {
-	this->painel = painel;	
+	painel = p;	
 	contexto = painel->obterContexto();
-	moldura = Formas::Moldura(painel->obterContexto());
-	colisao = Colisao2d({}, painel->obterContexto());
-	inputs = painel->obterContexto()->inputs;
+	Formas::Moldura::configurar(contexto, {});
+	colisao = Colisao2d({}, contexto);
+	inputs = contexto->inputs;
 }
 
 void BubbleUI::Widget::defAlinhamento(const Alinhamento& lado)

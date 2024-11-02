@@ -2,9 +2,10 @@
 #include "src/ui/painel/painel.hpp"
 
 BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click, bool completo)
-    : completo(completo)
-,   funcao_click_(funcao_click)
+    : completo(completo),
+   funcao_click_(funcao_click)
 {
+    espessuraBorda =3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
@@ -15,6 +16,7 @@ BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, std::function<v
 BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, const std::string& image_path, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
+    espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
@@ -23,10 +25,22 @@ BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, const std::stri
     letra_padding = { 5, 5 };
 }
 
+BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
+    : completo(completo), callback(callback)
+{
+    espessuraBorda = 3;
+    cor = { 1, 1, 1, 1 };
+    frase = label_shared;
+    resolucao = 12;
+    configurar();
+    letra_padding = { 5, 5 };
+}
+
 BubbleUI::Widgets::Botao::
 Botao(const std::string &label_shared, std::function<void()> function, const std::string& imagePath, bool completo) : completo(completo)
 ,   funcao_click_(function)
 {
+    espessuraBorda = 3;
     icon = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
@@ -39,28 +53,27 @@ void BubbleUI::Widgets::Botao::atualizar()
 {
     if (icon)
     {
-        icon->defPainel(painel);
+        icon->definirPai(painel);
         icon->atualizar();
     }
     Texto::atualizar();
     if (icon) box_size.y = icon->obtRect().h;
-    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y) };
-    moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+   Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     // largura se completo ou não
     if (completo)
     {
         if(icon)
-        moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 4 - icon->obtRect().w, static_cast<int>(box_size.y)});
+       Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 4 - icon->obtRect().w, static_cast<int>(box_size.y)});
         else
-        moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
+       Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
         colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w - painel->widgetPadding.x * 2, (int)box_size.y});
     }
     else
     {
-        moldura.defTam({ largura_texto + letra_padding.x * 2, static_cast<int>(box_size.y) });
+       Moldura::definirTamanho({ largura_texto + letra_padding.x * 2, static_cast<int>(box_size.y) });
         colisao.defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y });
     }
-    moldura.atualizar();
+   Moldura::atualizar();
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho = true;
     //calcula click
     if (colisao.mouseEmCima() && inputs->mouseEnter == GLFW_PRESS && gatilho)
@@ -71,14 +84,14 @@ void BubbleUI::Widgets::Botao::atualizar()
             gatilho = false;
         }
         if (callback)*callback = true;
-        moldura.defCor({ 0.8, 0.66f, 0.86, 1});
+       Moldura::defCor({ 0.39f, 0.32f, 0.46f, 1.f});
     }else
-        moldura.defCor({ 0.26f, 0.21f, 0.28f, 1 });
+       Moldura::defCor({ 0.17f, 0.14f, 0.2f, 1.f });
 }
 
 void BubbleUI::Widgets::Botao::renderizar() const
 {
-    moldura.renderizar();
+   Moldura::renderizar();
     Texto::renderizar();
 
     if (icon)

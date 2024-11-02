@@ -28,29 +28,29 @@ void BubbleUI::Items::ItemMenu::atualizar()
     if (!colisao.mouseEmCima())
     {
         mouseEmCima = false; // Marca que o mouse não está sobre o item
-        moldura.defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
+        Moldura::defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
     }
     else
     {
         // Verifica se o botão esquerdo do mouse foi pressionado
         if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
         mouseEmCima = true; // Marca que o mouse está mais sobre o item
-        moldura.defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
+        Moldura::defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
     if (inputs->mouseEnter == GLFW_RELEASE)
         gatilho = true;
 
     // Atualiza a posição e tamanho da moldura
-    moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
-    moldura.defTam({ largura_texto + letra_padding.x * 2, box_size.y });
-    moldura.atualizar(); // Atualiza a moldura
+    Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+    Moldura::definirTamanho({ largura_texto + letra_padding.x * 2, box_size.y });
+    Moldura::atualizar(); // Atualiza a moldura
 }
 
 // Método para renderizar o ItemMenu na tela
 void BubbleUI::Items::ItemMenu::renderizar() const
 {
-    moldura.renderizar(); // Renderiza a moldura
+    Moldura::renderizar(); // Renderiza a moldura
 
     // Renderiza cada letra do texto
     for (auto& rect : letras_rect)
@@ -73,9 +73,9 @@ void BubbleUI::Items::ItemMenu::renderizar() const
 void BubbleUI::Items::ItemMenu::renderizar_texto()
 {
     // Posiciona o box dentro do widget, com padding do pai
-    box_pos.x =  pai->obtRect().x + pai->widgetPadding.x + pai->posicaoWidget.x;
-    box_pos.y =  pai->obtRect().y + pai->widgetPadding.y + pai->posicaoWidget.y;
-    box_size.x = pai->obtRect().w - pai->widgetPadding.x * 2;
+    box_pos.x =  pai->obterRetangulo().x + pai->widgetPadding.x + pai->posicaoWidget.x;
+    box_pos.y =  pai->obterRetangulo().y + pai->widgetPadding.y + pai->posicaoWidget.y;
+    box_size.x = pai->obterRetangulo().w - pai->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // Variáveis para as dimensões da letra
@@ -127,7 +127,7 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
     if(!vquebrarLinha)
         pai->posicaoWidget.x += largura;
     else
-        pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obtRect().y;
+        pai->posicaoWidget.y = box_pos.y + box_size.y - pai->obterRetangulo().y;
 
 }
 
@@ -152,11 +152,11 @@ void BubbleUI::Items::ItemMenu::configurar(const std::string &font_path, unsigne
 }
 
 // Método para definir a moldura do ItemMenu
-void BubbleUI::Items::ItemMenu::defMoldura(Formas::Moldura* m)
+void BubbleUI::Items::ItemMenu::definirPai(Formas::Moldura* m)
 {
     pai = m;
-    contexto = m->obtCtx();
-    moldura = Formas::Moldura(contexto); // Define a moldura com base no contexto do pai
+    contexto = m->obterContexto();
+    Formas::Moldura::configurar(contexto, {}); // Define a moldura com base no contexto do pai
     colisao = Colisao2d({}, contexto); // Cria uma nova instância de colisão 2D
     inputs = contexto->inputs;
 }

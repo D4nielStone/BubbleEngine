@@ -5,11 +5,9 @@
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
     : gatilho1(false), gatilho2(false), mensagem(mensagem)
 {
-    letra_padding = { 3, 3 };
     resolucao = 12;
     lines_box_limite = 3;
-    configurar();
-    moldura.defCor({ 0.05f, 0.05f, 0.05f });
+    configurar(); 
 }
 
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& mensagem)
@@ -18,11 +16,9 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, c
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 2, 2 };
     resolucao = 12;
     lines_box_limite = 3;
-    configurar();
-    moldura.defCor({ 0.05f, 0.05f, 0.05f });
+    configurar(); 
 }
 
 BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
@@ -31,11 +27,9 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string
     if (buffer) {
         texto = buffer->c_str(); texto_cursor_index = buffer->size() - 1;
     }
-    letra_padding = { 2, 2 };
     resolucao = 12;
     lines_box_limite = 3;
     configurar();
-    moldura.defCor({ 0.05f, 0.05f, 0.05f });
 }
 
 
@@ -43,6 +37,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
 {
     Texto::atualizar(); // Atualiza texto
 
+    Moldura::defCor({ 0.17f, 0.14f, 0.2f, 1.f });
     if (painel->selecionado) 
     {
         if (colisao.mouseEmCima()) {
@@ -79,15 +74,15 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
 
     // Redimensiona moldura e colisao
     colisao.defRect({box_pos.x, box_pos.y, (int)box_size.x, (int)box_size.y});
-    moldura.defTam({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); moldura.defPos({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
-    moldura.atualizar();
+    Moldura::definirTamanho({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+    Moldura::atualizar();
 
     painel->posicaoWidget.y += painel->widgetPadding.y;
 }
 
 void BubbleUI::Widgets::CaixaTexto::renderizar() const
 {
-    moldura.renderizar();
+    Moldura::renderizar();
     Texto::renderizar();
     // Renderiza o cursor
     //if (Bubble::Tempo::s_passados % 2 == 0)
@@ -103,9 +98,9 @@ void BubbleUI::Widgets::CaixaTexto::renderizar() const
     //}
 }
 
-void BubbleUI::Widgets::CaixaTexto::defPainel(Painel* painel)
+void BubbleUI::Widgets::CaixaTexto::definirPai(Formas::Moldura* painel)
 {
-    BubbleUI::Widgets::Texto::defPainel(painel);
+    BubbleUI::Widgets::Texto::definirPai(painel);
     contexto = painel->obterContexto();
     inputs = painel->obterContexto()->inputs; // Simplifica o acesso
 }

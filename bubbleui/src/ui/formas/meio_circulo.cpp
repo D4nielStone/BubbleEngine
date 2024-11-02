@@ -21,13 +21,13 @@ Vector4f BubbleUI::Formas::MeioCirculo::obtMeioCirculoNDC() const
     return coord_ndc;
 }
 
-void MeioCirculo::defTam(const Vector2 &tam)
+void MeioCirculo::definirTamanho(const Vector2 &tam)
 {
     retangulo.w = tam.x;
     retangulo.h = tam.y;
 }
 
-void MeioCirculo::defPos(const Vector2 &pos)
+void MeioCirculo::definirPosicao(const Vector2 &pos)
 {
     retangulo.x = pos.x;
     retangulo.y = pos.y;

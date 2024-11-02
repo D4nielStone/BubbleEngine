@@ -24,9 +24,9 @@ namespace BubbleUI
 			unsigned int resolucao, texturaID;
 			int lines_box_limite, largura_texto;
 			Vector2f box_size, box_pos, line_pos;
-			Vector2 letra_padding;
+			Vector2 letra_padding{ 5, 5 };
 			std::string frase;
-			Color cor, cor_de_selecao{ 0.678, 0.847, 0.902, 1.0};
+			Color cor{1.f, 1.f, 1.f, 1.f}, cor_de_selecao{ 0.678, 0.847, 0.902, 1.0 };
 			Vector2 pos_texto;
 			Vector4 char_rect, char_fundo_rect;
 			Vector4f paraNDC(const Vector4& vec4);

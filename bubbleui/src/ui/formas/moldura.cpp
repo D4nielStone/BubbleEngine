@@ -1,19 +1,16 @@
 #include "moldura.hpp"
 
-// Define a espessura da borda
-int espessuraBorda = 8;
-
 BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4& retangulo)
 {
 	configurar(contexto, retangulo);
 }
 
-void BubbleUI::Formas::Moldura::configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4& retangulo)
+void BubbleUI::Formas::Moldura::configurar(std::shared_ptr<BubbleUI::Contexto> c, const Vector4& retangulo)
 {
 
-	this->contexto = contexto;
+	this->contexto = c;
 	this->retangulo = retangulo;
-	Rect::Rect(contexto, retangulo);
+	Rect::Rect(c, retangulo);
 	*cor_base = { 0.3f, 0.3f, 0.3f, 1.f };
 	borda_d = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
 	borda_b = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
@@ -42,10 +39,10 @@ void BubbleUI::Formas::Moldura::atualizar()
 		return;
 
 	// Ponta direita cima
-	ponta_a->defPos({ static_cast<int>(retangulo.x) + retangulo.w, static_cast<int>(retangulo.y) + retangulo.h });
-	ponta_b->defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) + retangulo.h });
-	ponta_c->defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) });
-	ponta_d->defPos({ static_cast<int>(retangulo.x) + retangulo.w, static_cast<int>(retangulo.y)});
+	ponta_a->definirPosicao({ static_cast<int>(retangulo.x) + retangulo.w, static_cast<int>(retangulo.y) + retangulo.h });
+	ponta_b->definirPosicao({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) + retangulo.h });
+	ponta_c->definirPosicao({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) });
+	ponta_d->definirPosicao({ static_cast<int>(retangulo.x) + retangulo.w, static_cast<int>(retangulo.y)});
 	// Borda direita
 	borda_d->definirRetangulo({
 		retangulo.x + retangulo.w,
@@ -103,12 +100,12 @@ void BubbleUI::Formas::Moldura::renderizar() const
 	ponta_b->renderizar();
 }
 
-void BubbleUI::Formas::Moldura::defTam(const Vector2& tam)
+void BubbleUI::Formas::Moldura::definirTamanho(const Vector2& tam)
 {
 	retangulo.w = tam.x - espessuraBorda * 2;
 	retangulo.h = tam.y - espessuraBorda * 2;
 }
-void BubbleUI::Formas::Moldura::defPos(const Vector2& pos)
+void BubbleUI::Formas::Moldura::definirPosicao(const Vector2& pos)
 {
 	retangulo.x = pos.x + espessuraBorda;
 	retangulo.y = pos.y + espessuraBorda;
@@ -125,14 +122,14 @@ void BubbleUI::Formas::Moldura::definirRetangulo(const Vector4& rect)
 	else retangulo = rect;
 }
 
-Vector4 BubbleUI::Formas::Moldura::obtRect() const
+Vector4 BubbleUI::Formas::Moldura::obterRetangulo() const
 {
 	if (!ocultar_linhas)
 		return retangulo_completo;
 	else return retangulo;
 }
 
-std::shared_ptr<BubbleUI::Contexto> BubbleUI::Formas::Moldura::obtCtx() const
+std::shared_ptr<BubbleUI::Contexto> BubbleUI::Formas::Moldura::obterContexto() const
 {
 	return contexto;
 }

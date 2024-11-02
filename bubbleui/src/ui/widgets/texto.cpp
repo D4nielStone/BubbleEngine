@@ -124,7 +124,8 @@ void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
     }
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 13 + letra_padding.y * 2;  // Altura do texto mais padding
-    painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y) };
+    if (quebrarLinha)painel->posicaoWidget = { 0,  (int)(box_pos.y + box_size.y - painel->obterRetangulo().y) };
+    else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto; };
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)

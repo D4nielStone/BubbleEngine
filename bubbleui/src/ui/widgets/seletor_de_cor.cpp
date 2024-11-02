@@ -50,10 +50,10 @@ void SeletorDeCor::renderizar() const
     Texto::renderizar();
 }
 
-void SeletorDeCor::defPainel(Painel* painel)
+void SeletorDeCor::definirPai(Formas::Moldura* painel)
 {
-    Widget::defPainel(painel);
-    arco_cor->defPainel(painel);
+    Widget::definirPai(painel);
+    arco_cor->definirPai(painel);
 }
 
 void SeletorDeCor::calcularCor()

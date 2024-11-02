@@ -20,7 +20,7 @@ Linha::Linha(const Vector4 &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos),
         linha_vertex.carregado = true;
     }
 }
-void Linha::defPos(const Vector4 &pos)
+void Linha::definirPosicao(const Vector4 &pos)
 {
     posicoes = pos;
 }

@@ -8,42 +8,12 @@ namespace BubbleUI {
         configurar(ctx, rect);
     }
 
-    // Manipulação de Tamanho e Posição
-    void Painel::definirTamanho(const Vector2& tam)
-    {
-        retangulo.w = tam.x;
-        retangulo.h = tam.y;
-    }
-
-    void Painel::definirPosicao(const Vector2& pos)
-    {
-        retangulo.x = pos.x;
-        retangulo.y = pos.y;
-    }
-
-    void Painel::adicionarTamanho(const Vector2& tam)
-    {
-        retangulo.w += tam.x;
-        retangulo.h += tam.y;
-    }
-
-    void Painel::adicionarPosicao(const Vector2& pos)
-    {
-        retangulo.x += pos.x;
-        retangulo.y += pos.y;
-    }
 
     // Widgets
     void Painel::adicionarWidget(std::shared_ptr<Widget> widget)
     {
-        widget->defPainel(this);
+        widget->definirPai(this);
         lista_widgets.push_back(widget);
-    }
-
-    // Obtenção de Dados
-    Vector4 Painel::obterRetangulo() const
-    {
-        return retangulo;
     }
 
     Vector2 Painel::obterTamanhoMinimo() const
@@ -74,10 +44,6 @@ namespace BubbleUI {
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
         menuDeContexto->atualizar();
-        // Atualiza a moldura
-        moldura.defPos({ static_cast<int>(retangulo.x), static_cast<int>(retangulo.y) });
-        moldura.defTam({ retangulo.w, retangulo.h });
-        moldura.atualizar();
 
         // Atualiza os widgets
         preAtualizacao();
@@ -89,6 +55,8 @@ namespace BubbleUI {
         posAtualizacao();
 
         arrastando = false;
+        // Atualiza a moldura
+        Moldura::atualizar();
     }
 
     // Ciclo de Vida do Painel: Renderização
@@ -96,7 +64,7 @@ namespace BubbleUI {
     {
         glScissor(retangulo.x -1, (contexto->tamanho.height - (static_cast<int>(retangulo.y) + 1) - retangulo.h), retangulo.w + 2, retangulo.h + 2);
 
-        moldura.renderizar();
+        Moldura::renderizar();
         preRenderizacao();
         if (mostrar_aba)aba->renderizar();
 
@@ -124,33 +92,52 @@ namespace BubbleUI {
         bordaEsq = std::make_unique<Separador>(ESQUERDA, this);
         bordaDir = std::make_unique<Separador>(DIREITA, this);
 
-        moldura = Formas::Moldura(contexto);
-        moldura.defCor({ 0.13f, 0.11f, 0.16f, 1.f });
 
         menuDeContexto= std::make_unique<Util::PopUp>(contexto);
         aba= std::make_unique<Aba>(this);
+
+        this->contexto = ctx;
+        this->retangulo = retangulo;
+        Rect::Rect(ctx, retangulo);
+        defCor({ 0.13f, 0.11f, 0.16f, 1.f });
+        borda_d = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
+        borda_b = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
+        borda_e = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
+        borda_c = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
+        borda_d->defCor(cor_base);
+        borda_b->defCor(cor_base);
+        borda_e->defCor(cor_base);
+        borda_c->defCor(cor_base);
+        ponta_a = std::make_unique<Formas::MeioCirculo>(contexto, Vector4{ 0, 0, espessuraBorda, espessuraBorda });
+        ponta_b = std::make_unique<Formas::MeioCirculo>(contexto, Vector4{ 0, 0, -espessuraBorda, espessuraBorda });
+        ponta_c = std::make_unique<Formas::MeioCirculo>(contexto, Vector4{ 0, 0, -espessuraBorda, -espessuraBorda });
+        ponta_d = std::make_unique<Formas::MeioCirculo>(contexto, Vector4{ 0, 0, espessuraBorda, -espessuraBorda });
+        ponta_a->defCor(cor_base);
+        ponta_b->defCor(cor_base);
+        ponta_c->defCor(cor_base);
+        ponta_d->defCor(cor_base);
     }
 
     // Controle de Limites e Redimensionamento
     void Painel::corrigirLimite()
     {
-        if (retangulo.w < tamanhoMinimo.x && redimensionamentoAtual== DIREITA)
+        if (obterRetangulo().w < tamanhoMinimo.x && redimensionamentoAtual == DIREITA)
         {
-            retangulo.w = tamanhoMinimo.x;
+            definirTamanho({ tamanhoMinimo.x, obterRetangulo().h });
         }
-        if (retangulo.h < tamanhoMinimo.y && redimensionamentoAtual== BAIXO)
+        if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual== BAIXO)
         {
-            retangulo.h = tamanhoMinimo.y;
+            definirTamanho({ obterRetangulo().w, tamanhoMinimo.y });
         }
-        if (retangulo.w < tamanhoMinimo.x && redimensionamentoAtual== ESQUERDA)
+        if (obterRetangulo().w < tamanhoMinimo.x && redimensionamentoAtual== ESQUERDA)
         {
-            retangulo.x += retangulo.w - tamanhoMinimo.x;
-            retangulo.w = tamanhoMinimo.x;
+            adiPos({ retangulo.w - tamanhoMinimo.x, 0 });
+            definirTamanho({ tamanhoMinimo.x, obterRetangulo().h });
         }
-        if (retangulo.h < tamanhoMinimo.y && redimensionamentoAtual== CIMA)
+        if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual== CIMA)
         {
-            retangulo.y += retangulo.h - tamanhoMinimo.y;
-            retangulo.h = tamanhoMinimo.y;
+            adiPos({ obterRetangulo().h - tamanhoMinimo.y, 0 });
+            definirTamanho({ obterRetangulo().w, tamanhoMinimo.y });
         }
     }
 
