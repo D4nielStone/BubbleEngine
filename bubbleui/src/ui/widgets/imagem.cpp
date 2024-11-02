@@ -6,12 +6,17 @@ BubbleUI::Widgets::Imagem::Imagem(unsigned int id, const Vector2 &size, const bo
 {
 }
 
-BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, Vector2 *posicao) : posicao_ptr(posicao)
+BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao)
 {
-    auto &gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
+    auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
-    rect.w *= static_cast<int>(static_cast<float>(size_percentage) / 100);
-    rect.h *= static_cast<int>(static_cast<float>(size_percentage) / 100);
+
+    // Calcula o fator de escala como um valor de ponto flutuante
+    float scale_factor = static_cast<float>(size_percentage) / 100.0f;
+
+    // Aplica o fator de escala na largura e altura antes de converter para int
+    rect.w = static_cast<int>(rect.w * scale_factor);
+    rect.h = static_cast<int>(rect.h * scale_factor);
 }
 
 BubbleUI::Widgets::Imagem::Imagem(const std::string& path, const Vector2& size)
@@ -44,7 +49,7 @@ void BubbleUI::Widgets::Imagem::atualizar()
         rect.w = painel->obterRetangulo().w;
         rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
     }
-    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x, painel->obterRetangulo().y + painel->posicaoWidget.y, rect.w, rect.h };
+    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x, painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     
     rect.y += padding ? painel->widgetPadding.y : 0;
     switch (alinhamentoHorizontal)

@@ -3,20 +3,8 @@
 
 BubbleUI::Util::PopUp::PopUp(std::shared_ptr<Contexto> contexto)
 {
-	Moldura::Moldura(contexto);
-	inputs = contexto->inputs; 
-	this->contexto = contexto;
-	this->retangulo = retangulo;
-	Rect::Rect(contexto, retangulo);
-	colisao = Colisao2d({},contexto);
-	linha_d = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_b = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_e = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_c = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_d->defCor({ 0.35, 0.35, 0.35 });
-	linha_b->defCor({ 0.35, 0.35, 0.35 });
-	linha_e->defCor({ 0.55, 0.55, 0.55 });
-	linha_c->defCor({ 0.55, 0.55, 0.55 });
+	configurar(contexto, {});
+	inputs = contexto->inputs;
 }
 
 void BubbleUI::Util::PopUp::posAtualizacao()
@@ -33,7 +21,7 @@ void BubbleUI::Util::PopUp::posAtualizacao()
 	}
 
 	colisao.defRect(retangulo);
-	mouseEmCima = colisao.mouseEmCima();
+	//mouseEmCima = colisao.mouseEmCima();
 	if (vmostrar && inputs->mouseEnter == GLFW_RELEASE)
 		podeEsconder = true;
 	if (vmostrar && inputs->mouseEnter == GLFW_PRESS && !mouseEmCima && podeEsconder)

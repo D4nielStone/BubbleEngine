@@ -44,7 +44,7 @@ void BubbleUI::Util::BarraMenu::atualizar()
 {
 	if (callbackSalvarCenaAtual)
 		salvarCenaAtual();
-	retangulo = { 0, 1, contexto->tamanho.width, altura };
+	retangulo = { 4, 1, contexto->tamanho.width - 8, altura };
 	Moldura::atualizar();
 	posicaoWidget = { 0, 0 };
 	widgetPadding = { 3, 3 };
@@ -65,18 +65,10 @@ void BubbleUI::Util::BarraMenu::adicionarBotao(std::unique_ptr<Items::ItemMenu> 
 
 void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 {
-	this->contexto = ctx;
-	*cor_base = { 0.1f, 0.1f, 0.1f, 1.f };
-	linha_d = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_b = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_e = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_c = std::make_unique<Formas::Linha>(Vector4{ 0, 0, 0, 0 }, contexto);
-	linha_d->defCor({ 0.35f, 0.35f, 0.35f, 1.f });
-	linha_b->defCor({ 0.35f, 0.35f, 0.35f, 1.f });
-	linha_e->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
-	linha_c->defCor({ 0.55f, 0.55f, 0.55f, 1.f });
+	configurar(ctx, {});
+	*cor_base = { 0.26f, 0.21f, 0.28f, 1 };
 
-	popupCena = std::make_shared<PopUp>(contexto);
+	popupCena = std::make_shared<PopUp>(ctx);
 	popupCena->adiItem(std::make_shared<Items::ItemMenu>("Novo projeto"));
 	popupCena->adiItem(std::make_shared<Items::ItemMenu>("Abrir projeto"));
 

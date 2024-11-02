@@ -50,7 +50,7 @@ void BubbleUI::Widgets::Botao::atualizar()
     if (completo)
     {
         if(icon)
-        moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2 - icon->obtRect().w, static_cast<int>(box_size.y)});
+        moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 4 - icon->obtRect().w, static_cast<int>(box_size.y)});
         else
         moldura.defTam({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
         colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w - painel->widgetPadding.x * 2, (int)box_size.y});
@@ -61,29 +61,19 @@ void BubbleUI::Widgets::Botao::atualizar()
         colisao.defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y });
     }
     moldura.atualizar();
-    //reseta gatilho
-    moldura.ocultar_linhas = true;
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho = true;
     //calcula click
     if (colisao.mouseEmCima() && inputs->mouseEnter == GLFW_PRESS && gatilho)
     {
-        moldura.ocultar_linhas = false;
         if (funcao_click_)
         {
             funcao_click_();
             gatilho = false;
         }
         if (callback)*callback = true;
-    }
-    else if(colisao.mouseEmCima() && inputs->mouseEnter == GLFW_PRESS)
-    {
-        moldura.ocultar_linhas = false;
-    }
-    //calcula cor
-    if(colisao.mouseEmCima())
-        moldura.defCor({ 0.4, 0.03f, 0.4, 1});
-    else
-        moldura.defCor({ 0.25f, 0.25f, 0.25f, 1 });
+        moldura.defCor({ 0.8, 0.66f, 0.86, 1});
+    }else
+        moldura.defCor({ 0.26f, 0.21f, 0.28f, 1 });
 }
 
 void BubbleUI::Widgets::Botao::renderizar() const

@@ -12,7 +12,7 @@ namespace BubbleUI
 		void defRect(const Vector4 &quad);
 		bool mouseEmCima() const;
 	private:
-		Vector4 quadrado;
+		Vector4 quadrado{};
 		std::shared_ptr<Contexto> contexto;
 		short int raio = 0;
 	};

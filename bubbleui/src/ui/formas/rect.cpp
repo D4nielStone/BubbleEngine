@@ -43,10 +43,18 @@ void Rect::adiPos(const Vector2 &pos)
     retangulo.x += pos.x;
     retangulo.y += pos.y;
 }
+void BubbleUI::Formas::Rect::definirRetangulo(const Vector4& rect)
+{
+    retangulo = rect;
+}
 // Deve definir cor base
 void Rect::defCor(const Color &cor)
 {
     *cor_base = cor;
+}
+void BubbleUI::Formas::Rect::defCor(Color* cor)
+{
+    cor_base = cor;
 }
 // Deve atualizar
 void Rect::atualizar()

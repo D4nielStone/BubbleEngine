@@ -65,11 +65,11 @@ namespace BubbleUI {
             bordaCima->atualizar(); bordaBaixo->atualizar();
             bordaEsq->atualizar(); bordaDir->atualizar();
             corrigirLimite();
-            aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
+            if(mostrar_aba)aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
         }
         else
         {
-            aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
+            if (mostrar_aba)aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
         }
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
@@ -81,7 +81,7 @@ namespace BubbleUI {
 
         // Atualiza os widgets
         preAtualizacao();
-        aba->atualizar();
+        if (mostrar_aba)aba->atualizar(); else { posicaoWidget = { 0, 0 }; };
         for (auto& widget : lista_widgets)
         {
             widget->atualizar();
@@ -98,7 +98,7 @@ namespace BubbleUI {
 
         moldura.renderizar();
         preRenderizacao();
-        aba->renderizar();
+        if (mostrar_aba)aba->renderizar();
 
         // Renderiza os widgets
         for (const auto& widget : lista_widgets)
@@ -125,7 +125,7 @@ namespace BubbleUI {
         bordaDir = std::make_unique<Separador>(DIREITA, this);
 
         moldura = Formas::Moldura(contexto);
-        moldura.defCor({ 0.1f, 0.1f, 0.1f });
+        moldura.defCor({ 0.13f, 0.11f, 0.16f, 1.f });
 
         menuDeContexto= std::make_unique<Util::PopUp>(contexto);
         aba= std::make_unique<Aba>(this);

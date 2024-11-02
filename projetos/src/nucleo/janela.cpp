@@ -32,8 +32,6 @@ static bool iniciar_()
 
     // Defini o painel de teste
     painel = std::make_shared<BubbleUI::Paineis::VisualizadorDeProjetos>(contexto_ui);
-    barra_menu = std::make_unique<BubbleUI::Util::BarraMenu>();
-    barra_menu->defContexto(contexto_ui);
 
     return true;
 }
@@ -45,8 +43,6 @@ static void novo_loop()
 
     painel->atualizar();
     painel->renderizar();
-    barra_menu->atualizar();
-    barra_menu->renderizar();
 
     glfwSwapBuffers(janela);
     glfwPollEvents();

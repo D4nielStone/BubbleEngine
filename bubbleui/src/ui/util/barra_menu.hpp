@@ -16,7 +16,7 @@ namespace BubbleUI
 			void adicionarBotao(std::unique_ptr<Items::ItemMenu> item);
 			void defContexto(std::shared_ptr<Contexto> ctx);
 		private:
-			int altura{ 26 };
+			int altura{ 22 };
 			std::vector<std::unique_ptr<Items::ItemMenu>> botoes;
 			Items::Texto texto_nome_projeto;
 			std::shared_ptr<Util::PopUp> popupCena{ nullptr };

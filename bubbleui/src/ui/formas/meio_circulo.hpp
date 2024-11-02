@@ -9,18 +9,18 @@ namespace BubbleUI
 	namespace Formas
 	{
 
-		class BEUI_DLL_API Rect
+		class BEUI_DLL_API MeioCirculo
 		{
 		public:
-			Rect() = default;
-			Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect);
-			virtual Vector4 obtRect() const;
-			Vector4f obtRectNDC() const;
-			virtual void defTam(const Vector2 &tam);
-			virtual void defPos(const Vector2 &pos);
+			MeioCirculo() = default;
+			MeioCirculo(std::shared_ptr<Contexto> ctx, const Vector4 &rect);
+			virtual Vector4 obtMeioCirculo() const;
+			Vector4f obtMeioCirculoNDC() const;
+			void defTam(const Vector2 &tam);
+			void defPos(const Vector2 &pos);
 			void adiTam(const Vector2 &tam);
 			void adiPos(const Vector2 &tam);
-			virtual void definirRetangulo(const Vector4 &rect);
+			void definirRetangulo(const Vector4 &rect);
 			void defCor(const Color &cor);
 			void defCor(Color* cor);
 			virtual void atualizar();

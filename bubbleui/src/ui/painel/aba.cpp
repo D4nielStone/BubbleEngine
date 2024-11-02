@@ -15,14 +15,14 @@ BubbleUI::Aba::Aba(Painel *painel)
 
 void BubbleUI::Aba::atualizar()
 {
-    painel->posicaoWidget = { 0, -letra_padding.y*2 + 1 };
+    painel->posicaoWidget = { 0, -letra_padding.y*2 };
 
     renderizar_texto(frase);
 
     painel->posicaoWidget = { 0, corpo_rect->obtRect().h };
 
     corpo_rect->defPos({static_cast<int>(painel->obterRetangulo().x), static_cast<int>(painel->obterRetangulo().y)});
-    corpo_rect->defTam({ painel->obterRetangulo().w, 14});
+    corpo_rect->defTam({ painel->obterRetangulo().w, 15});
     box_pos = {corpo_rect->obtRect().x, corpo_rect->obtRect().y};
     box_size = { static_cast<float>(corpo_rect->obtRect().w), static_cast<float>(corpo_rect->obtRect().h) };
     corpo_rect->atualizar();

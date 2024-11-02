@@ -47,7 +47,7 @@ namespace BubbleUI
 		Lado redimensionamentoAtual;
 		bool selecionado{ false };
 		bool arrastando{ false };
-		bool mouse1click{ false }, redimensionavel{ true };
+		bool mouse1click{ false }, redimensionavel{ true }, mostrar_aba{ true };
 	protected:
 		// Métodos de Configuração e Ciclo de Vida
 		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });
