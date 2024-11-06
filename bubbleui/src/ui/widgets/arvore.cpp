@@ -1,8 +1,10 @@
 #include "arvore.hpp"
 #include "src/ui/painel/painel.hpp"
 
+using namespace BubbleUI::Widgets;
+
 // Construtor da classe Arvore, inicializa os membros da classe.
-BubbleUI::Widgets::Arvore::Arvore(const std::string &l, bool* retorno) : retorno(retorno)
+Arvore::Arvore(const std::string &l, bool* retorno) : retorno(retorno)
 {
     frase = l;
 
@@ -12,7 +14,7 @@ BubbleUI::Widgets::Arvore::Arvore(const std::string &l, bool* retorno) : retorno
     // Define o padding (espaçamento) ao redor do texto
     letra_padding = { 4, 4 };
 }
-BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::string& imagePath)
+Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::string& imagePath)
     : retorno(retorno)
 {
     icone = std::make_unique<Imagem>(imagePath, Vector2{20, 20});
@@ -27,7 +29,7 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string> label, bool* reto
     // Define o padding (espaçamento) ao redor do texto
     letra_padding = { 3, 4 };
 }
-BubbleUI::Widgets::Arvore::Arvore(const std::string& label, bool* retorno, const std::string& imagePath)
+Arvore::Arvore(const std::string& label, bool* retorno, const std::string& imagePath)
     : retorno(retorno)
 {
     icone = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
@@ -41,7 +43,7 @@ BubbleUI::Widgets::Arvore::Arvore(const std::string& label, bool* retorno, const
     letra_padding = { 3, 4 };
 }
 // Construtor da classe Arvore, inicializa os membros da classe.
-BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
+Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 {
     label_shared = l;
 
@@ -55,8 +57,10 @@ BubbleUI::Widgets::Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) 
 }
 
 // Método para atualizar o estado do widget Arvore a cada frame
-void BubbleUI::Widgets::Arvore::atualizar()
+void Arvore::atualizar()
 {
+    // Atualiza a moldura
+    Moldura::atualizar();
     // Salva o padding antigo do pai
     float padding_antigoy = painel->widgetPadding.y;
 
@@ -66,7 +70,7 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Se houver uma árvore pai, ajusta o padding horizontal
     if (arvore_pai)
     {
-        painel->posicaoWidget.x = arvore_pai->box_pos.x - painel->obterRetangulo().x + 5;
+        painel->posicaoWidget.x = arvore_pai->box_pos.x + 5;
     }
 
     if(icone)
@@ -106,13 +110,13 @@ void BubbleUI::Widgets::Arvore::atualizar()
         }
     // Restaura o padding original do pai
     painel->widgetPadding.y = padding_antigoy;
-    painel->posicaoWidget.x = 0;
+    painel->posicaoWidget.x = painel->obterRetangulo().x;
 
     // Define o retângulo de colisão para a detecção de mouse
     colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
-    Moldura::definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
-    Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
+    definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
+    definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
 
 
     // Reseta gatilho de click
@@ -121,19 +125,18 @@ void BubbleUI::Widgets::Arvore::atualizar()
     // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
     if (painel->arvoreCor.r == 0.1f)
     {
-        cor = { 0.15f, 0.15f, 0.15f };
-        painel->arvoreCor = { 0.15f, 0.15f, 0.15f };
+        cor = { 0.35f, 0.31f, 0.39f, 1.f };
+        painel->arvoreCor = { 0.35f, 0.31f, 0.39f, 1.f };
     }
     else
     {
         // Caso contrário, define a cor padrão mais escura
-        cor = { 0.1f, 0.1f, 0.1f };
-        painel->arvoreCor = { 0.1f, 0.1f, 0.1f };
+        cor = { 0.25f, 0.21f, 0.29f, 1.f };
+        painel->arvoreCor = { 0.25f, 0.21f, 0.29f, 1.f };
     }
 
     Moldura::defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
-    Moldura::ocultar_linhas = true;
     if (!colisao.mouseEmCima() && painel->selecionado)
     {
         if (inputs->mouseEnter == GLFW_PRESS)
@@ -146,23 +149,18 @@ void BubbleUI::Widgets::Arvore::atualizar()
     {
         {
             // Se o mouse estiver sobre o widget, altera a cor da moldura
-            Moldura::defCor({ 0.2f, 0.2f, 0.2f });
+            Moldura::defCor({ 0.45f, 0.41f, 0.49f, 1.f });
             if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)
             {
                 if (retorno)    *retorno = true; // ponteiro do retorno
-                Moldura::ocultar_linhas = false; // não oculta linhas da moldura
                 if (aberto && gatilho_click) { aberto = false; gatilho_click = false; }
                 else if (gatilho_click && !filhos.empty()) { aberto = true; gatilho_click = false; }
             }
         }
     }
-
-    // Atualiza a moldura
-    Moldura::atualizar();
-
 }
 // Método para renderizar o widget Arvore na tela
-void BubbleUI::Widgets::Arvore::renderizar() const
+void Arvore::renderizar() const
 {
     // Renderiza a moldura utilizando triângulos
     if (Moldura::obterRetangulo().y > box_pos.y + box_size.y)return;
@@ -185,7 +183,7 @@ void BubbleUI::Widgets::Arvore::renderizar() const
 }
 
 // Método para definir o painel associado ao widget Arvore
-void BubbleUI::Widgets::Arvore::definirPai(Formas::Moldura* painel)
+void Arvore::definirPai(Formas::Moldura* painel)
 {
     // Chama o método de base para associar o painel ao texto
     Texto::definirPai(painel);
@@ -196,7 +194,7 @@ void BubbleUI::Widgets::Arvore::definirPai(Formas::Moldura* painel)
 }
 
 // Método para adicionar um filho à árvore
-void BubbleUI::Widgets::Arvore::adiFilho(std::shared_ptr<Widget> filho)
+void Arvore::adiFilho(std::shared_ptr<Widget> filho)
 {
     // Define a árvore pai do filho como a instância atual
     filho->arvore_pai = shared_from_this();

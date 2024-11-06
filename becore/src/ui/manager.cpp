@@ -22,7 +22,7 @@ void BubbleUI::Manager::iniPaineisPadrao()
 	lista_paineis.push_back(
 		std::make_shared<Paineis::Inspetor>(contexto, projeto->obterGC(), Vector4{ contexto->tamanho.width / 2.f + margem / 2 + (contexto->tamanho.width / 4.f) - margem, contexto->tamanho.height /2.f + y_start, contexto->tamanho.width / 4 - margem/2, contexto->tamanho.height/2 - margem - y_start }));
 	lista_paineis.push_back(
-		std::make_shared<Paineis::Depurador>(contexto));
+		std::make_shared<Paineis::Depurador>(contexto, Vector4{10, 10, 100, 50}));
 }
 
 // Seleciona o painel
@@ -77,15 +77,19 @@ void BubbleUI::Manager::renderizar() const
 {
 	glClearColor(0.2, 0.2, 0.2, 1);
 	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	// Ativar o stencil buffer
+	glEnable(GL_STENCIL_TEST);
 	glViewport(0, 0, contexto->tamanho.width, contexto->tamanho.height);
 
-	glEnable(GL_SCISSOR_TEST);
 	for (auto& painel : lista_paineis)
 	{
 		painel->renderizar();
 	}
-	glDisable(GL_SCISSOR_TEST);
+
+	glDisable(GL_STENCIL_TEST);
 	barra_de_menu.renderizar();
+	glEnable(GL_CULL_FACE);
 }
 
 void BubbleUI::Manager::atualizar()

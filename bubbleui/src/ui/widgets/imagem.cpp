@@ -2,11 +2,13 @@
 #include "src/ui/painel/painel.hpp"
 #include "src/arquivadores/imageloader.hpp"
 
-BubbleUI::Widgets::Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
+using namespace BubbleUI::Widgets;
+
+Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : ID(id), rect({ 0, 0, size.x, size.y }), preencher(auto_resize)
 {
 }
 
-BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao)
+Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao)
 {
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
@@ -19,7 +21,7 @@ BubbleUI::Widgets::Imagem::Imagem(const std::string& path, int size_percentage, 
     rect.h = static_cast<int>(rect.h * scale_factor);
 }
 
-BubbleUI::Widgets::Imagem::Imagem(const std::string& path, const Vector2& size)
+Imagem::Imagem(const std::string& path, const Vector2& size)
 {
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
@@ -29,7 +31,7 @@ BubbleUI::Widgets::Imagem::Imagem(const std::string& path, const Vector2& size)
 
 
 // Deve transformar coordenadas pixel para NDC
-Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
+Vector4f Imagem::paraNDC() const
 {
     Vector4f coord_ndc;
 
@@ -42,14 +44,14 @@ Vector4f BubbleUI::Widgets::Imagem::paraNDC() const
 }
 
 
-void BubbleUI::Widgets::Imagem::atualizar()
+void Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obterRetangulo().w;
-        rect.h = painel->obterRetangulo().h - painel->posicaoWidget.y;
+        rect.w = painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x);
+        rect.h = painel->obterRetangulo().h - (painel->posicaoWidget.y - painel->obterRetangulo().y);
     }
-    rect = { painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x, painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
+    rect = { (float)painel->posicaoWidget.x + painel->widgetPadding.x, (float)painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     
     rect.y += padding ? painel->widgetPadding.y : 0;
     switch (alinhamentoHorizontal)
@@ -71,7 +73,7 @@ void BubbleUI::Widgets::Imagem::atualizar()
     }
     if (quebrarLinha)
     {
-        painel->posicaoWidget.x = 0;
+        painel->posicaoWidget.x = painel->obterRetangulo().x;
         painel->posicaoWidget.y += rect.h + painel->widgetPadding.y*2;
     }
     else
@@ -81,7 +83,7 @@ void BubbleUI::Widgets::Imagem::atualizar()
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem
-void BubbleUI::Widgets::Imagem::renderizar() const
+void Imagem::renderizar() const
 {
     if (!deveRenderizar)
         return;
@@ -99,12 +101,12 @@ void BubbleUI::Widgets::Imagem::renderizar() const
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-bool BubbleUI::Widgets::Imagem::defID(unsigned int newID)
+bool Imagem::defID(unsigned int newID)
 {
     return ID = newID;
 }
 
-Vector4 BubbleUI::Widgets::Imagem::obtRect() const
+Vector4 Imagem::obtRect() const
 {
     return rect;
 }

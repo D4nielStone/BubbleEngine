@@ -4,11 +4,12 @@
 
 BubbleUI::Aba::Aba(Formas::Moldura *painel)
 {
+    quebrarLinha = true;
     frase = static_cast<Painel*>(painel) ? static_cast<Painel*>(painel)->nome() : "Moldura sem nome";
     if (frase == "Moldura sem nome")painel_flag = false;
     this->painel = painel;
     resolucao = 14;
-    letra_padding = {4, 4};
+    letra_padding = {4, 1};
     configurar();
     Texto::Texto(frase);
     corpo_rect = std::make_unique<Formas::Rect>(painel->obterContexto(), Vector4{});
@@ -16,11 +17,10 @@ BubbleUI::Aba::Aba(Formas::Moldura *painel)
 
 void BubbleUI::Aba::atualizar()
 {
-    painel->posicaoWidget = { 0, -letra_padding.y*2 };
-
+    auto padding_antigo = painel->widgetPadding.y;
+    painel->widgetPadding.y = 0;
     renderizar_texto(frase);
-
-    painel->posicaoWidget = { 0, corpo_rect->obterRetangulo().h };
+    painel->widgetPadding.y = padding_antigo;
 
     corpo_rect->definirPosicao({static_cast<int>(painel->obterRetangulo().x), static_cast<int>(painel->obterRetangulo().y)});
     corpo_rect->definirTamanho({ painel->obterRetangulo().w, 15});

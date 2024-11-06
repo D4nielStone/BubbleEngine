@@ -1,10 +1,12 @@
 #include "opcoes.hpp"
 #include "src/ui/painel/painel.hpp"
 
-BubbleUI::Widgets::Opcoes::Opcoes()
+using namespace BubbleUI::Widgets;
+
+Opcoes::Opcoes()
 {
 }
-void BubbleUI::Widgets::Opcoes::atualizar()
+void Opcoes::atualizar()
 {
     const int origem = (int)painel->obterRetangulo().y;
     const int diferenca = painel->posicaoWidget.y - origem;
@@ -13,14 +15,14 @@ void BubbleUI::Widgets::Opcoes::atualizar()
     Moldura::definirTamanho({ static_cast<int>(painel->obterRetangulo().w - painel->widgetPadding.x * 2), static_cast<int>(painel->obterRetangulo().h - diferenca - painel->widgetPadding.y*2)});
     Moldura::atualizar();
 
-    posicaoWidget = { 0,0 };
     for (auto& botao : botoes)
     {
         botao->atualizar();
     }
+    texto.atualizar();
 }
 
-void BubbleUI::Widgets::Opcoes::renderizar() const
+void Opcoes::renderizar() const
 {
     Moldura::renderizar();
 
@@ -28,13 +30,16 @@ void BubbleUI::Widgets::Opcoes::renderizar() const
     {
         botao->renderizar();
     }
+    texto.renderizar();
 }
 
-void BubbleUI::Widgets::Opcoes::recarregar()
+void Opcoes::recarregar()
 {
+    texto.definirTexto("Nenhum projeto");
+    texto.definirPai(this);
 }
 
-void BubbleUI::Widgets::Opcoes::adiBotao(const std::string& label)
+void Opcoes::adiBotao(const std::string& label)
 {
     botoes.push_back(std::make_unique<Botao>(label, nullptr, false));
     botoes[botoes.size() - 1]->definirPai(this);

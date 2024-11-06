@@ -1,17 +1,19 @@
 #include "filtro.hpp"
 #include "src/ui/painel/painel.hpp"
 
-BubbleUI::Widgets::Filtro::Filtro(const std::string& label) : label(label)
+using namespace BubbleUI::Widgets;
+
+Filtro::Filtro(const std::string& label) : label(label)
 {
 }
-void BubbleUI::Widgets::Filtro::atualizar()
+void Filtro::atualizar()
 {
-    Moldura::defCor({0.25f, 0.21f, 0.29f, 1.f});
-    Moldura::definirPosicao({painel->widgetPadding.x, painel->posicaoWidget.y + painel->widgetPadding.y});
-    Moldura::definirTamanho({static_cast<int>(painel->obterRetangulo().w - Moldura::obterRetangulo().x- painel->widgetPadding.x), static_cast<int>(painel->obterRetangulo().h - Moldura::obterRetangulo().y- painel->widgetPadding.y) });
+    defCor({0.25f, 0.21f, 0.29f, 1.f});
+    definirPosicao({painel->widgetPadding.x, painel->posicaoWidget.y + painel->widgetPadding.y});
+    definirTamanho({static_cast<int>(painel->obterRetangulo().w - obterRetangulo().x- painel->widgetPadding.x), static_cast<int>(painel->obterRetangulo().h - obterRetangulo().y- painel->widgetPadding.y) });
     Moldura::atualizar();
 
-    posicaoWidget = { 0,0 };
+    posicaoWidget = { (int)obterRetangulo().x, (int)obterRetangulo().y};
     for (auto& botao : botoes)
     {
         botao->atualizar();
@@ -20,7 +22,7 @@ void BubbleUI::Widgets::Filtro::atualizar()
     projetos->atualizar();
 }
 
-void BubbleUI::Widgets::Filtro::renderizar() const
+void Filtro::renderizar() const
 {
     Moldura::renderizar();
 
@@ -32,7 +34,7 @@ void BubbleUI::Widgets::Filtro::renderizar() const
     projetos->renderizar();
 }
 
-void BubbleUI::Widgets::Filtro::recarregar()
+void Filtro::recarregar()
 {
     botoes.clear();
     adiBotao("Novo Projeto");
@@ -41,10 +43,11 @@ void BubbleUI::Widgets::Filtro::recarregar()
     text_box->definirPai(this);
     projetos = std::make_unique<Opcoes>();
     projetos->definirPai(this);
+    projetos->recarregar();
 }
 
-void BubbleUI::Widgets::Filtro::adiBotao(const std::string& label)
+void Filtro::adiBotao(const std::string& label)
 {
-    botoes.push_back(std::make_unique<Botao>(label, nullptr, false));
+    botoes.push_back(std::make_unique<Widgets::Botao>(label, nullptr, false));
     botoes[botoes.size() - 1]->definirPai(this);
 }

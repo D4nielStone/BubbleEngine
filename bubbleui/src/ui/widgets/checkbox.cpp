@@ -2,7 +2,9 @@
 #include "src/ui/painel/painel.hpp"
 #include <src/arquivadores/imageloader.hpp>
 
-BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& alinhamento) 
+using namespace BubbleUI::Widgets;
+
+CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& alinhamento) 
     : retorno(retorno)
 {
     alinhamentoHorizontal = alinhamento;
@@ -12,7 +14,7 @@ BubbleUI::Widgets::CheckBox::CheckBox(bool* retorno, const std::string& texto, c
     IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
 }
 
-void BubbleUI::Widgets::CheckBox::atualizar()
+void CheckBox::atualizar()
 {
     int x = painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x;
     int y = painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y;
@@ -77,7 +79,7 @@ void BubbleUI::Widgets::CheckBox::atualizar()
         painel->posicaoWidget.x += size + painel->widgetPadding.x;
 }
 
-void BubbleUI::Widgets::CheckBox::renderizar() const
+void CheckBox::renderizar() const
 {
     Moldura::renderizar();
     if (!frase.empty())
@@ -88,7 +90,7 @@ void BubbleUI::Widgets::CheckBox::renderizar() const
 
 }
 
-void BubbleUI::Widgets::CheckBox::renderizarImg() const
+void CheckBox::renderizarImg() const
 {
     shaderImg.use();
     shaderImg.setVec2("quadrado.posicao", Moldura::obtRectNDC().x, Moldura::obtRectNDC().y);

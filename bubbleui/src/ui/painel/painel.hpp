@@ -56,7 +56,7 @@ namespace BubbleUI
 		std::unique_ptr<Aba> aba{ nullptr };
 
 		// Dados de Geometria
-		Vector2 tamanhoMinimo;
+		Vector2 tamanhoMinimo{100, 50};
 		bool renderizarCorpo{ true };
 
 	};

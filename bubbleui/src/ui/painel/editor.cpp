@@ -7,6 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+using namespace BubbleUI::Widgets;
+
 /*static glm::vec3 worldToScreen(const glm::vec3& worldPos, const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix, int screenWidth, int screenHeight) {
     // Transformação para o espaço da câmera (view space)
     glm::vec4 clipSpacePos = projectionMatrix * viewMatrix * glm::vec4(worldPos, 1.0);
@@ -91,7 +93,7 @@ static void adicionarCena()
         });
 }
 
-BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<BubbleUI::Widgets::Imagem>(0)),
+BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<Imagem>(0)),
 scenemanager(scenemanager)
 {
 	Nome = "Editor";
@@ -115,6 +117,7 @@ scenemanager(scenemanager)
 void BubbleUI::Paineis::Editor::preAtualizacao()
 {
 
+    widgetPadding = { 0,0 };
     if (callback_adicam)adicionarCamera();
     if (callback_adicubo)adicionarCubo();
     if (callback_adicena)adicionarCena();

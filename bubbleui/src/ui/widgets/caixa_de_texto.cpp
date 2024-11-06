@@ -2,7 +2,9 @@
 #include "src/ui/painel/painel.hpp"
 #include <src/depuracao/debug.hpp>
 
-BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
+using namespace BubbleUI::Widgets;
+
+CaixaTexto::CaixaTexto(const std::string &mensagem)
     : gatilho1(false), gatilho2(false), mensagem(mensagem)
 {
     quebrarLinha = true;
@@ -11,7 +13,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(const std::string &mensagem)
     configurar(); 
 }
 
-BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& mensagem)
+CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& mensagem)
     : mensagem(mensagem), buffer_texto(buffer) 
 {
     quebrarLinha = true;
@@ -23,7 +25,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, c
     configurar(); 
 }
 
-BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
+CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
     : mensagem(mensagem), buffer_texto(buffer)
 {
     quebrarLinha = true;
@@ -36,7 +38,7 @@ BubbleUI::Widgets::CaixaTexto::CaixaTexto(std::string* buffer, const std::string
 }
 
 
-void BubbleUI::Widgets::CaixaTexto::atualizar()
+void CaixaTexto::atualizar()
 {
     Texto::atualizar(); // Atualiza texto
 
@@ -83,7 +85,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizar()
     painel->posicaoWidget.y += painel->widgetPadding.y;
 }
 
-void BubbleUI::Widgets::CaixaTexto::renderizar() const
+void CaixaTexto::renderizar() const
 {
     Moldura::renderizar();
     Texto::renderizar();
@@ -101,14 +103,14 @@ void BubbleUI::Widgets::CaixaTexto::renderizar() const
     //}
 }
 
-void BubbleUI::Widgets::CaixaTexto::definirPai(Formas::Moldura* painel)
+void CaixaTexto::definirPai(Formas::Moldura* painel)
 {
-    BubbleUI::Widgets::Texto::definirPai(painel);
+    Texto::definirPai(painel);
     contexto = painel->obterContexto();
     inputs = painel->obterContexto()->inputs; // Simplifica o acesso
 }
 
-void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
+void CaixaTexto::processarEntrada(char c)
 {
     if (c == '\b' && texto_cursor_index != 0) // Backspace
     {
@@ -125,7 +127,7 @@ void BubbleUI::Widgets::CaixaTexto::processarEntrada(char c)
 
 double tempo_inicial = 0.0;
 
-void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
+void CaixaTexto::atualizarInputs()
 {
     double tempo_atual = glfwGetTime(); // Obtenha o tempo atual
     if (gatilho1) {
@@ -175,7 +177,7 @@ void BubbleUI::Widgets::CaixaTexto::atualizarInputs()
     }
 }
 
-void BubbleUI::Widgets::CaixaTexto::iniciarSelecao()
+void CaixaTexto::iniciarSelecao()
 {
     if (!selecionando_texto) { selecionado = false; mouse_pos_ini = { (int)inputs->mousex, (int)inputs->mousey }; selecionando_texto = true; }
     else selecionado = true;

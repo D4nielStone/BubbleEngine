@@ -1,7 +1,9 @@
 #include "botao.hpp"
 #include "src/ui/painel/painel.hpp"
 
-BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click, bool completo)
+using namespace BubbleUI::Widgets;
+
+Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click, bool completo)
     : completo(completo),
    funcao_click_(funcao_click)
 {
@@ -13,7 +15,7 @@ BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, std::function<v
     letra_padding = {5, 5};
 }
 
-BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, const std::string& image_path, bool* callback, bool completo)
+Botao::Botao(const std::string& label_shared, const std::string& image_path, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
     espessuraBorda = 3;
@@ -25,7 +27,7 @@ BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, const std::stri
     letra_padding = { 5, 5 };
 }
 
-BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
+Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
     espessuraBorda = 3;
@@ -36,7 +38,7 @@ BubbleUI::Widgets::Botao::Botao(const std::string& label_shared, bool* callback,
     letra_padding = { 5, 5 };
 }
 
-BubbleUI::Widgets::Botao::
+Botao::
 Botao(const std::string &label_shared, std::function<void()> function, const std::string& imagePath, bool completo) : completo(completo)
 ,   funcao_click_(function)
 {
@@ -49,7 +51,7 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
     letra_padding = {5, 5};
 }
 
-void BubbleUI::Widgets::Botao::atualizar()
+void Botao::atualizar()
 {
     if (icon)
     {
@@ -89,7 +91,7 @@ void BubbleUI::Widgets::Botao::atualizar()
        Moldura::defCor({ 0.17f, 0.14f, 0.2f, 1.f });
 }
 
-void BubbleUI::Widgets::Botao::renderizar() const
+void Botao::renderizar() const
 {
    Moldura::renderizar();
     Texto::renderizar();

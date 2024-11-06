@@ -1,6 +1,8 @@
 #include "widget.hpp"
 #include "src/ui/painel/painel.hpp"
 
+using namespace BubbleUI::Widgets;
+
 void BubbleUI::Widget::definirPai(Formas::Moldura* p)
 {
 	painel = p;	

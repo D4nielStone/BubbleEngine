@@ -29,6 +29,8 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Atualização
     void Painel::atualizar()
     {
+        // Atualiza a moldura
+        Moldura::atualizar();
         arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
         {
@@ -47,7 +49,7 @@ namespace BubbleUI {
 
         // Atualiza os widgets
         preAtualizacao();
-        if (mostrar_aba)aba->atualizar(); else { posicaoWidget = { 0, 0 }; };
+        if (mostrar_aba)aba->atualizar();
         for (auto& widget : lista_widgets)
         {
             widget->atualizar();
@@ -55,16 +57,31 @@ namespace BubbleUI {
         posAtualizacao();
 
         arrastando = false;
-        // Atualiza a moldura
-        Moldura::atualizar();
     }
 
     // Ciclo de Vida do Painel: Renderização
     void Painel::renderizar() const
     {
-        glScissor(retangulo.x -1, (contexto->tamanho.height - (static_cast<int>(retangulo.y) + 1) - retangulo.h), retangulo.w + 2, retangulo.h + 2);
 
+        // Passo 1: Desenhar a máscara no stencil buffer
+        glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE); // Desativar a escrita de cores
+        glDepthMask(GL_FALSE); // Desativar o depth buffer
+        glClear(GL_STENCIL_BUFFER_BIT); // Limpar o stencil buffer
+
+        // Desenhar a moldura com bordas arredondadas no stencil buffer
         Moldura::renderizar();
+
+        // Passo 2: Configurar o recorte com stencil
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE); // Reativar a escrita de cores
+        glDepthMask(GL_TRUE); // Reativar o depth buffer
+        glStencilFunc(GL_EQUAL, 1, 0xFF); // Permitir a renderização apenas onde o stencil buffer é 1
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Manter o valor do stencil
+
+        // Desenhar o conteúdo dentro da área recortada
+        Moldura::renderizar();
+
         preRenderizacao();
         if (mostrar_aba)aba->renderizar();
 
@@ -131,12 +148,12 @@ namespace BubbleUI {
         }
         if (obterRetangulo().w < tamanhoMinimo.x && redimensionamentoAtual== ESQUERDA)
         {
-            adiPos({ retangulo.w - tamanhoMinimo.x, 0 });
+            adiPos({ -(tamanhoMinimo.x - obterRetangulo().w), 0 });
             definirTamanho({ tamanhoMinimo.x, obterRetangulo().h });
         }
         if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual== CIMA)
         {
-            adiPos({ obterRetangulo().h - tamanhoMinimo.y, 0 });
+            adiPos({ 0, -(tamanhoMinimo.y - obterRetangulo().h)});
             definirTamanho({ obterRetangulo().w, tamanhoMinimo.y });
         }
     }

@@ -4,23 +4,31 @@
 #include <cstdlib>
 // em src/ui/widgets/texto.cpp
 
+using namespace BubbleUI::Widgets;
+
 using namespace Bubble::Arquivadores;
 
-BubbleUI::Widgets::Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padding({ 0, 0 })
+Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     configurar();
 }
 
-BubbleUI::Widgets::Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
+Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     label_shared = new std::string(l);
     configurar();
 }
 
+void Texto::definirTexto(const std::string& texto)
+{
+    frase = texto;
+    delete[] label_shared;
+}
+
 // Método genérico de atualizacao
-void BubbleUI::Widgets::Texto::atualizar()
+void Texto::atualizar()
 {
     // Renderiza texto de label_shared, o ponteiro
     if (label_shared) frase = *label_shared;
@@ -28,7 +36,7 @@ void BubbleUI::Widgets::Texto::atualizar()
 }
 
 // Método para renderizar o texto
-void BubbleUI::Widgets::Texto::renderizar() const
+void Texto::renderizar() const
 {
     // Configura o shader para renderizar o texto
     shader.use();
@@ -48,15 +56,15 @@ void BubbleUI::Widgets::Texto::renderizar() const
 }
 
 // Método para atualizar retangulo das letras do texto
-void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
+void Texto::renderizar_texto(std::string &frase)
 {
     // Posiciona o box dentro do widget, com padding do pai
     if(alinhamentoHorizontal == Alinhamento::Esquerda)
-        box_pos.x = painel->obterRetangulo().x + painel->widgetPadding.x + painel->posicaoWidget.x;
+        box_pos.x = painel->widgetPadding.x + painel->posicaoWidget.x;
     else
         box_pos.x = painel->obterRetangulo().x - painel->widgetPadding.x + painel->posicaoWidget.x;
-    box_pos.y = painel->obterRetangulo().y + painel->widgetPadding.y + painel->posicaoWidget.y;
-    box_size.x = painel->obterRetangulo().w - painel->widgetPadding.x * 2 - painel->posicaoWidget.x;
+    box_pos.y =painel->widgetPadding.y + painel->posicaoWidget.y;
+    box_size.x = painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x) - painel->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto
 
     // não renderiza se não visível
@@ -125,11 +133,11 @@ void BubbleUI::Widgets::Texto::renderizar_texto(std::string &frase)
     // Atualiza o tamanho do box para o próximo widget
     box_size.y = line_pos.y + 13 + letra_padding.y * 2;  // Altura do texto mais padding
     if (quebrarLinha)painel->posicaoWidget = { (int)painel->obterRetangulo().x, (int)(box_pos.y + box_size.y) };
-    else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto; };
+    else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto + painel->widgetPadding.x; };
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)
-Vector4f BubbleUI::Widgets::Texto::paraNDC(const Vector4& coord)
+Vector4f Texto::paraNDC(const Vector4& coord)
 {
     Vector4f coord_ndc;
 
@@ -142,13 +150,13 @@ Vector4f BubbleUI::Widgets::Texto::paraNDC(const Vector4& coord)
 }
 
 // Configura o texto com a fonte e resolução especificada
-void BubbleUI::Widgets::Texto::configurar(unsigned int resolucao, std::string font_path)
+void Texto::configurar(unsigned int resolucao, std::string font_path)
 {
     carregarFonte(font_path); // Carrega a fonte
 }
 
 // Método para detextar caractéres selecionados
-bool BubbleUI::Widgets::Texto::desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx)
+bool Texto::desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx)
 {
     // Verifica se a letra está na área de seleção
     bool intersecta_verticalmente = char_rect.y + char_rect.h > mouse_inicial.y && char_rect.y < mouse_final.y; // Verifica interseção horizontal

@@ -4,6 +4,8 @@
 #include "src/ui/widgets/caixa_de_texto.hpp"
 #include "src/ui/widgets/filtro.hpp"
 
+using namespace BubbleUI::Widgets;
+
 BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(std::shared_ptr<Contexto> contexto, const bool& preencher)
 	: preencher(preencher)
 {
@@ -16,10 +18,10 @@ BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(std::shared_pt
 		selecionado = true;
 		redimensionavel = false;
 	}
-	auto banner = std::make_shared<BubbleUI::Widgets::Imagem>("assets/texturas/icons/banner.png", 20);
+	auto banner = std::make_shared<Imagem>("assets/texturas/icons/banner.png", 20);
 	banner->quebrarLinha = true;
 	adicionarWidget(banner);
-	auto filtro = std::make_shared<BubbleUI::Widgets::Filtro>("Filtrar Projetos");
+	auto filtro = std::make_shared<Filtro>("Filtrar Projetos");
 	adicionarWidget(filtro);
 	filtro->recarregar();
 }

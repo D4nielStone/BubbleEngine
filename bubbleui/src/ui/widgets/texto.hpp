@@ -13,6 +13,7 @@ namespace BubbleUI
 			Texto(std::string* label_shared);
 			Texto(const std::string& label_shared);
 			Texto() = default;
+			void definirTexto(const std::string & texto);
 			void atualizar() override;
 			void renderizar() const override;
 			static void configurar(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consolas.ttf");
