@@ -26,8 +26,8 @@ void BubbleUI::Items::Botao::atualizar()
 		if (callback)
 		{
 			*callback = true;
-			gatilho = false;
 		}
+		gatilho = false;
 	}
 }
 void BubbleUI::Items::Botao::renderizar() const

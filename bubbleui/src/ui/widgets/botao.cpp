@@ -18,6 +18,7 @@ Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click,
 Botao::Botao(const std::string& label_shared, const std::string& image_path, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
+    quebrarLinha = true;
     espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
@@ -30,6 +31,7 @@ Botao::Botao(const std::string& label_shared, const std::string& image_path, boo
 Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
+    quebrarLinha = true;
     espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
@@ -43,6 +45,7 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
 ,   funcao_click_(function)
 {
     espessuraBorda = 3;
+    quebrarLinha = true;
     icon = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
@@ -60,6 +63,8 @@ void Botao::atualizar()
     }
     Texto::atualizar();
     if (icon) box_size.y = icon->obtRect().h;
+    if (quebrarLinha)painel->posicaoWidget = { (int)painel->obterRetangulo().x, (int)(box_pos.y + box_size.y) };
+    else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto + painel->widgetPadding.x; };
    Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     // largura se completo ou não
     if (completo)

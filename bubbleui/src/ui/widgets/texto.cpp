@@ -23,6 +23,7 @@ Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
 
 void Texto::definirTexto(const std::string& texto)
 {
+    if (frase == texto)return;
     frase = texto;
     delete[] label_shared;
 }

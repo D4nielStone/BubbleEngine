@@ -50,4 +50,5 @@ void Filtro::adiBotao(const std::string& label)
 {
     botoes.push_back(std::make_unique<Widgets::Botao>(label, nullptr, false));
     botoes[botoes.size() - 1]->definirPai(this);
+    botoes[botoes.size() - 1]->quebrarLinha = false;
 }

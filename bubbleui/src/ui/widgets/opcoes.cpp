@@ -1,7 +1,9 @@
 #include "opcoes.hpp"
 #include "src/ui/painel/painel.hpp"
+#include <filesystem>
 
 using namespace BubbleUI::Widgets;
+using namespace std::filesystem;
 
 Opcoes::Opcoes()
 {
@@ -35,12 +37,40 @@ void Opcoes::renderizar() const
 
 void Opcoes::recarregar()
 {
-    texto.definirTexto("Nenhum projeto");
+    diretorios.clear();
     texto.definirPai(this);
+    // Itera sobre as pastas de projetos
+    for (const auto& pasta : directory_iterator(contexto->dirDoProjeto))
+    {
+        // Se é uma pasta válida, procura por ícone
+        if (!pasta.is_directory())continue;
+        // Iterando...
+        std::string temp{ "ICON.ico" };
+        for( const auto& arquivo_projeto : directory_iterator(pasta.path()))
+        {
+            // Verifica se é um arquivo e se é um ícone
+            if (arquivo_projeto.is_regular_file() && arquivo_projeto.path().filename().string() == "icone.png")
+            {
+                temp = arquivo_projeto.path().string();
+            }
+        }
+        diretorios.push_back(std::pair(pasta.path().string(), temp));
+    }
+    //
+    // Adiciona botão para cada projeto
+    for (const auto& diretorio : diretorios)
+    {
+        adiBotao(diretorio.first, diretorio.second);
+    }
+
+    if(botoes.empty())
+    texto.definirTexto("Nenhum projeto encontrado\n");
+    else
+    texto.definirTexto("\n" + std::to_string(botoes.size()) + " Projetos encontrados");
 }
 
-void Opcoes::adiBotao(const std::string& label)
+void Opcoes::adiBotao(const std::string& label,const std::string& icone)
 {
-    botoes.push_back(std::make_unique<Botao>(label, nullptr, false));
+    botoes.push_back(std::make_unique<Botao>(path(label).filename().string(), icone, nullptr, true));
     botoes[botoes.size() - 1]->definirPai(this);
 }

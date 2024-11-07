@@ -6,6 +6,7 @@ using namespace BubbleUI::Widgets;
 // Construtor da classe Arvore, inicializa os membros da classe.
 Arvore::Arvore(const std::string &l, bool* retorno) : retorno(retorno)
 {
+    quebrarLinha = true;
     frase = l;
 
     // Define a resolução padrão para o texto
@@ -17,6 +18,7 @@ Arvore::Arvore(const std::string &l, bool* retorno) : retorno(retorno)
 Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::string& imagePath)
     : retorno(retorno)
 {
+    quebrarLinha = true;
     icone = std::make_unique<Imagem>(imagePath, Vector2{20, 20});
     icone->padding = true;
 
@@ -33,6 +35,7 @@ Arvore::Arvore(const std::string& label, bool* retorno, const std::string& image
     : retorno(retorno)
 {
     icone = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
+    quebrarLinha = true;
     icone->padding = true;
 
     frase = label;
@@ -45,6 +48,7 @@ Arvore::Arvore(const std::string& label, bool* retorno, const std::string& image
 // Construtor da classe Arvore, inicializa os membros da classe.
 Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 {
+    quebrarLinha = true;
     label_shared = l;
 
     frase = "";

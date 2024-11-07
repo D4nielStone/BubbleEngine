@@ -28,7 +28,7 @@ namespace BubbleUI
 			virtual void preAtualizacao() {};
 			virtual void posAtualizacao() {};
 			// Define a espessura da borda
-			int espessuraBorda{ 8 };
+			int espessuraBorda{ 5 };
 			void configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4& retangulo);
 			Vector4 retangulo_completo{};
 			std::unique_ptr<Rect>
