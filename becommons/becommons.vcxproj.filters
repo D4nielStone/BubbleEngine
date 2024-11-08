@@ -69,9 +69,6 @@
     <ClCompile Include="src\util\includes.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\threadpool.inl">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\arquivadores\arquivo3d.hpp">
@@ -137,7 +134,7 @@
     <ClInclude Include="src\arquivadores\fonte.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\threadpool.hpp">
+    <ClInclude Include="assets\icon.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

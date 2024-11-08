@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "inspetor.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
 #include "src/ui/widgets/arvore.hpp"

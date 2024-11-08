@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "barra_menu.hpp"
 #include "src/ui/formas/linha.hpp"
 #include "src/ui/items/item_botao.hpp"

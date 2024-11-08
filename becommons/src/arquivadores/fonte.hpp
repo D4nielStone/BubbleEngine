@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #pragma once
 #include "becommons.hpp"
 #include "glm/glm.hpp"

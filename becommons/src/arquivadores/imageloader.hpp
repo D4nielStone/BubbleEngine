@@ -6,7 +6,7 @@
 #include <assimp/scene.h>
 #include <glad/glad.h>
 
-class GLFWimage;
+struct GLFWimage;
 namespace Bubble {
     namespace Arquivadores {
         class BECOMMONS_DLL_API ImageLoader
@@ -26,6 +26,7 @@ namespace Bubble {
             std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
             void flipVertical();
             void carregarImagem(const std::string& filepath);
+            void embutida(unsigned char* data, const unsigned int tamanho);
             const char* path;
             int width, height, channels;
             unsigned char* data;

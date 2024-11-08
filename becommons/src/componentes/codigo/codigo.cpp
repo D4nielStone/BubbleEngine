@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "codigo.hpp"
 #include "src/entidades/entidade.hpp"
 #include <iostream>
@@ -18,7 +20,7 @@ int luaPrintRedirect(lua_State* L) {
             output += lua_typename(L, lua_type(L, i));  // Se não for string, captura o tipo
         }
         if (i < n) {
-            output += "\t";  // Adiciona tabulação entre os argumentos
+            output += "	";  // Adiciona tabulação entre os argumentos
         }
     }
     Debug::cout(output);  // Envia a mensagem para o Debug::cout()

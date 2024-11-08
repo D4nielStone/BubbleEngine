@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "scenemanager.hpp"
 #include "src/depuracao/debug.hpp"
 #include "glad/glad.h"

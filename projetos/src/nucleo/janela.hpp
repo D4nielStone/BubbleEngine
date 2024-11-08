@@ -5,7 +5,7 @@
 */
 
 /* Inclusões */
-#include "becore/src/nucleo/projeto.hpp"
+//#include "becore/src/nucleo/projeto.hpp"
 #include "becommons/src/arquivadores/imageloader.hpp"
 #include "bubbleui/src/ui/contexto/contexto.hpp"
 #include "bubbleui/src/ui/painel/visualizador_de_projetos.hpp"
@@ -16,4 +16,4 @@ GLFWwindow* janela{ nullptr };
 std::shared_ptr<BubbleUI::Contexto> contexto_ui{ nullptr };
 std::shared_ptr<BubbleUI::Paineis::VisualizadorDeProjetos> painel{ nullptr };
 std::unique_ptr<BubbleUI::Util::BarraMenu> barra_menu{ nullptr };
-constexpr const char* title = "Bubble Engine - Project Manager - Copyright 2024 Daniel Oliveira";
+constexpr const char* title = "Bubble Engine - Project Manager - (C) 2024 Daniel Oliveira";

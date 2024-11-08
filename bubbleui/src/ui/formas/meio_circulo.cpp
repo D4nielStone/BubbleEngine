@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "meio_circulo.hpp"
 #include "src/depuracao/debug.hpp"
 #include "src/depuracao/assert.hpp"

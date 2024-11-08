@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "arvore.hpp"
 #include "src/ui/painel/painel.hpp"
 
@@ -66,7 +68,7 @@ void Arvore::atualizar()
     // Atualiza a moldura
     Moldura::atualizar();
     // Salva o padding antigo do pai
-    float padding_antigoy = painel->widgetPadding.y;
+    const int padding_antigoy = painel->widgetPadding.y;
 
     // Ajusta temporariamente o padding vertical do pai para 0
     painel->widgetPadding.y = 0;
@@ -74,7 +76,7 @@ void Arvore::atualizar()
     // Se houver uma árvore pai, ajusta o padding horizontal
     if (arvore_pai)
     {
-        painel->posicaoWidget.x = arvore_pai->box_pos.x + 5;
+        painel->posicaoWidget.x = arvore_pai->box_pos.x + 5.F;
     }
 
     if(icone)

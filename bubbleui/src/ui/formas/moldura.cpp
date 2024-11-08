@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
 #include "moldura.hpp"
 
 BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4& retangulo)

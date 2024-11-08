@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "fonte.hpp"
 #include "src/depuracao/debug.hpp"
 #include "glad/glad.h"
@@ -43,7 +45,7 @@ BECOMMONS_DLL_API void Bubble::Arquivadores::carregarFonte(std::string path)
     }
 }
 
-std::u32string utf8_to_utf32(const std::string& utf8) {
+static std::u32string utf8_to_utf32(const std::string& utf8) {
     std::u32string utf32;
     char32_t codepoint = 0;
     int bytes = 0;

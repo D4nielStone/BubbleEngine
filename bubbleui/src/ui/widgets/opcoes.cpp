@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "opcoes.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <filesystem>
@@ -64,9 +66,9 @@ void Opcoes::recarregar()
     }
 
     if(botoes.empty())
-    texto.definirTexto("Nenhum projeto encontrado\n");
+    texto.definirTexto("Nenhum projeto encontrado");
     else
-    texto.definirTexto("\n" + std::to_string(botoes.size()) + " Projetos encontrados");
+    texto.definirTexto("" + std::to_string(botoes.size()) + " Projetos encontrados");
 }
 
 void Opcoes::adiBotao(const std::string& label,const std::string& icone)

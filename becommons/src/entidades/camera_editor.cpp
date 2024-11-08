@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "camera_editor.hpp"
 #include "src/depuracao/debug.hpp"
 #include <glm/gtc/matrix_transform.hpp>

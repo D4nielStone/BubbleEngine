@@ -1,7 +1,10 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "imageloader.hpp"
 #include "src/depuracao/debug.hpp"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "assets/icon.hpp"
 #include <iostream>
 
 using namespace Bubble::Arquivadores;
@@ -17,7 +20,7 @@ ImageLoader::ImageLoader(const std::string& filepath)
 ImageLoader::~ImageLoader()
 {
     if (data) {
-        delete[] data;
+        //delete[] data;
         data = nullptr; // Precaução para evitar acesso duplo
     }
 }
@@ -46,10 +49,15 @@ void ImageLoader::carregarImagem(const std::string& filepath)
         carregado = true;
         return;
     }
-   // Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
-    // Inicializa o FreeImage  
+    // Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
+     // Inicializa o FreeImage  
     FreeImage_Initialise();
 
+    if (filepath == "ICON.ico")
+    {
+        embutida(icon_png, icon_png_len);
+        return;
+    }
     // Determina o formato da imagem  
     FREE_IMAGE_FORMAT format = FreeImage_GetFileType(path, 0);
     if (format == FIF_UNKNOWN) {
@@ -104,6 +112,63 @@ void ImageLoader::carregarImagem(const std::string& filepath)
 
     // Finaliza o FreeImage  
     FreeImage_DeInitialise();
+}
+void ImageLoader::embutida(unsigned char* data, const unsigned int tamanho) 
+{
+    // Cria um stream de memória com o buffer da imagem
+    FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
+    if (!memoryStream) {
+        fprintf(stderr, "Erro ao criar o stream de memória.");
+        return;
+    }
+
+    // Detecta o formato da imagem no stream de memória
+    FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(memoryStream, 0);
+    if (format == FIF_UNKNOWN) {
+        fprintf(stderr, "Formato de imagem desconhecido.");
+        FreeImage_CloseMemory(memoryStream);
+        return;
+    }
+
+    // Carrega a imagem do stream de memória
+    FIBITMAP* bitmap_ = FreeImage_LoadFromMemory(format, memoryStream, 0);
+
+    if (!bitmap_) {
+        fprintf(stderr, "Erro ao carregar a imagem.");
+        FreeImage_CloseMemory(memoryStream);
+        return;
+    }
+    // Converte a imagem para 32 bits  
+    FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(bitmap_);
+    // Obtém as propriedades da imagem (largura, altura, canais, dados)
+    width = FreeImage_GetWidth(bitmap);     // Largura da imagem
+    height = FreeImage_GetHeight(bitmap);   // Altura da imagem
+    channels = FreeImage_GetBPP(bitmap)/8; // Canais de cor (assumindo 8 bits por canal)
+
+    // Aloca memória para os dados da imagem  
+    this->data = new unsigned char[width * height * channels];
+    unsigned char* bits = FreeImage_GetBits(bitmap);
+
+    // Copia os dados e corrige a ordem dos canais (ARGB para RGBA)  
+    for (int i = 0; i < width * height; ++i) {
+        this->data[i * 4 + 0] = bits[i * 4 + 2]; // R  
+        this->data[i * 4 + 1] = bits[i * 4 + 1]; // G  
+        this->data[i * 4 + 2] = bits[i * 4 + 0]; // B  
+        this->data[i * 4 + 3] = bits[i * 4 + 3]; // A  
+    }
+
+    // Libera os recursos
+    FreeImage_Unload(bitmap);
+    FreeImage_CloseMemory(memoryStream);
+
+    // Indica que a imagem foi carregada com sucesso  
+    carregado = true;
+    imagens_carregadas.insert(std::pair(path, this));
+    flipVertical();
+
+    FreeImage_DeInitialise();
+
+    return;
 }
 GLFWimage ImageLoader::converterParaGlfw()
 {

@@ -39,5 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="RCa05800" />
   </ItemGroup>
 </Project>

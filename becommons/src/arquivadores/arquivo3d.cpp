@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "arquivo3d.hpp"
 #include "src/depuracao/debug.hpp"
 #include "iostream"

@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
 #include "widget.hpp"
 #include "src/ui/painel/painel.hpp"
 

@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Shader.hpp"
@@ -56,7 +58,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
         fragmentCode = fShaderStream.str();
     }
     catch (std::ifstream::failure& e) {
-        std::cout << e.what() << "\n";
+        std::cout << e.what() << "";
         return;
     }
 
@@ -132,7 +134,7 @@ bool Shader::checkCompileErrors(unsigned int shader, const std::string& type) {
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
         if (!success) {
             glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-            std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+            std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << infoLog << "-- -------------------------------------------------- - -- " << std::endl;
             return false;
         }
     }
@@ -140,7 +142,8 @@ bool Shader::checkCompileErrors(unsigned int shader, const std::string& type) {
         glGetProgramiv(shader, GL_LINK_STATUS, &success);
         if (!success) {
             glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-            std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- --\n";
+            std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << infoLog << 
+ "-- -------------------------------------------------- - --";
             return false;
         }
     }
@@ -152,7 +155,7 @@ bool Shader::checkLinkErrors(unsigned int program) {
     glGetProgramiv(program, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(program, 1024, NULL, infoLog);
-        std::cout << "PROGRAM_LINKING_ERROR\n" + std::string(infoLog) + "\n-- -------------------------------------------------- - -- \n";
+        std::cout << "PROGRAM_LINKING_ERROR" + std::string(infoLog) + "-- -------------------------------------------------- - -- ";
         return false;
     }
     return true;

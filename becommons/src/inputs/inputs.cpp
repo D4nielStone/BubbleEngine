@@ -58,7 +58,7 @@ void Inputs::handleKey(Key key) {
         break;
     }
 }
-Key glfwKeyToKey(int glfwKey) {
+static Key glfwKeyToKey(int glfwKey) {
     static const std::unordered_map<int, Key> keyMap = {
         {GLFW_KEY_W, Key::W},
         {GLFW_KEY_A, Key::A},
@@ -170,6 +170,6 @@ void charCallback(GLFWwindow* window, unsigned int codepoint)
         utf8_char[0] = toupper(utf8_char[0]);
     }
 
-    inputs->letra = utf8_char.empty() ? '\0' : utf8_char[0];
+    inputs->letra = utf8_char.empty() ? ' ' : utf8_char[0];
     inputs->char_press = true;
 }

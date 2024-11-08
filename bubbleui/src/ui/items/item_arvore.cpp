@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
 #include "item_arvore.hpp"
 #include "src/ui/util/pop_up.hpp"
 

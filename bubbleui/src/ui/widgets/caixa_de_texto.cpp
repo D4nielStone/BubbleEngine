@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "caixa_de_texto.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <src/depuracao/debug.hpp>
@@ -69,12 +71,12 @@ void CaixaTexto::atualizar()
     if (texto.empty())
     {
         frase = mensagem;
-        cor = { 0.7, 0.7, 0.7 };
+        cor = { 0.7F, 0.7F, 0.7F};
     }
     else
     {
         frase = texto;
-        cor = { 1, 1, 1 };
+        cor = { 1.F, 1.F, 1.F };
     }
 
     // Redimensiona moldura e colisao
@@ -112,13 +114,13 @@ void CaixaTexto::definirPai(Formas::Moldura* painel)
 
 void CaixaTexto::processarEntrada(char c)
 {
-    if (c == '\b' && texto_cursor_index != 0) // Backspace
+    if (c == '' && texto_cursor_index != 0) // Backspace
     {
         texto.pop_back();
         texto_cursor_index = texto.size();
         return;
     }
-    else if (c != '\b')
+    else if (c != '')
     {
         texto.insert(texto_cursor_index, 1, c);
         texto_cursor_index++;
@@ -137,7 +139,7 @@ void CaixaTexto::atualizarInputs()
     if (inputs->isKeyPressed(BS) && !texto.empty() && !gatilho1) // Backspace
     {
         inputs->char_press = true;
-        inputs->letra = '\b';
+        inputs->letra = '';
     }
     if (inputs->isKeyPressed(ENTER) && !gatilho1) // Enter
     {

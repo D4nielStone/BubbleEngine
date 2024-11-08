@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include "skybox.hpp"
 #include "glad/glad.h"
 #include "src/depuracao/debug.hpp"
@@ -98,7 +100,7 @@ namespace Bubble::Util
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
         shader.setInt("skybox", 0);
-        glDrawArrays(GL_TRIANGLES, 0, malha.vertices.size());
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(malha.vertices.size()));
         glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
         glDepthMask(GL_TRUE);
     }

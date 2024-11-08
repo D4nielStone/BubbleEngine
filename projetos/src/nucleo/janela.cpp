@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Daniel Oliveira
+// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
 #include <windows.h>
 #include <glad/glad.h>
 #include "janela.hpp"
@@ -47,11 +49,11 @@ static void novo_loop()
     glfwSwapBuffers(janela);
     glfwPollEvents();
 }
-#ifdef NDEBUG
-#define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
-#else
+//#ifdef NDEBUG
+//#define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
+//#else
 #define INIT main()
-#endif
+//#endif
 int INIT
 {
     if (!iniciar_())return -1;
