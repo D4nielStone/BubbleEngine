@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "camera_editor.hpp"
 #include "src/depuracao/debug.hpp"
 #include <glm/gtc/matrix_transform.hpp>
@@ -9,6 +10,7 @@
 #include <GLFW/glfw3.h>
 
 using namespace Bubble::Entidades;
+
 CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
     :  inputs(input), velocidadeDeMovimento(100.f), sensibilidadeDeRotacao(100.f),
     yaw(-90.0f), pitch(0.0f) {
@@ -67,7 +69,7 @@ void CameraEditor::atualizar()
         // Rotação
         if (inputs->isKeyPressed(Key::UP))
         {
-            pitch += sensibilidadeDeRotacao* deltaTime;
+            pitch += static_cast<double>(sensibilidadeDeRotacao * deltaTime);
             if (pitch > 89.0f)
                 pitch = 89.0f;
             atualizarDirecao();
@@ -76,7 +78,7 @@ void CameraEditor::atualizar()
         }
         if (inputs->isKeyPressed(Key::DOWN))
         {
-            pitch -= sensibilidadeDeRotacao* deltaTime;
+            pitch -= static_cast<double>(sensibilidadeDeRotacao* deltaTime);
             if (pitch < -89.0f)
                 pitch = -89.0f;
             atualizarDirecao();
@@ -85,7 +87,7 @@ void CameraEditor::atualizar()
         }
         if (inputs->isKeyPressed(Key::LEFT))
         {
-            yaw -= sensibilidadeDeRotacao* deltaTime;
+            yaw -= static_cast<double>(sensibilidadeDeRotacao * deltaTime);
             atualizarDirecao();
             // Calcular a matriz de visualização
             matrizVisualizacao = glm::lookAt(transformacao->obterPosicao(), transformacao->obterPosicao() + frente, { 0, 1, 0 });

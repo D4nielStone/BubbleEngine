@@ -18,7 +18,7 @@ namespace BubbleUI
 			~ItemMenu();
 			virtual void atualizar();
 			virtual void renderizar() const;
-			static void configurar(const std::string &font_path = "assets/fontes/consolas/consolas.ttf", unsigned int resolucao = 12);
+			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consola.ttf");
 			virtual void definirPai(Formas::Moldura*);
 			void definirEscondido(bool boleano);
 			void quebrarLinha(bool boleano);
@@ -41,6 +41,7 @@ namespace BubbleUI
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 			std::vector<LetraRect> letras_rect;
 			bool gatilho{ true }, clicado{ false }, mouseEmCima{ false }, escondido{ false }, vquebrarLinha{ true };
+			std::string nome_da_fonte;
 		};
 	}
 }

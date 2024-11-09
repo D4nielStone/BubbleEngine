@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "caixa_de_texto.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <src/depuracao/debug.hpp>
@@ -12,7 +13,7 @@ CaixaTexto::CaixaTexto(const std::string &mensagem)
     quebrarLinha = true;
     resolucao = 12;
     lines_box_limite = 3;
-    configurar(); 
+    definirFonte(); 
 }
 
 CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& mensagem)
@@ -24,7 +25,7 @@ CaixaTexto::CaixaTexto(std::shared_ptr<std::string> buffer, const std::string& m
     }
     resolucao = 12;
     lines_box_limite = 3;
-    configurar(); 
+    definirFonte();
 }
 
 CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
@@ -36,7 +37,7 @@ CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
     }
     resolucao = 12;
     lines_box_limite = 3;
-    configurar();
+    definirFonte();
 }
 
 

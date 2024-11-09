@@ -1,5 +1,5 @@
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "barra_menu.hpp"
 #include "src/ui/formas/linha.hpp"
 #include "src/ui/items/item_botao.hpp"
@@ -75,8 +75,8 @@ void BubbleUI::Util::BarraMenu::defContexto(std::shared_ptr<Contexto> ctx)
 	popupCena->adiItem(std::make_shared<Items::ItemMenu>("Abrir projeto"));
 
 	adicionarBotao(std::make_unique<Items::Arvore>("Arquivo", popupCena));
-	texto_nome_projeto = Items::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
+	texto_nome_projeto = Widgets::Texto(contexto->NomeDoProjeto + " | " + contexto->VercaoDaEngine);
 
 	texto_nome_projeto.definirPai(this);
-	texto_nome_projeto.quebrarLinha(false);
+	texto_nome_projeto.quebrarLinha = false;
 }

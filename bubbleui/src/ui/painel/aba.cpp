@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informações.
+
 #include "aba.hpp"
 #include "src/ui/widgets/texto.hpp"
 #include "painel.hpp"
@@ -12,7 +13,7 @@ BubbleUI::Aba::Aba(Formas::Moldura *painel)
     this->painel = painel;
     resolucao = 14;
     letra_padding = {4, 1};
-    configurar();
+    definirFonte();
     Texto::Texto(frase);
     corpo_rect = std::make_unique<Formas::Rect>(painel->obterContexto(), Vector4{});
 }

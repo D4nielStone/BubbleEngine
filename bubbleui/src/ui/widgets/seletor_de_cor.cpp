@@ -1,5 +1,5 @@
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "seletor_de_cor.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <algorithm>
@@ -33,7 +33,7 @@ SeletorDeCor::SeletorDeCor(Color* cor, const std::string& label, const Alinhamen
     arco_cor->flip = true;
     frase = label;
     resolucao = 12;
-    configurar();
+    definirFonte();
     letra_padding = { 3, 3 };
 }
 

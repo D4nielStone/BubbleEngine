@@ -1,5 +1,6 @@
-// Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
+// Copyright (c) 2024 Daniel Oliveira
+
 #include "arvore.hpp"
 #include "src/ui/painel/painel.hpp"
 

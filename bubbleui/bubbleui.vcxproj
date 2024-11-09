@@ -149,7 +149,6 @@
     <ClInclude Include="src\ui\widgets\opcoes.hpp" />
     <ClInclude Include="src\ui\widgets\filtro.hpp" />
     <ClInclude Include="src\ui\formas\meio_circulo.hpp" />
-    <ClInclude Include="src\ui\items\item_texto.hpp" />
     <ClInclude Include="src\ui\painel\jogo.hpp" />
     <ClInclude Include="src\ui\util\barra_menu.hpp" />
     <ClInclude Include="src\ui\painel\inspetor.hpp" />
@@ -183,7 +182,6 @@
     <ClCompile Include="src\ui\widgets\opcoes.cpp" />
     <ClCompile Include="src\ui\widgets\filtro.cpp" />
     <ClCompile Include="src\ui\formas\meio_circulo.cpp" />
-    <ClCompile Include="src\ui\items\item_texto.cpp" />
     <ClCompile Include="src\ui\painel\jogo.cpp" />
     <ClCompile Include="src\ui\util\barra_menu.cpp" />
     <ClCompile Include="src\ui\painel\inspetor.cpp" />

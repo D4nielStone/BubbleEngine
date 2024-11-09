@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "botao.hpp"
 #include "src/ui/painel/painel.hpp"
 
@@ -13,7 +14,7 @@ Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click,
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    configurar();
+    definirFonte();
     letra_padding = {5, 5};
 }
 
@@ -25,7 +26,7 @@ Botao::Botao(const std::string& label_shared, const std::string& image_path, boo
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    configurar();
+    definirFonte();
     icon = std::make_unique<Imagem>(image_path, Vector2{60, 60});
     letra_padding = { 5, 5 };
 }
@@ -38,7 +39,7 @@ Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    configurar();
+    definirFonte();
     letra_padding = { 5, 5 };
 }
 
@@ -52,7 +53,7 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    configurar();
+    definirFonte();
     letra_padding = {5, 5};
 }
 
@@ -67,7 +68,10 @@ void Botao::atualizar()
     if (icon) box_size.y = icon->obtRect().h;
     if (quebrarLinha)painel->posicaoWidget = { (int)painel->obterRetangulo().x, (int)(box_pos.y + box_size.y) };
     else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto + painel->widgetPadding.x; };
-   Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+    if(icon)
+    Moldura::definirPosicao({ static_cast<int>(box_pos.x - painel->widgetPadding.x*2 - icon->obterRetangulo().w), static_cast<int>(box_pos.y) });
+    else
+    Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     // largura se completo ou não
     if (completo)
     {
@@ -95,7 +99,7 @@ void Botao::atualizar()
         if (callback)*callback = true;
        Moldura::defCor({ 0.39f, 0.32f, 0.46f, 1.f});
     }else
-       Moldura::defCor({ 0.17f, 0.14f, 0.2f, 1.f });
+       Moldura::defCor(ROXO_EXCURO);
 }
 
 void Botao::renderizar() const

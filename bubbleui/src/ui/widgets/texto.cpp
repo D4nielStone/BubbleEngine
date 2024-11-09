@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "texto.hpp"
 #include "src/ui/painel/painel.hpp"
 #include "src/depuracao/debug.hpp"
@@ -13,14 +14,14 @@ using namespace Bubble::Arquivadores;
 Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
-    configurar();
+    definirFonte();
 }
 
 Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
     label_shared = new std::string(l);
-    configurar();
+    definirFonte();
 }
 
 void Texto::definirTexto(const std::string& texto)
@@ -86,6 +87,7 @@ void Texto::renderizar_texto(std::string &frase)
     size_t i = alinhamentoEsquerda ? 0 : frase.size() - 1;
     size_t step = alinhamentoEsquerda ? 1 : -1;
 
+        auto caracteres = Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().obterCaracteres(nome_da_fonte);
     // Loop até que i seja fora dos limites
     while (i < frase.size() && i >= 0) // o limite superior é necessário apenas se `frase.size()` pode ser 0.
     {
@@ -95,7 +97,13 @@ void Texto::renderizar_texto(std::string &frase)
             continue;
         }
         char& c = frase[i];
-        ch = (*Bubble::Arquivadores::obterCaracteres())[c]; // Obtém o caractere atual
+
+        if(caracteres)
+            ch = caracteres->at(c); // Obtém o caractere atual
+        else
+        {
+            return;
+        }
 
         // Define as dimensões e posição da letra
         w_letter = ch.Size.x;
@@ -153,9 +161,10 @@ Vector4f Texto::paraNDC(const Vector4& coord)
 }
 
 // Configura o texto com a fonte e resolução especificada
-void Texto::configurar(unsigned int resolucao, std::string font_path)
+void Texto::definirFonte(unsigned int resolucao, std::string font_path)
 {
-    carregarFonte(font_path); // Carrega a fonte
+    nome_da_fonte = font_path;
+    Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().carregarFonte(font_path, resolucao); // Carrega a fonte
 }
 
 // Método para detextar caractéres selecionados

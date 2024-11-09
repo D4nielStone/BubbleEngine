@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include <windows.h>
 #include <glad/glad.h>
 #include "janela.hpp"
@@ -32,6 +33,10 @@ static bool iniciar_()
     contexto_ui = std::make_shared<BubbleUI::Contexto>();
     contexto_ui->def_inputs(janela);
 
+    // ativa blend
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // Defini o painel de teste
     painel = std::make_shared<BubbleUI::Paineis::VisualizadorDeProjetos>(contexto_ui);
 
@@ -49,11 +54,11 @@ static void novo_loop()
     glfwSwapBuffers(janela);
     glfwPollEvents();
 }
-//#ifdef NDEBUG
-//#define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
-//#else
+#ifdef NDEBUG
+#define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
+#else
 #define INIT main()
-//#endif
+#endif
 int INIT
 {
     if (!iniciar_())return -1;

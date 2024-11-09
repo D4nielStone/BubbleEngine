@@ -1,106 +1,76 @@
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "fonte.hpp"
-#include "src/depuracao/debug.hpp"
-#include "glad/glad.h"
-#include <map>
-#include <string>
-#include <glm/glm.hpp>
+#include "assets/fontes_na_memoria.hpp"
+#include <filesystem>
 
 using namespace Bubble::Arquivadores;
 
-FT_Face face;
-FT_Library library;
-bool ft_carregado = false;
-std::map<char32_t, Character> Characters;
-
-BECOMMONS_DLL_API std::map<char32_t, Character>* Bubble::Arquivadores::obterCaracteres()
-{   
-    return &Characters;
-}
-
-BECOMMONS_DLL_API void Bubble::Arquivadores::carregarFonte(std::string path)
+std::map<const std::string, std::pair<const unsigned char*, unsigned int>> fontes_memoria
 {
-    if (!ft_carregado)
+    {"consolas.ttf", std::pair(Consolas_ttf, Consolas_ttf_len)},
+    {"consolai.ttf", std::pair(consolai_ttf, consolai_ttf_len)},
+    {"consola.ttf", std::pair(Consola_ttf, Consola_ttf_len)},
+    {"consolaz.ttf", std::pair(consolaz_ttf, consolaz_ttf_len)}
+};
+
+GerenciadorDeFontes::GerenciadorDeFontes()
+{
+    if (FT_Init_FreeType(&ft))
     {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        // Inicia Biblioteca Freetype
-        if (FT_Init_FreeType(&library))
-        {
-            Debug::emitir(Debug::Erro, "FreeType inicializacao falhou");
-            return;
-        }
-
-        // Carrega Fonte
-        if (FT_New_Face(library, path.c_str(), 0, &face) == FT_Err_Unknown_File_Format)
-        {
-            Debug::emitir(Debug::Erro, "FreeType: Formato de arquivo de fonte desconhecido");
-            return;
-        }
-
-        definirResolucao(14);  // Defina o tamanho inicial da resolução
-        ft_carregado = true;
+        throw std::runtime_error("Erro ao inicializar FreeType");
     }
 }
 
-static std::u32string utf8_to_utf32(const std::string& utf8) {
-    std::u32string utf32;
-    char32_t codepoint = 0;
-    int bytes = 0;
-
-    for (unsigned char c : utf8) {
-        if (c <= 0x7F) { // ASCII range
-            utf32.push_back(c);
-        }
-        else if (c <= 0xBF) { // Continuation bytes
-            codepoint = (codepoint << 6) | (c & 0x3F);
-            if (--bytes == 0) utf32.push_back(codepoint);
-        }
-        else if (c <= 0xDF) { // Start of 2-byte sequence
-            codepoint = c & 0x1F;
-            bytes = 1;
-        }
-        else if (c <= 0xEF) { // Start of 3-byte sequence
-            codepoint = c & 0x0F;
-            bytes = 2;
-        }
-        else { // Start of 4-byte sequence
-            codepoint = c & 0x07;
-            bytes = 3;
-        }
-    }
-
-    return utf32;
-}
-
-BECOMMONS_DLL_API void Bubble::Arquivadores::definirResolucao(int resolution)
+GerenciadorDeFontes& GerenciadorDeFontes::obterInstancia()
 {
-    // Limpar caracteres anteriores
-    for (const auto& pair : Characters) {
-        glDeleteTextures(1, &pair.second.TextureID);
+    static GerenciadorDeFontes instance;
+    return instance;
+}
+
+GerenciadorDeFontes::~GerenciadorDeFontes()
+{
+    FT_Done_FreeType(ft);
+}
+
+void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsigned int resolucao)
+{
+    if (fontes.find(nome_da_fonte) != fontes.end())
+    {
+        return; // Fonte já carregada
     }
-    Characters.clear();
 
-    FT_Set_Pixel_Sizes(face, 0, resolution);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Desabilitar restrição de alinhamento de byte
+    FT_Face face{};
 
-    // Iterar sobre um intervalo de caracteres Unicode (Exemplo: ASCII estendido de 0x20 a 0x7E)
-    for (unsigned long charcode = 0x20; charcode <= 0x7E; ++charcode) {
-        // Verificar se o glifo existe na fonte
-        FT_UInt glyph_index = FT_Get_Char_Index(face, charcode);
-        if (glyph_index == 0) {
-            continue; // Pular caracteres não suportados pela fonte
+    if (fontes_memoria.find(std::filesystem::path(nome_da_fonte).filename().string()) != fontes_memoria.end())
+    {
+        if (FT_New_Memory_Face(ft, fontes_memoria.at((std::filesystem::path(nome_da_fonte).filename().string())).first, fontes_memoria.at((std::filesystem::path(nome_da_fonte).filename().string())).second, 0, &face))
+        {
+            throw std::runtime_error("Erro ao carregar a fonte: " + nome_da_fonte);
+        }
+    }
+    else
+        if (std::filesystem::exists(nome_da_fonte)) {
+            if (FT_New_Face(ft, nome_da_fonte.c_str(), 0, &face)) {
+                throw std::runtime_error("Erro ao carregar a fonte: " + nome_da_fonte);
+            }
+        }
+        else {
+            throw std::runtime_error("Fonte não encontrada: " + nome_da_fonte);
         }
 
-        // Carregar o glifo do caractere
-        if (FT_Load_Char(face, charcode, FT_LOAD_RENDER)) {
-            Debug::emitir(Debug::Erro, "FREETYPE: Falha ao carregar glifo para charcode " + std::to_string(charcode));
+
+    FT_Set_Pixel_Sizes(face, 0, resolucao);
+
+    std::map<unsigned char, Character> caracteres;
+
+    for (unsigned char c = 0; c < 128; c++)
+    {
+        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        {
             continue;
         }
 
-        // Gerar a textura
         unsigned int texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
@@ -116,19 +86,30 @@ BECOMMONS_DLL_API void Bubble::Arquivadores::definirResolucao(int resolution)
             face->glyph->bitmap.buffer
         );
 
-        // Definir opções de textura
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        // Armazenar o caractere para uso futuro
         Character character = {
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            face->glyph->advance.x
+            static_cast<unsigned int>(face->glyph->advance.x)
         };
-        Characters.insert(std::make_pair(charcode, character));
+        caracteres[c] = character;
     }
+
+    fontes[nome_da_fonte] = caracteres;
+    FT_Done_Face(face);
+}
+
+const std::map<unsigned char, Character>* GerenciadorDeFontes::obterCaracteres(const std::string& nome_da_fonte) const
+{
+    auto it = fontes.find(nome_da_fonte);
+    if (it != fontes.end())
+    {
+        return &it->second;
+    }
+    return nullptr;
 }

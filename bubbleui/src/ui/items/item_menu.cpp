@@ -1,5 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "item_menu.hpp"
 #include "src/depuracao/debug.hpp"
 
@@ -8,13 +9,13 @@ using namespace Bubble::Arquivadores;
 // Construtor que inicializa o ItemMenu com uma label_shared e configurações padrão
 BubbleUI::Items::ItemMenu::ItemMenu(std::string* label_shared) : resolucao(12), label_shared(label_shared), texto(""), letra_padding({ 4, 4 })
 {
-    configurar(); // Configura o item com as configurações padrão
+    definirFonte(); // Configura o item com as configurações padrão
 }
 
 // Construtor que inicializa o ItemMenu com uma label_shared passada como string
 BubbleUI::Items::ItemMenu::ItemMenu(const std::string &l) : resolucao(12), frase(l), letra_padding({5, 4})
 {
-    configurar(); // Configura o item com as configurações padrão
+    definirFonte(); // Configura o item com as configurações padrão
 }
 
 // Método para atualizar o estado do ItemMenu, incluindo a lógica de interação
@@ -37,7 +38,7 @@ void BubbleUI::Items::ItemMenu::atualizar()
         // Verifica se o botão esquerdo do mouse foi pressionado
         if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
         mouseEmCima = true; // Marca que o mouse está mais sobre o item
-        Moldura::defCor({ 0.4, 0.4, 0.4 }); // Define uma cor diferente para a moldura
+        Moldura::defCor({ 0.4F, 0.4F, 0.4F }); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
     if (inputs->mouseEnter == GLFW_RELEASE)
@@ -92,7 +93,7 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
 
     // Itera sobre cada caractere na frase
     for (char& c : frase) {
-        ch = (*Bubble::Arquivadores::obterCaracteres())[c]; // Obtém o caractere atual
+        ch = Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().obterCaracteres(nome_da_fonte)->at(c); // Obtém o caractere atual
 
         // Define as dimensões e posição da letra
         w_letter = ch.Size.x;
@@ -147,10 +148,11 @@ Vector4f BubbleUI::Items::ItemMenu::paraNDC()
     return coord_ndc;
 }
 
-// Método para configurar o ItemMenu com uma resolução e um caminho de fonte
-void BubbleUI::Items::ItemMenu::configurar(const std::string &font_path, unsigned int resolucao)
+// Configura o texto com a fonte e resolução especificada
+void BubbleUI::Items::ItemMenu::definirFonte(unsigned int resolucao, std::string font_path)
 {
-    carregarFonte(font_path); // Carrega a fonte especificada
+    nome_da_fonte = font_path;
+    Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().carregarFonte(font_path, resolucao); // Carrega a fonte
 }
 
 // Método para definir a moldura do ItemMenu

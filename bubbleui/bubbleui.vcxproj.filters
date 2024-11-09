@@ -93,9 +93,6 @@
     <ClInclude Include="src\ui\widgets\checkbox.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\items\item_texto.hpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="src\ui\widgets\seletor_de_cor.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -186,9 +183,6 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\widgets\checkbox.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ui\items\item_texto.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\widgets\seletor_de_cor.cpp">

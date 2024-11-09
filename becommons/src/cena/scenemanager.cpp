@@ -1,5 +1,5 @@
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "scenemanager.hpp"
 #include "src/depuracao/debug.hpp"
 #include "glad/glad.h"
@@ -55,7 +55,7 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
         adicionarCena(criarCenaPadrao(Nome));
     else
         adicionarCena(std::make_shared<Scene>(Nome.c_str()));
-    carregarCena(numeroDeCenas() - 1);
+    carregarCena(static_cast<int>(numeroDeCenas() - 1));
 }
 
 void Bubble::Cena::SceneManager::defJogoViewport(Vector4 rect)

@@ -1,5 +1,5 @@
 // Copyright (c) 2024 Daniel Oliveira
-// Licenciado sob a licença MIT. Consulte o arquivo LICENSE para mais informaçoes.
+
 #include "checkbox.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <src/arquivadores/imageloader.hpp>
