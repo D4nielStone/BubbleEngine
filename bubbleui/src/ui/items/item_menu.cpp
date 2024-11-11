@@ -89,11 +89,11 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
 
     letras_rect.clear(); // Limpa a lista de retângulos das letras
 
-    Bubble::Arquivadores::Character ch;
-
+    auto it = Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().obterCaracteres(nome_da_fonte);
+    if (!it)return;
     // Itera sobre cada caractere na frase
     for (char& c : frase) {
-        ch = Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().obterCaracteres(nome_da_fonte)->at(c); // Obtém o caractere atual
+        Bubble::Arquivadores::Character ch = it->at(c); // Obtém o caractere atual
 
         // Define as dimensões e posição da letra
         w_letter = ch.Size.x;
@@ -158,6 +158,7 @@ void BubbleUI::Items::ItemMenu::definirFonte(unsigned int resolucao, std::string
 // Método para definir a moldura do ItemMenu
 void BubbleUI::Items::ItemMenu::definirPai(Formas::Moldura* m)
 {
+    definirFonte();
     pai = m;
     contexto = m->obterContexto();
     Formas::Moldura::configurar(contexto, {}); // Define a moldura com base no contexto do pai

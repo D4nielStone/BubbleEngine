@@ -138,8 +138,8 @@ void Arvore::atualizar()
     else
     {
         // Caso contrário, define a cor padrão mais escura
-        cor = { 0.25f, 0.21f, 0.29f, 1.f };
-        painel->arvoreCor = { 0.25f, 0.21f, 0.29f, 1.f };
+        cor = ROXO_CLARO;
+        painel->arvoreCor = ROXO_CLARO;
     }
 
     Moldura::defCor(cor);

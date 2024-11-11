@@ -18,7 +18,7 @@ namespace BubbleUI
 			~ItemMenu();
 			virtual void atualizar();
 			virtual void renderizar() const;
-			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consola.ttf");
+			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/noto_sans/noto_sans.regular.ttf");
 			virtual void definirPai(Formas::Moldura*);
 			void definirEscondido(bool boleano);
 			void quebrarLinha(bool boleano);

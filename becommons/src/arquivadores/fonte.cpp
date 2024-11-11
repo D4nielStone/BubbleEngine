@@ -11,7 +11,10 @@ std::map<const std::string, std::pair<const unsigned char*, unsigned int>> fonte
     {"consolas.ttf", std::pair(Consolas_ttf, Consolas_ttf_len)},
     {"consolai.ttf", std::pair(consolai_ttf, consolai_ttf_len)},
     {"consola.ttf", std::pair(Consola_ttf, Consola_ttf_len)},
-    {"consolaz.ttf", std::pair(consolaz_ttf, consolaz_ttf_len)}
+    {"consolaz.ttf", std::pair(consolaz_ttf, consolaz_ttf_len)},
+    {"noto_sans.italic.ttf", std::pair(noto_sans_italic_ttf, noto_sans_italic_ttf_len)},
+    {"noto_sans.bold.ttf", std::pair(noto_sans_bold_ttf, noto_sans_bold_ttf_len)},
+    {"noto_sans.regular.ttf", std::pair(noto_sans_regular_ttf, noto_sans_regular_ttf_len)}
 };
 
 GerenciadorDeFontes::GerenciadorDeFontes()
@@ -51,7 +54,7 @@ void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsign
     }
     else
         if (std::filesystem::exists(nome_da_fonte)) {
-            if (FT_New_Face(ft, nome_da_fonte.c_str(), 0, &face)) {
+            if (FT_New_Face(ft, nome_da_fonte.c_str(), fontes.size(), &face)) {
                 throw std::runtime_error("Erro ao carregar a fonte: " + nome_da_fonte);
             }
         }
@@ -62,12 +65,14 @@ void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsign
 
     FT_Set_Pixel_Sizes(face, 0, resolucao);
 
-    std::map<unsigned char, Character> caracteres;
+    std::map<char32_t, Character> caracteres;
 
-    for (unsigned char c = 0; c < 128; c++)
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    for (unsigned int c = 0; c < 128; c++)
     {
         if (FT_Load_Char(face, c, FT_LOAD_RENDER))
         {
+            throw std::runtime_error("Erro ao carregar letra: " + c);
             continue;
         }
 
@@ -95,21 +100,23 @@ void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsign
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            static_cast<unsigned int>(face->glyph->advance.x)
+            face->glyph->advance.x
         };
-        caracteres[c] = character;
+        caracteres.insert(caracteres.end(), std::pair(c, character));
     }
 
     fontes[nome_da_fonte] = caracteres;
+
     FT_Done_Face(face);
 }
 
-const std::map<unsigned char, Character>* GerenciadorDeFontes::obterCaracteres(const std::string& nome_da_fonte) const
+const std::map<char32_t, Character>* GerenciadorDeFontes::obterCaracteres(const std::string& nome_da_fonte) const
 {
     auto it = fontes.find(nome_da_fonte);
     if (it != fontes.end())
     {
         return &it->second;
     }
+    obterInstancia().carregarFonte(nome_da_fonte, 12);
     return nullptr;
 }

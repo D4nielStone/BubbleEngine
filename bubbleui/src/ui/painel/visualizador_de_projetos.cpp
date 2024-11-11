@@ -9,28 +9,36 @@
 
 using namespace BubbleUI::Widgets;
 
-BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(std::shared_ptr<Contexto> contexto, const bool& preencher)
+BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(const bool& preencher, const Vector4& retangulo)
 	: preencher(preencher)
 {
 	Nome = "Visualizador de Projetos";
-	mostrar_aba = false;
-	configurar(contexto, {0, 0});
+	widgetPadding = { 5, 5 };
+	this->retangulo = retangulo;
 	if (preencher)
 	{
-		widgetPadding = {5, 5};
+		mostrar_aba = false;
 		selecionado = true;
 		redimensionavel = false;
 	}
+}
+
+void BubbleUI::Paineis::VisualizadorDeProjetos::posAtualizacao()
+{
+	if (preencher)
+	{
+		definirPosicao({ 0, 0 });
+		definirTamanho({ contexto->tamanho.width - static_cast<int>(obterRetangulo().x), contexto->tamanho.height - static_cast<int>(obterRetangulo().y) });
+	}
+}
+void  BubbleUI::Paineis::VisualizadorDeProjetos::definirContexto(std::shared_ptr<Contexto> ctx)
+{
+	Painel::definirContexto(ctx);
+
 	auto banner = std::make_shared<Imagem>("assets/texturas/icons/banner.png", 20);
 	banner->quebrarLinha = true;
 	adicionarWidget(banner);
 	auto filtro = std::make_shared<Filtro>("Filtrar Projetos");
 	adicionarWidget(filtro);
 	filtro->recarregar();
-}
-
-void BubbleUI::Paineis::VisualizadorDeProjetos::posAtualizacao()
-{
-	definirPosicao({0, 0});
-	definirTamanho({contexto->tamanho.width - static_cast<int>(obterRetangulo().x), contexto->tamanho.height - static_cast<int>(obterRetangulo().y)});
 }

@@ -5,9 +5,9 @@
 namespace BubbleUI {
 
     // Construtor
-    Painel::Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect)
+    Painel::Painel(const Vector4& rect) 
     {
-        configurar(ctx, rect);
+        retangulo = (rect);
     }
 
 
@@ -61,6 +61,11 @@ namespace BubbleUI {
         arrastando = false;
     }
 
+    void Painel::definirContexto(std::shared_ptr<Contexto> ctx)
+    {
+        configurar(ctx);
+    }
+
     // Ciclo de Vida do Painel: Renderização
     void Painel::renderizar() const
     {
@@ -103,7 +108,6 @@ namespace BubbleUI {
         contexto = ctx;
         widgetPadding = { 5, 5 };
         tamanhoMinimo = { 100, 15 };
-        retangulo = rect;
 
         // Inicializa bordas e moldura
         bordaCima = std::make_unique<Separador>(CIMA, this);

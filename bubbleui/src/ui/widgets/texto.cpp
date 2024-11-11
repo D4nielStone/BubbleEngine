@@ -52,6 +52,7 @@ void Texto::renderizar() const
         shader.setInt("textura", 0);
 
         glBindTexture(GL_TEXTURE_2D, letra.ID);
+        glActiveTexture(GL_TEXTURE0 + letra.ID);
         glBindVertexArray(rect_vertex.VAO);
         glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(rect_vertex.indices.size()), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);

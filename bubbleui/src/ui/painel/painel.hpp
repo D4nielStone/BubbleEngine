@@ -14,8 +14,8 @@ namespace BubbleUI
 	{
 	public:
 		// Construtores
+		Painel(const Vector4& rect);
 		Painel() = default;
-		Painel(std::shared_ptr<Contexto> ctx, const Vector4& rect = {0, 0, 100, 50});
 
 		// Widgets
 		void adicionarWidget(std::shared_ptr<Widget> widget);
@@ -31,6 +31,7 @@ namespace BubbleUI
 		// Estado do Painel
 		bool cursorNormal() const;
 		std::string nome() const { return Nome; }
+		virtual void definirContexto(std::shared_ptr<Contexto>);
 
 		// Flags de Controle
 		Lado redimensionamentoAtual;

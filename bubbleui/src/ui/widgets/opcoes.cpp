@@ -48,7 +48,7 @@ void Opcoes::recarregar()
         // Se é uma pasta válida, procura por ícone
         if (!pasta.is_directory())continue;
         // Iterando...
-        std::string temp{ "ICON.ico" };
+        std::string temp{ "icon.ico" };
         for( const auto& arquivo_projeto : directory_iterator(pasta.path()))
         {
             // Verifica se é um arquivo e se é um ícone
@@ -66,6 +66,7 @@ void Opcoes::recarregar()
         adiBotao(diretorio.first, diretorio.second);
     }
 
+    texto.definirFonte(13, "assets/fontes/noto_sans/noto_sans.regular.ttf");
     if(botoes.empty())
     texto.definirTexto("Nenhum projeto encontrado");
     else

@@ -8,8 +8,9 @@ namespace BubbleUI {
             public Painel
         {
         public:
-            VisualizadorDeProjetos(std::shared_ptr<Contexto> contexto, const bool& preencher = true);
+            VisualizadorDeProjetos(const bool& preencher = true, const Vector4& retangulo = {10, 10, 100, 400});
             void posAtualizacao() override;
+            void definirContexto(std::shared_ptr<Contexto> ctx) override;
         private:
             bool preencher{};   // flag para preencher a tela com o painel
             void recarregar();

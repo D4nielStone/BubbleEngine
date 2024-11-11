@@ -31,8 +31,8 @@ void MeioCirculo::definirTamanho(const Vector2 &tam)
 
 void MeioCirculo::definirPosicao(const Vector2 &pos)
 {
-    retangulo.x = pos.x;
-    retangulo.y = pos.y;
+    retangulo.x = static_cast<float>(pos.x);
+    retangulo.y = static_cast<float>(pos.y);
 }
 
 void MeioCirculo::adiTam(const Vector2 &tam)

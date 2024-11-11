@@ -1,6 +1,6 @@
 
 // Copyright (c) 2024 Daniel Oliveira
-
+#include "src/ui/painel/editor.hpp"
 #include <windows.h>
 #include <glad/glad.h>
 #include "janela.hpp"
@@ -23,36 +23,23 @@ static bool iniciar_()
     }
 
     // define o ícone da janela
-    auto icone_ = Bubble::Arquivadores::ImageLoader("ICON.ico");
+    auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
     const GLFWimage icone = icone_.converterParaGlfw();
     
     if (icone_.carregado)   glfwSetWindowIcon(janela, 1, &icone);
     
-
-    // defini contexto usado para interface gráfica
-    contexto_ui = std::make_shared<BubbleUI::Contexto>();
-    contexto_ui->def_inputs(janela);
-
-    // ativa blend
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    // Defini o painel de teste
-    painel = std::make_shared<BubbleUI::Paineis::VisualizadorDeProjetos>(contexto_ui);
+    // Cria novo contexto ui
+    BubbleUI::novoContexto(janela);
+    // adiciona um visualizador de projetos minimizado (maximize = false)
+    BubbleUI::adicionarPainel(janela, new BubbleUI::Paineis::VisualizadorDeProjetos(false));
+    // adiciona um editor com "scenemanager" sendo nullptr, e posição e tamanho {200, 200, 200, 100}
+    BubbleUI::adicionarPainel(janela, new BubbleUI::Paineis::Editor(nullptr, {200, 200, 200, 100}));
 
     return true;
 }
 static void novo_loop()
 {
-    glClearColor(0.1, 0.1, 0.1, 1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glViewport(0, 0, contexto_ui->tamanho.width, contexto_ui->tamanho.height);
-
-    painel->atualizar();
-    painel->renderizar();
-
-    glfwSwapBuffers(janela);
-    glfwPollEvents();
+    BubbleUI::atualizarContexto(janela);
 }
 #ifdef NDEBUG
 #define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)

@@ -56,53 +56,43 @@ static void abrirSelecionar()
     if (GetOpenFileName(&ofn) == TRUE)
     {
         std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
-        Bubble::Cena::adicionarTarefaNaFila([ofn, filePath]()
-            {
                 Bubble::Cena::criarEntidade(filePath);
-            });
     }
 }
 // Função para adicionar Cubo
 static void adicionarCubo()
 {
-    Bubble::Cena::adicionarTarefaNaFila([]()
-        {
             Bubble::Cena::criarEntidade("assets/primitivas/modelos/cube.dae");
-        });
 }
 // Função para adicionar Esfera
 static void adicionarEsfera()
 {
-    Bubble::Cena::adicionarTarefaNaFila([]()
-        {
             Bubble::Cena::criarEntidade("assets/primitivas/modelos/sphere.dae");
-        });
 }// Função para adicionar Camera
 // Adiciona camera
 static void adicionarCamera()
 {
-    Bubble::Cena::adicionarTarefaNaFila([]()
-        {
             Bubble::Cena::criarCamera(Bubble::Cena::CameraEditorAtual()->transformacao->obterPosicao());
-        });
 }
 // Adiciona cena
 static void adicionarCena()
 {
-    Bubble::Cena::adicionarTarefaNaFila([]()
-        {
             Bubble::Cena::adicionarCena();
-        });
 }
 
-BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<Imagem>(0)),
+BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<Imagem>(0)),
 scenemanager(scenemanager)
 {
 	Nome = "Editor";
     buffer->flip = true;
 	renderizarCorpo = false;
-	configurar(ctx, rect);
-	adicionarWidget(buffer);
+    retangulo = rect;
+}
+
+void BubbleUI::Paineis::Editor::definirContexto(std::shared_ptr < Contexto > ctx)
+{
+    Painel::definirContexto(ctx);
+    adicionarWidget(buffer);
 
     // Popup para adicionar primitivas
     auto popup_primitivas = std::make_shared<Util::PopUp>(ctx);
@@ -111,9 +101,9 @@ scenemanager(scenemanager)
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Camera", &callback_adicam));
     popup_primitivas->adiItem(std::make_shared<Items::Botao>("adicionar Plano", nullptr));
     // Popup principal
-	menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &callback_select));
-	menuDeContexto->adiItem(std::make_shared<Items::Botao>("adicionar cena", &callback_adicena));
-	menuDeContexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
+    menuDeContexto->adiItem(std::make_shared<Items::Botao>("importar objeto 3D", &callback_select));
+    menuDeContexto->adiItem(std::make_shared<Items::Botao>("adicionar cena", &callback_adicena));
+    menuDeContexto->adiItem(std::make_shared<Items::Arvore>("adicionar primitiva", popup_primitivas));
 }
 
 void BubbleUI::Paineis::Editor::preAtualizacao()
@@ -127,8 +117,13 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     if (callback_select)abrirSelecionar();
 
     Vector4 rect_size = buffer->obtRect();
-    scenemanager->defEditorViewport(rect_size);
-    auto cenaAtual = scenemanager->cenaAtual();
+    
+    std::shared_ptr<Bubble::Cena::Scene> cenaAtual;
+    if (scenemanager) 
+    {
+        scenemanager->defEditorViewport(rect_size);
+        cenaAtual = scenemanager->cenaAtual();
+    }
     // verifica se a cena é válida
     (cenaAtual != nullptr) && buffer->defID(cenaAtual->camera_editor.textureColorbuffer);
 

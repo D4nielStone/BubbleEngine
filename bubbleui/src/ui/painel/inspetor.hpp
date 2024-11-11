@@ -9,6 +9,7 @@ namespace BubbleUI
 		{
 		public:
 			Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect = { 2, 2, 100, 50 });
+			Inspetor() = default;
 			~Inspetor();
 		private:
 			void recarregar();

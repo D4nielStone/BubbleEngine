@@ -2,13 +2,20 @@
 // Copyright (c) 2024 Daniel Oliveira
 
 #include "imageloader.hpp"
-#include "src/depuracao/debug.hpp"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "assets/icon.hpp"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "assets/imagems_na_memoria.hpp"
+#include <map>
+#include <filesystem>
 #include <iostream>
 
 using namespace Bubble::Arquivadores;
+
+const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
+{
+    {"icon.ico", std::pair(icon_png, icon_png_len)},
+    {"banner.png", std::pair(banner_png, banner_png_len)}
+};
 
 ImageLoader::ImageLoader()
 {
@@ -54,9 +61,10 @@ void ImageLoader::carregarImagem(const std::string& filepath)
      // Inicializa o FreeImage  
     FreeImage_Initialise();
 
-    if (filepath == "ICON.ico")
+    const std::string nome_arquivo = std::filesystem::path(filepath).filename().string();
+    if (imagems_memoria.find(nome_arquivo) != imagems_memoria.end())
     {
-        embutida(icon_png, icon_png_len);
+        embutida(imagems_memoria.at(nome_arquivo).first, imagems_memoria.at(nome_arquivo).second);
         return;
     }
     // Determina o formato da imagem  
@@ -66,14 +74,12 @@ void ImageLoader::carregarImagem(const std::string& filepath)
     }
 
     if (format == FIF_UNKNOWN) {
-        Debug::emitir(Debug::Tipo::Erro, std::string(std::string("erro ao determinar formato da imagem: ") + filepath).c_str());
         return;
     }
 
     // Carrega a imagem  
     FIBITMAP* bitmap = FreeImage_Load(format, path);
     if (!bitmap) {
-        Debug::emitir(Debug::Tipo::Erro, std::string(std::string("erro ao carregar imagem: ") + filepath).c_str());
         return;
     }
 
@@ -82,7 +88,6 @@ void ImageLoader::carregarImagem(const std::string& filepath)
     FreeImage_Unload(bitmap);
 
     if (!converted) {
-        Debug::emitir(Debug::Tipo::Erro, std::string(std::string("erro ao converter a imagem para 32 bits: ") + filepath).c_str());
         return;
     }
 
@@ -114,7 +119,7 @@ void ImageLoader::carregarImagem(const std::string& filepath)
     // Finaliza o FreeImage  
     FreeImage_DeInitialise();
 }
-void ImageLoader::embutida(unsigned char* data, const unsigned int tamanho) 
+void ImageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {
     // Cria um stream de memória com o buffer da imagem
     FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
@@ -175,7 +180,6 @@ GLFWimage ImageLoader::converterParaGlfw()
 {
     GLFWimage image = {};
     if (!carregado) {
-        Debug::emitir(Debug::Tipo::Erro, "tentativa de converter imagem não carregada para GLFW");
         return image;
     }
 
@@ -240,7 +244,6 @@ unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory,
 }
 
 unsigned int Bubble::Arquivadores::TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
-    Debug::emitir("TextureFromFile", "Tentando carregar textura embutida");
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -263,10 +266,8 @@ unsigned int Bubble::Arquivadores::TextureFromFile(unsigned char* data, unsigned
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        Debug::emitir("TextureFromFile", "Textura embutida carregada com sucesso");
     }
     else {
-        Debug::emitir("TextureFromFile", "Falha ao carregar a textura embutida");
         std::cerr << "Failed to load texture: Textura embutida" << std::endl;
     }
 
@@ -315,7 +316,6 @@ GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* t
                 FreeImage_Unload(dib);
             }
             else {
-                Debug::emitir("Error", "Failed to load texture from memory.");
             }
         }
         FreeImage_CloseMemory(fiMemory);

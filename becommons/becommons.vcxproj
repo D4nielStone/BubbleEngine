@@ -164,8 +164,12 @@
     <ClInclude Include="assets\fontes\consolas\consolai.hpp" />
     <ClInclude Include="assets\fontes\consolas\Consolas.hpp" />
     <ClInclude Include="assets\fontes\consolas\consolaz.hpp" />
+    <ClInclude Include="assets\fontes\noto_sans\noto_bold.hpp" />
+    <ClInclude Include="assets\fontes\noto_sans\noto_italic.hpp" />
+    <ClInclude Include="assets\fontes\noto_sans\noto_regular.hpp" />
     <ClInclude Include="assets\fontes_na_memoria.hpp" />
-    <ClInclude Include="assets\icon.hpp" />
+    <ClInclude Include="assets\imagems\icon.hpp" />
+    <ClInclude Include="assets\imagems\banner.hpp" />
     <ClInclude Include="assets\shaders\imagem_frag.hpp" />
     <ClInclude Include="assets\shaders\imagem_vert.hpp" />
     <ClInclude Include="assets\shaders\quad_frag.hpp" />
@@ -173,6 +177,7 @@
     <ClInclude Include="assets\shaders\texto_frag.hpp" />
     <ClInclude Include="assets\shaders\texto_vert.hpp" />
     <ClInclude Include="assets\shaders_na_memoria.hpp" />
+    <ClInclude Include="assets\imagems_na_memoria.hpp" />
     <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\arquivo3d.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />

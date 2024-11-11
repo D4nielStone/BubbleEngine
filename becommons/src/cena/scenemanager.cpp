@@ -163,15 +163,9 @@ void Bubble::Cena::definirSceneManager(std::shared_ptr<SceneManager> scene_manag
     scenemanager = scene_manager;
 }
 
-// Função para adicionar uma tarefa na fila
-static void Bubble::Cena::adicionarTarefaNaFila(std::function<void()> tarefa)
-{
-    std::lock_guard<std::mutex> lock(filaMutex);
-    filaDeTarefas.push(tarefa);
-}
-
 void Bubble::Cena::criarEntidade(std::string path)
 {
+    if (!scenemanager)return;
     scenemanager->cenaAtual() && scenemanager->cenaAtual()->criarEntidade(path);
 }
 

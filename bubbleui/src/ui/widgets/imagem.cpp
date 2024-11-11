@@ -51,8 +51,8 @@ void Imagem::atualizar()
 {
     if (preencher)
     {
-        rect.w = painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x);
-        rect.h = painel->obterRetangulo().h - (painel->posicaoWidget.y - painel->obterRetangulo().y);
+        rect.w = static_cast<int>(painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x));
+        rect.h = static_cast<int>(painel->obterRetangulo().h - (painel->posicaoWidget.y - painel->obterRetangulo().y));
     }
     rect = { (float)painel->posicaoWidget.x + painel->widgetPadding.x, (float)painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     
@@ -71,17 +71,17 @@ void Imagem::atualizar()
     }
     if (posicao_ptr)
     {
-        rect.x = posicao_ptr->x;
-        rect.y = posicao_ptr->y;
+        rect.x = static_cast<float>(posicao_ptr->x);
+        rect.y = static_cast<float>(posicao_ptr->y);
     }
     if (quebrarLinha)
     {
-        painel->posicaoWidget.x = painel->obterRetangulo().x;
+        painel->posicaoWidget.x = static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x * 2);
         painel->posicaoWidget.y += rect.h + painel->widgetPadding.y*2;
     }
     else
     {
-        painel->posicaoWidget.x += rect.w + painel->widgetPadding.x;
+        painel->posicaoWidget.x += rect.w + painel->widgetPadding.x*2;
     }
 }
 

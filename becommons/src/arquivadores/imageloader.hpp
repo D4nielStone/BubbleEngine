@@ -26,7 +26,7 @@ namespace Bubble {
             std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
             void flipVertical();
             void carregarImagem(const std::string& filepath);
-            void embutida(unsigned char* data, const unsigned int tamanho);
+            void embutida(BYTE* data, const unsigned int tamanho);
             const char* path;
             int width, height, channels;
             unsigned char* data;

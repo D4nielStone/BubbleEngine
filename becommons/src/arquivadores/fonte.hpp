@@ -39,11 +39,11 @@ namespace Bubble
             void carregarFonte(const std::string& nome_da_fonte, unsigned int resolucao);
 
             // Obtém um ponteiro para os caracteres de uma fonte já carregada
-            const std::map<unsigned char, Character>* obterCaracteres(const std::string& nome_da_fonte) const;
+            const std::map<char32_t, Character>* obterCaracteres(const std::string& nome_da_fonte) const;
 
         private:
             FT_Library ft; // FreeType library
-            std::map<std::string, std::map<unsigned char, Character>> fontes; // Mapa para armazenar as fontes carregadas
+            std::map<std::string, std::map<char32_t, Character>> fontes; // Mapa para armazenar as fontes carregadas
         };
     }
 }

@@ -16,7 +16,7 @@ namespace BubbleUI
 			void definirTexto(const std::string & texto);
 			void atualizar() override;
 			void renderizar() const override;
-			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/consolas/consola.ttf");
+			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/noto_sans/noto_sans.regular.ttf");
 		protected:
 			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
 			void renderizar_texto(std::string &frase);
