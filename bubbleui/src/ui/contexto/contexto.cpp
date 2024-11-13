@@ -4,6 +4,8 @@
 #include "contexto.hpp"
 #include <shlobj.h> // Necessário para SHGetKnownFolderPath
 #include <map>
+#include <future>
+#include <thread>
 #include <comdef.h> // Necessário para _bstr_t (conversão de wchar_t para string)
 #include "src/ui/painel/painel.hpp"
 
@@ -96,8 +98,20 @@ void BubbleUI::adicionarPainel(GLFWwindow* window, BubbleUI::Painel* painel)
 void BubbleUI::Contexto::atualizar()
 {
     glfwPollEvents();
-    for (auto& painel : paineis)
-        painel->atualizar();
+
+    // Vetor de futures para armazenar as tarefas assíncronas de atualização dos paineis
+    std::vector<std::future<void>> futures;
+
+    // Inicia cada painel->atualizar() em uma thread separada
+    for (auto& painel : paineis) {
+        futures.push_back(std::async(std::launch::async, [&painel]() {
+            painel->atualizar();
+            }));
+    }
+
+    for (auto& future : futures) {
+        future.wait();
+    }
 }
 void BubbleUI::Contexto::renderizar() const
 {

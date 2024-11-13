@@ -302,5 +302,5 @@ extern BECOMMONS_DLL_API Vertex linha_vertex;
 extern BECOMMONS_DLL_API Vertex halfcircle_vertex;
 
 // cores
-const Color ROXO_EXCURO = Color(0.17f, 0.14f, 0.2f, 1.f);
+const Color ROXO_ESCURO = Color(0.17f, 0.14f, 0.2f, 1.f);
 const Color ROXO_CLARO = Color( 0.25f, 0.21f, 0.29f, 1.f );

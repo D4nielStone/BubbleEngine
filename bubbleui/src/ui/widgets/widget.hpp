@@ -38,5 +38,6 @@ namespace BubbleUI
 		Alinhamento alinhamentoHorizontal = Alinhamento::Esquerda;
 		std::shared_ptr<Contexto> contexto{ nullptr };
 		std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
+		Vector2f posicao_antiga{0,0};
 	};
 }

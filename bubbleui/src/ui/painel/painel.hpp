@@ -39,7 +39,7 @@ namespace BubbleUI
 		bool mouse1click{ false }, redimensionavel{ true }, mostrar_aba{ true };
 	protected:
 		// Métodos de Configuração e Ciclo de Vida
-		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 100, 50 });
+		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 200, 100 });
 		virtual void preAtualizacao() {}
 		virtual void posAtualizacao() {}
 		virtual void preRenderizacao() const {}
@@ -57,7 +57,7 @@ namespace BubbleUI
 		std::unique_ptr<Aba> aba{ nullptr };
 
 		// Dados de Geometria
-		Vector2 tamanhoMinimo{100, 50};
+		Vector2 tamanhoMinimo{200, 100};
 		bool renderizarCorpo{ true };
 
 	};

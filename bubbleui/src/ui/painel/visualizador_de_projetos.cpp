@@ -12,6 +12,7 @@ using namespace BubbleUI::Widgets;
 BubbleUI::Paineis::VisualizadorDeProjetos::VisualizadorDeProjetos(const bool& preencher, const Vector4& retangulo)
 	: preencher(preencher)
 {
+	tamanhoMinimo = {300, 500};
 	Nome = "Visualizador de Projetos";
 	widgetPadding = { 5, 5 };
 	this->retangulo = retangulo;

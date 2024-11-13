@@ -1,6 +1,7 @@
 
 // Copyright (c) 2024 Daniel Oliveira
 #include "src/ui/painel/editor.hpp"
+#include "src/ui/painel/depurador.hpp"
 #include <windows.h>
 #include <glad/glad.h>
 #include "janela.hpp"
@@ -30,10 +31,7 @@ static bool iniciar_()
     
     // Cria novo contexto ui
     BubbleUI::novoContexto(janela);
-    // adiciona um visualizador de projetos minimizado (maximize = false)
-    BubbleUI::adicionarPainel(janela, new BubbleUI::Paineis::VisualizadorDeProjetos(false));
-    // adiciona um editor com "scenemanager" sendo nullptr, e posição e tamanho {200, 200, 200, 100}
-    BubbleUI::adicionarPainel(janela, new BubbleUI::Paineis::Editor(nullptr, {200, 200, 200, 100}));
+    BubbleUI::adicionarPainel(janela, new BubbleUI::Paineis::VisualizadorDeProjetos(true));
 
     return true;
 }

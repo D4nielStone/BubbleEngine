@@ -29,6 +29,23 @@ void Opcoes::atualizar()
 
 void Opcoes::renderizar() const
 {
+    // Passo 1: Desenhar a máscara no stencil buffer
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+    glStencilFunc(GL_ALWAYS, 1, 0xFF);
+    glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE); // Desativar a escrita de cores
+    glDepthMask(GL_FALSE); // Desativar o depth buffer
+    glClear(GL_STENCIL_BUFFER_BIT); // Limpar o stencil buffer
+
+    // Desenhar a moldura com bordas arredondadas no stencil buffer
+    Moldura::renderizar();
+
+    // Passo 2: Configurar o recorte com stencil
+    glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE); // Reativar a escrita de cores
+    glDepthMask(GL_TRUE); // Reativar o depth buffer
+    glStencilFunc(GL_EQUAL, 1, 0xFF); // Permitir a renderização apenas onde o stencil buffer é 1
+    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Manter o valor do stencil
+
+    // Desenhar o conteúdo dentro da área recortada
     Moldura::renderizar();
 
     for (const auto& botao : botoes)

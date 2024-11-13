@@ -14,7 +14,7 @@ Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click,
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    definirFonte();
+    definirFonte(13, "noto_sans.bold.ttf");
     letra_padding = {5, 5};
 }
 
@@ -25,8 +25,8 @@ Botao::Botao(const std::string& label_shared, const std::string& image_path, boo
     espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
-    resolucao = 12;
-    definirFonte();
+    resolucao = 13;
+    definirFonte(13, "noto_sans.bold.ttf");
     icon = std::make_unique<Imagem>(image_path, Vector2{60, 60});
     letra_padding = { 5, 5 };
 }
@@ -53,12 +53,14 @@ Botao(const std::string &label_shared, std::function<void()> function, const std
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    definirFonte();
+    definirFonte(13, "noto_sans.bold.ttf");
     letra_padding = {5, 5};
 }
 
 void Botao::atualizar()
 {
+    if (posicao_antiga.y > painel->obterRetangulo().y + painel->obterRetangulo().h)
+        return;
     if (icon)
     {
         icon->definirPai(painel);
@@ -99,11 +101,14 @@ void Botao::atualizar()
         if (callback)*callback = true;
        Moldura::defCor({ 0.39f, 0.32f, 0.46f, 1.f});
     }else
-       Moldura::defCor(ROXO_EXCURO);
+       Moldura::defCor(ROXO_ESCURO);
 }
 
 void Botao::renderizar() const
 {
+
+    if (obterRetangulo().y > painel->obterRetangulo().y + painel->obterRetangulo().h)
+        return;
    Moldura::renderizar();
     Texto::renderizar();
 

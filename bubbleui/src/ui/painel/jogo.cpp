@@ -16,7 +16,7 @@ BubbleUI::Paineis::Jogo::Jogo(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bub
 	renderizarCorpo = false;
     buffer->flip = true;
 	configurar(ctx, rect);
-	adicionarWidget(buffer);
+	//adicionarWidget(buffer);
 }
 
 void BubbleUI::Paineis::Jogo::preAtualizacao()

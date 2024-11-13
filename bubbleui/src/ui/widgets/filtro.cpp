@@ -12,8 +12,8 @@ Filtro::Filtro(const std::string& label) : label(label)
 void Filtro::atualizar()
 {
     defCor(ROXO_CLARO);
-    definirPosicao({ painel->posicaoWidget.x + painel->widgetPadding.x, painel->posicaoWidget.y + painel->widgetPadding.y});
-    definirTamanho({static_cast<int>(painel->obterRetangulo().w - painel->widgetPadding.x*2), static_cast<int>(painel->obterRetangulo().h - painel->widgetPadding.y*2) });
+    definirPosicao({ painel->posicaoWidget.x, painel->posicaoWidget.y});
+    definirTamanho({static_cast<int>(painel->obterRetangulo().w - painel->widgetPadding.x*2), static_cast<int>(painel->obterRetangulo().h - painel->widgetPadding.y*2 - (obterRetangulo().y - painel->obterRetangulo().y))});
     Moldura::atualizar();
 
     posicaoWidget = { (int)obterRetangulo().x, (int)obterRetangulo().y};
@@ -27,6 +27,7 @@ void Filtro::atualizar()
 
 void Filtro::renderizar() const
 {
+
     Moldura::renderizar();
 
     for (const auto& botao : botoes)

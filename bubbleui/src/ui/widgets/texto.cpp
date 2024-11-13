@@ -28,7 +28,6 @@ void Texto::definirTexto(const std::string& texto)
 {
     if (frase == texto)return;
     frase = texto;
-    delete[] label_shared;
 }
 
 // Método genérico de atualizacao
@@ -125,6 +124,10 @@ void Texto::renderizar_texto(std::string &frase)
         char_rect.y = y_letter + line_pos.y;
         char_rect.w = w_letter;
         char_rect.h = h_letter;
+
+        // se letra ultrapassa o painel:
+        if (char_rect.x + char_rect.w > painel->obterRetangulo().x + painel->obterRetangulo().w)
+            break;
 
         // Adiciona o retângulo da letra para renderização
         letras_rect.push_back({ paraNDC(char_rect), ch.TextureID, });

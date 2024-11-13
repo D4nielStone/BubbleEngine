@@ -8,6 +8,7 @@ namespace BubbleUI
 		class BEUI_DLL_API Imagem : public Widget
 		{
 		public:
+			Imagem() = default;
 			Imagem(unsigned int id, const Vector2& size = { 100, 100 }, const bool& auto_resize = true);
 			Imagem(const std::string& path, int size_percentage, Vector2* posicao = nullptr);
 			Imagem(const std::string& path, const Vector2& size = {16, 16});

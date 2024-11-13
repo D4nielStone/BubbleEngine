@@ -85,7 +85,7 @@ void CaixaTexto::atualizar()
     Moldura::definirTamanho({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     Moldura::atualizar();
 
-    painel->posicaoWidget.y += painel->widgetPadding.y;
+    //painel->posicaoWidget.y += painel->widgetPadding.y;
 }
 
 void CaixaTexto::renderizar() const

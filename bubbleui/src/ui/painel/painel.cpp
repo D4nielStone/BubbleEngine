@@ -31,20 +31,21 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Atualização
     void Painel::atualizar()
     {
-        // Atualiza a moldura
         Moldura::atualizar();
+        // Atualiza a moldura
         arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
         {
             bordaCima->atualizar(); bordaBaixo->atualizar();
             bordaEsq->atualizar(); bordaDir->atualizar();
-            corrigirLimite();
-            if(mostrar_aba)aba->obterCorpo()->defCor({ 0.4f, 0.0f, 0.4f, 1 });
+            if(mostrar_aba)aba->obterCorpo()->defCor(ROXO_CLARO);
         }
         else
         {
-            if (mostrar_aba)aba->obterCorpo()->defCor({ 0.1f, 0.1f, 0.1f, 1 });
+            if (mostrar_aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
         }
+        corrigirLimite();
+        Rect::paraNDC();
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
         menuDeContexto->atualizar();
@@ -148,19 +149,9 @@ namespace BubbleUI {
         {
             definirTamanho({ tamanhoMinimo.x, obterRetangulo().h });
         }
-        if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual== BAIXO)
+        if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual == BAIXO)
         {
-            definirTamanho({ obterRetangulo().w, tamanhoMinimo.y });
-        }
-        if (obterRetangulo().w < tamanhoMinimo.x && redimensionamentoAtual== ESQUERDA)
-        {
-            adiPos({ -(tamanhoMinimo.x - obterRetangulo().w), 0 });
-            definirTamanho({ tamanhoMinimo.x, obterRetangulo().h });
-        }
-        if (obterRetangulo().h < tamanhoMinimo.y && redimensionamentoAtual== CIMA)
-        {
-            adiPos({ 0, -(tamanhoMinimo.y - obterRetangulo().h)});
-            definirTamanho({ obterRetangulo().w, tamanhoMinimo.y });
+            definirTamanho({ tamanhoMinimo.x, obterRetangulo().w });
         }
     }
 

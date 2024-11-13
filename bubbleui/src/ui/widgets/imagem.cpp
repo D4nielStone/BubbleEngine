@@ -76,12 +76,12 @@ void Imagem::atualizar()
     }
     if (quebrarLinha)
     {
-        painel->posicaoWidget.x = static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x * 2);
+        painel->posicaoWidget.x = static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x);
         painel->posicaoWidget.y += rect.h + painel->widgetPadding.y*2;
     }
     else
     {
-        painel->posicaoWidget.x += rect.w + painel->widgetPadding.x*2;
+        painel->posicaoWidget.x += rect.w + painel->widgetPadding.x;
     }
 }
 
