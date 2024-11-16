@@ -7,13 +7,23 @@
 #include <future>
 #include <thread>
 #include <comdef.h> // Necessário para _bstr_t (conversão de wchar_t para string)
+#include "src/arquivadores/imageloader.hpp"
 #include "src/ui/painel/painel.hpp"
+#include "src/ui/painel/visualizador_de_projetos.hpp"
+#include <atomic>  // Para o uso de variáveis atômicas
 
 // contextos existentes
 std::map<GLFWwindow*, std::shared_ptr<BubbleUI::Contexto>> contextos;
 
 // Contexto padrão
 BubbleUI::Contexto* contexto_atual{ nullptr };
+std::condition_variable contexto_pronto;
+std::mutex mtx;
+
+bool BubbleUI::parar()
+{
+    return (contextos.size() == 0);
+}
 
 static std::string obterDiretorioDoc()
 {
@@ -88,16 +98,42 @@ void BubbleUI::novoContexto(GLFWwindow* window)
     contextos[window] = std::make_shared<Contexto>(window);
 }
 
-void BubbleUI::adicionarPainel(GLFWwindow* window, BubbleUI::Painel* painel)
+std::shared_ptr<BubbleUI::Contexto> BubbleUI::novoContexto(const char* nome_janela, const Vector4& pos_tam)
 {
-    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
-    painel->definirContexto(contextos[window]);
-    contextos[window]->paineis.emplace_back(painel);
+    size_t n_ctx = contextos.size();
+    // Inicia a criação do contexto em uma nova thread
+    std::thread([nome_janela, pos_tam]() mutable {
+        inicializarContextoNaThread(nome_janela, pos_tam);
+        }).detach();
+    // Espera pela modificação no map
+    std::unique_lock<std::mutex> lock(mtx);
+    contexto_pronto.wait(lock, [&]() { return contextos.size() > n_ctx; });
+
+    return prev(contextos.end())->second;
+}
+
+void BubbleUI::Contexto::adicionarVP(const bool preenchido)
+{
+    adicionarTarefa([this, preenchido]() {
+        auto vp = new BubbleUI::Paineis::VisualizadorDeProjetos(preenchido);
+        vp->definirContexto(contextos[glfwWindow]);
+        paineis.emplace_back(vp);
+        });
 }
 
 void BubbleUI::Contexto::atualizar()
 {
     glfwPollEvents();
+
+    // Executa as tarefas pendentes na fila
+    {
+        std::lock_guard<std::mutex> lock(mutexFilaTarefas);
+        while (!filaDeTarefas.empty()) {
+            auto tarefa = filaDeTarefas.front();
+            filaDeTarefas.pop();
+            tarefa();  // Executa a tarefa
+        }
+    }
 
     // Vetor de futures para armazenar as tarefas assíncronas de atualização dos paineis
     std::vector<std::future<void>> futures;
@@ -115,7 +151,7 @@ void BubbleUI::Contexto::atualizar()
 }
 void BubbleUI::Contexto::renderizar() const
 {
-    glClearColor(0.1, 0.1, 0.1, 1);
+    glClearColor(0.1F, 0.1F, 0.1F, 1.F);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, tamanho.width, tamanho.height);
 
@@ -131,11 +167,65 @@ void BubbleUI::Contexto::renderizar() const
 //    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
 //
 //}
-void BubbleUI::atualizarContexto(GLFWwindow* window)
-{
-    if (!window) abort();   // Janela inválida
-    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
 
-    contextos[window]->atualizar();
-    contextos[window]->renderizar();
+void BubbleUI::Contexto::adicionarTarefa(const std::function<void()>& tarefa) {
+    std::lock_guard<std::mutex> lock(mutexFilaTarefas);
+    filaDeTarefas.push(tarefa);
+}
+
+void BubbleUI::inicializarContextoNaThread(const char* nome_janela, const Vector4& pos_tam)
+{
+    // Inicializa o GLFW e verifica erros
+    if (!glfwInit()) {
+        std::cerr << "!";
+        return;
+    }
+
+    // Cria a janela e contexto OpenGL
+    auto window = glfwCreateWindow(pos_tam.w, pos_tam.h, nome_janela, NULL, NULL);
+    if (!window) {
+        glfwTerminate();
+        std::cerr << "!!";
+        return;
+    }
+
+    glfwSetWindowPos(window, pos_tam.x, pos_tam.y);
+    glfwMakeContextCurrent(window);
+
+    // Carrega o OpenGL usando GLAD
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        std::cerr << "!!!";
+        return;
+    }
+
+    // Define o ícone da janela, se necessário
+    auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
+    const GLFWimage icone = icone_.converterParaGlfw();
+    if (icone_.carregado) {
+        glfwSetWindowIcon(window, 1, &icone);
+    }
+
+    // Define o contexto e armazena no map
+     // Protege o acesso ao map
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        contextos[window] = std::make_shared<BubbleUI::Contexto>(window);
+    }
+
+    contexto_pronto.notify_one();
+
+    // Loop de renderização na mesma thread
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+
+        // Atualização e renderização do contexto atual
+        contextos[window]->atualizar();
+        contextos[window]->renderizar();
+    }
+
+    // Limpa recursos ao encerrar
+    contextos.erase(window);
+    glfwDestroyWindow(window);
 }

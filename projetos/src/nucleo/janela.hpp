@@ -8,12 +8,8 @@
 
 /* Inclusões */
 //#include "becore/src/nucleo/projeto.hpp"
-#include "becommons/src/arquivadores/imageloader.hpp"
 #include "bubbleui/src/ui/contexto/contexto.hpp"
-#include "bubbleui/src/ui/painel/visualizador_de_projetos.hpp"
-#include "bubbleui/src/ui/util/barra_menu.hpp"
 
 /* Declarações globais */
-GLFWwindow* janela{ nullptr };
 std::shared_ptr<BubbleUI::Contexto> contexto_ui{ nullptr };
 constexpr const char* title = "Bubble Engine - Project Manager - (C) 2024 Daniel Oliveira";

@@ -5,6 +5,7 @@
 #include "src/ui/painel/painel.hpp"
 
 using namespace BubbleUI::Widgets;
+bool teste{}, once{ false };
 
 Filtro::Filtro(const std::string& label) : label(label)
 {
@@ -23,6 +24,12 @@ void Filtro::atualizar()
     }
     text_box->atualizar();
     projetos->atualizar();
+
+    if (teste && !once)
+    {
+        once = true;
+        novoContexto("Novo projeto");
+    }
 }
 
 void Filtro::renderizar() const
@@ -37,12 +44,11 @@ void Filtro::renderizar() const
     text_box->renderizar();
     projetos->renderizar();
 }
-
 void Filtro::recarregar()
 {
     botoes.clear();
-    adiBotao("Novo Projeto");
-    adiBotao("Abrir Projeto");
+    adiBotao("Novo Projeto", &teste);
+    adiBotao("Abrir Projeto", nullptr);
     text_box = std::make_unique<CaixaTexto>(label);
     text_box->definirPai(this);
     projetos = std::make_unique<Opcoes>();
@@ -50,9 +56,9 @@ void Filtro::recarregar()
     projetos->recarregar();
 }
 
-void Filtro::adiBotao(const std::string& label)
+void Filtro::adiBotao(const std::string& label, bool* callback)
 {
-    botoes.push_back(std::make_unique<Widgets::Botao>(label, nullptr, false));
+    botoes.push_back(std::make_unique<Widgets::Botao>(label, callback, false));
     botoes[botoes.size() - 1]->definirPai(this);
     botoes[botoes.size() - 1]->quebrarLinha = false;
 }

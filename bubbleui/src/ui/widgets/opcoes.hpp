@@ -15,7 +15,7 @@ namespace BubbleUI
 			void atualizar() override;
 			void renderizar() const override;
 			void recarregar();
-			void adiBotao(const std::string& label, const std::string& icone);
+			void adiBotao(const std::string& label, const std::string& icone, bool* callback);
 		private:
 			std::vector<std::unique_ptr<Botao>> botoes;
 			std::vector<std::pair<std::string,std::string>> diretorios;

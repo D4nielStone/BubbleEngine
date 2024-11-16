@@ -59,6 +59,8 @@ void Opcoes::recarregar()
 {
     diretorios.clear();
     texto.definirPai(this);
+
+    if (!exists(contexto->dirDoProjeto)) create_directories(contexto->dirDoProjeto);
     // Itera sobre as pastas de projetos
     for (const auto& pasta : directory_iterator(contexto->dirDoProjeto))
     {
@@ -80,7 +82,7 @@ void Opcoes::recarregar()
     // Adiciona botão para cada projeto
     for (const auto& diretorio : diretorios)
     {
-        adiBotao(diretorio.first, diretorio.second);
+        adiBotao(diretorio.first, diretorio.second, nullptr);
     }
 
     texto.definirFonte(13, "assets/fontes/noto_sans/noto_sans.regular.ttf");
@@ -90,8 +92,8 @@ void Opcoes::recarregar()
     texto.definirTexto("" + std::to_string(botoes.size()) + " Projetos encontrados");
 }
 
-void Opcoes::adiBotao(const std::string& label,const std::string& icone)
+void Opcoes::adiBotao(const std::string& label,const std::string& icone, bool* callback)
 {
-    botoes.push_back(std::make_unique<Botao>(path(label).filename().string(), icone, nullptr, true));
+    botoes.push_back(std::make_unique<Botao>(path(label).filename().string(), icone, callback, true));
     botoes[botoes.size() - 1]->definirPai(this);
 }

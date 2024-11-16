@@ -17,7 +17,7 @@ namespace BubbleUI
 			void recarregar();
 		private:
 			std::vector<std::unique_ptr<Botao>> botoes;
-			void adiBotao(const std::string &label);
+			void adiBotao(const std::string &label, bool* callback);
 			std::unique_ptr<CaixaTexto> text_box{ nullptr };
 			std::string label;
 			std::unique_ptr<Opcoes> projetos{ nullptr };
