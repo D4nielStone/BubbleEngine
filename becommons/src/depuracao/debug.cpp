@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+// Copyright (c) 2024 Daniel Oliveira
 
 #include "debug.hpp"
 

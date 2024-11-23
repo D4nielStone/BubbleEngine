@@ -9,6 +9,12 @@ namespace BubbleUI {
     {
         retangulo = (rect);
     }
+    // Construtor
+    Painel::Painel(const char* n, const Vector4& rect) 
+    {
+        retangulo = (rect);
+        Nome = n;
+    }
 
 
     // Widgets
@@ -45,7 +51,7 @@ namespace BubbleUI {
             if (mostrar_aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
         }
         corrigirLimite();
-        Rect::paraNDC();
+        Rect::atualizar();
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
         menuDeContexto->atualizar();
@@ -60,8 +66,16 @@ namespace BubbleUI {
         posAtualizacao();
 
         arrastando = false;
+
+        corpo.definirRetangulo(obterRetangulo());
+        corpo.atualizar();
     }
 
+    void Painel::definirContexto(std::shared_ptr<Contexto> ctx, const char* nome, const Vector4& rect = { 0,0,0,0 })
+    {
+        Nome = nome;
+        configurar(ctx, rect);
+    }
     void Painel::definirContexto(std::shared_ptr<Contexto> ctx)
     {
         configurar(ctx);
@@ -88,10 +102,10 @@ namespace BubbleUI {
         glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Manter o valor do stencil
 
         // Desenhar o conteúdo dentro da área recortada
-        Moldura::renderizar();
+        corpo.renderizar();
 
         preRenderizacao();
-        if (mostrar_aba)aba->renderizar();
+        if (mostrar_aba && aba)aba->renderizar();
 
         // Renderiza os widgets
         for (const auto& widget : lista_widgets)
@@ -103,13 +117,26 @@ namespace BubbleUI {
         posRenderizacao();
     }
 
+    std::vector<std::shared_ptr<BubbleUI::Widget>> Painel::widgets() const
+    {
+        return lista_widgets;
+    }
+
+    void Painel::defCor(const Color& cor)
+    {
+        Rect::defCor(cor);
+        corpo.defCor(cor);
+    }
+
     // Configuração do Painel
     void Painel::configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect)
     {
+        retangulo = rect;
         contexto = ctx;
         widgetPadding = { 5, 5 };
         tamanhoMinimo = { 100, 15 };
 
+        Rect::contexto = ctx;
         // Inicializa bordas e moldura
         bordaCima = std::make_unique<Separador>(CIMA, this);
         bordaBaixo = std::make_unique<Separador>(BAIXO, this);
@@ -120,10 +147,11 @@ namespace BubbleUI {
         menuDeContexto= std::make_unique<Util::PopUp>(contexto);
         aba= std::make_unique<Aba>(this);
 
-        this->contexto = ctx;
         this->retangulo = retangulo;
         Rect::Rect(ctx, retangulo);
+        corpo.definirBuffers(ctx, retangulo);
         defCor({ 0.13f, 0.11f, 0.16f, 1.f });
+        corpo.defCor({ 0.13f, 0.11f, 0.16f, 1.f });
         borda_d = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
         borda_b = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
         borda_e = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });

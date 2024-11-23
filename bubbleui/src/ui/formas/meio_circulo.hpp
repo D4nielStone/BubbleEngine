@@ -1,3 +1,6 @@
+
+// Copyright (c) 2024 Daniel Oliveira
+
 #pragma once
 #include "glad/glad.h"
 #include "bubbleui.hpp"

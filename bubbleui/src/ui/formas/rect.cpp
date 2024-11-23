@@ -8,7 +8,7 @@ using namespace BubbleUI::Formas;
 
 Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
 {
-    definirBuffers();
+    definirBuffers(ctx, rect);
 }
 
 // Deve retornar o tamanho/posicao
@@ -92,8 +92,10 @@ Vector4f Rect::paraNDC()
     return coord_ndc;
 }
 // deve definir buffers do quadrado
-void Rect::definirBuffers()
+void Rect::definirBuffers(std::shared_ptr<Contexto> ctx, const Vector4& rect)
 {
+    contexto = ctx;
+    retangulo = rect;
     if (rect_vertex.carregado)    return;
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

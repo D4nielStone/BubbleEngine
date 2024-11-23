@@ -1,4 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
+
 #include "assets/shaders_na_memoria.hpp"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -124,7 +126,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    shaders.push_back({ {vertexPath, fragmentPath}, ID });
+    //shaders.push_back({ {vertexPath, fragmentPath}, ID });
 }
 
 void Shader::use() const {

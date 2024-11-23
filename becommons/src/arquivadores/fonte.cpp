@@ -38,10 +38,10 @@ GerenciadorDeFontes::~GerenciadorDeFontes()
 
 void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsigned int resolucao)
 {
-    if (fontes.find(nome_da_fonte) != fontes.end())
-    {
-        return; // Fonte já carregada
-    }
+    //if (fontes.find(nome_da_fonte) != fontes.end())
+    //{
+    //    return; // Fonte já carregada
+    //}
 
     FT_Face face{};
 

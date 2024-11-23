@@ -14,19 +14,19 @@ Botao::Botao(const std::string& label_shared, std::function<void()>funcao_click,
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    definirFonte(13, "noto_sans.bold.ttf");
+    definirFonte();
     letra_padding = {5, 5};
 }
 
 Botao::Botao(const std::string& label_shared, const std::string& image_path, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
-    quebrarLinha = true;
+    //quebrarLinha = true;
     espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 13;
-    definirFonte(13, "noto_sans.bold.ttf");
+    definirFonte();
     icon = std::make_unique<Imagem>(image_path, Vector2{60, 60});
     letra_padding = { 5, 5 };
 }
@@ -34,7 +34,7 @@ Botao::Botao(const std::string& label_shared, const std::string& image_path, boo
 Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
     : completo(completo), callback(callback)
 {
-    quebrarLinha = true;
+    //quebrarLinha = true;
     espessuraBorda = 3;
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
@@ -43,37 +43,52 @@ Botao::Botao(const std::string& label_shared, bool* callback, bool completo)
     letra_padding = { 5, 5 };
 }
 
+void BubbleUI::Widgets::Botao::definirPai(Moldura* pai)
+{
+    Texto::definirPai(pai);
+    if(icon)icon->definirPai(pai);
+}
+
 Botao::
 Botao(const std::string &label_shared, std::function<void()> function, const std::string& imagePath, bool completo) : completo(completo)
 ,   funcao_click_(function)
 {
     espessuraBorda = 3;
     quebrarLinha = true;
-    icon = std::make_unique<Imagem>(imagePath, Vector2{ 20, 20 });
+    icon = std::make_unique<Imagem>(imagePath, Vector2{ _Meu_iconsize, _Meu_iconsize });
     cor = { 1, 1, 1, 1 };
     frase = label_shared;
     resolucao = 12;
-    definirFonte(13, "noto_sans.bold.ttf");
+    definirFonte();
     letra_padding = {5, 5};
 }
 
 void Botao::atualizar()
 {
+    /// Verifica se o botao esta visivel
     if (posicao_antiga.y > painel->obterRetangulo().y + painel->obterRetangulo().h)
         return;
+
+    /// Caso possua um icone, atualise-o
     if (icon)
-    {
-        icon->definirPai(painel);
         icon->atualizar();
-    }
+    
+    /// Atualiza o texto
     Texto::atualizar();
+
+    /// Atualiza altura do botao
     if (icon) box_size.y = icon->obtRect().h;
-    if (quebrarLinha)painel->posicaoWidget = { (int)painel->obterRetangulo().x, (int)(box_pos.y + box_size.y) };
-    else { painel->posicaoWidget.x = letra_padding.x + box_pos.x + largura_texto + painel->widgetPadding.x; };
-    if(icon)
-    Moldura::definirPosicao({ static_cast<int>(box_pos.x - painel->widgetPadding.x*2 - icon->obterRetangulo().w), static_cast<int>(box_pos.y) });
+
+    if (quebrarLinha)
+    {
+        painel->posicaoWidget = { (int)painel->obterRetangulo().x, (int)(box_pos.y + box_size.y) };
+    }
     else
-    Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
+    {
+        painel->posicaoWidget.x = box_pos.x + largura_texto + painel->widgetPadding.x*3;
+    }
+    
+    Moldura::definirPosicao({ static_cast<int>(box_pos.x ), static_cast<int>(box_pos.y) });
     // largura se completo ou não
     if (completo)
     {
@@ -91,15 +106,24 @@ void Botao::atualizar()
    Moldura::atualizar();
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho = true;
     //calcula click
-    if (colisao.mouseEmCima() && inputs->mouseEnter == GLFW_PRESS && gatilho)
+    if (colisao.mouseEmCima())
     {
-        if (funcao_click_)
-        {
-            funcao_click_();
-            gatilho = false;
-        }
-        if (callback)*callback = true;
-       Moldura::defCor({ 0.39f, 0.32f, 0.46f, 1.f});
+       Moldura::defCor(ROXO_ESCURO_2);
+       if (inputs->mouseEnter == GLFW_PRESS && gatilho)
+       {
+           if (funcao_click_)
+           {
+               funcao_click_();
+               gatilho = false;
+       Moldura::defCor(ROXO_CLARO_2);
+           }else
+           if (callback)
+           {
+               *callback = true;
+               gatilho = false;
+       Moldura::defCor(ROXO_CLARO_2);
+           }
+       }
     }else
        Moldura::defCor(ROXO_ESCURO);
 }

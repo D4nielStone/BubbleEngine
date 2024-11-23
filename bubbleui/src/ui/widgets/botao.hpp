@@ -14,8 +14,10 @@ namespace BubbleUI
 			Botao(const std::string &label_shared, const std::string& imagePath, bool* callback = nullptr, bool completo = true);
 			Botao(const std::string &label_shared, bool* callback = nullptr, bool completo = true);
 			Botao() = default;
+			void definirPai(Moldura* pai) override;
 			void atualizar() override;
 			void renderizar() const override;
+			int _Meu_iconsize{ 15 };
 		private:
 			bool completo{}, gatilho{ false };
 			bool* callback{ nullptr };

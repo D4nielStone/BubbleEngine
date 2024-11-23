@@ -105,7 +105,7 @@
     <ClInclude Include="src\ui\widgets\filtro.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\widgets\opcoes.hpp">
+    <ClInclude Include="src\ui\widgets\arquivos.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
@@ -197,7 +197,7 @@
     <ClCompile Include="src\ui\widgets\filtro.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\widgets\opcoes.cpp">
+    <ClCompile Include="src\ui\widgets\arquivos.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>

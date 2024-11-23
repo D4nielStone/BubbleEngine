@@ -168,6 +168,7 @@
     <ClInclude Include="assets\fontes\noto_sans\noto_italic.hpp" />
     <ClInclude Include="assets\fontes\noto_sans\noto_regular.hpp" />
     <ClInclude Include="assets\fontes_na_memoria.hpp" />
+    <ClInclude Include="assets\imagems\folder.hpp" />
     <ClInclude Include="assets\imagems\icon.hpp" />
     <ClInclude Include="assets\imagems\banner.hpp" />
     <ClInclude Include="assets\shaders\imagem_frag.hpp" />

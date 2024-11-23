@@ -165,7 +165,7 @@ Vector4f Texto::paraNDC(const Vector4& coord)
 }
 
 // Configura o texto com a fonte e resolução especificada
-void Texto::definirFonte(unsigned int resolucao, std::string font_path)
+void Texto::definirFonte(unsigned int resolucao, const std::string& font_path)
 {
     nome_da_fonte = font_path;
     Bubble::Arquivadores::GerenciadorDeFontes::obterInstancia().carregarFonte(font_path, resolucao); // Carrega a fonte

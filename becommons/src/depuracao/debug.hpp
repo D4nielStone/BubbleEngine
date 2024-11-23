@@ -1,3 +1,6 @@
+
+// Copyright (c) 2024 Daniel Oliveira
+
 #ifndef DEBUG_H
 #define DEBUG_H
 #include "becommons.hpp"

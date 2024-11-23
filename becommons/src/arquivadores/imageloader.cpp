@@ -14,7 +14,8 @@ using namespace Bubble::Arquivadores;
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
 {
     {"icon.ico", std::pair(icon_png, icon_png_len)},
-    {"banner.png", std::pair(banner_png, banner_png_len)}
+    {"banner.png", std::pair(banner_png, banner_png_len)},
+    {"folder.png", std::pair(folder_png, folder_png_len)}
 };
 
 ImageLoader::ImageLoader()
@@ -47,16 +48,16 @@ void ImageLoader::flipVertical()
 }
 void ImageLoader::carregarImagem(const std::string& filepath)
 {
-    auto it = imagens_carregadas.find(filepath);
-    if (it != imagens_carregadas.end())
-    {
-        data = it->second->data;
-        channels = it->second->channels;
-        width = it->second->width;
-        height = it->second->height;
-        carregado = true;
-        return;
-    }
+    //auto it = imagens_carregadas.find(filepath);
+    //if (it != imagens_carregadas.end())
+    //{
+    //    data = it->second->data;
+    //    channels = it->second->channels;
+    //    width = it->second->width;
+    //    height = it->second->height;
+    //    carregado = true;
+    //    return;
+    //}
     // Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
      // Inicializa o FreeImage  
     FreeImage_Initialise();

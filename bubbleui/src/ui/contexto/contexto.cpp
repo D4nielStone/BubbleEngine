@@ -1,6 +1,6 @@
+
 // Copyright (c) 2024 Daniel Oliveira
 
-#include <glad/glad.h>
 #include "contexto.hpp"
 #include <shlobj.h> // Necessário para SHGetKnownFolderPath
 #include <map>
@@ -8,12 +8,33 @@
 #include <thread>
 #include <comdef.h> // Necessário para _bstr_t (conversão de wchar_t para string)
 #include "src/ui/painel/painel.hpp"
+#include <functional>
+#include "src/arquivadores/shader.hpp"
+#include "src/arquivadores/imageloader.hpp"
+#include "src/ui/painel/editor.hpp"
+#include "src/ui/painel/depurador.hpp"
+#include <windows.h>
+#include <memory>
+#include <queue>
 
 // contextos existentes
 std::map<GLFWwindow*, std::shared_ptr<BubbleUI::Contexto>> contextos;
 
 // Contexto padrão
 BubbleUI::Contexto* contexto_atual{ nullptr };
+
+std::queue<std::function<void()>> tarefas;
+
+std::shared_ptr<BubbleUI::Painel> BubbleUI::Contexto::painel(const char* nome_painel, const Vector4& rect)
+{
+    std::shared_ptr<Painel> _Pnl_tmp = std::make_shared<Painel>(); // Shared ownership for temporary panel
+    tarefa([this, rect, nome_painel, _Pnl_tmp]() mutable
+        {
+            _Pnl_tmp->definirContexto(contextos[glfwWindow], nome_painel, rect);
+            paineis.emplace_back(_Pnl_tmp.get()); // Store in the collection
+        });
+    return _Pnl_tmp;
+}
 
 static std::string obterDiretorioDoc()
 {
@@ -47,7 +68,7 @@ BubbleUI::Contexto::Contexto(GLFWwindow* window)
     cursor_normal = glfwCreateStandardCursor(GLFW_CURSOR_NORMAL);
     cursor_texto = glfwCreateStandardCursor(GLFW_IBEAM_CURSOR);
     cursor = cursor_normal;
-    dirDoProjeto = obterDiretorioDoc() + "/Bubble Engine/Projetos";
+    dirDoProjeto = obterDiretorioDoc() + R"(\Bubble Engine\Projetos)";
     if (window != nullptr) definirJanela(window);
 }
 
@@ -63,7 +84,6 @@ void BubbleUI::Contexto::definirJanela(GLFWwindow* janela)
 {
     glfwWindow = janela;
     inputs = std::make_shared<Bubble::Inputs::Inputs>();
-    contexto_atual = this;
 
     // definir inputs
     glfwSetWindowUserPointer(glfwWindow, inputs.get());
@@ -86,13 +106,17 @@ void BubbleUI::novoContexto(GLFWwindow* window)
 {
     if (!window) abort();   // Janela inválida
     contextos[window] = std::make_shared<Contexto>(window);
+    contexto_atual = contextos[window].get();
+    rect_vertex.carregado = false;
+    linha_vertex.carregado = false;
+    halfcircle_vertex.carregado = false;
 }
 
-void BubbleUI::adicionarPainel(GLFWwindow* window, BubbleUI::Painel* painel)
+void BubbleUI::adicionarPainel(Contexto* contexto, BubbleUI::Painel* painel)
 {
-    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
-    painel->definirContexto(contextos[window]);
-    contextos[window]->paineis.emplace_back(painel);
+    if (!contexto) return;
+    painel->definirContexto(contextos[contexto->glfwWindow]);
+    contexto->paineis.emplace_back(painel);
 }
 
 void BubbleUI::Contexto::atualizar()
@@ -123,6 +147,15 @@ void BubbleUI::Contexto::renderizar() const
         painel->renderizar();
 
     glfwSwapBuffers(glfwWindow);
+
+    /**
+    * Executa as funcoes na thread principal
+    */
+    while (!tarefas.empty()) {
+        auto &tarefa = tarefas.front();
+            tarefa();
+        tarefas.pop();
+    }
 }
 
 //static void BubbleUI::renderizarContexto(GLFWwindow* window)
@@ -133,9 +166,55 @@ void BubbleUI::Contexto::renderizar() const
 //}
 void BubbleUI::atualizarContexto(GLFWwindow* window)
 {
-    if (!window) abort();   // Janela inválida
-    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
+    Contexto* ctx{ nullptr };
+    if (!window) ctx = contexto_atual;   // Janela inválida
+    else
+    if (contextos.find(window) == contextos.end()) ctx = contexto_atual; // Não possui contexto para essa janela
 
-    contextos[window]->atualizar();
-    contextos[window]->renderizar();
+    if (!ctx) abort(); /// Contexto inválido
+    ctx->atualizar();
+    ctx->renderizar();
+}
+
+BubbleUI::Contexto* BubbleUI::janela(const char* title)
+{
+        // inicia glfw
+        if (!glfwInit())
+            return nullptr;
+
+        GLFWwindow* shared{ NULL };
+
+        auto janela = glfwCreateWindow(800, 400, title, NULL, shared);
+        if (!janela) return nullptr;
+
+        if(!shared)glfwMakeContextCurrent(janela);
+
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        {
+            return nullptr;
+        }
+
+        // define o ícone da janela
+        auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
+        const GLFWimage icone = icone_.converterParaGlfw();
+
+        if (icone_.carregado)   glfwSetWindowIcon(janela, 1, &icone);
+
+        // Cria novo contexto ui
+        BubbleUI::novoContexto(janela);
+
+        return contextos[janela].get();
+}
+
+bool BubbleUI::fim()
+{
+    if (contexto_atual)
+        return glfwWindowShouldClose(contexto_atual->glfwWindow);
+    else
+        abort();
+}
+
+void BubbleUI::tarefa(const std::function<void()> funcao)
+{
+    tarefas.push(funcao);
 }

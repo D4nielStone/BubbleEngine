@@ -1,3 +1,6 @@
+
+// Copyright (c) 2024 Daniel Oliveira
+
 #pragma once
 #include "glad/glad.h"
 #include "bubbleui.hpp"
@@ -21,10 +24,11 @@ namespace BubbleUI
 			void adiTam(const Vector2 &tam);
 			void adiPos(const Vector2 &tam);
 			virtual void definirRetangulo(const Vector4 &rect);
-			void defCor(const Color &cor);
+			virtual void defCor(const Color &cor);
 			void defCor(Color* cor);
 			virtual void atualizar();
 			virtual void renderizar() const;
+			void definirBuffers(std::shared_ptr<Contexto> ctx, const Vector4& rect = {});
 		protected:
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Vector4 retangulo, tamanhoAnterior;
@@ -33,7 +37,6 @@ namespace BubbleUI
 			Vector4f coord_ndc;
 			Size tamanhoDoContextoAnterior;
 			Shader shader{ Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
-			void definirBuffers();
 		};
 	}
 }

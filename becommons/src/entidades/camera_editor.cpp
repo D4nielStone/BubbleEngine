@@ -69,7 +69,7 @@ void CameraEditor::atualizar()
         // Rotação
         if (inputs->isKeyPressed(Key::UP))
         {
-            pitch += static_cast<double>(sensibilidadeDeRotacao * deltaTime);
+            pitch += static_cast<double>(sensibilidadeDeRotacao) * deltaTime;
             if (pitch > 89.0f)
                 pitch = 89.0f;
             atualizarDirecao();
