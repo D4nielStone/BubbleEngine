@@ -19,6 +19,7 @@ namespace Bubble {
             Arquivo3d(const std::string& caminho);
             Arquivo3d(const std::wstring& caminho);        // Construtor com caminho em std::wstring
             void carregar();
+            bool carregado() const;
             std::string nome() const;               // Método para obter o nome da cena
         private:
             const aiScene* cena;                    // Ponteiro para a cena carregada

@@ -16,7 +16,7 @@ namespace BubbleUI
 			Botao() = default;
 			void definirPai(Moldura* pai) override;
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			int _Meu_iconsize{ 15 };
 		private:
 			bool completo{}, gatilho{ false };

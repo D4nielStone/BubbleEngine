@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "arvore.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -22,6 +22,7 @@ Arvore::Arvore(std::shared_ptr<std::string> label, bool* retorno, const std::str
     : retorno(retorno)
 {
     quebrarLinha = true;
+    espessuraBorda = 2;
     icone = std::make_unique<Imagem>(imagePath, Vector2{20, 20});
     icone->padding = true;
 
@@ -52,6 +53,7 @@ Arvore::Arvore(const std::string& label, bool* retorno, const std::string& image
 Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 {
     quebrarLinha = true;
+    espessuraBorda = 2;
     label_shared = l;
 
     frase = "";
@@ -67,30 +69,24 @@ Arvore::Arvore(std::shared_ptr<std::string>l, bool* retorno) : retorno(retorno)
 void Arvore::atualizar()
 {
     // Atualiza a moldura
-    Moldura::atualizar();
-    // Salva o padding antigo do pai
-    const int padding_antigoy = painel->widgetPadding.y;
-
-    // Ajusta temporariamente o padding vertical do pai para 0
+    auto p = painel->widgetPadding.y;
     painel->widgetPadding.y = 0;
-
     // Se houver uma árvore pai, ajusta o padding horizontal
-    if (arvore_pai)
-    {
-        painel->posicaoWidget.x = arvore_pai->box_pos.x + 5.F;
-    }
-
-    if(icone)
-    icone->atualizar();
-
-    // Atualiza o texto baseado no ponteiro
+    if (arvore_pai)   painel->posicaoWidget.x = arvore_pai->box_pos.x + 5.F;
+    //
+    // Se houver icone, o-atualiza
+    if(icone)   icone->atualizar();
+    //
+    // Atualiza o texto baseado no ponteiro caso seja != nullptr
     if (label_shared)
+    {
+        // Se aberto
         if (aberto)
         {
             frase = (*label_shared);
             renderizar_texto(frase);
-
-            if (!filhos.empty()) painel->posicaoWidget.y += painel->widgetPadding.y;
+            // Atualiza os filhos
+            if (!filhos.empty()) painel->posicaoWidget.y += painel->widgetPadding.y; //<<Reajuste do padding
             for (const auto& filho : filhos)
             {
                 filho->atualizar();
@@ -101,7 +97,9 @@ void Arvore::atualizar()
             frase = (*label_shared);
             renderizar_texto(frase);
         }
+    }
     else
+    {
         if (aberto)
         {
             renderizar_texto(frase);
@@ -115,20 +113,19 @@ void Arvore::atualizar()
         {
             renderizar_texto(frase);
         }
+    }
     // Restaura o padding original do pai
-    painel->widgetPadding.y = padding_antigoy;
     painel->posicaoWidget.x = painel->obterRetangulo().x;
-
+    //
     // Define o retângulo de colisão para a detecção de mouse
     colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
     definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
     definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
-
-
-    // Reseta gatilho de click
-    if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true;
-
+    //
+    //
+    if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true; //<< Reseta gatilho de click
+    
     // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara
     if (painel->arvoreCor.r == 0.1f)
     {
@@ -141,10 +138,11 @@ void Arvore::atualizar()
         cor = ROXO_CLARO;
         painel->arvoreCor = ROXO_CLARO;
     }
-
+    //
     Moldura::defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
-    if (!colisao.mouseEmCima() && painel->selecionado)
+    if(!painel->selecionado)return;
+    if (!colisao.mouseEmCima())
     {
         if (inputs->mouseEnter == GLFW_PRESS)
         {
@@ -152,7 +150,7 @@ void Arvore::atualizar()
                 *retorno = false;
         }
     }
-    else if (painel->selecionado)
+    else
     {
         {
             // Se o mouse estiver sobre o widget, altera a cor da moldura
@@ -165,9 +163,11 @@ void Arvore::atualizar()
             }
         }
     }
+    painel->widgetPadding.y = p;
+    Moldura::atualizar();
 }
 // Método para renderizar o widget Arvore na tela
-void Arvore::renderizar() const
+void Arvore::renderizar()
 {
     // Renderiza a moldura utilizando triângulos
     if (Moldura::obterRetangulo().y > box_pos.y + box_size.y)return;
@@ -194,6 +194,7 @@ void Arvore::definirPai(Formas::Moldura* painel)
 {
     // Chama o método de base para associar o painel ao texto
     Texto::definirPai(painel);
+    definirFonte();
     inputs = painel->obterContexto()->inputs;
 
     if (icone)

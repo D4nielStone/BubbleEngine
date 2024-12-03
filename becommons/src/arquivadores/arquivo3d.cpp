@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "arquivo3d.hpp"
 #include "src/depuracao/debug.hpp"
@@ -64,7 +64,7 @@ std::vector<Textura> Arquivo3d::processarTextura(aiMaterial* mat, aiTextureType 
 void Arquivo3d::carregar() {
     for (const auto& arquivo : arquivos) {      // Re-utiliza se já carregado
         if (arquivo.second == PathCompleto) {
-            Debug::emitir(Debug::Alerta, "Arquivo 3D já existente, re-utilizando");
+        std::cout << "Arquivo 3D já existente, re-utilizando\n";
             RootNode = arquivo.first;
             Caminho = arquivo.second;
             return;
@@ -88,6 +88,11 @@ void Arquivo3d::carregar() {
 
     RootNode = processarNos(cena->mRootNode, 0); // Adiciona rootnode com seus filhos
     arquivos.push_back(std::make_pair(RootNode, PathCompleto));
+}
+
+bool Bubble::Arquivadores::Arquivo3d::carregado() const
+{
+    return foi_carregado;
 }
 
 glm::mat4& ConvertToGLMMat4(const aiMatrix4x4& aiMat) {
@@ -156,6 +161,9 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
     }
     
     Debug::emitir("Importer", "Node: " + std::string(depth, ' ') + node_final.nome);
+
+    foi_carregado = true;
+
     return node_final;
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "scenemanager.hpp"
 #include "src/depuracao/debug.hpp"
@@ -29,7 +29,7 @@ std::shared_ptr<Scene> SceneManager::cenaAtual() const {
         return scenes[currentSceneIndex];
     else
     {
-        Debug::emitir(Debug::Erro, "Não tem cena atual");
+        Debug::emitir(Erro, "Não tem cena atual");
         return nullptr;
     }
 }
@@ -39,12 +39,12 @@ std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
     //Cria cena
     std::shared_ptr<Scene> scene = std::make_shared<Scene>(Nome.c_str());
 
-    scene->camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
-    scene->camera_editor.olharPara({0, 0, 0});
-    scene->criarEntidade("assets/primitivas/modelos/sphere.obj");
-    scene->criarEntidade("assets/primitivas/modelos/cube.obj");
-    scene->Entidades[1]->obterFilhos()[0]->obterTransformacao()->definirPosicao({0, -1, 0});
-    scene->Entidades[1]->obterFilhos()[0]->obterTransformacao()->definirEscala({2, 0.25, 2});
+    Cena::camera_editor.transformacao->definirPosicao({ 3, 3, 3 });
+    Cena::camera_editor.olharPara({0, 0, 0});
+    auto esfera = scene->criarEntidade("assets/primitivas/modelos/sphere.obj");
+    auto cubo = scene->criarEntidade("assets/primitivas/modelos/cube.obj");
+    if(!esfera->obterFilhos().empty())esfera->obterFilhos()[0]->obterTransformacao()->definirPosicao({0, -1, 0});
+    if (!cubo->obterFilhos().empty())cubo->obterFilhos()[0]->obterTransformacao()->definirEscala({2, 0.25, 2});
 
     return scene;
 }
@@ -75,18 +75,18 @@ void SceneManager::adicionarCena(std::shared_ptr<Scene> scene)
 // Deve carregar cena baseado no index
 void SceneManager::carregarCena(int sceneIndex) {
     if (sceneIndex >= 0 && sceneIndex < scenes.size()) {
-        scenes[sceneIndex]->camera_editor.inputs = inputs;
+        camera_editor.inputs = inputs;
         currentSceneIndex = sceneIndex;
 
         std::string msg("Carregando cena ");
         std::string soma = msg + std::to_string(currentSceneIndex);
 
-        Debug::emitir(Debug::Tipo::Mensagem, soma.c_str());
+        std::cout << soma.c_str();
 
         scenes[currentSceneIndex]->carregar();
     }
     else {
-        Debug::emitir(Debug::Tipo::Erro, "índice da cena não é válido");
+        Debug::emitir(Erro, "índice da cena não é válido");
     }
 }
 // Fila de tarefas para o thread principal
@@ -95,26 +95,27 @@ std::mutex filaMutex;
 // Deve renderizar cena atual
 void SceneManager::renderizarCenaAtual() const
 {
-    // Processar fila de tarefas na thread principal
-    while (!filaDeTarefas.empty()) {
-        filaDeTarefas.front()(); // Executar a tarefa
-        filaDeTarefas.pop();      // Remover a tarefa da fila
-    }
     if (!cenaAtual()) return;
-    glEnable(GL_DEPTH_TEST);
-    cenaAtual()->camera_editor.desenharFrame(viewportEditor);
-    cenaAtual()->renderizar(Editor);
+
+    camera_editor.desenharFrame(viewportEditor);
+        cenaAtual()->renderizar(Editor);
     if (cenaAtual()->camera_principal)
     {
         cenaAtual()->camera_principal->desenharFrame(viewportJogo);
         cenaAtual()->renderizar(Game);
     }
-    // Desligar framebuffer
+    //Desligar framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 // Deve atualizar cena atual
 void SceneManager::atualizarCenaAtual() const
 {
+
+    // Processar fila de tarefas na thread principal
+    while (!filaDeTarefas.empty()) {
+        filaDeTarefas.front()(); // Executar a tarefa
+        filaDeTarefas.pop();      // Remover a tarefa da fila
+    }
     float aspectoDoEditor, aspectoDoJogo;
     if (viewportEditor.h != 0)
         aspectoDoEditor = static_cast<float>(viewportEditor.w) / viewportEditor.h;
@@ -126,7 +127,7 @@ void SceneManager::atualizarCenaAtual() const
     else
         aspectoDoJogo= 1;
     if (cenaAtualIdx() != -1) {
-        camera_editor_atual = &cenaAtual()->camera_editor;
+        camera_editor_atual = &camera_editor;
         cenaAtual()->atualizar(aspectoDoEditor, aspectoDoJogo);
     }
 }
@@ -142,10 +143,8 @@ int SceneManager::cenaAtualIdx() const {
 void SceneManager::defIputs(std::shared_ptr<Inputs::Inputs> inp)
 {
     inputs = inp;
-    for (auto& scene : scenes)
-    {
-        scene->camera_editor.inputs = inp;
-    }
+        camera_editor.inputs = inp;
+    
 }
 
 Bubble::Entidades::CameraEditor* Bubble::Cena::CameraEditorAtual()
@@ -166,7 +165,9 @@ void Bubble::Cena::definirSceneManager(std::shared_ptr<SceneManager> scene_manag
 void Bubble::Cena::criarEntidade(std::string path)
 {
     if (!scenemanager)return;
-    scenemanager->cenaAtual() && scenemanager->cenaAtual()->criarEntidade(path);
+    std::cout << "Cena: criando entidade com " << path << "\n";
+    if (scenemanager->cenaAtual())filaDeTarefas.push([path]() {scenemanager->cenaAtual()->criarEntidade(path); });
+    std::cout << "B\n";
 }
 
 void Bubble::Cena::criarCamera(glm::vec3 posicao)

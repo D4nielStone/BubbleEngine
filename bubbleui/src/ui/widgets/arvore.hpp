@@ -13,7 +13,7 @@ namespace BubbleUI
 			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno);
 			Arvore(std::shared_ptr<std::string>label_shared, bool* retorno, const std::string &imagePath);
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			void definirPai(Formas::Moldura* painel) override;
 			void adiFilho(std::shared_ptr<Widget> filho);
 		private:

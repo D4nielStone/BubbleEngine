@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 /**
  * @file arquivos.hpp
@@ -45,7 +45,7 @@ namespace BubbleUI
 			 * Este método é responsável por desenhar o widget e seus componentes
 			 * na tela.
 			 */
-			void renderizar() const override;
+			void renderizar() override;
 
 			/**
 			 * @brief Recarrega os arquivos e pastas de um diretório.

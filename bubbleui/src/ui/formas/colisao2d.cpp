@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "colisao2d.hpp"
 #include "src/depuracao/debug.hpp"

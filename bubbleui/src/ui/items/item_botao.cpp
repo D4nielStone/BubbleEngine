@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "item_botao.hpp"
 
@@ -33,7 +33,7 @@ void BubbleUI::Items::Botao::atualizar()
 		gatilho = false;
 	}
 }
-void BubbleUI::Items::Botao::renderizar() const
+void BubbleUI::Items::Botao::renderizar()
 {
 	ItemMenu::renderizar();
 }

@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "botao.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -128,7 +128,7 @@ void Botao::atualizar()
        Moldura::defCor(ROXO_ESCURO);
 }
 
-void Botao::renderizar() const
+void Botao::renderizar()
 {
 
     if (obterRetangulo().y > painel->obterRetangulo().y + painel->obterRetangulo().h)

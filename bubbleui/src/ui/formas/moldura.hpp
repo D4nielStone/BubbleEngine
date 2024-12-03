@@ -13,7 +13,7 @@ namespace BubbleUI
 			Moldura(std::shared_ptr<Contexto>, const Vector4& retangulo = {0, 0, 100, 20});
 			Moldura() = default;
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			void definirTamanho(const Vector2& tam)	override;
 			void definirPosicao(const Vector2& pos)	override;
 			void definirRetangulo(const Vector4& rect) override;
@@ -28,7 +28,7 @@ namespace BubbleUI
 			virtual void preAtualizacao() {};
 			virtual void posAtualizacao() {};
 			// Define a espessura da borda
-			int espessuraBorda{ 5 };
+			int espessuraBorda{ 3 };
 			void configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4& retangulo);
 			Vector4 retangulo_completo{};
 			std::unique_ptr<Rect>

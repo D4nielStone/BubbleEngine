@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 /**
  * @file contexto.hpp
@@ -88,7 +88,7 @@ namespace BubbleUI
          *
          * Chama as operações de renderização associadas aos painéis e widgets registrados.
          */
-        void renderizar() const;
+        void renderizar();
 
         /**
          * @brief Cria ou obtém um painel associado ao contexto.
@@ -126,10 +126,12 @@ namespace BubbleUI
 
     /**
      * @brief Atualiza o contexto associado a uma janela GLFW.
-     *
-     * @param window Ponteiro para a janela GLFW. Se for = a nullptr, atualiza o contexto mais recente.
      */
-    void atualizarContexto(GLFWwindow* window = nullptr);
+    void atualizarContexto();
+    /**
+     * @brief Renderiza o contexto associado a uma janela GLFW.
+     */
+    void renderizarContexto();
 
     /**
     * @brief Cria uma nova janela GLFW
@@ -138,7 +140,7 @@ namespace BubbleUI
     * @param title Titulo da janela
     * @return Retorna o ponteiro do contexto
     */
-    Contexto* janela(const char* title);
+    std::shared_ptr<BubbleUI::Contexto> janela(const char* title);
 
     /**
     * @brief Flag para atualizar contexto

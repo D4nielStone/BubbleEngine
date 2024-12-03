@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #pragma once
 #include "glad/glad.h"
@@ -27,7 +27,7 @@ namespace BubbleUI
 			void defCor(const Color &cor);
 			void defCor(Color* cor);
 			virtual void atualizar();
-			virtual void renderizar() const;
+			virtual void renderizar() ;
 		protected:
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Vector4 retangulo, tamanhoAnterior;

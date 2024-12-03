@@ -17,7 +17,7 @@ namespace BubbleUI
             CaixaTexto(std::string* buffer,const std::string &mensagem);
 
             void atualizar() override;
-            void renderizar() const override;
+            void renderizar() override;
             void definirPai(Formas::Moldura* painel) override;
         private:
             void processarEntrada(char c);

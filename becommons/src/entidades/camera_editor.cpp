@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "camera_editor.hpp"
 #include "src/depuracao/debug.hpp"
@@ -20,6 +20,8 @@ CameraEditor::CameraEditor(std::shared_ptr<Bubble::Inputs::Inputs> input)
     zFar = 300.0f;
     transformacao = std::make_shared<Componentes::Transformacao>();
     atualizarDirecao();
+    matrizVisualizacao = glm::lookAt(transformacao->obterPosicao(), transformacao->obterPosicao() + frente, { 0, 1, 0 });
+
 }
 CameraEditor::CameraEditor()
     : velocidadeDeMovimento(100.f), sensibilidadeDeRotacao(100.f),
@@ -30,6 +32,7 @@ CameraEditor::CameraEditor()
     zFar = 300.0f;
     transformacao = std::make_shared<Componentes::Transformacao>();
     atualizarDirecao();
+    matrizVisualizacao = glm::lookAt(transformacao->obterPosicao(), transformacao->obterPosicao() + frente, { 0, 1, 0 });
 }
 void CameraEditor::atualizar()
 {
@@ -112,13 +115,6 @@ void CameraEditor::atualizar()
 }
 void Bubble::Entidades::CameraEditor::renderizar() const
 {
-    shader.use();
-    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
-    shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
-    shader.setVec3("viewPos",
-        transformacao->obterPosicao().x,
-        transformacao->obterPosicao().y,
-        transformacao->obterPosicao().z);
 }
 void CameraEditor::configurar()
 {

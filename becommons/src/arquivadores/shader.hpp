@@ -17,7 +17,7 @@ private:
     std::string msg_;
 };
 
-class BECOMMONS_DLL_API Shader
+class Shader
 {
 public:
     // the program ID
@@ -27,7 +27,7 @@ public:
     Shader() { compilar("assets/shaders/phong.vert", "assets/shaders/phong.frag"); };
     Shader(const char* vertexPath, const char* fragmentPath);
     // use/activate the shader
-    void use() const;
+    void use();
     // utility uniform functions
     void compilar(const char* vertexPath, const char* fragmentPath);
     void setBool(const std::string& name, const bool &value) const;
@@ -41,3 +41,4 @@ public:
     bool checkCompileErrors(unsigned int shader, const std::string& type);
     bool checkLinkErrors(unsigned int shader);
 };
+inline Shader* shader_atual{ nullptr };

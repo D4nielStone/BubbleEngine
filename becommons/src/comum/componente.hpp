@@ -1,10 +1,10 @@
 #pragma once
 #include "becommons.hpp"
-#include "src/arquivadores/shader.hpp"
 #include <rapidjson/document.h>
 #include <rapidjson/allocators.h>
 #include <any>
 #include <variant>
+#include <vector>
 
 namespace Bubble {
 	namespace Entidades {
@@ -14,7 +14,6 @@ namespace Bubble {
 
 		class BECOMMONS_DLL_API Componente {
 		protected:
-			Shader shader;
 			const char* Nome = "componente_base";
 			bool carregadov{ false };
 		public:
@@ -27,9 +26,6 @@ namespace Bubble {
 			void definirPai(Bubble::Entidades::Entidade* ent) 
 			{
 				meuObjeto = ent;
-			}
-			void definirShader(const Shader& shade) {
-				shader = shade;
 			}
 			virtual rapidjson::Value serializar(rapidjson::Document* doc) const
 			{

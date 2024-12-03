@@ -13,7 +13,7 @@
 #include <future>
 namespace Bubble {
 	namespace Entidades {
-		class BECOMMONS_DLL_API Entidade {
+		class BECOMMONS_DLL_API Entidade : public std::enable_shared_from_this<Entidade> {
 		public:
 			Entidade(const Arquivadores::Arquivo3d& arquivo_objeto);
 			Entidade(const char* name);

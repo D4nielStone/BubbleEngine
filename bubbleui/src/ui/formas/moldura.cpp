@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "moldura.hpp"
 
@@ -90,7 +90,7 @@ void BubbleUI::Formas::Moldura::atualizar()
 	posicaoWidget = { (int)retangulo_completo.x,(int)retangulo_completo.y };
 }
 
-void BubbleUI::Formas::Moldura::renderizar() const
+void BubbleUI::Formas::Moldura::renderizar()
 {
 	Rect::renderizar();
 	if (ocultar_linhas)return;

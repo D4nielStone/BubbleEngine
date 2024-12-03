@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "contexto.hpp"
 #include <shlobj.h> // Necessário para SHGetKnownFolderPath
@@ -93,12 +93,6 @@ void BubbleUI::Contexto::definirJanela(GLFWwindow* janela)
     glfwSetCharCallback(glfwWindow, charCallback);
     glfwSetFramebufferSizeCallback(glfwWindow, callback_size);
 
-    // ativa blend
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    // ativa o stencil
-    glEnable(GL_STENCIL_TEST);
-
     tamanho = {800, 400};
 }
 
@@ -126,25 +120,28 @@ void BubbleUI::Contexto::atualizar()
     // Vetor de futures para armazenar as tarefas assíncronas de atualização dos paineis
     std::vector<std::future<void>> futures;
 
+    cursor = cursor_normal;
     // Inicia cada painel->atualizar() em uma thread separada
     for (auto& painel : paineis) {
-        futures.push_back(std::async(std::launch::async, [&painel]() {
+        //futures.push_back(std::async(std::launch::async, [&painel]() {
             painel->atualizar();
-            }));
+        //  }));
     }
 
     for (auto& future : futures) {
         future.wait();
     }
 }
-void BubbleUI::Contexto::renderizar() const
+void BubbleUI::Contexto::renderizar()
 {
-    glClearColor(0.1, 0.1, 0.1, 1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClearColor(0.1, 0.1, 0.1, 1);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, tamanho.width, tamanho.height);
 
     for (const auto& painel : paineis)
         painel->renderizar();
+
+    glfwSetCursor(glfwWindow, cursor);
 
     glfwSwapBuffers(glfwWindow);
 
@@ -164,19 +161,33 @@ void BubbleUI::Contexto::renderizar() const
 //    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
 //
 //}
-void BubbleUI::atualizarContexto(GLFWwindow* window)
+void BubbleUI::atualizarContexto()
 {
-    Contexto* ctx{ nullptr };
-    if (!window) ctx = contexto_atual;   // Janela inválida
-    else
-    if (contextos.find(window) == contextos.end()) ctx = contexto_atual; // Não possui contexto para essa janela
 
+    Contexto* ctx{ nullptr };
+    ctx = contexto_atual;   // Janela inválida
     if (!ctx) abort(); /// Contexto inválido
     ctx->atualizar();
-    ctx->renderizar();
 }
 
-BubbleUI::Contexto* BubbleUI::janela(const char* title)
+void BubbleUI::renderizarContexto()
+{
+
+    Contexto* ctx{ nullptr };
+    ctx = contexto_atual;   // Janela inválida
+    if (!ctx) abort(); /// Contexto inválido
+    // ativa o stencil
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+    glDisable(GL_CULL_FACE);
+
+    ctx->renderizar();
+
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+}
+
+std::shared_ptr<BubbleUI::Contexto> BubbleUI::janela(const char* title)
 {
         // inicia glfw
         if (!glfwInit())
@@ -201,9 +212,13 @@ BubbleUI::Contexto* BubbleUI::janela(const char* title)
         if (icone_.carregado)   glfwSetWindowIcon(janela, 1, &icone);
 
         // Cria novo contexto ui
+
+        // ativa blend
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         BubbleUI::novoContexto(janela);
 
-        return contextos[janela].get();
+        return contextos[janela];
 }
 
 bool BubbleUI::fim()

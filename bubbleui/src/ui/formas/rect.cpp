@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "rect.hpp"
 #include "src/depuracao/debug.hpp"
@@ -71,7 +71,7 @@ void Rect::atualizar()
 }
 
 // Deve renderizar
-void Rect::renderizar() const
+void Rect::renderizar() 
 {
     shader.use();
     shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
@@ -100,7 +100,7 @@ void Rect::definirBuffers(std::shared_ptr<Contexto> ctx, const Vector4& rect)
     
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        Debug::emitir(Debug::Erro, "Glad");
+        Debug::emitir(Erro, "Glad");
         return;
     }
 

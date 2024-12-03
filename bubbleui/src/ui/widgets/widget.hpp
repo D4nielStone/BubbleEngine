@@ -27,7 +27,7 @@ namespace BubbleUI
 	public:
 		Widget() = default;
 		virtual void atualizar() = 0;
-		virtual void renderizar() const = 0;
+		virtual void renderizar() = 0;
 		virtual void definirPai(Formas::Moldura* painel);
 		void defAlinhamento(const Alinhamento& lado);
 		std::shared_ptr<Widgets::Arvore> arvore_pai{ nullptr };

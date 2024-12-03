@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "pop_up.hpp"
 #include "src/ui/items/item_menu.hpp"
@@ -49,7 +49,7 @@ void BubbleUI::Util::PopUp::esconder()
 	vmostrar = false;
 }
 
-void BubbleUI::Util::PopUp::renderizar() const
+void BubbleUI::Util::PopUp::renderizar()
 {
 	if (escondido()) return; 
 	Moldura::renderizar();

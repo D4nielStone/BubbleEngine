@@ -12,7 +12,7 @@ namespace BubbleUI
 		public:
 			SeletorDeCor(Color* cor, const std::string& label, const Alinhamento& alinhamento = Alinhamento::Centro);
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			void definirPai(Formas::Moldura* painel) override;
 			void calcularCor();
 		private:

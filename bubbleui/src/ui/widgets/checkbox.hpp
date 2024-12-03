@@ -10,10 +10,11 @@ namespace BubbleUI
 		public:
 			CheckBox(bool *retorno, const std::string &texto = "", const Alinhamento& alinhamento = Alinhamento::Esquerda);
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 		private:
 			Shader shaderImg = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
-			void renderizarImg() const;
+			void renderizarImg();
+			Vector4f rect_ndc;
 			bool* retorno{ nullptr }, gatilho{ false }, deveRenderizar{ true };
 			int size{ 16 }; unsigned int IDimagem;
 		};

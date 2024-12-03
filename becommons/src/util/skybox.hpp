@@ -17,7 +17,7 @@ namespace Bubble
 			Skybox(const char* path);
 			Skybox();
 			void configurarBuffers();
-			void renderizar(const glm::mat4& projectionMat, const glm::mat4& viewMat) const;
+			void renderizar(const glm::mat4& projectionMat, const glm::mat4& viewMat);
 			unsigned int loadCubemapFromSingleTexture(const char* path);
 		};
 	}

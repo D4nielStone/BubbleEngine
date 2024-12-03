@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "painel.hpp"
 
@@ -37,7 +37,11 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Atualização
     void Painel::atualizar()
     {
-        Moldura::atualizar();
+        if (preencher)
+        {
+            definirPosicao({ 0, 0 });
+            definirTamanho({ contexto->tamanho.width - static_cast<int>(obterRetangulo().x), contexto->tamanho.height - static_cast<int>(obterRetangulo().y) });
+        }
         // Atualiza a moldura
         arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
@@ -50,8 +54,7 @@ namespace BubbleUI {
         {
             if (mostrar_aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
         }
-        corrigirLimite();
-        Rect::atualizar();
+        //corrigirLimite();
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
         menuDeContexto->atualizar();
@@ -67,8 +70,7 @@ namespace BubbleUI {
 
         arrastando = false;
 
-        corpo.definirRetangulo(obterRetangulo());
-        corpo.atualizar();
+        Moldura::atualizar();
     }
 
     void Painel::definirContexto(std::shared_ptr<Contexto> ctx, const char* nome, const Vector4& rect = { 0,0,0,0 })
@@ -79,16 +81,25 @@ namespace BubbleUI {
     void Painel::definirContexto(std::shared_ptr<Contexto> ctx)
     {
         configurar(ctx);
+        if (preencher)
+        {
+            selecionado = true;
+            redimensionavel = false;
+        }
+    }
+
+    void Painel::Fullscreen(const bool& booleano)
+    {
+        preencher = booleano;
     }
 
     // Ciclo de Vida do Painel: Renderização
-    void Painel::renderizar() const
+    void Painel::renderizar()
     {
-
         // Passo 1: Desenhar a máscara no stencil buffer
+        glEnable(GL_STENCIL_TEST);
         glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE); // Desativar a escrita de cores
         glDepthMask(GL_FALSE); // Desativar o depth buffer
         glClear(GL_STENCIL_BUFFER_BIT); // Limpar o stencil buffer
 
@@ -96,14 +107,9 @@ namespace BubbleUI {
         Moldura::renderizar();
 
         // Passo 2: Configurar o recorte com stencil
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE); // Reativar a escrita de cores
-        glDepthMask(GL_TRUE); // Reativar o depth buffer
         glStencilFunc(GL_EQUAL, 1, 0xFF); // Permitir a renderização apenas onde o stencil buffer é 1
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Manter o valor do stencil
-
-        // Desenhar o conteúdo dentro da área recortada
-        corpo.renderizar();
-
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP); // Manter o valor do stencilglDisable(GL_STENCIL_TEST);
+        
         preRenderizacao();
         if (mostrar_aba && aba)aba->renderizar();
 
@@ -115,6 +121,7 @@ namespace BubbleUI {
 
         menuDeContexto->renderizar();
         posRenderizacao();
+        glDisable(GL_STENCIL_TEST);
     }
 
     std::vector<std::shared_ptr<BubbleUI::Widget>> Painel::widgets() const
@@ -125,13 +132,12 @@ namespace BubbleUI {
     void Painel::defCor(const Color& cor)
     {
         Rect::defCor(cor);
-        corpo.defCor(cor);
     }
 
     // Configuração do Painel
     void Painel::configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect)
     {
-        retangulo = rect;
+        //retangulo = rect;
         contexto = ctx;
         widgetPadding = { 5, 5 };
         tamanhoMinimo = { 100, 15 };
@@ -147,11 +153,8 @@ namespace BubbleUI {
         menuDeContexto= std::make_unique<Util::PopUp>(contexto);
         aba= std::make_unique<Aba>(this);
 
-        this->retangulo = retangulo;
         Rect::Rect(ctx, retangulo);
-        corpo.definirBuffers(ctx, retangulo);
         defCor({ 0.13f, 0.11f, 0.16f, 1.f });
-        corpo.defCor({ 0.13f, 0.11f, 0.16f, 1.f });
         borda_d = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
         borda_b = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
         borda_e = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });

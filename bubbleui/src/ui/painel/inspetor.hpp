@@ -8,9 +8,10 @@ namespace BubbleUI
 		class BEUI_DLL_API Inspetor : public Painel
 		{
 		public:
-			Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect = { 2, 2, 100, 50 });
+			Inspetor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect = { 2, 2, 100, 50 });
 			Inspetor() = default;
 			~Inspetor();
+			void definirContexto(std::shared_ptr<Contexto> ctx) override;
 		private:
 			void recarregar();
 			void desvendarWidgets(const std::vector<std::any>& variaveis, std::shared_ptr<Widgets::Arvore> arvore);

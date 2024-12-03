@@ -1,19 +1,14 @@
-
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "Scene.hpp"
+#include "src/entidades/entidade.hpp"
 #include "glad/glad.h"
+#include "src/componentes/prototipo/terreno.hpp"
 
 namespace Bubble::Cena
 {
-    // Uma cena é criada
-    // \param name: para o nome da cena
-    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)), skybox(std::make_unique<Util::Skybox>()) {
-        //Debug::emitir("CENA", std::string(name) + " criada");
-    }
-    Scene::~Scene() {}
-    // Deve adicionar entidade
-    void Scene::carregarComponentes(std::shared_ptr<Entidades::Entidade> entidade) {
+    void PipeLine::adicionarEntidade(std::shared_ptr<Entidades::Entidade> entidade)
+    {
         for (auto& componente : entidade->listaDeComponentes()) {
             if (!componente->carregado())
                 componente->configurar();
@@ -23,32 +18,71 @@ namespace Bubble::Cena
                 entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
                 entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
             }
+            else
+                if (componente->nome() == "Terreno")
+                {
+                    // adiciona o renderizador ao nome correspondente do material
+                    entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
+                    entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material;
+                }
         }
         for (auto& filho : entidade->obterFilhos()) {
-            carregarComponentes(filho);
+            adicionarEntidade(filho);
         }
     }
 
-    bool Scene::criarEntidade(const std::string &path, const char* nome_entidade)
+    void PipeLine::renderizar()
     {
-        Arquivadores::Arquivo3d arquivo_3d(path); arquivo_3d.carregar();
+        // Itera sobre todos os pares de material e entidades
+        for (auto& [materialID, entidadesMaterial] : entidadesParaRenderizar) {
+            // Pega o ponteiro do material atual
+            Material* material = entidadesMaterial.second;
+
+            // Configura o material (shaders, texturas, etc.)
+            if (material) {
+                material->bind();
+            }
+
+            // Itera pelas entidades associadas ao material atual
+            for (auto& entidade : entidadesMaterial.first) {
+                // Renderiza a entidade
+                entidade->renderizar();
+            }
+        }
+    }
+    // Uma cena é criada
+    // \param name: para o nome da cena
+    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)), skybox(std::make_unique<Util::Skybox>()) {
+        Debug::emitir("CENA", std::string(name) + " criada");
+    }
+    Scene::~Scene() {}
+    // Deve adicionar entidade
+
+    std::shared_ptr<Entidades::Entidade> Scene::criarEntidade(const std::string &path, const char* nome_entidade)
+    {
+        Arquivadores::Arquivo3d arquivo_3d(path);
         adicionarEntidade(std::make_shared<Entidades::Entidade>(arquivo_3d));
-        return true;
+        return Entidades[Entidades.size()-1];
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
+        std::cout << "Cena: adicionando " << gameObject->nome() << "\n";
         if (!existeEntidade(gameObject.get())) {
-            carregarComponentes(gameObject);  // Carrega os componentes da entidade e dos filhos
+            renderizadores.adicionarEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
             Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
         }
     }
     bool carregou_arquivo3d{ false };
     // Deve renderizar Cena
-    void Scene::renderizar(const InputMode modo) const {
+    void Scene::renderizar(const InputMode modo)  {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glEnable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
+        glCullFace(GL_BACK); 
         
         if (modo == Editor) {
-            camera_editor.renderizar();
             skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
+            camera_editor.renderizar();
         }
         else if(camera_principal->meuObjeto->ativado) {
             camera_principal->renderizar();
@@ -59,15 +93,10 @@ namespace Bubble::Cena
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             return;
         }
-        for (auto& pair : entidadesParaRenderizar)
-        {
-            Componentes::atualizarMaterial(pair.second.second, shader);
-            for (auto& entidade : pair.second.first)
-            {
-                entidade->renderizar();
-            }
-        }
+
+        renderizadores.renderizar();
     }
+
     // Deve atualizar Cena
     void Scene::atualizar(float aspectoDoEditor, float aspectoDoJogo) {
         // Verifica se a tarefa já terminou sem bloquear e se não foi carregado ainda
@@ -113,10 +142,8 @@ namespace Bubble::Cena
     void Scene::carregar() {
         camera_editor.configurar();
 
-        glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
         for (auto& entidade : Entidades)
-            carregarComponentes(entidade);
+            renderizadores.adicionarEntidade(entidade);
     }
     // Deve serializar ela mesma ( isso é, passar para o documento json seus dados )
     void Scene::serializar(rapidjson::Document* doc) const {
@@ -141,7 +168,7 @@ namespace Bubble::Cena
         }
         else
         {
-            Debug::emitir(Debug::Erro, "O membro 'nome' não foi encontrado na cena");
+            Debug::emitir(Erro, "O membro 'nome' não foi encontrado na cena");
             return false;
         }
         // Deve analisar entidades
@@ -153,7 +180,7 @@ namespace Bubble::Cena
                 std::shared_ptr<Entidades::Entidade> entidadetmp = std::make_shared<Entidades::Entidade>();
                 if (!entidadetmp->parse(entidades[i]))
                 {
-                    Debug::emitir(Debug::Erro, "parse de entidades");
+                    Debug::emitir(Erro, "parse de entidades");
                     return false;
                 }
                 else
@@ -164,7 +191,7 @@ namespace Bubble::Cena
         }
         else
         {
-            Debug::emitir(Debug::Erro, "parse de entidades");
+            Debug::emitir(Erro, "parse de entidades");
             return false;
         }
         return true;

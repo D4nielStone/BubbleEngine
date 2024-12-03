@@ -11,7 +11,7 @@ namespace BubbleUI
 		Aba() = default;
 		Aba(Formas::Moldura* painel);
 		void atualizar() override;
-		void renderizar() const override;
+		void renderizar() override;
 		Formas::Rect* obterCorpo() const;
 	private:
 		bool painel_flag{ true };

@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "inspetor.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
@@ -16,11 +16,19 @@ static void abrirPopupAdiComp()
     msgMostrarPopup = true;
 }
 
-Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
+Inspetor::Inspetor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
     : scenemanager(scenemanager), nome_atual(new std::string(""))
 {
     Nome = "Inspetor";
-    configurar(ctx, rect);
+    retangulo = rect;
+    
+}
+
+Inspetor::~Inspetor() = default;
+
+void BubbleUI::Paineis::Inspetor::definirContexto(std::shared_ptr<Contexto> ctx)
+{
+    Painel::definirContexto(ctx);
     //popup componentes
     popup_comps = std::make_unique<Util::PopUp>(ctx);
     popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar camera", &msgAdiCam));
@@ -33,10 +41,8 @@ Inspetor::Inspetor(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::
     ent_atv_chk->quebrarLinha = false;
     // Verifica se o contexto e o scenemanager são válidos antes de usar
     if (scenemanager && ctx)    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
-    else                        Debug::emitir(Debug::Erro, "Scenemanager ou contexto inválido");// Log de erro
+    else                        Debug::emitir(Erro, "Scenemanager ou contexto inválido");// Log de erro
 }
-
-Inspetor::~Inspetor() = default;
 
 void Inspetor::recarregar()
 {

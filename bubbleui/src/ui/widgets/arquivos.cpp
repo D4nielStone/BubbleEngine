@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 #include "arquivos.hpp"
 #include "src/ui/painel/painel.hpp"
 #include <filesystem>
@@ -23,7 +23,7 @@ void Arquivos::atualizar()
     }
 }
 
-void Arquivos::renderizar() const
+void Arquivos::renderizar()
 {
     // Passo 1: Desenhar a máscara no stencil buffer
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);

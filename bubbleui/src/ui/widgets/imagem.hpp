@@ -14,7 +14,7 @@ namespace BubbleUI
 			Imagem(const std::string& path, const Vector2& size = {16, 16});
 			Vector4f paraNDC() const;
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			bool defID(unsigned int newID);
 			Vector4 obtRect() const;
 			bool deveRenderizar{ true }, flip{ false }, padding{ false };
@@ -22,6 +22,8 @@ namespace BubbleUI
 			unsigned int ID;
 			Vector2* posicao_ptr{ nullptr };
 			Vector4 rect;
+			std::string path;
+			unsigned int ip;
 			Shader shader = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
 			bool preencher{ false };
 		};

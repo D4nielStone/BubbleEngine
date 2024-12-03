@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "item_menu.hpp"
 #include "src/depuracao/debug.hpp"
@@ -51,7 +51,7 @@ void BubbleUI::Items::ItemMenu::atualizar()
 }
 
 // Método para renderizar o ItemMenu na tela
-void BubbleUI::Items::ItemMenu::renderizar() const
+void BubbleUI::Items::ItemMenu::renderizar() 
 {
     Moldura::renderizar(); // Renderiza a moldura
 

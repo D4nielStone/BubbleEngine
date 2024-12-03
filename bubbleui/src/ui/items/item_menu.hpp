@@ -17,7 +17,7 @@ namespace BubbleUI
 			ItemMenu() = default;
 			~ItemMenu();
 			virtual void atualizar();
-			virtual void renderizar() const;
+			virtual void renderizar();
 			void definirFonte(unsigned int resolucao = 12, std::string font_path = "assets/fontes/noto_sans/noto_sans.regular.ttf");
 			virtual void definirPai(Formas::Moldura*);
 			void definirEscondido(bool boleano);

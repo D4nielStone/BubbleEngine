@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "caixa_de_texto.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -90,7 +90,7 @@ void CaixaTexto::atualizar()
     Moldura::atualizar();
 }
 
-void CaixaTexto::renderizar() const
+void CaixaTexto::renderizar()
 {
     Moldura::renderizar();
     Texto::renderizar();

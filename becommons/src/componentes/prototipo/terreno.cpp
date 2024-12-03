@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "terreno.hpp"
 #include "glad/glad.h"
@@ -6,24 +6,20 @@
 #include "src/depuracao/debug.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "perlinnoise.hpp"
+#include "src/arquivadores/shader.hpp"
 
 using namespace Bubble::Componentes;
 void Terreno::atualizar()
-    {
-        desenharModelo();
-    }
+{
+    glBindVertexArray(mVertex.VAO);
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
+}
 void Terreno::configurar()
     {
         gerarHeightMap();
         configurarBuffers();
         carregadov = true;
-        Debug::emitir("TERRENO", "Terreno configurado");
     }
-void Terreno::atualizarMaterial()
-{
-    glDisable(GL_CULL_FACE);
-    shader.setVec3("material.cor_difusa", mVertex.material.difusa.r, mVertex.material.difusa.g, mVertex.material.difusa.b);
-}
 void Terreno::configurarBuffers() {
         glGenVertexArrays(1, &mVertex.VAO);
         glGenBuffers(1, &mVertex.VBO);
@@ -109,13 +105,6 @@ void Terreno::gerarHeightMap()
         }
         calcularNormais();
     }
-void Terreno::desenharModelo()
-{
-    //shader.use();
-    atualizarMaterial();
-    glBindVertexArray(mVertex.VAO);
-    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(mVertex.indices.size()), GL_UNSIGNED_INT, 0);
-}
 void Terreno::calcularNormais()
     {
         mVertex.normals.resize(mVertex.vertices.size(), 0.0f);
@@ -132,8 +121,8 @@ void Terreno::calcularNormais()
             glm::vec3 normal = glm::normalize(glm::cross(v1 - v0, v2 - v0));
 
             mVertex.normals[index0] += normal.x;
-            mVertex.normals[index0 + 1] += normal.y;
-            mVertex.normals[index0 + 2] += normal.z;
+            mVertex.normals[static_cast<std::vector<float, std::allocator<float>>::size_type>(index0) + 1] += normal.y;
+            mVertex.normals[static_cast<std::vector<float, std::allocator<float>>::size_type>(index0) + 2] += normal.z;
 
             mVertex.normals[index1] += normal.x;
             mVertex.normals[index1 + 1] += normal.y;
@@ -164,3 +153,7 @@ Terreno::~Terreno()
         glDeleteBuffers(1, &mVertex.VBO);
         glDeleteBuffers(1, &mVertex.EBO);
     }
+Vertex& Terreno::obterMalha()
+{
+    return mVertex;
+}

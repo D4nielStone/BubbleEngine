@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "linha.hpp"
 #include "src/depuracao/debug.hpp"
@@ -12,7 +12,7 @@ Linha::Linha(const Vector4 &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos),
     {
         if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
-            Debug::emitir(Debug::Erro, "Failed to initialize GLAD");
+            Debug::emitir(Erro, "Failed to initialize GLAD");
             return;
         }
         glGenBuffers(1, &linha_vertex.VBO);
@@ -61,7 +61,7 @@ void Linha::atualizar()
     if(cor_referencial)cor_base = (*cor_referencial) + 0.1f;
 }
 // Deve renderizar
-void Linha::renderizar() const
+void Linha::renderizar()
 {
     shader.use();
     shader.setVec2("linha.pos1", coord_ndc.x, coord_ndc.y);

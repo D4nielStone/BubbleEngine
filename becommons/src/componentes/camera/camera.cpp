@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "camera.hpp"
 #include <iostream>
@@ -42,9 +42,9 @@ void Camera::configurar() {
 
     // Check if the framebuffer is complete
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-    Debug::emitir(Debug::Tipo::Erro, "Framebuffer incompleto");
+    Debug::emitir(Erro, "Framebuffer incompleto");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    Debug::emitir(Debug::Tipo::Mensagem, "Camera configurada");
+    Debug::emitir(Mensagem, "Camera configurada");
     carregadov = true;
 }
 void Camera::atualizarAspecto(float aspect)
@@ -68,7 +68,7 @@ void Camera::desenharFrame(const Vector4 &viewportRect) const
 
     // Check if framebuffer is still complete after resizing
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        Debug::emitir(Debug::Tipo::Erro, "Framebuffer incompleto após redimensionamento");
+        Debug::emitir(Erro, "Framebuffer incompleto após redimensionamento");
     }
 
     // Update the viewport after resizing
@@ -76,14 +76,11 @@ void Camera::desenharFrame(const Vector4 &viewportRect) const
 
     // Clear buffers
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void Camera::renderizar() const
-{
-    shader.use();
-    shader.setMat4("projection", glm::value_ptr(matrizProjecao));
-    shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
+{ 
 }
 void Camera::atualizar() {
     matrizProjecao = glm::perspective(
@@ -98,10 +95,7 @@ void Camera::atualizar() {
 
         // Calculate view matrix
         matrizVisualizacao = glm::lookAt(posicaoCamera, alvoCamera, vetorCima);
-
-        shader.use();
-        shader.setMat4("projection", glm::value_ptr(matrizProjecao));
-        shader.setMat4("view", glm::value_ptr(matrizVisualizacao));
+         
    
 }
 const float* Camera::obterViewMatrix()

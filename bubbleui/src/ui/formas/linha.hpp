@@ -18,7 +18,7 @@ namespace BubbleUI
 			void defCor(const Color &cor);
 			void definirCorRef(Color* cor);
 			void atualizar();
-			void renderizar() const;
+			void renderizar();
 		protected:
 			std::shared_ptr<Contexto> contexto;
 			Vector4 posicoes, tamanhoAnterior;

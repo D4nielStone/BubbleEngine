@@ -1,8 +1,9 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "transformacao.hpp"
-
+#include <src/arquivadores/shader.cpp>
+#include "src/cena/scene.hpp"
 using namespace Bubble::Componentes;
 
 Transformacao::Transformacao()
@@ -48,8 +49,14 @@ void Transformacao::atualizar() {
     if (estado != DINAMICO)
         return;
 
-    shader.use();
-    shader.setMat4("model", glm::value_ptr(matriz_de_modelo));
+
+    shader_atual->setMat4("projection", Cena::camera_editor.obterProjMatrix());
+    shader_atual->setMat4("view", Cena::camera_editor.obterViewMatrix());
+    shader_atual->setVec3("viewPos",
+        Cena::camera_editor.transformacao->obterPosicao().x,
+        Cena::camera_editor.transformacao->obterPosicao().y,
+        Cena::camera_editor.transformacao->obterPosicao().z);
+    shader_atual->setMat4("model", glm::value_ptr(matriz_de_modelo));
 }
 void Transformacao::configurar() {
     glm::translate(matriz_de_modelo, posicao);

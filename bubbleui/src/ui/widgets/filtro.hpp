@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #pragma once
 #include "widget.hpp"
@@ -16,7 +16,7 @@ namespace BubbleUI
 		public:
 			Filtro(const std::string& label);
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
 			void recarregar();
 			void definirPai(Moldura* ctx) override;
 		private:

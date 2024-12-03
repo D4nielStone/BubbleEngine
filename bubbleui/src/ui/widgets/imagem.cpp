@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "imagem.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -13,8 +13,7 @@ Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : 
 
 Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao)
 {
-    auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
-    ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
+    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &rect.w, &rect.h); });
 
     // Calcula o fator de escala como um valor de ponto flutuante
     float scale_factor = static_cast<float>(size_percentage) / 100.0f;
@@ -86,7 +85,7 @@ void Imagem::atualizar()
 }
 
 // Atualiza o retângulo do corpo_do_widget para a imagem
-void Imagem::renderizar() const
+void Imagem::renderizar()
 {
     if (!deveRenderizar)
         return;

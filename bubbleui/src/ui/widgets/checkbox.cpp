@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "checkbox.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -14,12 +14,13 @@ CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& a
     quebrarLinha = true;
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
+    //definirFonte();
 }
 
 void CheckBox::atualizar()
 {
-    int x = painel->obterRetangulo().x + painel->posicaoWidget.x + painel->widgetPadding.x;
-    int y = painel->obterRetangulo().y + painel->posicaoWidget.y + painel->widgetPadding.y;
+    int x = painel->posicaoWidget.x + painel->widgetPadding.x;
+    int y = painel->posicaoWidget.y + painel->widgetPadding.y;
 
     switch (alinhamentoHorizontal)
     {
@@ -59,7 +60,7 @@ void CheckBox::atualizar()
 
     if (retorno)
     {
-        deveRenderizar = *retorno;
+        //deveRenderizar = *retorno;
         if (colisao.mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && *retorno)
         {
             gatilho = true;
@@ -72,6 +73,7 @@ void CheckBox::atualizar()
         }
     }
 
+    defCor(ROXO_ESCURO_2);
     Moldura::atualizar();
 
     // Controle da posição do widget no painel
@@ -79,9 +81,10 @@ void CheckBox::atualizar()
         painel->posicaoWidget.y += size + painel->widgetPadding.x * 2;
     else
         painel->posicaoWidget.x += size + painel->widgetPadding.x;
+    rect_ndc = Texto::paraNDC(Moldura::obterRetangulo());
 }
 
-void CheckBox::renderizar() const
+void CheckBox::renderizar()
 {
     Moldura::renderizar();
     if (!frase.empty())
@@ -92,11 +95,11 @@ void CheckBox::renderizar() const
 
 }
 
-void CheckBox::renderizarImg() const
+void CheckBox::renderizarImg()
 {
     shaderImg.use();
-    shaderImg.setVec2("quadrado.posicao", Moldura::obtRectNDC().x, Moldura::obtRectNDC().y);
-    shaderImg.setVec2("quadrado.tamanho", Moldura::obtRectNDC().z, Moldura::obtRectNDC().w);
+    shaderImg.setVec2("quadrado.posicao", rect_ndc.x, rect_ndc.y);
+    shaderImg.setVec2("quadrado.tamanho", rect_ndc.z, rect_ndc.w);
     shaderImg.setInt("textura", 0);
     shaderImg.setBool("flip", false);
 

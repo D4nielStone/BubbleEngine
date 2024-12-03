@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "aba.hpp"
 #include "src/ui/widgets/texto.hpp"
@@ -32,7 +32,7 @@ void BubbleUI::Aba::atualizar()
     corpo_rect->atualizar();
 }
 
-void BubbleUI::Aba::renderizar() const
+void BubbleUI::Aba::renderizar()
 {
     corpo_rect->renderizar();
     Texto::renderizar();

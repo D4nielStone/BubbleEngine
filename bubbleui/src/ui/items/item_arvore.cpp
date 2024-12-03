@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "item_arvore.hpp"
 #include "src/ui/util/pop_up.hpp"
@@ -22,7 +22,7 @@ void BubbleUI::Items::Arvore::atualizar()
 
 }
 
-void BubbleUI::Items::Arvore::renderizar() const
+void BubbleUI::Items::Arvore::renderizar()
 {
 	ItemMenu::renderizar();
 	m_popup->renderizar();

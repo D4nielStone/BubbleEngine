@@ -1,5 +1,7 @@
+
+
 #pragma once
-#include "src/comum/componente.hpp"
+#include "src/componentes/renderizador/renderizador.hpp"
 #include "src/util/includes.hpp"
 #include "becommons.hpp"
 #include "vector"
@@ -8,7 +10,7 @@ namespace Bubble
 {
 	namespace Componentes
 	{
-		class BECOMMONS_DLL_API Terreno : public Comum::Componente
+		class BECOMMONS_DLL_API Terreno : public Renderizador
 		{
 		private:
 			Vertex mVertex;
@@ -17,9 +19,9 @@ namespace Bubble
 			int width, depth;
 			void calcularNormais();
 			void configurarBuffers();
-			void desenharModelo();
-			void atualizarMaterial();
+			void desenharModelo() const;
 		public:
+			Vertex& obterMalha() override;
 			Terreno();
 			~Terreno();
 			void gerarHeightMap();

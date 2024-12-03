@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "glad/glad.h"
 #include "entidade.hpp"
@@ -14,6 +14,7 @@ Entidade::Entidade(const char* name)
 
 Entidade::Entidade(const Arquivadores::Arquivo3d& arquivo_objeto)
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {
+    if(arquivo_objeto.carregado())
     carregarNode(arquivo_objeto.RootNode);
 }
 
@@ -21,19 +22,6 @@ Entidade::Entidade()
     : transformacao(std::make_shared<Bubble::Componentes::Transformacao>()), Componentes({ transformacao }) {}
 
 void Entidade::atualizar() const {
-    
-    if (!ativado || !ativado_root)
-    {
-        for (auto& filho : filhos)
-            filho->ativado_root = false;
-        return;
-    }
-    else
-    {
-        for (auto& filho : filhos)
-            filho->ativado_root = true;
-    }
-
     for (const auto& componente : Componentes) 
     {
         if (componente->nome() != "Renderizador" &&componente->nome() != "Terreno" && componente->nome() != "Camera"&& componente->nome() != "Transformacao") {
@@ -52,7 +40,10 @@ void Entidade::renderizar()
         if (componente->nome() == "Renderizador" || componente->nome() == "Terreno")
             componente->atualizar();
     }
-
+    for (const auto& filho : filhos)
+    {
+        filho->renderizar();
+    }
 }
 
 std::string Entidade::nome() const
@@ -67,6 +58,7 @@ std::shared_ptr<std::string> Bubble::Entidades::Entidade::nomeptr()
 
 void Entidade::carregarNode(const Node& node)
 {
+    std::cout << "A\n";
     *Nome = node.nome;
     //if (pai)
     //{
@@ -124,6 +116,7 @@ const std::vector<std::shared_ptr<Bubble::Comum::Componente>>& Entidade::listaDe
 bool Entidade::adicionarComponente(std::shared_ptr<Bubble::Comum::Componente> componente) {
     componente->definirPai(this);
     Componentes.push_back(componente);
+    Bubble::Cena::obterSceneManager()->cenaAtual()->renderizadores.adicionarEntidade(shared_from_this());
     return true;
 }
 

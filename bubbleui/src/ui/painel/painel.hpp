@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #pragma once
 #include "src/ui/formas/moldura.hpp"
@@ -31,14 +31,14 @@ namespace BubbleUI
 
 		// Atualização e Renderização
 		void atualizar() override;
-		void renderizar() const override;
+		void renderizar() override;
 
 		// Estado do Painel
 		bool cursorNormal() const;
 		std::string nome() const { return Nome; }
 		virtual void definirContexto(std::shared_ptr<Contexto>, const char* nome, const Vector4& rect);
 		virtual void definirContexto(std::shared_ptr<Contexto>t);
-
+		void Fullscreen(const bool& booleano);
 		// Flags de Controle
 		Lado redimensionamentoAtual;
 		bool arrastando{ false };
@@ -50,9 +50,9 @@ namespace BubbleUI
 		// Métodos de Configuração e Ciclo de Vida
 		void configurar(std::shared_ptr<Contexto> ctx, const Vector4& rect = { 2, 2, 200, 100 });
 		virtual void preAtualizacao() {}
+		virtual void posRenderizacao() const {}
 		virtual void posAtualizacao() {}
 		virtual void preRenderizacao() const {}
-		virtual void posRenderizacao() const {}
 
 		void corrigirLimite();
 
@@ -68,7 +68,7 @@ namespace BubbleUI
 		// Dados de Geometria
 		Vector2 tamanhoMinimo{200, 100};
 		bool renderizarCorpo{ true };
-		Rect corpo;
+		bool preencher{};   // flag para preencher a tela com o painel
 	};
 
 } // namespace BubbleUI

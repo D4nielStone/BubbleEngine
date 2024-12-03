@@ -15,7 +15,8 @@ namespace BubbleUI
 			Texto() = default;
 			void definirTexto(const std::string & texto);
 			void atualizar() override;
-			void renderizar() const override;
+			void renderizar() override;
+			Vector4f paraNDC(const Vector4& vec4);
 			void definirFonte(unsigned int resolucao = 15, const std::string &font_path = "assets/fontes/noto_sans/noto_sans.regular.ttf");
 		protected:
 			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
@@ -30,7 +31,6 @@ namespace BubbleUI
 			Color cor{1.f, 1.f, 1.f, 1.f}, cor_de_selecao{ 0.678F, 0.847F, 0.902F, 1.0F };
 			Vector2 pos_texto;
 			Vector4 char_rect, char_fundo_rect;
-			Vector4f paraNDC(const Vector4& vec4);
 			std::vector<LetraRect> letras_rect;
 			Vector4 area_de_selecao;
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag"), shaderQuad = Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag");

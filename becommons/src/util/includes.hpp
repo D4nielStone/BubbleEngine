@@ -1,10 +1,11 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #pragma once
 #include <vector>
 #include <iostream>
 #include <cstdio>
+#include <glad/glad.h>
 #include <iostream>
 #include <becommons.hpp>
 #include "src/arquivadores/shader.hpp"
@@ -262,10 +263,52 @@ struct Luz
 struct Material {
     Color difusa;
     Color especular;
+    Shader* shader{ nullptr };
     float shininess = 32.f, reflexao = 0;
     size_t ID{};
     std::vector<Textura> texturas;
     std::string nome{ "material sem nome" };
+    ~Material() { if (shader) delete shader; };
+    void bind() {
+        if (!shader) shader = new Shader();
+        // Ativa o shader
+        shader->use();
+
+        // Configura propriedades de material
+        shader->setVec3("material.cor_difusa", difusa.r, difusa.g, difusa.b);
+        shader->setVec3("material.cor_especular", especular.r, especular.g, especular.b);
+        shader->setFloat("material.shininess", shininess);
+        shader->setFloat("material.reflexao", reflexao);
+
+        // Gerenciar texturas difusas e especulares
+        bool texturaDifusaAtiva = false;
+        bool texturaEspecularAtiva = false;
+
+        // Associa todas as texturas disponíveis
+        for (GLenum i = 0; i < texturas.size(); i++) {
+            glActiveTexture(GL_TEXTURE1 + i);  // Ativa o slot de textura correspondente
+            glBindTexture(GL_TEXTURE_2D, texturas[i].ID);  // Vincula a textura ao slot
+
+            // Define o tipo da textura no shader
+            shader->setInt(texturas[i].tipo, 1 + i);
+            shader->setBool(texturas[i].tipo + "_ativo", true);
+
+            // Verifica se é uma textura difusa ou especular para ativação
+            if (texturas[i].tipo == "textura_difusa") {
+                texturaDifusaAtiva = true;
+            }
+            else if (texturas[i].tipo == "textura_especular") {
+                texturaEspecularAtiva = true;
+            }
+        }
+
+        // Ativa ou desativa texturas difusas e especulares conforme o caso
+        shader->setBool("textura_difusa_ativo", texturaDifusaAtiva);
+        shader->setBool("textura_especular_ativo", texturaEspecularAtiva);
+
+        // Restaura para a unidade de textura padrão
+        glActiveTexture(GL_TEXTURE0);
+    };
 };
 
 struct Vertex {
@@ -299,12 +342,12 @@ using CaixaDeTextoID = std::pair<std::string*, const char*>;
 using SeletorDeCorID = std::pair<Color*, const char*>;
 using ArvoreID = std::pair<std::vector<std::any>, const char*>;
 
-extern BECOMMONS_DLL_API Vertex rect_vertex;
-extern BECOMMONS_DLL_API Vertex linha_vertex;
-extern BECOMMONS_DLL_API Vertex halfcircle_vertex;
+inline Vertex rect_vertex;
+inline Vertex linha_vertex;
+inline Vertex halfcircle_vertex;
 
 // cores
 const Color ROXO_ESCURO = Color(0.17f, 0.14f, 0.2f, 1.f);
 const Color ROXO_ESCURO_2 = Color(0.17f, 0.14f, 0.2f, 0.5f);
 const Color ROXO_CLARO = Color( 0.25f, 0.21f, 0.29f, 1.f );
-const Color ROXO_CLARO_2 = Color(0.30, 0.23, 0.40);
+const Color ROXO_CLARO_2 = Color(0.30F, 0.23F, 0.40F);

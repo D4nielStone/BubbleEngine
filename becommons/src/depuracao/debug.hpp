@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #ifndef DEBUG_H
 #define DEBUG_H
@@ -8,14 +8,14 @@
 #include "utility"
 #include "string"
 
+enum BECOMMONS_DLL_API Tipo
+{
+    Mensagem,
+    Erro,
+    Alerta
+};
 namespace Debug
 {
-    enum BECOMMONS_DLL_API Tipo
-    {
-        Mensagem,
-        Erro,
-        Alerta
-    };
 
     BECOMMONS_DLL_API void cout(const std::string &msg);
     BECOMMONS_DLL_API void emitir(Tipo t, std::string msg);

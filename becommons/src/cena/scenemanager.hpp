@@ -24,7 +24,7 @@ namespace Bubble {
             int cenaAtualIdx() const;
             std::shared_ptr<Scene> cenaAtual() const;
             void carregarCena(int sceneIndex);
-            void renderizarCenaAtual() const;
+            void renderizarCenaAtual() const  ;
             void atualizarCenaAtual() const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
             void defEditorViewport(Vector4 rect = {0, 0, 0, 0});

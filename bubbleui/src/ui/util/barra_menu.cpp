@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "barra_menu.hpp"
 #include "src/ui/formas/linha.hpp"
@@ -8,7 +8,7 @@
 #include "pop_up.hpp"
 #include<filesystem>
 
-void BubbleUI::Util::BarraMenu::renderizar() const
+void BubbleUI::Util::BarraMenu::renderizar()
 {
 	Moldura::renderizar();
 	texto_nome_projeto.renderizar();

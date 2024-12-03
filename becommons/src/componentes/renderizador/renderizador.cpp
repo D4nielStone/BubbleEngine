@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "renderizador.hpp"
 #include "src/arquivadores/imageloader.hpp"
@@ -89,25 +89,7 @@ Renderizador::~Renderizador()
 }
 
 Vertex& Bubble::Componentes::Renderizador::obterMalha()
+
 {
     return malha;
-}
-void Bubble::Componentes::atualizarMaterial(Material* material, Shader shader)
-{
-    shader.use();
-    shader.setVec3("material.cor_difusa", material->difusa.r, material->difusa.g, material->difusa.b);
-    shader.setVec3("material.cor_especular", material->especular.r, material->especular.g, material->especular.b);
-    shader.setFloat("material.shininess", material->shininess);
-    shader.setFloat("material.reflexao", material->reflexao);
-    shader.setBool("textura_difusa_ativo", false);
-    for (GLenum i = 0; i < material->texturas.size(); i++)
-    {
-        glActiveTexture(GL_TEXTURE1 + i);
-        glBindTexture(GL_TEXTURE_2D, material->texturas[i].ID);
-        shader.setInt(material->texturas[i].tipo, 1 + i);
-        shader.setBool(material->texturas[i].tipo + "_ativo", true);
-    }
-    glActiveTexture(GL_TEXTURE0);
-    shader.setInt("skybox", 0);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, Bubble::Util::obterSkyboxTexture());
 }

@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "texto.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -39,7 +39,7 @@ void Texto::atualizar()
 }
 
 // Método para renderizar o texto
-void Texto::renderizar() const
+void Texto::renderizar()
 {
     // Configura o shader para renderizar o texto
     shader.use();

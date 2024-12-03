@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 /*
     Essa classe e´responsável por criar uma moldura com os projetos na pasta de projetos.
@@ -24,7 +24,7 @@ static void janelaNovoProjeto()
 {
     auto ctx = BubbleUI::janela("Novo projeto");
     if (!ctx) return;
-    BubbleUI::adicionarPainel(ctx, new BubbleUI::Paineis::Depurador({0, 0, 100, 100}));
+    BubbleUI::adicionarPainel(ctx.get(), new BubbleUI::Paineis::Depurador({0, 0, 100, 100}));
 }
 
 static void novoProjeto()
@@ -64,7 +64,7 @@ void Filtro::definirPai(Moldura* ctx)
     recarregar();
 }
 
-void Filtro::renderizar() const
+void Filtro::renderizar()
 {
 
     Moldura::renderizar();

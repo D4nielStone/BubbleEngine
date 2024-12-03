@@ -10,7 +10,7 @@ namespace BubbleUI
 		{
 		public:
 			BarraMenu() {};
-			void renderizar() const;
+			void renderizar();
 			void salvarCenaAtual() const;
 			void atualizar();
 			void adicionarBotao(std::unique_ptr<Items::ItemMenu> item);

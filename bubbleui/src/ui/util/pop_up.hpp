@@ -16,7 +16,7 @@ namespace BubbleUI
 			PopUp(std::shared_ptr<Contexto>);
 			void mostrar();
 			void esconder();
-			void renderizar() const override;
+			void renderizar()  override;
 			void adiItem(std::shared_ptr<Items::ItemMenu> item);
 			bool temItems() const;
 			bool escondido() const;

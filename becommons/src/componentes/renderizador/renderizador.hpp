@@ -15,11 +15,10 @@ namespace Bubble{
             Renderizador(const Vertex& malha);
             Renderizador() { Nome = "Renderizador"; };
             ~Renderizador();
-            Vertex& obterMalha();
+            virtual Vertex& obterMalha();
             void configurar() override;
             void atualizar() override;
             bool visualizarWireFrame{ false };
         };
-        extern BECOMMONS_DLL_API void atualizarMaterial(Material* material, Shader shader);
     }
 }

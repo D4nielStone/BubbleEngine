@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "fonte.hpp"
 #include "assets/fontes_na_memoria.hpp"
@@ -38,10 +38,10 @@ GerenciadorDeFontes::~GerenciadorDeFontes()
 
 void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsigned int resolucao)
 {
-    //if (fontes.find(nome_da_fonte) != fontes.end())
-    //{
-    //    return; // Fonte já carregada
-    //}
+    if (fontes.find(nome_da_fonte) != fontes.end())
+    {
+        return; // Fonte já carregada
+    }
 
     FT_Face face{};
 

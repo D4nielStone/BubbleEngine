@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "seletor_de_cor.hpp"
 #include "src/ui/painel/painel.hpp"
@@ -45,7 +45,7 @@ void SeletorDeCor::atualizar()
     Texto::atualizar();
 }
 
-void SeletorDeCor::renderizar() const
+void SeletorDeCor::renderizar()
 {
     if (arco_cor)
         arco_cor->renderizar();

@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "meio_circulo.hpp"
 #include "src/depuracao/debug.hpp"
@@ -71,7 +71,7 @@ void MeioCirculo::atualizar()
 }
 
 // Deve renderizar
-void MeioCirculo::renderizar() const
+void MeioCirculo::renderizar()
 {
     shader.use();
     shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);

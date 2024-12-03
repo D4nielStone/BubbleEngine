@@ -1,5 +1,5 @@
 
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "assets/shaders_na_memoria.hpp"
 #include <glad/glad.h>
@@ -21,11 +21,14 @@ const std::map<std::string, const char*> shader_memoria{
     {"imagem.vert", imagem_vert},
     {"imagem.frag", imagem_frag},
     {"texto.vert", texto_vert},
-    {"texto.frag", texto_frag}
+    {"texto.frag", texto_frag},
+    {"skybox.vert", skybox_vert},
+    {"skybox.frag", skybox_frag},
+    {"phong.vert", phong_vert},
+    {"phong.frag", phong_frag}
 };
 
 std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
-GLuint shader_atual;
 
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 
@@ -126,14 +129,13 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    //shaders.push_back({ {vertexPath, fragmentPath}, ID });
+    
+    shaders.push_back({ {vertexPath, fragmentPath}, ID });
 }
 
-void Shader::use() const {
-    if (shader_atual != ID) {
-        glUseProgram(ID);
-        shader_atual = ID;
-    }
+void Shader::use() {
+    glUseProgram(ID);
+    shader_atual = this;
 }
 
 void Shader::setBool(const std::string& name, const bool& value) const {

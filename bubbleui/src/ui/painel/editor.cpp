@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Daniel Oliveira
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "editor.hpp"
 #include "src/ui/items/item_botao.hpp"
@@ -116,7 +116,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     if (callback_adiesf)adicionarEsfera();
     if (callback_select)abrirSelecionar();
 
-    Vector4 rect_size = buffer->obtRect();
+    Vector4 rect_size = obterRetangulo();
     
     std::shared_ptr<Bubble::Cena::Scene> cenaAtual;
     if (scenemanager) 
@@ -125,7 +125,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
         cenaAtual = scenemanager->cenaAtual();
     }
     // verifica se a cena é válida
-    (cenaAtual != nullptr) && buffer->defID(cenaAtual->camera_editor.textureColorbuffer);
+    (cenaAtual != nullptr) && buffer->defID(Bubble::Cena::camera_editor.textureColorbuffer);
 
     if (selecionado) {
         contexto->inputs->setInputMode(InputMode::Editor);
