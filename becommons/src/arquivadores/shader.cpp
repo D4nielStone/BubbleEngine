@@ -49,11 +49,6 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
         }
     }
 
-    // Inicializa o GLAD
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        throw ShaderException("Falha ao iniciar o GLAD");
-    }
-
     // Cria o programa shader
     try {
         ID = glCreateProgram();
