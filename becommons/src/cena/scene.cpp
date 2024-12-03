@@ -66,7 +66,6 @@ namespace Bubble::Cena
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
-        std::cout << "Cena: adicionando " << gameObject->nome() << "\n";
         if (!existeEntidade(gameObject.get())) {
             renderizadores.adicionarEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
             Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
@@ -82,16 +81,9 @@ namespace Bubble::Cena
         
         if (modo == Editor) {
             skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
-            camera_editor.renderizar();
         }
         else if(camera_principal->meuObjeto->ativado) {
-            camera_principal->renderizar();
             skybox->renderizar(camera_principal->obterProjMatrixMat(), camera_principal->obterViewMatrixMat());
-        }
-        else
-        {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            return;
         }
 
         renderizadores.renderizar();

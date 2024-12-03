@@ -12,6 +12,8 @@ using namespace Bubble::Componentes;
 Camera::Camera() : corSolida(true), FOV(45.0f), aspecto(1.333f), zNear(0.1f), zFar(300)
 {
     Nome = "Camera";
+
+    variaveis.push_back(std::pair(&ceu, "Cor difusa"));
 }
 Camera::~Camera() {}
 

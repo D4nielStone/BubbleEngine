@@ -8,6 +8,7 @@
 /* Inclusões */
 #include "src/ui/contexto/contexto.hpp"
 #include "src/ui/painel/editor.hpp"
+#include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/entidades.hpp"
 #include "src/ui/painel/inspetor.hpp"
 #include <Windows.h>
@@ -35,13 +36,14 @@ int INIT
 	Bubble::Cena::criarEntidade(R"(C:\Users\DN\3D Objects\86-bookshelf\Bookshelf\Bookshelf.fbx)");
 
 	auto editor = new BubbleUI::Paineis::Editor(gerenciador_cenas);
-	auto ent = new BubbleUI::Paineis::Entidades(gerenciador_cenas, { 3, 3, 200, 640});
-	auto insp = new BubbleUI::Paineis::Inspetor(gerenciador_cenas, { 500, 50, 100, 300});
+	auto ent = new BubbleUI::Paineis::Entidades(gerenciador_cenas, { 3, 3, 200, 400});
+	auto insp = new BubbleUI::Paineis::Inspetor(gerenciador_cenas, { 597, 0, 200, 400});
 	editor->Fullscreen(true);
 
 	BubbleUI::adicionarPainel(contexto.get(), editor);
 	BubbleUI::adicionarPainel(contexto.get(), ent);
 	BubbleUI::adicionarPainel(contexto.get(), insp);
+	BubbleUI::adicionarPainel(contexto.get(), new BubbleUI::Paineis::Depurador());
 
 	while (!BubbleUI::fim())
 	{

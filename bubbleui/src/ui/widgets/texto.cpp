@@ -20,13 +20,12 @@ Texto::Texto(std::string* label_shared) : label_shared(label_shared), letra_padd
 Texto::Texto(const std::string& l) : resolucao(16), letra_padding({ 0, 0 })
 {
     lines_box_limite = 3;
-    label_shared = new std::string(l);
+    frase = l;
     definirFonte();
 }
 
 void Texto::definirTexto(const std::string& texto)
 {
-    if (frase == texto)return;
     frase = texto;
 }
 

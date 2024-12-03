@@ -59,7 +59,8 @@ void GerenciadorDeFontes::carregarFonte(const std::string& nome_da_fonte, unsign
             }
         }
         else {
-            throw std::runtime_error("Fonte não encontrada: " + nome_da_fonte);
+            //Fonte não encontrada
+            return;
         }
 
 

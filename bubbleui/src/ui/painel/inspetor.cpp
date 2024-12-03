@@ -125,13 +125,13 @@ void Inspetor::desvendarWidgets(const std::vector<std::any>& variaveis, std::sha
     // Verifica se possui arvore
     for (const auto& variavel : variaveis)
     {
-    //    if (variavel.type() == typeid(ArvoreID))
-    //    {
-    //        auto newVar = variavel._Cast<ArvoreID>();
-    //        auto arvore_recursiva = std::make_shared<Widgets::Arvore>(newVar->second, nullptr);
-    //        arvore->adiFilho(arvore_recursiva);
-    //        desvendarWidgets(newVar->first, arvore_recursiva);
-    //    }else
+        if (variavel.type() == typeid(ArvoreID))
+        {
+            auto newVar = variavel._Cast<ArvoreID>();
+            auto arvore_recursiva = std::make_shared<Widgets::Arvore>(newVar->second, nullptr);
+            arvore->adiFilho(arvore_recursiva);
+            desvendarWidgets(newVar->first, arvore_recursiva);
+        }else
     // Verifica se possui check box
         if (variavel.type() == typeid(CheckBoxID))
         {

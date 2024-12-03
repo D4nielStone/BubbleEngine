@@ -22,10 +22,10 @@ void BubbleUI::Paineis::Depurador::preAtualizacao()
 		//	adicionarWidget(std::make_shared<Widgets::Texto>(str));
 		//}
 
+		fps_display->definirTexto("FPS: " + std::to_string(static_cast<int>(fps)));
 		fps = frames / elapsedTime;
 		frames = 0;  // Resetar o contador de frames
 		lastTime = glfwGetTime();  // Atualizar o tempo de referência
-		fps_display->definirTexto("FPS: " + std::to_string(static_cast<int>(fps)));
 	}
 }
 

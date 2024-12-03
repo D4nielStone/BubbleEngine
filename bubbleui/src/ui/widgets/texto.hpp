@@ -18,6 +18,7 @@ namespace BubbleUI
 			void renderizar() override;
 			Vector4f paraNDC(const Vector4& vec4);
 			void definirFonte(unsigned int resolucao = 15, const std::string &font_path = "assets/fontes/noto_sans/noto_sans.regular.ttf");
+			std::string nome_da_fonte{ "assets/fontes/noto_sans/noto_sans.regular.ttf" };
 		protected:
 			bool desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx);
 			void renderizar_texto(std::string &frase);
@@ -35,7 +36,6 @@ namespace BubbleUI
 			Vector4 area_de_selecao;
 			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag"), shaderQuad = Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag");
 			std::string* label_shared{ nullptr };
-			std::string nome_da_fonte;
 		};
 	}
 }

@@ -58,7 +58,6 @@ std::shared_ptr<std::string> Bubble::Entidades::Entidade::nomeptr()
 
 void Entidade::carregarNode(const Node& node)
 {
-    std::cout << "A\n";
     *Nome = node.nome;
     //if (pai)
     //{

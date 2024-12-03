@@ -14,7 +14,7 @@ CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& a
     quebrarLinha = true;
     auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
     IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
-    //definirFonte();
+    definirFonte();
 }
 
 void CheckBox::atualizar()
