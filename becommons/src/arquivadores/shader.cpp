@@ -1,34 +1,18 @@
 
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-#include "assets/shaders_na_memoria.hpp"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "Shader.hpp"
 #include "src/depuracao/debug.hpp"
 #include <src/util/includes.hpp>
 #include <filesystem>
-#include <map>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <vector>
 
-// Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
-const std::map<std::string, const char*> shader_memoria{
-    {"quad.vert", quad_vert},
-    {"quad.frag", quad_frag},
-    {"imagem.vert", imagem_vert},
-    {"imagem.frag", imagem_frag},
-    {"texto.vert", texto_vert},
-    {"texto.frag", texto_frag},
-    {"skybox.vert", skybox_vert},
-    {"skybox.frag", skybox_frag},
-    {"phong.vert", phong_vert},
-    {"phong.frag", phong_frag}
-};
-
-std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
+using namespace Bubble::Arquivadores;
 
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 

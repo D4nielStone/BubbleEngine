@@ -13,7 +13,7 @@ namespace Bubble
 			Vertex malha;
 			const char* Path = nullptr;
 		public:
-			Shader shader = Shader("assets/shaders/skybox.vert", "assets/shaders/skybox.frag");
+			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/skybox.vert", "assets/shaders/skybox.frag");
 			Skybox(const char* path);
 			Skybox();
 			void configurarBuffers();

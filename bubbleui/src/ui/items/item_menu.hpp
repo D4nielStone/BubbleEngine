@@ -34,7 +34,7 @@ namespace BubbleUI
 			Color cor{ 1, 1, 1 };
 			Vector4 char_rect{ 0, 0, 0 ,0 };
 			Vector4f paraNDC();
-			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
+			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
 			Colisao2d colisao;
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Formas::Moldura *pai{ nullptr };

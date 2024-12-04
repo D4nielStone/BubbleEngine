@@ -36,7 +36,7 @@ namespace BubbleUI
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			Size tamanhoDoContextoAnterior;
-			Shader shader{ Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
+			Bubble::Arquivadores::Shader shader{ Bubble::Arquivadores::Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
 		};
 	}
 }

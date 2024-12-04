@@ -9,11 +9,7 @@
 /* Inclusões */
 #include "bubbleui/src/ui/contexto/contexto.hpp"
 #include "bubbleui/src/ui/painel/visualizador_de_projetos.hpp"
-
-/* Declarações globais */
-GLFWwindow* janela{ nullptr };
-std::shared_ptr<BubbleUI::Contexto> contexto_ui{ nullptr };
-constexpr const char* title = "Bubble Engine - Project Manager - (C) 2024 Daniel Oliveira";
+#include <windows.h>
 
 /**
 * Funcao de inicializacao
@@ -26,13 +22,15 @@ constexpr const char* title = "Bubble Engine - Project Manager - (C) 2024 Daniel
 #endif
 int INIT
 {
-	auto contexto = BubbleUI::janela(title);
+	auto contexto = BubbleUI::janela("Bubble Engine - Project Manager - (C) 2024 Daniel Oliveira");
     if (!contexto)return -1;
 
-	BubbleUI::adicionarPainel(contexto, new BubbleUI::Paineis::VisualizadorDeProjetos());
+	BubbleUI::adicionarPainel(contexto.get(), new BubbleUI::Paineis::VisualizadorDeProjetos());
 
-	while(!BubbleUI::fim())
+	while (!BubbleUI::fim())
+	{
 		BubbleUI::atualizarContexto();
-
+		BubbleUI::renderizarContexto();
+	}
 	return 0;
 }

@@ -1,4 +1,4 @@
-const char* quad_frag = 
+inline const char* quad_frag = 
 R"(
 #version 330 core
 

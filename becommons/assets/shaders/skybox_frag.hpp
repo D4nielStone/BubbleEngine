@@ -1,6 +1,6 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-const char* skybox_frag =
+inline const char* skybox_frag =
 R"(
 #version 330 core
 out vec4 FragColor;

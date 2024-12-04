@@ -34,7 +34,7 @@ namespace BubbleUI
 			Vector4 char_rect, char_fundo_rect;
 			std::vector<LetraRect> letras_rect;
 			Vector4 area_de_selecao;
-			Shader shader = Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag"), shaderQuad = Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag");
+			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag"), shaderQuad = Bubble::Arquivadores::Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag");
 			std::string* label_shared{ nullptr };
 		};
 	}

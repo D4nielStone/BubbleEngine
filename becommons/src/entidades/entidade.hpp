@@ -36,8 +36,6 @@ namespace Bubble {
 			Entidade* pai{ nullptr };
 		private:
 			// Fila de tarefas para o segundo plano
-			Shader shader_padrao = Shader("assets/shaders/phong.vert", "assets/shaders/phong.frag");
-			Shader shader_outline = Shader("assets/shaders/outline.vert", "assets/shaders/outline.frag");
 			std::shared_ptr<Componentes::Transformacao> transformacao;
 			std::vector<std::shared_ptr<Comum::Componente>> Componentes;
 			std::vector<std::shared_ptr<Entidade>> filhos;

@@ -1,7 +1,7 @@
 
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-const char* quad_vert =
+inline const char* quad_vert =
 R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;

@@ -11,22 +11,16 @@ Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : 
 {
 }
 
-Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao)
+Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao), ip(size_percentage)
 {
-    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &rect.w, &rect.h); });
+    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y); });
 
-    // Calcula o fator de escala como um valor de ponto flutuante
-    float scale_factor = static_cast<float>(size_percentage) / 100.0f;
-
-    // Aplica o fator de escala na largura e altura antes de converter para int
-    rect.w = static_cast<int>(rect.w * scale_factor);
-    rect.h = static_cast<int>(rect.h * scale_factor);
 }
 
 Imagem::Imagem(const std::string& path, const Vector2& size)
 {
-    auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
-    ID = gerenciador.carregarTextura(path, &rect.w, &rect.h);
+    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y); });
+
     rect.w = size.x;
     rect.h = size.y;
 }
@@ -48,10 +42,21 @@ Vector4f Imagem::paraNDC() const
 
 void Imagem::atualizar()
 {
+
     if (preencher)
     {
         rect.w = static_cast<int>(painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x));
         rect.h = static_cast<int>(painel->obterRetangulo().h - (painel->posicaoWidget.y - painel->obterRetangulo().y));
+    }
+    else
+    {
+
+        // Calcula o fator de escala como um valor de ponto flutuante
+        float scale_factor = static_cast<float>(ip) / 100.0f;
+
+        // Aplica o fator de escala na largura e altura antes de converter para int
+        rect.w = static_cast<int>(tamanho_original.x * scale_factor);
+        rect.h = static_cast<int>(tamanho_original.y * scale_factor);
     }
     rect = { (float)painel->posicaoWidget.x + painel->widgetPadding.x, (float)painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     

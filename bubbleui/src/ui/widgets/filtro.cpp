@@ -29,7 +29,7 @@ static void janelaNovoProjeto()
 
 static void novoProjeto()
 {
-    BubbleUI::tarefa(janelaNovoProjeto);
+    //BubbleUI::tarefa(janelaNovoProjeto);
 }
 
 Filtro::Filtro(const std::string& label) : label(label)

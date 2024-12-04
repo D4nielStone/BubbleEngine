@@ -27,7 +27,6 @@ namespace Bubble
         class BECOMMONS_DLL_API Scene
         {
         private:
-            Shader shader;
             std::shared_ptr<std::string> Name = std::make_shared<std::string>("Cena");
             std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;

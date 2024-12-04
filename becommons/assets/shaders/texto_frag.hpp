@@ -1,4 +1,4 @@
-const char* texto_frag = R"(
+inline const char* texto_frag = R"(
 #version 330 core
 
 in vec2 Uv;

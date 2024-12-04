@@ -12,7 +12,7 @@ namespace BubbleUI
 			void atualizar() override;
 			void renderizar() override;
 		private:
-			Shader shaderImg = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
+			Bubble::Arquivadores::Shader shaderImg = Bubble::Arquivadores::Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
 			void renderizarImg();
 			Vector4f rect_ndc;
 			bool* retorno{ nullptr }, gatilho{ false }, deveRenderizar{ true };

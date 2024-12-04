@@ -28,7 +28,7 @@ namespace BubbleUI
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			Size tamanhoDoContextoAnterior;
-			Shader shader = Shader("assets/shaders/linha.vert", "assets/shaders/linha.frag");
+			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/linha.vert", "assets/shaders/linha.frag");
 		};
 	}
 }

@@ -22,9 +22,10 @@ namespace BubbleUI
 			unsigned int ID;
 			Vector2* posicao_ptr{ nullptr };
 			Vector4 rect;
+			Vector2 tamanho_original{};
 			std::string path;
 			unsigned int ip;
-			Shader shader = Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
+			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/imagem.vert", "assets/shaders/imagem.frag");
 			bool preencher{ false };
 		};
 	}

@@ -37,14 +37,15 @@ int INIT
 
 	auto editor = new BubbleUI::Paineis::Editor(gerenciador_cenas);
 	auto ent = new BubbleUI::Paineis::Entidades(gerenciador_cenas, { 3, 3, 200, 400});
-	auto insp = new BubbleUI::Paineis::Inspetor(gerenciador_cenas, { 597, 0, 200, 400});
+	auto insp = new BubbleUI::Paineis::Inspetor(gerenciador_cenas, { 597, 3, 200, 400});
 	editor->Fullscreen(true);
 
 	BubbleUI::adicionarPainel(contexto.get(), editor);
 	BubbleUI::adicionarPainel(contexto.get(), ent);
 	BubbleUI::adicionarPainel(contexto.get(), insp);
+#ifdef _DEBUG
 	BubbleUI::adicionarPainel(contexto.get(), new BubbleUI::Paineis::Depurador());
-
+#endif
 	while (!BubbleUI::fim())
 	{
 		BubbleUI::atualizarContexto();

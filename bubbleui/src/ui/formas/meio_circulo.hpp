@@ -29,13 +29,14 @@ namespace BubbleUI
 			virtual void atualizar();
 			virtual void renderizar() ;
 		protected:
+
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Vector4 retangulo, tamanhoAnterior;
 			Color* cor_base	{ new Color(0.2f, 0.2f, 0.2f, 1.f) };
 			Vector4f paraNDC();
 			Vector4f coord_ndc;
 			Size tamanhoDoContextoAnterior;
-			Shader shader{ Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
+			Bubble::Arquivadores::Shader shader{ Bubble::Arquivadores::Shader("assets/shaders/quad.vert", "assets/shaders/quad.frag") };
 			void definirBuffers();
 		};
 	}
