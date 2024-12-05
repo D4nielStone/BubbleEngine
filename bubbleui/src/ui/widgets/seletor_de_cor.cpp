@@ -26,9 +26,9 @@ static void HSVtoRGB(float h, float s, float v, float* r, float* g, float* b) {
 SeletorDeCor::SeletorDeCor(Color* cor, const std::string& label, const Alinhamento& alinhamento)
 : cor_callback(cor)
 {
-    alinhamentoHorizontal = alinhamento;
+    alinhamentoHorizontal = Alinhamento::Esquerda;
     arco_cor = std::make_unique<Imagem>("assets/texturas/icons/arco_cor.png", Vector2{static_cast<int>(raio*2), static_cast<int>(raio * 2) });
-    arco_cor->defAlinhamento(Alinhamento::Direita); arco_cor->padding = true;
+    arco_cor->defAlinhamento(alinhamento); arco_cor->padding = true;
     arco_cor->quebrarLinha = true;
     arco_cor->flip = true;
     frase = label;

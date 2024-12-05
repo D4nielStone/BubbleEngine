@@ -9,11 +9,12 @@
 
 using namespace Bubble::Componentes;
 
-Camera::Camera() : corSolida(true), FOV(45.0f), aspecto(1.333f), zNear(0.1f), zFar(300)
+Camera::Camera() : FOV(75.F), aspecto(1.333f), zNear(0.1f), zFar(300)
 {
     Nome = "Camera";
 
-    variaveis.push_back(std::pair(&ceu, "Cor difusa"));
+    variaveis.push_back(std::pair(&ceu, "Cor do ceu"));
+    variaveis.push_back(std::pair(&corSolida, "Renderizar skybox"));
 }
 Camera::~Camera() {}
 
@@ -55,6 +56,11 @@ void Camera::atualizarAspecto(float aspect)
 {
     aspecto = aspect;
 }
+void Camera::atualizarShader()
+{
+    shader_atual->setMat4("projection", obterProjMatrix());
+    shader_atual->setMat4("view", obterViewMatrix());
+}
 void Camera::desenharFrame(const Vector4<int> &viewportRect) const
 {
     // Bind framebuffer
@@ -85,6 +91,7 @@ void Camera::desenharFrame(const Vector4<int> &viewportRect) const
 
 void Camera::renderizar()
 { 
+    if(!corSolida)
     skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
 }
 void Camera::atualizar() {

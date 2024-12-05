@@ -43,6 +43,7 @@ namespace BubbleUI
 
 		void defCor(const Color& cor) override;
 	protected:
+		std::shared_ptr<Colisao2d> colisao = std::make_shared<Colisao2d>();
 		// Métodos de Configuração e Ciclo de Vida
 		void configurar(std::shared_ptr<Contexto> ctx, const Vector4<int>& rect = { 2, 2, 200, 100 });
 		virtual void preAtualizacao() {}

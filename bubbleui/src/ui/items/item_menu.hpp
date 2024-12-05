@@ -35,7 +35,7 @@ namespace BubbleUI
 			Vector4<int> char_rect{ 0, 0, 0 ,0 };
 			Vector4<float> paraNDC();
 			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
-			Colisao2d colisao;
+			std::shared_ptr<Colisao2d> colisao = std::make_shared<Colisao2d>();
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Formas::Moldura *pai{ nullptr };
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };

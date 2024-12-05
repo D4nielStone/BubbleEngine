@@ -30,7 +30,7 @@
     <ClInclude Include="src\ui\formas\linha.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\ui\painel\separador.hpp">
+    <ClInclude Include="src\ui\ancoragem\separador.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\formas\colisao2d.hpp">
@@ -125,7 +125,7 @@
     <ClCompile Include="src\ui\formas\linha.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\ui\painel\separador.cpp">
+    <ClCompile Include="src\ui\ancoragem\separador.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\formas\colisao2d.cpp">

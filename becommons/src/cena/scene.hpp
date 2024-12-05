@@ -21,7 +21,7 @@ namespace Bubble
         public:
             PipeLine() = default;
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> ent);
-            void renderizar();
+            void renderizar(Componentes::Camera* cam);
         };
         class BECOMMONS_DLL_API Scene
         {

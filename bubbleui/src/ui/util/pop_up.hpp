@@ -25,7 +25,7 @@ namespace BubbleUI
 			int largura{ 0 }, altura{ 0 };
 			void posAtualizacao() override;
 			bool vmostrar{ false }, podeEsconder{ false };
-			Colisao2d colisao;
+			std::shared_ptr<Colisao2d> colisao = std::make_shared<Colisao2d>();
 			std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 			std::vector<std::shared_ptr<Items::ItemMenu>> lista_items;
 		};

@@ -31,8 +31,9 @@ namespace Bubble::Cena
         }
     }
 
-    void PipeLine::renderizar()
+    void PipeLine::renderizar(Componentes::Camera* cam)
     {
+        cam->renderizar();
         // Itera sobre todos os pares de material e entidades
         for (auto& [materialID, entidadesMaterial] : entidadesParaRenderizar) {
             // Pega o ponteiro do material atual
@@ -43,6 +44,8 @@ namespace Bubble::Cena
                 material->bind();
             }
 
+            cam->atualizarShader();
+
             // Itera pelas entidades associadas ao material atual
             for (auto& entidade : entidadesMaterial.first) {
                 // Renderiza a entidade
@@ -52,17 +55,17 @@ namespace Bubble::Cena
     }
     // Uma cena é criada
     // \param name: para o nome da cena
-    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)) {
+    Scene::Scene(const std::string& name) : Name(std::make_shared<std::string>(name)) {
         Debug::emitir("CENA", std::string(name) + " criada");
     }
     Scene::~Scene() {}
     // Deve adicionar entidade
 
-    std::shared_ptr<Entidades::Entidade> Scene::criarEntidade(const std::string &path, const char* nome_entidade)
+    std::shared_ptr<Entidades::Entidade> Scene::criarEntidade(const std::string& path, const char* nome_entidade)
     {
         Arquivadores::Arquivo3d arquivo_3d(path);
         adicionarEntidade(std::make_shared<Entidades::Entidade>(arquivo_3d));
-        return Entidades[Entidades.size()-1];
+        return Entidades[Entidades.size() - 1];
     }
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
@@ -73,20 +76,18 @@ namespace Bubble::Cena
     }
     bool carregou_arquivo3d{ false };
     // Deve renderizar Cena
-    void Scene::renderizar(const InputMode modo)  {
+    void Scene::renderizar(const InputMode modo) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
-        glCullFace(GL_BACK); 
-        
-        if (modo == Editor) {
-            camera_editor.renderizar();
-        }
-        else if(camera_principal->meuObjeto->ativado) {
-            camera_principal->renderizar();
-        }
+        glCullFace(GL_BACK);
 
-        renderizadores.renderizar();
+        if (modo == Editor) {
+            renderizadores.renderizar(&camera_editor);
+        }
+        else {
+            renderizadores.renderizar(camera_principal);
+        }
     }
 
     // Deve atualizar Cena

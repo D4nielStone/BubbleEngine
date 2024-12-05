@@ -11,7 +11,7 @@ void BubbleUI::Widget::definirPai(Formas::Moldura* p)
 	painel = p;	
 	contexto = painel->obterContexto();
 	Formas::Moldura::configurar(contexto, {});
-	colisao = Colisao2d({}, contexto);
+	colisao->definirContexto(contexto);
 	inputs = contexto->inputs;
 }
 

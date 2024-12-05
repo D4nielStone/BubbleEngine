@@ -33,7 +33,7 @@ namespace BubbleUI
 		std::shared_ptr<Widgets::Arvore> arvore_pai{ nullptr };
 		bool quebrarLinha{ false };
 	protected:
-		Colisao2d colisao;
+		std::shared_ptr<Colisao2d> colisao = std::make_shared<Colisao2d>();
 		Formas::Moldura *painel{ nullptr };
 		Alinhamento alinhamentoHorizontal = Alinhamento::Esquerda;
 		std::shared_ptr<Contexto> contexto{ nullptr };

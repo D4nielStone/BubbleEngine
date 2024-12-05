@@ -118,7 +118,7 @@ void Arvore::atualizar()
     painel->posicaoWidget.x = painel->obterRetangulo().x;
     //
     // Define o retângulo de colisão para a detecção de mouse
-    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), painel->obterRetangulo().w, (int)box_size.y });
+    colisao->definirBounds({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
     definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
     definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
@@ -142,7 +142,7 @@ void Arvore::atualizar()
     Moldura::defCor(cor);
     // Se o mouse não estiver sobre o widget, define a cor padrão da moldura
     if(!painel->selecionado)return;
-    if (!colisao.mouseEmCima())
+    if (!colisao->mouseEmCima())
     {
         if (inputs->mouseEnter == GLFW_PRESS)
         {

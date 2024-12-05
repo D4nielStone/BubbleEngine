@@ -16,6 +16,7 @@ namespace Bubble {
             void configurar() override;
             void atualizar() override;
             virtual void renderizar();
+            void atualizarShader();
             void atualizarAspecto(float aspect);
             void desenharFrame(const Vector4<int> &viewportRect) const;
             const float* obterViewMatrix();
@@ -23,9 +24,9 @@ namespace Bubble {
             Color ceu{ 0.7f, 0.7f, 1.0f, 1 };
             glm::mat4 obterViewMatrixMat() const;
             glm::mat4 obterProjMatrixMat() const;
-            bool corSolida;
+            bool corSolida{ false };
             unsigned int FBO, textureColorbuffer, rbo;
-            float FOV, aspecto, zFar, zNear, resolucaoDoFB{ 0.9f };
+            float FOV, aspecto, zFar, zNear, resolucaoDoFB{ 1.F};
         protected:
             std::unique_ptr<Util::Skybox> skybox{ nullptr };
             glm::mat4 matrizProjecao;

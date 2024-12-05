@@ -100,8 +100,16 @@ void BubbleUI::adicionarAncora(Contexto* contexto, BubbleUI::Ancora* ancora)
     contexto->ancoras.emplace_back(ancora);
 }
 
+bool gatilho_ancora{ false };
+
 void BubbleUI::Contexto::atualizar()
 {
+
+    if (!gatilho_ancora) {
+        ancora_root->definirContexto(contextos[glfwWindow]);
+        gatilho_ancora = true;
+    }
+
     glfwPollEvents();
 
     // Vetor de futures para armazenar as tarefas assíncronas de atualização dos paineis

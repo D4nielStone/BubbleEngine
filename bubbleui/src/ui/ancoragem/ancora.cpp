@@ -18,6 +18,7 @@ void Ancora::definirContexto(std::shared_ptr<Contexto> contexto)
 }
 
 void Ancora::definirPainel(Painel* painel) {
+    tipo = Nenhum;
 	this->painel = painel;
 }
 

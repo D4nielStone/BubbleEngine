@@ -10,8 +10,9 @@ namespace BubbleUI
 		class BEUI_DLL_API Jogo : public Painel
 		{
 		public:
-			Jogo(std::shared_ptr < Contexto>ctx, std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4<int>&rect = {2, 2, 50, 50});
+			Jogo(std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4<int>&rect = {2, 2, 50, 50});
 			void preAtualizacao() override;
+			void definirContexto(std::shared_ptr<Contexto>ctx) override;
 		private: 
 			std::shared_ptr<Bubble::Cena::SceneManager> scenemanager;
 			std::shared_ptr<Widgets::Imagem> buffer;

@@ -9,6 +9,7 @@
 /* Inclusões */
 #include "bubbleui/src/ui/contexto/contexto.hpp"
 #include "bubbleui/src/ui/painel/visualizador_de_projetos.hpp"
+#include "src/ui/ancoragem/ancora.hpp"
 #include <windows.h>
 
 /**
@@ -25,7 +26,7 @@ int INIT
 	auto contexto = BubbleUI::janela("Bubble Engine - Project Manager - (C) 2024 Daniel Oliveira");
     if (!contexto)return -1;
 
-	BubbleUI::adicionarPainel(contexto.get(), new BubbleUI::Paineis::VisualizadorDeProjetos());
+	contexto->ancora_root->definirPainel(new BubbleUI::Paineis::VisualizadorDeProjetos());
 
 	while (!BubbleUI::fim())
 	{

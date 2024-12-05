@@ -32,15 +32,17 @@ namespace BubbleUI {
     // Ciclo de Vida do Painel: Atualização
     void Painel::atualizar()
     {
+        colisao->definirBounds(obterRetangulo());
+
         // Atualiza a moldura
         arvoreCor = {0.1f, 0.1f, 0.1f};
         if (selecionado)
         {
-            if(mostrar_aba)aba->obterCorpo()->defCor(ROXO_CLARO);
+            if(mostrar_aba && aba)aba->obterCorpo()->defCor(ROXO_CLARO);
         }
         else
         {
-            if (mostrar_aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
+            if (mostrar_aba && aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
         }
         if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
             menuDeContexto->mostrar();
@@ -48,7 +50,7 @@ namespace BubbleUI {
 
         // Atualiza os widgets
         preAtualizacao();
-        if (mostrar_aba)aba->atualizar();
+        if (mostrar_aba && aba)aba->atualizar();
         for (auto& widget : lista_widgets)
         {
             widget->atualizar();
@@ -121,9 +123,11 @@ namespace BubbleUI {
         Rect::contexto = ctx;
         
         menuDeContexto= std::make_unique<Util::PopUp>(contexto);
-        aba= std::make_unique<Aba>(this);
 
-        Rect::Rect(ctx, retangulo);
+        colisao->definirContexto(contexto);
+
+        Rect::Rect(contexto, retangulo);
+        aba= std::make_unique<Aba>(this);
         defCor({ 0.13f, 0.11f, 0.16f, 1.f });
         borda_d = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });
         borda_b = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });

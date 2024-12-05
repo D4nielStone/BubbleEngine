@@ -1,7 +1,6 @@
 #pragma once
 #include "imagem.hpp"
 #include "texto.hpp"
-#include "src/ui/painel/separador.hpp"
 
 namespace BubbleUI
 {

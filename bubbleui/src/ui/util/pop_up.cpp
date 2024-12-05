@@ -7,7 +7,7 @@
 BubbleUI::Util::PopUp::PopUp(std::shared_ptr<Contexto> contexto)
 {
 	configurar(contexto, {});
-	colisao = Colisao2d({}, contexto);
+	colisao ->definirContexto(contexto);
 	inputs = contexto->inputs;
 }
 
@@ -24,8 +24,8 @@ void BubbleUI::Util::PopUp::posAtualizacao()
 		altura += item->altura;
 	}
 
-	colisao.defRect(retangulo);
-	mouseEmCima = colisao.mouseEmCima();
+	colisao->definirBounds(retangulo);
+	mouseEmCima = colisao->mouseEmCima();
 	if (vmostrar && inputs->mouseEnter == GLFW_RELEASE)
 		podeEsconder = true;
 	if (vmostrar && inputs->mouseEnter == GLFW_PRESS && !mouseEmCima && podeEsconder)

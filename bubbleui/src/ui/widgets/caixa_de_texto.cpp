@@ -49,7 +49,7 @@ void CaixaTexto::atualizar()
     if (!painel->selecionado)
         return;
 
-    if (colisao.mouseEmCima()) {
+    if (colisao->mouseEmCima()) {
         contexto->cursor = contexto->cursor_texto; // Define o cursor
         if (inputs->mouseEnter == GLFW_PRESS)iniciarSelecao(); // Inicializa seleção
         else selecionando_texto = false; // Desativa seleção
@@ -85,7 +85,7 @@ void CaixaTexto::atualizar()
     }
 
     // Redimensiona moldura e colisao
-    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), static_cast<int>(box_size.x), static_cast<int>(box_size.y) });
+    colisao->definirBounds({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), static_cast<int>(box_size.x), static_cast<int>(box_size.y) });
     Moldura::definirTamanho({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     Moldura::atualizar();
 }

@@ -173,7 +173,7 @@
     <ClInclude Include="src\ui\widgets\imagem.hpp" />
     <ClInclude Include="src\ui\painel\depurador.hpp" />
     <ClInclude Include="src\ui\formas\colisao2d.hpp" />
-    <ClInclude Include="src\ui\painel\separador.hpp" />
+    <ClInclude Include="src\ui\ancoragem\separador.hpp" />
     <ClInclude Include="bubbleui.hpp" />
     <ClInclude Include="src\ui\formas\linha.hpp" />
     <ClInclude Include="src\ui\painel\painel.hpp" />
@@ -207,7 +207,7 @@
     <ClCompile Include="src\ui\widgets\imagem.cpp" />
     <ClCompile Include="src\ui\painel\depurador.cpp" />
     <ClCompile Include="src\ui\formas\colisao2d.cpp" />
-    <ClCompile Include="src\ui\painel\separador.cpp" />
+    <ClCompile Include="src\ui\ancoragem\separador.cpp" />
     <ClCompile Include="src\ui\formas\linha.cpp" />
     <ClCompile Include="src\ui\painel\painel.cpp" />
     <ClCompile Include="src\ui\contexto\contexto.cpp" />

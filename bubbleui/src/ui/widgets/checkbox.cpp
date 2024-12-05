@@ -19,6 +19,8 @@ CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& a
 
 void CheckBox::atualizar()
 {
+    deveRenderizar = (retorno != nullptr) ? *retorno : false;
+
     int x = painel->posicaoWidget.x + painel->widgetPadding.x;
     int y = painel->posicaoWidget.y + painel->widgetPadding.y;
 
@@ -34,7 +36,7 @@ void CheckBox::atualizar()
 
     Moldura::definirPosicao({ x, y });
     Moldura::definirTamanho({ size, size });
-    colisao.defRect(Moldura::obterRetangulo());
+    colisao->definirBounds(Moldura::obterRetangulo());
 
     // Atualiza o texto se houver
     if (!frase.empty())
@@ -61,12 +63,12 @@ void CheckBox::atualizar()
     if (retorno)
     {
         //deveRenderizar = *retorno;
-        if (colisao.mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && *retorno)
+        if (colisao->mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && *retorno)
         {
             gatilho = true;
             *retorno = false;
         }
-        else if (colisao.mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && !*retorno)
+        else if (colisao->mouseEmCima() && !gatilho && inputs->mouseEnter == GLFW_PRESS && !*retorno)
         {
             gatilho = true;
             *retorno = true;

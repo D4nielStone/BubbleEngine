@@ -27,8 +27,8 @@ void BubbleUI::Items::ItemMenu::atualizar()
     clicado = false; // Inicializa o estado de clique como falso
 
     // Verifica se o mouse está sobre o item
-    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
-    if (!colisao.mouseEmCima())
+    colisao->definirBounds({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
+    if (!colisao->mouseEmCima())
     {
         mouseEmCima = false; // Marca que o mouse não está sobre o item
         Moldura::defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
@@ -162,7 +162,7 @@ void BubbleUI::Items::ItemMenu::definirPai(Formas::Moldura* m)
     pai = m;
     contexto = m->obterContexto();
     Formas::Moldura::configurar(contexto, {}); // Define a moldura com base no contexto do pai
-    colisao = Colisao2d({}, contexto); // Cria uma nova instância de colisão 2D
+    colisao->definirContexto(contexto);
     inputs = contexto->inputs;
 }
 

@@ -1,26 +1,37 @@
-
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
-
+#include <vector>
+#include <memory>
+#include <algorithm>
 #include "colisao2d.hpp"
 #include "src/depuracao/debug.hpp"
 
-BubbleUI::Colisao2d::Colisao2d(const Vector4<int>& quadrado, std::shared_ptr<Contexto> ctx) : quadrado(quadrado), contexto(ctx)
-{
-}
+namespace BubbleUI {
 
-void BubbleUI::Colisao2d::defRect(const Vector4<int> &quad)
-{
-	quadrado = quad;
-}
+    Colisao2d::Colisao2d(const Vector4<int>& bounds, std::shared_ptr<Contexto> ctx)
+        : bounds(bounds), contexto(ctx)
+    {
+    }
 
-bool BubbleUI::Colisao2d::mouseEmCima() const
-{
-	if (   contexto->inputs->mousex > quadrado.x 
-		&& contexto->inputs->mousex < (quadrado.x + quadrado.w)
-		&& contexto->inputs->mousey > quadrado.y 
-		&& contexto->inputs->mousey < (quadrado.y + quadrado.h)
-	   )
-		return true;
-	else
-		return false;
-}
+    void Colisao2d::definirContexto(std::shared_ptr<Contexto> ctx)
+    {
+        contexto = ctx;
+    }
+
+    void Colisao2d::definirBounds(const Vector4<int>& quad)
+    {
+        bounds = quad;
+    }
+
+    Colisao2d::~Colisao2d() {
+    }
+
+    bool Colisao2d::mouseEmCima() const {
+        const auto posMouse = Vector2(contexto->inputs->mousex, contexto->inputs->mousey);
+        return mouseDentro(posMouse);
+    }
+
+    bool Colisao2d::mouseDentro(const Vector2& posMouse) const {
+        return (posMouse.x >= bounds.x && posMouse.x < (bounds.x + bounds.w) &&
+            posMouse.y >= bounds.y && posMouse.y < (bounds.y + bounds.h));
+    }
+     
+} // namespace BubbleUI

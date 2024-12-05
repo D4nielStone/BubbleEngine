@@ -21,7 +21,7 @@ void BubbleUI::Separador::atualizar()
 
 bool BubbleUI::Separador::cursor() const
 {
-	return colisao.mouseEmCima();
+	return colisao->mouseEmCima();
 }
 
 void BubbleUI::Separador::atualizarColisao()
@@ -29,7 +29,7 @@ void BubbleUI::Separador::atualizarColisao()
 	switch (lado)
 	{
 	case DIREITA:
-		colisao.defRect({
+		colisao->definirBounds({
 			painel->obterRetangulo().x + painel->obterRetangulo().w -2,
 			painel->obterRetangulo().y,
 			10,
@@ -37,7 +37,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case ESQUERDA:
-		colisao.defRect({
+		colisao->definirBounds({
 			painel->obterRetangulo().x - 10,
 			painel->obterRetangulo().y,
 			12,
@@ -45,7 +45,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case CIMA:
-		colisao.defRect({
+		colisao->definirBounds({
 			painel->obterRetangulo().x,
 			painel->obterRetangulo().y - 10,
 			painel->obterRetangulo().w,
@@ -53,7 +53,7 @@ void BubbleUI::Separador::atualizarColisao()
 			});
 		break;
 	case BAIXO:
-		colisao.defRect({
+		colisao->definirBounds({
 			painel->obterRetangulo().x,
 			painel->obterRetangulo().y + painel->obterRetangulo().h - 2,
 			painel->obterRetangulo().w,
@@ -67,7 +67,7 @@ void BubbleUI::Separador::atualizarColisao()
 
 void BubbleUI::Separador::atualizarCursor()
 {
-	if (colisao.mouseEmCima() && painel->selecionado)
+	if (colisao->mouseEmCima() && painel->selecionado)
 	{
 		switch (lado)
 		{

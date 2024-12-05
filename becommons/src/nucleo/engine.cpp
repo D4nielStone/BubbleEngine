@@ -16,7 +16,6 @@ bool Engine::carregarProjeto(const std::string& path)
 {
 	Debug::emitir("Engine", "carregando projeto em: " + path);
 	gerenciador_dc->novaCena("Cena", false);
-	Bubble::Cena::criarEntidade(R"(C:\Users\DN\3D Objects\fence-barricade-03\source\Fence-Barricade_03.blend)");;
 	return true;
 }
 void Engine::atualizar()

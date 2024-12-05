@@ -36,9 +36,11 @@ void BubbleUI::Paineis::Inspetor::definirContexto(std::shared_ptr<Contexto> ctx)
     popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar renderizador", &msgAdiRender));
     popup_comps->adiItem(std::make_shared<Items::Botao>("adicionar terreno", &msgAdiTerr));
     // adiciona chackbox para ativar/desativar entidade
-    auto ent_atv_chk = std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado);
-    adicionarWidget(ent_atv_chk);
+    if (entidade_selecionada) {
+        auto ent_atv_chk = std::make_shared<Widgets::CheckBox>(&entidade_selecionada->ativado);
+        adicionarWidget(ent_atv_chk);
     ent_atv_chk->quebrarLinha = false;
+    }
     // Verifica se o contexto e o scenemanager são válidos antes de usar
     if (scenemanager && ctx)    adicionarWidget(std::make_shared<Widgets::CaixaTexto>(nome_atual, ""));
     else                        Debug::emitir(Erro, "Scenemanager ou contexto inválido");// Log de erro

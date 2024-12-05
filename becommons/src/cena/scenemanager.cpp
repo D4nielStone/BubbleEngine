@@ -81,7 +81,7 @@ void SceneManager::carregarCena(int sceneIndex) {
         std::string msg("Carregando cena ");
         std::string soma = msg + std::to_string(currentSceneIndex);
 
-        std::cout << soma.c_str();
+        Debug::emitir("Cena", soma.c_str());
 
         scenes[currentSceneIndex]->carregar();
     }
