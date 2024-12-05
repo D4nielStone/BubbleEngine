@@ -1,12 +1,8 @@
-#pragma once
+/*#pragma once
 #include "src/ui/formas/linha.hpp"
 #include "src/ui/formas/colisao2d.hpp"
 #include "bubbleui.hpp"
 
-enum Lado
-{
-	DIREITA, ESQUERDA, CIMA, BAIXO
-};
 namespace BubbleUI
 {
 	class Painel;
@@ -30,3 +26,4 @@ namespace BubbleUI
 		void atualizarArrasto();
 	};
 }
+*/

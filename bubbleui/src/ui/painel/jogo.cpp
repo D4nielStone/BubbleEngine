@@ -9,7 +9,7 @@
 
 using namespace BubbleUI::Widgets;
 
-BubbleUI::Paineis::Jogo::Jogo(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<Imagem>(0))
+BubbleUI::Paineis::Jogo::Jogo(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4<int>& rect) : buffer(std::make_shared<Imagem>(0))
 , scenemanager(scenemanager)
 {
 	Nome = "Jogo";
@@ -21,7 +21,7 @@ BubbleUI::Paineis::Jogo::Jogo(std::shared_ptr<Contexto> ctx, std::shared_ptr<Bub
 
 void BubbleUI::Paineis::Jogo::preAtualizacao()
 {
-    Vector4 rect_size = buffer->obtRect();
+    Vector4<int> rect_size = buffer->obtRect();
     scenemanager->defJogoViewport(rect_size);
     widgetPadding = { 0, 0 };
     (scenemanager->cenaAtual() && scenemanager->cenaAtual()->camera_principal) && buffer->defID(scenemanager->cenaAtual()->camera_principal->textureColorbuffer);

@@ -3,7 +3,7 @@
 #include "entidades.hpp"
 #include "src/ui/widgets/caixa_de_texto.hpp"
 
-BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect) : scenemanager(scenemanager)
+BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Bubble::Cena::SceneManager> scenemanager, const Vector4<int> &rect) : scenemanager(scenemanager)
 {
     Nome = "Entidades";
     retangulo = rect;

@@ -3,30 +3,30 @@
 
 #include "moldura.hpp"
 
-BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4& retangulo)
+BubbleUI::Formas::Moldura::Moldura(std::shared_ptr<Contexto> contexto, const Vector4<int>& retangulo)
 {
 	configurar(contexto, retangulo);
 }
 
-void BubbleUI::Formas::Moldura::configurar(std::shared_ptr<BubbleUI::Contexto> c, const Vector4& retangulo)
+void BubbleUI::Formas::Moldura::configurar(std::shared_ptr<BubbleUI::Contexto> c, const Vector4<int>& retangulo)
 {
 
 	this->contexto = c;
 	this->retangulo = retangulo;
 	Rect::Rect(c, retangulo);
 	*cor_base = { 0.3f, 0.3f, 0.3f, 1.f };
-	borda_d = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
-	borda_b = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
-	borda_e = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
-	borda_c = std::make_unique<Rect>(contexto, Vector4{ 0, 0, 0, 0 });
+	borda_d = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });
+	borda_b = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });
+	borda_e = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });
+	borda_c = std::make_unique<Rect>(contexto, Vector4<int>{ 0, 0, 0, 0 });
 	borda_d->defCor(cor_base);
 	borda_b->defCor(cor_base);
 	borda_e->defCor(cor_base);
 	borda_c->defCor(cor_base);
-	ponta_a = std::make_unique<MeioCirculo>(contexto, Vector4{ 0, 0, espessuraBorda, espessuraBorda });
-	ponta_b = std::make_unique<MeioCirculo>(contexto, Vector4{ 0, 0, -espessuraBorda, espessuraBorda });
-	ponta_c = std::make_unique<MeioCirculo>(contexto, Vector4{ 0, 0, -espessuraBorda, -espessuraBorda });
-	ponta_d = std::make_unique<MeioCirculo>(contexto, Vector4{ 0, 0, espessuraBorda, -espessuraBorda });
+	ponta_a = std::make_unique<MeioCirculo>(contexto, Vector4<int>{ 0, 0, espessuraBorda, espessuraBorda });
+	ponta_b = std::make_unique<MeioCirculo>(contexto, Vector4<int>{ 0, 0, -espessuraBorda, espessuraBorda });
+	ponta_c = std::make_unique<MeioCirculo>(contexto, Vector4<int>{ 0, 0, -espessuraBorda, -espessuraBorda });
+	ponta_d = std::make_unique<MeioCirculo>(contexto, Vector4<int>{ 0, 0, espessuraBorda, -espessuraBorda });
 	ponta_a->defCor(cor_base);
 	ponta_b->defCor(cor_base);
 	ponta_c->defCor(cor_base);
@@ -115,7 +115,7 @@ void BubbleUI::Formas::Moldura::definirPosicao(const Vector2& pos)
 	retangulo.y = pos.y + espessuraBorda;
 }
 
-void BubbleUI::Formas::Moldura::definirRetangulo(const Vector4& rect)
+void BubbleUI::Formas::Moldura::definirRetangulo(const Vector4<int>& rect)
 {
 	if (!ocultar_linhas) {
 		retangulo.w = rect.w - espessuraBorda * 2;
@@ -126,7 +126,7 @@ void BubbleUI::Formas::Moldura::definirRetangulo(const Vector4& rect)
 	else retangulo = rect;
 }
 
-Vector4 BubbleUI::Formas::Moldura::obterRetangulo() const
+Vector4<int> BubbleUI::Formas::Moldura::obterRetangulo() const
 {
 	if (!ocultar_linhas)
 		return retangulo_completo;

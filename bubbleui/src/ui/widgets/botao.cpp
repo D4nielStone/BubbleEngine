@@ -96,12 +96,12 @@ void Botao::atualizar()
        Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2 - icon->obtRect().w, static_cast<int>(box_size.y)});
         else
        Moldura::definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
-        colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w - painel->widgetPadding.x * 2, (int)box_size.y});
+        colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), painel->obterRetangulo().w - painel->widgetPadding.x * 2, (int)box_size.y});
     }
     else
     {
        Moldura::definirTamanho({ largura_texto + letra_padding.x * 2, static_cast<int>(box_size.y) });
-        colisao.defRect({ box_pos.x, box_pos.y, (int)largura_texto + letra_padding.x * 2, (int)box_size.y });
+        colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), static_cast<int>(largura_texto) + letra_padding.x * 2, (int)box_size.y });
     }
    Moldura::atualizar();
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho = true;

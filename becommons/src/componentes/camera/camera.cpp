@@ -55,7 +55,7 @@ void Camera::atualizarAspecto(float aspect)
 {
     aspecto = aspect;
 }
-void Camera::desenharFrame(const Vector4 &viewportRect) const
+void Camera::desenharFrame(const Vector4<int> &viewportRect) const
 {
     // Bind framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);

@@ -4,11 +4,11 @@
 #include "colisao2d.hpp"
 #include "src/depuracao/debug.hpp"
 
-BubbleUI::Colisao2d::Colisao2d(const Vector4& quadrado, std::shared_ptr<Contexto> ctx) : quadrado(quadrado), contexto(ctx)
+BubbleUI::Colisao2d::Colisao2d(const Vector4<int>& quadrado, std::shared_ptr<Contexto> ctx) : quadrado(quadrado), contexto(ctx)
 {
 }
 
-void BubbleUI::Colisao2d::defRect(const Vector4 &quad)
+void BubbleUI::Colisao2d::defRect(const Vector4<int> &quad)
 {
 	quadrado = quad;
 }

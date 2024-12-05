@@ -1,0 +1,68 @@
+\doxysection{contexto.\+hpp}
+\hypertarget{contexto_8hpp_source}{}\label{contexto_8hpp_source}\index{src/ui/contexto/contexto.hpp@{src/ui/contexto/contexto.hpp}}
+\mbox{\hyperlink{contexto_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <glfw/glfw3.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}src/util/utils.hpp"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}src/inputs/inputs.hpp"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{class\ }Painel;\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{struct\ }BEUI\_DLL\_API\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}}}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ GLFWwindow*\ glfwWindow\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ GLFWcursor*\ cursor\_horizontal\{\ \textcolor{keyword}{nullptr}\ \};\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ GLFWcursor*\ cursor\_texto\{\ \textcolor{keyword}{nullptr}\ \};\ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ GLFWcursor*\ cursor\_vertical\{\ \textcolor{keyword}{nullptr}\ \};\ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ GLFWcursor*\ cursor\_normal\{\ \textcolor{keyword}{nullptr}\ \};\ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ GLFWcursor*\ cursor\{\ \textcolor{keyword}{nullptr}\ \};\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_a08d42660423f04c7845d388e5bfb0f56}{NomeDoProjeto}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::string\ VercaoDaEngine\{\ \textcolor{stringliteral}{"{}0.1\ Alpha.1"{}}\ \};\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_a3d90f6fe232f794980c2788c25b7ab56}{VercaoOpengl}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_ac09aae372ecb203a05af5f50fd64a484}{NomeGpu}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_afca1de8d15dc37beddd70bfa6b5d96dc}{dirDoProjeto}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ Size\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_a04a140e99dcf8c6152a0f578de078191}{tamanho}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ resolucao\{\ 15\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::shared\_ptr<Bubble::Inputs::Inputs>\ inputs\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ std::vector<Painel*>\ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_a80620bb53c684ed69f0b223723aec976}{paineis}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto_aa07390503786ac42dd0cbd6deb274f4e}{\string~Contexto}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}}(GLFWwindow*\ window);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ atualizar();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ std::shared\_ptr<Painel>\ painel(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ nome\_painel,\ \textcolor{keyword}{const}\ Vector4<int>\&\ rect);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirJanela(GLFWwindow*\ janela);}
+\DoxyCodeLine{00108\ \ \ \ \ \};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_bubble_u_i_aa478b47fb64c55fa2646815eb87ee144}{novoContexto}}(GLFWwindow*\ window);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_bubble_u_i_a6f530662743e875c4491b58a35a55312}{adicionarPainel}}(\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}}*\ contexto,\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel}{Painel}}*\ painel);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_bubble_u_i_a5f9b0ddfce6c124c25ba72d752281b39}{atualizarContexto}}();}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_bubble_u_i_a6460e3689b35188744fec00f2540800b}{renderizarContexto}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00143\ \ \ \ \ std::shared\_ptr<BubbleUI::Contexto>\ \mbox{\hyperlink{namespace_bubble_u_i_ad6b3bd2b07016a2621e89a3019028171}{janela}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ title);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespace_bubble_u_i_a35c6d064ed338df8c8411946a049e4d5}{fim}}();}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespace_bubble_u_i_aa00bcf7092a11b5b45c8fa1a81b4eda4}{tarefa}}(\textcolor{keyword}{const}\ std::function<\textcolor{keywordtype}{void}()>\ funcao);}
+\DoxyCodeLine{00158\ \}}
+
+\end{DoxyCode}

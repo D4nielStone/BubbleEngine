@@ -27,7 +27,7 @@ void BubbleUI::Items::ItemMenu::atualizar()
     clicado = false; // Inicializa o estado de clique como falso
 
     // Verifica se o mouse está sobre o item
-    colisao.defRect({ box_pos.x, box_pos.y, largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
+    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), largura_texto + letra_padding.x * 2, box_size.y }); // Define o retângulo de colisão
     if (!colisao.mouseEmCima())
     {
         mouseEmCima = false; // Marca que o mouse não está sobre o item
@@ -61,7 +61,7 @@ void BubbleUI::Items::ItemMenu::renderizar()
         shader.use(); // Usa o shader para renderização
         shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b); // Define a cor do quadrado/letra
         shader.setVec2("quadrado.posicao", rect.rect.x, rect.rect.y); // Define a posição da letra
-        shader.setVec2("quadrado.tamanho", rect.rect.z, rect.rect.w); // Define o tamanho da letra
+        shader.setVec2("quadrado.tamanho", rect.rect.w, rect.rect.h); // Define o tamanho da letra
         shader.setInt("textura", 0); // Define a textura para o shader
 
         glBindTexture(GL_TEXTURE_2D, rect.ID); // Associa a textura da letra
@@ -135,13 +135,13 @@ void BubbleUI::Items::ItemMenu::renderizar_texto()
 }
 
 // Método para transformar coordenadas de pixel para NDC (Normalized Device Coordinates)
-Vector4f BubbleUI::Items::ItemMenu::paraNDC()
+Vector4<float> BubbleUI::Items::ItemMenu::paraNDC()
 {
-    Vector4f coord_ndc;
+    Vector4<float> coord_ndc;
 
     // Calcula as coordenadas normalizadas
-    coord_ndc.z = (char_rect.w * 2.f) / contexto->tamanho.width;
-    coord_ndc.w = -(2.0f * char_rect.h) / contexto->tamanho.height;
+    coord_ndc.w = (char_rect.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.h = -(2.0f * char_rect.h) / contexto->tamanho.height;
     coord_ndc.x = (char_rect.x * 2.f) / contexto->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * char_rect.y) / contexto->tamanho.height;
 

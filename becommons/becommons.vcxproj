@@ -157,7 +157,7 @@
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\nucleo\engine.cpp" />
-    <ClCompile Include="src\util\includes.cpp" />
+    <ClCompile Include="src\util\utils.cpp" />
     <ClCompile Include="src\util\skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,7 +204,7 @@
     <ClInclude Include="src\entidades\camera_editor.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />
     <ClInclude Include="src\inputs\inputs.hpp" />
-    <ClInclude Include="src\util\includes.hpp" />
+    <ClInclude Include="src\util\utils.hpp" />
     <ClInclude Include="src\util\skybox.hpp" />
   </ItemGroup>
   <ItemGroup>

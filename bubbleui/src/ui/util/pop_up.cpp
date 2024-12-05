@@ -39,7 +39,7 @@ void BubbleUI::Util::PopUp::mostrar()
 {
 	if (!vmostrar)
 	{
-		this->retangulo = { static_cast<float>(inputs->mousex), static_cast<float>(inputs->mousey), largura, altura };
+		this->retangulo = { static_cast<int>(inputs->mousex), static_cast<int>(inputs->mousey), largura, altura };
 		vmostrar = true;
 	}
 }

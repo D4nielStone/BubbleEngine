@@ -1,0 +1,49 @@
+\doxysection{widget.\+hpp}
+\hypertarget{widget_8hpp_source}{}\label{widget_8hpp_source}\index{src/ui/widgets/widget.hpp@{src/ui/widgets/widget.hpp}}
+\mbox{\hyperlink{widget_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rect_8hpp}{src/ui/formas/rect.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{moldura_8hpp}{src/ui/formas/moldura.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{colisao2d_8hpp}{src/ui/formas/colisao2d.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{comment}{//Pre-\/declarações}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{class\ }Painel;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{namespace\ }Widgets\ }
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }Arvore;}
+\DoxyCodeLine{00015\ \ \ \ \ \};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5a}{Alinhamento}}}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5aa98b6fc6bcc2b13cf5ba7cd2c6d11ac65}{Direita}},}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5aa82f391f31d6baed85308c703bbb2567a}{Esquerda}},}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5aaecff412c5a1d5db57bfb545bdf355d3f}{Centro}},}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5aaaaadc2a30213f050883b0f1c49a0b001}{Cima}},}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5aac87388e9d01187f7a12821ee803f4a02}{Baixo}}}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//Classe}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widget_a10be1a1260fadd3c2b340058982ebdd3}{Widget}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widget_aa274e0f9fda8f5a32d1258d9803c7b80}{atualizar}}()\ =\ 0;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widget_a01ae4a71f457e565d21d7f436b72c8bd}{renderizar}}()\ =\ 0;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ definirPai(\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}*\ painel);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ defAlinhamento(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5a}{Alinhamento}}\&\ lado);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ std::shared\_ptr<Widgets::Arvore>\ arvore\_pai\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ quebrarLinha\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_colisao2d}{Colisao2d}}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widget_a2ba061750c959d84f894c306dafec24c}{colisao}};}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}\ *painel\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespace_bubble_u_i_a5918df2187fce8b37f94681698238a5a}{Alinhamento}}\ alinhamentoHorizontal\ =\ Alinhamento::Esquerda;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::shared\_ptr<Contexto>\ contexto\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::shared\_ptr<Bubble::Inputs::Inputs>\ inputs\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ Vector2f\ posicao\_antiga\{0,0\};}
+\DoxyCodeLine{00042\ \ \ \ \ \};}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}

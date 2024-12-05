@@ -13,7 +13,7 @@ namespace Bubble {
             std::shared_ptr<Scene> criarCenaPadrao(std::string Nome);
             std::shared_ptr<Inputs::Inputs> inputs{ nullptr };
             // viewport para renderizacao
-            Vector4 viewportEditor, viewportJogo;
+            Vector4<int> viewportEditor, viewportJogo;
         public:
             SceneManager();
             ~SceneManager();
@@ -27,8 +27,8 @@ namespace Bubble {
             void renderizarCenaAtual() const  ;
             void atualizarCenaAtual() const;
             void novaCena(std::string Nome = "Cena nova", bool cenaPadrao = true);
-            void defEditorViewport(Vector4 rect = {0, 0, 0, 0});
-            void defJogoViewport(Vector4 rect = {0, 0, 0, 0});
+            void defEditorViewport(Vector4<int> rect = {0, 0, 0, 0});
+            void defJogoViewport(Vector4<int> rect = {0, 0, 0, 0});
         };
         extern BECOMMONS_DLL_API Bubble::Entidades::CameraEditor* CameraEditorAtual();
         extern BECOMMONS_DLL_API std::shared_ptr<Bubble::Cena::SceneManager> obterSceneManager();

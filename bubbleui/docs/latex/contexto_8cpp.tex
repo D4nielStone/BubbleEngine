@@ -1,0 +1,50 @@
+\doxysection{src/ui/contexto/contexto.cpp File Reference}
+\hypertarget{contexto_8cpp}{}\label{contexto_8cpp}\index{src/ui/contexto/contexto.cpp@{src/ui/contexto/contexto.cpp}}
+{\ttfamily \#include "{}contexto.\+hpp"{}}\newline
+{\ttfamily \#include $<$shlobj.\+h$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$comdef.\+h$>$}\newline
+{\ttfamily \#include "{}src/ui/painel/painel.\+hpp"{}}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include "{}src/arquivadores/shader.\+hpp"{}}\newline
+{\ttfamily \#include "{}src/arquivadores/imageloader.\+hpp"{}}\newline
+{\ttfamily \#include "{}src/ui/painel/editor.\+hpp"{}}\newline
+{\ttfamily \#include "{}src/ui/painel/depurador.\+hpp"{}}\newline
+{\ttfamily \#include $<$windows.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ GLFWwindow \texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Bubble\+UI\+::\+Contexto}} $>$ $>$ \mbox{\hyperlink{contexto_8cpp_a88c703449fa0f823e62146f512e2b82f}{contextos}}
+\item 
+\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Bubble\+UI\+::\+Contexto}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{contexto_8cpp_aa82af93f333a886a07de5c2d2bbbced6}{contexto\+\_\+atual}} \{ nullptr \}
+\item 
+std\+::queue$<$ std\+::function$<$ void()$>$ $>$ \mbox{\hyperlink{contexto_8cpp_afce6c2d1c9a83c9e618cd442f5fc34e9}{tarefas}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{contexto_8cpp_aa82af93f333a886a07de5c2d2bbbced6}\index{contexto.cpp@{contexto.cpp}!contexto\_atual@{contexto\_atual}}
+\index{contexto\_atual@{contexto\_atual}!contexto.cpp@{contexto.cpp}}
+\doxysubsubsection{\texorpdfstring{contexto\_atual}{contexto\_atual}}
+{\footnotesize\ttfamily \label{contexto_8cpp_aa82af93f333a886a07de5c2d2bbbced6} 
+\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Bubble\+UI\+::\+Contexto}}\texorpdfstring{$\ast$}{*} contexto\+\_\+atual \{ nullptr \}}
+
+\Hypertarget{contexto_8cpp_a88c703449fa0f823e62146f512e2b82f}\index{contexto.cpp@{contexto.cpp}!contextos@{contextos}}
+\index{contextos@{contextos}!contexto.cpp@{contexto.cpp}}
+\doxysubsubsection{\texorpdfstring{contextos}{contextos}}
+{\footnotesize\ttfamily \label{contexto_8cpp_a88c703449fa0f823e62146f512e2b82f} 
+std\+::map$<$GLFWwindow\texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Bubble\+UI\+::\+Contexto}}$>$ $>$ contextos}
+
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2024 Daniel Oliveira 
+\end{DoxyCopyright}
+\Hypertarget{contexto_8cpp_afce6c2d1c9a83c9e618cd442f5fc34e9}\index{contexto.cpp@{contexto.cpp}!tarefas@{tarefas}}
+\index{tarefas@{tarefas}!contexto.cpp@{contexto.cpp}}
+\doxysubsubsection{\texorpdfstring{tarefas}{tarefas}}
+{\footnotesize\ttfamily \label{contexto_8cpp_afce6c2d1c9a83c9e618cd442f5fc34e9} 
+std\+::queue$<$std\+::function$<$void()$>$ $>$ tarefas}
+

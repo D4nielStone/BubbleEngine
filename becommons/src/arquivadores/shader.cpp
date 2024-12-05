@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "Shader.hpp"
 #include "src/depuracao/debug.hpp"
-#include <src/util/includes.hpp>
+#include <src/util/utils.hpp>
 #include <filesystem>
 #include <iostream>
 #include <sstream>

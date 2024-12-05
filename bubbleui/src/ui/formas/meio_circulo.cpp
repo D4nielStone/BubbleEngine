@@ -7,18 +7,18 @@
 constexpr double M_PI = 3.14159265359;
 using namespace BubbleUI::Formas;
 
-MeioCirculo::MeioCirculo(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
+MeioCirculo::MeioCirculo(std::shared_ptr<Contexto> ctx, const Vector4<int> &rect) : retangulo(rect), contexto(ctx)
 {
     definirBuffers();
 }
 
 // Deve retornar o tamanho/posicao
-Vector4 MeioCirculo::obtMeioCirculo() const
+Vector4<int> MeioCirculo::obtMeioCirculo() const
 {
     return retangulo;
 }
 
-Vector4f BubbleUI::Formas::MeioCirculo::obtMeioCirculoNDC() const
+Vector4<float> BubbleUI::Formas::MeioCirculo::obtMeioCirculoNDC() const
 {
     return coord_ndc;
 }
@@ -46,7 +46,7 @@ void MeioCirculo::adiPos(const Vector2 &pos)
     retangulo.x += pos.x;
     retangulo.y += pos.y;
 }
-void BubbleUI::Formas::MeioCirculo::definirRetangulo(const Vector4& rect)
+void BubbleUI::Formas::MeioCirculo::definirRetangulo(const Vector4<int>& rect)
 {
     retangulo = rect;
 }
@@ -74,7 +74,7 @@ void MeioCirculo::atualizar()
 void MeioCirculo::renderizar()
 {
     shader.use();
-    shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
+    shader.setVec2("quadrado.tamanho", coord_ndc.w, coord_ndc.h);
     shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     shader.setCor("quadrado.cor", *cor_base);
     glBindVertexArray(halfcircle_vertex.VAO);
@@ -82,10 +82,10 @@ void MeioCirculo::renderizar()
     glBindVertexArray(0);
 }
 // Deve transformar coordenadas pixel para NDC
-Vector4f MeioCirculo::paraNDC()
+Vector4<float> MeioCirculo::paraNDC()
 {
-    coord_ndc.z = (retangulo.w * 2.f) / contexto->tamanho.width;
-    coord_ndc.w = -(2.0f * retangulo.h) / contexto->tamanho.height;
+    coord_ndc.w = (retangulo.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.h = -(2.0f * retangulo.h) / contexto->tamanho.height;
     coord_ndc.x = (retangulo.x * 2.f) / contexto->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * retangulo.y) / contexto->tamanho.height;
 

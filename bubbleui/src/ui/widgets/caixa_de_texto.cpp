@@ -63,7 +63,7 @@ void CaixaTexto::atualizar()
         atualizarInputs(); defCor(ROXO_ESCURO_2);
     } // Atualiza entrada
     else defCor(ROXO_ESCURO);
-    if (selecionando_texto) area_de_selecao = { static_cast<float>(mouse_pos_ini.x), static_cast<float>(mouse_pos_ini.y), (int)inputs->mousex, (int)inputs->mousey };
+    if (selecionando_texto) area_de_selecao = { static_cast<int>(mouse_pos_ini.x), static_cast<int>(mouse_pos_ini.y), static_cast<int>(inputs->mousex), static_cast<int>(inputs->mousey) };
 
     // Atribui texto da frase para o buffer
     if (buffer_texto.get())
@@ -85,7 +85,7 @@ void CaixaTexto::atualizar()
     }
 
     // Redimensiona moldura e colisao
-    colisao.defRect({ box_pos.x, box_pos.y, (int)box_size.x, (int)box_size.y });
+    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), static_cast<int>(box_size.x), static_cast<int>(box_size.y) });
     Moldura::definirTamanho({ static_cast<int>(box_size.x), static_cast<int>(box_size.y) }); Moldura::definirPosicao({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y) });
     Moldura::atualizar();
 }

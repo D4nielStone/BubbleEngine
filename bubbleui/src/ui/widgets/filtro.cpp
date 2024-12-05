@@ -22,9 +22,9 @@ static void abrirProjeto()
 
 static void janelaNovoProjeto()
 {
-    auto ctx = BubbleUI::janela("Novo projeto");
-    if (!ctx) return;
-    BubbleUI::adicionarPainel(ctx.get(), new BubbleUI::Paineis::Depurador({0, 0, 100, 100}));
+    //auto ctx = BubbleUI::janela("Novo projeto");
+    //if (!ctx) return;
+    //BubbleUI::adicionarPainel(ctx.get(), new BubbleUI::Paineis::Depurador({0, 0, 100, 100}));
 }
 
 static void novoProjeto()

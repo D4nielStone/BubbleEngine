@@ -118,7 +118,7 @@ void Arvore::atualizar()
     painel->posicaoWidget.x = painel->obterRetangulo().x;
     //
     // Define o retângulo de colisão para a detecção de mouse
-    colisao.defRect({ box_pos.x, box_pos.y, painel->obterRetangulo().w, (int)box_size.y });
+    colisao.defRect({ static_cast<int>(box_pos.x), static_cast<int>(box_pos.y), painel->obterRetangulo().w, (int)box_size.y });
     // Define a posição e o tamanho da moldura
     definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
     definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });

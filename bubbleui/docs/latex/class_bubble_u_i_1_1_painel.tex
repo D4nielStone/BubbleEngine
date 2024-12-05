@@ -1,0 +1,356 @@
+\doxysection{Bubble\+UI\+::Painel Class Reference}
+\hypertarget{class_bubble_u_i_1_1_painel}{}\label{class_bubble_u_i_1_1_painel}\index{BubbleUI::Painel@{BubbleUI::Painel}}
+
+
+{\ttfamily \#include $<$painel.\+hpp$>$}
+
+Inheritance diagram for Bubble\+UI\+::Painel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.464052cm]{class_bubble_u_i_1_1_painel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_painel_a90b829677b4e82265314c2c77048811f}{Painel}} (const Vector4$<$ int $>$ \&rect)
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_painel_a8869df62c007b9b142b794595171c58f}{Painel}} (const char \texorpdfstring{$\ast$}{*}n, const Vector4$<$ int $>$ \&rect)
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b}{Painel}} ()=default
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a01d04f64a65df8901d3e383e573b8dbc}{adicionar\+Widget}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}} $>$ widget)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a51d23a6228dfa93c11a4be255bc7eb07}{obter\+Contexto}} () const
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aaae2e91dc467767e88b18d38401cd728}{atualizar}} () override
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a2379994554ec418603f14ffd0975324f}{renderizar}} () override
+\item 
+std\+::string \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2}{nome}} () const
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3d25da742045c5d7f1637317891e3915}{definir\+Contexto}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$, const char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2}{nome}}, const Vector4$<$ int $>$ \&rect)
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a5b62c729b917ebb0e87f9dc6d5e0ffa8}{definir\+Contexto}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$)
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}} $>$ $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_af71b08a08db73c24f8fc4bf386115c8f}{widgets}} () const
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a7346b81edde4aaa9b73aab19b696b596}{def\+Cor}} (const Color \&cor) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Bubble\+UI\+::\+Formas\+::\+Moldura}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a1c1bbae86a2ab6771be935becf724639}{Moldura}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$, const Vector4$<$ int $>$ \&\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_af5b9ea07f4e6e0ccfddeebfe78d554e6}{retangulo}}=\{0, 0, 100, 20\})
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_acfc7be4d63fcde52d4696dc3cfe40342}{Moldura}} ()=default
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a681e7d14596bcada7552c82daf2bc6a8}{definir\+Tamanho}} (const Vector2 \&tam) override
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_aba069d679e68ec4ecd7991d948bbef23}{definir\+Posicao}} (const Vector2 \&pos) override
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a91c4290bb4c5bbd393568df755e242ed}{definir\+Retangulo}} (const Vector4$<$ int $>$ \&rect) override
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a2d521a3bd394542f72728dfa386fe392}{obter\+Retangulo}} () const override
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a1f099268841ed5f212836cb9c995a24a}{obter\+Contexto}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Bubble\+UI\+::\+Formas\+::\+Rect}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_ac57876533d5561af67640c208f250975}{Rect}} ()=default
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_acd73e050c98d4134ad40bc8a64eb511f}{Rect}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ ctx, const Vector4$<$ int $>$ \&rect)
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a82a81c517ef284eb5c8983e8c360af69}{obt\+Rect\+NDC}} () const
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a3373ba87488fe516172101aebc35b194}{adi\+Tam}} (const Vector2 \&tam)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a2d489a4a80948b5fedda6d948749f375}{adi\+Pos}} (const Vector2 \&tam)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a83c433066396dda45754aff43aa59ec7}{def\+Cor}} (Color \texorpdfstring{$\ast$}{*}cor)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_ae7d8a8788806efaad58d74eafb071be8}{definir\+Buffers}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ ctx, const Vector4$<$ int $>$ \&rect=\{\})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aa7511f1e8d745247943c22e2d3e70430}{mouse1click}} \{ false \}
+\item 
+bool \mbox{\hyperlink{class_bubble_u_i_1_1_painel_ae36982878f715ae069a2706fc6a48aeb}{mostrar\+\_\+aba}} \{ true \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Bubble\+UI\+::\+Formas\+::\+Moldura}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector2 \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a3723fd65bc462a8260e3f92e8b2ff442}{posicao\+Widget}} \{ 0, 0 \}
+\item 
+Vector2 \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a7c7cbff0279ee7cffdbcf862d00b9894}{widget\+Padding}} \{ 3, 3 \}
+\item 
+Color \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a0652d7050b6dc6f58f4935b732cacaae}{arvore\+Cor}} \{ 0.\+1f, 0.\+1f, 0.\+1f \}
+\item 
+bool \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a097b2a6276bf0e1df07e207aac8eb0fa}{selecionado}} \{ true \}
+\item 
+bool \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_aa35cc02776ecc5a33d9181dde86ba9b9}{ocultar\+\_\+linhas}} \{ false \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a259f46fe06662ec9a2d446947160908e}{configurar}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ ctx, const Vector4$<$ int $>$ \&rect=\{ 2, 2, 200, 100 \})
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a87d2e0c4d7735a37da71fa02193d1208}{pre\+Atualizacao}} ()
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a1e89260cf6c68788f0ea337188f555c2}{pos\+Renderizacao}} () const
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_adc1aebfcae1501349b95a31fc1a1ce5e}{pos\+Atualizacao}} ()
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a75b86d6ee81e01f072e104b9510e64db}{pre\+Renderizacao}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Bubble\+UI\+::\+Formas\+::\+Moldura}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a0c74c3fe63c92268d5d1592ff199c3f4}{configurar}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Bubble\+UI\+::\+Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_ab925921a1c58f25666523b3840759a4e}{contexto}}, const Vector4$<$ int $>$ \&\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_af5b9ea07f4e6e0ccfddeebfe78d554e6}{retangulo}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Bubble\+UI\+::\+Formas\+::\+Rect}}}
+\begin{DoxyCompactItemize}
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a9f468c7be0374a33c78a4c573fdb2fdb}{para\+NDC}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_bubble_u_i_1_1_painel_acbbaa85a699f849deb672e4e0ea83b7b}{Nome}} = "{}Painel"{}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}} $>$ $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a281c4e87d4138f4fa9dc8415d58b877a}{lista\+\_\+widgets}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_util_1_1_pop_up}{Util\+::\+Pop\+Up}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aae8b942587668794d0c90c38794b4f45}{menu\+De\+Contexto}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_aba}{Aba}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a5036c06fdc22d5f1f21927935b848572}{aba}} \{ nullptr \}
+\item 
+bool \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a1d0d6d2efca0adf89db72c92139cd717}{renderizar\+Corpo}} \{ true \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Bubble\+UI\+::\+Formas\+::\+Moldura}}}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a2820541b8aea688e77da6e3b409342de}{espessura\+Borda}} \{ 3 \}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a38fc3e59bf53507a6f5b1cc0b5f9ec83}{retangulo\+\_\+completo}} \{\}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Rect}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a5487c86abc072d030970c8c45375d03f}{borda\+\_\+d}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Rect}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a119eafc9a86d4a15d8e771758a183a16}{borda\+\_\+e}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Rect}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_ad214915e34d696522b25c3032856b1d4}{borda\+\_\+c}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Rect}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a4cd24462a9d86d961a2b616641a8717e}{borda\+\_\+b}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{Meio\+Circulo}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a48aa278b014b2047d1c593c556d05924}{ponta\+\_\+a}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{Meio\+Circulo}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a3254c2caee731d207cf500538ac496ba}{ponta\+\_\+b}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{Meio\+Circulo}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a87d7beaa8106ec15d1eed9f51934860b}{ponta\+\_\+c}} \{ nullptr \}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{Meio\+Circulo}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a1df3866d5c71e4681d2e02d87fbd6d26}{ponta\+\_\+d}} \{ nullptr \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Bubble\+UI\+::\+Formas\+::\+Rect}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_ab925921a1c58f25666523b3840759a4e}{contexto}} \{ nullptr \}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_af5b9ea07f4e6e0ccfddeebfe78d554e6}{retangulo}} \{30,30,30,30\}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_aedba87a4d8ac8f65df7cfa9ac319e7a8}{tamanho\+Anterior}}
+\item 
+Color \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a12c3eefe1e36dee4ddfd6d6bb8745b4a}{cor\+\_\+base}} \{ new Color(0.\+2f, 0.\+2f, 0.\+2f, 1.f) \}
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_ae1397445d14c990098e73698676c5a19}{coord\+\_\+ndc}}
+\item 
+Size \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a89a15e23b30444597accebd11bff28d7}{tamanho\+Do\+Contexto\+Anterior}}
+\item 
+Bubble\+::\+Arquivadores\+::\+Shader \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_a47e42eae0dcbe33229fddc58801cda4b}{shader}} \{ Bubble\+::\+Arquivadores\+::\+Shader("{}assets/shaders/quad.\+vert"{}, "{}assets/shaders/quad.\+frag"{}) \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bubble_u_i_1_1_painel_a90b829677b4e82265314c2c77048811f}\index{BubbleUI::Painel@{BubbleUI::Painel}!Painel@{Painel}}
+\index{Painel@{Painel}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{Painel()}{Painel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a90b829677b4e82265314c2c77048811f} 
+Bubble\+UI\+::\+Painel\+::\+Painel (\begin{DoxyParamCaption}\item[{const Vector4$<$ int $>$ \&}]{rect}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a8869df62c007b9b142b794595171c58f}\index{BubbleUI::Painel@{BubbleUI::Painel}!Painel@{Painel}}
+\index{Painel@{Painel}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{Painel()}{Painel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a8869df62c007b9b142b794595171c58f} 
+Bubble\+UI\+::\+Painel\+::\+Painel (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{n}{, }\item[{const Vector4$<$ int $>$ \&}]{rect}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b}\index{BubbleUI::Painel@{BubbleUI::Painel}!Painel@{Painel}}
+\index{Painel@{Painel}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{Painel()}{Painel()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b} 
+Bubble\+UI\+::\+Painel\+::\+Painel (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bubble_u_i_1_1_painel_a01d04f64a65df8901d3e383e573b8dbc}\index{BubbleUI::Painel@{BubbleUI::Painel}!adicionarWidget@{adicionarWidget}}
+\index{adicionarWidget@{adicionarWidget}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{adicionarWidget()}{adicionarWidget()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a01d04f64a65df8901d3e383e573b8dbc} 
+void Bubble\+UI\+::\+Painel\+::adicionar\+Widget (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}} $>$}]{widget}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_aaae2e91dc467767e88b18d38401cd728}\index{BubbleUI::Painel@{BubbleUI::Painel}!atualizar@{atualizar}}
+\index{atualizar@{atualizar}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{atualizar()}{atualizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_aaae2e91dc467767e88b18d38401cd728} 
+void Bubble\+UI\+::\+Painel\+::atualizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a8849bb60a840e85997674ab6e79088ad}{Bubble\+UI\+::\+Formas\+::\+Moldura}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a259f46fe06662ec9a2d446947160908e}\index{BubbleUI::Painel@{BubbleUI::Painel}!configurar@{configurar}}
+\index{configurar@{configurar}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{configurar()}{configurar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a259f46fe06662ec9a2d446947160908e} 
+void Bubble\+UI\+::\+Painel\+::configurar (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$}]{ctx}{, }\item[{const Vector4$<$ int $>$ \&}]{rect}{ = {\ttfamily \{~2,~2,~200,~100~\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a7346b81edde4aaa9b73aab19b696b596}\index{BubbleUI::Painel@{BubbleUI::Painel}!defCor@{defCor}}
+\index{defCor@{defCor}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{defCor()}{defCor()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a7346b81edde4aaa9b73aab19b696b596} 
+void Bubble\+UI\+::\+Painel\+::def\+Cor (\begin{DoxyParamCaption}\item[{const Color \&}]{cor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect_af07e263b6056072d01337876a790b4ba}{Bubble\+UI\+::\+Formas\+::\+Rect}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a5b62c729b917ebb0e87f9dc6d5e0ffa8}\index{BubbleUI::Painel@{BubbleUI::Painel}!definirContexto@{definirContexto}}
+\index{definirContexto@{definirContexto}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{definirContexto()}{definirContexto()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a5b62c729b917ebb0e87f9dc6d5e0ffa8} 
+void Bubble\+UI\+::\+Painel\+::definir\+Contexto (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$}]{ctx}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_depurador_a19bb12d8df566fedaf5076d77076c239}{Bubble\+UI\+::\+Paineis\+::\+Depurador}}, \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_editor_a69816a34da0e8f80b57602ce5ea79c3e}{Bubble\+UI\+::\+Paineis\+::\+Editor}}, \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_entidades_a269331d683850361bc81b38a6f5899eb}{Bubble\+UI\+::\+Paineis\+::\+Entidades}}, \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_inspetor_a51170c703ab9380c57c99b84b8ccff69}{Bubble\+UI\+::\+Paineis\+::\+Inspetor}}, and \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_visualizador_de_projetos_ae222e4f7e8a5d7c5d50a53bea8356add}{Bubble\+UI\+::\+Paineis\+::\+Visualizador\+De\+Projetos}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a3d25da742045c5d7f1637317891e3915}\index{BubbleUI::Painel@{BubbleUI::Painel}!definirContexto@{definirContexto}}
+\index{definirContexto@{definirContexto}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{definirContexto()}{definirContexto()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a3d25da742045c5d7f1637317891e3915} 
+void Bubble\+UI\+::\+Painel\+::definir\+Contexto (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$}]{ctx}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{nome}{, }\item[{const Vector4$<$ int $>$ \&}]{rect}{ = {\ttfamily \{~0,0,0,0~\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2}\index{BubbleUI::Painel@{BubbleUI::Painel}!nome@{nome}}
+\index{nome@{nome}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{nome()}{nome()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2} 
+std\+::string Bubble\+UI\+::\+Painel\+::nome (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a51d23a6228dfa93c11a4be255bc7eb07}\index{BubbleUI::Painel@{BubbleUI::Painel}!obterContexto@{obterContexto}}
+\index{obterContexto@{obterContexto}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{obterContexto()}{obterContexto()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a51d23a6228dfa93c11a4be255bc7eb07} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ Bubble\+UI\+::\+Painel\+::obter\+Contexto (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_adc1aebfcae1501349b95a31fc1a1ce5e}\index{BubbleUI::Painel@{BubbleUI::Painel}!posAtualizacao@{posAtualizacao}}
+\index{posAtualizacao@{posAtualizacao}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{posAtualizacao()}{posAtualizacao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_adc1aebfcae1501349b95a31fc1a1ce5e} 
+virtual void Bubble\+UI\+::\+Painel\+::pos\+Atualizacao (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_aff64badf931ec4d982985e2d43a0a61e}{Bubble\+UI\+::\+Formas\+::\+Moldura}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a1e89260cf6c68788f0ea337188f555c2}\index{BubbleUI::Painel@{BubbleUI::Painel}!posRenderizacao@{posRenderizacao}}
+\index{posRenderizacao@{posRenderizacao}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{posRenderizacao()}{posRenderizacao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a1e89260cf6c68788f0ea337188f555c2} 
+virtual void Bubble\+UI\+::\+Painel\+::pos\+Renderizacao (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a87d2e0c4d7735a37da71fa02193d1208}\index{BubbleUI::Painel@{BubbleUI::Painel}!preAtualizacao@{preAtualizacao}}
+\index{preAtualizacao@{preAtualizacao}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{preAtualizacao()}{preAtualizacao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a87d2e0c4d7735a37da71fa02193d1208} 
+virtual void Bubble\+UI\+::\+Painel\+::pre\+Atualizacao (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a97879aaa3e83d7358bce816404dea1c8}{Bubble\+UI\+::\+Formas\+::\+Moldura}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_editor_a166efe3f967a50e2d1b8f53abe56787d}{Bubble\+UI\+::\+Paineis\+::\+Editor}}, and \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_jogo_a8986731608753c68abc0f955ea920cd7}{Bubble\+UI\+::\+Paineis\+::\+Jogo}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a75b86d6ee81e01f072e104b9510e64db}\index{BubbleUI::Painel@{BubbleUI::Painel}!preRenderizacao@{preRenderizacao}}
+\index{preRenderizacao@{preRenderizacao}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{preRenderizacao()}{preRenderizacao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a75b86d6ee81e01f072e104b9510e64db} 
+virtual void Bubble\+UI\+::\+Painel\+::pre\+Renderizacao (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a2379994554ec418603f14ffd0975324f}\index{BubbleUI::Painel@{BubbleUI::Painel}!renderizar@{renderizar}}
+\index{renderizar@{renderizar}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{renderizar()}{renderizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a2379994554ec418603f14ffd0975324f} 
+void Bubble\+UI\+::\+Painel\+::renderizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_ade0c35dfd93d11e7f80614d6d601d87a}{Bubble\+UI\+::\+Formas\+::\+Moldura}}.
+
+\Hypertarget{class_bubble_u_i_1_1_painel_af71b08a08db73c24f8fc4bf386115c8f}\index{BubbleUI::Painel@{BubbleUI::Painel}!widgets@{widgets}}
+\index{widgets@{widgets}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{widgets()}{widgets()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_af71b08a08db73c24f8fc4bf386115c8f} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Bubble\+UI\+::\+Widget}} $>$ $>$ Bubble\+UI\+::\+Painel\+::widgets (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bubble_u_i_1_1_painel_a5036c06fdc22d5f1f21927935b848572}\index{BubbleUI::Painel@{BubbleUI::Painel}!aba@{aba}}
+\index{aba@{aba}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{aba}{aba}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a5036c06fdc22d5f1f21927935b848572} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{class_bubble_u_i_1_1_aba}{Aba}}$>$ Bubble\+UI\+::\+Painel\+::aba \{ nullptr \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a281c4e87d4138f4fa9dc8415d58b877a}\index{BubbleUI::Painel@{BubbleUI::Painel}!lista\_widgets@{lista\_widgets}}
+\index{lista\_widgets@{lista\_widgets}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{lista\_widgets}{lista\_widgets}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a281c4e87d4138f4fa9dc8415d58b877a} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}}$>$ $>$ Bubble\+UI\+::\+Painel\+::lista\+\_\+widgets\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_aae8b942587668794d0c90c38794b4f45}\index{BubbleUI::Painel@{BubbleUI::Painel}!menuDeContexto@{menuDeContexto}}
+\index{menuDeContexto@{menuDeContexto}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{menuDeContexto}{menuDeContexto}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_aae8b942587668794d0c90c38794b4f45} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{class_bubble_u_i_1_1_util_1_1_pop_up}{Util\+::\+Pop\+Up}}$>$ Bubble\+UI\+::\+Painel\+::menu\+De\+Contexto \{ nullptr \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_ae36982878f715ae069a2706fc6a48aeb}\index{BubbleUI::Painel@{BubbleUI::Painel}!mostrar\_aba@{mostrar\_aba}}
+\index{mostrar\_aba@{mostrar\_aba}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{mostrar\_aba}{mostrar\_aba}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_ae36982878f715ae069a2706fc6a48aeb} 
+bool Bubble\+UI\+::\+Painel\+::mostrar\+\_\+aba \{ true \}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_aa7511f1e8d745247943c22e2d3e70430}\index{BubbleUI::Painel@{BubbleUI::Painel}!mouse1click@{mouse1click}}
+\index{mouse1click@{mouse1click}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{mouse1click}{mouse1click}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_aa7511f1e8d745247943c22e2d3e70430} 
+bool Bubble\+UI\+::\+Painel\+::mouse1click \{ false \}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_acbbaa85a699f849deb672e4e0ea83b7b}\index{BubbleUI::Painel@{BubbleUI::Painel}!Nome@{Nome}}
+\index{Nome@{Nome}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{Nome}{Nome}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_acbbaa85a699f849deb672e4e0ea83b7b} 
+std\+::string Bubble\+UI\+::\+Painel\+::\+Nome = "{}Painel"{}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_painel_a1d0d6d2efca0adf89db72c92139cd717}\index{BubbleUI::Painel@{BubbleUI::Painel}!renderizarCorpo@{renderizarCorpo}}
+\index{renderizarCorpo@{renderizarCorpo}!BubbleUI::Painel@{BubbleUI::Painel}}
+\doxysubsubsection{\texorpdfstring{renderizarCorpo}{renderizarCorpo}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_painel_a1d0d6d2efca0adf89db72c92139cd717} 
+bool Bubble\+UI\+::\+Painel\+::renderizar\+Corpo \{ true \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ui/painel/\mbox{\hyperlink{painel_8hpp}{painel.\+hpp}}\item 
+src/ui/painel/\mbox{\hyperlink{painel_8cpp}{painel.\+cpp}}\end{DoxyCompactItemize}

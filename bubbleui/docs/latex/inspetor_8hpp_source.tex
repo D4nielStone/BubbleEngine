@@ -1,0 +1,37 @@
+\doxysection{inspetor.\+hpp}
+\hypertarget{inspetor_8hpp_source}{}\label{inspetor_8hpp_source}\index{src/ui/painel/inspetor.hpp@{src/ui/painel/inspetor.hpp}}
+\mbox{\hyperlink{inspetor_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{painel_8hpp}{painel.hpp}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}src/cena/scenemanager.hpp"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{namespace\ }Paineis\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_inspetor}{Inspetor}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel}{Painel}}}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_inspetor}{Inspetor}}(std::shared\_ptr<Bubble::Cena::SceneManager>\ scenemanager,\ \textcolor{keyword}{const}\ Vector4<int>\ \&rect\ =\ \{\ 2,\ 2,\ 100,\ 50\ \});}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_inspetor_a42f33a1bd56c21f4437f8f0bc514829b}{Inspetor}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_paineis_1_1_inspetor_a6437dda001b064f21ae048318fa3c202}{\string~Inspetor}}();}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirContexto(std::shared\_ptr<Contexto>\ ctx)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ recarregar();}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ desvendarWidgets(\textcolor{keyword}{const}\ std::vector<std::any>\&\ variaveis,\ std::shared\_ptr<Widgets::Arvore>\ arvore);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ preAtualizacao()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ posRenderizacao()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<Util::PopUp>\ popup\_comps\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Bubble::Entidades::Entidade>\ entidade\_selecionada\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Bubble::Cena::SceneManager>\ scenemanager\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<std::string>\ nome\_atual\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ msgMostrarPopup\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ msgAdiCam\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ msgAdiCode\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ msgAdiRender\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ msgAdiTerr\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00030\ \ \ \ \ \}}
+\DoxyCodeLine{00031\ \}}
+
+\end{DoxyCode}

@@ -5,7 +5,7 @@
 
 using namespace BubbleUI::Formas;
 
-Linha::Linha(const Vector4 &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos), contexto(ctx)
+Linha::Linha(const Vector4<int> &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos), contexto(ctx)
 {
     cor_base = { 0.4f, 0.f, 0.4f, 0.9f };
     if (!linha_vertex.carregado)
@@ -22,7 +22,7 @@ Linha::Linha(const Vector4 &pos, std::shared_ptr<Contexto> ctx) : posicoes(pos),
         linha_vertex.carregado = true;
     }
 }
-void Linha::definirPosicao(const Vector4 &pos)
+void Linha::definirPosicao(const Vector4<int> &pos)
 {
     posicoes = pos;
 }
@@ -36,7 +36,7 @@ void BubbleUI::Formas::Linha::definirCorRef(Color* cor)
     cor_referencial = cor;
 }
 // Deve transformar coordenadas pixel para NDC
-Vector4f Linha::paraNDC()
+Vector4<float> Linha::paraNDC()
 {
     // Converte as coordenadas de pixels para NDC com o sistema top-left
     coord_ndc.x = (posicoes.x * 2.f) / contexto->tamanho.width - 1.f;
@@ -45,8 +45,8 @@ Vector4f Linha::paraNDC()
     coord_ndc.y = 1.0f - (2.0f * posicoes.y / contexto->tamanho.height);
 
     // Calcular para as coordenadas da segunda posição (z, w)
-    coord_ndc.z = (posicoes.w * 2.f) / contexto->tamanho.width - 1.f;
-    coord_ndc.w = 1.0f - (2.0f * posicoes.h / contexto->tamanho.height);
+    coord_ndc.w = (posicoes.w * 2.f) / contexto->tamanho.width - 1.f;
+    coord_ndc.h = 1.0f - (2.0f * posicoes.h / contexto->tamanho.height);
     return coord_ndc;
 }
 
@@ -65,7 +65,7 @@ void Linha::renderizar()
 {
     shader.use();
     shader.setVec2("linha.pos1", coord_ndc.x, coord_ndc.y);
-    shader.setVec2("linha.pos2", coord_ndc.z, coord_ndc.w);
+    shader.setVec2("linha.pos2", coord_ndc.w, coord_ndc.h);
     shader.setCor("cor", cor_base);
 
     glBindVertexArray(linha_vertex.VAO);

@@ -1,0 +1,52 @@
+\doxysection{moldura.\+hpp}
+\hypertarget{moldura_8hpp_source}{}\label{moldura_8hpp_source}\index{src/ui/formas/moldura.hpp@{src/ui/formas/moldura.hpp}}
+\mbox{\hyperlink{moldura_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{rect_8hpp}{rect.hpp}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{meio__circulo_8hpp}{meio\_circulo.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{linha_8hpp}{linha.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{namespace\ }Formas}
+\DoxyCodeLine{00009\ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Moldura}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Rect}}}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:\ }
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Moldura}}(std::shared\_ptr<Contexto>,\ \textcolor{keyword}{const}\ Vector4<int>\&\ retangulo\ =\ \{0,\ 0,\ 100,\ 20\});}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_acfc7be4d63fcde52d4696dc3cfe40342}{Moldura}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ atualizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirTamanho(\textcolor{keyword}{const}\ Vector2\&\ tam)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirPosicao(\textcolor{keyword}{const}\ Vector2\&\ pos)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirRetangulo(\textcolor{keyword}{const}\ Vector4<int>\&\ rect)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ obterRetangulo()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Contexto>\ obterContexto()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ posicaoWidget\{\ 0,\ 0\ \};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ widgetPadding\{\ 3,\ 3\ \};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ arvoreCor\{\ 0.1f,\ 0.1f,\ 0.1f\ \};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ selecionado\{\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ocultar\_linhas\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_a97879aaa3e83d7358bce816404dea1c8}{preAtualizacao}}()\ \{\};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura_aff64badf931ec4d982985e2d43a0a61e}{posAtualizacao}}()\ \{\};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Define\ a\ espessura\ da\ borda}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ espessuraBorda\{\ 3\ \};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ configurar(std::shared\_ptr<BubbleUI::Contexto>\ contexto,\ \textcolor{keyword}{const}\ Vector4<int>\&\ retangulo);}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ retangulo\_completo\{\};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<Rect>}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ borda\_d\{\ \textcolor{keyword}{nullptr}\ \},}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ borda\_e\{\ \textcolor{keyword}{nullptr}\ \},}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ borda\_c\{\ \textcolor{keyword}{nullptr}\ \},\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ borda\_b\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<MeioCirculo>}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ponta\_a\{\ \textcolor{keyword}{nullptr}\ \},}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ponta\_b\{\ \textcolor{keyword}{nullptr}\ \},}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ponta\_c\{\ \textcolor{keyword}{nullptr}\ \},\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ponta\_d\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \}}
+
+\end{DoxyCode}

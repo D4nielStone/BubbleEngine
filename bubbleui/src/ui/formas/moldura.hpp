@@ -10,14 +10,14 @@ namespace BubbleUI
 		class BEUI_DLL_API Moldura : public Rect
 		{
 		public: 
-			Moldura(std::shared_ptr<Contexto>, const Vector4& retangulo = {0, 0, 100, 20});
+			Moldura(std::shared_ptr<Contexto>, const Vector4<int>& retangulo = {0, 0, 100, 20});
 			Moldura() = default;
 			void atualizar() override;
 			void renderizar() override;
 			void definirTamanho(const Vector2& tam)	override;
 			void definirPosicao(const Vector2& pos)	override;
-			void definirRetangulo(const Vector4& rect) override;
-			Vector4 obterRetangulo() const override;
+			void definirRetangulo(const Vector4<int>& rect) override;
+			Vector4<int> obterRetangulo() const override;
 			std::shared_ptr<Contexto> obterContexto() const;
 			Vector2 posicaoWidget{ 0, 0 };
 			Vector2 widgetPadding{ 3, 3 };
@@ -29,8 +29,8 @@ namespace BubbleUI
 			virtual void posAtualizacao() {};
 			// Define a espessura da borda
 			int espessuraBorda{ 3 };
-			void configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4& retangulo);
-			Vector4 retangulo_completo{};
+			void configurar(std::shared_ptr<BubbleUI::Contexto> contexto, const Vector4<int>& retangulo);
+			Vector4<int> retangulo_completo{};
 			std::unique_ptr<Rect>
 				borda_d{ nullptr },
 				borda_e{ nullptr },

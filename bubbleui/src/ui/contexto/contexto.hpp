@@ -13,13 +13,13 @@
 #include <glad/glad.h>
 #include <glfw/glfw3.h>
 #include "bubbleui.hpp"
-#include "src/util/includes.hpp"
+#include "src/util/utils.hpp"
 #include "src/inputs/inputs.hpp"
 
 
 namespace BubbleUI
 {
-    class Painel; ///< Declaração antecipada para evitar dependência cíclica.
+    struct Ancora; ///< Declaração antecipada para evitar dependência cíclica.
 
     /**
      * @struct Contexto
@@ -51,14 +51,15 @@ namespace BubbleUI
 
         /// Dimensões da janela GLFW.
         Size tamanho;
-        /// Resolucao da fonte.
-        size_t resolucao{ 15 };
+
+        /// Ancora root
+        Ancora* ancora_root{ nullptr };
 
         /// Gerenciamento de entradas do usuário.
         std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 
-        /// Lista de ponteiros para painéis associados ao contexto.
-        std::vector<Painel*> paineis;
+        /// Lista de ponteiros para ancoras associadas ao contexto.
+        std::vector<Ancora*> ancoras;
 
         /**
          * @brief Destrutor.
@@ -90,14 +91,6 @@ namespace BubbleUI
          */
         void renderizar();
 
-        /**
-         * @brief Cria ou obtém um painel associado ao contexto.
-         *
-         * @param nome_painel Nome identificador do painel.
-         * @param rect Retângulo que define as dimensões do painel.
-         * @return Um ponteiro compartilhado para o painel criado ou existente.
-         */
-        std::shared_ptr<Painel> painel(const char* nome_painel, const Vector4& rect);
 
         /**
          * @brief Define a janela GLFW associada ao contexto.
@@ -122,7 +115,7 @@ namespace BubbleUI
      * @param contexto Ponteiro para o contexto em questao.
      * @param painel Ponteiro para o painel a ser adicionado.
      */
-    void adicionarPainel(Contexto* contexto, Painel* painel);
+    void adicionarAncora(Contexto* contexto, Ancora* ancora);
 
     /**
      * @brief Atualiza o contexto associado a uma janela GLFW.

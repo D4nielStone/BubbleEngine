@@ -6,18 +6,18 @@
 
 using namespace BubbleUI::Formas;
 
-Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4 &rect) : retangulo(rect), contexto(ctx)
+Rect::Rect(std::shared_ptr<Contexto> ctx, const Vector4<int>&rect) : retangulo(rect), contexto(ctx)
 {
     definirBuffers(ctx, rect);
 }
 
 // Deve retornar o tamanho/posicao
-Vector4 Rect::obterRetangulo() const
+Vector4<int> Rect::obterRetangulo() const
 {
     return retangulo;
 }
 
-Vector4f BubbleUI::Formas::Rect::obtRectNDC() const
+Vector4<float> BubbleUI::Formas::Rect::obtRectNDC() const
 {
     return coord_ndc;
 }
@@ -45,7 +45,7 @@ void Rect::adiPos(const Vector2 &pos)
     retangulo.x += pos.x;
     retangulo.y += pos.y;
 }
-void BubbleUI::Formas::Rect::definirRetangulo(const Vector4& rect)
+void BubbleUI::Formas::Rect::definirRetangulo(const Vector4<int>& rect)
 {
     retangulo = rect;
 }
@@ -74,7 +74,7 @@ void Rect::atualizar()
 void Rect::renderizar() 
 {
     shader.use();
-    shader.setVec2("quadrado.tamanho", coord_ndc.z, coord_ndc.w);
+    shader.setVec2("quadrado.tamanho", coord_ndc.w, coord_ndc.h);
     shader.setVec2("quadrado.posicao", coord_ndc.x, coord_ndc.y);
     shader.setCor("quadrado.cor", *cor_base);
     glBindVertexArray(rect_vertex.VAO);
@@ -82,17 +82,17 @@ void Rect::renderizar()
     glBindVertexArray(0);
 }
 // Deve transformar coordenadas pixel para NDC
-Vector4f Rect::paraNDC()
+Vector4<float> Rect::paraNDC()
 {
-    coord_ndc.z = (retangulo.w * 2.f) / contexto->tamanho.width;
-    coord_ndc.w = -(2.0f * retangulo.h) / contexto->tamanho.height;
+    coord_ndc.w = (retangulo.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.h = -(2.0f * retangulo.h) / contexto->tamanho.height;
     coord_ndc.x = (retangulo.x * 2.f) / contexto->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * retangulo.y) / contexto->tamanho.height;
 
     return coord_ndc;
 }
 // deve definir buffers do quadrado
-void Rect::definirBuffers(std::shared_ptr<Contexto> ctx, const Vector4& rect)
+void Rect::definirBuffers(std::shared_ptr<Contexto> ctx, const Vector4<int>& rect)
 {
     contexto = ctx;
     retangulo = rect;

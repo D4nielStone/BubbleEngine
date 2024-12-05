@@ -1,0 +1,123 @@
+\doxysection{Bubble\+UI\+::Formas\+::Linha Class Reference}
+\hypertarget{class_bubble_u_i_1_1_formas_1_1_linha}{}\label{class_bubble_u_i_1_1_formas_1_1_linha}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+
+
+{\ttfamily \#include $<$linha.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a2e22c8efdc352e2a616f5cbe2c793d0e}{Linha}} ()=default
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_aa5fc65cc8a34cbd74303589265a0969e}{Linha}} (const Vector4$<$ int $>$ \&\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_aded19f5db2bf03e39882e16066f5d1cf}{posicoes}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ ctx)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_ab5b0358a1cdcd7ec35dba0a8851bb50f}{definir\+Posicao}} (const Vector4$<$ int $>$ \&\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_aded19f5db2bf03e39882e16066f5d1cf}{posicoes}})
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a0486338385c2afb732fe3814e99c4261}{def\+Cor}} (const Color \&cor)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_ac42c2cbcf9e08e1a8347bd8a58875979}{definir\+Cor\+Ref}} (Color \texorpdfstring{$\ast$}{*}cor)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a1bed54e6a70ed44391cfa644debb5ada}{atualizar}} ()
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a0552be7f95d93ff7e6fa9ad346dad6f3}{renderizar}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a8cc91305852025aeddfccb86a39d8a55}{contexto}}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_aded19f5db2bf03e39882e16066f5d1cf}{posicoes}}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a4a266bbafcc014a9bb0c1a53611f25a7}{tamanho\+Anterior}}
+\item 
+Color \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_ad65618522d516b79da55c2f205bd74b9}{cor\+\_\+base}}
+\item 
+Color \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_linha_a3e6002bbc0bc2ac38eaafe03023de698}{cor\+\_\+referencial}} \{ nullptr \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a2e22c8efdc352e2a616f5cbe2c793d0e}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!Linha@{Linha}}
+\index{Linha@{Linha}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{Linha()}{Linha()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a2e22c8efdc352e2a616f5cbe2c793d0e} 
+Bubble\+UI\+::\+Formas\+::\+Linha\+::\+Linha (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_aa5fc65cc8a34cbd74303589265a0969e}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!Linha@{Linha}}
+\index{Linha@{Linha}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{Linha()}{Linha()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_aa5fc65cc8a34cbd74303589265a0969e} 
+Linha\+::\+Linha (\begin{DoxyParamCaption}\item[{const Vector4$<$ int $>$ \&}]{posicoes}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$}]{ctx}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a1bed54e6a70ed44391cfa644debb5ada}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!atualizar@{atualizar}}
+\index{atualizar@{atualizar}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{atualizar()}{atualizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a1bed54e6a70ed44391cfa644debb5ada} 
+void Linha\+::atualizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a0486338385c2afb732fe3814e99c4261}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!defCor@{defCor}}
+\index{defCor@{defCor}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{defCor()}{defCor()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a0486338385c2afb732fe3814e99c4261} 
+void Linha\+::def\+Cor (\begin{DoxyParamCaption}\item[{const Color \&}]{cor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_ac42c2cbcf9e08e1a8347bd8a58875979}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!definirCorRef@{definirCorRef}}
+\index{definirCorRef@{definirCorRef}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{definirCorRef()}{definirCorRef()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_ac42c2cbcf9e08e1a8347bd8a58875979} 
+void Bubble\+UI\+::\+Formas\+::\+Linha\+::definir\+Cor\+Ref (\begin{DoxyParamCaption}\item[{Color \texorpdfstring{$\ast$}{*}}]{cor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_ab5b0358a1cdcd7ec35dba0a8851bb50f}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!definirPosicao@{definirPosicao}}
+\index{definirPosicao@{definirPosicao}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{definirPosicao()}{definirPosicao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_ab5b0358a1cdcd7ec35dba0a8851bb50f} 
+void Linha\+::definir\+Posicao (\begin{DoxyParamCaption}\item[{const Vector4$<$ int $>$ \&}]{posicoes}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a0552be7f95d93ff7e6fa9ad346dad6f3}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!renderizar@{renderizar}}
+\index{renderizar@{renderizar}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{renderizar()}{renderizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a0552be7f95d93ff7e6fa9ad346dad6f3} 
+void Linha\+::renderizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a8cc91305852025aeddfccb86a39d8a55}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!contexto@{contexto}}
+\index{contexto@{contexto}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{contexto}{contexto}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a8cc91305852025aeddfccb86a39d8a55} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}}$>$ Bubble\+UI\+::\+Formas\+::\+Linha\+::contexto\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_ad65618522d516b79da55c2f205bd74b9}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!cor\_base@{cor\_base}}
+\index{cor\_base@{cor\_base}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{cor\_base}{cor\_base}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_ad65618522d516b79da55c2f205bd74b9} 
+Color Bubble\+UI\+::\+Formas\+::\+Linha\+::cor\+\_\+base\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a3e6002bbc0bc2ac38eaafe03023de698}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!cor\_referencial@{cor\_referencial}}
+\index{cor\_referencial@{cor\_referencial}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{cor\_referencial}{cor\_referencial}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a3e6002bbc0bc2ac38eaafe03023de698} 
+Color\texorpdfstring{$\ast$}{*} Bubble\+UI\+::\+Formas\+::\+Linha\+::cor\+\_\+referencial \{ nullptr \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_aded19f5db2bf03e39882e16066f5d1cf}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!posicoes@{posicoes}}
+\index{posicoes@{posicoes}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{posicoes}{posicoes}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_aded19f5db2bf03e39882e16066f5d1cf} 
+Vector4$<$int$>$ Bubble\+UI\+::\+Formas\+::\+Linha\+::posicoes\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_linha_a4a266bbafcc014a9bb0c1a53611f25a7}\index{BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}!tamanhoAnterior@{tamanhoAnterior}}
+\index{tamanhoAnterior@{tamanhoAnterior}!BubbleUI::Formas::Linha@{BubbleUI::Formas::Linha}}
+\doxysubsubsection{\texorpdfstring{tamanhoAnterior}{tamanhoAnterior}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_linha_a4a266bbafcc014a9bb0c1a53611f25a7} 
+Vector4$<$int$>$ Bubble\+UI\+::\+Formas\+::\+Linha\+::tamanho\+Anterior\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ui/formas/\mbox{\hyperlink{linha_8hpp}{linha.\+hpp}}\item 
+src/ui/formas/\mbox{\hyperlink{linha_8cpp}{linha.\+cpp}}\end{DoxyCompactItemize}

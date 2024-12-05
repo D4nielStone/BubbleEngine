@@ -80,7 +80,7 @@ static void adicionarCena()
             Bubble::Cena::adicionarCena();
 }
 
-BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect) : buffer(std::make_shared<Imagem>(0)),
+BubbleUI::Paineis::Editor::Editor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4<int>& rect) : buffer(std::make_shared<Imagem>(0)),
 scenemanager(scenemanager)
 {
 	Nome = "Editor";
@@ -116,7 +116,7 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
     if (callback_adiesf)adicionarEsfera();
     if (callback_select)abrirSelecionar();
 
-    Vector4 rect_size = obterRetangulo();
+    Vector4<int> rect_size = obterRetangulo();
     
     std::shared_ptr<Bubble::Cena::Scene> cenaAtual;
     if (scenemanager) 

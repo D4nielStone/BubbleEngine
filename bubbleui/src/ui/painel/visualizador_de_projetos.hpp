@@ -8,7 +8,7 @@ namespace BubbleUI {
             public Painel
         {
         public:
-            VisualizadorDeProjetos(const bool& preencher = true, const Vector4& retangulo = {10, 10, 100, 400});
+            VisualizadorDeProjetos(const bool& preencher = true, const Vector4<int>& retangulo = {10, 10, 100, 400});
             void definirContexto(std::shared_ptr<Contexto> ctx) override;
         private:
             std::map<std::string, std::string> diretorios_projetos;

@@ -58,12 +58,12 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
     carregarCena(static_cast<int>(numeroDeCenas() - 1));
 }
 
-void Bubble::Cena::SceneManager::defJogoViewport(Vector4 rect)
+void Bubble::Cena::SceneManager::defJogoViewport(Vector4<int> rect)
 {
     viewportJogo = rect;
 }
 
-void Bubble::Cena::SceneManager::defEditorViewport(Vector4 rect)
+void Bubble::Cena::SceneManager::defEditorViewport(Vector4<int> rect)
 {
     viewportEditor = rect;
 }

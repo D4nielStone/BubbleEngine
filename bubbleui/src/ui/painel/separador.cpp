@@ -1,6 +1,5 @@
-
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
-
+/*
 #include "separador.hpp"
 #include "painel.hpp"
 #include <src/depuracao/debug.hpp>
@@ -31,7 +30,7 @@ void BubbleUI::Separador::atualizarColisao()
 	{
 	case DIREITA:
 		colisao.defRect({
-			painel->obterRetangulo().x + painel->obterRetangulo().w -2.f,
+			painel->obterRetangulo().x + painel->obterRetangulo().w -2,
 			painel->obterRetangulo().y,
 			10,
 			painel->obterRetangulo().h
@@ -48,7 +47,7 @@ void BubbleUI::Separador::atualizarColisao()
 	case CIMA:
 		colisao.defRect({
 			painel->obterRetangulo().x,
-			painel->obterRetangulo().y - 10.f,
+			painel->obterRetangulo().y - 10,
 			painel->obterRetangulo().w,
 			12
 			});
@@ -56,7 +55,7 @@ void BubbleUI::Separador::atualizarColisao()
 	case BAIXO:
 		colisao.defRect({
 			painel->obterRetangulo().x,
-			painel->obterRetangulo().y + painel->obterRetangulo().h - 2.f,
+			painel->obterRetangulo().y + painel->obterRetangulo().h - 2,
 			painel->obterRetangulo().w,
 			12
 			});
@@ -134,3 +133,4 @@ void BubbleUI::Separador::atualizarArrasto()
 		arrastando = false;
 	mouse_pos_ini = { static_cast<int>(inputs->mousex), static_cast<int>(inputs->mousey) };
 }
+*/

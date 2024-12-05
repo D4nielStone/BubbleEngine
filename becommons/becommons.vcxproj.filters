@@ -66,7 +66,7 @@
     <ClCompile Include="src\arquivadores\fonte.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\util\includes.cpp">
+    <ClCompile Include="src\util\utils.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\nucleo\engine.cpp">
@@ -122,7 +122,7 @@
     <ClInclude Include="becommons.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\util\includes.hpp">
+    <ClInclude Include="src\util\utils.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="src\util\skybox.hpp">

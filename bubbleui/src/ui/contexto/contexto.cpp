@@ -7,12 +7,10 @@
 #include <future>
 #include <thread>
 #include <comdef.h> // Necessário para _bstr_t (conversão de wchar_t para string)
-#include "src/ui/painel/painel.hpp"
+#include "src/ui/ancoragem/ancora.hpp"
 #include <functional>
 #include "src/arquivadores/shader.hpp"
 #include "src/arquivadores/imageloader.hpp"
-#include "src/ui/painel/editor.hpp"
-#include "src/ui/painel/depurador.hpp"
 #include <windows.h>
 #include <memory>
 #include <queue>
@@ -24,17 +22,6 @@ std::map<GLFWwindow*, std::shared_ptr<BubbleUI::Contexto>> contextos;
 BubbleUI::Contexto* contexto_atual{ nullptr };
 
 std::queue<std::function<void()>> tarefas;
-
-std::shared_ptr<BubbleUI::Painel> BubbleUI::Contexto::painel(const char* nome_painel, const Vector4& rect)
-{
-    std::shared_ptr<Painel> _Pnl_tmp = std::make_shared<Painel>(); // Shared ownership for temporary panel
-    tarefa([this, rect, nome_painel, _Pnl_tmp]() mutable
-        {
-            _Pnl_tmp->definirContexto(contextos[glfwWindow], nome_painel, rect);
-            paineis.emplace_back(_Pnl_tmp.get()); // Store in the collection
-        });
-    return _Pnl_tmp;
-}
 
 static std::string obterDiretorioDoc()
 {
@@ -60,7 +47,7 @@ static std::string obterDiretorioDoc()
     return caminhoDocumentosStr;
 }
 
-BubbleUI::Contexto::Contexto(GLFWwindow* window)
+BubbleUI::Contexto::Contexto(GLFWwindow* window) : ancora_root(new Ancora(Horizontal))
 {
 
     cursor_horizontal = glfwCreateStandardCursor(GLFW_RESIZE_EW_CURSOR);
@@ -106,11 +93,11 @@ void BubbleUI::novoContexto(GLFWwindow* window)
     halfcircle_vertex.carregado = false;
 }
 
-void BubbleUI::adicionarPainel(Contexto* contexto, BubbleUI::Painel* painel)
+void BubbleUI::adicionarAncora(Contexto* contexto, BubbleUI::Ancora* ancora)
 {
     if (!contexto) return;
-    painel->definirContexto(contextos[contexto->glfwWindow]);
-    contexto->paineis.emplace_back(painel);
+    ancora->definirContexto(contextos[contexto->glfwWindow]);
+    contexto->ancoras.emplace_back(ancora);
 }
 
 void BubbleUI::Contexto::atualizar()
@@ -121,11 +108,17 @@ void BubbleUI::Contexto::atualizar()
     std::vector<std::future<void>> futures;
 
     cursor = cursor_normal;
+
+    ancora_root->bounds = {0, 0, tamanho.width, tamanho.height};
+    ancora_root->atualizarBounds();
+    ancora_root->atualizarPaineis();
+
     // Inicia cada painel->atualizar() em uma thread separada
-    for (auto& painel : paineis) {
-        //futures.push_back(std::async(std::launch::async, [&painel]() {
-            painel->atualizar();
-        //  }));
+    for (auto& ancora : ancoras) {
+        futures.push_back(std::async(std::launch::async, [&ancora]() {
+            ancora->atualizarBounds();
+            ancora->atualizarPaineis();
+          }));
     }
 
     for (auto& future : futures) {
@@ -134,12 +127,13 @@ void BubbleUI::Contexto::atualizar()
 }
 void BubbleUI::Contexto::renderizar()
 {
-    //glClearColor(0.1, 0.1, 0.1, 1);
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(0.1, 0.1, 0.1, 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, tamanho.width, tamanho.height);
 
-    for (const auto& painel : paineis)
-        painel->renderizar();
+    ancora_root->renderizarPaineis();
+    for (const auto& ancora : ancoras)
+        ancora->renderizarPaineis();
 
     glfwSetCursor(glfwWindow, cursor);
 
@@ -154,36 +148,24 @@ void BubbleUI::Contexto::renderizar()
         tarefas.pop();
     }
 }
-
-//static void BubbleUI::renderizarContexto(GLFWwindow* window)
-//{
-//    if (!window) abort();   // Janela inválida
-//    if (contextos.find(window) == contextos.end()) abort(); // Não possui contexto para essa janela
-//
-//}
 void BubbleUI::atualizarContexto()
 {
-
-    Contexto* ctx{ nullptr };
-    ctx = contexto_atual;   // Janela inválida
-    if (!ctx) abort(); /// Contexto inválido
-    ctx->atualizar();
+    if (!contexto_atual) abort(); /// Contexto inválido
+    contexto_atual->atualizar();
 }
 
 void BubbleUI::renderizarContexto()
 {
-
-    Contexto* ctx{ nullptr };
-    ctx = contexto_atual;   // Janela inválida
-    if (!ctx) abort(); /// Contexto inválido
+    if (!contexto_atual) abort(); /// Contexto inválido
     // ativa o stencil
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_STENCIL_TEST);
     glDisable(GL_CULL_FACE);
 
-    ctx->renderizar();
+    contexto_atual->renderizar();
 
     glEnable(GL_CULL_FACE);
+    glDisable(GL_STENCIL_TEST);
     glEnable(GL_DEPTH_TEST);
 }
 

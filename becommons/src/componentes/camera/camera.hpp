@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "src/util/skybox.hpp"
 #include "becommons.hpp"
-#include "src/util/includes.hpp"
+#include "src/util/utils.hpp"
 
 namespace Bubble {
     namespace Componentes {
@@ -17,7 +17,7 @@ namespace Bubble {
             void atualizar() override;
             virtual void renderizar();
             void atualizarAspecto(float aspect);
-            void desenharFrame(const Vector4 &viewportRect) const;
+            void desenharFrame(const Vector4<int> &viewportRect) const;
             const float* obterViewMatrix();
             const float* obterProjMatrix();
             Color ceu{ 0.7f, 0.7f, 1.0f, 1 };

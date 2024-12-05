@@ -1,0 +1,47 @@
+\doxysection{meio\+\_\+circulo.\+hpp}
+\hypertarget{meio__circulo_8hpp_source}{}\label{meio__circulo_8hpp_source}\index{src/ui/formas/meio\_circulo.hpp@{src/ui/formas/meio\_circulo.hpp}}
+\mbox{\hyperlink{meio__circulo_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}glad/glad.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}src/util/utils.hpp"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{contexto_8hpp}{src/ui/contexto/contexto.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{namespace\ }Formas}
+\DoxyCodeLine{00013\ \ \ \ \ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{MeioCirculo}}}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a7bb2654da0e1655fcf4a538e91c239cd}{MeioCirculo}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{MeioCirculo}}(std::shared\_ptr<Contexto>\ ctx,\ \textcolor{keyword}{const}\ Vector4<int>\ \&rect);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ Vector4<int>\ obtMeioCirculo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<float>\ obtMeioCirculoNDC()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirTamanho(\textcolor{keyword}{const}\ Vector2\ \&tam);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirPosicao(\textcolor{keyword}{const}\ Vector2\ \&pos);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ adiTam(\textcolor{keyword}{const}\ Vector2\ \&tam);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ adiPos(\textcolor{keyword}{const}\ Vector2\ \&tam);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirRetangulo(\textcolor{keyword}{const}\ Vector4<int>\ \&rect);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ defCor(\textcolor{keyword}{const}\ Color\ \&cor);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ defCor(Color*\ cor);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ atualizar();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ renderizar()\ ;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Contexto>\ contexto\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a1b48fbe7a257a3e12f6fc47a9e9bf009}{retangulo}},\ tamanhoAnterior;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ Color*\ cor\_base\ \{\ \textcolor{keyword}{new}\ Color(0.2f,\ 0.2f,\ 0.2f,\ 1.f)\ \};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<float>\ paraNDC();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<float>\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_aa96eb1cf0a826125e574390707690f95}{coord\_ndc}};}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ Size\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af1b60a36beb2cf089911346ee9c3f709}{tamanhoDoContextoAnterior}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ Bubble::Arquivadores::Shader\ shader\{\ Bubble::Arquivadores::Shader(\textcolor{stringliteral}{"{}assets/shaders/quad.vert"{}},\ \textcolor{stringliteral}{"{}assets/shaders/quad.frag"{}})\ \};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirBuffers();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ \}}
+
+\end{DoxyCode}

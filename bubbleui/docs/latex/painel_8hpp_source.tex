@@ -1,0 +1,66 @@
+\doxysection{painel.\+hpp}
+\hypertarget{painel_8hpp_source}{}\label{painel_8hpp_source}\index{src/ui/painel/painel.hpp@{src/ui/painel/painel.hpp}}
+\mbox{\hyperlink{painel_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{moldura_8hpp}{src/ui/formas/moldura.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{widget_8hpp}{src/ui/widgets/widget.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{pop__up_8hpp}{src/ui/util/pop\_up.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}memory"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{aba_8hpp}{aba.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bubble_u_i_1_1_painel}{Painel}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Construtores}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b}{Painel}}(\textcolor{keyword}{const}\ Vector4<int>\&\ rect);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b}{Painel}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ n,\ \textcolor{keyword}{const}\ Vector4<int>\&\ rect);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a8835c6edfa007d98c9c206d8f203537b}{Painel}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Widgets}}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a01d04f64a65df8901d3e383e573b8dbc}{adicionarWidget}}(std::shared\_ptr<Widget>\ widget);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Obtenção\ de\ Dados}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::shared\_ptr<Contexto>\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a51d23a6228dfa93c11a4be255bc7eb07}{obterContexto}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Atualização\ e\ Renderização}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aaae2e91dc467767e88b18d38401cd728}{atualizar}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a2379994554ec418603f14ffd0975324f}{renderizar}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Estado\ do\ Painel}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2}{nome}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_acbbaa85a699f849deb672e4e0ea83b7b}{Nome}};\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3d25da742045c5d7f1637317891e3915}{definirContexto}}(std::shared\_ptr<Contexto>,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3ba41bf894657acdd0ae801544407df2}{nome}},\ \textcolor{keyword}{const}\ Vector4<int>\&\ rect);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a3d25da742045c5d7f1637317891e3915}{definirContexto}}(std::shared\_ptr<Contexto>);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Flags\ de\ Controle}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aa7511f1e8d745247943c22e2d3e70430}{mouse1click}}\{\ \textcolor{keyword}{false}\ \},\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_ae36982878f715ae069a2706fc6a48aeb}{mostrar\_aba}}\{\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Widget>>\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_af71b08a08db73c24f8fc4bf386115c8f}{widgets}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a7346b81edde4aaa9b73aab19b696b596}{defCor}}(\textcolor{keyword}{const}\ Color\&\ cor)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Métodos\ de\ Configuração\ e\ Ciclo\ de\ Vida}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a259f46fe06662ec9a2d446947160908e}{configurar}}(std::shared\_ptr<Contexto>\ ctx,\ \textcolor{keyword}{const}\ Vector4<int>\&\ rect\ =\ \{\ 2,\ 2,\ 200,\ 100\ \});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a87d2e0c4d7735a37da71fa02193d1208}{preAtualizacao}}()\ \{\}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a1e89260cf6c68788f0ea337188f555c2}{posRenderizacao}}()\textcolor{keyword}{\ const\ }\{\}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_adc1aebfcae1501349b95a31fc1a1ce5e}{posAtualizacao}}()\ \{\}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a75b86d6ee81e01f072e104b9510e64db}{preRenderizacao}}()\textcolor{keyword}{\ const\ }\{\}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Atributos}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_acbbaa85a699f849deb672e4e0ea83b7b}{Nome}}\ =\ \textcolor{stringliteral}{"{}Painel"{}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::vector<std::shared\_ptr<Widget>>\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a281c4e87d4138f4fa9dc8415d58b877a}{lista\_widgets}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Componentes}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::unique\_ptr<Util::PopUp>\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_aae8b942587668794d0c90c38794b4f45}{menuDeContexto}}\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::unique\_ptr<Aba>\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a5036c06fdc22d5f1f21927935b848572}{aba}}\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Dados\ de\ Geometria}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bubble_u_i_1_1_painel_a1d0d6d2efca0adf89db72c92139cd717}{renderizarCorpo}}\{\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00063\ \ \ \ \ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \}}
+
+\end{DoxyCode}

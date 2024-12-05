@@ -15,7 +15,7 @@ BubbleUI::Aba::Aba(Formas::Moldura *painel)
     letra_padding = {4, 2};
     definirFonte();
     Texto::Texto(frase);
-    corpo_rect = std::make_unique<Formas::Rect>(painel->obterContexto(), Vector4{});
+    corpo_rect = std::make_unique<Formas::Rect>(painel->obterContexto(), Vector4<int>{});
 }
 
 void BubbleUI::Aba::atualizar()
@@ -27,7 +27,7 @@ void BubbleUI::Aba::atualizar()
 
     corpo_rect->definirPosicao({static_cast<int>(painel->obterRetangulo().x), static_cast<int>(painel->obterRetangulo().y)});
     corpo_rect->definirTamanho({ painel->obterRetangulo().w, 16});
-    box_pos = {corpo_rect->obterRetangulo().x, corpo_rect->obterRetangulo().y};
+    box_pos = {static_cast<float>(corpo_rect->obterRetangulo().x), static_cast<float>(corpo_rect->obterRetangulo().y)};
     box_size = { static_cast<float>(corpo_rect->obterRetangulo().w), static_cast<float>(corpo_rect->obterRetangulo().h) };
     corpo_rect->atualizar();
 }

@@ -99,7 +99,7 @@ void CheckBox::renderizarImg()
 {
     shaderImg.use();
     shaderImg.setVec2("quadrado.posicao", rect_ndc.x, rect_ndc.y);
-    shaderImg.setVec2("quadrado.tamanho", rect_ndc.z, rect_ndc.w);
+    shaderImg.setVec2("quadrado.tamanho", rect_ndc.w, rect_ndc.h);
     shaderImg.setInt("textura", 0);
     shaderImg.setBool("flip", false);
 

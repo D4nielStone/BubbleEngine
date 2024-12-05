@@ -1,0 +1,47 @@
+\doxysection{texto.\+hpp}
+\hypertarget{texto_8hpp_source}{}\label{texto_8hpp_source}\index{src/ui/widgets/texto.hpp@{src/ui/widgets/texto.hpp}}
+\mbox{\hyperlink{texto_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}string"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{widget_8hpp}{src/ui/widgets/widget.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}src/arquivadores/fonte.hpp"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{namespace\ }Widgets}
+\DoxyCodeLine{00009\ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto}{Texto}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widget}{Widget}}}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto}{Texto}}(std::string*\ label\_shared);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto}{Texto}}(\textcolor{keyword}{const}\ std::string\&\ label\_shared);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a5580e9e91e72f2d6bb8cb1b21194469f}{Texto}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirTexto(\textcolor{keyword}{const}\ std::string\ \&\ texto);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ atualizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<float>\ paraNDC(\textcolor{keyword}{const}\ Vector4<int>\&\ vec4);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirFonte(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ resolucao\ =\ 15,\ \textcolor{keyword}{const}\ std::string\ \&font\_path\ =\ \textcolor{stringliteral}{"{}assets/fontes/noto\_sans/noto\_sans.regular.ttf"{}});}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ nome\_da\_fonte\{\ \textcolor{stringliteral}{"{}assets/fontes/noto\_sans/noto\_sans.regular.ttf"{}}\ \};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ desenharSelecao(Vector2\ mouse\_inicial,\ Vector2\ mouse\_final,\ Vector4<int>\ char\_rect,\ \textcolor{keywordtype}{size\_t}\ letra\_idx);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar\_texto(std::string\ \&frase);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ texto\_cursor\_index\{\ 0\ \};\ Vector4<float>\ texto\_cursor\_pos;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ selecionando\_texto\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a7d4f4606c039a954a2cc1f81ee76b7f6}{resolucao}},\ texturaID;}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lines\_box\_limite,\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a3aaab890a886b5e490f303a54788ff3a}{largura\_texto}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ box\_size,\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a0d1555dc73e8e670a5d6ca295ed9dc93}{box\_pos}},\ line\_pos;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ letra\_padding\{\ 5,\ 5\ \};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a3cd78e9247b16b86bc5d0f3986d89692}{frase}};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ cor\{1.f,\ 1.f,\ 1.f,\ 1.f\},\ cor\_de\_selecao\{\ 0.678F,\ 0.847F,\ 0.902F,\ 1.0F\ \};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a34553f48eaf7f7c0cc28dfb18e86dd66}{pos\_texto}};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ char\_rect,\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_afa471782dc0015b564430540f6d67766}{char\_fundo\_rect}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<LetraRect>\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_a6a2a7ba78aed2372648e7aa81c3650db}{letras\_rect}};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto_ab034086a7bdf653373b166eee0910b25}{area\_de\_selecao}};}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ Bubble::Arquivadores::Shader\ shader\ =\ Bubble::Arquivadores::Shader(\textcolor{stringliteral}{"{}assets/shaders/texto.vert"{}},\ \textcolor{stringliteral}{"{}assets/shaders/texto.frag"{}}),\ shaderQuad\ =\ Bubble::Arquivadores::Shader(\textcolor{stringliteral}{"{}assets/shaders/quad.vert"{}},\ \textcolor{stringliteral}{"{}assets/shaders/quad.frag"{}});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ std::string*\ label\_shared\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ \}}
+
+\end{DoxyCode}

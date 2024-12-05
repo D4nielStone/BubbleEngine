@@ -6,6 +6,7 @@
 #include "src/ui/painel/depurador.hpp"
 #include "src/ui/painel/entidades.hpp"
 #include "src/ui/painel/inspetor.hpp"
+#include "src/ui/ancoragem/ancora.hpp"
 #include "src/nucleo/engine.hpp"
 #include <windows.h>
 
@@ -69,23 +70,20 @@ return 0;
     }
 
     // Criando os painéis da interface do editor
-    auto editor = new BubbleUI::Paineis::Editor(engine.obterGerenciadorDeCenas());
-    auto ent = new BubbleUI::Paineis::Entidades(engine.obterGerenciadorDeCenas(), { 3, 3, 200, 400 });
-    auto insp = new BubbleUI::Paineis::Inspetor(engine.obterGerenciadorDeCenas(), { 597, 3, 200, 400 });
+    BubbleUI::Paineis::Editor* editor = new BubbleUI::Paineis::Editor( engine.obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Entidades* ent = new BubbleUI::Paineis::Entidades( engine.obterGerenciadorDeCenas(), { 3, 3, 200, 400 });
+    BubbleUI::Paineis::Inspetor* insp = new BubbleUI::Paineis::Inspetor( engine.obterGerenciadorDeCenas(), { 597, 3, 200, 400 });
 
-    // Definindo o painel editor para tela cheia
-    editor->Fullscreen(true);
+    // criando ancoras
+    BubbleUI::Ancora* ancora_ent_insp = new BubbleUI::Ancora(BubbleUI::Vertical); ///< alinha  entidades e inspetor
+
+    ancora_ent_insp->a = new BubbleUI::Ancora(BubbleUI::Nenhum, insp);
+    ancora_ent_insp->b = new BubbleUI::Ancora(BubbleUI::Nenhum, ent);
+
+    contexto->ancora_root->a = new BubbleUI::Ancora(BubbleUI::Nenhum, editor);
+    contexto->ancora_root->b = ancora_ent_insp;
 
     // Adicionando os painéis à janela do contexto
-    BubbleUI::adicionarPainel(contexto.get(), editor);
-    BubbleUI::adicionarPainel(contexto.get(), ent);
-    BubbleUI::adicionarPainel(contexto.get(), insp);
-
-#ifdef _DEBUG
-    // Adicionando o painel de depuração se estiver no modo de debug
-    BubbleUI::adicionarPainel(contexto.get(), new BubbleUI::Paineis::Depurador());
-#endif
-    
     engine.definirInputs(contexto->inputs);
 
 }

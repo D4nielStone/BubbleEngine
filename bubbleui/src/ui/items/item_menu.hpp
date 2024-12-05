@@ -32,8 +32,8 @@ namespace BubbleUI
 			std::string texto{ "" }, frase{ "" };
 			std::string* label_shared{ nullptr };
 			Color cor{ 1, 1, 1 };
-			Vector4 char_rect{ 0, 0, 0 ,0 };
-			Vector4f paraNDC();
+			Vector4<int> char_rect{ 0, 0, 0 ,0 };
+			Vector4<float> paraNDC();
 			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/texto.vert", "assets/shaders/texto.frag");
 			Colisao2d colisao;
 			std::shared_ptr<Contexto> contexto{ nullptr };

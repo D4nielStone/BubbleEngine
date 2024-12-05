@@ -1,0 +1,34 @@
+\doxysection{botao.\+hpp}
+\hypertarget{botao_8hpp_source}{}\label{botao_8hpp_source}\index{src/ui/widgets/botao.hpp@{src/ui/widgets/botao.hpp}}
+\mbox{\hyperlink{botao_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{texto_8hpp}{texto.hpp}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{imagem_8hpp}{imagem.hpp}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{namespace\ }Widgets}
+\DoxyCodeLine{00008\ \ \ \ \ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao}{Botao}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto}{Texto}}}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao}{Botao}}(\textcolor{keyword}{const}\ std::string\ \&label\_shared,\ std::function<\textcolor{keywordtype}{void}()>\ funcao\_click,\ \textcolor{keyword}{const}\ std::string\&\ imagePath,\textcolor{keywordtype}{bool}\ completo\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao}{Botao}}(\textcolor{keyword}{const}\ std::string\ \&label\_shared,\ std::function<\textcolor{keywordtype}{void}()>\ funcao\_click,\ \textcolor{keywordtype}{bool}\ completo\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao}{Botao}}(\textcolor{keyword}{const}\ std::string\ \&label\_shared,\ \textcolor{keyword}{const}\ std::string\&\ imagePath,\ \textcolor{keywordtype}{bool}*\ callback\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{bool}\ completo\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao}{Botao}}(\textcolor{keyword}{const}\ std::string\ \&label\_shared,\ \textcolor{keywordtype}{bool}*\ callback\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{bool}\ completo\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_botao_a60266ff2a734fc41b8a4937f81dce953}{Botao}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirPai(Moldura*\ pai)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ atualizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \_Meu\_iconsize\{\ 15\ \};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ completo\{\},\ gatilho\{\ \textcolor{keyword}{false}\ \};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}*\ callback\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<void()>\ funcao\_click\_;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<Imagem>\ icon\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \}}
+
+\end{DoxyCode}

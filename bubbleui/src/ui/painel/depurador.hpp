@@ -9,7 +9,7 @@ namespace BubbleUI
 		class BEUI_DLL_API Depurador : public Painel
 		{
 		public:
-			Depurador(const Vector4& retangulo = {0, 31, 100, 50});
+			Depurador(const Vector4<int>& retangulo = {0, 31, 100, 50});
 			void definirContexto(std::shared_ptr<Contexto> ctx) override;
 		private:
 			void preAtualizacao() override;

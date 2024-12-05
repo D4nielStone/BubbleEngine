@@ -27,12 +27,12 @@ Imagem::Imagem(const std::string& path, const Vector2& size)
 
 
 // Deve transformar coordenadas pixel para NDC
-Vector4f Imagem::paraNDC() const
+Vector4<float> Imagem::paraNDC() const
 {
-    Vector4f coord_ndc;
+    Vector4<float> coord_ndc;
 
-    coord_ndc.z = (rect.w * 2.f) / contexto->tamanho.width;
-    coord_ndc.w = -(2.0f * rect.h) / contexto->tamanho.height;
+    coord_ndc.w= (rect.w * 2.f) / contexto->tamanho.width;
+    coord_ndc.h = -(2.0f * rect.h) / contexto->tamanho.height;
     coord_ndc.x = (rect.x * 2.f) / contexto->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * rect.y) / contexto->tamanho.height;
 
@@ -58,7 +58,7 @@ void Imagem::atualizar()
     //    rect.w = static_cast<int>(tamanho_original.x * scale_factor);
     //    rect.h = static_cast<int>(tamanho_original.y * scale_factor);
     //}
-    rect = { (float)painel->posicaoWidget.x + painel->widgetPadding.x, (float)painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
+    rect = { painel->posicaoWidget.x + painel->widgetPadding.x, painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     
     rect.y += padding ? painel->widgetPadding.y : 0;
     switch (alinhamentoHorizontal)
@@ -94,10 +94,10 @@ void Imagem::renderizar()
 {
     if (!deveRenderizar)
         return;
-    Vector4f rectf = paraNDC();
+    Vector4<float> rectf = paraNDC();
     shader.use();
     shader.setVec2("quadrado.posicao", rectf.x, rectf.y);
-    shader.setVec2("quadrado.tamanho", rectf.z, rectf.w);
+    shader.setVec2("quadrado.tamanho", rectf.w, rectf.h);
     shader.setInt("textura", 0);
     shader.setBool("flip", flip);
 
@@ -113,7 +113,7 @@ bool Imagem::defID(unsigned int newID)
     return ID = newID;
 }
 
-Vector4 Imagem::obtRect() const
+Vector4<int> Imagem::obtRect() const
 {
     return rect;
 }

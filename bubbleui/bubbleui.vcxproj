@@ -151,6 +151,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ui\ancoragem\ancora.hpp" />
     <ClInclude Include="src\ui\widgets\arquivos.hpp" />
     <ClInclude Include="src\ui\widgets\filtro.hpp" />
     <ClInclude Include="src\ui\formas\meio_circulo.hpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="src\ui\painel\visualizador_de_projetos.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ui\ancoragem\ancora.cpp" />
     <ClCompile Include="src\ui\widgets\arquivos.cpp" />
     <ClCompile Include="src\ui\widgets\filtro.cpp" />
     <ClCompile Include="src\ui\formas\meio_circulo.cpp" />

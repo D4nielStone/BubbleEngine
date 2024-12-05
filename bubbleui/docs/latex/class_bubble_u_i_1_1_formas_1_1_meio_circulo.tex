@@ -1,0 +1,206 @@
+\doxysection{Bubble\+UI\+::Formas\+::Meio\+Circulo Class Reference}
+\hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo}{}\label{class_bubble_u_i_1_1_formas_1_1_meio_circulo}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+
+
+{\ttfamily \#include $<$meio\+\_\+circulo.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a7bb2654da0e1655fcf4a538e91c239cd}{Meio\+Circulo}} ()=default
+\item 
+\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a554fdaed2e7a9563bdfd7e2790838b47}{Meio\+Circulo}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ ctx, const Vector4$<$ int $>$ \&rect)
+\item 
+virtual Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a305a2b57fc3c2e236b36b613fdaee133}{obt\+Meio\+Circulo}} () const
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5a2b062f4a3e4453fe4396f2feb164f0}{obt\+Meio\+Circulo\+NDC}} () const
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a791a3f4a08eff91e4b8e3d50ebc5d5db}{definir\+Tamanho}} (const Vector2 \&tam)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a78491a29dce258721ae569b2a9547eb0}{definir\+Posicao}} (const Vector2 \&pos)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a8815fe53ede1b0039d46f521760bc2b8}{adi\+Tam}} (const Vector2 \&tam)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a447543d002fa063d38f8a662f274cff0}{adi\+Pos}} (const Vector2 \&tam)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a93980aa054f0869a3a7474236243206b}{definir\+Retangulo}} (const Vector4$<$ int $>$ \&rect)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_afc7b5cee66900dd89e9d66f78950fa5d}{def\+Cor}} (const Color \&cor)
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a191850ebcc867cac5692750237429a71}{def\+Cor}} (Color \texorpdfstring{$\ast$}{*}cor)
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a4406f424d7e2047c6dbba738bd96f375}{atualizar}} ()
+\item 
+virtual void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a9f3af24fdb215d9628e9111f66c5383d}{renderizar}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_ae6e4232de6e5f83105cdb201ba09bfda}{para\+NDC}} ()
+\item 
+void \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af4e355da4a89f2902b5aee9a18f2a402}{definir\+Buffers}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af481e50333b5c2b391ba05602d60d3eb}{contexto}} \{ nullptr \}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a1b48fbe7a257a3e12f6fc47a9e9bf009}{retangulo}}
+\item 
+Vector4$<$ int $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a713edb895c675d7eaa671447cd2bc3d3}{tamanho\+Anterior}}
+\item 
+Color \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_acf45f4eb48b0c28e43277502882c12c9}{cor\+\_\+base}} \{ new Color(0.\+2f, 0.\+2f, 0.\+2f, 1.f) \}
+\item 
+Vector4$<$ float $>$ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_aa96eb1cf0a826125e574390707690f95}{coord\+\_\+ndc}}
+\item 
+Size \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af1b60a36beb2cf089911346ee9c3f709}{tamanho\+Do\+Contexto\+Anterior}}
+\item 
+Bubble\+::\+Arquivadores\+::\+Shader \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5324d7ea93f1f106914770317a7d726b}{shader}} \{ Bubble\+::\+Arquivadores\+::\+Shader("{}assets/shaders/quad.\+vert"{}, "{}assets/shaders/quad.\+frag"{}) \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a7bb2654da0e1655fcf4a538e91c239cd}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!MeioCirculo@{MeioCirculo}}
+\index{MeioCirculo@{MeioCirculo}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{MeioCirculo()}{MeioCirculo()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a7bb2654da0e1655fcf4a538e91c239cd} 
+Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::\+Meio\+Circulo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a554fdaed2e7a9563bdfd7e2790838b47}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!MeioCirculo@{MeioCirculo}}
+\index{MeioCirculo@{MeioCirculo}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{MeioCirculo()}{MeioCirculo()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a554fdaed2e7a9563bdfd7e2790838b47} 
+Meio\+Circulo\+::\+Meio\+Circulo (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}} $>$}]{ctx}{, }\item[{const Vector4$<$ int $>$ \&}]{rect}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a447543d002fa063d38f8a662f274cff0}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!adiPos@{adiPos}}
+\index{adiPos@{adiPos}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{adiPos()}{adiPos()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a447543d002fa063d38f8a662f274cff0} 
+void Meio\+Circulo\+::adi\+Pos (\begin{DoxyParamCaption}\item[{const Vector2 \&}]{tam}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a8815fe53ede1b0039d46f521760bc2b8}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!adiTam@{adiTam}}
+\index{adiTam@{adiTam}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{adiTam()}{adiTam()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a8815fe53ede1b0039d46f521760bc2b8} 
+void Meio\+Circulo\+::adi\+Tam (\begin{DoxyParamCaption}\item[{const Vector2 \&}]{tam}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a4406f424d7e2047c6dbba738bd96f375}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!atualizar@{atualizar}}
+\index{atualizar@{atualizar}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{atualizar()}{atualizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a4406f424d7e2047c6dbba738bd96f375} 
+void Meio\+Circulo\+::atualizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a191850ebcc867cac5692750237429a71}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!defCor@{defCor}}
+\index{defCor@{defCor}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{defCor()}{defCor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a191850ebcc867cac5692750237429a71} 
+void Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::def\+Cor (\begin{DoxyParamCaption}\item[{Color \texorpdfstring{$\ast$}{*}}]{cor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_afc7b5cee66900dd89e9d66f78950fa5d}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!defCor@{defCor}}
+\index{defCor@{defCor}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{defCor()}{defCor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_afc7b5cee66900dd89e9d66f78950fa5d} 
+void Meio\+Circulo\+::def\+Cor (\begin{DoxyParamCaption}\item[{const Color \&}]{cor}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af4e355da4a89f2902b5aee9a18f2a402}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!definirBuffers@{definirBuffers}}
+\index{definirBuffers@{definirBuffers}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{definirBuffers()}{definirBuffers()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af4e355da4a89f2902b5aee9a18f2a402} 
+void Meio\+Circulo\+::definir\+Buffers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a78491a29dce258721ae569b2a9547eb0}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!definirPosicao@{definirPosicao}}
+\index{definirPosicao@{definirPosicao}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{definirPosicao()}{definirPosicao()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a78491a29dce258721ae569b2a9547eb0} 
+void Meio\+Circulo\+::definir\+Posicao (\begin{DoxyParamCaption}\item[{const Vector2 \&}]{pos}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a93980aa054f0869a3a7474236243206b}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!definirRetangulo@{definirRetangulo}}
+\index{definirRetangulo@{definirRetangulo}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{definirRetangulo()}{definirRetangulo()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a93980aa054f0869a3a7474236243206b} 
+void Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::definir\+Retangulo (\begin{DoxyParamCaption}\item[{const Vector4$<$ int $>$ \&}]{rect}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a791a3f4a08eff91e4b8e3d50ebc5d5db}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!definirTamanho@{definirTamanho}}
+\index{definirTamanho@{definirTamanho}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{definirTamanho()}{definirTamanho()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a791a3f4a08eff91e4b8e3d50ebc5d5db} 
+void Meio\+Circulo\+::definir\+Tamanho (\begin{DoxyParamCaption}\item[{const Vector2 \&}]{tam}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a305a2b57fc3c2e236b36b613fdaee133}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!obtMeioCirculo@{obtMeioCirculo}}
+\index{obtMeioCirculo@{obtMeioCirculo}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{obtMeioCirculo()}{obtMeioCirculo()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a305a2b57fc3c2e236b36b613fdaee133} 
+Vector4$<$ int $>$ Meio\+Circulo\+::obt\+Meio\+Circulo (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5a2b062f4a3e4453fe4396f2feb164f0}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!obtMeioCirculoNDC@{obtMeioCirculoNDC}}
+\index{obtMeioCirculoNDC@{obtMeioCirculoNDC}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{obtMeioCirculoNDC()}{obtMeioCirculoNDC()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5a2b062f4a3e4453fe4396f2feb164f0} 
+Vector4$<$ float $>$ Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::obt\+Meio\+Circulo\+NDC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_ae6e4232de6e5f83105cdb201ba09bfda}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!paraNDC@{paraNDC}}
+\index{paraNDC@{paraNDC}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{paraNDC()}{paraNDC()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_ae6e4232de6e5f83105cdb201ba09bfda} 
+Vector4$<$ float $>$ Meio\+Circulo\+::para\+NDC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a9f3af24fdb215d9628e9111f66c5383d}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!renderizar@{renderizar}}
+\index{renderizar@{renderizar}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{renderizar()}{renderizar()}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a9f3af24fdb215d9628e9111f66c5383d} 
+void Meio\+Circulo\+::renderizar (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af481e50333b5c2b391ba05602d60d3eb}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!contexto@{contexto}}
+\index{contexto@{contexto}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{contexto}{contexto}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af481e50333b5c2b391ba05602d60d3eb} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{struct_bubble_u_i_1_1_contexto}{Contexto}}$>$ Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::contexto \{ nullptr \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_aa96eb1cf0a826125e574390707690f95}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!coord\_ndc@{coord\_ndc}}
+\index{coord\_ndc@{coord\_ndc}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{coord\_ndc}{coord\_ndc}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_aa96eb1cf0a826125e574390707690f95} 
+Vector4$<$float$>$ Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::coord\+\_\+ndc\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_acf45f4eb48b0c28e43277502882c12c9}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!cor\_base@{cor\_base}}
+\index{cor\_base@{cor\_base}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{cor\_base}{cor\_base}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_acf45f4eb48b0c28e43277502882c12c9} 
+Color\texorpdfstring{$\ast$}{*} Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::cor\+\_\+base \{ new Color(0.\+2f, 0.\+2f, 0.\+2f, 1.f) \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a1b48fbe7a257a3e12f6fc47a9e9bf009}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!retangulo@{retangulo}}
+\index{retangulo@{retangulo}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{retangulo}{retangulo}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a1b48fbe7a257a3e12f6fc47a9e9bf009} 
+Vector4$<$int$>$ Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::retangulo\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5324d7ea93f1f106914770317a7d726b}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!shader@{shader}}
+\index{shader@{shader}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{shader}{shader}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a5324d7ea93f1f106914770317a7d726b} 
+Bubble\+::\+Arquivadores\+::\+Shader Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::shader \{ Bubble\+::\+Arquivadores\+::\+Shader("{}assets/shaders/quad.\+vert"{}, "{}assets/shaders/quad.\+frag"{}) \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a713edb895c675d7eaa671447cd2bc3d3}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!tamanhoAnterior@{tamanhoAnterior}}
+\index{tamanhoAnterior@{tamanhoAnterior}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{tamanhoAnterior}{tamanhoAnterior}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_a713edb895c675d7eaa671447cd2bc3d3} 
+Vector4$<$int$>$ Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::tamanho\+Anterior\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af1b60a36beb2cf089911346ee9c3f709}\index{BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}!tamanhoDoContextoAnterior@{tamanhoDoContextoAnterior}}
+\index{tamanhoDoContextoAnterior@{tamanhoDoContextoAnterior}!BubbleUI::Formas::MeioCirculo@{BubbleUI::Formas::MeioCirculo}}
+\doxysubsubsection{\texorpdfstring{tamanhoDoContextoAnterior}{tamanhoDoContextoAnterior}}
+{\footnotesize\ttfamily \label{class_bubble_u_i_1_1_formas_1_1_meio_circulo_af1b60a36beb2cf089911346ee9c3f709} 
+Size Bubble\+UI\+::\+Formas\+::\+Meio\+Circulo\+::tamanho\+Do\+Contexto\+Anterior\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/ui/formas/\mbox{\hyperlink{meio__circulo_8hpp}{meio\+\_\+circulo.\+hpp}}\item 
+src/ui/formas/\mbox{\hyperlink{meio__circulo_8cpp}{meio\+\_\+circulo.\+cpp}}\end{DoxyCompactItemize}

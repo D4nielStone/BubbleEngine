@@ -1,0 +1,53 @@
+\doxysection{item\+\_\+menu.\+hpp}
+\hypertarget{item__menu_8hpp_source}{}\label{item__menu_8hpp_source}\index{src/ui/items/item\_menu.hpp@{src/ui/items/item\_menu.hpp}}
+\mbox{\hyperlink{item__menu_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}string"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}src/arquivadores/fonte.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{moldura_8hpp}{src/ui/formas/moldura.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{colisao2d_8hpp}{src/ui/formas/colisao2d.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{namespace\ }Items}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu}{ItemMenu}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu}{ItemMenu}}(std::string*\ label\_shared);}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu}{ItemMenu}}(\textcolor{keyword}{const}\ std::string\ \&label\_shared);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_a2075e3978af6bec049f05f656c384c76}{ItemMenu}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_a3bcd41f880ad271c3d43d88cd7b163a3}{\string~ItemMenu}}();}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ atualizar();}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ renderizar();}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirFonte(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ resolucao\ =\ 12,\ std::string\ font\_path\ =\ \textcolor{stringliteral}{"{}assets/fontes/noto\_sans/noto\_sans.regular.ttf"{}});}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ definirPai(\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}*);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ definirEscondido(\textcolor{keywordtype}{bool}\ boleano);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ quebrarLinha(\textcolor{keywordtype}{bool}\ boleano);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ largura\{\ 0\ \},\ altura\{\ 0\ \};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2f\ box\_pos\{\ 0,\ 0\ \},\ line\_pos\{\ 0,\ 0\ \};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar\_texto();}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_af74cf2abd3836a91d058cfb80bff659b}{resolucao}},\ texturaID;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ lines\_box\_limite,\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_ae40012c9329a7f8c228dad9e67e2c5e5}{largura\_texto}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ Vector2\ box\_size\{\ 0,\ 0\ \},\ letra\_padding\{2,\ 2\},\ pos\_texto\{\ 0,\ 0\ \};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ texto\{\ \textcolor{stringliteral}{"{}"{}}\ \},\ frase\{\ \textcolor{stringliteral}{"{}"{}}\ \};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ std::string*\ label\_shared\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ Color\ cor\{\ 1,\ 1,\ 1\ \};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<int>\ char\_rect\{\ 0,\ 0,\ 0\ ,0\ \};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Vector4<float>\ paraNDC();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ Bubble::Arquivadores::Shader\ shader\ =\ Bubble::Arquivadores::Shader(\textcolor{stringliteral}{"{}assets/shaders/texto.vert"{}},\ \textcolor{stringliteral}{"{}assets/shaders/texto.frag"{}});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_colisao2d}{Colisao2d}}\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_a24eb3cec038f2d75bf85f531eed3c8f1}{colisao}};}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Contexto>\ contexto\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}\ *pai\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<Bubble::Inputs::Inputs>\ inputs\{\ \textcolor{keyword}{nullptr}\ \};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<LetraRect>\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_a6e4c0ac4c0c05b7ee68ca3e4ef16c3d7}{letras\_rect}};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ gatilho\{\ \textcolor{keyword}{true}\ \},\ clicado\{\ \textcolor{keyword}{false}\ \},\ mouseEmCima\{\ \textcolor{keyword}{false}\ \},\ escondido\{\ \textcolor{keyword}{false}\ \},\ vquebrarLinha\{\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{class_bubble_u_i_1_1_items_1_1_item_menu_afe34e77a096a5fd8f7aa81006d6da5da}{nome\_da\_fonte}};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \}}
+
+\end{DoxyCode}

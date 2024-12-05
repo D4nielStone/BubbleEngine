@@ -1,0 +1,27 @@
+\doxysection{aba.\+hpp}
+\hypertarget{aba_8hpp_source}{}\label{aba_8hpp_source}\index{src/ui/painel/aba.hpp@{src/ui/painel/aba.hpp}}
+\mbox{\hyperlink{aba_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{texto_8hpp}{src/ui/widgets/texto.hpp}}"{}}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}bubbleui.hpp"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_bubble_u_i}{BubbleUI}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keyword}{class\ }Painel;}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{class\ }BEUI\_DLL\_API\ \mbox{\hyperlink{class_bubble_u_i_1_1_aba}{Aba}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_bubble_u_i_1_1_widgets_1_1_texto}{Widgets::Texto}}}
+\DoxyCodeLine{00009\ \ \ \ \ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_aba_a2d20698dde3a79b1d798498f7b584add}{Aba}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_aba}{Aba}}(\mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_moldura}{Formas::Moldura}}*\ painel);}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ atualizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ renderizar()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_bubble_u_i_1_1_formas_1_1_rect}{Formas::Rect}}*\ obterCorpo()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ painel\_flag\{\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ std::vector<LetraRect>\ letras\_rect;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::unique\_ptr<Formas::Rect>corpo\_rect;}
+\DoxyCodeLine{00020\ \ \ \ \ \};}
+\DoxyCodeLine{00021\ \}}
+
+\end{DoxyCode}

@@ -16,7 +16,7 @@ static void abrirPopupAdiComp()
     msgMostrarPopup = true;
 }
 
-Inspetor::Inspetor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4& rect)
+Inspetor::Inspetor(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4<int>& rect)
     : scenemanager(scenemanager), nome_atual(new std::string(""))
 {
     Nome = "Inspetor";

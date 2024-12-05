@@ -5,7 +5,7 @@
 #include "src/depuracao/debug.hpp"
 
 BubbleUI::Paineis::Depurador::
-Depurador(const Vector4& retangulo)
+Depurador(const Vector4<int>& retangulo)
 {
 	this->retangulo = retangulo;
 	Nome = "Depurador";

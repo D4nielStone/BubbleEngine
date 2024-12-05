@@ -46,7 +46,7 @@ void Texto::renderizar()
     {
         shader.setVec3("quadrado.cor", cor.r, cor.g, cor.b);
         shader.setVec2("quadrado.posicao", letra.rect.x, letra.rect.y);
-        shader.setVec2("quadrado.tamanho", letra.rect.z, letra.rect.w);
+        shader.setVec2("quadrado.tamanho", letra.rect.w, letra.rect.h);
         shader.setInt("textura", 0);
 
         glBindTexture(GL_TEXTURE_2D, letra.ID);
@@ -151,12 +151,12 @@ void Texto::renderizar_texto(std::string &frase)
 }
 
 // Converte coordenadas de pixel para NDC (Normalized Device Coordinates)
-Vector4f Texto::paraNDC(const Vector4& coord)
+Vector4<float> Texto::paraNDC(const Vector4<int>& coord)
 {
-    Vector4f coord_ndc;
+    Vector4<float> coord_ndc;
 
-    coord_ndc.z = (coord.w * 2.f) / painel->obterContexto()->tamanho.width;
-    coord_ndc.w = -(2.0f * coord.h) / painel->obterContexto()->tamanho.height;
+    coord_ndc.w = (coord.w * 2.f) / painel->obterContexto()->tamanho.width;
+    coord_ndc.h = -(2.0f * coord.h) / painel->obterContexto()->tamanho.height;
     coord_ndc.x = (coord.x * 2.f) / painel->obterContexto()->tamanho.width - 1.f;
     coord_ndc.y = 1.0f - (2.0f * coord.y) / painel->obterContexto()->tamanho.height;
 
@@ -171,7 +171,7 @@ void Texto::definirFonte(unsigned int resolucao, const std::string& font_path)
 }
 
 // Método para detextar caractéres selecionados
-bool Texto::desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4 char_rect, size_t letra_idx)
+bool Texto::desenharSelecao(Vector2 mouse_inicial, Vector2 mouse_final, Vector4<int> char_rect, size_t letra_idx)
 {
     // Verifica se a letra está na área de seleção
     bool intersecta_verticalmente = char_rect.y + char_rect.h > mouse_inicial.y && char_rect.y < mouse_final.y; // Verifica interseção horizontal

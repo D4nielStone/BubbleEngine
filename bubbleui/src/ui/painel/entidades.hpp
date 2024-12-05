@@ -11,7 +11,7 @@ namespace BubbleUI
 		class BEUI_DLL_API Entidades : public Painel
 		{
 		public:
-			Entidades(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4 &rect = { 2, 2, 100, 50 });
+			Entidades(std::shared_ptr<Bubble::Cena::SceneManager> scenemanager, const Vector4<int> &rect = { 2, 2, 100, 50 });
 			void recarregar();
 			void definirContexto(std::shared_ptr < Contexto >) override;
 		private:
