@@ -165,7 +165,7 @@ void Bubble::Cena::definirSceneManager(std::shared_ptr<SceneManager> scene_manag
 void Bubble::Cena::criarEntidade(std::string path)
 {
     if (!scenemanager)return;
-    if (scenemanager->cenaAtual())filaDeTarefas.push([path]() {scenemanager->cenaAtual()->criarEntidade(path); });
+    if (scenemanager->cenaAtual())scenemanager->cenaAtual()->criarEntidade(path);
 }
 
 void Bubble::Cena::criarCamera(glm::vec3 posicao)

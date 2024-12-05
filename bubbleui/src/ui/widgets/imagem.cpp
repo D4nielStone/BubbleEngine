@@ -48,16 +48,16 @@ void Imagem::atualizar()
         rect.w = static_cast<int>(painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x));
         rect.h = static_cast<int>(painel->obterRetangulo().h - (painel->posicaoWidget.y - painel->obterRetangulo().y));
     }
-    else
-    {
-
-        // Calcula o fator de escala como um valor de ponto flutuante
-        float scale_factor = static_cast<float>(ip) / 100.0f;
-
-        // Aplica o fator de escala na largura e altura antes de converter para int
-        rect.w = static_cast<int>(tamanho_original.x * scale_factor);
-        rect.h = static_cast<int>(tamanho_original.y * scale_factor);
-    }
+    //else
+    //{
+    //
+    //    // Calcula o fator de escala como um valor de ponto flutuante
+    //    float scale_factor = static_cast<float>(ip) / 100.0f;
+    //
+    //    // Aplica o fator de escala na largura e altura antes de converter para int
+    //    rect.w = static_cast<int>(tamanho_original.x * scale_factor);
+    //    rect.h = static_cast<int>(tamanho_original.y * scale_factor);
+    //}
     rect = { (float)painel->posicaoWidget.x + painel->widgetPadding.x, (float)painel->posicaoWidget.y + painel->widgetPadding.y, rect.w, rect.h };
     
     rect.y += padding ? painel->widgetPadding.y : 0;

@@ -46,6 +46,8 @@ void BubbleUI::Paineis::Inspetor::definirContexto(std::shared_ptr<Contexto> ctx)
 
 void Inspetor::recarregar()
 {
+    if (!scenemanager) return;
+
     lista_widgets.clear();
     // Verifica entidade selecionada e muda nome da entidade atual
     if (entidade_selecionada) nome_atual = entidade_selecionada->nomeptr();
@@ -71,6 +73,7 @@ void Inspetor::recarregar()
 
 void Inspetor::preAtualizacao()
 {
+    if (!scenemanager) return;
     // Recarrega no momento certo
     if (scenemanager->cenaAtual() && entidade_selecionada != scenemanager->cenaAtual()->entidade_selecionada)
     {

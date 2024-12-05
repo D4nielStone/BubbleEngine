@@ -52,7 +52,7 @@ namespace Bubble::Cena
     }
     // Uma cena é criada
     // \param name: para o nome da cena
-    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)), skybox(std::make_unique<Util::Skybox>()) {
+    Scene::Scene(const std::string &name) : Name(std::make_shared<std::string>(name)) {
         Debug::emitir("CENA", std::string(name) + " criada");
     }
     Scene::~Scene() {}
@@ -80,10 +80,10 @@ namespace Bubble::Cena
         glCullFace(GL_BACK); 
         
         if (modo == Editor) {
-            skybox->renderizar(camera_editor.obterProjMatrixMat(), camera_editor.obterViewMatrixMat());
+            camera_editor.renderizar();
         }
         else if(camera_principal->meuObjeto->ativado) {
-            skybox->renderizar(camera_principal->obterProjMatrixMat(), camera_principal->obterViewMatrixMat());
+            camera_principal->renderizar();
         }
 
         renderizadores.renderizar();

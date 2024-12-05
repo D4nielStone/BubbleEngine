@@ -18,7 +18,6 @@ namespace Bubble::Util
         return cubemapTexture;
     }
     Skybox::Skybox() : Path("skybox/") {
-        configurarBuffers();
     }
     Skybox::Skybox(const char* path) : Path(path) {}
     void Skybox::configurarBuffers() {

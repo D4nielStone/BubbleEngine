@@ -48,7 +48,7 @@ glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
 void Transformacao::atualizar() {
     if (estado != DINAMICO)
         return;
-
+    if (!shader_atual) shader_atual = new Shader();
 
     shader_atual->setMat4("projection", Cena::camera_editor.obterProjMatrix());
     shader_atual->setMat4("view", Cena::camera_editor.obterViewMatrix());

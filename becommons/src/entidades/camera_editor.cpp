@@ -113,9 +113,6 @@ void CameraEditor::atualizar()
         zFar
     );
 }
-void Bubble::Entidades::CameraEditor::renderizar() const
-{
-}
 void CameraEditor::configurar()
 {
     Camera::configurar();

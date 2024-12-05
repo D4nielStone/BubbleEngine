@@ -18,6 +18,8 @@ Camera::Camera() : corSolida(true), FOV(45.0f), aspecto(1.333f), zNear(0.1f), zF
 Camera::~Camera() {}
 
 void Camera::configurar() {
+    skybox = (std::make_unique<Util::Skybox>());
+    skybox->configurarBuffers();
     // Framebuffer configuration
     glGenFramebuffers(1, &FBO);
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
@@ -81,8 +83,9 @@ void Camera::desenharFrame(const Vector4 &viewportRect) const
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-void Camera::renderizar() const
+void Camera::renderizar()
 { 
+    skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
 }
 void Camera::atualizar() {
     matrizProjecao = glm::perspective(

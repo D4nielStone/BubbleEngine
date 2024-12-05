@@ -7,7 +7,6 @@
 #include "src/entidades/entidade.hpp"
 #include "src/arquivadores/shader.hpp"
 #include "src/entidades/camera_editor.hpp"
-#include "src/util/skybox.hpp"
 #include "becommons.hpp"
 
 namespace Bubble
@@ -28,7 +27,6 @@ namespace Bubble
         {
         private:
             std::shared_ptr<std::string> Name = std::make_shared<std::string>("Cena");
-            std::unique_ptr<Bubble::Util::Skybox> skybox{ nullptr };
             bool existeEntidade(Entidades::Entidade* entidade) const;
             bool entidadeExisteRecursivo(std::shared_ptr<Entidades::Entidade> obj, Entidades::Entidade* entidade) const;
         public:
@@ -36,8 +34,6 @@ namespace Bubble
             std::shared_ptr<Entidades::Entidade> entidade_selecionada{ nullptr };
             std::vector<std::shared_ptr<Bubble::Entidades::Entidade>>Entidades;
             Bubble::Componentes::Camera* camera_principal = nullptr;
-
-            float corCeu[3]{ 0.3f, 0.3f, 1.f };
 
             Scene() {}
             Scene(const std::string &name);

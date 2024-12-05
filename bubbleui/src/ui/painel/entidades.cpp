@@ -10,8 +10,7 @@ BubbleUI::Paineis::Entidades::Entidades(std::shared_ptr < Bubble::Cena::SceneMan
 }
 void BubbleUI::Paineis::Entidades::recarregar()
 {
-
-    std::cout << "Entidades: Recarregando\n";
+    if (!scenemanager || !scenemanager->cenaAtual())return;
 
     lista_widgets.clear();
     adicionarWidget(std::make_shared<Widgets::CaixaTexto>("Procurar"));
@@ -43,6 +42,7 @@ void BubbleUI::Paineis::Entidades::definirContexto(std::shared_ptr<Contexto>ctx)
 
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
+    if (!scenemanager) return;
     // Recarrega no momento certo
     if (scenemanager->cenaAtual() && (quantidade_entidades != scenemanager->cenaAtual()->Entidades.size() || quantidade_cenas != scenemanager->obterCenas().size()))
     {
