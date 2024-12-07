@@ -7,9 +7,12 @@
 using namespace Bubble::Componentes;
 
 Transformacao::Transformacao()
-    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(0, 0, 0), escala(0.1f)
+    : matriz_de_modelo(glm::mat4(1.f)), posicao(0.f, 0.f, 0.f), rotacao(0, 0, 0), escala(1, 1, 1)
 {
     Nome = "Transformacao";
+    variaveis.push_back(std::pair(& posicao, "Posicao"));
+    variaveis.push_back(std::pair(& rotacao, "Rotacao"));
+    variaveis.push_back(std::pair(& escala, "Escala"));
 }
 rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const 
 {
@@ -31,11 +34,11 @@ rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const
     obj.AddMember("escala", escalaarr, doc->GetAllocator());
     return obj;
 }
-glm::quat Transformacao::obterRotacao() const { return rotacao; }
-glm::vec3 Transformacao::obterPosicao() const { return posicao; }
-glm::vec3 Transformacao::obterEscala() const { return escala; }
-glm::vec3 Transformacao::obterDirecao() const {
-    glm::vec3 direcaoPadrao = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::quat Transformacao::obterRotacao() const { return glm::vec3(rotacao.x, rotacao.y, rotacao.z); }
+Vector3<float> Transformacao::obterPosicao() const { return posicao; }
+Vector3<float> Transformacao::obterEscala() const { return escala; }
+Vector3<float> Transformacao::obterDirecao() const {
+    const auto direcaoPadrao = Vector3<float>{ 0.0f, 0.0f, -1.0f };
     return rotacao * direcaoPadrao;
 }
 float* Transformacao::obterMatrizGlobal() const {
@@ -46,33 +49,32 @@ glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
     return matriz_de_modelo;
 }
 void Transformacao::atualizar() {
-    if (estado != DINAMICO)
-        return;
-    if (!shader_atual) shader_atual = new Shader();
+    if (!shader_atual) return;
 
-    shader_atual->setMat4("projection", Cena::camera_editor.obterProjMatrix());
-    shader_atual->setMat4("view", Cena::camera_editor.obterViewMatrix());
-    shader_atual->setVec3("viewPos",
-        Cena::camera_editor.transformacao->obterPosicao().x,
-        Cena::camera_editor.transformacao->obterPosicao().y,
-        Cena::camera_editor.transformacao->obterPosicao().z);
     shader_atual->setMat4("model", glm::value_ptr(matriz_de_modelo));
 }
 void Transformacao::configurar() {
-    glm::translate(matriz_de_modelo, posicao);
-    glm::rotate(matriz_de_modelo, 1.f, rotacao);
-    glm::scale(matriz_de_modelo, escala);
+    glm::translate(matriz_de_modelo, glm::vec3(posicao.x, posicao.y, posicao.z));
+    glm::rotate(matriz_de_modelo, 1.f, glm::vec3(rotacao.x, rotacao.y, rotacao.z));
+    glm::scale(matriz_de_modelo, glm::vec3(escala.x, escala.y, escala.z));
 }
-void Transformacao::definirPosicao(const glm::vec3& newPosition) { posicao = newPosition;  comporMatriz(posicao, rotacao, escala);}
-void Transformacao::definirRotacao(const glm::vec3& newRotation) { rotacao = newRotation; comporMatriz(posicao, rotacao, escala); }
-void Transformacao::definirEscala(const glm::vec3& newScale) { escala = newScale;  comporMatriz(posicao, rotacao, escala); }
-void Transformacao::Move(glm::vec3 pos) {
+void Transformacao::definirPosicao(const Vector3<float>& newPosition) { posicao = newPosition;  comporMatriz(glm::vec3(posicao.x,posicao.y,posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));}
+void Transformacao::definirRotacao(const Vector3<float>& newRotation) { rotacao = newRotation; comporMatriz(glm::vec3(posicao.x, posicao.y, posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));
+}
+void Transformacao::definirEscala(const Vector3<float>& newScale) { escala = newScale;  comporMatriz(glm::vec3(posicao.x, posicao.y, posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));
+}
+void Transformacao::Move(Vector3<float> &pos) {
     posicao += pos;
-    glm::translate(matriz_de_modelo, posicao);
+    glm::translate(matriz_de_modelo, glm::vec3(posicao.x,posicao.y,posicao.z));
+}
+void Transformacao::Move(glm::vec3 pos) {
+    posicao += Vector3<float>(pos.x,pos.y,pos.z);
+    glm::translate(matriz_de_modelo, glm::vec3(posicao.x,posicao.y,posicao.z));
 }
 void Transformacao::Rotacionar(const float x, const float y, const float z) {
-    rotacao = glm::normalize(glm::vec3(x, y, z));
-    glm::rotate(matriz_de_modelo, 1.f, rotacao);
+    glm::vec3 n = glm::normalize(glm::vec3(x, y, z));
+    rotacao = Vector3(n.x,n.y,n.z);
+    glm::rotate(matriz_de_modelo, 1.f, glm::vec3(rotacao.x,rotacao.y,rotacao.z));
 }
 void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const {
     glm::vec3 skew;

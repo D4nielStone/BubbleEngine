@@ -14,6 +14,7 @@ namespace Bubble::Cena
                 componente->configurar();
             if (componente->nome() == "Renderizador")
             {
+                Debug::emitir("PipeLine", "adicionando entidade com renderizador");
                 // adiciona o renderizador ao nome correspondente do material
                 entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
                 entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
@@ -21,6 +22,7 @@ namespace Bubble::Cena
             else
                 if (componente->nome() == "Terreno")
                 {
+                Debug::emitir("PipeLine", "adicionando entidade terreno");
                     // adiciona o renderizador ao nome correspondente do material
                     entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
                     entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material;
@@ -57,7 +59,7 @@ namespace Bubble::Cena
     // Uma cena é criada
     // \param name: para o nome da cena
     Scene::Scene(const std::string& name) : Name(std::make_shared<std::string>(name)) {
-        Debug::emitir("CENA", std::string(name) + " criada");
+        Debug::emitir("Cena", std::string(name) + " criada");
     }
     Scene::~Scene() {}
     // Deve adicionar entidade

@@ -30,11 +30,11 @@ namespace Bubble {
             void defEditorViewport(Vector4<int> rect = {0, 0, 0, 0});
             void defJogoViewport(Vector4<int> rect = {0, 0, 0, 0});
         };
-        extern BECOMMONS_DLL_API Bubble::Entidades::CameraEditor* CameraEditorAtual();
-        extern BECOMMONS_DLL_API std::shared_ptr<Bubble::Cena::SceneManager> obterSceneManager();
-        extern BECOMMONS_DLL_API void definirSceneManager(std::shared_ptr<SceneManager> scene_manager);
-        BECOMMONS_DLL_API void criarEntidade(std::string path);
-        BECOMMONS_DLL_API void criarCamera(glm::vec3 posicao);
-        BECOMMONS_DLL_API void adicionarCena();
+        extern Bubble::Entidades::CameraEditor* CameraEditorAtual();
+        extern std::shared_ptr<Bubble::Cena::SceneManager> obterSceneManager();
+        extern void definirSceneManager(std::shared_ptr<SceneManager> scene_manager);
+        void criarEntidade(std::string path);
+        void criarCamera(const Vector3<float> &posicao);
+        void adicionarCena();
     } // namespace Cena
 } // namespace Bubble

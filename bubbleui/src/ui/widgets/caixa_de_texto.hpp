@@ -15,6 +15,7 @@ namespace BubbleUI
             CaixaTexto(const std::string &mensagem = "");
             CaixaTexto(std::shared_ptr<std::string> buffer,const std::string &mensagem);
             CaixaTexto(std::string* buffer,const std::string &mensagem);
+            CaixaTexto(float* buffer,const std::string &mensagem);
 
             void atualizar() override;
             void renderizar() override;
@@ -30,6 +31,7 @@ namespace BubbleUI
             bool gatilho1, gatilho2, selecionado{ false };
             Vector2 mouse_pos_ini;
             double cronometro;
+            float* buffer_numerico{ nullptr };
         };
     }
 }

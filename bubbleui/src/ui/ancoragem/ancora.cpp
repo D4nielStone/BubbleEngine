@@ -76,18 +76,9 @@ void Ancora::atualizarPaineis() {
     // Renderizar recursivamente os nós filhos usando async
     std::future<void> futureA, futureB;
 
-    if (a) {
-        futureA = std::async(std::launch::async, &Ancora::atualizarPaineis, a); // Executa em paralelo
-    }
     if (b) {
-        futureB = std::async(std::launch::async, &Ancora::atualizarPaineis, b); // Executa em paralelo
-    }
-
-    // Espera os resultados das tarefas assíncronas
-    if (futureA.valid()) {
-        futureA.get(); // Aguarda a execução de 'a'
-    }
-    if (futureB.valid()) {
-        futureB.get(); // Aguarda a execução de 'b'
+        b->atualizarPaineis();
+    }if (a) {
+        a->atualizarPaineis();
     }
 }

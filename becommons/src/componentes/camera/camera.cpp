@@ -102,7 +102,7 @@ void Camera::atualizar() {
         zFar
     );
 
-        glm::vec3 posicaoCamera = meuObjeto->obterTransformacao()->obterPosicao();
+        glm::vec3 posicaoCamera = glm::vec3(meuObjeto->obterTransformacao()->obterPosicao().x,meuObjeto->obterTransformacao()->obterPosicao().y,meuObjeto->obterTransformacao()->obterPosicao().z);
         glm::vec3 vetorCima(0, 1, 0);
 
         // Calculate view matrix

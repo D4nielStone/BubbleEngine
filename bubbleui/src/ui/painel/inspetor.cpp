@@ -155,6 +155,17 @@ void Inspetor::desvendarWidgets(const std::vector<std::any>& variaveis, std::sha
             auto newVar = variavel._Cast<CaixaDeTextoID>();
             arvore->adiFilho(std::make_shared<Widgets::CaixaTexto>(newVar->first, newVar->second));
         }else
+    // Verifica se possui vetor3
+        if (variavel.type() == typeid(Vector3ID))
+        {
+            auto newVar = variavel._Cast<Vector3ID>();
+
+            auto arvorev3 = std::make_shared<Widgets::Arvore>(newVar->second, nullptr);
+            arvore->adiFilho(arvorev3);
+            arvorev3->adiFilho(std::make_shared<Widgets::CaixaTexto>(&newVar->first->x, "x"));
+            arvorev3->adiFilho(std::make_shared<Widgets::CaixaTexto>(&newVar->first->y, "y"));
+            arvorev3->adiFilho(std::make_shared<Widgets::CaixaTexto>(&newVar->first->z, "z"));
+        }else
     // Verifica se possui seletor de cor
         if (variavel.type() == typeid(SeletorDeCorID))
         {

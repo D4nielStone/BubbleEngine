@@ -44,7 +44,7 @@ std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
     auto esfera = scene->criarEntidade("assets/primitivas/modelos/sphere.obj");
     auto cubo = scene->criarEntidade("assets/primitivas/modelos/cube.obj");
     if(!esfera->obterFilhos().empty())esfera->obterFilhos()[0]->obterTransformacao()->definirPosicao({0, -1, 0});
-    if (!cubo->obterFilhos().empty())cubo->obterFilhos()[0]->obterTransformacao()->definirEscala({2, 0.25, 2});
+    if (!cubo->obterFilhos().empty())cubo->obterFilhos()[0]->obterTransformacao()->definirEscala({2, 0.25f, 2});
 
     return scene;
 }
@@ -55,7 +55,10 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
         adicionarCena(criarCenaPadrao(Nome));
     else
         adicionarCena(std::make_shared<Scene>(Nome.c_str()));
+
     carregarCena(static_cast<int>(numeroDeCenas() - 1));
+
+    criarCamera({ 0, 0, -2 });
 }
 
 void Bubble::Cena::SceneManager::defJogoViewport(Vector4<int> rect)
@@ -168,7 +171,7 @@ void Bubble::Cena::criarEntidade(std::string path)
     if (scenemanager->cenaAtual())scenemanager->cenaAtual()->criarEntidade(path);
 }
 
-void Bubble::Cena::criarCamera(glm::vec3 posicao)
+void Bubble::Cena::criarCamera(const Vector3<float> &posicao)
 {
     auto obj = std::make_shared<Entidades::Entidade>("Camera");
     obj->obterTransformacao()->definirPosicao(posicao);

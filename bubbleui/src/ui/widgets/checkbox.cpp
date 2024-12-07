@@ -48,7 +48,7 @@ void CheckBox::atualizar()
             painel->posicaoWidget.x += size + painel->widgetPadding.x;
             break;
         case Alinhamento::Direita:
-            painel->posicaoWidget.x = painel->obterRetangulo().w - size - painel->widgetPadding.x*2;
+            painel->posicaoWidget.x = painel->obterRetangulo().x + painel->obterRetangulo().w - size - painel->widgetPadding.x*2;
             break;
         }
         Texto::atualizar();
@@ -79,7 +79,7 @@ void CheckBox::atualizar()
 
     // Controle da posição do widget no painel
     if (quebrarLinha)
-        painel->posicaoWidget.y += size + painel->widgetPadding.x * 2;
+        painel->posicaoWidget.y += size + painel->widgetPadding.y;
     else
         painel->posicaoWidget.x += size + painel->widgetPadding.x;
     rect_ndc = Texto::paraNDC(Moldura::obterRetangulo());

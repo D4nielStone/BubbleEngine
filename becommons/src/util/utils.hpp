@@ -6,8 +6,8 @@
 #include <iostream>
 #include <cstdio>
 #include <glad/glad.h>
-#include <iostream>
 #include <becommons.hpp>
+#include <glm/vec3.hpp>
 #include "src/arquivadores/shader.hpp"
 #include <any>
 
@@ -115,6 +115,132 @@ struct Vector4
     }
 };
 
+#include <iostream>
+#include <type_traits>
+
+template<class T>
+struct Vector3
+{
+    T x, y, z;
+
+    // Construtor com parâmetros
+    Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
+
+    // Construtor padrão
+    Vector3() : x(T{}), y(T{}), z(T{}) {}
+
+    // Operador de soma com outro Vector3
+    Vector3 operator+(const glm::vec3& other) const
+    {
+        return Vector3{ x + other.x, y + other.y, z + other.z };
+    }
+    
+    // Operador de soma com outro Vector3
+    Vector3 operator+(const Vector3& other) const
+    {
+        return Vector3{ x + other.x, y + other.y, z + other.z };
+    }
+
+    // Operador de soma com um escalar
+    Vector3 operator+(const T& scalar) const
+    {
+        return Vector3{ x + scalar, y + scalar, z + scalar };
+    }
+
+    // Operador de soma acumulada com outro Vector3
+    Vector3& operator+=(const Vector3& other)
+    {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        return *this;
+    }
+
+    // Operador de soma acumulada com um escalar
+    Vector3& operator+=(const T& scalar)
+    {
+        x += scalar;
+        y += scalar;
+        z += scalar;
+        return *this;
+    }
+
+    // Operador de subtração com outro Vector3
+    Vector3 operator-(const Vector3& other) const
+    {
+        return Vector3{ x - other.x, y - other.y, z - other.z };
+    }
+
+    // Operador de subtração com um escalar
+    Vector3 operator-(const T& scalar) const
+    {
+        return Vector3{ x - scalar, y - scalar, z - scalar };
+    }
+
+    // Operador de subtração acumulada com outro Vector3
+    Vector3& operator-=(const Vector3& other)
+    {
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+        return *this;
+    }
+
+    // Operador de subtração acumulada com um escalar
+    Vector3& operator-=(const T& scalar)
+    {
+        x -= scalar;
+        y -= scalar;
+        z -= scalar;
+        return *this;
+    }
+
+    // Operador de multiplicação com outro Vector3
+    Vector3 operator*(const Vector3& other) const
+    {
+        return Vector3{ x * other.x, y * other.y, z * other.z };
+    }
+
+    // Operador de multiplicação com um escalar
+    Vector3 operator*(const T& scalar) const
+    {
+        return Vector3{ x * scalar, y * scalar, z * scalar };
+    }
+
+    // Operador de multiplicação acumulada com outro Vector3
+    Vector3& operator*=(const Vector3& other)
+    {
+        x *= other.x;
+        y *= other.y;
+        z *= other.z;
+        return *this;
+    }
+
+    // Operador de multiplicação acumulada com um escalar
+    Vector3& operator*=(const T& scalar)
+    {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        return *this;
+    }
+
+    // Operador de igualdade
+    bool operator==(const Vector3& other) const
+    {
+        return x == other.x && y == other.y && z == other.z;
+    }
+
+    // Operador de diferença
+    bool operator!=(const Vector3& other) const
+    {
+        return !(*this == other);
+    }
+     
+};
+
+
+
 struct Vector2
 {
     int x = 0, y = 0;
@@ -136,26 +262,6 @@ struct Vector2
 
     // Operador de diferença (!=)
     bool operator!=(const Vector2& other) const
-    {
-        return !(*this == other);
-    }
-};
-struct Vector3
-{
-    int x = 0, y = 0, z = 0;
-    // Operador de soma (+)
-    Vector3 operator+(const Vector3& other) const
-    {
-        return { x + other.x && y + other.y && z + other.z };
-    }
-    // Operador de igualdade (==)
-    bool operator==(const Vector3& other) const
-    {
-        return x == other.x && y == other.y && z == other.z;
-    }
-
-    // Operador de diferença (!=)
-    bool operator!=(const Vector3& other) const
     {
         return !(*this == other);
     }
@@ -278,6 +384,7 @@ struct LetraRect
 
 using CheckBoxID = std::pair<bool*, const char*>;
 using CaixaDeTextoID = std::pair<std::string*, const char*>;
+using Vector3ID = std::pair<Vector3<float>*, const char*>;
 using SeletorDeCorID = std::pair<Color*, const char*>;
 using ArvoreID = std::pair<std::vector<std::any>, const char*>;
 

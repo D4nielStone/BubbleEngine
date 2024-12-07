@@ -40,6 +40,17 @@ CaixaTexto::CaixaTexto(std::string* buffer, const std::string& mensagem)
     definirFonte();
 }
 
+BubbleUI::Widgets::CaixaTexto::CaixaTexto(float* buffer, const std::string& mensagem) : buffer_numerico(buffer), mensagem(mensagem)
+{
+    quebrarLinha = true;
+    if (buffer) {
+        texto = std::to_string(*buffer); texto_cursor_index = texto.size() - 1;
+    }
+    resolucao = 12;
+    lines_box_limite = 3;
+    definirFonte();
+}
+
 
 void CaixaTexto::atualizar()
 {
@@ -71,6 +82,21 @@ void CaixaTexto::atualizar()
         buffer_texto->clear();
         for (size_t i = 0; i < texto.size(); i++)   buffer_texto->push_back(texto[i]);
     }
+    // Atribui texto da frase para o buffer
+    if (buffer_numerico) {
+        try {
+            *buffer_numerico = std::stof(texto);
+        }
+        catch (const std::invalid_argument&) {
+            // Lidando com texto inválido
+            *buffer_numerico = 0.0f;
+        }
+        catch (const std::out_of_range&) {
+            // Lidando com valores fora do intervalo de float
+            *buffer_numerico = 0.0f;
+        }
+    }
+
 
     // Defini mensagem caso texto vazio
     if (texto.empty())
@@ -113,8 +139,19 @@ void CaixaTexto::processarEntrada(char c)
     }
     else if (c != '')
     {
-        texto.insert(texto_cursor_index, 1, c);
-        texto_cursor_index++;
+        if (!buffer_numerico)
+        {
+            texto.insert(texto_cursor_index, 1, c);
+            texto_cursor_index++;
+        }
+        else if (buffer_numerico) {
+            if (isdigit(c) || c == '.') { // Apenas números ou ponto
+                if (c == '.' && texto.find('.') != std::string::npos) return; // Evita múltiplos pontos
+                texto.insert(texto_cursor_index, 1, c);
+                texto_cursor_index++;
+            }
+        }
+
     }
 }
 

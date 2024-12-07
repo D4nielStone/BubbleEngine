@@ -56,7 +56,7 @@ static void abrirSelecionar()
     if (GetOpenFileName(&ofn) == TRUE)
     {
         std::string filePath = std::filesystem::path(ofn.lpstrFile).string();
-                Bubble::Cena::criarEntidade(filePath);
+        BubbleUI::tarefa([filePath]() {Bubble::Cena::criarEntidade(filePath); });
     }
 }
 // Função para adicionar Cubo
