@@ -33,6 +33,42 @@ namespace Bubble::Cena
         }
     }
 
+    void PipeLine::removerEntidade(std::shared_ptr<Entidades::Entidade> ent) {
+        // Itera sobre os componentes da entidade
+        for (auto& componente : ent->listaDeComponentes()) {
+            if (componente->nome() == "Renderizador") {
+                auto& materialID = static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID;
+                auto& listaEntidades = entidadesParaRenderizar[materialID].first;
+
+                // Remove a entidade da lista associada ao material
+                listaEntidades.erase(std::remove(listaEntidades.begin(), listaEntidades.end(), ent), listaEntidades.end());
+
+                // Remove o material do mapa se não houver mais entidades associadas
+                if (listaEntidades.empty()) {
+                    entidadesParaRenderizar.erase(materialID);
+                }
+            }
+            else if (componente->nome() == "Terreno") {
+                auto& materialID = static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID;
+                auto& listaEntidades = entidadesParaRenderizar[materialID].first;
+
+                // Remove a entidade da lista associada ao material
+                listaEntidades.erase(std::remove(listaEntidades.begin(), listaEntidades.end(), ent), listaEntidades.end());
+
+                // Remove o material do mapa se não houver mais entidades associadas
+                if (listaEntidades.empty()) {
+                    entidadesParaRenderizar.erase(materialID);
+                }
+            }
+        }
+
+        // Remover os filhos recursivamente
+        for (auto& filho : ent->obterFilhos()) {
+            removerEntidade(filho);
+        }
+    }
+
+
     void PipeLine::renderizar(Componentes::Camera* cam)
     {
         cam->renderizar();
@@ -75,6 +111,12 @@ namespace Bubble::Cena
         if (!existeEntidade(gameObject.get())) {
             renderizadores.adicionarEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
             Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
+        }
+    }
+    void Scene::removerEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
+        if (gameObject != nullptr && !existeEntidade(gameObject.get())) {
+            renderizadores.removerEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
+            Entidades.erase(std::find(Entidades.begin(), Entidades.end(), gameObject));  // Adiciona objeto à lista de entidades
         }
     }
     bool carregou_arquivo3d{ false };

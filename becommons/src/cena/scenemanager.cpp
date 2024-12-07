@@ -57,8 +57,6 @@ void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
         adicionarCena(std::make_shared<Scene>(Nome.c_str()));
 
     carregarCena(static_cast<int>(numeroDeCenas() - 1));
-
-    criarCamera({ 0, 0, -2 });
 }
 
 void Bubble::Cena::SceneManager::defJogoViewport(Vector4<int> rect)

@@ -33,7 +33,7 @@ namespace Bubble {
             rapidjson::Value serializar(rapidjson::Document* doc) const override;
 
             Vector3<float> obterPosicao() const;
-            glm::quat obterRotacao() const;
+            glm::vec3 obterRotacao() const;
             Vector3<float> obterEscala() const;
 
             void definirPosicao(const Vector3<float>& newPosition);
@@ -48,7 +48,7 @@ namespace Bubble {
             void decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const;
             void comporMatriz(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale);
 
-            void definirMatriz(glm::mat4 matriz_nova);
+            void definirMatriz(glm::mat4 matriz_nova, int factor);
 
             Estado estado = DINAMICO;
         };

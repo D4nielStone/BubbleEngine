@@ -13,6 +13,7 @@ Camera::Camera() : FOV(75.F), aspecto(1.333f), zNear(0.1f), zFar(300)
 {
     Nome = "Camera";
 
+    variaveis.push_back(std::pair(&NomeCam, "Nome da camera"));
     variaveis.push_back(std::pair(&ceu, "Cor do ceu"));
     variaveis.push_back(std::pair(&corSolida, "Renderizar skybox"));
 }
@@ -84,15 +85,18 @@ void Camera::desenharFrame(const Vector4<int> &viewportRect) const
     // Update the viewport after resizing
     glViewport(0, 0, viewportRect.w, viewportRect.h);
 
-    // Clear buffers
-    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    // Clear buffers 
 }
 
 void Camera::renderizar()
 { 
-    //if(!corSolida)
-    skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
+    if (!corSolida)
+    {
+        skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
+        return;
+    }
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
 }
 void Camera::atualizar() {
     matrizProjecao = glm::perspective(
@@ -103,10 +107,19 @@ void Camera::atualizar() {
     );
 
         glm::vec3 posicaoCamera = glm::vec3(meuObjeto->obterTransformacao()->obterPosicao().x,meuObjeto->obterTransformacao()->obterPosicao().y,meuObjeto->obterTransformacao()->obterPosicao().z);
+        // Rotação da câmera em ângulos de Euler (em radianos)
+        float yaw = glm::radians(meuObjeto->obterTransformacao()->obterRotacao().y);   // Rotação em torno do eixo Y
+        float pitch = glm::radians(meuObjeto->obterTransformacao()->obterRotacao().x); // Rotação em torno do eixo X
+
+        // Calcular direção da câmera (usando ângulos de Euler)
+        glm::vec3 cameraDirection;
+        cameraDirection.x = cos(yaw) * cos(pitch);
+        cameraDirection.y = sin(pitch);
+        cameraDirection.z = sin(yaw) * cos(pitch);
         glm::vec3 vetorCima(0, 1, 0);
 
         // Calculate view matrix
-        matrizVisualizacao = glm::lookAt(posicaoCamera, alvoCamera, vetorCima);
+        matrizVisualizacao = glm::lookAt(posicaoCamera, posicaoCamera + cameraDirection, vetorCima);
          
    
 }

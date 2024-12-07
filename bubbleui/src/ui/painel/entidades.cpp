@@ -43,6 +43,7 @@ void BubbleUI::Paineis::Entidades::definirContexto(std::shared_ptr<Contexto>ctx)
 void BubbleUI::Paineis::Entidades::preAtualizacao()
 {
     if (!scenemanager) return;
+    if (contexto->inputs->isKeyPressed(Key::Del)) scenemanager->cenaAtual()->removerEntidade(scenemanager->cenaAtual()->entidade_selecionada);
     // Recarrega no momento certo
     if (scenemanager->cenaAtual() && (quantidade_entidades != scenemanager->cenaAtual()->Entidades.size() || quantidade_cenas != scenemanager->obterCenas().size()))
     {

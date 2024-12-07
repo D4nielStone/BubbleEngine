@@ -13,13 +13,13 @@ Imagem::Imagem(unsigned int id, const Vector2 &size, const bool &auto_resize) : 
 
 Imagem::Imagem(const std::string& path, int size_percentage, Vector2* posicao) : posicao_ptr(posicao), ip(size_percentage)
 {
-    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y); });
+   ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y);
 
 }
 
 Imagem::Imagem(const std::string& path, const Vector2& size)
 {
-    BubbleUI::tarefa([path, this]() {ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y); });
+    ID = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura(path, &tamanho_original.x, &tamanho_original.y);
 
     rect.w = size.x;
     rect.h = size.y;

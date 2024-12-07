@@ -2,11 +2,11 @@
 #include <string>
 #include <vector>
 #include "becommons.hpp"
+#include <src/componentes/camera/camera.hpp>
 #include "src/util/utils.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include "src/util/utils.hpp"
 
 namespace Bubble {
     namespace Arquivadores {
@@ -26,6 +26,7 @@ namespace Bubble {
             bool foi_carregado{ false };
             std::vector<Textura> processarTextura(aiMaterial* mat, aiTextureType type, const std::string& typeName); // Método para processar texturas
             Node processarNos(aiNode* node, unsigned int depth);                    // Método para processar nós da cena
+            std::shared_ptr<Componentes::Camera> temCamera(aiNode* node);
             Material processarMateriais(aiMaterial* material);                 // Método para processar malhas
         };
     }

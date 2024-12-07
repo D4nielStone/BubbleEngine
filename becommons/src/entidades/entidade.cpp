@@ -59,18 +59,13 @@ std::shared_ptr<std::string> Bubble::Entidades::Entidade::nomeptr()
 void Entidade::carregarNode(const Node& node)
 {
     *Nome = node.nome;
-    //if (pai)
-    //{
-    //    transformacao->definirMatriz(node.transformacao * painel->obterTransformacao()->obterMatriz());
-    //}
-    //else
-    //{
-    //transformacao->definirMatriz(node.transformacao);
-    //}
+    
+    transformacao->definirMatriz(node.transformacao, node.metrica);
     for (const auto& malha : node.malhas)
     {
         adicionarComponente(std::make_shared<Bubble::Componentes::Renderizador>(malha));
     }
+    if (node.camera) adicionarComponente(node.camera);
     
     for (const auto& no_filho : node.filhos)
     {

@@ -27,6 +27,7 @@ namespace Bubble {
             bool corSolida{ false };
             unsigned int FBO, textureColorbuffer, rbo;
             float FOV, aspecto, zFar, zNear, resolucaoDoFB{ 1.F};
+            std::string NomeCam{"no name"};
         protected:
             std::unique_ptr<Util::Skybox> skybox{ nullptr };
             glm::mat4 matrizProjecao;

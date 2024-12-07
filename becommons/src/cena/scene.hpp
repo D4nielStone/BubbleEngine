@@ -21,6 +21,7 @@ namespace Bubble
         public:
             PipeLine() = default;
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> ent);
+            void removerEntidade(std::shared_ptr<Entidades::Entidade> ent);
             void renderizar(Componentes::Camera* cam);
         };
         class BECOMMONS_DLL_API Scene
@@ -40,6 +41,7 @@ namespace Bubble
             ~Scene();
             std::shared_ptr<Entidades::Entidade> criarEntidade(const std::string &path, const char* nome_entidade = "entidade sem nome");
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
+            void removerEntidade(std::shared_ptr<Entidades::Entidade> gameObject);
             void renderizar(const InputMode modo);
             void atualizar(float aspectoDoEditor, float aspectoDoJogo);
             void atualizarFilhos(std::shared_ptr<Entidades::Entidade> entidade);

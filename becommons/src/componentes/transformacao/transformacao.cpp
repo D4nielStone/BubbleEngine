@@ -34,7 +34,7 @@ rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const
     obj.AddMember("escala", escalaarr, doc->GetAllocator());
     return obj;
 }
-glm::quat Transformacao::obterRotacao() const { return glm::vec3(rotacao.x, rotacao.y, rotacao.z); }
+glm::vec3 Transformacao::obterRotacao() const { return glm::vec3(rotacao.x, rotacao.y, rotacao.z); }
 Vector3<float> Transformacao::obterPosicao() const { return posicao; }
 Vector3<float> Transformacao::obterEscala() const { return escala; }
 Vector3<float> Transformacao::obterDirecao() const {
@@ -51,6 +51,7 @@ glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
 void Transformacao::atualizar() {
     if (!shader_atual) return;
 
+    comporMatriz({ posicao.x,posicao.y,posicao.z }, { rotacao.x,rotacao.y,rotacao.z }, { escala.x,escala.y,escala.z });
     shader_atual->setMat4("model", glm::value_ptr(matriz_de_modelo));
 }
 void Transformacao::configurar() {
@@ -92,7 +93,12 @@ void Transformacao::comporMatriz(const glm::vec3& position, const glm::vec3& rot
     matriz_de_modelo = glm::scale(matriz_de_modelo, scale);
 }
 
-void Bubble::Componentes::Transformacao::definirMatriz(glm::mat4 matriz_nova)
+void Bubble::Componentes::Transformacao::definirMatriz(glm::mat4 matriz_nova, int factor)
 {
+    glm::vec3 p, r, s;
     matriz_de_modelo = matriz_nova;
+    decomporMatriz(&p, &r, &s);
+    posicao = p / glm::vec3(factor); ///< 1 metro = 100 centímetros
+    rotacao = r;
+    escala = s / glm::vec3(factor);  ///< 1 metro = 100 centímetros
 }

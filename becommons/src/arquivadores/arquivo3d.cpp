@@ -60,6 +60,7 @@ std::vector<Textura> Arquivo3d::processarTextura(aiMaterial* mat, aiTextureType 
     return textures;
 }
 
+int metrica_atual{ 1 };
 
 void Arquivo3d::carregar() {
     for (const auto& arquivo : arquivos) {      // Re-utiliza se já carregado
@@ -84,6 +85,9 @@ void Arquivo3d::carregar() {
         return;
     }
 
+    if (std::filesystem::path(PathCompleto).extension().string() == ".fbx")
+        metrica_atual = 100;
+
     Caminho = std::filesystem::path(PathCompleto).parent_path().string();
 
     RootNode = processarNos(cena->mRootNode, 0); // Adiciona rootnode com seus filhos
@@ -95,24 +99,27 @@ bool Bubble::Arquivadores::Arquivo3d::carregado() const
     return foi_carregado;
 }
 
-glm::mat4& ConvertToGLMMat4(const aiMatrix4x4& aiMat) {
-    glm::mat4 glmMat;
-
+static void ConvertToGLMMat4(const aiMatrix4x4& aiMat, glm::mat4& glmMat) {
     glmMat[0][0] = aiMat.a1; glmMat[1][0] = aiMat.a2; glmMat[2][0] = aiMat.a3; glmMat[3][0] = aiMat.a4;
     glmMat[0][1] = aiMat.b1; glmMat[1][1] = aiMat.b2; glmMat[2][1] = aiMat.b3; glmMat[3][1] = aiMat.b4;
     glmMat[0][2] = aiMat.c1; glmMat[1][2] = aiMat.c2; glmMat[2][2] = aiMat.c3; glmMat[3][2] = aiMat.c4;
     glmMat[0][3] = aiMat.d1; glmMat[1][3] = aiMat.d2; glmMat[2][3] = aiMat.d3; glmMat[3][3] = aiMat.d4;
-
-    return glmMat;
 }
+
 
 Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
     Node node_final;
+    node_final.metrica = metrica_atual;
     node_final.nome = ai_node->mName.C_Str();
+    
+    // Compara o nome da câmera com o nome do nó
+    if (node_final.nome == "Camera") {
+    node_final.camera = std::make_shared<Componentes::Camera>();
+    }
 
     // Extrair a matriz de transformação do aiNode
     aiMatrix4x4 aiTransform = ai_node->mTransformation;
-    node_final.transformacao = ConvertToGLMMat4(aiTransform);
+     ConvertToGLMMat4(aiTransform, node_final.transformacao);
 
     for (unsigned int i = 0; i < ai_node->mNumMeshes; ++i) {
         aiMesh* mesh = cena->mMeshes[ai_node->mMeshes[i]];
@@ -165,6 +172,20 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
     foi_carregado = true;
 
     return node_final;
+}
+
+std::shared_ptr<Bubble::Componentes::Camera> Bubble::Arquivadores::Arquivo3d::temCamera(aiNode* node)
+{
+    std::shared_ptr<Bubble::Componentes::Camera> c = std::make_shared<Componentes::Camera>();
+    // Percorre todas as câmeras na cena
+        aiCamera* camera = cena->mCameras[0];
+
+        // Compara o nome da câmera com o nome do nó
+        if (node->mName.C_Str() == "Camera") {
+            return c;
+        }
+
+    return nullptr;
 }
 
 Material Arquivo3d::processarMateriais(aiMaterial* material) {

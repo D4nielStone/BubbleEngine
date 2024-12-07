@@ -80,60 +80,59 @@ void CameraEditor::atualizar()
             const auto s = p + frente;
             // Calcular a matriz de visualização
             matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
-
-            // Rotação
-            if (inputs->isKeyPressed(Key::UP))
-            {
-                pitch += static_cast<double>(sensibilidadeDeRotacao) * deltaTime;
-                if (pitch > 89.0f)
-                    pitch = 89.0f;
-                atualizarDirecao();
-
-                const auto p = transformacao->obterPosicao();
-                const auto s = p + frente;
-                // Calcular a matriz de visualização
-                matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
-            }
-            if (inputs->isKeyPressed(Key::DOWN))
-            {
-                pitch -= static_cast<double>(sensibilidadeDeRotacao * deltaTime);
-                if (pitch < -89.0f)
-                    pitch = -89.0f;
-                atualizarDirecao();
-                const auto p = transformacao->obterPosicao();
-                const auto s = p + frente;
-                // Calcular a matriz de visualização
-                matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
-            }
-            if (inputs->isKeyPressed(Key::LEFT))
-            {
-                yaw -= static_cast<double>(sensibilidadeDeRotacao * deltaTime);
-                atualizarDirecao();
-                const auto p = transformacao->obterPosicao();
-                const auto s = p + frente;
-                // Calcular a matriz de visualização
-                matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
-            }
-            if (inputs->isKeyPressed(Key::RIGHT))
-            {
-                yaw += sensibilidadeDeRotacao * deltaTime;
-                atualizarDirecao();
-                const auto p = transformacao->obterPosicao();
-                const auto s = p + frente;
-                // Calcular a matriz de visualização
-                matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
-            }
         }
+        // Rotação
+        if (inputs->isKeyPressed(Key::UP))
+        {
+            pitch += static_cast<double>(sensibilidadeDeRotacao) * deltaTime;
+            if (pitch > 89.0f)
+                pitch = 89.0f;
+            atualizarDirecao();
 
-
-
-        matrizProjecao = glm::perspective(
-            glm::radians(FOV),
-            aspecto,
-            zNear,
-            zFar
-        );
+            const auto p = transformacao->obterPosicao();
+            const auto s = p + frente;
+            // Calcular a matriz de visualização
+            matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
+        }
+        if (inputs->isKeyPressed(Key::DOWN))
+        {
+            pitch -= static_cast<double>(sensibilidadeDeRotacao * deltaTime);
+            if (pitch < -89.0f)
+                pitch = -89.0f;
+            atualizarDirecao();
+            const auto p = transformacao->obterPosicao();
+            const auto s = p + frente;
+            // Calcular a matriz de visualização
+            matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
+        }
+        if (inputs->isKeyPressed(Key::LEFT))
+        {
+            yaw -= static_cast<double>(sensibilidadeDeRotacao * deltaTime);
+            atualizarDirecao();
+            const auto p = transformacao->obterPosicao();
+            const auto s = p + frente;
+            // Calcular a matriz de visualização
+            matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
+        }
+        if (inputs->isKeyPressed(Key::RIGHT))
+        {
+            yaw += sensibilidadeDeRotacao * deltaTime;
+            atualizarDirecao();
+            const auto p = transformacao->obterPosicao();
+            const auto s = p + frente;
+            // Calcular a matriz de visualização
+            matrizVisualizacao = glm::lookAt(glm::vec3(p.x, p.y, p.z), glm::vec3(s.x, s.y, s.z), { 0, 1, 0 });
+        }
     }
+
+
+
+    matrizProjecao = glm::perspective(
+        glm::radians(FOV),
+        aspecto,
+        zNear,
+        zFar
+    );
 }
 void CameraEditor::atualizarDirecao()
 {

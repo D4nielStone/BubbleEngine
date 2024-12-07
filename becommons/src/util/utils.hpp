@@ -10,7 +10,8 @@
 #include <glm/vec3.hpp>
 #include "src/arquivadores/shader.hpp"
 #include <any>
-
+#include <type_traits>
+namespace Bubble { namespace Componentes { class Camera; } }
 // Definição da estrutura Vector4
 template<class T>
 struct Vector4
@@ -115,8 +116,6 @@ struct Vector4
     }
 };
 
-#include <iostream>
-#include <type_traits>
 
 template<class T>
 struct Vector3
@@ -222,6 +221,14 @@ struct Vector3
         x *= scalar;
         y *= scalar;
         z *= scalar;
+        return *this;
+    }
+    // Operador de atribuicao
+    Vector3& operator=(const glm::vec3& eq)
+    {
+        x = eq.x;
+        y = eq.y;
+        z = eq.z;
         return *this;
     }
 
@@ -371,7 +378,10 @@ struct Node
 {
     std::vector<Node> filhos;
     std::vector<Vertex> malhas;
+    std::shared_ptr<Bubble::Componentes::Camera> camera;
+    std::vector<Luz> luzes;
     std::string nome = "node sem nome";
+    int metrica{ 1 }; ///< medida de escala, 1 metro = 100 centimetros
     glm::mat4 transformacao;
 };
 

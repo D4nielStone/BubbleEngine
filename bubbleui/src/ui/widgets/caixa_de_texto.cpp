@@ -145,7 +145,7 @@ void CaixaTexto::processarEntrada(char c)
             texto_cursor_index++;
         }
         else if (buffer_numerico) {
-            if (isdigit(c) || c == '.') { // Apenas números ou ponto
+            if (isdigit(c) || c == '.'|| c == '-') { // Apenas números ou ponto
                 if (c == '.' && texto.find('.') != std::string::npos) return; // Evita múltiplos pontos
                 texto.insert(texto_cursor_index, 1, c);
                 texto_cursor_index++;
