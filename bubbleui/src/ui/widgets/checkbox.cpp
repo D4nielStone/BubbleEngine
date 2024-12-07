@@ -11,9 +11,8 @@ CheckBox::CheckBox(bool* retorno, const std::string& texto, const Alinhamento& a
 {
     alinhamentoHorizontal = alinhamento;
     frase = texto;
-    quebrarLinha = true;
-    auto& gerenciador = Bubble::Arquivadores::TextureLoader::getInstance();
-    IDimagem = gerenciador.carregarTextura("assets/texturas/icons/check.png");
+    quebrarLinha = true; 
+     BubbleUI::tarefa([this]( ){IDimagem = Bubble::Arquivadores::TextureLoader::getInstance().carregarTextura("assets/texturas/icons/check.png"); });
     definirFonte();
 }
 
@@ -75,7 +74,7 @@ void CheckBox::atualizar()
         }
     }
 
-    defCor(ROXO_ESCURO_2);
+    defCor(ROXO_CLARO);
     Moldura::atualizar();
 
     // Controle da posição do widget no painel

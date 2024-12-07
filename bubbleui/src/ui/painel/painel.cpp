@@ -44,10 +44,11 @@ namespace BubbleUI {
         {
             if (mostrar_aba && aba)aba->obterCorpo()->defCor(ROXO_ESCURO);
         }
-        if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
-            menuDeContexto->mostrar();
-        menuDeContexto->atualizar();
-
+        if (ativar_mc) {
+            if (selecionado && contexto->inputs->mouseButton == GLFW_MOUSE_BUTTON_RIGHT && contexto->inputs->mouseEnter == GLFW_PRESS)
+                menuDeContexto->mostrar();
+            menuDeContexto->atualizar();
+        }
         // Atualiza os widgets
         preAtualizacao();
         if (mostrar_aba && aba)aba->atualizar();
@@ -97,7 +98,7 @@ namespace BubbleUI {
         {
             widget->renderizar();
         }
-
+        if (ativar_mc) 
         menuDeContexto->renderizar();
         posRenderizacao();
         glDisable(GL_STENCIL_TEST);

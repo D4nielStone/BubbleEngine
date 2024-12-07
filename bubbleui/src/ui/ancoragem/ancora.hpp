@@ -22,6 +22,7 @@
 
 namespace BubbleUI
 {
+	class Separador;	///< Definicao antecipada da classe Spearador
 	enum TipoAncoragem
 	{
 		Nenhum,
@@ -41,6 +42,7 @@ namespace BubbleUI
 		Ancora* a, * b;	///< Paineis de vivisão ( caso dividido )
 		std::vector<Painel*> tabs; ///< Tabs para caso seja do tipo tab
 		Painel* painel; ///< Painel filho
+		Separador* divisoria;
 		unsigned int abaAtiva;
 		Vector4<int> bounds{30, 30, 600, 400};	   ///< limites do dock
 		void definirContexto(std::shared_ptr<Contexto>);

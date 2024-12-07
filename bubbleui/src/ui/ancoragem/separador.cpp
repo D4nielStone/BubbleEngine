@@ -1,65 +1,37 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
-/*
+
 #include "separador.hpp"
-#include "painel.hpp"
 #include <src/depuracao/debug.hpp>
 
 using namespace BubbleUI;
 
-Separador::Separador(const Lado side, Painel* p) :contexto(p->obterContexto()), inputs(p->obterContexto()->inputs), lado(side), painel(p), colisao(Colisao2d({}, p->obterContexto()))
+Separador::Separador(TipoAncoragem side, Ancora* p) : lado(side), pai(p)
 {
+
+}
+
+float BubbleUI::Separador::proporcao() const
+{
+	return _Mproporcao;
 }
 
 void BubbleUI::Separador::atualizar()
 {
-	if (!painel->selecionado || !painel->redimensionavel)
-		return;
+	if (!colisao) colisao = std::make_shared < Colisao2d>(Vector4<int>(), contexto);
 	atualizarColisao();
 	atualizarArrasto();
 	atualizarCursor();
-}
-
-bool BubbleUI::Separador::cursor() const
-{
-	return colisao->mouseEmCima();
 }
 
 void BubbleUI::Separador::atualizarColisao()
 {
 	switch (lado)
 	{
-	case DIREITA:
-		colisao->definirBounds({
-			painel->obterRetangulo().x + painel->obterRetangulo().w -2,
-			painel->obterRetangulo().y,
-			10,
-			painel->obterRetangulo().h
-			});
+	case Horizontal:
+		colisao->definirBounds(Vector4<int>( pai->bounds.x + pai->bounds.w * _Mproporcao - 5, pai->bounds.y, 5, pai->bounds.h  ));
 		break;
-	case ESQUERDA:
-		colisao->definirBounds({
-			painel->obterRetangulo().x - 10,
-			painel->obterRetangulo().y,
-			12,
-			painel->obterRetangulo().h
-			});
-		break;
-	case CIMA:
-		colisao->definirBounds({
-			painel->obterRetangulo().x,
-			painel->obterRetangulo().y - 10,
-			painel->obterRetangulo().w,
-			12
-			});
-		break;
-	case BAIXO:
-		colisao->definirBounds({
-			painel->obterRetangulo().x,
-			painel->obterRetangulo().y + painel->obterRetangulo().h - 2,
-			painel->obterRetangulo().w,
-			12
-			});
-		break;
+	case Vertical:
+		colisao->definirBounds(Vector4<int>(pai->bounds.x , pai->bounds.y + pai->bounds.h * _Mproporcao - 5, pai->bounds.w  , 5  ));
 	default:
 		break;
 	}
@@ -67,20 +39,14 @@ void BubbleUI::Separador::atualizarColisao()
 
 void BubbleUI::Separador::atualizarCursor()
 {
-	if (colisao->mouseEmCima() && painel->selecionado)
+	if (colisao->mouseEmCima()  )
 	{
 		switch (lado)
 		{
-		case DIREITA:
+		case Horizontal:
 			contexto->cursor = contexto->cursor_horizontal;
-			break;
-		case ESQUERDA:
-			contexto->cursor = contexto->cursor_horizontal;
-			break;
-		case CIMA:
-			contexto->cursor = contexto->cursor_vertical;
-			break;
-		case BAIXO:
+			break; 
+		case Vertical:
 			contexto->cursor = contexto->cursor_vertical;
 			break;
 		default:
@@ -103,34 +69,37 @@ void BubbleUI::Separador::atualizarArrasto()
 {
 	if (arrastando && inputs->mouseEnter == GLFW_PRESS)
 	{
-		painel->arrastando = true;
-		painel->redimensionamentoAtual = lado;
+		// Obtém a posição do mouse
+		auto mousePos = Vector2(inputs->mousex, inputs->mousey);
+
 		switch (lado)
 		{
-		case DIREITA:
-			contexto->cursor = contexto->cursor_horizontal;
-				painel->adiTam({ static_cast<int>(inputs->mousex) - mouse_pos_ini.x, 0 });
+		case Horizontal:
+			// Calcula a nova proporção com base na posição X do mouse
+			_Mproporcao = static_cast<float>(mousePos.x - pai->bounds.x) / pai->bounds.w;
 			break;
-		case ESQUERDA:
-			contexto->cursor = contexto->cursor_horizontal;
-				painel->adiPos({ static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
-				painel->adiTam({ -static_cast<int>(inputs->mousex - mouse_pos_ini.x), 0 });
+
+		case Vertical:
+			// Calcula a nova proporção com base na posição Y do mouse
+			_Mproporcao = static_cast<float>(mousePos.y - pai->bounds.y) / pai->bounds.h;
 			break;
-		case CIMA:
-			contexto->cursor = contexto->cursor_vertical;
-				painel->adiPos({ 0,static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
-				painel->adiTam({ 0,-static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
-			break;
-		case BAIXO:
-			contexto->cursor = contexto->cursor_vertical;
-				painel->adiTam({ 0, static_cast<int>(inputs->mousey - mouse_pos_ini.y) });
-			break;
+
 		default:
 			break;
 		}
+
+		// Garante que a proporção fique entre 0.0 e 1.0
+		if (_Mproporcao < 0.0f)
+			_Mproporcao = 0.0f;
+		else if (_Mproporcao > 1.0f)
+			_Mproporcao = 1.0f;
+
+		// Atualiza a colisão com a nova proporção
+		atualizarColisao();
 	}
-	else
+	else if (inputs->mouseEnter == GLFW_RELEASE)
+	{
+		// Finaliza o arrasto ao liberar o botão do mouse
 		arrastando = false;
-	mouse_pos_ini = { static_cast<int>(inputs->mousex), static_cast<int>(inputs->mousey) };
+	}
 }
-*/

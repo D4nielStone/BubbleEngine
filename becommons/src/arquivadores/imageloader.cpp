@@ -7,6 +7,7 @@
 #include "assets/imagems_na_memoria.hpp"
 #include <map>
 #include <filesystem>
+#include "src/depuracao/debug.hpp"
 #include <iostream>
 
 using namespace Bubble::Arquivadores;
@@ -15,6 +16,19 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
 {
     {"icon.ico", std::pair(icon_png, icon_png_len)},
     {"banner.png", std::pair(banner_png, banner_png_len)},
+    {"arco_cor.png", std::pair(arco_cor_png, arco_cor_png_len)},
+    {"Camera.png", std::pair(camera_png, camera_png_len)},
+    {"check.png", std::pair(check_png, check_png_len)},
+    {"Codigo.png", std::pair(codigo_png, codigo_png_len)},
+    {"cube.png", std::pair(cube_png, cube_png_len)},
+    {"Fisica.png", std::pair(fisica_png, fisica_png_len)},
+    {"Iluminacao.png", std::pair(iluminacao_png, iluminacao_png_len)},
+    {"Play.png", std::pair(play_png, play_png_len)},
+    {"Renderizador.png", std::pair(renderizador_png, renderizador_png_len)},
+    {"scene.png", std::pair(scene_png, scene_png_len)},
+    {"stop.png", std::pair(stop_png, stop_png_len)},
+    {"Terreno.png", std::pair(terreno_png, terreno_png_len)},
+    {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
 
@@ -48,18 +62,18 @@ void ImageLoader::flipVertical()
 }
 void ImageLoader::carregarImagem(const std::string& filepath)
 {
-    //auto it = imagens_carregadas.find(filepath);
-    //if (it != imagens_carregadas.end())
-    //{
-    //    data = it->second->data;
-    //    channels = it->second->channels;
-    //    width = it->second->width;
-    //    height = it->second->height;
-    //    carregado = true;
-    //    return;
-    //}
-    // Debug::emitir("IMAGE_LOADER", "nova imagem:" + filepath);
-     // Inicializa o FreeImage  
+    auto it = imagens_carregadas.find(filepath);
+    if (it != imagens_carregadas.end())
+    {
+        data = it->second->data;
+        channels = it->second->channels;
+        width = it->second->width;
+        height = it->second->height;
+        carregado = true;
+        return;
+    }
+     Debug::emitir("ImageLoader", "nova imagem:" + filepath);
+    //Inicializa o FreeImage  
     FreeImage_Initialise();
 
     const std::string nome_arquivo = std::filesystem::path(filepath).filename().string();

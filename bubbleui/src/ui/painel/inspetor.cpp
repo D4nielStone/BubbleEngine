@@ -93,28 +93,34 @@ void Inspetor::preAtualizacao()
     }
     // Adiciona camera
     if (msgAdiCam) {
-        auto componente = std::make_shared<Bubble::Componentes::Camera>();
-        componente->configurar();
-        (entidade_selecionada!= nullptr) && entidade_selecionada->adicionarComponente(componente); 
-        msgAdiCam = false; recarregar(); }
+        BubbleUI::tarefa([this]() {
+            auto componente = std::make_shared<Bubble::Componentes::Camera>();
+            (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
+            msgAdiCam = false; recarregar();
+            });
+    }
     // Adiciona codigo
     if (msgAdiCode) {
-        auto componente = std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua");
-        componente->configurar();
-        (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
-        msgAdiCode = false; recarregar(); }
+        BubbleUI::tarefa([this]() {
+            auto componente = std::make_shared<Bubble::Componentes::Codigo>("assets/scripts/rotacionar.lua");
+            (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
+            msgAdiCode = false; recarregar();
+            });
+    }
     // Adiciona Renderizador
     if (msgAdiRender) {
-        auto componente = std::make_shared<Bubble::Componentes::Renderizador>();
-        componente->configurar();
-        (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
-        msgAdiRender = false; recarregar(); }
+        BubbleUI::tarefa([this]() {
+            auto componente = std::make_shared<Bubble::Componentes::Renderizador>();
+            (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
+            msgAdiRender = false; recarregar();    });
+    }
     // Adiciona Terreno
     if (msgAdiTerr) {
-        auto componente = std::make_shared<Bubble::Componentes::Terreno>();
-        componente->configurar();
-        (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
-        msgAdiTerr = false; recarregar();
+        BubbleUI::tarefa([this]() {
+            auto componente = std::make_shared<Bubble::Componentes::Terreno>();
+            (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
+            msgAdiTerr = false; recarregar();
+            });
     }
 }
 

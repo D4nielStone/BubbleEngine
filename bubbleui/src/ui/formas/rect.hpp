@@ -32,7 +32,7 @@ namespace BubbleUI
 		protected:
 			std::shared_ptr<Contexto> contexto{ nullptr };
 			Vector4<int> retangulo{30,30,30,30}, tamanhoAnterior;
-			Color* cor_base	{ new Color(0.2f, 0.2f, 0.2f, 1.f) };
+			Color* cor_base	{ new Color(ROXO_ESCURO) };
 			Vector4<float> paraNDC();
 			Vector4<float> coord_ndc;
 			Size tamanhoDoContextoAnterior;

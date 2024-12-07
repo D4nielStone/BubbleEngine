@@ -61,11 +61,8 @@ void Texto::renderizar()
 // Método para atualizar retangulo das letras do texto
 void Texto::renderizar_texto(std::string &frase)
 {
-    // Posiciona o box dentro do widget, com padding do pai
-    if(alinhamentoHorizontal == Alinhamento::Esquerda)
+    // Posiciona o box dentro do widget, com padding do pai 
         box_pos.x = painel->widgetPadding.x + painel->posicaoWidget.x;
-    else
-        box_pos.x = painel->obterRetangulo().x - painel->widgetPadding.x + painel->posicaoWidget.x;
     box_pos.y =painel->widgetPadding.y + painel->posicaoWidget.y;
     box_size.x = painel->obterRetangulo().w - (painel->posicaoWidget.x - painel->obterRetangulo().x) - painel->widgetPadding.x * 2;
     box_size.y = 0; // Inicialize como 0, vai ser atualizado com a altura do texto

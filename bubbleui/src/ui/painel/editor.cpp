@@ -72,7 +72,7 @@ static void adicionarEsfera()
 // Adiciona camera
 static void adicionarCamera()
 {
-            Bubble::Cena::criarCamera(Bubble::Cena::CameraEditorAtual()->transformacao->obterPosicao());
+    BubbleUI::tarefa([]() {Bubble::Cena::criarCamera(Bubble::Cena::CameraEditorAtual()->transformacao->obterPosicao()); });
 }
 // Adiciona cena
 static void adicionarCena()
@@ -87,6 +87,7 @@ scenemanager(scenemanager)
     buffer->flip = true;
 	renderizarCorpo = false;
     retangulo = rect;
+    ativar_mc = true;
 }
 
 void BubbleUI::Paineis::Editor::definirContexto(std::shared_ptr < Contexto > ctx)

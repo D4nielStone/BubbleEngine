@@ -24,14 +24,13 @@ void BubbleUI::Items::Botao::atualizar()
 	ItemMenu::atualizar();
 	if(callback)
 	*callback = false;
-	if (clicado && gatilho && !escondido)
+	if (clicado && !escondido)
 	{
 		if (callback)
 		{
 			*callback = true;
 		}
-		gatilho = false;
-	}
+	} 
 }
 void BubbleUI::Items::Botao::renderizar()
 {

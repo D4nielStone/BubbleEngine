@@ -44,6 +44,7 @@ namespace Bubble::Cena
                 material->bind();
             }
 
+            cam->atualizar();
             cam->atualizarShader();
 
             // Itera pelas entidades associadas ao material atual
@@ -92,17 +93,7 @@ namespace Bubble::Cena
 
     // Deve atualizar Cena
     void Scene::atualizar(float aspectoDoEditor, float aspectoDoJogo) {
-        // Verifica se a tarefa já terminou sem bloquear e se não foi carregado ainda
-        //if (!carregou_arquivo3d && tarefaCriarEntidade.first.valid() && tarefaCriarEntidade.first.wait_for(std::chrono::milliseconds(0)) == std::future_status::ready) {
-        //    adicionarEntidade(std::make_shared<Entidades::Entidade>(tarefaCriarEntidade.second));
-        //    carregou_arquivo3d = true; // Marca como carregado
-        //}
-        camera_editor.atualizarAspecto(aspectoDoEditor);
-        camera_editor.atualizar();
-        if (camera_principal) {
-            camera_principal->atualizarAspecto(aspectoDoJogo);
-            camera_principal->atualizar();
-        }
+        
         bool existe_obj_selecionado{ false };
         for (auto& obj : Entidades) 
         {
@@ -117,6 +108,12 @@ namespace Bubble::Cena
                 camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
             }
             atualizarFilhos(obj);
+        }
+        camera_editor.atualizarAspecto(aspectoDoEditor);
+        camera_editor.atualizar();
+        if (camera_principal) {
+            camera_principal->atualizarAspecto(aspectoDoJogo);
+            camera_principal->atualizar();
         }
     }
 

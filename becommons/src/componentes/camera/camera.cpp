@@ -91,7 +91,7 @@ void Camera::desenharFrame(const Vector4<int> &viewportRect) const
 
 void Camera::renderizar()
 { 
-    if(!corSolida)
+    //if(!corSolida)
     skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
 }
 void Camera::atualizar() {

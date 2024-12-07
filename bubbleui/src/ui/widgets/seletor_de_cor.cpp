@@ -32,6 +32,7 @@ SeletorDeCor::SeletorDeCor(Color* cor, const std::string& label, const Alinhamen
     arco_cor->quebrarLinha = true;
     arco_cor->flip = true;
     frase = label;
+    quebrarLinha = true;
     resolucao = 12;
     definirFonte();
     letra_padding = { 3, 3 };

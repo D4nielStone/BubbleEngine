@@ -61,6 +61,7 @@ namespace BubbleUI
 
 		// Dados de Geometria
 		bool renderizarCorpo{ true };
+		bool ativar_mc = false;
 	};
 
 }

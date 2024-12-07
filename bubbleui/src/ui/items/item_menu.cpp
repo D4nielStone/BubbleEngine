@@ -31,14 +31,18 @@ void BubbleUI::Items::ItemMenu::atualizar()
     if (!colisao->mouseEmCima())
     {
         mouseEmCima = false; // Marca que o mouse não está sobre o item
-        Moldura::defCor({ 0.298f, 0.286f, 0.322f }); // Define a cor da moldura
+        Moldura::defCor(ROXO_CLARO); // Define a cor da moldura
     }
     else
     {
         // Verifica se o botão esquerdo do mouse foi pressionado
-        if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT)  clicado = true; // Marca que o item foi clicado
+        if (inputs->mouseEnter == GLFW_PRESS && inputs->mouseButton == GLFW_MOUSE_BUTTON_LEFT && gatilho)
+        {
+            clicado = true;
+            gatilho = false;
+        } // Marca que o item foi clicado
         mouseEmCima = true; // Marca que o mouse está mais sobre o item
-        Moldura::defCor({ 0.4F, 0.4F, 0.4F }); // Define uma cor diferente para a moldura
+        Moldura::defCor(ROXO_CLARO_2); // Define uma cor diferente para a moldura
     }
     // Verifica gatilho para toque
     if (inputs->mouseEnter == GLFW_RELEASE)

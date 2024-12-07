@@ -1,29 +1,36 @@
-/*#pragma once
-#include "src/ui/formas/linha.hpp"
+#pragma once
+#include "ancora.hpp"
 #include "src/ui/formas/colisao2d.hpp"
-#include "bubbleui.hpp"
 
 namespace BubbleUI
 {
-	class Painel;
-	class BEUI_DLL_API Separador
+	class Separador
 	{
 	public:
-		Separador() = default;
-		Separador(const Lado side, Painel* painel);
+		/**
+		 * @brief Construtor do separador
+		 * @param tipo Tipo do separador (Vertical ou Horizontal)
+		 * @param ancora Ancora pai para redimesionamento
+		 */
+		Separador(TipoAncoragem tipo, Ancora* ancora);
+
+		/**
+		 * @brief Proporcao de divisao entre paineis
+		 * @return Valor flutuante para multiplicacao
+		 */
+		float proporcao() const;
 		void atualizar();
-		bool cursor() const;
-	private:
-		Colisao2d colisao;
 		std::shared_ptr<Bubble::Inputs::Inputs> inputs{ nullptr };
 		std::shared_ptr<Contexto> contexto{ nullptr };
-		Painel* painel = nullptr;
-		const Lado lado;
+	private:
+		std::shared_ptr<Colisao2d> colisao{ nullptr };
+		Ancora* pai { nullptr };
+		TipoAncoragem lado{ Horizontal };
 		bool mouse_1click, arrastando;
 		Vector2 arrasto_pos, mouse_pos_ini;
+		float _Mproporcao = 0.5F;
 		void atualizarColisao();
 		void atualizarCursor();
 		void atualizarArrasto();
 	};
 }
-*/

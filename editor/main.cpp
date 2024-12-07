@@ -72,9 +72,9 @@ return 0;
 
     // Criando os painéis da interface do editor
     BubbleUI::Paineis::Editor* editor = new BubbleUI::Paineis::Editor( engine.obterGerenciadorDeCenas());
-    BubbleUI::Paineis::Entidades* ent = new BubbleUI::Paineis::Entidades( engine.obterGerenciadorDeCenas(), { 3, 3, 200, 400 });
-    BubbleUI::Paineis::Jogo* jogo = new BubbleUI::Paineis::Jogo( engine.obterGerenciadorDeCenas(), { 3, 3, 200, 400 });
-    BubbleUI::Paineis::Inspetor* insp = new BubbleUI::Paineis::Inspetor( engine.obterGerenciadorDeCenas(), { 597, 3, 200, 400 });
+    BubbleUI::Paineis::Entidades* ent = new BubbleUI::Paineis::Entidades( engine.obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Jogo* jogo = new BubbleUI::Paineis::Jogo( engine.obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Inspetor* insp = new BubbleUI::Paineis::Inspetor( engine.obterGerenciadorDeCenas());
 
     // criando ancoras
     BubbleUI::Ancora* ancora_insp_duplo = new BubbleUI::Ancora(BubbleUI::Horizontal); ///< alinha  entidades e inspetor
@@ -84,11 +84,11 @@ return 0;
     ancora_edi_jogo->a = new BubbleUI::Ancora(BubbleUI::Nenhum, editor);
     ancora_edi_jogo->b = new BubbleUI::Ancora(BubbleUI::Nenhum, jogo);
 
-    ancora_insp_duplo->a = new BubbleUI::Ancora(BubbleUI::Nenhum, insp);
+    ancora_insp_duplo->a = new BubbleUI::Ancora(BubbleUI::Nenhum, ent);
     ancora_insp_duplo->b = ancora_edi_jogo;
 
     contexto->ancora_root->a = ancora_insp_duplo;
-    contexto->ancora_root->b = new BubbleUI::Ancora(BubbleUI::Nenhum, ent);
+    contexto->ancora_root->b = new BubbleUI::Ancora(BubbleUI::Nenhum, insp);
 
     // Adicionando os painéis à janela do contexto
     engine.definirInputs(contexto->inputs);

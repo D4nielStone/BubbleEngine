@@ -105,6 +105,15 @@ bool gatilho_ancora{ false };
 void BubbleUI::Contexto::atualizar()
 {
 
+    /**
+    * Executa as funcoes na thread principal
+    */
+    while (!tarefas.empty()) {
+        auto &tarefa = tarefas.front();
+            tarefa();
+        tarefas.pop();
+    }
+
     if (!gatilho_ancora) {
         ancora_root->definirContexto(contextos[glfwWindow]);
         gatilho_ancora = true;
@@ -146,15 +155,6 @@ void BubbleUI::Contexto::renderizar()
     glfwSetCursor(glfwWindow, cursor);
 
     glfwSwapBuffers(glfwWindow);
-
-    /**
-    * Executa as funcoes na thread principal
-    */
-    while (!tarefas.empty()) {
-        auto &tarefa = tarefas.front();
-            tarefa();
-        tarefas.pop();
-    }
 }
 void BubbleUI::atualizarContexto()
 {
