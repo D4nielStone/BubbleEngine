@@ -335,7 +335,7 @@ struct Color
 struct Textura {
     unsigned int ID{ 0 };
     std::string tipo{ "" };
-    const char* path{ "" };
+    std::string path{ "" };
 
     // Operador de igualdade
     bool operator==(const Textura& other) const {
@@ -363,7 +363,7 @@ struct Material {
     void bind();
 };
 
-struct Vertex {
+struct Malha {
     std::vector<float> vertices;
     std::vector<unsigned int> indices;
     std::vector<float> uvs;
@@ -372,12 +372,13 @@ struct Vertex {
     std::string nome = "malha sem nome";
     unsigned int VAO = 0, EBO = 0, VBO = 0;
     bool carregado = false;
+    size_t id{};
 };
 
 struct Node
 {
     std::vector<Node> filhos;
-    std::vector<Vertex> malhas;
+    std::vector<Malha> malhas;
     std::shared_ptr<Bubble::Componentes::Camera> camera;
     std::vector<Luz> luzes;
     std::string nome = "node sem nome";
@@ -398,9 +399,9 @@ using Vector3ID = std::pair<Vector3<float>*, const char*>;
 using SeletorDeCorID = std::pair<Color*, const char*>;
 using ArvoreID = std::pair<std::vector<std::any>, const char*>;
 
-inline Vertex rect_vertex;
-inline Vertex linha_vertex;
-inline Vertex halfcircle_vertex;
+inline Malha rect_vertex;
+inline Malha linha_vertex;
+inline Malha halfcircle_vertex;
 
 // cores
 const Color ROXO_ESCURO = Color(0.17f, 0.14f, 0.2f, 1.f);

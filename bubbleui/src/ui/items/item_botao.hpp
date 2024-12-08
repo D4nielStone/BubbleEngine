@@ -1,6 +1,5 @@
 #pragma once
 #include "item_menu.hpp"
-#include "src/ui/widgets/imagem.hpp"
 
 namespace BubbleUI
 {
@@ -13,7 +12,8 @@ namespace BubbleUI
 			Botao() = default;
 			Botao(const std::string &label_shared, bool* callback);
 			Botao(const std::string &label_shared, bool* callback, const std::string &imagePath);
-			void atualizar() override;
+			void atualizar() override; 
+			void definirPai(Formas::Moldura*) override;
 			void renderizar() override;
 		private:
 			bool* callback{ nullptr };

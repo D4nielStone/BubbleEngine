@@ -5,6 +5,7 @@
 #include "src/ui/items/item_arvore.hpp"
 #include <windows.h>
 #include <filesystem>
+#include "src/nucleo/engine.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -132,4 +133,9 @@ void BubbleUI::Paineis::Editor::preAtualizacao()
         contexto->inputs->setInputMode(InputMode::Editor);
     }
     else if (contexto->inputs->getInputMode() != Game) contexto->inputs->setInputMode(Default);
+
+
+    // Salva projeto
+    if (contexto->inputs->isKeyPressed(Ctrl) && contexto->inputs->isKeyPressed(S))
+        Bubble::Engine::getInstance()->salvarProjeto();
 }

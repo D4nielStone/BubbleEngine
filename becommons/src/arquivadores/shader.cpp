@@ -86,7 +86,7 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
             std::cerr << e.what() << "\n";
         }
     }
-    // Compilação do Vertex Shader
+    // Compilação do Malha Shader
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);

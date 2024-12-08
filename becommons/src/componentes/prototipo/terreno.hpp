@@ -13,7 +13,7 @@ namespace Bubble
 		class BECOMMONS_DLL_API Terreno : public Renderizador
 		{
 		private:
-			Vertex mVertex;
+			Malha mVertex;
 			std::vector<std::vector<float>> heightmap;
 			float scale;
 			int width, depth;
@@ -21,7 +21,7 @@ namespace Bubble
 			void configurarBuffers();
 			void desenharModelo() const;
 		public:
-			Vertex& obterMalha() override;
+			Malha& obterMalha() override;
 			Terreno();
 			~Terreno();
 			void gerarHeightMap();

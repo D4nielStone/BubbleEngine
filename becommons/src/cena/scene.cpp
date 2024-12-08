@@ -7,26 +7,22 @@
 
 namespace Bubble::Cena
 {
-    void PipeLine::adicionarEntidade(std::shared_ptr<Entidades::Entidade> entidade)
-    {
+    void PipeLine::adicionarAoMapa(std::shared_ptr<Entidades::Entidade> entidade, Comum::Componente* componente, const std::string& tipo) {
+        auto& malha = static_cast<Componentes::Renderizador*>(componente)->obterMalha();
+        entidadesParaRenderizar[malha.material.ID].first.push_back(entidade);
+        entidadesParaRenderizar[malha.material.ID].second = &malha.material;
+        Debug::emitir("PipeLine", "Adicionando entidade com " + tipo);
+    }
+
+    void PipeLine::adicionarEntidade(std::shared_ptr<Entidades::Entidade> entidade) {
         for (auto& componente : entidade->listaDeComponentes()) {
             if (!componente->carregado())
                 componente->configurar();
-            if (componente->nome() == "Renderizador")
-            {
-                Debug::emitir("PipeLine", "adicionando entidade com renderizador");
-                // adiciona o renderizador ao nome correspondente do material
-                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
-                entidadesParaRenderizar[static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Renderizador*>(componente.get())->obterMalha().material;
+
+            const auto& nome = componente->nome();
+            if (nome == "Renderizador" || nome == "Terreno") {
+                adicionarAoMapa(entidade, componente.get(), nome);
             }
-            else
-                if (componente->nome() == "Terreno")
-                {
-                Debug::emitir("PipeLine", "adicionando entidade terreno");
-                    // adiciona o renderizador ao nome correspondente do material
-                    entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].first.push_back(entidade);
-                    entidadesParaRenderizar[static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material.ID].second = &static_cast<Componentes::Terreno*>(componente.get())->obterMalha().material;
-                }
         }
         for (auto& filho : entidade->obterFilhos()) {
             adicionarEntidade(filho);
@@ -71,7 +67,10 @@ namespace Bubble::Cena
 
     void PipeLine::renderizar(Componentes::Camera* cam)
     {
+        glDisable(GL_DEPTH_TEST);
         cam->renderizar();
+        glEnable(GL_CULL_FACE);
+        glEnable(GL_DEPTH_TEST);
         // Itera sobre todos os pares de material e entidades
         for (auto& [materialID, entidadesMaterial] : entidadesParaRenderizar) {
             // Pega o ponteiro do material atual
@@ -91,6 +90,9 @@ namespace Bubble::Cena
                 entidade->renderizar();
             }
         }
+
+        //Desligar framebuffer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
     // Uma cena é criada
     // \param name: para o nome da cena
@@ -109,23 +111,33 @@ namespace Bubble::Cena
 
     void Scene::adicionarEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
         if (!existeEntidade(gameObject.get())) {
-            renderizadores.adicionarEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
-            Entidades.push_back(std::move(gameObject));  // Adiciona objeto à lista de entidades
+            renderizadores.adicionarEntidade(gameObject);
+            Entidades.push_back(std::move(gameObject));
         }
     }
+
     void Scene::removerEntidade(std::shared_ptr<Entidades::Entidade> gameObject) {
-        if (gameObject != nullptr && !existeEntidade(gameObject.get())) {
+        if (gameObject != nullptr && existeEntidade(gameObject.get())) {
             renderizadores.removerEntidade(gameObject);  // Carrega os componentes da entidade e dos filhos
-            Entidades.erase(std::find(Entidades.begin(), Entidades.end(), gameObject));  // Adiciona objeto à lista de entidades
+            auto it = std::find(Entidades.begin(), Entidades.end(), gameObject);
+            if (it != Entidades.end())
+                Entidades.erase(it);  // Adiciona objeto à lista de entidades
+            else if (gameObject->pai)
+                gameObject->pai->removerFilho(gameObject);
+            else {
+                Debug::emitir("Cena", "Não foi possivel remover entidade");
+                return;
+            }
+            Debug::emitir("Cena", "entidade removida");
+            gameObject->liberar();
+            gameObject.reset();
+            return;
         }
     }
     bool carregou_arquivo3d{ false };
     // Deve renderizar Cena
     void Scene::renderizar(const InputMode modo) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-        glEnable(GL_CULL_FACE);
-        glEnable(GL_DEPTH_TEST);
-        glCullFace(GL_BACK);
 
         if (modo == Editor) {
             renderizadores.renderizar(&camera_editor);
@@ -139,17 +151,18 @@ namespace Bubble::Cena
     void Scene::atualizar(float aspectoDoEditor, float aspectoDoJogo) {
         
         bool existe_obj_selecionado{ false };
-        for (auto& obj : Entidades) 
+        for (const auto& obj : Entidades) 
         {
-            // Verifica seleção e ativação do obj
-            if (obj->selecionada && !existe_obj_selecionado) { entidade_selecionada = obj; existe_obj_selecionado = true; }
             // Ignora se não ativo
             if (!obj->ativado || !obj->ativado_root)
                 continue;
+            // Verifica seleção e ativação do obj
+            if (obj->selecionada && !existe_obj_selecionado) { entidade_selecionada = obj; existe_obj_selecionado = true; }
             obj->atualizar();
             // defini camera atual
-            if ((!camera_principal || obj->selecionada)&& obj->obterComponente("Camera")) {
-                camera_principal = static_cast<Componentes::Camera*>(obj->obterComponente("Camera").get());
+            auto cam = obj->obterComponente("Camera");
+            if ((!camera_principal || obj->selecionada)&& cam) {
+                camera_principal = static_cast<Componentes::Camera*>(cam.get());
             }
             atualizarFilhos(obj);
         }
@@ -176,6 +189,8 @@ namespace Bubble::Cena
     void Scene::carregar() {
         camera_editor.configurar();
 
+        glCullFace(GL_BACK);
+
         for (auto& entidade : Entidades)
             renderizadores.adicionarEntidade(entidade);
     }
@@ -198,7 +213,7 @@ namespace Bubble::Cena
         if (document.HasMember("nome") && document["nome"].IsString())
         {
             *Name = document["nome"].GetString();
-            Debug::emitir("CENA", *Name + std::string(":"));
+            Debug::emitir("Cena", *Name + std::string(":"));
         }
         else
         {

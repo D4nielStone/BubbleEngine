@@ -19,7 +19,7 @@ namespace Bubble {
 		public:
 			std::vector<std::any> variaveis;
 			Bubble::Entidades::Entidade* meuObjeto = nullptr;
-			Componente() {};
+			Componente() = default;
 			const char* nome() const { return Nome; }
 			bool carregado() const { return carregadov; };
 			virtual void configurar() = 0; virtual void atualizar()  = 0;
@@ -27,10 +27,12 @@ namespace Bubble {
 			{
 				meuObjeto = ent;
 			}
+			virtual void liberar() { if(!variaveis.empty())variaveis.clear(); };
 			virtual rapidjson::Value serializar(rapidjson::Document* doc) const
 			{
 				return rapidjson::Value();
 			};
+			virtual bool parse(rapidjson::Value& v) { return true; };
 		};
 	}
 }	

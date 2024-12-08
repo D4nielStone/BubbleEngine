@@ -14,9 +14,6 @@
 // Definindo título da janela
 constexpr const char* title = "Bubble Engine - Editor - (C) 2024 Daniel Oliveira";
 
-// Instância da engine do Bubble
-Bubble::Engine engine;
-
 // Definição do ponto de entrada dependendo do modo de compilação (Debug ou Release)
 #ifdef NDEBUG
 #define INIT APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR lpCmdLine, int nCmdShow)
@@ -36,6 +33,8 @@ int INIT
 // Inicializando a interface do editor
 iniciarInterface();
 
+auto engine = Bubble::Engine::getInstance();
+
 // Loop de execução enquanto o editor estiver ativo
 while (!BubbleUI::fim())
 {
@@ -43,10 +42,10 @@ while (!BubbleUI::fim())
     BubbleUI::atualizarContexto();
 
     // Atualizando a engine (processa a lógica do jogo/editor)
-    engine.atualizar();
+    engine->atualizar();
 
     // Renderizando a cena (tanto para o editor quanto para o jogo)
-    engine.renderizar();
+    engine->renderizar();
 
     // Renderizando o contexto gráfico da interface
     BubbleUI::renderizarContexto();
@@ -63,18 +62,20 @@ return 0;
     // Criando a janela principal do editor
     auto contexto = BubbleUI::janela(title);
 
+    auto engine = Bubble::Engine::getInstance();
+
     // Carregando o projeto da engine
-    if (!engine.carregarProjeto(R"(C:\Users\DN\Documents\Bubble Engine\Projetos\teste)"))
+    if (!engine->carregarProjeto(R"(C:\Users\DN\Documents\Bubble Engine\Projetos\teste)"))
     {
         Debug::emitir(Erro, "carregando projeto.");
         return ;
     }
 
     // Criando os painéis da interface do editor
-    BubbleUI::Paineis::Editor* editor = new BubbleUI::Paineis::Editor( engine.obterGerenciadorDeCenas());
-    BubbleUI::Paineis::Entidades* ent = new BubbleUI::Paineis::Entidades( engine.obterGerenciadorDeCenas());
-    BubbleUI::Paineis::Jogo* jogo = new BubbleUI::Paineis::Jogo( engine.obterGerenciadorDeCenas());
-    BubbleUI::Paineis::Inspetor* insp = new BubbleUI::Paineis::Inspetor( engine.obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Editor* editor = new BubbleUI::Paineis::Editor( engine->obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Entidades* ent = new BubbleUI::Paineis::Entidades( engine->obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Jogo* jogo = new BubbleUI::Paineis::Jogo( engine->obterGerenciadorDeCenas());
+    BubbleUI::Paineis::Inspetor* insp = new BubbleUI::Paineis::Inspetor( engine->obterGerenciadorDeCenas());
 
     // criando ancoras
     BubbleUI::Ancora* ancora_insp_duplo = new BubbleUI::Ancora(BubbleUI::Horizontal); ///< alinha  entidades e inspetor
@@ -91,6 +92,6 @@ return 0;
     contexto->ancora_root->b = new BubbleUI::Ancora(BubbleUI::Nenhum, insp);
 
     // Adicionando os painéis à janela do contexto
-    engine.definirInputs(contexto->inputs);
+    engine->definirInputs(contexto->inputs);
 
 }

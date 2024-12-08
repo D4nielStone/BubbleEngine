@@ -22,7 +22,9 @@ namespace Bubble {
 			void atualizar() const;
 			void renderizar();
 			std::string nome() const;
+			void liberar();
 			std::shared_ptr<std::string> nomeptr();
+			void removerFilho(std::shared_ptr<Entidade> ent);
 			void carregarNode(const Node& node);
 			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
 			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome) const;

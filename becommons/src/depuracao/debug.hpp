@@ -18,7 +18,7 @@ namespace Debug
 {
 
     BECOMMONS_DLL_API void cout(const std::string &msg);
-    BECOMMONS_DLL_API void emitir(Tipo t, std::string msg);
+    void emitir(Tipo t, std::string msg);
     BECOMMONS_DLL_API void emitir(std::string t, std::string msg);
     
     BECOMMONS_DLL_API std::vector<std::string> obterMensagems();

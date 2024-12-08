@@ -14,6 +14,7 @@ Transformacao::Transformacao()
     variaveis.push_back(std::pair(& rotacao, "Rotacao"));
     variaveis.push_back(std::pair(& escala, "Escala"));
 }
+
 rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const 
 {
     rapidjson::Value obj(rapidjson::kObjectType);
@@ -34,6 +35,38 @@ rapidjson::Value Transformacao::serializar(rapidjson::Document* doc) const
     obj.AddMember("escala", escalaarr, doc->GetAllocator());
     return obj;
 }
+bool Transformacao::parse(rapidjson::Value& transform)
+{
+    // Verificar se "posicao" é um array de 3 elementos
+    if (!transform.HasMember("posicao") || !transform["posicao"].IsArray() || transform["posicao"].Size() != 3)
+        return false;
+
+    // Verificar se "rotacao" é um array de 3 elementos
+    if (!transform.HasMember("rotacao") || !transform["rotacao"].IsArray() || transform["rotacao"].Size() != 3)
+        return false;
+
+    // Verificar se "escala" é um array de 3 elementos
+    if (!transform.HasMember("escala") || !transform["escala"].IsArray() || transform["escala"].Size() != 3)
+        return false;
+
+    // Extrair valores para 'posicao'
+    posicao.x = transform["posicao"][0].GetFloat();
+    posicao.y = transform["posicao"][1].GetFloat();
+    posicao.z = transform["posicao"][2].GetFloat();
+
+    // Extrair valores para 'rotacao'
+    rotacao.x = transform["rotacao"][0].GetFloat();
+    rotacao.y = transform["rotacao"][1].GetFloat();
+    rotacao.z = transform["rotacao"][2].GetFloat();
+
+    // Extrair valores para 'escala'
+    escala.x = transform["escala"][0].GetFloat();
+    escala.y = transform["escala"][1].GetFloat();
+    escala.z = transform["escala"][2].GetFloat();
+    comporMatriz(glm::vec3(posicao.x, posicao.y, posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));
+    return true;
+}
+
 glm::vec3 Transformacao::obterRotacao() const { return glm::vec3(rotacao.x, rotacao.y, rotacao.z); }
 Vector3<float> Transformacao::obterPosicao() const { return posicao; }
 Vector3<float> Transformacao::obterEscala() const { return escala; }
@@ -41,13 +74,15 @@ Vector3<float> Transformacao::obterDirecao() const {
     const auto direcaoPadrao = Vector3<float>{ 0.0f, 0.0f, -1.0f };
     return rotacao * direcaoPadrao;
 }
+
 float* Transformacao::obterMatrizGlobal() const {
     return (float*)glm::value_ptr(matriz_de_modelo);
 }
-glm::mat4 Bubble::Componentes::Transformacao::obterMatriz() const
+glm::mat4 Transformacao::obterMatriz() const
 {
     return matriz_de_modelo;
 }
+
 void Transformacao::atualizar() {
     if (!shader_atual) return;
 
@@ -59,11 +94,13 @@ void Transformacao::configurar() {
     glm::rotate(matriz_de_modelo, 1.f, glm::vec3(rotacao.x, rotacao.y, rotacao.z));
     glm::scale(matriz_de_modelo, glm::vec3(escala.x, escala.y, escala.z));
 }
+
 void Transformacao::definirPosicao(const Vector3<float>& newPosition) { posicao = newPosition;  comporMatriz(glm::vec3(posicao.x,posicao.y,posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));}
 void Transformacao::definirRotacao(const Vector3<float>& newRotation) { rotacao = newRotation; comporMatriz(glm::vec3(posicao.x, posicao.y, posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));
 }
 void Transformacao::definirEscala(const Vector3<float>& newScale) { escala = newScale;  comporMatriz(glm::vec3(posicao.x, posicao.y, posicao.z), glm::vec3(rotacao.x, rotacao.y, rotacao.z), glm::vec3(escala.x, escala.y, escala.z));
 }
+
 void Transformacao::Move(Vector3<float> &pos) {
     posicao += pos;
     glm::translate(matriz_de_modelo, glm::vec3(posicao.x,posicao.y,posicao.z));
@@ -77,6 +114,7 @@ void Transformacao::Rotacionar(const float x, const float y, const float z) {
     rotacao = Vector3(n.x,n.y,n.z);
     glm::rotate(matriz_de_modelo, 1.f, glm::vec3(rotacao.x,rotacao.y,rotacao.z));
 }
+
 void Transformacao::decomporMatriz(glm::vec3* position, glm::vec3* rotation, glm::vec3* scale) const {
     glm::vec3 skew;
     glm::vec4 perspective;
@@ -92,8 +130,7 @@ void Transformacao::comporMatriz(const glm::vec3& position, const glm::vec3& rot
     matriz_de_modelo = glm::rotate(matriz_de_modelo, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     matriz_de_modelo = glm::scale(matriz_de_modelo, scale);
 }
-
-void Bubble::Componentes::Transformacao::definirMatriz(glm::mat4 matriz_nova, int factor)
+void Transformacao::definirMatriz(glm::mat4 matriz_nova, int factor)
 {
     glm::vec3 p, r, s;
     matriz_de_modelo = matriz_nova;

@@ -16,6 +16,7 @@ namespace Bubble {
             ImageLoader(const std::string& filepath);
             ~ImageLoader();
 
+            static ImageLoader& getInstance();
             int getWidth() const;
             int getHeight() const;
             int getChannels() const;
@@ -23,7 +24,6 @@ namespace Bubble {
             GLFWimage converterParaGlfw();
             bool carregado;
         private:
-            std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
             void flipVertical();
             void carregarImagem(const std::string& filepath);
             void embutida(BYTE* data, const unsigned int tamanho);
@@ -32,6 +32,7 @@ namespace Bubble {
             unsigned char* data;
         };
         BECOMMONS_DLL_API unsigned int TextureFromFile(const std::string& directory, int* width = nullptr, int* height = nullptr);
+        BECOMMONS_DLL_API unsigned int TextureFromFile(const std::string& directory, GLuint tipo_textura);
         BECOMMONS_DLL_API unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int format);
 
         class BECOMMONS_DLL_API TextureLoader
@@ -39,6 +40,8 @@ namespace Bubble {
         public:
             static TextureLoader& getInstance();
             GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
+            GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura);
+            GLuint carregarSkybox(const char*, std::vector<std::string> faces);
             GLuint carregarAiTexture(const aiTexture* texture);
         private:
             std::unordered_map<std::string, GLuint> texturasCarregadas;

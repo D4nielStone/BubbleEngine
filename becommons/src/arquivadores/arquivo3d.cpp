@@ -125,7 +125,7 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
         aiMesh* mesh = cena->mMeshes[ai_node->mMeshes[i]];
         if (!mesh) continue;
 
-        Vertex malha;
+        Malha malha;
         malha.nome = mesh->mName.C_Str();
         // Extrair vértices
         for (unsigned int j = 0; j < mesh->mNumVertices; ++j) {
@@ -160,6 +160,7 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
         }
 
         malha.material = processarMateriais(cena->mMaterials[mesh->mMaterialIndex]);
+        malha.id = gerarId(std::to_string(malha.vertices.size()));
         node_final.malhas.push_back(malha);
     }
 

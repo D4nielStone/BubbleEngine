@@ -30,7 +30,9 @@ namespace Bubble {
             void configurar() override;
             float* obterMatrizGlobal() const;
             glm::mat4 obterMatriz() const;
+
             rapidjson::Value serializar(rapidjson::Document* doc) const override;
+            bool parse(rapidjson::Value& v) override;
 
             Vector3<float> obterPosicao() const;
             glm::vec3 obterRotacao() const;

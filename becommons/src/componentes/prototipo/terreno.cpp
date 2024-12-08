@@ -153,7 +153,7 @@ Terreno::~Terreno()
         glDeleteBuffers(1, &mVertex.VBO);
         glDeleteBuffers(1, &mVertex.EBO);
     }
-Vertex& Terreno::obterMalha()
+Malha& Terreno::obterMalha()
 {
     return mVertex;
 }

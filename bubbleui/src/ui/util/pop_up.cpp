@@ -13,6 +13,7 @@ BubbleUI::Util::PopUp::PopUp(std::shared_ptr<Contexto> contexto)
 
 void BubbleUI::Util::PopUp::posAtualizacao()
 {
+	defCor(ROXO_ESCURO);
 	altura = 0;
 	posicaoWidget = { 0, 0 };
 	for (auto& item : lista_items)

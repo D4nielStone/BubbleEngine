@@ -3,6 +3,7 @@
 #include "string"
 #include "src/arquivadores/fonte.hpp"
 #include "src/ui/formas/moldura.hpp"
+#include "src/ui/widgets/imagem.hpp"
 #include "src/ui/formas/colisao2d.hpp"
 
 namespace BubbleUI
@@ -42,6 +43,8 @@ namespace BubbleUI
 			std::vector<LetraRect> letras_rect;
 			bool gatilho{ true }, clicado{ false }, mouseEmCima{ false }, escondido{ false }, vquebrarLinha{ true };
 			std::string nome_da_fonte;
+
+			std::unique_ptr<Widgets::Imagem> icon{ nullptr };
 		};
 	}
 }

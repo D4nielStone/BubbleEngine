@@ -75,8 +75,9 @@ void Arvore::atualizar()
     if (arvore_pai)   painel->posicaoWidget.x = arvore_pai->box_pos.x + 5.F;
     //
     // Se houver icone, o-atualiza
-    if(icone)   icone->atualizar();
-    //
+    if (icone) {
+          icone->atualizar();
+    }
     // Atualiza o texto baseado no ponteiro caso seja != nullptr
     if (label_shared)
     {
@@ -123,7 +124,7 @@ void Arvore::atualizar()
     definirPosicao({ static_cast<int>(painel->obterRetangulo().x + painel->widgetPadding.x), static_cast<int>(box_pos.y) });
     definirTamanho({ painel->obterRetangulo().w - painel->widgetPadding.x * 2, static_cast<int>(box_size.y) });
     //
-    //
+    if (icone) icone->definirTamanho({ static_cast<int>(box_size.y),static_cast<int>(box_size.y) });
     if (inputs->mouseEnter == GLFW_RELEASE)gatilho_click = true; //<< Reseta gatilho de click
     
     // Se a cor da árvore do pai estiver no valor padrão, define uma cor mais clara

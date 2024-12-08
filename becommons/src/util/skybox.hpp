@@ -10,7 +10,7 @@ namespace Bubble
 		class BECOMMONS_DLL_API Skybox
 		{
 		private:
-			Vertex malha;
+			Malha malha;
 			const char* Path = nullptr;
 		public:
 			Bubble::Arquivadores::Shader shader = Bubble::Arquivadores::Shader("assets/shaders/skybox.vert", "assets/shaders/skybox.frag");

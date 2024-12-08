@@ -20,6 +20,7 @@ namespace Bubble
             std::unordered_map<size_t, std::pair<std::vector<std::shared_ptr<Entidades::Entidade>>, Material*>> entidadesParaRenderizar;
         public:
             PipeLine() = default;
+            void adicionarAoMapa(std::shared_ptr<Entidades::Entidade> entidade, Bubble::Comum::Componente* componente, const std::string& tipo);
             void adicionarEntidade(std::shared_ptr<Entidades::Entidade> ent);
             void removerEntidade(std::shared_ptr<Entidades::Entidade> ent);
             void renderizar(Componentes::Camera* cam);

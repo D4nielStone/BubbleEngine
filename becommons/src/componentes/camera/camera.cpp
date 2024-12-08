@@ -14,14 +14,14 @@ Camera::Camera() : FOV(75.F), aspecto(1.333f), zNear(0.1f), zFar(300)
     Nome = "Camera";
 
     variaveis.push_back(std::pair(&NomeCam, "Nome da camera"));
+    variaveis.push_back(std::pair(&corSolida, "Renderizar como cor solida"));
     variaveis.push_back(std::pair(&ceu, "Cor do ceu"));
-    variaveis.push_back(std::pair(&corSolida, "Renderizar skybox"));
 }
-Camera::~Camera() {}
+Camera::~Camera() = default;
 
 void Camera::configurar() {
-    skybox = (std::make_unique<Util::Skybox>());
-    skybox->configurarBuffers();
+    //skybox = (std::make_unique<Util::Skybox>());
+    //skybox->configurarBuffers();
     // Framebuffer configuration
     glGenFramebuffers(1, &FBO);
     glBindFramebuffer(GL_FRAMEBUFFER, FBO);
@@ -90,13 +90,13 @@ void Camera::desenharFrame(const Vector4<int> &viewportRect) const
 
 void Camera::renderizar()
 { 
-    if (!corSolida)
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
+    if (!corSolida && skybox)
     {
         skybox->renderizar(obterProjMatrixMat(), obterViewMatrixMat());
         return;
     }
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
 }
 void Camera::atualizar() {
     matrizProjecao = glm::perspective(

@@ -31,6 +31,7 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
     {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
+std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
 
 ImageLoader::ImageLoader()
 {
@@ -220,6 +221,41 @@ unsigned char* ImageLoader::obterDados() const
     return data;
 }
 
+unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory,GLuint tipo_textura) {
+    // Gera um ID de textura e carrega a imagem
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+
+    int width, height, nrComponents;
+    ImageLoader img(directory.c_str());
+    auto data = img.obterDados();
+    nrComponents = img.getChannels();
+    width = img.getWidth();
+    height = img.getHeight(); 
+    if (data) {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
+
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(tipo_textura, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glActiveTexture(GL_TEXTURE0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    }
+    else {
+        std::cerr << "Failed to load texture: " << directory << std::endl;
+    }
+
+    return textureID;
+}
 unsigned int Bubble::Arquivadores::TextureFromFile(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
@@ -307,6 +343,51 @@ GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& c
     texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
 
     return id;
+}
+GLuint Bubble::Arquivadores::TextureLoader::carregarTextura(const std::string& caminho, GLuint tipo_textura)
+{
+    // Verificar se a textura já foi carregada
+    if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
+        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+    }
+
+    // Carregar nova textura
+    GLuint id = Bubble::Arquivadores::TextureFromFile(caminho.c_str(), tipo_textura);
+    texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
+
+    return id;
+}
+
+GLuint Bubble::Arquivadores::TextureLoader::carregarSkybox(const char* path_pai, std::vector<std::string> faces) {
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++) {
+        std::string caminhoCompleto = std::string(path_pai) + "/" + faces[i];
+        ImageLoader img(caminhoCompleto.c_str());
+        unsigned char* data = img.obterDados();
+        width = img.getWidth();
+        height = img.getHeight();
+        nrChannels = img.getChannels();
+
+        if (img.carregado) {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+                0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+        }
+        else {
+            std::cerr << "Falha ao carregar a textura do Skybox: " << caminhoCompleto << std::endl;
+        }
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
 }
 
 GLuint Bubble::Arquivadores::TextureLoader::carregarAiTexture(const aiTexture* texture)

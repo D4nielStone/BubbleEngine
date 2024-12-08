@@ -6,6 +6,9 @@
 #include <GLFW/glfw3.h>
 #include <src/componentes/prototipo/terreno.hpp>
 #include <queue>
+#include <filesystem>
+#include <rapidjson/writer.h>
+#include "src/nucleo/engine.hpp"
 #include <mutex>
 
 using namespace Bubble::Cena;
@@ -48,13 +51,77 @@ std::shared_ptr<Scene> SceneManager::criarCenaPadrao(std::string Nome)
 
     return scene;
 }
+
+void SceneManager::salvarCenas()
+{
+    // Salvar arquivos de cenas individuais
+    for (const auto& cena : obterCenas()) {
+        rapidjson::Document doc;
+        cena->serializar(&doc);
+
+        rapidjson::StringBuffer b;
+        rapidjson::Writer<rapidjson::StringBuffer> w(b);
+        doc.Accept(w);
+
+        std::ofstream arquivo_cena(Engine::getInstance()->diretorio_projeto + "\\Cenas\\" + cena->nome() + ".bcena");
+        if (!arquivo_cena.is_open()) {
+            Debug::emitir("Engine", "Erro ao criar o arquivo da cena: " + cena->nome());
+            continue;
+        }
+        arquivo_cena << b.GetString();
+        arquivo_cena.close();
+    }
+}
+void SceneManager::carregarCenas(const std::vector<std::string>& cenas)
+{
+    for (const auto& cena : cenas)
+    {
+        rapidjson::Document doc;
+        const std::string dir = Engine::getInstance()->diretorio_projeto + "\\Cenas\\" + cena + ".bcena";
+
+        // Verifica se o arquivo existe e é válido
+        if (!std::filesystem::exists(dir) || !std::filesystem::is_regular_file(dir))
+            continue;
+
+        // Lê o conteúdo do arquivo
+        std::ifstream arquivo(dir);
+        if (!arquivo.is_open())
+        {
+            Debug::emitir(Erro, "Não foi possível abrir o arquivo: " + dir);
+            continue;
+        }
+
+        std::stringstream buffer;
+        buffer << arquivo.rdbuf();
+        arquivo.close();
+
+        // Parseia o conteúdo JSON
+        if (doc.Parse(buffer.str().c_str()).HasParseError())
+        {
+            Debug::emitir(Erro, "Erro ao parsear o arquivo JSON: " + dir);
+            continue;
+        }
+
+        // Cria a cena e tenta parseá-la
+        auto cena_shared = std::make_shared<Scene>(cena);
+        if (cena_shared->parse(doc))
+            adicionarCena(cena_shared);
+        else
+            Debug::emitir(Erro, "Parse da cena falhou: " + cena);
+    }
+
+    // Cria uma nova cena padrão se nenhuma foi carregada
+    if (obterCenas().empty())
+        novaCena("Cena", false);
+}
+
 // Deve criar e carregar uma nova cena
 void SceneManager::novaCena(std::string Nome, bool cenaPadrao)
 {
     if (cenaPadrao)
-        adicionarCena(criarCenaPadrao(Nome));
+        adicionarCena(criarCenaPadrao(Nome + " " + std::to_string(numeroDeCenas())));
     else
-        adicionarCena(std::make_shared<Scene>(Nome.c_str()));
+        adicionarCena(std::make_shared<Scene>(Nome + " " + std::to_string(numeroDeCenas())));
 
     carregarCena(static_cast<int>(numeroDeCenas() - 1));
 }
@@ -105,8 +172,6 @@ void SceneManager::renderizarCenaAtual() const
         cenaAtual()->camera_principal->desenharFrame(viewportJogo);
         cenaAtual()->renderizar(Game);
     }
-    //Desligar framebuffer
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 // Deve atualizar cena atual
 void SceneManager::atualizarCenaAtual() const

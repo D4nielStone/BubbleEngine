@@ -17,7 +17,7 @@ namespace Bubble::Util
     {
         return cubemapTexture;
     }
-    Skybox::Skybox() : Path("skybox/") {
+    Skybox::Skybox() : Path("skybox") {
     }
     Skybox::Skybox(const char* path) : Path(path) {}
     void Skybox::configurarBuffers() {
@@ -91,7 +91,8 @@ namespace Bubble::Util
     }
     void Skybox::renderizar(const glm::mat4& projectionMat, const glm::mat4& viewMat)
     {
-
+        glDepthMask(GL_FALSE);
+        glDisable(GL_CULL_FACE);
         glm::mat4 view = glm::mat4(glm::mat3(viewMat));
         shader.use();
         shader.setMat4("view", glm::value_ptr(view));
@@ -100,11 +101,10 @@ namespace Bubble::Util
         shader.setInt("skybox", 0);
         glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(malha.vertices.size()));
         glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+        glDepthMask(GL_TRUE);
     }
     unsigned int Skybox::loadCubemapFromSingleTexture(const char* path)
     {
-        glGenTextures(1, &cubemapTexture);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 
         std::vector<std::string> faces
         {
@@ -114,30 +114,8 @@ namespace Bubble::Util
                "bottom.jpg",
                 "front.jpg",
                  "back.jpg"
-        };
-        for (unsigned int i = 0; i < faces.size(); i++)
-        {
-            auto image = Bubble::Arquivadores::ImageLoader(path + faces[i]);
-            auto data = image.obterDados();
-            int width = image.getWidth();
-            int height = image.getHeight();
-            if (data)
-            {
-                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                    0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data
-                );
-            }
-            else
-            {
-                std::cout << "Cubemap tex failed to load at path: " << faces[i] << std::endl;
-            }
-        }
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+        }; 
 
-        return cubemapTexture;
+        return Bubble::Arquivadores::TextureLoader::getInstance().carregarSkybox(path, faces);
     }
 }

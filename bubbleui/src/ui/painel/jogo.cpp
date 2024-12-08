@@ -27,12 +27,14 @@ void BubbleUI::Paineis::Jogo::preAtualizacao()
     Vector4<int> rect_size = buffer->obtRect();
     scenemanager->defJogoViewport(rect_size);
     widgetPadding = { 0, -1 };
+    buffer->defID(0);
     (scenemanager->cenaAtual() && scenemanager->cenaAtual()->camera_principal) && buffer->defID(scenemanager->cenaAtual()->camera_principal->textureColorbuffer);
+        
 
     if (selecionado) {
-    //    contexto->inputs->setInputMode(Game);
+        contexto->inputs->setInputMode(Game);
     }
-    //else if(contexto->inputs->getInputMode() != Editor) contexto->inputs->setInputMode(Default);
+    else if(contexto->inputs->getInputMode() != Editor) contexto->inputs->setInputMode(Default);
 
     // Detecta toque do ctrl F5 para iniciar janela
     if (contexto->inputs->getInputMode() == Game && contexto->inputs->isKeyPressed(Ctrl) && contexto->inputs->isKeyPressed(F5))

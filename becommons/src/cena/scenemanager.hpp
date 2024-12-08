@@ -17,6 +17,12 @@ namespace Bubble {
         public:
             SceneManager();
             ~SceneManager();
+
+            /**
+             * Carregamento de cenas
+             */
+            void carregarCenas(const std::vector<std::string>& cenas);
+            void salvarCenas();
             std::vector<std::shared_ptr<Scene>> obterCenas() const;
             void defIputs(std::shared_ptr<Inputs::Inputs>);
             size_t numeroDeCenas() const;
