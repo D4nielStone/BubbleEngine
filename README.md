@@ -17,5 +17,9 @@ pull requests são bem-vindas. Para maiores alterações, por favor abra um prob
 ## Licença
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## ScreenShot
+## ScreenShots
+v0.1
 ![image](https://github.com/user-attachments/assets/9d256fb2-4851-406d-93b0-acae90c34bb4)
+v0.2
+![Captura de tela 2024-12-07 133504](https://github.com/user-attachments/assets/17ff9c49-7e8c-4028-9316-dcd5701cbb65)
+
