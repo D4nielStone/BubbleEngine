@@ -15,7 +15,7 @@ public:
     Malha(std::vector<Vertice> vertices, std::vector<unsigned int> indices, std::vector<Textura> textures);
     void desenhar(Shader& shader);
 private:
-    //  render data
+    //  dados de renderizacao
     unsigned int VAO, VBO, EBO;
 
     void definirBuffers();

@@ -7,6 +7,7 @@
 
 #pragma once
 #include <GLFW/glfw3.h>
+#include "src/util/vetor2.hpp"
 
 struct Janela
 {

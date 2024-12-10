@@ -7,7 +7,6 @@
 #include <string>
 #include <map>
 #include <ft2build.h>
-#include <src/util/utils.hpp>
 #include FT_FREETYPE_H
 
 namespace Bubble
