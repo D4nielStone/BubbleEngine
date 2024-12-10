@@ -26,10 +26,10 @@ Janela::Janela(const char* nome)
     }
 
     // define o ícone da janela
-    auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
-    const GLFWimage icone = icone_.converterParaGlfw();
+    //auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
+    //const GLFWimage icone = icone_.converterParaGlfw();
 
-    if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
+    ///if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
 
     // ativa blend
     glEnable(GL_BLEND);

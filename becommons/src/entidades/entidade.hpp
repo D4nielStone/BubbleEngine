@@ -27,11 +27,37 @@ public:
 	/* Adiciona um componente a uma entidade */
 	template <typename T, typename... Args>
 	void adicionarComponente(const Entidade& ent, Args&&... args);
+
+	/* Verifica se uma entidade possui um componente */
+	template <typename T>
+	bool temComponent(const Entidade& entity);
+
+	/* Itera pelas entidades que possuem determinados componentes */
+	template <typename... Components, typename Func>
+	void paraCadaEntidade(Func func);
 };
+
+/* Definições de templates */
 
 template<typename T, typename ...Args>
 inline void GerenciadorDeEntidades::adicionarComponente(const Entidade& ent, Args && ...args)
 {
 	entidades[ent][std::type_index(typeid(T))] = std::make_shared<T>(std::forward<Args>(args)...);
 	Debug::emitir("GenEnt", "componente adicionado para: " + std::to_string(ent));
+}
+
+template<typename T>
+inline bool GerenciadorDeEntidades::temComponent(const Entidade& entity)
+{
+	return entidades[entity].count(std::type_index(typeid(T))) > 0;
+}
+
+template<typename ...Components, typename Func>
+inline void GerenciadorDeEntidades::paraCadaEntidade(Func func)
+{
+	for (auto& [entity, components] : entidades) {
+		if ((temComponent<Components>(entity) && ...)) {
+			func(entity);
+		}
+	}
 }

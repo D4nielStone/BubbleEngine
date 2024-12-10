@@ -1,14 +1,10 @@
-
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
+#pragma once
+#include <vector>
+#include <utility>
+#include <string>
 
-#ifndef DEBUG_H
-#define DEBUG_H
-#include "becommons.hpp"
-#include "vector"
-#include "utility"
-#include "string"
-
-enum BECOMMONS_DLL_API Tipo
+enum Tipo
 {
     Mensagem,
     Erro,
@@ -17,10 +13,9 @@ enum BECOMMONS_DLL_API Tipo
 namespace Debug
 {
 
-    BECOMMONS_DLL_API void cout(const std::string &msg);
+    void cout(const std::string &msg);
     void emitir(Tipo t, std::string msg);
-    BECOMMONS_DLL_API void emitir(std::string t, std::string msg);
+    void emitir(std::string t, std::string msg);
     
-    BECOMMONS_DLL_API std::vector<std::string> obterMensagems();
+    std::vector<std::string> obterMensagems();
 }
-#endif

@@ -112,7 +112,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;BECOMMONS_EXPORTS;%(PreprocessorDefinitions)BECOMMONS_EXPORTS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -129,7 +129,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)BECORE_EXPORTS;BECOMMONS_EXPORTS;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -141,15 +141,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="os\janela.cpp" />
-    <ClCompile Include="src\arquivadores\fonte.cpp" />
-    <ClCompile Include="src\arquivadores\arquivo3d.cpp" />
-    <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
-    <ClCompile Include="src\inputs\inputs.cpp" />
-    <ClCompile Include="src\util\utils.cpp" />
-    <ClCompile Include="src\util\skybox.cpp" />
+    <ClCompile Include="src\util\malha.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assets\fontes\consolas\Consola.hpp" />
@@ -189,22 +184,22 @@
     <ClInclude Include="assets\shaders_na_memoria.hpp" />
     <ClInclude Include="assets\imagems_na_memoria.hpp" />
     <ClInclude Include="os\janela.hpp" />
-    <ClInclude Include="src\componentes\propriedades.hpp" />
-    <ClInclude Include="src\arquivadores\fonte.hpp" />
-    <ClInclude Include="src\arquivadores\arquivo3d.hpp" />
-    <ClInclude Include="src\arquivadores\imageloader.hpp" />
     <ClInclude Include="src\arquivadores\shader.hpp" />
+    <ClInclude Include="src\componentes\propriedades.hpp" />
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />
-    <ClInclude Include="src\inputs\inputs.hpp" />
-    <ClInclude Include="src\util\utils.hpp" />
-    <ClInclude Include="src\util\skybox.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
+    <ClInclude Include="src\util\cor.hpp" />
+    <ClInclude Include="src\util\luz.hpp" />
+    <ClInclude Include="src\util\malha.hpp" />
+    <ClInclude Include="src\util\material.hpp" />
+    <ClInclude Include="src\util\textura.hpp" />
+    <ClInclude Include="src\util\vertice.hpp" />
+    <ClInclude Include="src\util\vetor2.hpp" />
+    <ClInclude Include="src\util\vetor3.hpp" />
+    <ClInclude Include="src\util\vetor4.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,18 +1,8 @@
-
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
-
+#pragma once
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include "Shader.hpp"
-#include "src/depuracao/debug.hpp"
-#include <src/util/utils.hpp>
 #include <filesystem>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <vector>
-
-using namespace Bubble::Arquivadores;
 
 ShaderException::ShaderException(const char* msg) : msg_(msg) {}
 
@@ -114,7 +104,6 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
 
 void Shader::use() {
     glUseProgram(ID);
-    shader_atual = this;
 }
 
 void Shader::setBool(const std::string& name, const bool& value) const {
@@ -137,7 +126,7 @@ void Shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void Shader::setCor(const std::string& name, const Color& cor) const {
+void Shader::setCor(const std::string& name, const Cor& cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
