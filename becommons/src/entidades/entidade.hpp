@@ -35,6 +35,13 @@ public:
 	/* Itera pelas entidades que possuem determinados componentes */
 	template <typename... Components, typename Func>
 	void paraCadaEntidade(Func func);
+
+	void atualizarRenderizadores(GerenciadorDeEntidades& gc);
+
+
+	// Obtém um componente de uma entidade
+	template <typename T>
+	std::shared_ptr<T> obterComponete(Entidade entity);
 };
 
 /* Definições de templates */
@@ -52,12 +59,21 @@ inline bool GerenciadorDeEntidades::temComponent(const Entidade& entity)
 	return entidades[entity].count(std::type_index(typeid(T))) > 0;
 }
 
-template<typename ...Components, typename Func>
+template<typename ...Componentes, typename Func>
 inline void GerenciadorDeEntidades::paraCadaEntidade(Func func)
 {
 	for (auto& [entity, components] : entidades) {
-		if ((temComponent<Components>(entity) && ...)) {
+		if ((temComponent<Componentes>(entity) && ...)) {
 			func(entity);
 		}
+	}
+}
+
+template<typename T>
+inline std::shared_ptr<T> GerenciadorDeEntidades::obterComponete(Entidade entity)
+{
+	auto it = entidades[entity].find(std::type_index(typeid(T)));
+	if (it != entidades[entity].end()) {
+		return std::static_pointer_cast<T>(it->second);
 	}
 }

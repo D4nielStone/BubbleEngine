@@ -140,6 +140,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\arquivadores\fonte.cpp" />
+    <ClCompile Include="src\arquivadores\imageloader.cpp" />
+    <ClCompile Include="src\arquivadores\modelo.cpp" />
     <ClCompile Include="os\janela.cpp" />
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
@@ -183,11 +186,15 @@
     <ClInclude Include="assets\shaders\texto_vert.hpp" />
     <ClInclude Include="assets\shaders_na_memoria.hpp" />
     <ClInclude Include="assets\imagems_na_memoria.hpp" />
+    <ClInclude Include="src\arquivadores\fonte.hpp" />
+    <ClInclude Include="src\arquivadores\imageloader.hpp" />
+    <ClInclude Include="src\arquivadores\modelo.hpp" />
     <ClInclude Include="os\janela.hpp" />
     <ClInclude Include="src\arquivadores\shader.hpp" />
     <ClInclude Include="src\componentes\propriedades.hpp" />
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
+    <ClInclude Include="src\componentes\renderizador.hpp" />
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />

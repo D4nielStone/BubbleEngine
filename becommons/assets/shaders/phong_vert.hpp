@@ -7,7 +7,7 @@ layout (location = 2) in vec2 aUV;
 
 out vec3 Normal;
 out vec3 Position;
-out vec2 UV;
+out vec2 Uv;
 
 uniform mat4 model;
 uniform mat4 view;
@@ -15,9 +15,9 @@ uniform mat4 projection;
 
 void main()
 {
-    UV = aUV;
+    Uv = aUV;
     Normal = mat3(transpose(inverse(model))) * aNormal;
     Position = aPos;
-    gl_Position = projection * view * model * vec4(aPos, 1.f);
+    gl_Position = vec4(aPos, 1.f);
 } 
 )";

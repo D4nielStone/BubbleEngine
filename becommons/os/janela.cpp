@@ -3,6 +3,14 @@
 #include "src/depuracao/debug.hpp"
 #include "src/arquivadores/imageloader.hpp"
 
+Vetor2<GLuint> tamanho;
+
+static void callbackSize(GLFWwindow*, int w, int h)
+{
+    tamanho.x = w;
+    tamanho.y = h;
+}
+
 Janela::Janela(const char* nome)
 {
     // inicia glfw
@@ -26,19 +34,22 @@ Janela::Janela(const char* nome)
     }
 
     // define o ícone da janela
-    //auto icone_ = Bubble::Arquivadores::ImageLoader("icon.ico");
-    //const GLFWimage icone = icone_.converterParaGlfw();
+    auto icone_ = ImageLoader("icon.ico");
+    const GLFWimage icone = icone_.converterParaGlfw();
 
-    ///if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
+    if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
 
     // ativa blend
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glfwSetWindowSizeCallback(window, callbackSize);
 }
 
 void Janela::atualizar() const
 {
     glfwPollEvents();
+    glViewport(0,0, tamanho.x, tamanho.y);
 }
 
 void Janela::desenhar() const
