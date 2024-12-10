@@ -75,7 +75,7 @@ void Inspetor::recarregar()
 
 void Inspetor::preAtualizacao()
 {
-    if (!scenemanager) return;
+    /*if (!scenemanager) return;
     // Recarrega no momento certo
     if (scenemanager->cenaAtual() && entidade_selecionada != scenemanager->cenaAtual()->entidade_selecionada)
     {
@@ -94,7 +94,7 @@ void Inspetor::preAtualizacao()
     // Adiciona camera
     if (msgAdiCam) {
         BubbleUI::tarefa([this]() {
-            auto componente = std::make_shared<Bubble::Componentes::Camera>();
+            /*auto componente = std::make_shared<Bubble::Componentes::Camera>();
             (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
             msgAdiCam = false; recarregar();
             });
@@ -121,7 +121,7 @@ void Inspetor::preAtualizacao()
             (entidade_selecionada != nullptr) && entidade_selecionada->adicionarComponente(componente);
             msgAdiTerr = false; recarregar();
             });
-    }
+    }*/
 }
 
 void Inspetor::posRenderizacao() const

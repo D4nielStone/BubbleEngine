@@ -11,7 +11,7 @@
 #include "src/arquivadores/shader.hpp"
 #include <any>
 #include <type_traits>
-namespace Bubble { namespace Componentes { class Camera; } }
+//namespace Bubble { namespace Componentes { class Camera; } }
 // Definição da estrutura Vector4
 template<class T>
 struct Vector4
@@ -379,7 +379,7 @@ struct Node
 {
     std::vector<Node> filhos;
     std::vector<Malha> malhas;
-    std::shared_ptr<Bubble::Componentes::Camera> camera;
+    /*std::shared_ptr<Bubble::Componentes::Camera> camera;*/
     std::vector<Luz> luzes;
     std::string nome = "node sem nome";
     int metrica{ 1 }; ///< medida de escala, 1 metro = 100 centimetros

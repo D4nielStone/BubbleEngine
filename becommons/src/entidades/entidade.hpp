@@ -1,47 +1,37 @@
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
+
+/**
+ * @file entidade.hpp
+ * @brief Inclusoes e definições relacionadas à entidade
+ */
+
 #pragma once
-#include "becommons.hpp"
-#include "src/comum/componente.hpp"
-#include "src/arquivadores/arquivo3d.hpp"
-#include "src/componentes/transformacao/transformacao.hpp"
-#include "src/componentes/renderizador/renderizador.hpp"
-#include "src/componentes/codigo/codigo.hpp"
-#include "src/componentes/camera/camera.hpp"
+#include <typeindex>
+#include <unordered_map>
 #include <memory>
-#include <vector>
-#include <stdexcept>
-#include "rapidjson/document.h"
-#include <future>
-namespace Bubble {
-	namespace Entidades {
-		class BECOMMONS_DLL_API Entidade : public std::enable_shared_from_this<Entidade> {
-		public:
-			Entidade(const Arquivadores::Arquivo3d& arquivo_objeto);
-			Entidade(const char* name);
-			Entidade();
-			~Entidade();
-			void atualizar() const;
-			void renderizar();
-			std::string nome() const;
-			void liberar();
-			std::shared_ptr<std::string> nomeptr();
-			void removerFilho(std::shared_ptr<Entidade> ent);
-			void carregarNode(const Node& node);
-			std::shared_ptr<Comum::Componente> obterComponente(const std::string& nome);
-			std::vector<std::shared_ptr<Bubble::Comum::Componente>> obterComponentes(const std::string& nome) const;
-			const std::vector<std::shared_ptr<Entidade>>& obterFilhos() const;
-			std::shared_ptr<Componentes::Transformacao> obterTransformacao() const;
-			const std::vector<std::shared_ptr<Comum::Componente>>& listaDeComponentes() const;
-			bool adicionarComponente(std::shared_ptr<Comum::Componente> componente);
-			rapidjson::Value serializar(rapidjson::Document* a);
-			bool parse(rapidjson::Value& v);
-			bool ativado{true}, selecionada{false}, ativado_root{true};
-			Entidade* pai{ nullptr };
-		private:
-			// Fila de tarefas para o segundo plano
-			std::shared_ptr<Componentes::Transformacao> transformacao;
-			std::vector<std::shared_ptr<Comum::Componente>> Componentes;
-			std::vector<std::shared_ptr<Entidade>> filhos;
-			std::shared_ptr<std::string> Nome = std::make_shared<std::string>("SemNome");
-		};
-	}
+#include "src/componentes/componente.hpp"
+#include "src/depuracao/debug.hpp"
+
+/* Definição de Entidade */
+using Entidade = std::size_t;
+
+/* Gerenciador ECS */
+class GerenciadorDeEntidades
+{
+private:
+	Entidade proxima_entidade{ 0 };
+	std::unordered_map<Entidade, std::unordered_map<std::type_index, std::shared_ptr<Componente>>> entidades;
+public:
+	/* Cria nova entidade */
+	Entidade criarEntidade();
+	/* Adiciona um componente a uma entidade */
+	template <typename T, typename... Args>
+	void adicionarComponente(const Entidade& ent, Args&&... args);
+};
+
+template<typename T, typename ...Args>
+inline void GerenciadorDeEntidades::adicionarComponente(const Entidade& ent, Args && ...args)
+{
+	entidades[ent][std::type_index(typeid(T))] = std::make_shared<T>(std::forward<Args>(args)...);
+	Debug::emitir("GenEnt", "componente adicionado para: " + std::to_string(ent));
 }

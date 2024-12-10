@@ -8,7 +8,6 @@
 #include "src/arquivadores/arquivo3d.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/glm.hpp"
-#include "src/cena/scenemanager.hpp"
 
 namespace Bubble::Util
 {

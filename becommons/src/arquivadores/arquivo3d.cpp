@@ -113,9 +113,9 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
     node_final.nome = ai_node->mName.C_Str();
     
     // Compara o nome da câmera com o nome do nó
-    if (node_final.nome == "Camera") {
+   /* if (node_final.nome == "Camera") {
     node_final.camera = std::make_shared<Componentes::Camera>();
-    }
+    }*/
 
     // Extrair a matriz de transformação do aiNode
     aiMatrix4x4 aiTransform = ai_node->mTransformation;
@@ -174,7 +174,7 @@ Node Arquivo3d::processarNos(aiNode* ai_node, unsigned int depth) {
 
     return node_final;
 }
-
+/*
 std::shared_ptr<Bubble::Componentes::Camera> Bubble::Arquivadores::Arquivo3d::temCamera(aiNode* node)
 {
     std::shared_ptr<Bubble::Componentes::Camera> c = std::make_shared<Componentes::Camera>();
@@ -187,7 +187,7 @@ std::shared_ptr<Bubble::Componentes::Camera> Bubble::Arquivadores::Arquivo3d::te
         }
 
     return nullptr;
-}
+}*/
 
 Material Arquivo3d::processarMateriais(aiMaterial* material) {
     Material mat;
