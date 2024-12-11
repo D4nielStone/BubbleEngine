@@ -147,6 +147,7 @@
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
+    <ClCompile Include="src\nucleo\sistema_de_renderizacao.cpp" />
     <ClCompile Include="src\util\malha.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +192,7 @@
     <ClInclude Include="src\arquivadores\modelo.hpp" />
     <ClInclude Include="os\janela.hpp" />
     <ClInclude Include="src\arquivadores\shader.hpp" />
+    <ClInclude Include="src\componentes\camera.hpp" />
     <ClInclude Include="src\componentes\propriedades.hpp" />
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
@@ -198,6 +200,8 @@
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />
+    <ClInclude Include="src\nucleo\sistema.hpp" />
+    <ClInclude Include="src\nucleo\sistema_de_renderizacao.hpp" />
     <ClInclude Include="src\util\cor.hpp" />
     <ClInclude Include="src\util\luz.hpp" />
     <ClInclude Include="src\util\malha.hpp" />

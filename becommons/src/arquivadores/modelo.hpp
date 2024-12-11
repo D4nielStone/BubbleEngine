@@ -21,5 +21,5 @@ private:
     void processarNo(aiNode* node, const aiScene* scene);
     Malha processarMalha(aiMesh* mesh, const aiScene* scene);
     std::vector<Textura> carregarMaterialETexturas(aiMaterial* mat, aiTextureType type,
-        std::string typeName);
+        std::string typeName) const;
 };

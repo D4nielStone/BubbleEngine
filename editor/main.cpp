@@ -6,6 +6,7 @@ constexpr const char* title = "Bubble Engine - Editor - (C) 2024 Daniel Oliveira
 #include "src/entidades/entidade.hpp"
 #include "src/componentes/propriedades.hpp"
 #include "src/componentes/renderizador.hpp"
+#include "src/componentes/camera.hpp"
 
 int main()
 {
@@ -13,23 +14,18 @@ int main()
 	GerenciadorDeEntidades ge;
 
 	Entidade cubo = ge.criarEntidade();
-	ge.adicionarComponente<Propriedades>(cubo, "Cubo");
 	Entidade player = ge.criarEntidade();
+
+	ge.adicionarComponente<Propriedades>(cubo, "Cubo");
 	ge.adicionarComponente<Propriedades>(player, "Player");
 
-	auto mdl = new Modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
 
-	ge.adicionarComponente<Renderizador>(player, mdl);
+	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -5.F));
+	ge.adicionarComponente<Renderizador>(cubo, new Modelo(R"(C:\Users\DN\3D Objects\fence-barricade-03\source\Fence-Barricade_03.blend)"));
 
-	/// Loop principal
-	while (!glfwWindowShouldClose(janela.window))
-	{
-		janela.atualizar();
+	janela.adicionarSistema<SistemaDeRenderizacao>(&ge);
 
-		ge.atualizarRenderizadores(ge);
-
-		janela.desenhar();
-	}
+	janela.iniciarLoop();
 
 	return 0;
 }

@@ -36,9 +36,6 @@ public:
 	template <typename... Components, typename Func>
 	void paraCadaEntidade(Func func);
 
-	void atualizarRenderizadores(GerenciadorDeEntidades& gc);
-
-
 	// Obtém um componente de uma entidade
 	template <typename T>
 	std::shared_ptr<T> obterComponete(Entidade entity);
@@ -76,4 +73,5 @@ inline std::shared_ptr<T> GerenciadorDeEntidades::obterComponete(Entidade entity
 	if (it != entidades[entity].end()) {
 		return std::static_pointer_cast<T>(it->second);
 	}
+	return nullptr;
 }

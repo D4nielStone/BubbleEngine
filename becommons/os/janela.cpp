@@ -3,7 +3,7 @@
 #include "src/depuracao/debug.hpp"
 #include "src/arquivadores/imageloader.hpp"
 
-Vetor2<GLuint> tamanho;
+Vetor2<int> tamanho;
 
 static void callbackSize(GLFWwindow*, int w, int h)
 {
@@ -44,17 +44,28 @@ Janela::Janela(const char* nome)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);
+    glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
 }
 
-void Janela::atualizar() const
-{
-    glfwPollEvents();
-    glViewport(0,0, tamanho.x, tamanho.y);
-    glClearColor(0.1, 0.1, 0.1, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
+double elapsedTime{ 0 };
 
-void Janela::desenhar() const
+void Janela::iniciarLoop() const
 {
-    glfwSwapBuffers(window);
+    /// Loop principal
+    while (!glfwWindowShouldClose(window))
+    {
+        glViewport(0, 0, tamanho.x, tamanho.y);
+        double deltaTime = glfwGetTime() - elapsedTime;
+        glfwPollEvents();
+
+        for (auto& [tipo, sistema] : sistemas) {
+            if (tipo == std::type_index(typeid(SistemaDeRenderizacao))) {
+                sistema->atualizar(deltaTime);
+            }
+        }
+
+        elapsedTime = glfwGetTime();
+
+        glfwSwapBuffers(window);
+    }
 }

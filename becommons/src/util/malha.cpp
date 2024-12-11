@@ -1,11 +1,11 @@
 #include <glad/glad.h>
 #include "malha.hpp"
 
-Malha::Malha(std::vector<Vertice> vertices, std::vector<unsigned int> indices, std::vector<Textura> textures)
+Malha::Malha(std::vector<Vertice> vertices, std::vector<unsigned int> indices, Material& material)
 {
     this->vertices = vertices;
     this->indices = indices;
-    this->texturas = textures;
+    this->material = material;
 
     definirBuffers();
 }
@@ -14,19 +14,21 @@ void Malha::desenhar(Shader& shader)
 {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
-    for (unsigned int i = 0; i < texturas.size(); i++)
+
+    shader.setCor("material.cor_difusa", material.difusa);
+    for (unsigned int i = 0; i < material.texturas.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
         // retrieve texture number (the N in diffuse_textureN)
         std::string number;
-        std::string name = texturas[i].tipo;
+        std::string name = material.texturas[i].tipo;
         if (name == "texture_diffuse")
             number = std::to_string(diffuseNr++);
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
 
         shader.setInt(("material_" + name + number).c_str(), i);
-        glBindTexture(GL_TEXTURE_2D, texturas[i].id);
+        glBindTexture(GL_TEXTURE_2D, material.texturas[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
 

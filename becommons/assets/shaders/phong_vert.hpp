@@ -18,6 +18,6 @@ void main()
     Uv = aUV;
     Normal = mat3(transpose(inverse(model))) * aNormal;
     Position = aPos;
-    gl_Position = vec4(aPos, 1.f);
+    gl_Position = projection * view * vec4(aPos, 1.f);
 } 
 )";

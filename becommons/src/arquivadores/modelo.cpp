@@ -109,10 +109,22 @@ Malha Modelo::processarMalha(aiMesh* mesh, const aiScene* scene)
     std::vector<Textura> heightMaps = carregarMaterialETexturas(material, aiTextureType_AMBIENT, "texture_height");
     texturas.insert(texturas.end(), heightMaps.begin(), heightMaps.end());
 
-    return Malha(vertices, indices, texturas);
+    /// extrai cor difusa
+    aiColor4D diffuse_color;
+    Cor difusa;
+    if (AI_SUCCESS == material->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse_color))
+    {
+         difusa.r = diffuse_color.r;
+         difusa.g = diffuse_color.g;
+         difusa.b = diffuse_color.b;
+         difusa.a = diffuse_color.a;
+    }
+    Material mat(texturas, difusa);
+
+    return Malha(vertices, indices, mat);
 }
 
-std::vector<Textura> Modelo::carregarMaterialETexturas(aiMaterial* mat, aiTextureType type, std::string typeName)
+std::vector<Textura> Modelo::carregarMaterialETexturas(aiMaterial* mat, aiTextureType type, std::string typeName) const
 {
     std::vector<Textura> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
