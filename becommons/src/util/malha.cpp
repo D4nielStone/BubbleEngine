@@ -27,7 +27,7 @@ void Malha::desenhar(Shader& shader)
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
 
-        shader.setInt(("material_" + name + number).c_str(), i);
+        shader.setInt((name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, material.texturas[i].id);
     }
     glActiveTexture(GL_TEXTURE0);

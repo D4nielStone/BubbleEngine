@@ -20,8 +20,8 @@ int main()
 	ge.adicionarComponente<Propriedades>(player, "Player");
 
 
-	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -5.F));
-	ge.adicionarComponente<Renderizador>(cubo, new Modelo(R"(C:\Users\DN\3D Objects\fence-barricade-03\source\Fence-Barricade_03.blend)"));
+	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -10.F),Vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
+	ge.adicionarComponente<Renderizador>(cubo, new Modelo(R"(C:\Users\DN\Downloads\survival_guitar_backpack\scene.gltf)"));
 
 	janela.adicionarSistema<SistemaDeRenderizacao>(&ge);
 

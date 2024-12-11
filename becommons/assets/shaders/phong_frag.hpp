@@ -14,8 +14,16 @@ struct Material
 
 uniform Material material;
 
+uniform sampler2D texture_diffuse1;
+
 void main()
 {              
-    FragColor = material.cor_difusa;
+    // Verifica se a textura existe ou se deve usar a cor base
+    vec4 texColor = texture(texture_diffuse1, Uv);  // Obtém a cor da textura
+    if (texColor.a < 0.1) {  // Verifica se a textura é praticamente transparente
+        FragColor = material.cor_difusa;  // Se a textura não estiver presente, usa a cor base
+    } else {
+        FragColor = texColor;  // Caso contrário, usa a cor da textura
+    }
 }
 )";
