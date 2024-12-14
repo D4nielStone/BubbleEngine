@@ -15,6 +15,7 @@
 
 struct Janela
 {
+	Vetor2<int> tamanho;
 	std::unordered_map<std::type_index, std::shared_ptr<Sistema>> sistemas;
 	GLFWwindow* window;
 	Janela(const char* nome);

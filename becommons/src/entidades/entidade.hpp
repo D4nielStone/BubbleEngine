@@ -13,20 +13,40 @@
 #include "src/depuracao/debug.hpp"
 
 /* Definição de Entidade */
-using Entidade = std::size_t;
+#include <functional>
+
+// Exemplo de uma estrutura Entidade
+struct Entidade {
+	uint32_t id;
+	MascaraComponente mascara = COMPONENTE_NONE;
+
+	bool operator==(const Entidade& other) const {
+		return id == other.id;
+	}
+};
+
+// Implementação de std::hash para Entidade
+namespace std {
+	template <>
+	struct hash<Entidade> {
+		std::size_t operator()(const Entidade& entidade) const {
+			return std::hash<uint32_t>()(entidade.id);
+		}
+	};
+}
 
 /* Gerenciador ECS */
 class GerenciadorDeEntidades
 {
 private:
-	Entidade proxima_entidade{ 0 };
-	std::unordered_map<Entidade, std::unordered_map<std::type_index, std::shared_ptr<Componente>>> entidades;
+	uint32_t proxima_entidade{ 0 };
+	std::unordered_map<Entidade, std::unordered_map<MascaraComponente, std::shared_ptr<Componente>>> entidades;
 public:
 	/* Cria nova entidade */
 	Entidade criarEntidade();
 	/* Adiciona um componente a uma entidade */
 	template <typename T, typename... Args>
-	void adicionarComponente(const Entidade& ent, Args&&... args);
+	void adicionarComponente(Entidade& ent, Args&&... args);
 
 	/* Verifica se uma entidade possui um componente */
 	template <typename T>
@@ -44,16 +64,17 @@ public:
 /* Definições de templates */
 
 template<typename T, typename ...Args>
-inline void GerenciadorDeEntidades::adicionarComponente(const Entidade& ent, Args && ...args)
+inline void GerenciadorDeEntidades::adicionarComponente(Entidade& ent, Args && ...args)
 {
-	entidades[ent][std::type_index(typeid(T))] = std::make_shared<T>(std::forward<Args>(args)...);
-	Debug::emitir("GenEnt", "componente adicionado para: " + std::to_string(ent));
+	ent.mascara |= T::mascara;
+	entidades[ent][ent.mascara] = std::make_shared<T>(std::forward<Args>(args)...);
+	Debug::emitir("GenEnt", "componente adicionado para: " + std::to_string(ent.id)+" Componente " + std::to_string(ent.mascara));
 }
 
 template<typename T>
 inline bool GerenciadorDeEntidades::temComponent(const Entidade& entity)
 {
-	return entidades[entity].count(std::type_index(typeid(T))) > 0;
+	return (entity.mascara & T::mascara) != 0;
 }
 
 template<typename ...Componentes, typename Func>
@@ -69,7 +90,7 @@ inline void GerenciadorDeEntidades::paraCadaEntidade(Func func)
 template<typename T>
 inline std::shared_ptr<T> GerenciadorDeEntidades::obterComponete(Entidade entity)
 {
-	auto it = entidades[entity].find(std::type_index(typeid(T)));
+	auto it = entidades[entity].find(T::mascara);
 	if (it != entidades[entity].end()) {
 		return std::static_pointer_cast<T>(it->second);
 	}

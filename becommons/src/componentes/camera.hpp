@@ -13,10 +13,11 @@ struct Camera : Componente
 	float aspecto;
 	float corte_curto;
 	float corte_longo;
+	static constexpr MascaraComponente mascara = COMPONENTE_CAM;
 
 	Camera(const Vetor3<float>& pos, const Vetor3<float>& target = {0.f, 0.f, 0.f}, float fov = 45.f, float aspect = 1.f, float near = 0.1f, float far = 100.f)
 		: posicao({ pos.x,pos.y,pos.z }), alvo({ target.x,target.y,target.z }),
-		cima(0.0f, 1.0f, 0.0f), fov(fov), aspecto(aspect), corte_curto(near), corte_longo(far) 
+		cima(0.0f, 1.0f, 0.0f), fov(fov), aspecto(aspect), corte_curto(near), corte_longo(far)
 	{
 	}
 	glm::mat4 obtViewMatrix() const {

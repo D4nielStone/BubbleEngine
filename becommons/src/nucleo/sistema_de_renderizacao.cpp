@@ -9,7 +9,7 @@ Shader* shader_phong{ nullptr };
 
 void SistemaDeRenderizacao::atualizar(double deltaTime)
 {
-    glClearColor(0.1, 0.1, 0.1, 1);
+    glClearColor(0.1F, 0.1F, 0.1F, 1.F);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     ge->paraCadaEntidade<Camera>([&](Entidade ent) {
         auto camera = ge->obterComponete<Camera>(ent);
@@ -23,6 +23,7 @@ void SistemaDeRenderizacao::atualizar(double deltaTime)
             render->modelo->Desenhar(*shader_phong);
             });
         });
+    Debug::emitir("FPS", std::to_string(1/deltaTime));
 }
 
 void SistemaDeRenderizacao::inicializar()

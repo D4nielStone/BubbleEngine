@@ -8,5 +8,5 @@ Entidade GerenciadorDeEntidades::criarEntidade()
 {
     proxima_entidade++;
     Debug::emitir("GenEnt", "nova entidade: " + std::to_string(proxima_entidade ));
-    return proxima_entidade;
+    return { proxima_entidade, COMPONENTE_NONE };
 }

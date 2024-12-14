@@ -16,10 +16,6 @@ int main()
 	Entidade cubo = ge.criarEntidade();
 	Entidade player = ge.criarEntidade();
 
-	ge.adicionarComponente<Propriedades>(cubo, "Cubo");
-	ge.adicionarComponente<Propriedades>(player, "Player");
-
-
 	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -10.F),Vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
 	ge.adicionarComponente<Renderizador>(cubo, new Modelo(R"(C:\Users\DN\Downloads\survival_guitar_backpack\scene.gltf)"));
 

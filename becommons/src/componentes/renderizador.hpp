@@ -6,5 +6,9 @@
 struct Renderizador : Componente
 {
 	Modelo* modelo;
-	explicit Renderizador(Modelo* malha) : modelo(malha){}
+	static constexpr MascaraComponente mascara = COMPONENTE_RENDER;
+
+	explicit Renderizador(Modelo* malha) : modelo(malha)
+	{
+	}
 };

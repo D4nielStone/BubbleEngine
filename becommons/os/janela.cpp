@@ -3,12 +3,11 @@
 #include "src/depuracao/debug.hpp"
 #include "src/arquivadores/imageloader.hpp"
 
-Vetor2<int> tamanho;
-
-static void callbackSize(GLFWwindow*, int w, int h)
+static void callbackSize(GLFWwindow* window, int w, int h)
 {
-    tamanho.x = w;
-    tamanho.y = h;
+    auto janela = static_cast<Janela*>(glfwGetWindowUserPointer(window));
+    janela->tamanho.x = w;
+    janela->tamanho.y = h;
 }
 
 Janela::Janela(const char* nome)
@@ -44,6 +43,7 @@ Janela::Janela(const char* nome)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);
+    glfwSetWindowUserPointer(window, this);
     glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
 }
 
