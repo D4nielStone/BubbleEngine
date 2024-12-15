@@ -9,6 +9,10 @@ static void callbackSize(GLFWwindow* window, int w, int h)
     janela->tamanho.x = w;
     janela->tamanho.y = h;
 }
+void Janela::adicionarTarefa(const uint32_t& id, std::function<void(uint32_t)> funcao)
+{
+    tarefas[id] = funcao;
+}
 
 Janela::Janela(const char* nome)
 {
@@ -57,6 +61,11 @@ void Janela::iniciarLoop() const
         glViewport(0, 0, tamanho.x, tamanho.y);
         double deltaTime = glfwGetTime() - elapsedTime;
         glfwPollEvents();
+
+        for (auto& [entidade, tarefa] : tarefas)
+        {
+            tarefa(entidade);
+        }
 
         for (auto& [tipo, sistema] : sistemas) {
                 sistema->atualizar(deltaTime);

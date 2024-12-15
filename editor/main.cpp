@@ -45,6 +45,12 @@ int main()
 		Entidade cubo = ge.criarEntidade();
 		ge.adicionarComponente<Transformacao>(cubo, Vetor3<float>( x, y, z ), Vetor3<float>(rot_x, rot_y, rot_z),Vetor3( 0.5f, 0.5f, 0.5f ));
 		ge.adicionarComponente<Renderizador>(cubo, modelo);
+		janela.adicionarTarefa(cubo.id, [&](uint32_t id)
+			{
+				auto t = ge.obterComponete<Transformacao>(id);
+				t->rotacao.y++;
+			}
+		);
 	}
 
 	janela.adicionarSistema<SistemaDeRenderizacao>(&ge);
