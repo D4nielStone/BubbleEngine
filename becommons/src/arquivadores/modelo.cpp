@@ -4,6 +4,7 @@
 #include <assimp/postprocess.h>
 #include <src/depuracao/debug.hpp>
 #include "imageloader.hpp"
+#include <filesystem>
 
 std::vector<Textura> texturas_carregadas;
 
@@ -145,7 +146,8 @@ std::vector<Textura> Modelo::carregarMaterialETexturas(aiMaterial* mat, aiTextur
         if (!skip)
         {   // if texture hasn't been loaded already, load it
             Textura texture;
-            texture.id = TextureFromFile(this->diretorio +"\\"+ str.C_Str());
+            auto relativa = std::filesystem::path(str.C_Str()).filename().string();
+            texture.id = TextureFromFile(this->diretorio +"\\"+ relativa);
             texture.tipo = typeName;
             texture.path = str.C_Str();
             textures.push_back(texture);

@@ -59,8 +59,9 @@ void Janela::iniciarLoop() const
     while (!glfwWindowShouldClose(window))
     {
         glViewport(0, 0, tamanho.x, tamanho.y);
-        double deltaTime = glfwGetTime() - elapsedTime;
         glfwPollEvents();
+        double deltaTime = glfwGetTime() - elapsedTime;
+        elapsedTime = glfwGetTime();
 
         for (auto& [entidade, tarefa] : tarefas)
         {
@@ -71,7 +72,6 @@ void Janela::iniciarLoop() const
                 sistema->atualizar(deltaTime);
         }
 
-        elapsedTime = glfwGetTime();
 
         glfwSwapBuffers(window);
     }

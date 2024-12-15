@@ -7,9 +7,15 @@ constexpr const char* title = "Bubble Engine - Editor - (C) 2024 Daniel Oliveira
 #include "src/componentes/renderizador.hpp"
 #include "src/componentes/camera.hpp"
 #include "src/componentes/transformacao.hpp"
+#include <windows.h>
 #include <random>
 
-int main()
+#ifdef DEBUG
+#define INIT main()
+#else
+#define INIT APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
+#endif
+int INIT
 {
 	Janela janela(title);
 	GerenciadorDeEntidades ge;
@@ -18,7 +24,7 @@ int main()
 
 	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -10.F),Vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
 	
-	const int numEnt = 300;
+	const int numEnt = 50;
 
 	auto modelo = new Modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
 
@@ -30,6 +36,13 @@ int main()
 	std::uniform_int_distribution<int> distrib_rot(0, 360); // Distribuição uniforme no intervalo [-100, 100]
 
 
+	janela.adicionarTarefa(player.id, [&](uint32_t id)
+		{
+			auto t = ge.obterComponete<Camera>(id);
+			t->posicao.x = cos(glfwGetTime()) * 10;
+			t->posicao.z = sin(glfwGetTime()) * 10;
+		}
+	);
 
 	for (size_t i = 0; i < numEnt; i++)
 	{
@@ -45,12 +58,6 @@ int main()
 		Entidade cubo = ge.criarEntidade();
 		ge.adicionarComponente<Transformacao>(cubo, Vetor3<float>( x, y, z ), Vetor3<float>(rot_x, rot_y, rot_z),Vetor3( 0.5f, 0.5f, 0.5f ));
 		ge.adicionarComponente<Renderizador>(cubo, modelo);
-		janela.adicionarTarefa(cubo.id, [&](uint32_t id)
-			{
-				auto t = ge.obterComponete<Transformacao>(id);
-				t->rotacao.y++;
-			}
-		);
 	}
 
 	janela.adicionarSistema<SistemaDeRenderizacao>(&ge);

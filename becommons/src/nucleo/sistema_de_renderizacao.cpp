@@ -7,6 +7,7 @@
 #include "glm/gtc/type_ptr.hpp"
 
 Shader* shader_phong{ nullptr };
+double et;
 
 void SistemaDeRenderizacao::atualizar(double deltaTime)
 {
@@ -36,7 +37,12 @@ void SistemaDeRenderizacao::atualizar(double deltaTime)
             render->modelo->Desenhar(*shader_phong);
             });
         });
-    Debug::emitir("FPS", std::to_string(1/deltaTime));
+    et += deltaTime;
+    if (et >= 1)
+    {
+        Debug::emitir("FPS", std::to_string(1 / deltaTime));
+        et = 0;
+    }
 }
 
 void SistemaDeRenderizacao::inicializar()

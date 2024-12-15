@@ -16,7 +16,7 @@ struct Material
 uniform Material material;
 
 uniform sampler2D texture_diffuse1;
-uniform bool textura_diffuse1_bool;
+uniform bool texture_diffuse1_bool;
 
 vec3 lightPos = vec3(0, 0, 0); // Posição da luz pontual
 
@@ -24,7 +24,7 @@ void main()
 {
     // Verifica se a textura existe ou se deve usar a cor base
     vec4 texColor = texture(texture_diffuse1, Uv);  // Obtém a cor da textura
-    vec4 baseColor = (textura_diffuse1_bool) ? texColor : material.cor_difusa;  // Cor final após aplicar a textura ou a cor base
+    vec4 baseColor = (texture_diffuse1_bool) ? texColor : material.cor_difusa;  // Cor final após aplicar a textura ou a cor base
 
     // Normaliza a normal
     vec3 norm = normalize(Normal);
