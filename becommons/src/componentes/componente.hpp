@@ -13,6 +13,7 @@ enum MascaraComponente : uint32_t
 	COMPONENTE_CAM           = 1 << 0,
 	COMPONENTE_RENDER		 = 1 << 1,
 	COMPONENTE_PROPRIEDADES  = 1 << 2,
+	COMPONENTE_TRANSFORMACAO = 1 << 3,
 };
 // Operadores bit a bit para MascaraComponente
 inline MascaraComponente operator|(MascaraComponente lhs, MascaraComponente rhs) {

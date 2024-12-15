@@ -224,5 +224,8 @@
     <ClInclude Include="src\nucleo\sistema_de_renderizacao.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="src\componentes\transformacao.hpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

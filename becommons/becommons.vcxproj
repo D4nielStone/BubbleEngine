@@ -197,6 +197,7 @@
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
     <ClInclude Include="src\componentes\renderizador.hpp" />
+    <ClInclude Include="src\componentes\transformacao.hpp" />
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />

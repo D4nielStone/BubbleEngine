@@ -9,15 +9,15 @@ out vec3 Normal;
 out vec3 Position;
 out vec2 Uv;
 
-uniform mat4 model;
+uniform mat4 modelo;
 uniform mat4 view;
 uniform mat4 projection;
 
 void main()
 {
     Uv = aUV;
-    Normal = mat3(transpose(inverse(model))) * aNormal;
-    Position = aPos;
-    gl_Position = projection * view * vec4(aPos, 1.f);
+    Normal = mat3(transpose(inverse(modelo))) * aNormal;
+    Position = (modelo * vec4(aPos, 1.0)).xyz; 
+    gl_Position = projection * view * modelo * vec4(aPos, 1.f);
 } 
 )";

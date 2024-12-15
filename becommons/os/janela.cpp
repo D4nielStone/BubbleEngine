@@ -59,9 +59,7 @@ void Janela::iniciarLoop() const
         glfwPollEvents();
 
         for (auto& [tipo, sistema] : sistemas) {
-            if (tipo == std::type_index(typeid(SistemaDeRenderizacao))) {
                 sistema->atualizar(deltaTime);
-            }
         }
 
         elapsedTime = glfwGetTime();
