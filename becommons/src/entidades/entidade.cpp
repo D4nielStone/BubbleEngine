@@ -4,9 +4,9 @@
 #include "src/componentes/renderizador.hpp"
 #include "src/arquivadores/shader.hpp"
 
-Entidade GerenciadorDeEntidades::criarEntidade()
+bubble::entidade bubble::registro::criar()
 {
     proxima_entidade++;
-    Debug::emitir("GenEnt", "nova entidade: " + std::to_string(proxima_entidade ));
+    Debug::emitir("registro", "nova entidade: " + std::to_string(proxima_entidade ));
     return { proxima_entidade, COMPONENTE_NONE };
 }

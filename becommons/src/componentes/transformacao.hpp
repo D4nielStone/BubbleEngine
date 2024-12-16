@@ -16,26 +16,29 @@
  *
 */
 
-struct Transformacao : Componente
+namespace bubble
 {
-	glm::vec3 posicao{}, rotacao{}, escala{};
-	glm::mat4 matrizModelo;
-	static constexpr MascaraComponente mascara = COMPONENTE_TRANSFORMACAO;
-
-	Transformacao(Vetor3<float> p,Vetor3<float> r,Vetor3<float> e) : 
-		posicao({ p.x,p.y,p.z }), 
-		rotacao({ r.x,r.y,r.z }),
-		escala({ e.x,e.y,e.z })
+	struct transformacao : componente
 	{
-	}
-	glm::mat4 calcularMatriz() 
-	{ 
-		matrizModelo = glm::translate(glm::mat4(1.f), posicao);
+		glm::vec3 posicao{}, rotacao{}, escala{};
+		glm::mat4 matrizmodelo;
+		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
 
-		matrizModelo *= glm::toMat4(glm::quat(glm::radians(rotacao)));
+		transformacao(const vetor3<float> &p, const vetor3<float> &r, const vetor3<float> &e) :
+			posicao({ p.x,p.y,p.z }),
+			rotacao({ r.x,r.y,r.z }),
+			escala({ e.x,e.y,e.z })
+		{
+		}
+		glm::mat4 calcular()
+		{
+			matrizmodelo = glm::translate(glm::mat4(1.f), posicao);
 
-		glm::scale(matrizModelo, escala);
-		return matrizModelo; 
-	}
-	float* obterMatrizPtr() { return glm::value_ptr(matrizModelo); }
-};
+			matrizmodelo *= glm::toMat4(glm::quat(glm::radians(rotacao)));
+
+			glm::scale(matrizmodelo, escala);
+			return matrizmodelo;
+		}
+		float* obter() { return glm::value_ptr(matrizmodelo); }
+	};
+}

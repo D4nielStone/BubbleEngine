@@ -7,40 +7,48 @@
 #pragma once
 #include <cstdint>
 
-enum MascaraComponente : uint32_t
+namespace bubble
 {
-	COMPONENTE_NONE          = 0,
-	COMPONENTE_CAM           = 1 << 0,
-	COMPONENTE_RENDER		 = 1 << 1,
-	COMPONENTE_PROPRIEDADES  = 1 << 2,
-	COMPONENTE_TRANSFORMACAO = 1 << 3,
-};
-// Operadores bit a bit para MascaraComponente
-inline MascaraComponente operator|(MascaraComponente lhs, MascaraComponente rhs) {
-	using T = std::underlying_type_t<MascaraComponente>;
-	return static_cast<MascaraComponente>(static_cast<T>(lhs) | static_cast<T>(rhs));
-}
+	/**
+	* @enum mascara
+	* @brief facilita a identificacao dos componentes pertencentes a uma entidade
+	*/
+	enum mascara : uint32_t
+	{
+		COMPONENTE_NONE				= 0,
+		COMPONENTE_CAM				= 1 << 0,
+		COMPONENTE_RENDER			= 1 << 1,
+		COMPONENTE_PROPRIEDADES		= 1 << 2,
+		COMPONENTE_TRANSFORMACAO	= 1 << 3,
+	};
+	// Operadores bit a bit para mascara
+	inline mascara operator|(mascara lhs, mascara rhs) {
+		using T = std::underlying_type_t<mascara>;
+		return static_cast<mascara>(static_cast<T>(lhs) | static_cast<T>(rhs));
+	}
+	inline mascara& operator|=(mascara& lhs, mascara rhs) {
+		lhs = lhs | rhs;
+		return lhs;
+	}
+	inline mascara operator&(mascara lhs, mascara rhs) {
+		using T = std::underlying_type_t<mascara>;
+		return static_cast<mascara>(static_cast<T>(lhs) & static_cast<T>(rhs));
+	}
+	inline mascara& operator&=(mascara& lhs, mascara rhs) {
+		lhs = lhs & rhs;
+		return lhs;
+	}
+	inline mascara operator~(mascara mask) {
+		using T = std::underlying_type_t<mascara>;
+		return static_cast<mascara>(~static_cast<T>(mask));
+	}
 
-inline MascaraComponente& operator|=(MascaraComponente& lhs, MascaraComponente rhs) {
-	lhs = lhs | rhs;
-	return lhs;
+	/**
+	* @struct componente
+	* @brief base para as funcionalidades da engine
+	*/
+	struct componente
+	{
+		virtual ~componente() = default;
+	};
 }
-inline MascaraComponente operator&(MascaraComponente lhs, MascaraComponente rhs) {
-	using T = std::underlying_type_t<MascaraComponente>;
-	return static_cast<MascaraComponente>(static_cast<T>(lhs) & static_cast<T>(rhs));
-}
-
-inline MascaraComponente& operator&=(MascaraComponente& lhs, MascaraComponente rhs) {
-	lhs = lhs & rhs;
-	return lhs;
-}
-
-inline MascaraComponente operator~(MascaraComponente mask) {
-	using T = std::underlying_type_t<MascaraComponente>;
-	return static_cast<MascaraComponente>(~static_cast<T>(mask));
-}
-
-struct Componente
-{
-	virtual ~Componente() = default; 
-};

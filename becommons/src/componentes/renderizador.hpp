@@ -3,12 +3,15 @@
 #include "componente.hpp"
 #include "src/arquivadores/modelo.hpp"
 
-struct Renderizador : Componente
+namespace bubble
 {
-	Modelo* modelo;
-	static constexpr MascaraComponente mascara = COMPONENTE_RENDER;
-
-	explicit Renderizador(Modelo* malha) : modelo(malha)
+	struct renderizador : componente
 	{
-	}
-};
+		modelo* modelo;
+		static constexpr mascara mascara = COMPONENTE_RENDER;
+
+		explicit renderizador(bubble::modelo* malha) : modelo(malha)
+		{
+		}
+	};
+}

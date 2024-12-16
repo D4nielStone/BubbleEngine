@@ -20,7 +20,7 @@ namespace bubble
 	 */
 	struct entidade {
 		uint32_t id;
-		MascaraComponente mascara = COMPONENTE_NONE;
+		bubble::mascara mascara = COMPONENTE_NONE;
 
 		bool operator==(const entidade& other) const {
 			return id == other.id;
@@ -38,9 +38,9 @@ namespace bubble
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
-		std::unordered_map<uint32_t, MascaraComponente> mascaras;
+		std::unordered_map<uint32_t, bubble::mascara> mascaras;
 		/// Armazena componentes da entidade associada
-		std::unordered_map<uint32_t, std::unordered_map<MascaraComponente, std::shared_ptr<Componente>>> entidades;
+		std::unordered_map<uint32_t, std::unordered_map<bubble::mascara, std::shared_ptr<bubble::componente>>> entidades;
 	public:
 		/* Cria nova entidade */
 		entidade criar();
@@ -77,11 +77,11 @@ namespace bubble
 		return (mascaras[entity] & T::mascara) != 0;
 	}
 
-	template<typename ...Componentes, typename Func>
+	template<typename ...componentes, typename Func>
 	inline void registro::cada(Func func)
 	{
 		for (auto& [entity, comps] : entidades) {
-			if ((temComponent<Componentes>(entity) && ...)) {
+			if ((tem<componentes>(entity) && ...)) {
 				func(entity);
 			}
 		}
@@ -91,7 +91,7 @@ namespace bubble
 	inline std::shared_ptr<T> registro::obter(const uint32_t& entity)
 	{
 		auto it = entidades[entity].find(T::mascara);
-		return it;
+		return std::static_pointer_cast<T>(it->second);
 	}
 
 }	///< namespace bubble

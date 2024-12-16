@@ -12,31 +12,35 @@
   * @class Sistema
   * @brief Classe base para sistemas do loop principal
   */
-class Sistema {
-public:
-    /**
-     * @brief Construtor virtual da classe Sistema
-     * @param nome Nome do sistema
-     */
-    Sistema(GerenciadorDeEntidades* ge) : ge(ge) {}
-    Sistema() = default;
 
-    /**
-     * @brief Destrutor virtual para garantir a destruição adequada das subclasses
-     */
-    virtual ~Sistema() = default;
+namespace bubble
+{
+    class sistema {
+    public:
+        /**
+         * @brief Construtor virtual da classe Sistema
+         * @param nome Nome do sistema
+         */
+        sistema(bubble::registro* reg) : reg(reg) {}
+        sistema() = default;
 
-    /**
-     * @brief Inicializa o sistema
-     */
-    virtual void inicializar() {};
+        /**
+         * @brief Destrutor virtual para garantir a destruição adequada das subclasses
+         */
+        virtual ~sistema() = default;
 
-    /**
-     * @brief Atualiza o sistema dentro do loop principal
-     * @param deltaTime Tempo desde a última atualização (em segundos)
-     */
-    virtual void atualizar(double deltaTime) {};
+        /**
+         * @brief Inicializa o sistema
+         */
+        virtual void inicializar() = 0;
 
-protected:
-    GerenciadorDeEntidades* ge;
-};
+        /**
+         * @brief Atualiza o sistema dentro do loop principal
+         * @param deltaTime Tempo desde a última atualização (em segundos)
+         */
+        virtual void atualizar(double deltaTime) = 0;
+
+    protected:
+        registro* reg;
+    };
+}

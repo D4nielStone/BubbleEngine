@@ -4,22 +4,25 @@
 #include "src/util/textura.hpp"
 #include <assimp/scene.h>
 
-class Modelo
+namespace bubble
 {
-public:
-    Modelo(const char* path)
+    class modelo
     {
-        carregarModelo(path);
-    }
-    void Desenhar(Shader& shader);
-private:
-    // dados de malha
-    std::vector<Malha> malhas;
-    std::string diretorio;
+    public:
+        modelo(const char* path)
+        {
+            carregarmodelo(path);
+        }
+        void desenhar(bubble::shader& shader);
+    private:
+        // dados de malha
+        std::vector<malha> malhas;
+        std::string diretorio;
 
-    void carregarModelo(const std::string &path);
-    void processarNo(aiNode* node, const aiScene* scene);
-    Malha processarMalha(aiMesh* mesh, const aiScene* scene);
-    std::vector<Textura> carregarMaterialETexturas(aiMaterial* mat, aiTextureType type,
-        std::string typeName) const;
-};
+        void carregarmodelo(const std::string& path);
+        void processarNo(aiNode* node, const aiScene* scene);
+        malha processarMalha(aiMesh* mesh, const aiScene* scene);
+        std::vector<textura> carregarMaterialETexturas(aiMaterial* mat, aiTextureType type,
+            std::string typeName) const;
+    };
+}

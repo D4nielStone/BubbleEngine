@@ -1,3 +1,4 @@
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include <string>
 #include "unordered_map"
@@ -7,46 +8,50 @@
 #include <glad/glad.h>
 
 struct GLFWimage;
-class  ImageLoader
+
+namespace bubble
 {
-public:
-    ImageLoader();
-    ImageLoader(const std::string& filepath);
-    ~ImageLoader();
+    class  imageLoader
+    {
+    public:
+        imageLoader();
+        imageLoader(const std::string& filepath);
+        ~imageLoader();
 
-    static ImageLoader& getInstance();
-    int getWidth() const;
-    int getHeight() const;
-    int getChannels() const;
-    unsigned char* obterDados() const;
-    GLFWimage converterParaGlfw();
-    bool carregado;
-private:
-    void flipVertical();
-    void carregarImagem(const std::string& filepath);
-    void embutida(BYTE* data, const unsigned int tamanho);
-    const char* path;
-    int width, height, channels;
-    unsigned char* data;
-};
-unsigned int TextureFromFile(const std::string& directory, int* width = nullptr, int* height = nullptr);
-unsigned int TextureFromFile(const std::string& directory, GLuint tipo_textura);
-unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int format);
-class  TextureLoader
-{
-public:
-    static TextureLoader& getInstance();
-    GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
-    GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura);
-    GLuint carregarSkybox(const char*, std::vector<std::string> faces);
-    GLuint carregarAiTexture(const aiTexture* texture);
-private:
-    std::unordered_map<std::string, GLuint> texturasCarregadas;
+        static bubble::imageLoader& obterInstancia();
+        int obterLargura() const;
+        int obterAltura() const;
+        int obterCanal() const;
+        unsigned char* obterDados() const;
+        GLFWimage converterParaGlfw();
+        bool carregado;
+    private:
+        void flipVertical();
+        void carregarImagem(const std::string& filepath);
+        void embutida(BYTE* data, const unsigned int tamanho);
+        const char* path;
+        int width, height, channels;
+        unsigned char* data;
+    };
+    unsigned int texturaDoArquivo(const std::string& directory, int* width = nullptr, int* height = nullptr);
+    unsigned int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
+    unsigned int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
+    class  textureLoader
+    {
+    public:
+        static textureLoader& obterInstancia();
+        GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
+        GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura);
+        GLuint carregarSkybox(const char*, std::vector<std::string> faces);
+        GLuint carregarAiTexture(const aiTexture* texture);
+    private:
+        std::unordered_map<std::string, GLuint> texturasCarregadas;
 
-    // Construtor privado para Singleton
-    TextureLoader() {}
+        // Construtor privado para Singleton
+        textureLoader() {}
 
-    // Desabilitar cópia e atribuição
-    TextureLoader(const TextureLoader&) = delete;
-    void operator=(const TextureLoader&) = delete;
-};
+        // Desabilitar cópia e atribuição
+        textureLoader(const textureLoader&) = delete;
+        void operator=(const textureLoader&) = delete;
+    };
+}

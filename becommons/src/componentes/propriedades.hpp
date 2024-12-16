@@ -3,13 +3,16 @@
 #include "componente.hpp"
 #include <string>
 
-struct Propriedades : Componente
+namespace bubble
 {
-	std::string nome;
-	static constexpr MascaraComponente mascara = COMPONENTE_PROPRIEDADES;
-	std::string tag;
-	bool ativo;
-	Propriedades(const std::string& name = "", const std::string& tag = "", bool active = true)
-		: nome(name), tag(tag), ativo(active) {
-	}
-};
+	struct propriedades : componente
+	{
+		
+		std::string nome;
+		std::string tag;
+		bool ativo;
+		static constexpr mascara mascara = COMPONENTE_PROPRIEDADES;
+		propriedades(const std::string& name = "", const std::string& tag = "", bool active = true)
+			: nome(name), tag(tag), ativo(active) {}
+	};
+}

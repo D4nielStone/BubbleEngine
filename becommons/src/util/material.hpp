@@ -4,11 +4,14 @@
 #include "textura.hpp"
 #include <vector>
 
-struct Material
+namespace bubble
 {
-	Material() = default;
-	Material(const std::vector<Textura>& texturas, const Cor& difusa = Cor(1, 1, 1), const Cor& especular = Cor(1.f, 1.f, 1.f)) :difusa(difusa), especular(especular), texturas(texturas){}
-	std::vector<Textura> texturas;
-	Cor difusa;
-	Cor especular;
-};
+	struct material
+	{
+		material() = default;
+		material(const std::vector<textura>& texturas, const bubble::cor& difusa = bubble::cor(1, 1, 1), const bubble::cor& especular = bubble::cor(1.f, 1.f, 1.f)) :difusa(difusa), especular(especular), texturas(texturas) {}
+		std::vector<textura> texturas;
+		bubble::cor difusa;
+		bubble::cor especular;
+	};
+}

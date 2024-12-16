@@ -2,10 +2,13 @@
 #pragma once
 #include "cor.hpp"
 #include "vetor3.hpp"
-struct Luz
+namespace bubble
 {
-    Vetor3<float> posicao;
-    Cor cor_ambiente;
-    Cor cor_difusa;
-    Cor cor_especular;
-};
+    struct luz
+    {
+        vetor3<float> posicao;
+        bubble::cor cor_ambiente;
+        bubble::cor cor_difusa;
+        bubble::cor cor_especular;
+    };
+}

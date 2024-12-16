@@ -1,117 +1,121 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura Vetor3 */
-template<class T>
-struct Vetor3
+/* Definição da estrutura vetor3 */
+
+namespace bubble
 {
-    T x, y, z;
-
-    // Construtor com parâmetros
-    Vetor3(T x, T y, T z) : x(x), y(y), z(z) {}
-
-    // Construtor padrão
-    Vetor3() : x(T{}), y(T{}), z(T{}) {}
-
-    // Operador de soma com outro Vetor3
-    Vetor3 operator+(const Vetor3& other) const
+    template<class T>
+    struct vetor3
     {
-        return Vetor3{ x + other.x, y + other.y, z + other.z };
-    }
+        T x, y, z;
 
-    // Operador de soma com um escalar
-    Vetor3 operator+(const T& scalar) const
-    {
-        return Vetor3{ x + scalar, y + scalar, z + scalar };
-    }
+        // Construtor com parâmetros
+        vetor3(T x, T y, T z) : x(x), y(y), z(z) {}
 
-    // Operador de soma acumulada com outro Vetor3
-    Vetor3& operator+=(const Vetor3& other)
-    {
-        x += other.x;
-        y += other.y;
-        z += other.z;
-        return *this;
-    }
+        // Construtor padrão
+        vetor3() : x(T{}), y(T{}), z(T{}) {}
 
-    // Operador de soma acumulada com um escalar
-    Vetor3& operator+=(const T& scalar)
-    {
-        x += scalar;
-        y += scalar;
-        z += scalar;
-        return *this;
-    }
+        // Operador de soma com outro vetor3
+        vetor3 operator+(const vetor3& other) const
+        {
+            return vetor3{ x + other.x, y + other.y, z + other.z };
+        }
 
-    // Operador de subtração com outro Vetor3
-    Vetor3 operator-(const Vetor3& other) const
-    {
-        return Vetor3{ x - other.x, y - other.y, z - other.z };
-    }
+        // Operador de soma com um escalar
+        vetor3 operator+(const T& scalar) const
+        {
+            return vetor3{ x + scalar, y + scalar, z + scalar };
+        }
 
-    // Operador de subtração com um escalar
-    Vetor3 operator-(const T& scalar) const
-    {
-        return Vetor3{ x - scalar, y - scalar, z - scalar };
-    }
+        // Operador de soma acumulada com outro vetor3
+        vetor3& operator+=(const vetor3& other)
+        {
+            x += other.x;
+            y += other.y;
+            z += other.z;
+            return *this;
+        }
 
-    // Operador de subtração acumulada com outro Vetor3
-    Vetor3& operator-=(const Vetor3& other)
-    {
-        x -= other.x;
-        y -= other.y;
-        z -= other.z;
-        return *this;
-    }
+        // Operador de soma acumulada com um escalar
+        vetor3& operator+=(const T& scalar)
+        {
+            x += scalar;
+            y += scalar;
+            z += scalar;
+            return *this;
+        }
 
-    // Operador de subtração acumulada com um escalar
-    Vetor3& operator-=(const T& scalar)
-    {
-        x -= scalar;
-        y -= scalar;
-        z -= scalar;
-        return *this;
-    }
+        // Operador de subtração com outro vetor3
+        vetor3 operator-(const vetor3& other) const
+        {
+            return vetor3{ x - other.x, y - other.y, z - other.z };
+        }
 
-    // Operador de multiplicação com outro Vetor3
-    Vetor3 operator*(const Vetor3& other) const
-    {
-        return Vetor3{ x * other.x, y * other.y, z * other.z };
-    }
+        // Operador de subtração com um escalar
+        vetor3 operator-(const T& scalar) const
+        {
+            return vetor3{ x - scalar, y - scalar, z - scalar };
+        }
 
-    // Operador de multiplicação com um escalar
-    Vetor3 operator*(const T& scalar) const
-    {
-        return Vetor3{ x * scalar, y * scalar, z * scalar };
-    }
+        // Operador de subtração acumulada com outro vetor3
+        vetor3& operator-=(const vetor3& other)
+        {
+            x -= other.x;
+            y -= other.y;
+            z -= other.z;
+            return *this;
+        }
 
-    // Operador de multiplicação acumulada com outro Vetor3
-    Vetor3& operator*=(const Vetor3& other)
-    {
-        x *= other.x;
-        y *= other.y;
-        z *= other.z;
-        return *this;
-    }
+        // Operador de subtração acumulada com um escalar
+        vetor3& operator-=(const T& scalar)
+        {
+            x -= scalar;
+            y -= scalar;
+            z -= scalar;
+            return *this;
+        }
 
-    // Operador de multiplicação acumulada com um escalar
-    Vetor3& operator*=(const T& scalar)
-    {
-        x *= scalar;
-        y *= scalar;
-        z *= scalar;
-        return *this;
-    }
+        // Operador de multiplicação com outro vetor3
+        vetor3 operator*(const vetor3& other) const
+        {
+            return vetor3{ x * other.x, y * other.y, z * other.z };
+        }
 
-    // Operador de igualdade
-    bool operator==(const Vetor3& other) const
-    {
-        return x == other.x && y == other.y && z == other.z;
-    }
+        // Operador de multiplicação com um escalar
+        vetor3 operator*(const T& scalar) const
+        {
+            return vetor3{ x * scalar, y * scalar, z * scalar };
+        }
 
-    // Operador de diferença
-    bool operator!=(const Vetor3& other) const
-    {
-        return !(*this == other);
-    }
+        // Operador de multiplicação acumulada com outro vetor3
+        vetor3& operator*=(const vetor3& other)
+        {
+            x *= other.x;
+            y *= other.y;
+            z *= other.z;
+            return *this;
+        }
 
-};
+        // Operador de multiplicação acumulada com um escalar
+        vetor3& operator*=(const T& scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            z *= scalar;
+            return *this;
+        }
+
+        // Operador de igualdade
+        bool operator==(const vetor3& other) const
+        {
+            return x == other.x && y == other.y && z == other.z;
+        }
+
+        // Operador de diferença
+        bool operator!=(const vetor3& other) const
+        {
+            return !(*this == other);
+        }
+
+    };
+}

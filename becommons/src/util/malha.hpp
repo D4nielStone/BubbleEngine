@@ -6,18 +6,22 @@
 #include "src/arquivadores/shader.hpp"
 #include "src/util/material.hpp"
 
-class Malha 
+namespace bubble
 {
-public:
-    std::vector<Vertice> vertices;
-    std::vector<unsigned int> indices;
-    Material material;
+    class malha
+    {
+    public:
+        std::vector<vertice> vertices;
+        std::vector<unsigned int> indices;
+        material material;
 
-    Malha(std::vector<Vertice> vertices, std::vector<unsigned int> indices, Material& material);
-    void desenhar(Shader& shader);
-private:
-    //  dados de renderizacao
-    unsigned int VAO, VBO, EBO;
+        malha(std::vector<vertice> vertices, std::vector<unsigned int> indices, bubble::material& material);
+        ~malha();
+        void desenhar(bubble::shader& shader);
+    private:
+        //  dados de renderizacao
+        unsigned int VAO, VBO, EBO;
 
-    void definirBuffers();
-};
+        void definirBuffers();
+    };
+}

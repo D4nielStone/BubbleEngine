@@ -17,16 +17,17 @@ constexpr const char* title = "Bubble Engine - Editor - (C) 2024 Daniel Oliveira
 #endif
 int INIT
 {
-	Janela janela(title);
-	GerenciadorDeEntidades ge;
+	bubble::janela janela(title);
+	bubble::registro reg;
+	bubble::sistemaRenderizacao sr(&reg);
 
-	Entidade player = ge.criarEntidade();
+	bubble::entidade player = reg.criar();
 
-	ge.adicionarComponente<Camera>(player, Vetor3(0.f, 0.f, -10.F),Vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
+	reg.adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, -10.F),bubble::vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
 	
 	const int numEnt = 50;
 
-	auto modelo = new Modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
+	auto modelo = new bubble::modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
 
 
 	// Cria o gerador de números aleatórios
@@ -34,15 +35,6 @@ int INIT
 	std::mt19937 gen(rd()); // Motor Mersenne Twister com seed
 	std::uniform_int_distribution<int> distrib(-30, 30); // Distribuição uniforme no intervalo [-100, 100]
 	std::uniform_int_distribution<int> distrib_rot(0, 360); // Distribuição uniforme no intervalo [-100, 100]
-
-
-	janela.adicionarTarefa(player.id, [&](uint32_t id)
-		{
-			auto t = ge.obterComponete<Camera>(id);
-			t->posicao.x = cos(glfwGetTime()) * 10;
-			t->posicao.z = sin(glfwGetTime()) * 10;
-		}
-	);
 
 	for (size_t i = 0; i < numEnt; i++)
 	{
@@ -55,14 +47,22 @@ int INIT
 		int rot_y = distrib_rot(gen);
 		int rot_z = distrib_rot(gen);
 
-		Entidade cubo = ge.criarEntidade();
-		ge.adicionarComponente<Transformacao>(cubo, Vetor3<float>( x, y, z ), Vetor3<float>(rot_x, rot_y, rot_z),Vetor3( 0.5f, 0.5f, 0.5f ));
-		ge.adicionarComponente<Renderizador>(cubo, modelo);
+		bubble::entidade cubo = reg.criar();
+		reg.adicionar<bubble::transformacao>(cubo, bubble::vetor3<float>( x, y, z ), bubble::vetor3<float>(rot_x, rot_y, rot_z),bubble::vetor3( 0.5f, 0.5f, 0.5f ));
+		reg.adicionar<bubble::renderizador>(cubo, modelo);
 	}
 
-	janela.adicionarSistema<SistemaDeRenderizacao>(&ge);
+	sr.inicializar();
 
-	janela.iniciarLoop();
+	while (!glfwWindowShouldClose(janela.window))
+	{
+		janela.poll();
+		janela.viewport();
+
+		sr.atualizar(0.016666);
+
+		janela.swap();
+	}
 
 	return 0;
 }

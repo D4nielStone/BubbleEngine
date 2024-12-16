@@ -1,20 +1,20 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include <glad/glad.h>
-#include "Shader.hpp"
+#include "shader.hpp"
 #include <filesystem>
 
-ShaderException::ShaderException(const char* msg) : msg_(msg) {}
+bubble::shaderException::shaderException(const char* msg) : msg_(msg) {}
 
-const char* ShaderException::what() const noexcept {
+const char* bubble::shaderException::what() const noexcept {
     return msg_.c_str();
 }
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath) {
+bubble::shader::shader(const char* vertexPath, const char* fragmentPath) {
     compilar(vertexPath, fragmentPath);
 }
 
-void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
+void bubble::shader::compilar(const char* vertexPath, const char* fragmentPath) {
     // Verifica se o shader já foi compilado
     for (const auto& shader : shaders) {
         if (shader.first.first == vertexPath && shader.first.second == fragmentPath) {
@@ -31,27 +31,27 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
         std::cerr << "Erro ao criar shader_program: " << e.what() << std::endl;
     }
 
-    const char* vertexShaderSource{};
-    const char* fragmentShaderSource{};
+    const char* vertexshaderSource{};
+    const char* fragmentshaderSource{};
 
     // Abre e lê os arquivos de shader
     std::string vertexCode;
     std::string fragmentCode;
-    std::ifstream vShaderFile, fShaderFile;
+    std::ifstream vshaderFile, fshaderFile;
 
-    vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-    fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    vshaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    vshaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
     if (!std::filesystem::exists(vertexPath) || !std::filesystem::exists(fragmentPath))
     {
         // Verifica se o shader está na memória
         if (shader_memoria.find(std::filesystem::path(vertexPath).filename().string()) != shader_memoria.end()) {
-            vertexShaderSource = shader_memoria.at(std::filesystem::path(vertexPath).filename().string());
+            vertexshaderSource = shader_memoria.at(std::filesystem::path(vertexPath).filename().string());
         }
         else
             return;
         if (shader_memoria.find(std::filesystem::path(fragmentPath).filename().string()) != shader_memoria.end()) {
-            fragmentShaderSource = shader_memoria.at(std::filesystem::path(fragmentPath).filename().string());
+            fragmentshaderSource = shader_memoria.at(std::filesystem::path(fragmentPath).filename().string());
         }
         else
             return;
@@ -59,86 +59,86 @@ void Shader::compilar(const char* vertexPath, const char* fragmentPath) {
     else
     {
         try {
-            vShaderFile.open(vertexPath);
-            fShaderFile.open(fragmentPath);
-            std::stringstream vShaderStream, fShaderStream;
+            vshaderFile.open(vertexPath);
+            fshaderFile.open(fragmentPath);
+            std::stringstream vshaderStream, fshaderStream;
 
-            vShaderStream << vShaderFile.rdbuf();
-            fShaderStream << fShaderFile.rdbuf();
+            vshaderStream << vshaderFile.rdbuf();
+            fshaderStream << fshaderFile.rdbuf();
 
-            vertexCode = vShaderStream.str();
-            fragmentCode = fShaderStream.str();
-            vertexShaderSource = vertexCode.c_str();
-            fragmentShaderSource = fragmentCode.c_str();
+            vertexCode = vshaderStream.str();
+            fragmentCode = fshaderStream.str();
+            vertexshaderSource = vertexCode.c_str();
+            fragmentshaderSource = fragmentCode.c_str();
         }
         catch (const std::ifstream::failure& e)
         {
             std::cerr << e.what() << "\n";
         }
     }
-    // Compilação do Malha Shader
-    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-    if (!checkCompileErrors(vertexShader, "VERTEX")) return;
+    // Compilação do Malha shader
+    GLuint vertexshader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexshader, 1, &vertexshaderSource, NULL);
+    glCompileShader(vertexshader);
+    if (!checkCompileErrors(vertexshader, "VERTEX")) return;
 
-    // Compilação do Fragment Shader
-    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-    if (!checkCompileErrors(fragmentShader, "FRAGMENT")) return;
+    // Compilação do Fragment shader
+    GLuint fragmentshader = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(fragmentshader, 1, &fragmentshaderSource, NULL);
+    glCompileShader(fragmentshader);
+    if (!checkCompileErrors(fragmentshader, "FRAGMENT")) return;
 
     // Vinculação e linkagem dos shaders
-    glAttachShader(ID, vertexShader);
-    glAttachShader(ID, fragmentShader);
+    glAttachShader(ID, vertexshader);
+    glAttachShader(ID, fragmentshader);
     glLinkProgram(ID);
     if (!checkLinkErrors(ID)) return;
 
     // Limpeza
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    glDeleteShader(vertexshader);
+    glDeleteShader(fragmentshader);
 
     
     shaders.push_back({ {vertexPath, fragmentPath}, ID });
 }
 
-void Shader::use() {
+void bubble::shader::use() const {
     glUseProgram(ID);
 }
 
-void Shader::setBool(const std::string& name, const bool& value) const {
+void bubble::shader::setBool(const std::string& name, const bool& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Shader::setFloat(const std::string& name, const float& value) const {
+void bubble::shader::setFloat(const std::string& name, const float& value) const {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Shader::setInt(const std::string& name, const int& value) const {
+void bubble::shader::setInt(const std::string& name, const int& value) const {
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void Shader::setMat4(const std::string& name, const float* value) const {
+void bubble::shader::setMat4(const std::string& name, const float* value) const {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void Shader::setMat3(const std::string& name, const float* value) const {
+void bubble::shader::setMat3(const std::string& name, const float* value) const {
     glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, value);
 }
 
-void Shader::setCor(const std::string& name, const Cor& cor) const {
+void bubble::shader::setCor(const std::string& name, const bubble::cor& cor) const {
     glUniform4f(glGetUniformLocation(ID, name.c_str()), cor.r, cor.g, cor.b, cor.a);
 }
 
-void Shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
+void bubble::shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
 }
 
-void Shader::setVec2(const std::string& name, const float& r, const float& g) const {
+void bubble::shader::setVec2(const std::string& name, const float& r, const float& g) const {
     glUniform2f(glGetUniformLocation(ID, name.c_str()), r, g);
 }
 
-bool Shader::checkCompileErrors(unsigned int shader, const std::string& type) {
+bool bubble::shader::checkCompileErrors(unsigned int shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];
 
@@ -161,7 +161,7 @@ bool Shader::checkCompileErrors(unsigned int shader, const std::string& type) {
     return true;
 }
 
-bool Shader::checkLinkErrors(unsigned int program) {
+bool bubble::shader::checkLinkErrors(unsigned int program) {
     GLint success;
     GLchar infoLog[1024];
 

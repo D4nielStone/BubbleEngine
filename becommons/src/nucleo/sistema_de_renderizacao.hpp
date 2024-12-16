@@ -8,10 +8,13 @@
 #pragma once
 #include "sistema.hpp"
 
-class SistemaDeRenderizacao : public Sistema
+namespace bubble
 {
-public:
-	explicit SistemaDeRenderizacao(GerenciadorDeEntidades* ge) { this->ge = ge; };
-	void atualizar(double deltaTime) override;
-	void inicializar() override;	
-};
+	class sistemaRenderizacao : public sistema
+	{
+	public:
+		explicit sistemaRenderizacao(registro* reg) { this->reg = reg; };
+		void atualizar(double deltaTime) override;
+		void inicializar() override;
+	};
+}

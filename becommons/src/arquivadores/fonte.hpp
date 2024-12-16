@@ -2,47 +2,48 @@
 
 #pragma once
 #include <glad/glad.h>
-#include "becommons.hpp"
-#include <glm/glm.hpp>
+#include "src/util/vetor2.hpp"
 #include <string>
 #include <map>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-namespace Bubble
+/**
+* @file fonte.hpp
+* @brief defini estruturas basicas para renderizacao de textos
+*/
+
+namespace bubble
 {
-    namespace Arquivadores
+    // Estrutura base da letra
+    struct caractere
     {
-        // Estrutura base da letra
-        struct BECOMMONS_DLL_API Character
-        {
-            unsigned int TextureID;  // ID handle of the glyph texture
-            glm::ivec2   Size;       // Size of glyph
-            glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
-            unsigned int Advance;    // Offset to advance to next glyph
-        };
+        unsigned int id;        // ID da textura
+        vetor2<unsigned int> tamanho;    // tamanho do glifo
+        vetor2<FT_Int>   apoio;    // offset
+        unsigned int avanco;    // Offset para o avanco do proximo glifo
+    };
 
 
-        class BECOMMONS_DLL_API GerenciadorDeFontes
-        {
-        public:
-            static GerenciadorDeFontes& obterInstancia();
+    class gerenciadorFontes
+    {
+    public:
+        static gerenciadorFontes& obterInstancia();
 
-            // Inicializa o FreeType
-            GerenciadorDeFontes();
+        // Inicializa o FreeType
+        gerenciadorFontes();
 
-            // Destrutor
-            ~GerenciadorDeFontes();
+        // Destrutor
+        ~gerenciadorFontes();
 
-            // Carrega uma fonte com a resolução especificada
-            void carregarFonte(const std::string& nome_da_fonte, unsigned int resolucao);
+        // Carrega uma fonte com a resolução especificada
+        void carregar(const std::string& nome_da_fonte, unsigned int resolucao);
 
-            // Obtém um ponteiro para os caracteres de uma fonte já carregada
-            const std::map<char32_t, Character>* obterCaracteres(const std::string& nome_da_fonte) const;
+        // Obtém um ponteiro para os caracteres de uma fonte já carregada
+        const std::map<char32_t, caractere>& obter(const std::string& nome_da_fonte) const;
 
-        private:
-            FT_Library ft; // FreeType library
-            std::map<std::string, std::map<char32_t, Character>> fontes; // Mapa para armazenar as fontes carregadas
-        };
-    }
+    private:
+        FT_Library ft; // biblioteca FreeType
+        std::map<std::string, std::map<char32_t, caractere>> fontes; // Mapa para armazenar as fontes carregadas
+    };
 }

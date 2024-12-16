@@ -5,16 +5,12 @@
 
 static void callbackSize(GLFWwindow* window, int w, int h)
 {
-    auto janela = static_cast<Janela*>(glfwGetWindowUserPointer(window));
+    auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window));
     janela->tamanho.x = w;
     janela->tamanho.y = h;
 }
-void Janela::adicionarTarefa(const uint32_t& id, std::function<void(uint32_t)> funcao)
-{
-    tarefas[id] = funcao;
-}
 
-Janela::Janela(const char* nome)
+bubble::janela::janela(const char* nome)
 {
     // inicia glfw
     if (!glfwInit())
@@ -37,7 +33,7 @@ Janela::Janela(const char* nome)
     }
 
     // define o ícone da janela
-    auto icone_ = ImageLoader("icon.ico");
+    auto icone_ = bubble::imageLoader("icon.ico");
     const GLFWimage icone = icone_.converterParaGlfw();
 
     if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
@@ -51,28 +47,17 @@ Janela::Janela(const char* nome)
     glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
 }
 
-double elapsedTime{ 0 };
-
-void Janela::iniciarLoop() const
+void bubble::janela::poll() const
 {
-    /// Loop principal
-    while (!glfwWindowShouldClose(window))
-    {
-        glViewport(0, 0, tamanho.x, tamanho.y);
-        glfwPollEvents();
-        double deltaTime = glfwGetTime() - elapsedTime;
-        elapsedTime = glfwGetTime();
+    glfwPollEvents();
+}
 
-        for (auto& [entidade, tarefa] : tarefas)
-        {
-            tarefa(entidade);
-        }
+void bubble::janela::swap() const
+{
+    glfwSwapBuffers(window);
+}
 
-        for (auto& [tipo, sistema] : sistemas) {
-                sistema->atualizar(deltaTime);
-        }
-
-
-        glfwSwapBuffers(window);
-    }
+void bubble::janela::viewport() const
+{
+    glViewport(0, 0, tamanho.x, tamanho.y);
 }

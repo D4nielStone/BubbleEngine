@@ -1,114 +1,118 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura Vetor2 */
-template<class T>
-struct Vetor2
+/* Definição da estrutura vetor2 */
+
+namespace bubble
 {
-    T x, y;
-
-    // Construtor com parâmetros
-    Vetor2(T x, T y) : x(x), y(y){}
-
-    // Construtor padrão
-    Vetor2() : x(T{}), y(T{}) {}
-
-    // Operador de soma com outro Vetor2
-    Vetor2 operator+(const Vetor2& other) const
+    template<class T>
+    struct vetor2
     {
-        return Vetor2{ x + other.x, y + other.y };
-    }
+        T x, y;
 
-    // Operador de soma com um escalar
-    Vetor2 operator+(const T& scalar) const
-    {
-        return Vetor2{ x + scalar, y + scalar };
-    }
+        // Construtor com parâmetros
+        vetor2(T x, T y) : x(x), y(y) {}
 
-    // Operador de soma acumulada com outro Vetor2
-    Vetor2& operator+=(const Vetor2& other)
-    {
-        x += other.x;
-        y += other.y;
-    
-        return *this;
-    }
+        // Construtor padrão
+        vetor2() : x(T{}), y(T{}) {}
 
-    // Operador de soma acumulada com um escalar
-    Vetor2& operator+=(const T& scalar)
-    {
-        x += scalar;
-        y += scalar;
-        return *this;
-    }
+        // Operador de soma com outro vetor2
+        vetor2 operator+(const vetor2& other) const
+        {
+            return vetor2{ x + other.x, y + other.y };
+        }
 
-    // Operador de subtração com outro Vetor2
-    Vetor2 operator-(const Vetor2& other) const
-    {
-        return Vetor2{ x - other.x, y - other.y };
-    }
+        // Operador de soma com um escalar
+        vetor2 operator+(const T& scalar) const
+        {
+            return vetor2{ x + scalar, y + scalar };
+        }
 
-    // Operador de subtração com um escalar
-    Vetor2 operator-(const T& scalar) const
-    {
-        return Vetor2{ x - scalar, y - scalar};
-    }
+        // Operador de soma acumulada com outro vetor2
+        vetor2& operator+=(const vetor2& other)
+        {
+            x += other.x;
+            y += other.y;
 
-    // Operador de subtração acumulada com outro Vetor2
-    Vetor2& operator-=(const Vetor2& other)
-    {
-        x -= other.x;
-        y -= other.y;
-    
-        return *this;
-    }
+            return *this;
+        }
 
-    // Operador de subtração acumulada com um escalar
-    Vetor2& operator-=(const T& scalar)
-    {
-        x -= scalar;
-        y -= scalar;
-        return *this;
-    }
+        // Operador de soma acumulada com um escalar
+        vetor2& operator+=(const T& scalar)
+        {
+            x += scalar;
+            y += scalar;
+            return *this;
+        }
 
-    // Operador de multiplicação com outro Vetor2
-    Vetor2 operator*(const Vetor2& other) const
-    {
-        return Vetor2{ x * other.x, y * other.y };
-    }
+        // Operador de subtração com outro vetor2
+        vetor2 operator-(const vetor2& other) const
+        {
+            return vetor2{ x - other.x, y - other.y };
+        }
 
-    // Operador de multiplicação com um escalar
-    Vetor2 operator*(const T& scalar) const
-    {
-        return Vetor2{ x * scalar, y * scalar };
-    }
+        // Operador de subtração com um escalar
+        vetor2 operator-(const T& scalar) const
+        {
+            return vetor2{ x - scalar, y - scalar };
+        }
 
-    // Operador de multiplicação acumulada com outro Vetor2
-    Vetor2& operator*=(const Vetor2& other)
-    {
-        x *= other.x;
-        y *= other.y;
-    
-        return *this;
-    }
+        // Operador de subtração acumulada com outro vetor2
+        vetor2& operator-=(const vetor2& other)
+        {
+            x -= other.x;
+            y -= other.y;
 
-    // Operador de multiplicação acumulada com um escalar
-    Vetor2& operator*=(const T& scalar)
-    {
-        x *= scalar;
-        y *= scalar;
-        return *this;
-    }
+            return *this;
+        }
 
-    // Operador de igualdade
-    bool operator==(const Vetor2& other) const
-    {
-        return x == other.x && y == other.y;
-    }
+        // Operador de subtração acumulada com um escalar
+        vetor2& operator-=(const T& scalar)
+        {
+            x -= scalar;
+            y -= scalar;
+            return *this;
+        }
 
-    // Operador de diferença
-    bool operator!=(const Vetor2& other) const
-    {
-        return !(*this == other);
-    }
+        // Operador de multiplicação com outro vetor2
+        vetor2 operator*(const vetor2& other) const
+        {
+            return vetor2{ x * other.x, y * other.y };
+        }
 
-};
+        // Operador de multiplicação com um escalar
+        vetor2 operator*(const T& scalar) const
+        {
+            return vetor2{ x * scalar, y * scalar };
+        }
+
+        // Operador de multiplicação acumulada com outro vetor2
+        vetor2& operator*=(const vetor2& other)
+        {
+            x *= other.x;
+            y *= other.y;
+
+            return *this;
+        }
+
+        // Operador de multiplicação acumulada com um escalar
+        vetor2& operator*=(const T& scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+            return *this;
+        }
+
+        // Operador de igualdade
+        bool operator==(const vetor2& other) const
+        {
+            return x == other.x && y == other.y;
+        }
+
+        // Operador de diferença
+        bool operator!=(const vetor2& other) const
+        {
+            return !(*this == other);
+        }
+
+    };
+}

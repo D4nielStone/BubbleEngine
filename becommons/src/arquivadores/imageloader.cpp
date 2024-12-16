@@ -1,4 +1,3 @@
-
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "imageloader.hpp"
@@ -29,24 +28,24 @@ const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_
     {"Transformacao.png", std::pair(transformacao_png, transformacao_png_len)},
     {"folder.png", std::pair(folder_png, folder_png_len)}
 };
-std::unordered_map<std::string, ImageLoader*>imagens_carregadas;
+std::unordered_map<std::string, bubble::imageLoader*>imagens_carregadas;
 
-ImageLoader::ImageLoader()
+bubble::imageLoader::imageLoader()
 {
 }
-ImageLoader::ImageLoader(const std::string& filepath)
+bubble::imageLoader::imageLoader(const std::string& filepath)
     : width(0), height(0), channels(0), data(nullptr), path(filepath.c_str()), carregado(false)
 {
     carregarImagem(filepath);
 }
-ImageLoader::~ImageLoader()
+bubble::imageLoader::~imageLoader()
 {
     if (data) {
         //delete[] data;
         data = nullptr; // Precaução para evitar acesso duplo
     }
 }
-void ImageLoader::flipVertical()
+void bubble::imageLoader::flipVertical()
 {
     int rowSize = width * channels;
     unsigned char* tempRow = new unsigned char[rowSize];
@@ -59,7 +58,7 @@ void ImageLoader::flipVertical()
     }
     delete[] tempRow;
 }
-void ImageLoader::carregarImagem(const std::string& filepath)
+void bubble::imageLoader::carregarImagem(const std::string& filepath)
 {
     auto it = imagens_carregadas.find(filepath);
     if (it != imagens_carregadas.end())
@@ -71,7 +70,7 @@ void ImageLoader::carregarImagem(const std::string& filepath)
         carregado = true;
         return;
     }
-     Debug::emitir("ImageLoader", "nova imagem: " + filepath);
+     Debug::emitir("bubble::imageLoader", "nova imagem: " + filepath);
     //Inicializa o FreeImage  
     FreeImage_Initialise();
 
@@ -133,7 +132,7 @@ void ImageLoader::carregarImagem(const std::string& filepath)
     // Finaliza o FreeImage  
     FreeImage_DeInitialise();
 }
-void ImageLoader::embutida(BYTE* data, const unsigned int tamanho) 
+void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {
     // Cria um stream de memória com o buffer da imagem
     FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
@@ -190,7 +189,7 @@ void ImageLoader::embutida(BYTE* data, const unsigned int tamanho)
 
     return;
 }
-GLFWimage ImageLoader::converterParaGlfw()
+GLFWimage bubble::imageLoader::converterParaGlfw()
 {
     GLFWimage image = {};
     if (!carregado) {
@@ -202,34 +201,34 @@ GLFWimage ImageLoader::converterParaGlfw()
     image.pixels = data;
     return image;
 }
-int ImageLoader::getWidth() const
+int bubble::imageLoader::obterLargura() const
 {
     return width;
 }
-int ImageLoader::getHeight() const
+int bubble::imageLoader::obterAltura() const
 {
     return height;
 }
-int ImageLoader::getChannels() const
+int bubble::imageLoader::obterCanal() const
 {
     return channels;
 }
-unsigned char* ImageLoader::obterDados() const
+unsigned char* bubble::imageLoader::obterDados() const
 {
     return data;
 }
 
-unsigned int TextureFromFile(const std::string& directory,GLuint tipo_textura) {
+unsigned int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    ImageLoader img(directory.c_str());
+    bubble::imageLoader img(directory.c_str());
     auto data = img.obterDados();
-    nrComponents = img.getChannels();
-    width = img.getWidth();
-    height = img.getHeight(); 
+    nrComponents = img.obterCanal();
+    width = img.obterLargura();
+    height = img.obterAltura(); 
     if (data) {
         GLenum format;
         if (nrComponents == 1)
@@ -254,17 +253,17 @@ unsigned int TextureFromFile(const std::string& directory,GLuint tipo_textura) {
 
     return textureID;
 }
-unsigned int TextureFromFile(const std::string& directory, int* width_ptr , int* height_ptr) {
+unsigned int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
 
     int width, height, nrComponents;
-    ImageLoader img(directory.c_str());
+    bubble::imageLoader img(directory.c_str());
     auto data = img.obterDados();
-    nrComponents = img.getChannels();
-    width = img.getWidth();
-    height = img.getHeight();
+    nrComponents = img.obterCanal();
+    width = img.obterLargura();
+    height = img.obterAltura();
     if (width_ptr) *width_ptr = width;
     if (height_ptr) *height_ptr = height;
     if (data) {
@@ -291,8 +290,7 @@ unsigned int TextureFromFile(const std::string& directory, int* width_ptr , int*
 
     return textureID;
 }
-
-unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
+unsigned int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -323,13 +321,13 @@ unsigned int TextureFromFile(unsigned char* data, unsigned int width, unsigned i
     return textureID;
 }
 
-TextureLoader& TextureLoader::getInstance()
+bubble::textureLoader& bubble::textureLoader::obterInstancia()
 {
-    static TextureLoader instance;
+    static bubble::textureLoader instance;
     return instance;
 }
 
-GLuint TextureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
+GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
 {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -337,12 +335,12 @@ GLuint TextureLoader::carregarTextura(const std::string& caminho, int *width, in
     }
 
     // Carregar nova textura
-    GLuint id = TextureFromFile(caminho.c_str(), width, height);
+    GLuint id = texturaDoArquivo(caminho.c_str(), width, height);
     texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
 
     return id;
 }
-GLuint TextureLoader::carregarTextura(const std::string& caminho, GLuint tipo_textura)
+GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, GLuint tipo_textura)
 {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
@@ -350,13 +348,13 @@ GLuint TextureLoader::carregarTextura(const std::string& caminho, GLuint tipo_te
     }
 
     // Carregar nova textura
-    GLuint id = TextureFromFile(caminho.c_str(), tipo_textura);
+    GLuint id = texturaDoArquivo(caminho.c_str(), tipo_textura);
     texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
 
     return id;
 }
 
-GLuint TextureLoader::carregarSkybox(const char* path_pai, std::vector<std::string> faces) {
+GLuint bubble::textureLoader::carregarSkybox(const char* path_pai, std::vector<std::string> faces) {
     GLuint textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
@@ -364,11 +362,11 @@ GLuint TextureLoader::carregarSkybox(const char* path_pai, std::vector<std::stri
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++) {
         std::string caminhoCompleto = std::string(path_pai) + "/" + faces[i];
-        ImageLoader img(caminhoCompleto.c_str());
+        bubble::imageLoader img(caminhoCompleto.c_str());
         unsigned char* data = img.obterDados();
-        width = img.getWidth();
-        height = img.getHeight();
-        nrChannels = img.getChannels();
+        width = img.obterLargura();
+        height = img.obterAltura();
+        nrChannels = img.obterCanal();
 
         if (img.carregado) {
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
@@ -388,7 +386,7 @@ GLuint TextureLoader::carregarSkybox(const char* path_pai, std::vector<std::stri
     return textureID;
 }
 
-GLuint TextureLoader::carregarAiTexture(const aiTexture* texture)
+GLuint bubble::textureLoader::carregarAiTexture(const aiTexture* texture)
 {
     GLuint ID{};
     if (texture) {
@@ -405,7 +403,7 @@ GLuint TextureLoader::carregarAiTexture(const aiTexture* texture)
                 int numChannels = bpp / 8;
 
                 // Usar GerenciadorDeTexturas para carregar a textura
-                ID = TextureFromFile(data, width, height, numChannels);
+                ID = texturaDoArquivo(data, width, height, numChannels);
 
                 FreeImage_Unload(dib);
             }
