@@ -149,7 +149,12 @@ namespace bubble
             {   // if texture hasn't been loaded already, load it
                 textura texture;
                 auto relativa = std::filesystem::path(str.C_Str()).filename().string();
-                texture.id = texturaDoArquivo(this->diretorio + "\\" + relativa);
+
+                int tex = texturaDoArquivo(this->diretorio + "\\" + relativa);
+                if (tex != -1)
+                    texture.id = tex;
+                else
+                    continue;
                 texture.tipo = typeName;
                 texture.path = str.C_Str();
                 textures.push_back(texture);

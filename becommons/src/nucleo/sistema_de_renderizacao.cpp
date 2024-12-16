@@ -3,6 +3,7 @@
 #include "src/componentes/renderizador.hpp"
 #include "src/componentes/transformacao.hpp"
 #include "src/componentes/camera.hpp"
+#include "src/nucleo/cena.hpp"
 #include "src/arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
@@ -37,8 +38,11 @@ namespace bubble
         }
     }
 
-    void sistemaRenderizacao::inicializar()
+    void sistemaRenderizacao::inicializar(bubble::cena* cena)
     {
+        this->cena = cena;
+        this->reg = cena->obterRegistro();
+
         if (!shader_phong) shader_phong = new bubble::shader();
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);

@@ -2,7 +2,6 @@
 
 /**
  * @file sistema.hpp
- * @brief Gerencia os sistemas no loop principal
  */
 
 #pragma once
@@ -15,13 +14,13 @@
 
 namespace bubble
 {
+    class cena;
     class sistema {
     public:
         /**
          * @brief Construtor virtual da classe Sistema
          * @param nome Nome do sistema
          */
-        sistema(bubble::registro* reg) : reg(reg) {}
         sistema() = default;
 
         /**
@@ -32,7 +31,7 @@ namespace bubble
         /**
          * @brief Inicializa o sistema
          */
-        virtual void inicializar() = 0;
+        virtual void inicializar(bubble::cena* cena);
 
         /**
          * @brief Atualiza o sistema dentro do loop principal
@@ -41,6 +40,7 @@ namespace bubble
         virtual void atualizar(double deltaTime) = 0;
 
     protected:
+        cena* cena;
         registro* reg;
     };
 }

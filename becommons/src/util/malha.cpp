@@ -15,9 +15,9 @@ namespace bubble
 
     malha::~malha()
     {
-        glDeleteVertexArrays(1, &VAO);
-        glDeleteBuffers(1, &VBO);
-        glDeleteBuffers(1, &EBO);
+        //glDeleteVertexArrays(1, &VAO);
+        //glDeleteBuffers(1, &VBO);
+        //glDeleteBuffers(1, &EBO);
     }
 
     void malha::desenhar(bubble::shader& shader)

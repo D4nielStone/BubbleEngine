@@ -13,8 +13,8 @@ namespace bubble
 	class sistemaRenderizacao : public sistema
 	{
 	public:
-		explicit sistemaRenderizacao(registro* reg) { this->reg = reg; };
+		sistemaRenderizacao() = default;
 		void atualizar(double deltaTime) override;
-		void inicializar() override;
+		void inicializar(bubble::cena* cena) override;
 	};
 }

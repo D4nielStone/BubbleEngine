@@ -33,9 +33,9 @@ namespace bubble
         int width, height, channels;
         unsigned char* data;
     };
-    unsigned int texturaDoArquivo(const std::string& directory, int* width = nullptr, int* height = nullptr);
-    unsigned int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
-    unsigned int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
+    int texturaDoArquivo(const std::string& directory, int* width = nullptr, int* height = nullptr);
+    int texturaDoArquivo(const std::string& directory, GLuint tipo_textura);
+    int texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int format);
     class  textureLoader
     {
     public:

@@ -24,7 +24,9 @@ namespace bubble
 		glm::mat4 matrizmodelo;
 		static constexpr mascara mascara = COMPONENTE_TRANSFORMACAO;
 
-		transformacao(const vetor3<float> &p, const vetor3<float> &r, const vetor3<float> &e) :
+		transformacao(const vetor3<float>& p = vetor3(0.f,0.f,0.f),
+			const vetor3<float>& r = vetor3(0.f, 0.f, 0.f), 
+			const vetor3<float>& e = vetor3(1.f, 1.f, 1.f)) :
 			posicao({ p.x,p.y,p.z }),
 			rotacao({ r.x,r.y,r.z }),
 			escala({ e.x,e.y,e.z })
@@ -36,7 +38,7 @@ namespace bubble
 
 			matrizmodelo *= glm::toMat4(glm::quat(glm::radians(rotacao)));
 
-			glm::scale(matrizmodelo, escala);
+			matrizmodelo = glm::scale(matrizmodelo, escala);
 			return matrizmodelo;
 		}
 		float* obter() { return glm::value_ptr(matrizmodelo); }

@@ -7,59 +7,44 @@ constexpr const char* title = "Bubble Engine - Editor - (C) 2024 Daniel Oliveira
 #include "src/componentes/renderizador.hpp"
 #include "src/componentes/camera.hpp"
 #include "src/componentes/transformacao.hpp"
+#include "src/nucleo/cena.hpp"
 #include <windows.h>
 #include <random>
 
-#ifdef DEBUG
+#ifdef _DEBUG
 #define INIT main()
 #else
 #define INIT APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
 #endif
+
 int INIT
 {
 	bubble::janela janela(title);
-	bubble::registro reg;
-	bubble::sistemaRenderizacao sr(&reg);
+	bubble::cena cena;
 
-	bubble::entidade player = reg.criar();
+	bubble::entidade player = cena.obterRegistro()->criar();
 
-	reg.adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, -10.F),bubble::vetor3(0.f, 0.f, 0.F), 75.f, 1.4F, 0.1F, 400.F);
+	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, -15.f));
+
+	auto mdl_cubo = new bubble::modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
+	auto mdl_esfera = new bubble::modelo(R"(C:\Users\DN\3D Objects\esfera\esfera.obj)");
+
+	bubble::entidade cubo = cena.obterRegistro()->criar();
+	cena.obterRegistro()->adicionar<bubble::transformacao>(cubo, bubble::vetor3(0.f,-4.f,0.f), bubble::vetor3(0.f, 0.f, 0.f), bubble::vetor3(5.f, 0.5f, 5.f));
+	cena.obterRegistro()->adicionar<bubble::renderizador>(cubo, mdl_cubo);
 	
-	const int numEnt = 50;
+	bubble::entidade esfera = cena.obterRegistro()->criar();
+	cena.obterRegistro()->adicionar<bubble::transformacao>(esfera);
+	cena.obterRegistro()->adicionar<bubble::renderizador>(esfera, mdl_esfera);
 
-	auto modelo = new bubble::modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
-
-
-	// Cria o gerador de números aleatórios
-	std::random_device rd; // Gera uma seed verdadeira, se disponível
-	std::mt19937 gen(rd()); // Motor Mersenne Twister com seed
-	std::uniform_int_distribution<int> distrib(-30, 30); // Distribuição uniforme no intervalo [-100, 100]
-	std::uniform_int_distribution<int> distrib_rot(0, 360); // Distribuição uniforme no intervalo [-100, 100]
-
-	for (size_t i = 0; i < numEnt; i++)
-	{
-		// Gera um número aleatório pos
-		int x = distrib(gen);
-		int y = distrib(gen);
-		int z = distrib(gen);
-		// Gera um número aleatório rot
-		int rot_x = distrib_rot(gen);
-		int rot_y = distrib_rot(gen);
-		int rot_z = distrib_rot(gen);
-
-		bubble::entidade cubo = reg.criar();
-		reg.adicionar<bubble::transformacao>(cubo, bubble::vetor3<float>( x, y, z ), bubble::vetor3<float>(rot_x, rot_y, rot_z),bubble::vetor3( 0.5f, 0.5f, 0.5f ));
-		reg.adicionar<bubble::renderizador>(cubo, modelo);
-	}
-
-	sr.inicializar();
+	cena.iniciar();
 
 	while (!glfwWindowShouldClose(janela.window))
 	{
 		janela.poll();
 		janela.viewport();
 
-		sr.atualizar(0.016666);
+		cena.atualizar(0.016666);
 
 		janela.swap();
 	}

@@ -18,7 +18,7 @@ uniform Material material;
 uniform sampler2D texture_diffuse1;
 uniform bool texture_diffuse1_bool;
 
-vec3 lightPos = vec3(0, 0, 0); // Posição da luz pontual
+vec3 lightDir = vec3(1, 1, -1); // Posição da luz pontual
 
 void main()
 {
@@ -28,9 +28,6 @@ void main()
 
     // Normaliza a normal
     vec3 norm = normalize(Normal);
-    
-    // Vetor de direção da luz
-    vec3 lightDir = normalize(lightPos - Position);
     
     // Calculando a iluminação difusa
     float diff = max(dot(norm, lightDir), 0.0);

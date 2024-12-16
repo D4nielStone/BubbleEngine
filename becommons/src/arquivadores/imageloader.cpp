@@ -218,7 +218,7 @@ unsigned char* bubble::imageLoader::obterDados() const
     return data;
 }
 
-unsigned int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
+int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -249,11 +249,12 @@ unsigned int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_t
     }
     else {
         std::cerr << "Failed to load texture: " << directory << std::endl;
+        return -1;
     }
 
     return textureID;
 }
-unsigned int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
+int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int* height_ptr) {
     // Gera um ID de textura e carrega a imagem
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -286,11 +287,12 @@ unsigned int bubble::texturaDoArquivo(const std::string& directory, int* width_p
     }
     else {
         std::cerr << "Failed to load texture: " << directory << std::endl;
+        return -1;
     }
 
     return textureID;
 }
-unsigned int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
+int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned int height, int nrComponents) {
 
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -316,6 +318,7 @@ unsigned int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, u
     }
     else {
         std::cerr << "Failed to load texture: Textura embutida" << std::endl;
+        return -1;
     }
 
     return textureID;
