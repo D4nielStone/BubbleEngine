@@ -14,12 +14,6 @@
 
 namespace bubble
 {
-	enum class estadoDeJogo : bool
-	{
-		PARADO  = true,
-		RODANDO = false
-	};
-
 	class cena
 	{
 	public:
@@ -34,7 +28,7 @@ namespace bubble
 	private:
 		registro reg;
 		std::shared_ptr<camera> camera_atual{ nullptr };
-		estadoDeJogo estado = estadoDeJogo::PARADO;
+		bool rodando = false;
 		sistemaRenderizacao srender;
 	};
 }

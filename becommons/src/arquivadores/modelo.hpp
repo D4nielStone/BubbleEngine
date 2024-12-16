@@ -13,6 +13,7 @@ namespace bubble
         {
             carregarmodelo(path);
         }
+        malha* obterMalha(int idx) { return &malhas[idx]; };
         void desenhar(bubble::shader& shader);
     private:
         // dados de malha

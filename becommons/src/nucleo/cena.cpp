@@ -7,27 +7,32 @@ bubble::cena::cena()
 
 void bubble::cena::pausar()
 {
-	estado = estadoDeJogo::PARADO;
+	Debug::emitir("cena", "Pausando");
+	rodando = false;
 }
 
 void bubble::cena::parar()
 {
-	// TODO: snapshot para retornar o estado do registro
-	estado = estadoDeJogo::PARADO;
+	Debug::emitir("cena", "Parando");
+	// TODO: snapshot para retornar o rodando do registro
+	rodando = false;
 }
 
 void bubble::cena::iniciar()
 {
-	if (estado != estadoDeJogo::PARADO)
+	Debug::emitir("cena", "Iniciando");
+	if (rodando != false)
 		return;
 
 	// capturar snapshot do registro
-	estado = estadoDeJogo::RODANDO;
+	rodando = true;
 }
+
+double elapsedTime;
 
 void bubble::cena::atualizar(double deltaTime)
 {
-	if (estado == estadoDeJogo::PARADO)
+	if (rodando == false)
 	{
 		// se parado apenas renderiza
 		srender.atualizar(deltaTime);
@@ -35,6 +40,8 @@ void bubble::cena::atualizar(double deltaTime)
 	else
 	{
 		// efetua operacoes matematicas de transformacao
+		elapsedTime += deltaTime;
+		if(elapsedTime >= 1 && rodando) Debug::emitir("cena", "Tempo de execucao: " + std::to_string(elapsedTime) + "s");
 		srender.atualizar(deltaTime);
 	}
 }

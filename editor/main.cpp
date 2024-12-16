@@ -24,9 +24,10 @@ int INIT
 
 	bubble::entidade player = cena.obterRegistro()->criar();
 
-	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, 15.f));
+	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(0.f, 3.f, 15.f));
 
 	auto mdl_cubo = new bubble::modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
+	mdl_cubo->obterMalha(0)->material.uvMundo = true;
 	auto mdl_esfera = new bubble::modelo(R"(C:\Users\DN\3D Objects\monkey\monkey.obj)");
 
 	bubble::entidade cubo = cena.obterRegistro()->criar();

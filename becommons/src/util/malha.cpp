@@ -26,6 +26,7 @@ namespace bubble
         unsigned int specularNr = 1;
 
         shader.setCor("material.cor_difusa", material.difusa);
+        shader.setBool("uvMundo", material.uvMundo);
         for (unsigned int i = 0; i < material.texturas.size(); i++)
         {
             glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
@@ -47,6 +48,20 @@ namespace bubble
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
+
+        diffuseNr = 1;
+        specularNr = 1;
+        //desativa texturas
+        for (unsigned int i = 0; i < material.texturas.size(); i++)
+        {
+            std::string number;
+            std::string name = material.texturas[i].tipo;
+            if (name == "texture_diffuse")
+                number = std::to_string(diffuseNr++);
+            else if (name == "texture_specular")
+                number = std::to_string(specularNr++);
+            shader.setBool((name + number + "_bool").c_str(), false);
+        }
     }
 
     void malha::definirBuffers()
