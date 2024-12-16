@@ -39,6 +39,17 @@ void bubble::cena::atualizar(double deltaTime)
 	}
 }
 
+void bubble::cena::definirCamera(const entidade& ent)
+{
+	if (reg.tem<camera>(ent.id))
+		camera_atual = reg.obter<camera>(ent.id);
+}
+
+std::shared_ptr<bubble::camera> bubble::cena::obterCamera() const
+{
+	return camera_atual;
+}
+
 bubble::registro* bubble::cena::obterRegistro()
 {
 	return &reg;

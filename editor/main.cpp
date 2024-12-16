@@ -24,10 +24,10 @@ int INIT
 
 	bubble::entidade player = cena.obterRegistro()->criar();
 
-	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, -15.f));
+	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(0.f, 0.f, 15.f));
 
 	auto mdl_cubo = new bubble::modelo(R"(C:\Users\DN\3D Objects\cubo\cubo.obj)");
-	auto mdl_esfera = new bubble::modelo(R"(C:\Users\DN\3D Objects\esfera\esfera.obj)");
+	auto mdl_esfera = new bubble::modelo(R"(C:\Users\DN\3D Objects\monkey\monkey.obj)");
 
 	bubble::entidade cubo = cena.obterRegistro()->criar();
 	cena.obterRegistro()->adicionar<bubble::transformacao>(cubo, bubble::vetor3(0.f,-4.f,0.f), bubble::vetor3(0.f, 0.f, 0.f), bubble::vetor3(5.f, 0.5f, 5.f));
@@ -37,6 +37,8 @@ int INIT
 	cena.obterRegistro()->adicionar<bubble::transformacao>(esfera);
 	cena.obterRegistro()->adicionar<bubble::renderizador>(esfera, mdl_esfera);
 
+	cena.definirCamera(player);
+	cena.obterCamera()->viewport_ptr = &janela.tamanho;
 	cena.iniciar();
 
 	while (!glfwWindowShouldClose(janela.window))

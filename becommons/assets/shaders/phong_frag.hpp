@@ -18,7 +18,7 @@ uniform Material material;
 uniform sampler2D texture_diffuse1;
 uniform bool texture_diffuse1_bool;
 
-vec3 lightDir = vec3(1, 1, -1); // Posição da luz pontual
+vec3 lightDir = vec3(1, 1, 0.5f); // Posição da luz pontual
 
 void main()
 {

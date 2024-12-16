@@ -6,8 +6,8 @@
 static void callbackSize(GLFWwindow* window, int w, int h)
 {
     auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window));
-    janela->tamanho.x = w;
-    janela->tamanho.y = h;
+    janela->tamanho.w = w;
+    janela->tamanho.h = h;
 }
 
 bubble::janela::janela(const char* nome)
@@ -44,7 +44,7 @@ bubble::janela::janela(const char* nome)
 
     glfwSetWindowSizeCallback(window, callbackSize);
     glfwSetWindowUserPointer(window, this);
-    glfwGetWindowSize(window, &tamanho.x, &tamanho.y);
+    glfwGetWindowSize(window, &tamanho.w, &tamanho.h);
 }
 
 void bubble::janela::poll() const
@@ -59,5 +59,5 @@ void bubble::janela::swap() const
 
 void bubble::janela::viewport() const
 {
-    glViewport(0, 0, tamanho.x, tamanho.y);
+    glViewport(0, 0, tamanho.w, tamanho.h);
 }

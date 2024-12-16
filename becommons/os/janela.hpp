@@ -7,7 +7,7 @@
 
 #pragma once
 #include <GLFW/glfw3.h>
-#include "src/util/vetor2.hpp"
+#include "src/util/vetor4.hpp"
 #include "src/nucleo/sistema.hpp"
 #include "src/nucleo/sistema_de_renderizacao.hpp"
 #include <functional>
@@ -23,7 +23,7 @@ namespace bubble
 	*/
 	struct janela
 	{
-		vetor2<int> tamanho;
+		vetor4<int> tamanho;
 		GLFWwindow* window;
 		janela(const char* nome);
 		void poll() const;
