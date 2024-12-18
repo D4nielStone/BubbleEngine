@@ -13,16 +13,17 @@ namespace bubble
 {
     void sistemaRenderizacao::atualizar(double deltaTime)
     {
-        glClearColor(0.1F, 0.1F, 0.5F, 1.F);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         auto camera = cena->obterCamera();
-        if(camera)
+        if (!camera) return;
+        glClearColor(camera->ceu.r, camera->ceu.g, camera->ceu.b, camera->ceu.a);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         reg->cada<renderizador, transformacao>([&](const uint32_t ent_ren) {
             auto render = reg->obter<renderizador>(ent_ren);
             auto transform = reg->obter<transformacao>(ent_ren);
 
             shader_phong->use();
             shader_phong->setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
+            shader_phong->setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
             shader_phong->setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
             transform->calcular();
             shader_phong->setMat4("modelo", transform->obter());

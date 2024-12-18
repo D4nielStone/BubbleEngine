@@ -23,7 +23,7 @@ namespace bubble
 	*/
 	struct janela
 	{
-		vetor4<int> tamanho;
+		vetor4<float> tamanho;
 		GLFWwindow* window;
 		janela(const char* nome);
 		void poll() const;

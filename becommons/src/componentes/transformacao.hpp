@@ -42,5 +42,13 @@ namespace bubble
 			return matrizmodelo;
 		}
 		float* obter() { return glm::value_ptr(matrizmodelo); }
+
+		transformacao& operator=(const transformacao& tr)
+		{
+			this->posicao = tr.posicao;
+			this->rotacao = tr.rotacao;
+			this->escala = tr.escala;
+			return *this;
+		}
 	};
 }

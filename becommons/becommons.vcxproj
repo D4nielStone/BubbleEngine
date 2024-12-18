@@ -147,6 +147,7 @@
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
+    <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\nucleo\cena.cpp" />
     <ClCompile Include="src\nucleo\sistema.cpp" />
     <ClCompile Include="src\nucleo\sistema_de_renderizacao.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
     <ClInclude Include="src\entidades\entidade.hpp" />
+    <ClInclude Include="src\inputs\inputs.hpp" />
     <ClInclude Include="src\nucleo\cena.hpp" />
     <ClInclude Include="src\nucleo\sistema.hpp" />
     <ClInclude Include="src\nucleo\sistema_de_renderizacao.hpp" />

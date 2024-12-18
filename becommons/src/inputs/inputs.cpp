@@ -6,21 +6,21 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 
-using namespace Bubble::Inputs;
+using namespace bubble;
 
-InputMode Inputs::getInputMode() const {
+inputMode inputs::getInputMode() const {
     return currentMode;
 }
-Inputs::Inputs() : currentMode(InputMode::Editor) {
+inputs::inputs() : currentMode(inputMode::Editor) {
     // Inicializa o mapa com valores padrão
-    for (int i = 0; i < static_cast<int>(Key::Count); ++i) {
-        keyStates[static_cast<Key>(i)] = false;
+    for (int i = 0; i < static_cast<int>(key::Count); ++i) {
+        keyStates[static_cast<key>(i)] = false;
     }
 }
-void Inputs::setInputMode(InputMode mode) {
+void inputs::setInputMode(inputMode mode) {
     currentMode = mode;
 }
-void Inputs::keyPressed(Key key) {
+void inputs::keyPressed(const key &key) {
     // Acesso direto ao mapa sem verificar se está vazio
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
@@ -32,7 +32,7 @@ void Inputs::keyPressed(Key key) {
         std::cerr << "Tecla desconhecida pressionada: " << static_cast<int>(key) << std::endl;
     }
 }
-void Inputs::keyReleased(Key key) {
+void inputs::keyReleased(const key &key) {
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = false;
@@ -42,12 +42,12 @@ void Inputs::keyReleased(Key key) {
         std::cerr << "Tecla desconhecida liberada: " << static_cast<int>(key) << std::endl;
     }
 }
-bool Inputs::isKeyPressed(Key key) const
+bool inputs::isKeyPressed(const key &key) const
 {
     auto it = keyStates.find(key);
     return it != keyStates.end() && it->second;
 }
-void Inputs::handleKey(Key key) {
+void inputs::handleKey(const key &key) {
     switch (currentMode) {
     case Game:
         break;
@@ -58,49 +58,49 @@ void Inputs::handleKey(Key key) {
         break;
     }
 }
-static Key glfwKeyToKey(int glfwKey) {
-    static const std::unordered_map<int, Key> keyMap = {
-        {GLFW_KEY_W, Key::W},
-        {GLFW_KEY_A, Key::A},
-        {GLFW_KEY_S, Key::S},
-        {GLFW_KEY_D, Key::D},
-        {GLFW_KEY_E, Key::E},
-        {GLFW_KEY_Q, Key::Q},
-        {GLFW_KEY_RIGHT, Key::RIGHT},
-        {GLFW_KEY_LEFT, Key::LEFT},
-        {GLFW_KEY_DOWN, Key::DOWN},
-        {GLFW_KEY_UP, Key::UP},
-        {GLFW_KEY_LEFT_SHIFT, Key::Shift},
-        {GLFW_KEY_RIGHT_SHIFT, Key::Shift},
-        {GLFW_KEY_LEFT_CONTROL, Key::Ctrl},
-        {GLFW_KEY_RIGHT_CONTROL, Key::Ctrl},
-        {GLFW_KEY_LEFT_ALT, Key::Alt},
-        {GLFW_KEY_RIGHT_ALT, Key::Alt},
-        {GLFW_KEY_BACKSPACE, Key::BS},
-        {GLFW_KEY_ENTER, Key::ENTER},
-        {GLFW_KEY_KP_ENTER, Key::ENTER},
-        {GLFW_KEY_DELETE, Key::Del},
-        {GLFW_KEY_F5, Key::F5}
+static key glfwkeyTokey(int glfwkey) {
+    static const std::unordered_map<int, key> keyMap = {
+        {GLFW_KEY_W, key::W},
+        {GLFW_KEY_A, key::A},
+        {GLFW_KEY_S, key::S},
+        {GLFW_KEY_D, key::D},
+        {GLFW_KEY_E, key::E},
+        {GLFW_KEY_Q, key::Q},
+        {GLFW_KEY_RIGHT, key::RIGHT},
+        {GLFW_KEY_LEFT, key::LEFT},
+        {GLFW_KEY_DOWN, key::DOWN},
+        {GLFW_KEY_UP, key::UP},
+        {GLFW_KEY_LEFT_SHIFT, key::Shift},
+        {GLFW_KEY_RIGHT_SHIFT, key::Shift},
+        {GLFW_KEY_LEFT_CONTROL, key::Ctrl},
+        {GLFW_KEY_RIGHT_CONTROL, key::Ctrl},
+        {GLFW_KEY_LEFT_ALT, key::Alt},
+        {GLFW_KEY_RIGHT_ALT, key::Alt},
+        {GLFW_KEY_BACKSPACE, key::BS},
+        {GLFW_KEY_ENTER, key::ENTER},
+        {GLFW_KEY_KP_ENTER, key::ENTER},
+        {GLFW_KEY_DELETE, key::Del},
+        {GLFW_KEY_F5, key::F5}
     };
 
-    auto it = keyMap.find(glfwKey);
-    return it != keyMap.end() ? it->second : Key::Count;
+    auto it = keyMap.find(glfwkey);
+    return it != keyMap.end() ? it->second : key::Count;
 }
 // Callback de teclado GLFW
-void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
+void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
-    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
-    inputs->mods = mods;
-    inputs->teclado_action = action;
+    bubble::inputs* input = static_cast<bubble::inputs*>(glfwGetWindowUserPointer(window));
+    input->mods = mods;
+    input->teclado_action = action;
 
-    if (inputs) {
-        Key mappedKey = glfwKeyToKey(key);
-        if (mappedKey != Key::Count) {
+    if (input) {
+        bubble::key mappedkey = glfwkeyTokey(key);
+        if (mappedkey != key::Count) {
             if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-                inputs->keyPressed(mappedKey);
+                input->keyPressed(mappedkey);
             }
             else if (action == GLFW_RELEASE) {
-                inputs->keyReleased(mappedKey);
+                input->keyReleased(mappedkey);
             }
         }
     }
@@ -109,27 +109,27 @@ void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods
     }
 }
 // Callback de posição do mouse
-void mousePosCallBack(GLFWwindow* window, double x, double y) 
+void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
-    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+    bubble::inputs* input = static_cast<bubble::inputs*>(glfwGetWindowUserPointer(window));
 
-    if (inputs) {
-        inputs->mousex = x;
-        inputs->mousey = y;
+    if (input) {
+        input->mousex = x;
+        input->mousey = y;
     }
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
     }
 }
 // Callback de clique do mouse
-void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods) 
+void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
-    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+    bubble::inputs* input = static_cast<bubble::inputs*>(glfwGetWindowUserPointer(window));
 
-    if (inputs) {
+    if (input) {
         // Processar o clique do mouse
-         inputs->mouseEnter = action;
-         inputs->mouseButton = button;
+         input->mouseEnter = action;
+         input->mouseButton = button;
     }
     else {
         std::cerr << "Erro: Ponteiro de usuário GLFW não está definido." << std::endl;
@@ -137,9 +137,9 @@ void mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 }
 
 // Callback para caracteres
-void charCallback(GLFWwindow* window, unsigned int codepoint)
+void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    Inputs* inputs = static_cast<Inputs*>(glfwGetWindowUserPointer(window));
+    bubble::inputs* inputs = static_cast<bubble::inputs*>(glfwGetWindowUserPointer(window));
 
     // Converte o código Unicode para um caractere UTF-8
     std::string utf8_char;

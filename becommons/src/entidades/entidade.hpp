@@ -20,7 +20,7 @@ namespace bubble
 	 */
 	struct entidade {
 		uint32_t id;
-		bubble::mascara mascara = COMPONENTE_NONE;
+		componente::mascara mascara = componente::COMPONENTE_NONE;
 
 		bool operator==(const entidade& other) const {
 			return id == other.id;
@@ -38,9 +38,9 @@ namespace bubble
 		/// proximo id livre
 		uint32_t proxima_entidade{ 0 };
 		/// Armazena mascara da entidade associada
-		std::unordered_map<uint32_t, bubble::mascara> mascaras;
+		std::unordered_map<uint32_t, bubble::componente::mascara> mascaras;
 		/// Armazena componentes da entidade associada
-		std::unordered_map<uint32_t, std::unordered_map<bubble::mascara, std::shared_ptr<bubble::componente>>> entidades;
+		std::unordered_map<uint32_t, std::unordered_map<bubble::componente::mascara, std::shared_ptr<bubble::componente>>> entidades;
 	public:
 		/* Cria nova entidade */
 		entidade criar();

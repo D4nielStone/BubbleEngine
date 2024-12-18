@@ -16,7 +16,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "projetos", "projetos\projet
 		{91E17E70-99B7-4C6F-8F10-AB35B4A51D71} = {91E17E70-99B7-4C6F-8F10-AB35B4A51D71}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "editor", "editor\editor.vcxproj", "{225DFE55-9A10-4CC9-8B12-00B2B76FD029}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "golf", "golf\golf.vcxproj", "{225DFE55-9A10-4CC9-8B12-00B2B76FD029}"
 	ProjectSection(ProjectDependencies) = postProject
 		{91E17E70-99B7-4C6F-8F10-AB35B4A51D71} = {91E17E70-99B7-4C6F-8F10-AB35B4A51D71}
 	EndProjectSection

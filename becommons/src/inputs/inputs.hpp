@@ -2,75 +2,64 @@
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "src/util/utils.hpp"
+#include "src/util/vetor2.hpp"
+#include "src/util/vetor4.hpp"
 #include "becommons.hpp"
 
 struct GLFWwindow;
-enum BECOMMONS_DLL_API Key {
-    W,
-    A,
-    S,
-    D,
-    E, 
-    Q,
-    UP,
-    RIGHT,
-    LEFT,
-    DOWN,
-    Shift,
-    Ctrl,
-    Alt,
-    BS,
-    ENTER,
-    F5,
-    Del,
-    Count
-};
 
-namespace std {
-    template <>
-    struct hash<Key> {
-        std::size_t operator()(const Key& k) const {
-            return std::hash<int>()(static_cast<int>(k));
-        }
-    };
-}
-
-
-enum BECOMMONS_DLL_API InputMode {
-    Editor,
-    Game,
-    Default
-};
-namespace Bubble
+namespace bubble
 {
-    namespace Inputs
-    {
+    enum key : uint8_t {
+        W,
+        A,
+        S,
+        D,
+        E,
+        Q,
+        UP,
+        RIGHT,
+        LEFT,
+        DOWN,
+        Shift,
+        Ctrl,
+        Alt,
+        BS,
+        ENTER,
+        F5,
+        Del,
+        Count
+    };
 
-        class BECOMMONS_DLL_API Inputs {
-        public:
-            Inputs();
+    enum inputMode {
+        Editor,
+        Game,
+        Default
+    };
 
-            void setInputMode(InputMode mode);
-            void keyPressed(Key key);
-            void keyReleased(Key key);
-            bool isKeyPressed(Key key) const;
-            InputMode getInputMode() const;
-            double mousex, mousey;
-            int mouseEnter {0}, teclado_action{0}, mods{0}, mouseButton{0};
-            char letra{ '\0' };
-            bool mouseClick{false}, char_press{false};
-        protected:
-            virtual void handleKey(Key key);
-        private:
-            InputMode currentMode{ InputMode::Editor };
-            std::unordered_map<Key, bool> keyStates;
-        };
-    }
+    class inputs {
+    public:
+        inputs();
+
+        void setInputMode(inputMode mode);
+        void keyPressed  (const key &key);
+        void keyReleased (const key &key);
+        bool isKeyPressed(const key &key) const;
+        inputMode getInputMode() const;
+        double mousex, mousey;
+        int mouseEnter{ 0 }, teclado_action{ 0 }, mods{ 0 }, mouseButton{ 0 };
+        char letra{ '\0' };
+        bool mouseClick{ false }, char_press{ false };
+    protected:
+        virtual void handleKey(const key &key);
+    private:
+        inputMode currentMode{ inputMode::Editor };
+        std::unordered_map<key, bool> keyStates;
+    };
+
+    // Callback de teclado GLFW
+    extern "C" void mousePosCallBack(GLFWwindow* window, double x, double y);
+    extern "C" void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
+    extern "C" void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
+    extern "C" void charCallback(GLFWwindow* window, unsigned int codepoint);
 }
-
-// Callback de teclado GLFW
-extern "C" BECOMMONS_DLL_API void mousePosCallBack(GLFWwindow* window, double x, double y);
-extern "C" BECOMMONS_DLL_API void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
-extern "C" BECOMMONS_DLL_API void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
-extern "C" BECOMMONS_DLL_API void charCallback(GLFWwindow* window, unsigned int codepoint);

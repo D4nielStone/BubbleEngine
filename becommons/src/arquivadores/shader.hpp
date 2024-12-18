@@ -9,6 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "assets/shaders_na_memoria.hpp"
 #include "src/util/cor.hpp"
+#include "src/util/vetor4.hpp"
 
 inline std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
@@ -53,6 +54,7 @@ namespace bubble
         void setInt(const std::string& name, const int& value) const;
         void setFloat(const std::string& name, const float& value) const;
         void setCor(const std::string& name, const bubble::cor& cor) const;
+        void setVec4(const std::string& name, const vetor4<int>& vec4) const;
         void setVec3(const std::string& name, const float& r, const float& g, const float& b) const;
         void setVec2(const std::string& name, const float& r, const float& g) const;
         void setMat4(const std::string& name, const float* value) const;

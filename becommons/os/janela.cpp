@@ -18,6 +18,7 @@ bubble::janela::janela(const char* nome)
         Debug::emitir(Erro, "Iniciando janela glfw");
         abort();
     }
+    glfwWindowHint(GLFW_SAMPLES, 2);
     window = glfwCreateWindow(800, 400, nome, NULL, NULL);
     if (!window) {
         Debug::emitir(Erro, "Janla invalida");
@@ -40,11 +41,15 @@ bubble::janela::janela(const char* nome)
 
     // ativa blend
     glEnable(GL_BLEND);
+    glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);
     glfwSetWindowUserPointer(window, this);
-    glfwGetWindowSize(window, &tamanho.w, &tamanho.h);
+    bubble::vetor4<int> tam{};
+    glfwGetWindowSize(window, &tam.w, &tam.h);
+    tamanho.h = tam.h;
+    tamanho.w = tam.w;
 }
 
 void bubble::janela::poll() const
