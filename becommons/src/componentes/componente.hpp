@@ -28,6 +28,7 @@ namespace bubble
 			COMPONENTE_RENDER = 1 << 1,
 			COMPONENTE_PROPRIEDADES = 1 << 2,
 			COMPONENTE_TRANSFORMACAO = 1 << 3,
+			COMPONENTE_TEXTO = 1 << 4,
 		};
 		virtual ~componente() = default;
 	};

@@ -1,15 +1,14 @@
 inline const char* texto_frag = R"(
 #version 330 core
+in vec2 TexCoords;
+out vec4 color;
 
-in vec2 Uv;
-in vec3 cor_texto;
-out vec4 FragColor;
-
-uniform sampler2D textura;
+uniform sampler2D text;
+uniform vec4 textColor;
 
 void main()
-{
-    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(textura, Uv).r);
-    FragColor = vec4(cor_texto, 1.0) * sampled;
-}
+{    
+    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
+    color = textColor* sampled;
+}  
 )";

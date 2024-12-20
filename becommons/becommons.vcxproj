@@ -150,6 +150,7 @@
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\nucleo\cena.cpp" />
     <ClCompile Include="src\nucleo\sistema.cpp" />
+    <ClCompile Include="src\nucleo\sistema_de_interface.cpp" />
     <ClCompile Include="src\nucleo\sistema_de_renderizacao.cpp" />
     <ClCompile Include="src\util\malha.cpp" />
   </ItemGroup>
@@ -200,6 +201,7 @@
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
     <ClInclude Include="src\componentes\renderizador.hpp" />
+    <ClInclude Include="src\componentes\texto.hpp" />
     <ClInclude Include="src\componentes\transformacao.hpp" />
     <ClInclude Include="src\depuracao\assert.hpp" />
     <ClInclude Include="src\depuracao\debug.hpp" />
@@ -207,6 +209,7 @@
     <ClInclude Include="src\inputs\inputs.hpp" />
     <ClInclude Include="src\nucleo\cena.hpp" />
     <ClInclude Include="src\nucleo\sistema.hpp" />
+    <ClInclude Include="src\nucleo\sistema_de_interface.hpp" />
     <ClInclude Include="src\nucleo\sistema_de_renderizacao.hpp" />
     <ClInclude Include="src\util\cor.hpp" />
     <ClInclude Include="src\util\luz.hpp" />

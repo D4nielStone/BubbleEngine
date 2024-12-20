@@ -10,7 +10,7 @@ static void callbackSize(GLFWwindow* window, int w, int h)
     janela->tamanho.h = h;
 }
 
-bubble::janela::janela(const char* nome)
+bubble::janela::janela(const char* nome, const char* icon_path)
 {
     // inicia glfw
     if (!glfwInit())
@@ -33,8 +33,13 @@ bubble::janela::janela(const char* nome)
         abort();
     }
 
+    bubble::imageLoader icone_;
+
     // define o ícone da janela
-    auto icone_ = bubble::imageLoader("icon.ico");
+    if(icon_path)
+    icone_ = bubble::imageLoader(icon_path);
+    else
+    icone_ = bubble::imageLoader("icon.ico");
     const GLFWimage icone = icone_.converterParaGlfw();
 
     if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);

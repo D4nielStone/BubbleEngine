@@ -119,5 +119,6 @@ namespace bubble
             return it->second;
         }
         obterInstancia().carregar(nome_da_fonte, 12);
+        return std::map<char32_t, caractere>{};
     }
 }

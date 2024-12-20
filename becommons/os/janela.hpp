@@ -25,7 +25,7 @@ namespace bubble
 	{
 		vetor4<float> tamanho;
 		GLFWwindow* window;
-		janela(const char* nome);
+		janela(const char* nome, const char* icon_path = nullptr);
 		void poll() const;
 		void swap() const;
 		void viewport() const;

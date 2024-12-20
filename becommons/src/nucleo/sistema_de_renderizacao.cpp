@@ -13,6 +13,8 @@ namespace bubble
 {
     void sistemaRenderizacao::atualizar(double deltaTime)
     {
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
         auto camera = cena->obterCamera();
         if (!camera) return;
         glClearColor(camera->ceu.r, camera->ceu.g, camera->ceu.b, camera->ceu.a);
@@ -37,8 +39,6 @@ namespace bubble
         this->reg = cena->obterRegistro();
 
         if (!shader_phong) shader_phong = new bubble::shader();
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
     }
 }

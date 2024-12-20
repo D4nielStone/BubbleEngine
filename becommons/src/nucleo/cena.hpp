@@ -8,6 +8,7 @@
 #include "src/entidades/entidade.hpp"
 #include "src/componentes/camera.hpp"
 #include "src/nucleo/sistema_de_renderizacao.hpp"
+#include "src/nucleo/sistema_de_interface.hpp"
 /**
  * @class cena
  */
@@ -30,5 +31,6 @@ namespace bubble
 		std::shared_ptr<camera> camera_atual{ nullptr };
 		bool rodando = false;
 		sistemaRenderizacao srender;
+		sistemaInterface sinterface;
 	};
 }

@@ -3,6 +3,7 @@
 bubble::cena::cena()
 {
 	srender.inicializar(this);
+	sinterface.inicializar(this);
 }
 
 void bubble::cena::pausar()
@@ -36,6 +37,7 @@ void bubble::cena::atualizar(double deltaTime)
 	{
 		// se parado apenas renderiza
 		srender.atualizar(deltaTime);
+		sinterface.atualizar(deltaTime);
 	}
 	else
 	{
@@ -43,6 +45,7 @@ void bubble::cena::atualizar(double deltaTime)
 		elapsedTime += deltaTime;
 		if(rodando) Debug::emitir("cena", "Tempo de execucao: " + std::to_string(elapsedTime) + "s");
 		srender.atualizar(deltaTime);
+		sinterface.atualizar(deltaTime);
 	}
 }
 
