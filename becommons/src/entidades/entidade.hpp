@@ -68,6 +68,7 @@ namespace bubble
 		ent.mascara |= T::mascara;
 		mascaras[ent.id] = ent.mascara; // Atualiza a máscara no mapa auxiliar
 		entidades[ent.id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
+		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
 	}
 
 

@@ -4,11 +4,11 @@ inline const char* texto_vert = R"(
 layout (location = 0) in vec4 vertex; // <vec2 pos, vec2 tex>
 out vec2 TexCoords;
 
-uniform mat4 projection;
+uniform mat4 projecao;
 
 void main()
 {
-    gl_Position = vec4(vertex.xy, 0.0, 1.0);
+    gl_Position = projecao * vec4(vertex.xy, 0.0, 1.0);
     TexCoords = vertex.zw;
 }  
 )";

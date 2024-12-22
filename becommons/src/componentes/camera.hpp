@@ -26,7 +26,7 @@ namespace bubble
 
 		glm::vec3 posicao, alvo, cima;
 
-		float fov,aspecto,corte_curto,corte_longo;
+		float fov, aspecto, corte_curto, corte_longo, escala{5.f};
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
@@ -53,7 +53,7 @@ namespace bubble
 					int altura = viewport_ptr->h;
 					aspecto = static_cast<float>(largura) / altura;
 
-					return glm::ortho(-10.f * aspecto, 10.f*aspecto, -10.f, 10.f, corte_curto, corte_longo);
+					return glm::ortho(-escala * aspecto, escala *aspecto, -escala, escala, corte_curto, corte_longo);
 				}
 				return glm::mat4(1);
 			}

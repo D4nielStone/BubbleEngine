@@ -6,6 +6,7 @@
  */
 #pragma once
 #include <cstdint>
+#include <type_traits>
 
 namespace bubble
 {
@@ -29,7 +30,9 @@ namespace bubble
 			COMPONENTE_PROPRIEDADES = 1 << 2,
 			COMPONENTE_TRANSFORMACAO = 1 << 3,
 			COMPONENTE_TEXTO = 1 << 4,
+			COMPONENTE_CODIGO = 1 << 5,
 		};
+		uint32_t meu_objeto{ 0 };
 		virtual ~componente() = default;
 	};
 	inline componente::mascara operator|(componente::mascara lhs, componente::mascara rhs) {

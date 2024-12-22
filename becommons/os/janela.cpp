@@ -18,7 +18,6 @@ bubble::janela::janela(const char* nome, const char* icon_path)
         Debug::emitir(Erro, "Iniciando janela glfw");
         abort();
     }
-    glfwWindowHint(GLFW_SAMPLES, 2);
     window = glfwCreateWindow(800, 400, nome, NULL, NULL);
     if (!window) {
         Debug::emitir(Erro, "Janla invalida");
@@ -46,7 +45,6 @@ bubble::janela::janela(const char* nome, const char* icon_path)
 
     // ativa blend
     glEnable(GL_BLEND);
-    glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);

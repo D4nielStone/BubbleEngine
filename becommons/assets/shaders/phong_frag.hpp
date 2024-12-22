@@ -20,7 +20,7 @@ uniform sampler2D texture_diffuse1;
 uniform bool texture_diffuse1_bool;
 uniform bool uvMundo;
 
-vec3 lightPos = vec3(10.f, 8.f, 7.f); // Posição da luz pontual
+vec3 lightPos = vec3(5.f, 10.f, 3.f); // Posição da luz pontual
 
 void main()
 {

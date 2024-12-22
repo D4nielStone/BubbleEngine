@@ -25,6 +25,10 @@ void bubble::cena::iniciar()
 	if (rodando != false)
 		return;
 
+	/// o sistema de código apenas inicia aao começar a cena
+	/// no modo de joo
+	scodigo.inicializar(this);
+
 	// capturar snapshot do registro
 	rodando = true;
 }
@@ -46,6 +50,7 @@ void bubble::cena::atualizar(double deltaTime)
 		if(rodando) Debug::emitir("cena", "Tempo de execucao: " + std::to_string(elapsedTime) + "s");
 		srender.atualizar(deltaTime);
 		sinterface.atualizar(deltaTime);
+		scodigo.atualizar(deltaTime);
 	}
 }
 

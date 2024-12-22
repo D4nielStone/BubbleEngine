@@ -7,8 +7,11 @@
 
 #include "src/entidades/entidade.hpp"
 #include "src/componentes/camera.hpp"
-#include "src/nucleo/sistema_de_renderizacao.hpp"
-#include "src/nucleo/sistema_de_interface.hpp"
+#include "sistema_de_renderizacao.hpp"
+#include "sistema_de_interface.hpp"
+#include "sistema_de_codigo.hpp"
+#include <memory>
+
 /**
  * @class cena
  */
@@ -32,5 +35,8 @@ namespace bubble
 		bool rodando = false;
 		sistemaRenderizacao srender;
 		sistemaInterface sinterface;
+		sistemaCodigo scodigo;
 	};
 }
+
+inline bubble::cena* cena_atual{ nullptr };

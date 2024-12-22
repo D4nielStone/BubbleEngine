@@ -8,21 +8,27 @@
 #include "glm/gtc/type_ptr.hpp"
 #include <src/componentes/texto.hpp>
 #include <src/arquivadores/fonte.hpp>
+#include <os/janela.hpp>
 
 bubble::shader* shader_texto{ nullptr };
+int fps{};
+double et{};
 
 namespace bubble
 {
     void sistemaInterface::atualizar(double deltaTime)
     {
+        et += deltaTime;
+        if (et >= 1.0) { et = 0; fps = 1 / deltaTime; };
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
         reg->cada<bubble::texto>([&](const uint32_t ent) 
             {
                 auto comp_text = reg->obter<bubble::texto>(ent);
-                texto(*shader_texto, comp_text->frase, -1, -1, 0.005f, {1, 1, 1, 1});
+                texto(*shader_texto, comp_text->frase, comp_text->padding.x, comp_text->padding.y, comp_text->escala, {1, 1, 1, 1});
             }
         );
+        texto(*shader_texto, "FPS " + std::to_string(fps), 0, 100, 1.f, {1, 1, 1, 1});
     }
 
     void sistemaInterface::inicializar(bubble::cena* cena)
@@ -43,14 +49,14 @@ namespace bubble
         glBindVertexArray(0);
     }
 
-    void bubble::sistemaInterface::texto(shader& s, const std::string& texto, float x, float y, float escala, bubble::cor color)
+    void bubble::sistemaInterface::texto(shader& s, const std::string& texto, float x, float y, float escala, bubble::cor color) const
     {
-        glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
+        glm::mat4 projection = glm::ortho(0.f, 400.f, 0.f, 400.f);
 
         // activate corresponding render state	
         s.use();
         s.setCor("textColor", color);
-        s.setMat4("projection", glm::value_ptr(projection));
+        s.setMat4("projecao", glm::value_ptr(projection));
 
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(text_VAO);
