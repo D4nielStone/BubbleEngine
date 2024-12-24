@@ -47,7 +47,6 @@ void bubble::cena::atualizar(double deltaTime)
 	{
 		// efetua operacoes matematicas de transformacao
 		elapsedTime += deltaTime;
-		if(rodando) Debug::emitir("cena", "Tempo de execucao: " + std::to_string(elapsedTime) + "s");
 		srender.atualizar(deltaTime);
 		sinterface.atualizar(deltaTime);
 		scodigo.atualizar(deltaTime);

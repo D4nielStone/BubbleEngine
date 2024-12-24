@@ -70,7 +70,7 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
         carregado = true;
         return;
     }
-     Debug::emitir("bubble::imageLoader", "nova imagem: " + filepath);
+     Debug::emitir("imageLoader", "nova imagem: " + filepath);
     //Inicializa o FreeImage  
     FreeImage_Initialise();
 

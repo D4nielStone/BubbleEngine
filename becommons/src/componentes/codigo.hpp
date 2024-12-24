@@ -5,7 +5,6 @@
 #include <string>
 #include "src/depuracao/debug.hpp"
 #include <lua.hpp>
-#include <LuaBridge/LuaBridge.h>
 
 namespace bubble
 {

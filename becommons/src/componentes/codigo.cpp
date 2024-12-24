@@ -1,6 +1,6 @@
 #include "codigo.hpp"
 #include "src/nucleo/cena.hpp"
-#include "src/api/entidade.hpp"
+#include "src/api/api_entidade.hpp"
 
 
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
@@ -8,12 +8,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 {
 	luaL_openlibs(L);
 
-	// registra classe entidade
-	luabridge::getGlobalNamespace(L)
-		.beginClass<bapi::entidade>("entidade")
-		.addConstructor<void(*)(uint32_t)>()
-		.addFunction("mover", &bapi::entidade::mover)
-		.endClass();
+	bapi::entidade::definir(L);
 
 	// Carregar e executar o script
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK)
