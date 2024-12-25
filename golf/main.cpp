@@ -23,7 +23,7 @@ constexpr const char* title = "Jogo de Golf - (C) 2024 Daniel Oliveira";
 
 int INIT
 {
-	bubble::janela janela(title, "icon_golf.png");
+	bubble::janela janela(title, "icon_golf.ico");
 	bubble::cena cena;
 	cena_atual = &cena;
 
@@ -37,14 +37,14 @@ int INIT
 	auto mdl_bandeira = new bubble::modelo(R"(C:\Users\DN\3D Objects\golf\golf.obj)");
 	auto mdl_bola = new bubble::modelo(R"(C:\Users\DN\3D Objects\golf\bola\scene.gltf)");
 
-	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::camera::ORTHO, bubble::vetor3(5.f, 5.f, 5.f));
+	cena.obterRegistro()->adicionar<bubble::camera>(player, bubble::vetor3(5.f, 5.f, 5.f), bubble::camera::f_Alvo);
 
 	cena.obterRegistro()->adicionar<bubble::transformacao>(cubo);
 	cena.obterRegistro()->adicionar<bubble::renderizador>(cubo, mdl_cubo);
 
 	cena.obterRegistro()->adicionar<bubble::transformacao>(bola, bubble::vetor3{0.f, 0.f, 8.f}, bubble::vetor3{ 0.f, 0.f, 0.f }, bubble::vetor3{ 0.1f, 0.1f, 0.1f });
 	cena.obterRegistro()->adicionar<bubble::renderizador>(bola, mdl_bola);
-	cena.obterRegistro()->adicionar<bubble::codigo>(bola, R"(C:\Users\DN\Desktop\script.lua)");
+	cena.obterRegistro()->adicionar<bubble::codigo>(bola, R"(C:\Users\DN\Desktop\deslizamento_camera.lua)");
 
 	cena.obterRegistro()->adicionar<bubble::transformacao>(bandeira);
 	cena.obterRegistro()->adicionar<bubble::renderizador>(bandeira, mdl_bandeira);

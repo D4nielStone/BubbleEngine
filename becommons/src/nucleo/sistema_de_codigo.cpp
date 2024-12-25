@@ -2,27 +2,53 @@
 #include "cena.hpp"
 #include <src/componentes/codigo.hpp>
 
-void bubble::sistemaCodigo::atualizar(double deltaTime)
+namespace bubble
 {
-    //atualiza os componentes
-    reg->cada<codigo>([&](const uint32_t entidade)
-        {
-            auto componente_codigo = reg->obter<codigo>(entidade);
-            componente_codigo->atualizar(deltaTime);
-        }
-    );
-}
+    void sistemaCodigo::atualizar(double deltaTime)
+    {
+        //atualiza os componentes
+        reg->cada<codigo>([&](const uint32_t entidade)
+            {
+                auto componente_codigo = reg->obter<codigo>(entidade);
+                componente_codigo->atualizar(deltaTime);
+            }
+        );
+    }
 
-void bubble::sistemaCodigo::inicializar(bubble::cena* cena)
-{
-    this->cena = cena;
-    this->reg = cena->obterRegistro();
+    void sistemaCodigo::inicializar(bubble::cena* cena)
+    {
+        this->cena = cena;
+        this->reg = cena->obterRegistro();
 
-    //inicializa os componentes
-    reg->cada<codigo>([&](const uint32_t entidade)
-        {
-            auto componente_codigo = reg->obter<codigo>(entidade);
-            componente_codigo->iniciar();
+        //inicializa os componentes
+        reg->cada<codigo>([&](const uint32_t entidade)
+            {
+                auto componente_codigo = reg->obter<codigo>(entidade);
+                componente_codigo->iniciar();
+            }
+        );
+    }
+    void sistemaCodigo::iniciarThread() {
+        rodando = true;
+        codigoThread = std::thread([this]() {
+            while (rodando) {
+                double deltaTime = 0.016; // Simula 60 FPS
+                {
+                    this->atualizar(deltaTime);
+                }
+                std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aguarda 16ms
+            }
+            });
+    }
+
+    void sistemaCodigo::pararThread() {
+        rodando = false;
+        if (codigoThread.joinable()) {
+            codigoThread.join();
         }
-    );
+    }
+
+    sistemaCodigo::~sistemaCodigo() {
+        pararThread();
+    }
 }

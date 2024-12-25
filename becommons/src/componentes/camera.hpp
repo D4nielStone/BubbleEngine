@@ -7,7 +7,6 @@
 #include <glm/ext/matrix_transform.hpp>
 #include <src/util/cor.hpp>
 
-namespace bapi { class entidade; }
 namespace bubble
 {
 	/**
@@ -20,34 +19,50 @@ namespace bubble
 		 * @enum configCamera
 		 * @brief configuracao da camera;
 		 */
-		enum configCamera : uint8_t { ORTHO, PERSPECTIVA, A, LIVRE };
-		configCamera projecao;
+		enum flagCamera : uint8_t { f_None = 0, f_Ortografica = 1 << 0, f_Alvo = 1 << 1};
+		flagCamera flags;
 
 		cor ceu{0.43f, 0.78f, 0.86, 1.f};
 
-		glm::vec3 posicao, *alvo, cima;
+		glm::vec3 posicao, * alvo{ nullptr }, cima{0, 1, 0};
 
-		float fov, aspecto, corte_curto, corte_longo, escala{5.f};
+		float fov{ 75.f }, aspecto, corte_curto{ 0.1f }, corte_longo{ 300.f }, escala{ 5.f }, yaw{ 0.f }, pitch{0.f};
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
 		vetor4<float>* viewport_ptr{ nullptr };
 
 		camera() = default;
-		camera(const configCamera& projecao, const vetor3<float>& pos, const vetor3<float>& target = { 0.f, 0.f, 0.f }, float fov = 45.f, float aspect = 1.f, float near = 0.1f, float far = 100.f)
+		camera(const vetor3<float>& pos, const flagCamera& flags = f_None)
 
-			: posicao({ pos.x,pos.y,pos.z }), alvo(new glm::vec3{ target.x,target.y,target.z }),
-			cima(0.0f, 1.0f, 0.0f), fov(fov), aspecto(aspect), corte_curto(near), corte_longo(far),
-			projecao(projecao)
+			: posicao({ pos.x,pos.y,pos.z }), flags(flags)
 		{
 		}
 		glm::mat4 obtViewMatrix() const {
-			return glm::lookAt(posicao, *alvo, cima);
+			if ((flags & f_Alvo)!= 0 && alvo)
+			{
+				return glm::lookAt(posicao, *alvo, cima);
+			}
+			else
+			{
+				// Cria a matriz de rotação com base no yaw e pitch
+				glm::mat4 rotacaoYaw = glm::rotate(glm::mat4(1.0f), glm::radians(-yaw), glm::vec3(0.0f, 1.0f, 0.0f));
+				glm::mat4 rotacaoPitch = glm::rotate(glm::mat4(1.0f), glm::radians(-pitch), glm::vec3(1.0f, 0.0f, 0.0f));
+
+				// Combina as rotações
+				glm::mat4 rotacao = rotacaoPitch * rotacaoYaw;
+
+				// Translada a câmera para a posição inversa
+				glm::mat4 translacao = glm::translate(glm::mat4(1.0f), -posicao);
+
+				// A matriz de visualização é a combinação das duas
+				return rotacao * translacao;
+			}
 		}
 
 		glm::mat4 obtProjectionMatrix()
 		{
-			if (projecao == configCamera::ORTHO)
+			if ((flags & f_Ortografica) != 0)
 			{
 				if (viewport_ptr)
 				{
@@ -71,5 +86,6 @@ namespace bubble
 			}
 		}
 		void olhar(const uint32_t& ent);
+		void olharPara(const glm::vec3& pos);
 	};
 }

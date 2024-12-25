@@ -7,14 +7,22 @@
 
 #pragma once
 #include "sistema.hpp"
+#include <thread>
+#include <atomic>
 
 namespace bubble
 {
 	class sistemaCodigo : public sistema
 	{
+	private:
+		std::atomic<bool> rodando{ false }; // Controle da thread
+		std::thread codigoThread;
 	public:
 		sistemaCodigo() = default;
+		~sistemaCodigo();
 		void atualizar(double deltaTime) override;
 		void inicializar(bubble::cena* cena) override;
+		void iniciarThread();
+		void pararThread();
 	};
 }

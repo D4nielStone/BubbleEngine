@@ -10,6 +10,7 @@ void bubble::cena::pausar()
 {
 	Debug::emitir("cena", "Pausando");
 	rodando = false;
+	scodigo.pararThread();
 }
 
 void bubble::cena::parar()
@@ -17,6 +18,7 @@ void bubble::cena::parar()
 	Debug::emitir("cena", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
+	scodigo.pararThread();
 }
 
 void bubble::cena::iniciar()
@@ -31,6 +33,7 @@ void bubble::cena::iniciar()
 
 	// capturar snapshot do registro
 	rodando = true;
+	scodigo.iniciarThread();
 }
 
 double elapsedTime;
@@ -49,7 +52,6 @@ void bubble::cena::atualizar(double deltaTime)
 		elapsedTime += deltaTime;
 		srender.atualizar(deltaTime);
 		sinterface.atualizar(deltaTime);
-		scodigo.atualizar(deltaTime);
 	}
 }
 

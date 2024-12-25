@@ -19,6 +19,8 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 
 void bubble::codigo::iniciar() const
 {
+	lua_pushnumber(L, meu_objeto);
+	lua_setglobal(L, "meuId");
 	// Tentar obter a função "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
 
