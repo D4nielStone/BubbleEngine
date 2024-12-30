@@ -3,15 +3,22 @@
 #include "src/util/malha.hpp"
 #include "src/util/textura.hpp"
 #include <assimp/scene.h>
+#include <filesystem>
 
 namespace bubble
 {
     class modelo
     {
     public:
-        modelo(const char* path)
+        modelo(const char* diretorio)
         {
-            carregarmodelo(path);
+            if (std::filesystem::exists(diretorio))
+                carregarmodelo(diretorio);
+            else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))
+            {
+
+                carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
+            }
         }
         malha* obterMalha(int idx) { return &malhas[idx]; };
         void desenhar(bubble::shader& shader);

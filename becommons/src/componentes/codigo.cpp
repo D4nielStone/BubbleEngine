@@ -1,6 +1,8 @@
 #include "codigo.hpp"
-#include "src/nucleo/cena.hpp"
+#include "src/nucleo/fase.hpp"
 #include "src/api/api_entidade.hpp"
+#include <src/inputs/inputs.hpp>
+#include "os/janela.hpp"
 
 
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
@@ -9,6 +11,16 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 	luaL_openlibs(L);
 
 	bapi::entidade::definir(L);
+
+	/* definindo classe inputs */
+	luabridge::getGlobalNamespace(L).
+		beginClass<bubble::inputs>("entradas").
+		addConstructor<void(*)()>().
+		addData("mouse_x", &bubble::inputs::mousex).
+		addData("mouse_y", &bubble::inputs::mousey).
+		addFunction("estaPressionado", &bubble::inputs::isKeyPressed).
+		endClass();
+	/*-------------------------*/
 
 	// Carregar e executar o script
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK)
@@ -19,8 +31,8 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 
 void bubble::codigo::iniciar() const
 {
-	lua_pushnumber(L, meu_objeto);
-	lua_setglobal(L, "meuId");
+	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
+	luabridge::setGlobal(L, &bubble::instanciaJanela->inputs, "entradas");
 	// Tentar obter a função "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
 

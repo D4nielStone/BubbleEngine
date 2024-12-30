@@ -10,8 +10,9 @@ namespace bubble
 		modelo* modelo;
 		static constexpr mascara mascara = COMPONENTE_RENDER;
 
-		explicit renderizador(bubble::modelo* malha) : modelo(malha)
+		renderizador(bubble::modelo* malha) : modelo(malha)
 		{
 		}
+		renderizador(const char* diretorio = "") {};
 	};
 }

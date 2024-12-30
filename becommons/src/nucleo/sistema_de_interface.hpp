@@ -16,7 +16,7 @@ namespace bubble
 	public:
 		sistemaInterface() = default;
 		void atualizar(double deltaTime) override;
-		void inicializar(bubble::cena* cena) override;
+		void inicializar(bubble::fase* fase) override;
 		void texto(shader& s, const std::string& texto, float x, float y, float escala, bubble::cor color) const;
 	private:
 		unsigned int text_VAO, text_VBO;

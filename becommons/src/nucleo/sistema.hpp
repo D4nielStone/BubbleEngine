@@ -14,7 +14,7 @@
 
 namespace bubble
 {
-    class cena;
+    class fase;
     class sistema {
     public:
         /**
@@ -31,7 +31,7 @@ namespace bubble
         /**
          * @brief Inicializa o sistema
          */
-        virtual void inicializar(bubble::cena* cena);
+        virtual void inicializar(bubble::fase* fase);
 
         /**
          * @brief Atualiza o sistema dentro do loop principal
@@ -40,7 +40,7 @@ namespace bubble
         virtual void atualizar(double deltaTime) = 0;
 
     protected:
-        cena* cena;
+        fase* fase;
         registro* reg;
     };
 }

@@ -33,6 +33,7 @@ namespace bubble
 			COMPONENTE_CODIGO = 1 << 5,
 		};
 		uint32_t meu_objeto{ 0 };
+		componente() = default;
 		virtual ~componente() = default;
 	};
 	inline componente::mascara operator|(componente::mascara lhs, componente::mascara rhs) {

@@ -1,5 +1,5 @@
 #include "sistema_de_codigo.hpp"
-#include "cena.hpp"
+#include "fase.hpp"
 #include <src/componentes/codigo.hpp>
 
 namespace bubble
@@ -15,10 +15,10 @@ namespace bubble
         );
     }
 
-    void sistemaCodigo::inicializar(bubble::cena* cena)
+    void sistemaCodigo::inicializar(bubble::fase* fase)
     {
-        this->cena = cena;
-        this->reg = cena->obterRegistro();
+        this->fase = fase;
+        this->reg = fase->obterRegistro();
 
         //inicializa os componentes
         reg->cada<codigo>([&](const uint32_t entidade)

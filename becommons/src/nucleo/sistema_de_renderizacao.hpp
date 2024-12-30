@@ -15,6 +15,6 @@ namespace bubble
 	public:
 		sistemaRenderizacao() = default;
 		void atualizar(double deltaTime) override;
-		void inicializar(bubble::cena* cena) override;
+		void inicializar(bubble::fase* fase) override;
 	};
 }

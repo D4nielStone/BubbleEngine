@@ -16,7 +16,7 @@ namespace bubble
 {
 	/**
 	 * @struct entidade
-	 * @brief todo elemento do cenario
+	 * @brief todo elemento do faserio
 	 */
 	struct entidade {
 		uint32_t id;

@@ -42,6 +42,7 @@ namespace bubble
             shader.setBool((name + number + "_bool").c_str(), true);
             glBindTexture(GL_TEXTURE_2D, material.texturas[i].id);
         }
+        shader.setBool("recebe_luz", material.recebe_luz);
         glActiveTexture(GL_TEXTURE0);
 
         // draw mesh

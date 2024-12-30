@@ -3,7 +3,7 @@
 #include "src/componentes/renderizador.hpp"
 #include "src/componentes/transformacao.hpp"
 #include "src/componentes/camera.hpp"
-#include "src/nucleo/cena.hpp"
+#include "src/nucleo/fase.hpp"
 #include "src/arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include <src/componentes/texto.hpp>
@@ -11,15 +11,11 @@
 #include <os/janela.hpp>
 
 bubble::shader* shader_texto{ nullptr };
-int fps{};
-double et{};
 
 namespace bubble
 {
     void sistemaInterface::atualizar(double deltaTime)
     {
-        et += deltaTime;
-        if (et >= 1.0) { et = 0; fps = 1 / deltaTime; };
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
         reg->cada<bubble::texto>([&](const uint32_t ent) 
@@ -28,13 +24,12 @@ namespace bubble
                 texto(*shader_texto, comp_text->frase, comp_text->padding.x, comp_text->padding.y, comp_text->escala, {1, 1, 1, 1});
             }
         );
-        texto(*shader_texto, "FPS " + std::to_string(fps), 0, 100, 1.f, {1, 1, 1, 1});
     }
 
-    void sistemaInterface::inicializar(bubble::cena* cena)
+    void sistemaInterface::inicializar(bubble::fase* fase)
     {
-        this->cena = cena;
-        this->reg = cena->obterRegistro();
+        this->fase = fase;
+        this->reg = fase->obterRegistro();
 
         if (!shader_texto) shader_texto = new bubble::shader("texto.vert", "texto.frag");
 

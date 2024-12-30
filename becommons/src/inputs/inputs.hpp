@@ -10,27 +10,6 @@ struct GLFWwindow;
 
 namespace bubble
 {
-    enum key : uint8_t {
-        W,
-        A,
-        S,
-        D,
-        E,
-        Q,
-        UP,
-        RIGHT,
-        LEFT,
-        DOWN,
-        Shift,
-        Ctrl,
-        Alt,
-        BS,
-        ENTER,
-        F5,
-        Del,
-        Count
-    };
-
     enum inputMode {
         Editor,
         Game,
@@ -42,19 +21,19 @@ namespace bubble
         inputs();
 
         void setInputMode(inputMode mode);
-        void keyPressed  (const key &key);
-        void keyReleased (const key &key);
-        bool isKeyPressed(const key &key) const;
+        void keyPressed  (const char &key);
+        void keyReleased (const char &key);
+        bool isKeyPressed(const char &key) const;
         inputMode getInputMode() const;
         double mousex, mousey;
         int mouseEnter{ 0 }, teclado_action{ 0 }, mods{ 0 }, mouseButton{ 0 };
         char letra{ '\0' };
         bool mouseClick{ false }, char_press{ false };
     protected:
-        virtual void handleKey(const key &key);
+        virtual void handleKey(const char &key);
     private:
         inputMode currentMode{ inputMode::Editor };
-        std::unordered_map<key, bool> keyStates;
+        std::unordered_map<char, bool> keyStates;
     };
 
     // Callback de teclado GLFW

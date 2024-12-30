@@ -22,12 +22,17 @@ uniform bool uvMundo;
 
 vec3 lightPos = vec3(5.f, 10.f, 3.f); // Posição da luz pontual
 
+uniform bool recebe_luz;
+
 void main()
 {
+    vec3 result;
     vec2 novoUv = uvMundo ? Position.xz : Uv;
     // Verifica se a textura existe ou se deve usar a cor base
     vec4 texColor = texture(texture_diffuse1, novoUv);  // Obtém a cor da textura
     vec4 baseColor = (texture_diffuse1_bool) ? texColor : material.cor_difusa;  // Cor final após aplicar a textura ou a cor base
+    if(recebe_luz)
+    {
 
     vec3 norm = normalize(Normal);
     vec3 lightDir = normalize(lightPos);
@@ -38,8 +43,12 @@ void main()
 
 
     // Combina a iluminação difusa, especular e a cor ambiente
-    vec3 result = diffuse;
-    
+    result = diffuse;
+    }
+    else
+    {    
+        result = baseColor.xyz;
+    }
     // Aplica o resultado final ao fragmento
     FragColor = vec4(result, baseColor.w);
 }

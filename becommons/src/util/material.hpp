@@ -11,7 +11,7 @@ namespace bubble
 		material() = default;
 		material(const std::vector<textura>& texturas, const bubble::cor& difusa = bubble::cor(1, 1, 1), const bubble::cor& especular = bubble::cor(1.f, 1.f, 1.f)) :difusa(difusa), especular(especular), texturas(texturas) {}
 		std::vector<textura> texturas;
-		bool uvMundo{ false };
+		bool uvMundo{ false }, recebe_luz{ true };
 		bubble::cor difusa;
 		bubble::cor especular;
 	};

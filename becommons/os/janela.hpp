@@ -10,6 +10,7 @@
 #include "src/util/vetor4.hpp"
 #include "src/nucleo/sistema.hpp"
 #include "src/nucleo/sistema_de_renderizacao.hpp"
+#include "src/inputs/inputs.hpp"
 #include <functional>
 #include <memory>
 #include <unordered_map>
@@ -25,9 +26,13 @@ namespace bubble
 	{
 		vetor4<float> tamanho;
 		GLFWwindow* window;
+		inputs inputs;
 		janela(const char* nome, const char* icon_path = nullptr);
+		~janela();
 		void poll() const;
 		void swap() const;
 		void viewport() const;
+		void nome(const char* novo_nome) const;
 	};
+	inline static janela* instanciaJanela{ nullptr };
 }

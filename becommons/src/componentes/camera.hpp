@@ -24,7 +24,7 @@ namespace bubble
 
 		cor ceu{0.43f, 0.78f, 0.86, 1.f};
 
-		glm::vec3 posicao, * alvo{ nullptr }, cima{0, 1, 0};
+		glm::vec3 posicao, * alvo{ new glm::vec3(0,0,0) }, cima{0, 1, 0};
 
 		float fov{ 75.f }, aspecto, corte_curto{ 0.1f }, corte_longo{ 300.f }, escala{ 5.f }, yaw{ 0.f }, pitch{0.f};
 
@@ -33,11 +33,7 @@ namespace bubble
 		vetor4<float>* viewport_ptr{ nullptr };
 
 		camera() = default;
-		camera(const vetor3<float>& pos, const flagCamera& flags = f_None)
-
-			: posicao({ pos.x,pos.y,pos.z }), flags(flags)
-		{
-		}
+		camera(const vetor3<float>& pos, const flagCamera& flags = f_Ortografica);
 		glm::mat4 obtViewMatrix() const {
 			if ((flags & f_Alvo)!= 0 && alvo)
 			{

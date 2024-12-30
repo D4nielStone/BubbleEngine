@@ -3,7 +3,7 @@
 #include "src/componentes/renderizador.hpp"
 #include "src/componentes/transformacao.hpp"
 #include "src/componentes/camera.hpp"
-#include "src/nucleo/cena.hpp"
+#include "src/nucleo/fase.hpp"
 #include "src/arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
 
@@ -15,7 +15,7 @@ namespace bubble
     {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
-        auto camera = cena->obterCamera();
+        auto camera = fase->obterCamera();
         if (!camera) return;
         glClearColor(camera->ceu.r, camera->ceu.g, camera->ceu.b, camera->ceu.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -33,10 +33,10 @@ namespace bubble
             });
     }
 
-    void sistemaRenderizacao::inicializar(bubble::cena* cena)
+    void sistemaRenderizacao::inicializar(bubble::fase* fase)
     {
-        this->cena = cena;
-        this->reg = cena->obterRegistro();
+        this->fase = fase;
+        this->reg = fase->obterRegistro();
 
         if (!shader_phong) shader_phong = new bubble::shader();
         glCullFace(GL_BACK);

@@ -1,8 +1,8 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 /**
- * @file cena.hpp
- * @brief Gerencia sistemas numa cena
+ * @file fase.hpp
+ * @brief Gerencia sistemas numa fase
  */
 
 #include "src/entidades/entidade.hpp"
@@ -10,33 +10,39 @@
 #include "sistema_de_renderizacao.hpp"
 #include "sistema_de_interface.hpp"
 #include "sistema_de_codigo.hpp"
+#include <string>
 #include <memory>
 
 /**
- * @class cena
+ * @class fase
  */
 
 namespace bubble
 {
-	class cena
+	class fase
 	{
 	public:
-		cena();
+		fase(const char* diretorio);
+		fase();
+		std::string nome() const;
 		void pausar();
 		void parar();
 		void iniciar();
 		void atualizar(double deltaTime);
 		void definirCamera(const entidade &ent);
+		void analizar(const char* diretorio);
 		std::shared_ptr<camera> obterCamera() const;
 		registro* obterRegistro();
 	private:
+		const char* diretorio;
 		registro reg;
 		std::shared_ptr<camera> camera_atual{ nullptr };
 		bool rodando = false;
+		std::string _Mnome;
 		sistemaRenderizacao srender;
 		sistemaInterface sinterface;
 		sistemaCodigo scodigo;
 	};
 }
 
-inline bubble::cena* cena_atual{ nullptr };
+inline bubble::fase* fase_atual{ nullptr };

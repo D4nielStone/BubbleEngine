@@ -9,7 +9,9 @@ static void callbackSize(GLFWwindow* window, int w, int h)
     janela->tamanho.w = w;
     janela->tamanho.h = h;
 }
-
+bubble::janela::~janela()
+{
+}
 bubble::janela::janela(const char* nome, const char* icon_path)
 {
     // inicia glfw
@@ -48,7 +50,10 @@ bubble::janela::janela(const char* nome, const char* icon_path)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);
+    glfwSetCursorPosCallback(window,bubble::mousePosCallBack);
+    glfwSetKeyCallback(window,bubble::callbackKey);
     glfwSetWindowUserPointer(window, this);
+
     bubble::vetor4<int> tam{};
     glfwGetWindowSize(window, &tam.w, &tam.h);
     tamanho.h = tam.h;
@@ -68,4 +73,9 @@ void bubble::janela::swap() const
 void bubble::janela::viewport() const
 {
     glViewport(0, 0, tamanho.w, tamanho.h);
+}
+
+void bubble::janela::nome(const char* novo_nome) const
+{
+    glfwSetWindowTitle(window, novo_nome);
 }
