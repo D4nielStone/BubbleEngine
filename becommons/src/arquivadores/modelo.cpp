@@ -8,12 +8,22 @@
 
 namespace bubble
 {
-    std::vector<textura> texturas_carregadas;
-
     void modelo::desenhar(bubble::shader& shader)
     {
         for (unsigned int i = 0; i < malhas.size(); i++)
             malhas[i].desenhar(shader);
+    }
+
+    bubble::shader& modelo::shader()
+    {
+        if (!_Mshader) _Mshader = new bubble::shader();
+        return *_Mshader;
+    }
+
+    void modelo::definirShader(const char* vertex, const char* frag)
+    {
+        if (_Mshader) delete _Mshader;
+        _Mshader = new bubble::shader(vertex, frag);
     }
 
     void modelo::carregarmodelo(const std::string& path)
@@ -23,7 +33,7 @@ namespace bubble
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
-            Debug::emitir(Erro, import.GetErrorString());
+            debug::emitir(Erro, import.GetErrorString());
             return;
         }
         diretorio = path.substr(0, path.find_last_of('\\'));
@@ -134,32 +144,6 @@ namespace bubble
         {
             aiString str;
             mat->GetTexture(type, i, &str);
-            // check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
-            bool skip = false;
-            for (unsigned int j = 0; j < texturas_carregadas.size(); j++)
-            {
-                if (std::strcmp(texturas_carregadas[j].path.data(), str.C_Str()) == 0)
-                {
-                    textures.push_back(texturas_carregadas[j]);
-                    skip = true; // a texture with the same filepath has already been loaded, continue to next one. (optimization)
-                    break;
-                }
-            }
-            if (!skip)
-            {   // if texture hasn't been loaded already, load it
-                textura texture;
-                auto relativa = std::filesystem::path(str.C_Str()).filename().string();
-
-                int tex = texturaDoArquivo(this->diretorio + "\\" + relativa);
-                if (tex != -1)
-                    texture.id = tex;
-                else
-                    continue;
-                texture.tipo = typeName;
-                texture.path = str.C_Str();
-                textures.push_back(texture);
-                texturas_carregadas.push_back(texture);  // store it as texture loaded for entire model, to ensure we won't unnecessary load duplicate textures.
-            }
         }
         return textures;
     }

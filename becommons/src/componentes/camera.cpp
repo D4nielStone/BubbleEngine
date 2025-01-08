@@ -5,15 +5,17 @@
 
 void bubble::camera::olhar(const uint32_t& ent)
 {
-	if(fase_atual->obterRegistro()->tem<bubble::transformacao>(ent))
+	if (!fase_atual->obterRegistro()->tem<bubble::transformacao>(ent))return;
+	flag_alvo = true;
 	alvo = &fase_atual->obterRegistro()->obter<bubble::transformacao>(ent)->posicao;
 }
 void bubble::camera::olharPara(const glm::vec3& pos)
 {
+	flag_alvo = true;
 	*alvo = pos;
 }
 
-bubble::camera::camera(const vetor3<float>& pos, const flagCamera& flags)
-	: posicao({ pos.x,pos.y,pos.z }), flags(flags)
+bubble::camera::camera(const vetor3<float>& pos, const bool alvo, const bool orth)
+	: posicao({ pos.x,pos.y,pos.z }), flag_alvo(alvo), flag_orth(orth)
 {
 }

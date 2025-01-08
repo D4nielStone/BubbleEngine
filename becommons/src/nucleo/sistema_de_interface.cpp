@@ -11,17 +11,33 @@
 #include <os/janela.hpp>
 
 bubble::shader* shader_texto{ nullptr };
+bubble::shader* shader_imagem{ nullptr };
+glm::mat4 projection{1.f};
 
 namespace bubble
 {
+    sistemaInterface::~sistemaInterface()
+    {
+        delete shader_texto;
+        delete shader_imagem;
+        glDeleteBuffers(1, &text_VBO);
+        glDeleteBuffers(1, &img_VBO);
+        glDeleteVertexArrays(1, &text_VAO);
+        glDeleteVertexArrays(1, &img_VAO);
+    }
     void sistemaInterface::atualizar(double deltaTime)
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
+        projection = glm::ortho(0.f, instanciaJanela->tamanho.w, 0.f, instanciaJanela->tamanho.h);
         reg->cada<bubble::texto>([&](const uint32_t ent) 
             {
-                auto comp_text = reg->obter<bubble::texto>(ent);
-                texto(*shader_texto, comp_text->frase, comp_text->padding.x, comp_text->padding.y, comp_text->escala, {1, 1, 1, 1});
+                desenharTexto(*shader_texto, *reg->obter<bubble::texto>(ent));
+            }
+        );
+        reg->cada<bubble::imagem>([&](const uint32_t ent) 
+            {
+                desenharImagem(*shader_imagem, *reg->obter<bubble::imagem>(ent));
             }
         );
     }
@@ -32,7 +48,8 @@ namespace bubble
         this->reg = fase->obterRegistro();
 
         if (!shader_texto) shader_texto = new bubble::shader("texto.vert", "texto.frag");
-
+        if (!shader_imagem) shader_imagem = new bubble::shader("imagem.vert", "imagem.frag");
+        /*---------------texto---------------*/
         glGenVertexArrays(1, &text_VAO);
         glGenBuffers(1, &text_VBO);
         glBindVertexArray(text_VAO);
@@ -42,15 +59,58 @@ namespace bubble
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
+
+        /*--------------imagem--------------*/
+        // Definição de dados do quadrado (posição e UV)
+        float vertices[] = {
+            // Posição (x, y)    // UV (u, v)
+            0.0f, 0.0f,        0.0f, 0.0f, // Inferior esquerdo
+             1.0f, 0.0f,        1.0f, 0.0f, // Inferior direito
+             1.0f,  1.0f,        1.0f, 1.0f, // Superior direito
+            0.0f,  1.0f,        0.0f, 1.0f  // Superior esquerdo
+        };
+
+        // Índices para formar dois triângulos
+        unsigned int indices[] = {
+            0, 1, 2, // Primeiro triângulo
+            2, 3, 0  // Segundo triângulo
+        };
+
+        // Geração de VAO, VBO e EBO
+        glGenVertexArrays(1, &img_VAO);
+        glGenBuffers(1, &img_VBO);
+        glGenBuffers(1, &img_EBO);
+
+        // Configuração do VAO
+        glBindVertexArray(img_VAO);
+
+        // Configuração do VBO (dados do quadrado)
+        glBindBuffer(GL_ARRAY_BUFFER, img_VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+        // Configuração do EBO (índices)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, img_EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        // Configuração do atributo de posição (layout location = 0)
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+
+        // Configuração do atributo UV (layout location = 1)
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        // Desassociar o VAO para evitar alterações
+        glBindVertexArray(0);
+
     }
 
-    void bubble::sistemaInterface::texto(shader& s, const std::string& texto, float x, float y, float escala, bubble::cor color) const
+    void bubble::sistemaInterface::desenharTexto(shader& s, const bubble::texto &_texto)
     {
-        glm::mat4 projection = glm::ortho(0.f, 400.f, 0.f, 400.f);
-
+        auto text = _texto;
         // activate corresponding render state	
         s.use();
-        s.setCor("textColor", color);
+        s.setCor("textColor", text.cor);
         s.setMat4("projecao", glm::value_ptr(projection));
 
         glActiveTexture(GL_TEXTURE0);
@@ -59,17 +119,17 @@ namespace bubble
         // iterate through all characters
         std::string::const_iterator c;
         auto& chs = bubble::gerenciadorFontes::obterInstancia().obter("noto_sans.regular.ttf");
-        for(char32_t ca : texto)
+        for(char32_t ca : text.frase)
         {
             if (chs.empty())
                 return;
             bubble::caractere ch = chs.at(ca);
             
-            float xpos = x + ch.apoio.x * escala;
-            float ypos = y - (ch.tamanho.y - ch.apoio.y) * escala;
+            float xpos = text.padding.x + ch.apoio.x * text.escala;
+            float ypos = text.padding.y - (ch.tamanho.y - ch.apoio.y) * text.escala;
 
-            float w = ch.tamanho.x * escala;
-            float h = ch.tamanho.y * escala;
+            float w = ch.tamanho.x * text.escala;
+            float h = ch.tamanho.y * text.escala;
             // update VBO for each character
             float vertices[6][4] = {
                 { xpos,     ypos + h,   0.0f, 0.0f },
@@ -89,9 +149,24 @@ namespace bubble
             // render quad
             glDrawArrays(GL_TRIANGLES, 0, 6);
             // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-            x += (ch.avanco >> 6) * escala; // bitshift by 6 to get value in pixels (2^6 = 64)
+            text.padding.x += (ch.avanco >> 6) * text.escala; // bitshift by 6 to get value in pixels (2^6 = 64)
         }
         glBindVertexArray(0);
         glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    void bubble::sistemaInterface::desenharImagem(shader& s, const bubble::imagem& img)
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, img.id);
+        s.use();
+        s.setVec2("quadrado.posicao", img.padding.x,img.padding.y);
+        s.setVec2("quadrado.tamanho", img.limite.x, img.limite.y);
+        s.setInt("textura", 0);
+        s.setInt("flip", img.flip);
+        s.setMat4("projecao", glm::value_ptr(projection));
+        /*  desenho  */
+        glBindVertexArray(img_VAO);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glBindVertexArray(0);
     }
 }

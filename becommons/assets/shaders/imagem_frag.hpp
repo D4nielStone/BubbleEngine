@@ -7,7 +7,7 @@ uniform bool flip = false;
 uniform sampler2D textura;
 void main()
 {
-if(flip)
+if(!flip)
     FragColor = texture(textura, vec2(Uv.x, -Uv.y)).rgba;
     else
     FragColor = texture(textura, Uv);

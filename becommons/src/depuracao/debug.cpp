@@ -6,16 +6,16 @@
 
 std::vector<std::string> msgs;
 
-void Debug::cout(const std::string& msg)
+void debug::cout(const std::string& msg)
 {
     msgs.push_back(msg + "");
 }
-std::vector<std::string> Debug::obterMensagems()
+std::vector<std::string> debug::obterMensagems()
 {
     return msgs;
 }
 
-void Debug::emitir(Tipo t, std::string msg) 
+void debug::emitir(Tipo t, std::string msg) 
 {
 #ifdef _DEBUG
 	switch (t)
@@ -34,7 +34,7 @@ void Debug::emitir(Tipo t, std::string msg)
 	}
 #endif
 }
-void Debug::emitir(std::string t, std::string msg)
+void debug::emitir(std::string t, std::string msg)
 {
 #ifdef _DEBUG
 	std::cout << "[" << t << "] " << msg << "\n";

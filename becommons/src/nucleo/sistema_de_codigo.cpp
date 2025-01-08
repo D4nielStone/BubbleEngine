@@ -1,6 +1,7 @@
 #include "sistema_de_codigo.hpp"
 #include "fase.hpp"
 #include <src/componentes/codigo.hpp>
+#include <os/janela.hpp>
 
 namespace bubble
 {
@@ -32,11 +33,10 @@ namespace bubble
         rodando = true;
         codigoThread = std::thread([this]() {
             while (rodando) {
-                double deltaTime = 0.016; // Simula 60 FPS
                 {
-                    this->atualizar(deltaTime);
+                    this->atualizar(0.016666);
+                    std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aguarda 16ms
                 }
-                std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aguarda 16ms
             }
             });
     }

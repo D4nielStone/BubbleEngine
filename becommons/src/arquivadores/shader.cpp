@@ -3,6 +3,22 @@
 #include <glad/glad.h>
 #include "shader.hpp"
 #include <filesystem>
+#include "assets/shaders_na_memoria.hpp"
+
+inline std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
+// Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos
+inline const std::unordered_map<std::string, const char*> shader_memoria{
+    {"quad.vert", quad_vert},
+    {"quad.frag", quad_frag},
+    {"imagem.vert", imagem_vert},
+    {"imagem.frag", imagem_frag},
+    {"texto.vert", texto_vert},
+    {"texto.frag", texto_frag},
+    {"skybox.vert", skybox_vert},
+    {"skybox.frag", skybox_frag},
+    {"phong.vert", phong_vert},
+    {"phong.frag", phong_frag}
+};
 
 bubble::shaderException::shaderException(const char* msg) : msg_(msg) {}
 

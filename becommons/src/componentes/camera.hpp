@@ -19,23 +19,32 @@ namespace bubble
 		 * @enum configCamera
 		 * @brief configuracao da camera;
 		 */
-		enum flagCamera : uint8_t { f_None = 0, f_Ortografica = 1 << 0, f_Alvo = 1 << 1};
-		flagCamera flags;
 
-		cor ceu{0.43f, 0.78f, 0.86, 1.f};
+		cor ceu				{0.43f, 0.78f, 0.86, 1.f};
 
-		glm::vec3 posicao, * alvo{ new glm::vec3(0,0,0) }, cima{0, 1, 0};
+		glm::vec3 posicao	{ 0,0,0 };
+		glm::vec3* alvo		{ new glm::vec3(0, 0, 0) };
+		glm::vec3 cima		{ 0,1,0 };
 
-		float fov{ 75.f }, aspecto, corte_curto{ 0.1f }, corte_longo{ 300.f }, escala{ 5.f }, yaw{ 0.f }, pitch{0.f};
+		float fov			{ 75.f };
+		float aspecto		{ 0.f };
+		float corte_curto	{ 0.1f }; 
+		float corte_longo	{ 300.f };
+		float escala		{ 5.f };
+		float yaw			{ 0.f };
+		float pitch			{ 0.f };
+
+		bool flag_alvo		{ false };
+		bool flag_orth		{ false };
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
 		vetor4<float>* viewport_ptr{ nullptr };
 
 		camera() = default;
-		camera(const vetor3<float>& pos, const flagCamera& flags = f_Ortografica);
+		camera(const vetor3<float>& pos, const bool alvo = false, const bool ortho = false);
 		glm::mat4 obtViewMatrix() const {
-			if ((flags & f_Alvo)!= 0 && alvo)
+			if (flag_alvo)
 			{
 				return glm::lookAt(posicao, *alvo, cima);
 			}
@@ -58,26 +67,21 @@ namespace bubble
 
 		glm::mat4 obtProjectionMatrix()
 		{
-			if ((flags & f_Ortografica) != 0)
+			if (flag_orth && viewport_ptr)
 			{
-				if (viewport_ptr)
-				{
-					int largura = viewport_ptr->w;
-					int altura = viewport_ptr->h;
-					aspecto = static_cast<float>(largura) / altura;
+				int largura = viewport_ptr->w;
+				int altura = viewport_ptr->h;
+				aspecto = static_cast<float>(largura) / altura;
 
-					return glm::ortho(-escala * aspecto, escala *aspecto, -escala, escala, corte_curto, corte_longo);
-				}
-				return glm::mat4(1);
+				return glm::ortho(-escala * aspecto, escala * aspecto, -escala, escala, corte_curto, corte_longo);
+
 			}
-			else
+			else if(viewport_ptr)
 			{
-				if (viewport_ptr)
-				{
-					int largura = viewport_ptr->w;
-					int altura = viewport_ptr->h;
-					aspecto = static_cast<float>(largura) / altura;
-				}
+				int largura = viewport_ptr->w;
+				int altura = viewport_ptr->h;
+				aspecto = static_cast<float>(largura) / altura;
+
 				return glm::perspective(glm::radians(fov), aspecto, corte_curto, corte_longo);
 			}
 		}

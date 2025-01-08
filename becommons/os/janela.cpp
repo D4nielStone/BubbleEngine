@@ -17,12 +17,13 @@ bubble::janela::janela(const char* nome, const char* icon_path)
     // inicia glfw
     if (!glfwInit())
     {
-        Debug::emitir(Erro, "Iniciando janela glfw");
+        debug::emitir(Erro, "Iniciando janela glfw");
         abort();
     }
+    glfwWindowHint(GLFW_SAMPLES, 3);
     window = glfwCreateWindow(800, 400, nome, NULL, NULL);
     if (!window) {
-        Debug::emitir(Erro, "Janla invalida");
+        debug::emitir(Erro, "Janla invalida");
         abort();
     };
 
@@ -30,7 +31,7 @@ bubble::janela::janela(const char* nome, const char* icon_path)
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        Debug::emitir(Erro, "Glad");
+        debug::emitir(Erro, "Glad");
         abort();
     }
 
@@ -46,11 +47,13 @@ bubble::janela::janela(const char* nome, const char* icon_path)
     if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
 
     // ativa blend
-    glEnable(GL_BLEND);
+    glEnable(GL_BLEND); 
+    glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glfwSetWindowSizeCallback(window, callbackSize);
     glfwSetCursorPosCallback(window,bubble::mousePosCallBack);
+    glfwSetMouseButtonCallback(window, bubble::mouseButtonCallBack);
     glfwSetKeyCallback(window,bubble::callbackKey);
     glfwSetWindowUserPointer(window, this);
 
@@ -60,9 +63,11 @@ bubble::janela::janela(const char* nome, const char* icon_path)
     tamanho.w = tam.w;
 }
 
-void bubble::janela::poll() const
+void bubble::janela::poll()
 {
     glfwPollEvents();
+    _Mtempo.deltaT = glfwGetTime() - _Mtempo.tempoCorrido;
+    _Mtempo.tempoCorrido = glfwGetTime();
 }
 
 void bubble::janela::swap() const

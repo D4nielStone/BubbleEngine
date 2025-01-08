@@ -6,6 +6,7 @@
  */
 
 #pragma once
+#include "tempo.hpp"
 #include <GLFW/glfw3.h>
 #include "src/util/vetor4.hpp"
 #include "src/nucleo/sistema.hpp"
@@ -24,15 +25,16 @@ namespace bubble
 	*/
 	struct janela
 	{
+		tempo _Mtempo;
 		vetor4<float> tamanho;
 		GLFWwindow* window;
 		inputs inputs;
 		janela(const char* nome, const char* icon_path = nullptr);
 		~janela();
-		void poll() const;
+		void poll();
 		void swap() const;
 		void viewport() const;
 		void nome(const char* novo_nome) const;
 	};
-	inline static janela* instanciaJanela{ nullptr };
+	inline janela* instanciaJanela{ nullptr };
 }

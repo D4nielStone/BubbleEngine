@@ -8,6 +8,8 @@
 #pragma once
 #include "sistema.hpp"
 #include "src/arquivadores/shader.hpp"
+#include "src/componentes/texto.hpp"
+#include "src/componentes/imagem.hpp"
 
 namespace bubble
 {
@@ -15,10 +17,13 @@ namespace bubble
 	{
 	public:
 		sistemaInterface() = default;
+		~sistemaInterface() override;
 		void atualizar(double deltaTime) override;
 		void inicializar(bubble::fase* fase) override;
-		void texto(shader& s, const std::string& texto, float x, float y, float escala, bubble::cor color) const;
+		static void desenharTexto(shader& s, const texto& t);
+		static void desenharImagem(shader& s, const imagem& img);
 	private:
-		unsigned int text_VAO, text_VBO;
+		inline static unsigned int text_VAO, text_VBO;
+		inline static unsigned int img_VAO, img_VBO, img_EBO;
 	};
 }

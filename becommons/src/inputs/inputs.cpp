@@ -3,33 +3,36 @@
 #include <unordered_map>
 #include <stdexcept>
 #include <src/depuracao/debug.hpp>
+#include <src/nucleo/fase.hpp>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <os/janela.hpp>
 
 using namespace bubble;
-static const std::unordered_map<int, char> keyMap = {
-        {GLFW_KEY_W, 'W'},
-        {GLFW_KEY_A, 'A'},
-        {GLFW_KEY_S, 'S'},
-        {GLFW_KEY_D, 'D'},
-        {GLFW_KEY_E, 'E'},
-        {GLFW_KEY_Q, 'Q'},
-        {GLFW_KEY_RIGHT, 'Dire'},
-        {GLFW_KEY_LEFT, 'Esqu'},
-        {GLFW_KEY_DOWN, 'Baix'},
-        {GLFW_KEY_UP, 'Cima'},
-        {GLFW_KEY_LEFT_SHIFT, 'Shif'},
-        {GLFW_KEY_RIGHT_SHIFT, 'Shif'},
-        {GLFW_KEY_LEFT_CONTROL, 'Ctrl'},
-        {GLFW_KEY_RIGHT_CONTROL, 'Ctrl'},
-        {GLFW_KEY_LEFT_ALT, 'Alt'},
-        {GLFW_KEY_RIGHT_ALT, 'Alt'},
-        {GLFW_KEY_BACKSPACE, 'BS'},
-        {GLFW_KEY_ENTER, 'Ente'},
-        {GLFW_KEY_KP_ENTER, 'Ente'},
-        {GLFW_KEY_DELETE, 'Del'},
-        {GLFW_KEY_F5, 'F5'}
+static const std::unordered_map<int, std::string> keyMap = {
+        {GLFW_KEY_W, "W"},
+{GLFW_KEY_A, "A"},
+{GLFW_KEY_S, "S"},
+{GLFW_KEY_D, "D"},
+{GLFW_KEY_E, "E"},
+{GLFW_KEY_Q, "Q"},
+{GLFW_KEY_RIGHT, "Dire"},
+{GLFW_KEY_LEFT, "Esqu"},
+{GLFW_KEY_DOWN, "Baix"},
+{GLFW_KEY_UP, "Cima"},
+{GLFW_KEY_LEFT_SHIFT, "Shif"},
+{GLFW_KEY_RIGHT_SHIFT, "Shif"},
+{GLFW_KEY_LEFT_CONTROL, "Ctrl"},
+{GLFW_KEY_RIGHT_CONTROL, "Ctrl"},
+{GLFW_KEY_LEFT_ALT, "Alt"},
+{GLFW_KEY_RIGHT_ALT, "Alt"},
+{GLFW_KEY_BACKSPACE, "BS"},
+{GLFW_KEY_ENTER, "Ente"},
+{GLFW_KEY_KP_ENTER, "Ente"},
+{GLFW_KEY_DELETE, "Del"},
+{GLFW_KEY_F5, "F5"},
+{GLFW_MOUSE_BUTTON_MIDDLE, "Scrl"},
+{GLFW_MOUSE_BUTTON_LEFT, "MouseE"}
 };
 
 inputMode inputs::getInputMode() const {
@@ -45,34 +48,35 @@ inputs::inputs() : currentMode(inputMode::Game) {
 void inputs::setInputMode(inputMode mode) {
     currentMode = mode;
 }
-void inputs::keyPressed(const char &key) {
+void inputs::keyPressed(const std::string &key) {
     // Acesso direto ao mapa sem verificar se está vazio
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = true;
         handleKey(key);
     }
-    else {
+    else 
+    {
         // Tecla inválida, pode ser registrado para depuração se necessário
-        std::cerr << "Tecla desconhecida pressionada: " << static_cast<int>(key) << std::endl;
+        std::cerr << "Tecla desconhecida pressionada: " << key << std::endl;
     }
 }
-void inputs::keyReleased(const char &key) {
+void inputs::keyReleased(const std::string &key) {
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = false;
     }
     else {
         // Tecla desconhecida, pode ser registrado para depuração se necessário
-        std::cerr << "Tecla desconhecida liberada: " << static_cast<int>(key) << std::endl;
+        std::cerr << "Tecla desconhecida liberada: " << key << std::endl;
     }
 }
-bool inputs::isKeyPressed(const char &key) const
+bool inputs::isKeyPressed(const std::string &key) const
 {
     auto it = keyStates.find(key);
     return it != keyStates.end() && it->second;
 }
-void inputs::handleKey(const char &key) {
+void inputs::handleKey(const std::string &key) {
     switch (currentMode) {
     case Game:
         break;
@@ -83,10 +87,10 @@ void inputs::handleKey(const char &key) {
         break;
     }
 }
-static char glfwkeyTokey(int glfwkey) {
+static std::string glfwkeyTokey(int glfwkey) {
 
     auto it = keyMap.find(glfwkey);
-    return it != keyMap.end() ? it->second : 'Erro';
+    return it != keyMap.end() ? it->second : "Erro";
 }
 // Callback de teclado GLFW
 void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
@@ -95,8 +99,8 @@ void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, 
     input.mods = mods;
     input.teclado_action = action;
 
-        char mappedkey = glfwkeyTokey(key);
-        if (mappedkey != 'Erro') {
+        std::string mappedkey = glfwkeyTokey(key);
+        if (mappedkey != "Erro") {
             if (action == GLFW_PRESS || action == GLFW_REPEAT) {
                 input.keyPressed(mappedkey);
             }
@@ -105,6 +109,7 @@ void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, 
             }
         }
 }
+
 // Callback de posição do mouse
 void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
@@ -119,12 +124,20 @@ void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int
 {
     auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
 
-        // Processar o clique do mouse
-         input.mouseEnter = action;
-         input.mouseButton = button;
-    
-}
+    // Processar o clique do mouse
+    input.mouseEnter = action;
+    input.mouseButton = button;
 
+    std::string mappedkey = glfwkeyTokey(button);
+    if (mappedkey != "Erro") {
+        if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+            input.keyPressed(mappedkey);
+        }
+        else if (action == GLFW_RELEASE) {
+            input.keyReleased(mappedkey);
+        }
+    }
+}
 // Callback para caracteres
 void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
@@ -162,4 +175,25 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
 
     input.letra = utf8_char.empty() ? ' ' : utf8_char[0];
     input.char_press = true;
+}
+
+bubble::vetor2<double> bubble::obterMouse()
+{
+    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window))->inputs;
+
+        return vetor2{ input.mousex, input.mousey };
+};
+
+bubble::vetor2<double> bubble::tamanhoJanela()
+{
+    auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window));
+
+    return { janela->tamanho.w, janela->tamanho.h };
+};
+
+bool bubble::pressionada(const std::string &letra)
+{
+    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window))->inputs;
+
+    return input.isKeyPressed(letra);
 }

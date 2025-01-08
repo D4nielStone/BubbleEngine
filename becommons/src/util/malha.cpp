@@ -45,9 +45,21 @@ namespace bubble
         shader.setBool("recebe_luz", material.recebe_luz);
         glActiveTexture(GL_TEXTURE0);
 
-        // draw mesh
         glBindVertexArray(VAO);
-        glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+        if (instancias_pos.empty())
+        {
+            shader.setBool("instancia", false);
+            glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+        }
+        else
+        {
+            shader.setBool("instancia", true);
+            for (size_t i = 0; i < instancias_pos.size(); i++)
+            {
+                shader.setVec3("posicoes[" + std::to_string(i) + "]", instancias_pos[i].x, instancias_pos[i].y, instancias_pos[i].z);
+            }
+            glDrawElementsInstanced(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0, instancias_pos.size());
+        }
         glBindVertexArray(0);
 
         diffuseNr = 1;

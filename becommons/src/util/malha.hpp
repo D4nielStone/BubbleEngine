@@ -11,6 +11,7 @@ namespace bubble
     class malha
     {
     public:
+        std::vector<glm::vec3> instancias_pos;
         std::vector<vertice> vertices;
         std::vector<unsigned int> indices;
         material material;

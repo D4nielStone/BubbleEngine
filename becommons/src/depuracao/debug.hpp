@@ -10,7 +10,7 @@ enum Tipo
     Erro,
     Alerta
 };
-namespace Debug
+namespace debug
 {
 
     void cout(const std::string &msg);

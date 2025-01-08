@@ -5,7 +5,6 @@
 #include "src/util/vetor2.hpp"
 #include "src/util/vetor4.hpp"
 #include "becommons.hpp"
-
 struct GLFWwindow;
 
 namespace bubble
@@ -19,21 +18,20 @@ namespace bubble
     class inputs {
     public:
         inputs();
-
         void setInputMode(inputMode mode);
-        void keyPressed  (const char &key);
-        void keyReleased (const char &key);
-        bool isKeyPressed(const char &key) const;
+        void keyPressed  (const std::string &key);
+        void keyReleased (const std::string &key);
+        bool isKeyPressed(const std::string &key) const;
         inputMode getInputMode() const;
         double mousex, mousey;
         int mouseEnter{ 0 }, teclado_action{ 0 }, mods{ 0 }, mouseButton{ 0 };
         char letra{ '\0' };
         bool mouseClick{ false }, char_press{ false };
+        std::unordered_map<std::string, bool> keyStates;
     protected:
-        virtual void handleKey(const char &key);
+        virtual void handleKey(const std::string&key);
     private:
         inputMode currentMode{ inputMode::Editor };
-        std::unordered_map<char, bool> keyStates;
     };
 
     // Callback de teclado GLFW
@@ -41,4 +39,7 @@ namespace bubble
     extern "C" void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
     extern "C" void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
     extern "C" void charCallback(GLFWwindow* window, unsigned int codepoint);
+    vetor2<double> obterMouse();
+    vetor2<double> tamanhoJanela();
+    bool pressionada(const std::string &tecla);
 }

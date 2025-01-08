@@ -6,13 +6,20 @@
 #include <src/componentes/transformacao.hpp>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
+#include <src/util/vetor2.hpp>
+#include <src/componentes/texto.hpp>
+#include <src/componentes/imagem.hpp>
+#include <src/componentes/fisica.hpp>
 
 namespace bapi
 {
 	struct entidade
 	{
 		bubble::transformacao* _Mtransformacao{ nullptr };
+		bubble::fisica* _Mfisica{ nullptr };
 		bubble::camera* _Mcamera{ nullptr };
+		bubble::texto* _Mtexto{ nullptr };
+		bubble::imagem* _Mimagem{ nullptr };
 		uint32_t id;
 		static void definir(lua_State* L) 
 		{
@@ -22,6 +29,17 @@ namespace bapi
 				addData<float>("x", &glm::vec3::x).
 				addData<float>("y", &glm::vec3::y).
 				addData<float>("z", &glm::vec3::z).
+				endClass().
+				beginClass<bubble::vetor2<int>>("vetor2i").		///< define vetor3
+				addConstructor<void(*)(int, int)>().
+				addConstructor<void(*)(float, float)>().
+				addData<int>("x", &bubble::vetor2<int>::x).
+				addData<int>("y", &bubble::vetor2<int>::y).
+				endClass().
+				beginClass<bubble::vetor2<double>>("vetor2d").		///< define vetor3
+				addConstructor<void(*)(double, double)>().
+				addData<double>("x", &bubble::vetor2<double>::x).
+				addData<double>("y", &bubble::vetor2<double>::y).
 				endClass().
 				beginClass<bubble::cor>("cor").		///< define vetor3
 				addConstructor<void(*)(float, float, float, float)>().
@@ -34,20 +52,36 @@ namespace bapi
 				addConstructor<void(*)()>().
 				addData<glm::vec3>("posicao", &bubble::transformacao::posicao, true).
 				endClass().
+				beginClass<bubble::imagem>("imagem").			///< define transformacao
+				addConstructor<void(*)(std::string)>().
+				addData<bubble::vetor2<int>>("padding", &bubble::imagem::padding, true).
+				addData<bubble::vetor2<int>>("limite", &bubble::imagem::limite, true).
+				endClass().
+				beginClass<bubble::fisica>("fisica").			///< define transformacao
+				addConstructor<void(*)()>().
+				addFunction("aplicarForca", &bubble::fisica::aplicarForca).
+				addFunction("aplicarVelocidade", &bubble::fisica::aplicarVelocidade).
+				addFunction("obterVelocidade", &bubble::fisica::obterVelocidade).
+				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
-				addFunction<void, const uint32_t&>("olhar", &bubble::camera::olhar).
-				addFunction<void, const glm::vec3&>("olharPara", &bubble::camera::olharPara).
+				addFunction("olhar", &bubble::camera::olhar).
+				addFunction("olharPara", &bubble::camera::olharPara).
 				addData("posicao", &bubble::camera::posicao).
 				addData("fov", &bubble::camera::fov).
 				addData("yaw", &bubble::camera::yaw).
 				addData("pitch", &bubble::camera::pitch).
 				addData("ceu", &bubble::camera::ceu).
+				addData("escala", &bubble::camera::escala).
+				addData("flag_alvo", &bubble::camera::flag_alvo).
+				addData("flag_ortho", &bubble::camera::flag_orth).
 				endClass().
 				beginClass<bapi::entidade>("entidade").			///< define entidade
 				addConstructor<void(*)(int)>().
 				addData("transformacao", &bapi::entidade::_Mtransformacao, true).
 				addData("camera", &bapi::entidade::_Mcamera, true).
+				addData("imagem", &bapi::entidade::_Mimagem, true).
+				addData("fisica", &bapi::entidade::_Mfisica, true).
 				addData("id", &bapi::entidade::id, false).
 				endClass();
 		};

@@ -70,6 +70,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\output\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Platform)\output\</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+  </PropertyGroup>
   <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <VcpkgUseStatic>true</VcpkgUseStatic>
     <VcpkgConfiguration>Release</VcpkgConfiguration>
@@ -148,12 +156,14 @@
     <ClCompile Include="src\arquivadores\shader.cpp" />
     <ClCompile Include="src\componentes\camera.cpp" />
     <ClCompile Include="src\componentes\codigo.cpp" />
+    <ClCompile Include="src\componentes\fisica.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
     <ClCompile Include="src\nucleo\fase.cpp" />
     <ClCompile Include="src\nucleo\sistema.cpp" />
     <ClCompile Include="src\nucleo\sistema_de_codigo.cpp" />
+    <ClCompile Include="src\nucleo\sistema_de_fisica.cpp" />
     <ClCompile Include="src\nucleo\sistema_de_interface.cpp" />
     <ClCompile Include="src\nucleo\sistema_de_renderizacao.cpp" />
     <ClCompile Include="src\util\malha.cpp" />
@@ -195,6 +205,7 @@
     <ClInclude Include="assets\shaders\texto_vert.hpp" />
     <ClInclude Include="assets\shaders_na_memoria.hpp" />
     <ClInclude Include="assets\imagems_na_memoria.hpp" />
+    <ClInclude Include="os\tempo.hpp" />
     <ClInclude Include="src\api\api_entidade.hpp" />
     <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />
@@ -204,6 +215,7 @@
     <ClInclude Include="src\componentes\camera.hpp" />
     <ClInclude Include="src\componentes\disposicao.hpp" />
     <ClInclude Include="src\componentes\codigo.hpp" />
+    <ClInclude Include="src\componentes\fisica.hpp" />
     <ClInclude Include="src\componentes\propriedades.hpp" />
     <ClInclude Include="becommons.hpp" />
     <ClInclude Include="src\componentes\componente.hpp" />
@@ -217,6 +229,7 @@
     <ClInclude Include="src\nucleo\fase.hpp" />
     <ClInclude Include="src\nucleo\sistema.hpp" />
     <ClInclude Include="src\nucleo\sistema_de_codigo.hpp" />
+    <ClInclude Include="src\nucleo\sistema_de_fisica.hpp" />
     <ClInclude Include="src\nucleo\sistema_de_interface.hpp" />
     <ClInclude Include="src\nucleo\sistema_de_renderizacao.hpp" />
     <ClInclude Include="src\util\cor.hpp" />
@@ -228,6 +241,7 @@
     <ClInclude Include="src\util\vetor2.hpp" />
     <ClInclude Include="src\util\vetor3.hpp" />
     <ClInclude Include="src\util\vetor4.hpp" />
+    <ClInclude Include="src\componentes\imagem.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

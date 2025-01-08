@@ -10,6 +10,7 @@
 #include <memory>
 #include <functional>
 #include "src/componentes/componente.hpp"
+#include "src/componentes/fisica.hpp"
 #include "src/depuracao/debug.hpp"
 
 namespace bubble
@@ -70,7 +71,6 @@ namespace bubble
 		entidades[ent.id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
 	}
-
 
 	template<typename T>
 	inline bool registro::tem(const uint32_t& entity)

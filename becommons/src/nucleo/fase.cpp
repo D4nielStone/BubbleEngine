@@ -7,19 +7,21 @@
 #include <src/componentes/transformacao.hpp>
 #include <src/componentes/propriedades.hpp>
 #include <src/componentes/renderizador.hpp>
+#include <src/componentes/imagem.hpp>
 #include <iostream>
 #include <os/janela.hpp>
 
 using namespace rapidjson;
+using namespace bubble;
 
-bubble::fase::fase() : _Mnome("")
+fase::fase() : _Mnome("")
 {
 	srender.inicializar(this);
 	sinterface.inicializar(this);
 	fase_atual = this;
 }
 
-bubble::fase::fase(const char* diretorio) : diretorio(diretorio)
+fase::fase(const char* diretorio) : diretorio(diretorio)
 {
 	srender.inicializar(this);
 	sinterface.inicializar(this);
@@ -36,37 +38,39 @@ bubble::fase::fase(const char* diretorio) : diretorio(diretorio)
 	}
 }
 
-void bubble::fase::analizar(const char* diretorio)
+static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
 {
-	std::ifstream file(diretorio);
-	std::stringstream sb;
-	sb << file.rdbuf();
-	Document doc;
-	doc.Parse(sb.str().c_str());
+	/// cor difusa
 
-	if (doc.HasParseError()) 
+	if (malha.HasMember("cor_difusa"))
+		m->material.difusa =
 	{
-		Debug::emitir(Erro, "Parse da fase");
-	}
-	if (doc.HasMember("nome") && doc["nome"].IsString())
+		malha["cor_difusa"].GetArray()[0].GetFloat() / 255,
+		malha["cor_difusa"].GetArray()[1].GetFloat() / 255,
+		malha["cor_difusa"].GetArray()[2].GetFloat() / 255,
+		malha["cor_difusa"].GetArray()[3].GetFloat() / 255,
+	};
+	/// recebe luz
+	if (malha.HasMember("recebe_luz"))
+		m->material.recebe_luz = malha["recebe_luz"].GetBool();
+	/// itera instancias
+	if (malha.HasMember("instancias"))
 	{
-		_Mnome = doc["nome"].GetString();
-		Debug::emitir("Fase", "Nome definido como " + _Mnome);
-	}
-	if (doc.HasMember("selecionada") && doc["selecionada"].IsBool())
-	{
-		if (doc["selecionada"].GetBool())
+		for (auto& instancia : malha["instancias"].GetArray())
 		{
-			Debug::emitir("Fase", "Fase ativa");
+			m->instancias_pos.push_back( glm::vec3(instancia[0].GetFloat(),instancia[1].GetFloat(),instancia[2].GetFloat()));
 		}
 	}
+}
+static void analizarEntidades(Document& doc, fase* f)
+{
+	auto reg = f->obterRegistro();
 	if (doc.HasMember("entidades") && doc["entidades"].IsArray())
 	{
-		int id{ 0 };
 		for (auto& entidade : doc["entidades"].GetArray())
 		{
 			/// cria entidade
-			auto id = reg.criar();
+			auto id = reg->criar();
 			/// itera os componentes
 			if (entidade.HasMember("componentes") && entidade["componentes"].IsArray())
 			{
@@ -77,26 +81,33 @@ void bubble::fase::analizar(const char* diretorio)
 						const char* i = componente["tipo"].GetString();
 						if (std::strcmp(i, "camera") == 0)
 						{
-							reg.adicionar<camera>(id, vetor3(0.f, 0.f, 0.f));
-							definirCamera(id);
+							reg->adicionar<camera>(id, vetor3(0.f, 0.f, 0.f));
+							f->definirCamera(id);
 
 							auto arr = componente["posicao"].GetArray();
-							camera_atual->posicao = { arr[0].GetFloat(), arr[1].GetFloat(), arr[2].GetFloat()};
-							if(componente.HasMember("olhar"))
-							obterCamera()->olhar(componente["olhar"].GetInt());
-							
-							if(componente.HasMember("yaw"))
-							obterCamera()->yaw = componente["yaw"].GetFloat();
+							f->obterCamera()->posicao = {arr[0].GetFloat(), arr[1].GetFloat(), arr[2].GetFloat()};
+							if (componente.HasMember("olhar"))
+								f->obterCamera()->olhar(componente["olhar"].GetInt());
 
-							if(componente.HasMember("pitch"))
-							obterCamera()->pitch = componente["pitch"].GetFloat();
+							if (componente.HasMember("yaw"))
+								f->obterCamera()->yaw = componente["yaw"].GetFloat();
 
-							if(componente.HasMember("escala"))
-							obterCamera()->escala = componente["escala"].GetFloat();
+							if (componente.HasMember("pitch"))
+								f->obterCamera()->pitch = componente["pitch"].GetFloat();
+
+							if (componente.HasMember("escala"))
+								f->obterCamera()->escala = componente["escala"].GetFloat();
+
+							if (componente.HasMember("alvo"))
+								f->obterCamera()->flag_alvo = componente["alvo"].GetBool();
+
+							if (componente.HasMember("ortho"))
+								f->obterCamera()->flag_orth = componente["ortho"].GetBool();
+
 							if (componente.HasMember("ceu"))
 							{
 								auto ceu = componente["ceu"].GetArray();
-								obterCamera()->ceu = 
+								f->obterCamera()->ceu =
 								{
 									ceu[0].GetFloat() / 255,
 									ceu[1].GetFloat() / 255,
@@ -108,35 +119,42 @@ void bubble::fase::analizar(const char* diretorio)
 						else if (std::strcmp(i, "renderizador") == 0)
 						{
 							const char* path = componente["diretorio"].GetString();
-							reg.adicionar<renderizador>(id, new modelo(path));
-							auto render = reg.obter<renderizador>(id.id);
+							reg->adicionar<renderizador>(id, new modelo(path));
+							auto render = reg->obter<renderizador>(id.id);
 
+							/// extrai sahder
+							if (componente.HasMember("vertex_shader") && componente.HasMember("fragment_shader"))
+							{
+								render->modelo->definirShader(componente["vertex_shader"].GetString(), componente["fragment_shader"].GetString());
+							}
 							/// extrai material
 							if (componente.HasMember("malhas"))
 							{
 								auto malhas = componente["malhas"].GetArray();
 								for (auto& malha : malhas)
 								{
-									auto m = render->modelo->obterMalha(malha["id"].GetInt());
-									/// cor difusa
-									m->material.difusa = 
+									bubble::malha* m;
+									if (malha["id"].IsInt())
 									{
-										malha["cor_difusa"].GetArray()[0].GetFloat() / 255,
-										malha["cor_difusa"].GetArray()[1].GetFloat() / 255,
-										malha["cor_difusa"].GetArray()[2].GetFloat() / 255,
-										malha["cor_difusa"].GetArray()[3].GetFloat() / 255,
-									};
-									/// recebe luz
-									m->material.recebe_luz = malha["recebe_luz"].GetBool();
+										m = render->modelo->obterMalha(malha["id"].GetInt());
+										analizarMalha(m, malha);
+									}
+									else if (malha["id"].IsString())
+									{
+										for (auto& m : render->modelo->malhas)
+										{
+											analizarMalha(&m, malha);
+										}
+									}
 								}
 							}
 						}
 						else if (std::strcmp(i, "propriedades") == 0)
-							reg.adicionar<propriedades>(id);
+							reg->adicionar<propriedades>(id);
 						else if (std::strcmp(i, "transformacao") == 0)
 						{
-							reg.adicionar<transformacao>(id);
-							auto tr = reg.obter<transformacao>(id.id);
+							reg->adicionar<transformacao>(id);
+							auto tr = reg->obter<transformacao>(id.id);
 							auto pos = componente["posicao"].GetArray();
 							tr->posicao = { pos[0].GetFloat(), pos[1].GetFloat(), pos[2].GetFloat() };
 							auto rot = componente["rotacao"].GetArray();
@@ -152,11 +170,46 @@ void bubble::fase::analizar(const char* diretorio)
 								frase = componente["frase"].GetString();
 							if (componente.HasMember("escala") && componente["escala"].IsFloat())
 								size = componente["escala"].GetFloat();
-							reg.adicionar<texto>(id, frase, size);
+							reg->adicionar<texto>(id, frase, size);
 						}
 						else if (std::strcmp(i, "codigo") == 0)
 						{
-							// reg.adicionar<codigo>(id);
+							reg->adicionar<codigo>(id, componente["diretorio"].GetString());
+						}
+						else if (std::strcmp(i, "imagem") == 0)
+						{
+							reg->adicionar<imagem>(id, componente["diretorio"].GetString());
+							reg->obter<imagem>(id.id)->flip = componente["flip"].GetBool();
+						}
+						else if (std::strcmp(i, "codigo") == 0)
+						{
+							reg->adicionar<codigo>(id, componente["diretorio"].GetString());
+						}
+						else if (std::strcmp(i, "fisica") == 0)
+						{
+							btCollisionShape* forma;
+							auto f = componente["forma"].GetString();
+							const btVector3 n(0, 1, 0);
+							btVector3 posin;
+							btScalar massa;
+
+							if (componente.HasMember("posicao_inicial"))
+								posin = {componente["posicao_inicial"].GetArray()[0].GetFloat(),componente["posicao_inicial"].GetArray()[1].GetFloat(),componente["posicao_inicial"].GetArray()[2].GetFloat()};
+							if (std::strcmp(f, "esfera") == 0)
+							{
+								forma = new btSphereShape(componente["raio"].GetFloat());
+							}
+							else if(std::strcmp(f, "plano") == 0)
+								forma = new btStaticPlaneShape(n, 0);
+							else if(std::strcmp(f, "caixa") == 0)
+								forma = new btBoxShape(btVector3(1.f, 1.f, 1.f));
+							else if (std::strcmp(f, "modelo") == 0)
+							{
+								reg->adicionar<fisica>(id, true, massa, posin);
+								continue;
+							}
+							massa = componente["massa"].GetFloat();
+							reg->adicionar<fisica>(id, forma, massa, posin);
 						}
 					}
 				}
@@ -165,53 +218,75 @@ void bubble::fase::analizar(const char* diretorio)
 	}
 }
 
+void bubble::fase::analizar(const char* diretorio)
+{
+	std::ifstream file(diretorio);
+	std::stringstream sb;
+	sb << file.rdbuf();
+	Document doc;
+	doc.Parse(sb.str().c_str());
+
+	if (doc.HasParseError()) 
+	{
+		debug::emitir(Erro, "Parse da fase");
+	}
+	/*----Analise da cena-----*/
+	if (doc.HasMember("nome") && doc["nome"].IsString())
+	{
+		_Mnome = doc["nome"].GetString();
+		debug::emitir("Fase", "Nome definido como " + _Mnome);
+	}
+	if (doc.HasMember("selecionada") && doc["selecionada"].IsBool())
+	{
+		if (doc["selecionada"].GetBool())
+		{
+			debug::emitir("Fase", "Fase ativa");
+		}
+	}
+	/*------------------------*/
+	analizarEntidades(doc, this);
+}
+
 void bubble::fase::pausar()
 {
-	Debug::emitir("fase", "Pausando");
+	debug::emitir("fase", "Pausando");
 	rodando = false;
 	scodigo.pararThread();
+	sfisica.pararThread();
 }
 
 void bubble::fase::parar()
 {
-	Debug::emitir("fase", "Parando");
+	debug::emitir("fase", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
 	scodigo.pararThread();
+	sfisica.pararThread();
 }
 
 void bubble::fase::iniciar()
 {
-	Debug::emitir("fase", "Iniciando");
+	debug::emitir("fase", "Iniciando");
 	if (rodando != false)
 		return;
 
-	/// o sistema de código apenas inicia aao começar a fase
+	/// o sistema de código apenas inicia ao começar a fase
 	/// no modo de joo
 	scodigo.inicializar(this);
+	sfisica.inicializar(this);
 
 	// capturar snapshot do registro
 	rodando = true;
 	scodigo.iniciarThread();
+	sfisica.iniciarThread();
 }
 
 double elapsedTime;
 
 void bubble::fase::atualizar(double deltaTime)
 {
-	if (rodando == false)
-	{
-		// se parado apenas renderiza
-		srender.atualizar(deltaTime);
-		sinterface.atualizar(deltaTime);
-	}
-	else
-	{
-		// efetua operacoes matematicas de transformacao
-		elapsedTime += deltaTime;
-		srender.atualizar(deltaTime);
-		sinterface.atualizar(deltaTime);
-	}
+	srender.atualizar(deltaTime);
+	sinterface.atualizar(deltaTime);
 }
 
 void bubble::fase::definirCamera(const entidade& ent)

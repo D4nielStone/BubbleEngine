@@ -8,6 +8,7 @@
 #include "src/entidades/entidade.hpp"
 #include "src/componentes/camera.hpp"
 #include "sistema_de_renderizacao.hpp"
+#include "sistema_de_fisica.hpp"
 #include "sistema_de_interface.hpp"
 #include "sistema_de_codigo.hpp"
 #include <string>
@@ -33,6 +34,7 @@ namespace bubble
 		void analizar(const char* diretorio);
 		std::shared_ptr<camera> obterCamera() const;
 		registro* obterRegistro();
+		sistemaFisica sfisica;
 	private:
 		const char* diretorio;
 		registro reg;

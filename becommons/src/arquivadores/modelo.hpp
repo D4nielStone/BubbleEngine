@@ -3,6 +3,7 @@
 #include "src/util/malha.hpp"
 #include "src/util/textura.hpp"
 #include <assimp/scene.h>
+#include <src/arquivadores/shader.hpp>
 #include <filesystem>
 
 namespace bubble
@@ -20,12 +21,16 @@ namespace bubble
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
             }
         }
+        void definirShader(const char* vertex,const char* frag);
+        bubble::shader& shader();
         malha* obterMalha(int idx) { return &malhas[idx]; };
         void desenhar(bubble::shader& shader);
+        std::vector<malha> malhas;
     private:
         // dados de malha
-        std::vector<malha> malhas;
+
         std::string diretorio;
+        bubble::shader* _Mshader{nullptr};
 
         void carregarmodelo(const std::string& path);
         void processarNo(aiNode* node, const aiScene* scene);

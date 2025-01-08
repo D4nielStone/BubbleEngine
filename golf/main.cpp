@@ -1,6 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 /// Definindo título da janela
+#include <Windows.h>
 #include <glad/glad.h>
 #include "os/janela.hpp"
 #include "src/entidades/entidade.hpp"
@@ -9,21 +10,21 @@
 #include "src/componentes/transformacao.hpp"
 #include "ui/formas/retangulo.hpp"
 #include "src/nucleo/fase.hpp"
-#include <windows.h>
 #include <random>
 #include <src/componentes/texto.hpp>
 #include <src/componentes/codigo.hpp>
+#include <src/componentes/fisica.hpp>
 
-const std::string title = "Golf - (C) 2024 Daniel Oliveira | ";
+const std::string title = "Golf - (C) 2025 Daniel Oliveira | ";
 using namespace bubble;
 
 #ifdef _DEBUG
-#define INIT main()
+#define INIT int main()
 #else
-#define INIT APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)
+#define INIT int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, LPSTR cmdline, int cmdshow)
 #endif 
 
-int INIT
+INIT
 {
 	instanciaJanela = new janela(title.c_str(), "icon_golf.ico");
 

@@ -3,6 +3,7 @@
 #include "src/api/api_entidade.hpp"
 #include <src/inputs/inputs.hpp>
 #include "os/janela.hpp"
+#include <cmath>
 
 
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
@@ -12,27 +13,32 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 
 	bapi::entidade::definir(L);
 
-	/* definindo classe inputs */
-	luabridge::getGlobalNamespace(L).
-		beginClass<bubble::inputs>("entradas").
-		addConstructor<void(*)()>().
-		addData("mouse_x", &bubble::inputs::mousex).
-		addData("mouse_y", &bubble::inputs::mousey).
-		addFunction("estaPressionado", &bubble::inputs::isKeyPressed).
-		endClass();
+	/*-------------------------*/
+	luabridge::getGlobalNamespace(L)
+		.beginNamespace("inputs")
+		.addFunction("pressionada", &bubble::pressionada)
+		.addFunction("mouse", &bubble::obterMouse)
+		.addFunction("tamanhoTela", &bubble::tamanhoJanela)
+		.endNamespace()
+		.beginNamespace("tempo")
+		.addVariable("deltaT", &instanciaJanela->_Mtempo.deltaT)
+		.endNamespace()
+		.beginNamespace("mat")
+		.addFunction("lerp", &std::lerp<float,float,float>)
+		.addFunction("clamp", &std::clamp<float>)
+		.endNamespace();
 	/*-------------------------*/
 
 	// Carregar e executar o script
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK)
 	{
-		Debug::emitir(Erro, std::string("carregar script : ") + lua_tostring(L, -1));
+		debug::emitir(Erro, std::string("carregar script : ") + lua_tostring(L, -1));
 	}
 }
 
 void bubble::codigo::iniciar() const
 {
 	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
-	luabridge::setGlobal(L, &bubble::instanciaJanela->inputs, "entradas");
 	// Tentar obter a função "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
 
@@ -42,13 +48,13 @@ void bubble::codigo::iniciar() const
 		// Chamar a função Lua "iniciar" - é uma função local dentro do escopo do script
 		if (lua_pcall(L, 0, 0, 0) != LUA_OK)
 		{
-			Debug::emitir(Erro, std::string("Erro ao chamar função 'iniciar': ") + lua_tostring(L, -1));
+			debug::emitir(Erro, std::string("funcao 'iniciar': ") + lua_tostring(L, -1));
 			lua_pop(L, 1);  // Remover a mensagem de erro da pilha
 		}
 	}
 	else
 	{
-		Debug::emitir(Erro, "Função 'iniciar' não encontrada ou não é uma função local.");
+		debug::emitir(Erro, "Funcao 'iniciar' nao encontrada ou nao eh uma funcao local.");
 		lua_pop(L, 1); // Remover da pilha se não for uma função válida
 	}
 }
@@ -61,7 +67,7 @@ void bubble::codigo::atualizar(double deltaTime) const
 	{
 		if (lua_pcall(L, 0, 0, 0) != LUA_OK)
 		{
-			Debug::emitir(Erro, std::string("atualizar script : ") + lua_tostring(L, -1));
+			debug::emitir(Erro, std::string("atualizar script : ") + lua_tostring(L, -1));
 		}
 	}
 	else
