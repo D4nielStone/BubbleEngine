@@ -207,6 +207,7 @@
     <ClInclude Include="assets\imagems_na_memoria.hpp" />
     <ClInclude Include="os\tempo.hpp" />
     <ClInclude Include="src\api\api_entidade.hpp" />
+    <ClInclude Include="src\api\mat.hpp" />
     <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />
     <ClInclude Include="src\arquivadores\modelo.hpp" />

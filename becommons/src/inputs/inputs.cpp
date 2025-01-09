@@ -181,14 +181,14 @@ bubble::vetor2<double> bubble::obterMouse()
 {
     auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window))->inputs;
 
-        return vetor2{ input.mousex, input.mousey };
+        return bubble::vetor2<double>( input.mousex, input.mousey );
 };
 
-bubble::vetor2<double> bubble::tamanhoJanela()
+bubble::vetor2<int> bubble::tamanhoJanela()
 {
     auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window));
 
-    return { janela->tamanho.w, janela->tamanho.h };
+    return bubble::vetor2<int>( janela->tamanho.w, janela->tamanho.h );
 };
 
 bool bubble::pressionada(const std::string &letra)

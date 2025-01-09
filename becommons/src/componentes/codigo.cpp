@@ -1,10 +1,10 @@
 #include "codigo.hpp"
 #include "src/nucleo/fase.hpp"
 #include "src/api/api_entidade.hpp"
+#include "src/api/mat.hpp"
 #include <src/inputs/inputs.hpp>
 #include "os/janela.hpp"
 #include <cmath>
-
 
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
 
@@ -12,7 +12,6 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 	luaL_openlibs(L);
 
 	bapi::entidade::definir(L);
-
 	/*-------------------------*/
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("inputs")
@@ -24,9 +23,13 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.addVariable("deltaT", &instanciaJanela->_Mtempo.deltaT)
 		.endNamespace()
 		.beginNamespace("mat")
-		.addFunction("lerp", &std::lerp<float,float,float>)
+		.addFunction("lerp", &std::lerp<float, float, float>)
 		.addFunction("clamp", &std::clamp<float>)
+		.addFunction("distanciaV3", &bubble::distancia3)
+		.addFunction("distanciaV2", &bubble::distancia2)
+		.addFunction("telaParaMundo", &bubble::telaParaMundo)
 		.endNamespace();
+			
 	/*-------------------------*/
 
 	// Carregar e executar o script

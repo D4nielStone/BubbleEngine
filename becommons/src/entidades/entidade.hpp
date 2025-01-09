@@ -45,9 +45,16 @@ namespace bubble
 	public:
 		/* Cria nova entidade */
 		entidade criar();
+		/* Retorna todos os componentes da entidade */
+		componente::mascara obterComponentes(const uint32_t& id) const;
 		/* Adiciona um componente a uma entidade */
 		template <typename T, typename... Args>
 		void adicionar(entidade& ent, Args&&... args);
+
+		/* Remove um componente a uma entidade */
+		template <typename T>
+		void remover(const uint32_t& ent);
+
 
 		/* Verifica se uma entidade possui um componente */
 		template <typename T>
@@ -72,17 +79,32 @@ namespace bubble
 		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
 	}
 
+
+	template<typename T>
+	inline void registro::remover(const uint32_t& ent)
+	{
+		auto it = entidades.find(ent);
+		if (it != entidades.end()) {
+			it->second.erase(T::mascara);
+			mascaras[ent] &= ~T::mascara; // Remove o bit correspondente ao componente.
+			if (it->second.empty()) {
+				entidades.erase(it); // Remove a entidade se não houver mais componentes.
+			}
+		}
+		debug::emitir("registro", "entidade removida: " + std::to_string(ent));
+	}
+
 	template<typename T>
 	inline bool registro::tem(const uint32_t& entity)
 	{
 		return (mascaras[entity] & T::mascara) != 0;
 	}
 
-	template<typename ...componentes, typename Func>
+	template<typename ...comps, typename Func>
 	inline void registro::cada(Func func)
 	{
-		for (auto& [entity, comps] : entidades) {
-			if ((tem<componentes>(entity) && ...)) {
+		for (auto& [entity, componentes] : entidades) {
+			if ((tem<comps>(entity) && ...)) {
 				func(entity);
 			}
 		}

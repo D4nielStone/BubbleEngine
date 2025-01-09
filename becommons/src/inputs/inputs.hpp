@@ -4,6 +4,7 @@
 #include <functional>
 #include "src/util/vetor2.hpp"
 #include "src/util/vetor4.hpp"
+#include <glm/glm.hpp>
 #include "becommons.hpp"
 struct GLFWwindow;
 
@@ -39,7 +40,7 @@ namespace bubble
     extern "C" void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
     extern "C" void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
     extern "C" void charCallback(GLFWwindow* window, unsigned int codepoint);
-    vetor2<double> obterMouse();
-    vetor2<double> tamanhoJanela();
+    bubble::vetor2<double> obterMouse();
+    bubble::vetor2<int> tamanhoJanela();
     bool pressionada(const std::string &tecla);
 }

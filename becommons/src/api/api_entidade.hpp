@@ -10,6 +10,7 @@
 #include <src/componentes/texto.hpp>
 #include <src/componentes/imagem.hpp>
 #include <src/componentes/fisica.hpp>
+#include "mat.hpp"
 
 namespace bapi
 {
@@ -51,6 +52,8 @@ namespace bapi
 				beginClass<bubble::transformacao>("transformacao").			///< define transformacao
 				addConstructor<void(*)()>().
 				addData<glm::vec3>("posicao", &bubble::transformacao::posicao, true).
+				addData<glm::vec3>("escala", &bubble::transformacao::escala, true).
+				addData<glm::vec3>("rotacao", &bubble::transformacao::rotacao, true).
 				endClass().
 				beginClass<bubble::imagem>("imagem").			///< define transformacao
 				addConstructor<void(*)(std::string)>().
@@ -60,8 +63,8 @@ namespace bapi
 				beginClass<bubble::fisica>("fisica").			///< define transformacao
 				addConstructor<void(*)()>().
 				addFunction("aplicarForca", &bubble::fisica::aplicarForca).
-				addFunction("aplicarVelocidade", &bubble::fisica::aplicarVelocidade).
-				addFunction("obterVelocidade", &bubble::fisica::obterVelocidade).
+				addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
+				addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
 				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
@@ -69,6 +72,9 @@ namespace bapi
 				addFunction("olharPara", &bubble::camera::olharPara).
 				addData("posicao", &bubble::camera::posicao).
 				addData("fov", &bubble::camera::fov).
+				addData("corte_curto", &bubble::camera::corte_curto).
+				addData("corte_longo", &bubble::camera::corte_longo).
+				addData("frente", &bubble::camera::forward).
 				addData("yaw", &bubble::camera::yaw).
 				addData("pitch", &bubble::camera::pitch).
 				addData("ceu", &bubble::camera::ceu).
@@ -83,14 +89,10 @@ namespace bapi
 				addData("imagem", &bapi::entidade::_Mimagem, true).
 				addData("fisica", &bapi::entidade::_Mfisica, true).
 				addData("id", &bapi::entidade::id, false).
+				addFunction("destruir", &bapi::entidade::destruir).
 				endClass();
 		};
-		void mover(float x, float y, float z) const
-		{
-			_Mtransformacao->posicao.x += x;
-			_Mtransformacao->posicao.y += y;
-			_Mtransformacao->posicao.z += z;
-		}
+		void destruir() const;
 		entidade(const uint32_t& id);
 	};
 }

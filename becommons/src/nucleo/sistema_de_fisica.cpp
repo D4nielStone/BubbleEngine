@@ -10,7 +10,7 @@ bubble::sistemaFisica::sistemaFisica()
     faseAmpla = new btDbvtBroadphase();
     solucionador = new btSequentialImpulseConstraintSolver();
     mundoDinamico = new btDiscreteDynamicsWorld(expedidor, faseAmpla, solucionador, configColisao);
-    mundoDinamico->setGravity(btVector3(0, -9.8, 0));
+    mundoDinamico->setGravity(btVector3(0, -10, 0));
 }
 bubble::sistemaFisica::~sistemaFisica()
 {
@@ -40,6 +40,7 @@ void bubble::sistemaFisica::inicializar(bubble::fase* f)
             mundoDinamico->addRigidBody(comp_fisica->obterCorpoRigido());
         }
     );
+    mundoDinamicoPrincipal = mundoDinamico;
 }
 
 void bubble::sistemaFisica::iniciarThread()

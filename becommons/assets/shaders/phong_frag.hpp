@@ -48,6 +48,6 @@ void main()
         result = baseColor.xyz;
     }
     // Aplica o resultado final ao fragmento
-    FragColor = vec4(result, baseColor.w);
+    FragColor = vec4(result, 1);
 }
 )";

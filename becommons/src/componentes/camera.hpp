@@ -20,11 +20,14 @@ namespace bubble
 		 * @brief configuracao da camera;
 		 */
 
-		cor ceu				{0.43f, 0.78f, 0.86, 1.f};
+		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
 		glm::vec3 posicao	{ 0,0,0 };
 		glm::vec3* alvo		{ new glm::vec3(0, 0, 0) };
 		glm::vec3 cima		{ 0,1,0 };
+		glm::vec3 forward;
+
+		glm::mat4 viewMatrix;
 
 		float fov			{ 75.f };
 		float aspecto		{ 0.f };
@@ -43,10 +46,10 @@ namespace bubble
 
 		camera() = default;
 		camera(const vetor3<float>& pos, const bool alvo = false, const bool ortho = false);
-		glm::mat4 obtViewMatrix() const {
+		glm::mat4 obtViewMatrix() {
 			if (flag_alvo)
 			{
-				return glm::lookAt(posicao, *alvo, cima);
+				viewMatrix = glm::lookAt(posicao, *alvo, cima);
 			}
 			else
 			{
@@ -61,26 +64,34 @@ namespace bubble
 				glm::mat4 translacao = glm::translate(glm::mat4(1.0f), -posicao);
 
 				// A matriz de visualização é a combinação das duas
-				return rotacao * translacao;
+				viewMatrix =  rotacao * translacao;
 			}
+			forward.x = -viewMatrix[0][2]; // Elemento na 3ª coluna, 1ª linha
+			forward.y = -viewMatrix[1][2]; // Elemento na 3ª coluna, 2ª linha
+			forward.z = -viewMatrix[2][2]; // Elemento na 3ª coluna, 3ª linha
+
+			yaw = atan2(forward.x, forward.z); // Yaw em radianos
+			pitch = asin(forward.y);          // Pitch em radianos
+
+			return viewMatrix;
 		}
 
 		glm::mat4 obtProjectionMatrix()
 		{
 			if (flag_orth && viewport_ptr)
 			{
-				int largura = viewport_ptr->w;
-				int altura = viewport_ptr->h;
-				aspecto = static_cast<float>(largura) / altura;
+				float largura = viewport_ptr->w;
+				float altura = viewport_ptr->h;
+				aspecto = largura / altura;
 
 				return glm::ortho(-escala * aspecto, escala * aspecto, -escala, escala, corte_curto, corte_longo);
 
 			}
 			else if(viewport_ptr)
 			{
-				int largura = viewport_ptr->w;
-				int altura = viewport_ptr->h;
-				aspecto = static_cast<float>(largura) / altura;
+				float largura = viewport_ptr->w;
+				float altura = viewport_ptr->h;
+				aspecto = largura / altura;
 
 				return glm::perspective(glm::radians(fov), aspecto, corte_curto, corte_longo);
 			}

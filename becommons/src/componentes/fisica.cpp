@@ -19,7 +19,7 @@ void bubble::fisica::init()
     estadoDeMovimento = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), posicaoInicial));
     btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(massa, estadoDeMovimento, forma, inertia);
     corpoRigido = new btRigidBody(rigidBodyCI);
-    corpoRigido->setDamping(0.0, 0.0); // Sem amortecimento
+    corpoRigido->setRollingFriction(0.1);
 }
 // Construtor para criação de malha
 bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial)

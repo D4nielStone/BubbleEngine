@@ -13,6 +13,14 @@
 
 namespace bubble
 {
+    inline btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
+    // Estrutura para armazenar os resultados do Raycast
+    struct ResultadoRaio {
+        bool atingiu;                      // Se o raio atingiu algo
+        btVector3 pontoDeColisao;            // Ponto de colisão
+        btVector3 normalAtingida;           // Normal da superfície atingida
+        const btCollisionObject* objetoAtingido; // Objeto atingido
+    };
     class sistemaFisica : public sistema {
     public:
          sistemaFisica();
@@ -35,4 +43,25 @@ namespace bubble
         btSequentialImpulseConstraintSolver* solucionador;
         btDiscreteDynamicsWorld* mundoDinamico;
     };
+
+    // Função de Raycast
+    inline static ResultadoRaio novoRaio(
+        const btVector3& start,
+        const btVector3& end) {
+        ResultadoRaio result;
+        result.atingiu = false;
+        result.objetoAtingido = nullptr;
+
+        btCollisionWorld::ClosestRayResultCallback rayCallback(start, end);
+        mundoDinamicoPrincipal->rayTest(start, end, rayCallback);
+
+        if (rayCallback.hasHit()) {
+            result.atingiu = true;
+            result.pontoDeColisao = rayCallback.m_hitPointWorld;
+            result.normalAtingida = rayCallback.m_hitNormalWorld;
+            result.objetoAtingido = rayCallback.m_collisionObject;
+        }
+
+        return result;
+    }
 }
