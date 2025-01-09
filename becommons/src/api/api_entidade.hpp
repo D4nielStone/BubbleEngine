@@ -11,6 +11,7 @@
 #include <src/componentes/imagem.hpp>
 #include <src/componentes/fisica.hpp>
 #include "mat.hpp"
+#include <src/nucleo/sistema_de_fisica.hpp>
 
 namespace bapi
 {
@@ -60,12 +61,6 @@ namespace bapi
 				addData<bubble::vetor2<int>>("padding", &bubble::imagem::padding, true).
 				addData<bubble::vetor2<int>>("limite", &bubble::imagem::limite, true).
 				endClass().
-				beginClass<bubble::fisica>("fisica").			///< define transformacao
-				addConstructor<void(*)()>().
-				addFunction("aplicarForca", &bubble::fisica::aplicarForca).
-				addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
-				addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
-				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
 				addFunction("olhar", &bubble::camera::olhar).
@@ -95,4 +90,25 @@ namespace bapi
 		void destruir() const;
 		entidade(const uint32_t& id);
 	};
+	inline static void definirFisica(lua_State* L)
+	{
+		luabridge::getGlobalNamespace(L).
+			beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
+			addConstructor<void(*)()>().
+			endClass().
+			beginClass<bubble::resultadoRaio>("resultadoRaio").			///< define transformacao
+			addConstructor<void(*)()>().
+			addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
+			addData("atingiu", &bubble::resultadoRaio::atingiu, false).
+			addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
+			addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
+			endClass().
+			beginClass<bubble::fisica>("fisica").			///< define transformacao
+			addConstructor<void(*)()>().
+			addFunction("aplicarForca", &bubble::fisica::aplicarForca).
+			addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
+			addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
+			addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
+			endClass();
+	}
 }

@@ -15,10 +15,10 @@ namespace bubble
 {
     inline btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
     // Estrutura para armazenar os resultados do Raycast
-    struct ResultadoRaio {
+    struct resultadoRaio {
         bool atingiu;                      // Se o raio atingiu algo
-        btVector3 pontoDeColisao;            // Ponto de colisão
-        btVector3 normalAtingida;           // Normal da superfície atingida
+        glm::vec3 pontoDeColisao;            // Ponto de colisão
+        glm::vec3 normalAtingida;           // Normal da superfície atingida
         const btCollisionObject* objetoAtingido; // Objeto atingido
     };
     class sistemaFisica : public sistema {
@@ -45,10 +45,14 @@ namespace bubble
     };
 
     // Função de Raycast
-    inline static ResultadoRaio novoRaio(
-        const btVector3& start,
-        const btVector3& end) {
-        ResultadoRaio result;
+    inline static resultadoRaio novoRaio(
+        const glm::vec3& comeco,
+        const glm::vec3& fim) {
+
+        btVector3 start(comeco.x, comeco.y, comeco.z);
+        btVector3 end(fim.x, fim.y, fim.z);
+
+        resultadoRaio result;
         result.atingiu = false;
         result.objetoAtingido = nullptr;
 
@@ -57,8 +61,8 @@ namespace bubble
 
         if (rayCallback.hasHit()) {
             result.atingiu = true;
-            result.pontoDeColisao = rayCallback.m_hitPointWorld;
-            result.normalAtingida = rayCallback.m_hitNormalWorld;
+            result.pontoDeColisao = { rayCallback.m_hitPointWorld.getX(),rayCallback.m_hitPointWorld.getY(),rayCallback.m_hitPointWorld.getZ()};
+            result.normalAtingida = { rayCallback.m_hitNormalWorld.getX(),rayCallback.m_hitNormalWorld.getY(),rayCallback.m_hitNormalWorld.getZ() };
             result.objetoAtingido = rayCallback.m_collisionObject;
         }
 

@@ -22,12 +22,13 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.beginNamespace("tempo")
 		.addVariable("deltaT", &instanciaJanela->_Mtempo.deltaT)
 		.endNamespace()
-		.beginNamespace("mat")
+		.beginNamespace("util")
 		.addFunction("lerp", &std::lerp<float, float, float>)
 		.addFunction("clamp", &std::clamp<float>)
 		.addFunction("distanciaV3", &bubble::distancia3)
 		.addFunction("distanciaV2", &bubble::distancia2)
 		.addFunction("telaParaMundo", &bubble::telaParaMundo)
+		.addFunction("novoRaio", &bubble::novoRaio)
 		.endNamespace();
 			
 	/*-------------------------*/
