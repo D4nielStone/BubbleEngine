@@ -116,3 +116,5 @@ namespace bubble
 
     };
 }
+
+typedef bubble::vetor2<double> vet2;

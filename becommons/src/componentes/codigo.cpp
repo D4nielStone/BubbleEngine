@@ -11,6 +11,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 {
 	luaL_openlibs(L);
 
+	bapi::definirFisica(L);
 	bapi::entidade::definir(L);
 	/*-------------------------*/
 	luabridge::getGlobalNamespace(L)
@@ -24,6 +25,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.endNamespace()
 		.beginNamespace("util")
 		.addFunction("lerp", &std::lerp<float, float, float>)
+		.addFunction("lerpV3", &bubble::lerpV3)
 		.addFunction("clamp", &std::clamp<float>)
 		.addFunction("distanciaV3", &bubble::distancia3)
 		.addFunction("distanciaV2", &bubble::distancia2)

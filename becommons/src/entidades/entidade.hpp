@@ -97,7 +97,10 @@ namespace bubble
 	template<typename T>
 	inline bool registro::tem(const uint32_t& entity)
 	{
-		return (mascaras[entity] & T::mascara) != 0;
+		if (mascaras.find(entity) != mascaras.end())
+			return (mascaras[entity] & T::mascara) != 0;
+		else
+			return false;
 	}
 
 	template<typename ...comps, typename Func>

@@ -7,6 +7,7 @@
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include <src/util/vetor2.hpp>
+#include <src/util/raio.hpp>
 #include <src/componentes/texto.hpp>
 #include <src/componentes/imagem.hpp>
 #include <src/componentes/fisica.hpp>
@@ -65,6 +66,7 @@ namespace bapi
 				addConstructor<void(*)()>().
 				addFunction("olhar", &bubble::camera::olhar).
 				addFunction("olharPara", &bubble::camera::olharPara).
+				addFunction("pontoParaRaio", &bubble::camera::pontoParaRaio).
 				addData("posicao", &bubble::camera::posicao).
 				addData("fov", &bubble::camera::fov).
 				addData("corte_curto", &bubble::camera::corte_curto).
@@ -95,6 +97,11 @@ namespace bapi
 		luabridge::getGlobalNamespace(L).
 			beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
 			addConstructor<void(*)()>().
+			endClass().
+			beginClass<bubble::raio>("raio").			///< define transformacao
+			addConstructor<void(*)()>().
+			addData("origem", &bubble::raio::origem).
+			addData("direcao", &bubble::raio::direcao).
 			endClass().
 			beginClass<bubble::resultadoRaio>("resultadoRaio").			///< define transformacao
 			addConstructor<void(*)()>().

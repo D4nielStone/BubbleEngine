@@ -119,3 +119,5 @@ namespace bubble
 
     };
 }
+
+typedef bubble::vetor3<float> vet3;

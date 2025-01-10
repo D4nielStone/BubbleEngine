@@ -7,6 +7,7 @@
 
 #pragma once
 #include "sistema.hpp"
+#include "src/util/raio.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
 #include <thread>
 #include <atomic>
@@ -14,13 +15,7 @@
 namespace bubble
 {
     inline btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
-    // Estrutura para armazenar os resultados do Raycast
-    struct resultadoRaio {
-        bool atingiu;                      // Se o raio atingiu algo
-        glm::vec3 pontoDeColisao;            // Ponto de colisão
-        glm::vec3 normalAtingida;           // Normal da superfície atingida
-        const btCollisionObject* objetoAtingido; // Objeto atingido
-    };
+    
     class sistemaFisica : public sistema {
     public:
          sistemaFisica();
@@ -45,27 +40,36 @@ namespace bubble
     };
 
     // Função de Raycast
-    inline static resultadoRaio novoRaio(
-        const glm::vec3& comeco,
-        const glm::vec3& fim) {
+    inline static resultadoRaio novoRaio(const raio& raio) {
+        // Configuração do ponto inicial e final do raio no espaço 3D
+        btVector3 origem(raio.origem.x, raio.origem.y, raio.origem.z);
+        btVector3 destino = origem + btVector3(raio.direcao.x, raio.direcao.y, raio.direcao.z) * 1000.0f; // Alcança até 1000 unidades
 
-        btVector3 start(comeco.x, comeco.y, comeco.z);
-        btVector3 end(fim.x, fim.y, fim.z);
+        // Criar o callback de raycast
+        btCollisionWorld::ClosestRayResultCallback callback(origem, destino);
 
-        resultadoRaio result;
-        result.atingiu = false;
-        result.objetoAtingido = nullptr;
+        // Executar o raycast no mundo físico
+        mundoDinamicoPrincipal->rayTest(origem, destino, callback);
 
-        btCollisionWorld::ClosestRayResultCallback rayCallback(start, end);
-        mundoDinamicoPrincipal->rayTest(start, end, rayCallback);
+        // Estrutura de retorno
+        resultadoRaio resultado = { false, glm::vec3(0.0f), glm::vec3(0.0f), nullptr };
 
-        if (rayCallback.hasHit()) {
-            result.atingiu = true;
-            result.pontoDeColisao = { rayCallback.m_hitPointWorld.getX(),rayCallback.m_hitPointWorld.getY(),rayCallback.m_hitPointWorld.getZ()};
-            result.normalAtingida = { rayCallback.m_hitNormalWorld.getX(),rayCallback.m_hitNormalWorld.getY(),rayCallback.m_hitNormalWorld.getZ() };
-            result.objetoAtingido = rayCallback.m_collisionObject;
+        // Verificar se houve colisão
+        if (callback.hasHit()) {
+            resultado.atingiu = true;
+
+            // Ponto de colisão
+            btVector3 ponto = callback.m_hitPointWorld;
+            resultado.pontoDeColisao = glm::vec3(ponto.getX(), ponto.getY(), ponto.getZ());
+
+            // Normal da superfície atingida
+            btVector3 normal = callback.m_hitNormalWorld;
+            resultado.normalAtingida = glm::normalize(glm::vec3(normal.getX(), normal.getY(), normal.getZ()));
+
+            // Objeto atingido
+            resultado.objetoAtingido = callback.m_collisionObject;
         }
 
-        return result;
+        return resultado;
     }
 }

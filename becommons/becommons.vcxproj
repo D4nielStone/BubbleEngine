@@ -237,6 +237,7 @@
     <ClInclude Include="src\util\luz.hpp" />
     <ClInclude Include="src\util\malha.hpp" />
     <ClInclude Include="src\util\material.hpp" />
+    <ClInclude Include="src\util\raio.hpp" />
     <ClInclude Include="src\util\textura.hpp" />
     <ClInclude Include="src\util\vertice.hpp" />
     <ClInclude Include="src\util\vetor2.hpp" />

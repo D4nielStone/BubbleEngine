@@ -1,6 +1,8 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "componente.hpp"
+#include "src/util/raio.hpp"
+#include "src/util/vetor2.hpp"
 #include "src/util/vetor3.hpp"
 #include "src/util/vetor4.hpp"
 #include <glm/ext/matrix_clip_space.hpp>
@@ -98,5 +100,35 @@ namespace bubble
 		}
 		void olhar(const uint32_t& ent);
 		void olharPara(const glm::vec3& pos);
+		inline static vet3 telaParaNDC(vet2 screenPoint, vet2 screenSize) {
+			// screenPoint: Coordenadas de tela (x, y), geralmente em pixels.
+			// screenSize: Tamanho da tela (largura, altura), em pixels.
+			// Retorna: Coordenadas normalizadas no dispositivo (NDC).
+
+			float xNDC = (2.0f * screenPoint.x) / screenSize.x - 1.0f;
+			float yNDC = 1.0f - (2.0f * screenPoint.y) / screenSize.y;
+			float zNDC = 1.0f; // Geralmente definido como 1 para a profundidade inicial (plano de projeção)
+
+			return vet3(xNDC, yNDC, zNDC);
+		}
+
+		raio pontoParaRaio(vet2 screenPoint) {
+			// Converte screenPoint (x, y) para Normalized Device Coordinates
+			vet3 ndc = telaParaNDC(screenPoint, vet2(viewport_ptr->w, viewport_ptr->h));
+
+			// Converte para o espaço de câmera
+			glm::vec4 cameraSpace = glm::inverse(obtProjectionMatrix()) * glm::vec4(ndc.x,ndc.y,ndc.z, 1.f);
+
+			// Converte para o espaço do mundo
+			glm::vec4 worldSpaceDirection = glm::inverse(obtViewMatrix()) * cameraSpace;
+
+			// Cria o raio a partir da posição da câmera e da direção
+			raio ray{};
+			ray.origem = posicao; // Origem do raio é a posição da câmera
+			ray.direcao = normalize(worldSpaceDirection); // Direção normalizada
+
+			return ray;
+		}
+
 	};
 }
