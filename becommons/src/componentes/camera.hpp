@@ -29,13 +29,15 @@ namespace bubble
 		glm::vec3 forward, posicao;
 		std::shared_ptr<bubble::transformacao> transform{ nullptr };
 
-		glm::mat4 viewMatrix;
+		glm::mat4 viewMatrix, projMatriz;
 
 		float fov			{ 75.f };
 		float aspecto		{ 0.f };
 		float corte_curto	{ 0.1f }; 
 		float corte_longo	{ 300.f };
 		float escala		{ 5.f };
+
+		float left, top, bottom, right;
 
 		bool flag_orth		{ false };
 
@@ -48,9 +50,9 @@ namespace bubble
 		glm::mat4 obtViewMatrix();
 
 		glm::mat4 obtProjectionMatrix();
-		
-		inline static vet3 telaParaNDC(vet2 screenPoint, vet2 screenSize);
 
-		raio pontoParaRaio(vet2 screenPoint);
+		raio pontoParaRaio(vet2 screenPoint) const;
+
+		glm::vec3 telaParaMundo(const vet2& screenPoint, float profundidade) const;
 	};
 }

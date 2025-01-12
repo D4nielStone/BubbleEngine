@@ -6,6 +6,7 @@
 #include <src/componentes/texto.hpp>
 #include <src/componentes/transformacao.hpp>
 #include <src/componentes/propriedades.hpp>
+#include <src/componentes/fisica.hpp>
 #include <src/componentes/renderizador.hpp>
 #include <src/componentes/imagem.hpp>
 #include <iostream>
@@ -183,7 +184,9 @@ static void analizarEntidades(Document& doc, fase* f)
 							const btVector3 n(0, 1, 0);
 							btVector3 posin;
 							btScalar massa;
-
+							fisica::camada camada{fisica::COLISAO_PADRAO};
+							if (componente.HasMember("camada") && componente["camada"].GetInt() == 1)
+								camada = fisica::COLISAO_ESPECIAL;
 							if (componente.HasMember("posicao_inicial"))
 								posin = {componente["posicao_inicial"].GetArray()[0].GetFloat(),componente["posicao_inicial"].GetArray()[1].GetFloat(),componente["posicao_inicial"].GetArray()[2].GetFloat()};
 							if (std::strcmp(f, "esfera") == 0)
@@ -196,11 +199,11 @@ static void analizarEntidades(Document& doc, fase* f)
 								forma = new btBoxShape(btVector3(1.f, 1.f, 1.f));
 							else if (std::strcmp(f, "modelo") == 0)
 							{
-								reg->adicionar<fisica>(id, true, massa, posin);
+								reg->adicionar<fisica>(id, true, massa, posin, camada);
 								continue;
 							}
 							massa = componente["massa"].GetFloat();
-							reg->adicionar<fisica>(id, forma, massa, posin);
+							reg->adicionar<fisica>(id, forma, massa, posin, camada);
 						}
 					}
 				}

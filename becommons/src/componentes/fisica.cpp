@@ -4,8 +4,8 @@
 #include "renderizador.hpp"
 
 // Construtor para forma genérica
-bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial)
-    : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial)
+bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
+    : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
     init();
 }
@@ -22,8 +22,8 @@ void bubble::fisica::init()
     corpoRigido->setRollingFriction(0.1);
 }
 // Construtor para criação de malha
-bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial)
-    : malha(malha), massa(0), posicaoInicial(posicaoInicial)
+bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
+    : malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
 }
 
@@ -83,7 +83,7 @@ void bubble::fisica::criarMalha()
 // Atualizar transformação
 void bubble::fisica::atualizarTransformacao()
 {
-
+    if (massa == 0)  return;
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt);
 

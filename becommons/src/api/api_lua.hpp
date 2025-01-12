@@ -13,7 +13,6 @@
 #include <src/componentes/imagem.hpp>
 #include <src/componentes/fisica.hpp>
 #include "mat.hpp"
-#include <src/nucleo/sistema_de_fisica.hpp>
 
 namespace bapi
 {
@@ -75,6 +74,7 @@ namespace bapi
 				addData("ceu", &bubble::camera::ceu).
 				addData("escala", &bubble::camera::escala).
 				addData("flag_ortho", &bubble::camera::flag_orth).
+				addFunction("telaParaMundo", &bubble::camera::telaParaMundo).
 				endClass().
 				beginClass<bapi::entidade>("entidade").			///< define entidade
 				addConstructor<void(*)(int)>().
@@ -89,37 +89,5 @@ namespace bapi
 		void destruir() const;
 		entidade(const uint32_t& id);
 	};
-	static bool igual(btCollisionObject* c1, btRigidBody* rb)
-	{
-		return c1 == rb;
-	}
-	inline static void definirFisica(lua_State* L)
-	{
-		luabridge::getGlobalNamespace(L).
-			beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
-			addConstructor<void(*)()>().
-			endClass().
-			beginClass<bubble::raio>("raio").			///< define transformacao
-			addConstructor<void(*)()>().
-			addData("origem", &bubble::raio::origem).
-			addData("direcao", &bubble::raio::direcao).
-			endClass().
-			beginClass<bubble::resultadoRaio>("resultadoRaio").			///< define transformacao
-			addConstructor<void(*)()>().
-			addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
-			addData("atingiu", &bubble::resultadoRaio::atingiu, false).
-			addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
-			addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
-			endClass().
-			beginClass<bubble::fisica>("fisica").			///< define transformacao
-			addConstructor<void(*)()>().
-			addFunction("aplicarForca", &bubble::fisica::aplicarForca).
-			addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
-			addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
-			addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
-			endClass().
-			beginNamespace("fisica").
-			addFunction("igual", &igual).
-			endNamespace();
-	}
+	void definirFisica(lua_State* L);
 }

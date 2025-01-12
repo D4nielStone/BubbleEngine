@@ -29,8 +29,6 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.addFunction("clamp", &std::clamp<float>)
 		.addFunction("distanciaV3", &bubble::distancia3)
 		.addFunction("distanciaV2", &bubble::distancia2)
-		.addFunction("telaParaMundo", &bubble::telaParaMundo)
-		.addFunction("novoRaio", &bubble::novoRaio)
 		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>)
 		.endNamespace();
 			

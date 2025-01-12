@@ -1,6 +1,7 @@
 #include "api_lua.hpp"
 #include <src/nucleo/fase.hpp>
 #include <src/componentes/renderizador.hpp>
+#include <src/nucleo/sistema_de_fisica.hpp>
 #include <src/componentes/codigo.hpp>
 
 using namespace bubble;
@@ -37,4 +38,35 @@ bapi::entidade::entidade(const uint32_t& id) : id(id)
 		_Mimagem = fase_atual->obterRegistro()->obter<bubble::imagem>(id).get();
 	if (fase_atual->obterRegistro()->tem<bubble::fisica>(id))
 		_Mfisica = fase_atual->obterRegistro()->obter<bubble::fisica>(id).get();
+}
+void bapi::definirFisica(lua_State* L)
+{
+	luabridge::getGlobalNamespace(L).
+		beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
+		addConstructor<void(*)()>().
+		endClass().
+		beginClass<btRigidBody>("corpoRigido").			///< define transformacao
+		endClass().
+		beginClass<bubble::raio>("raio").			///< define transformacao
+		addConstructor<void(*)()>().
+		addData("origem", &bubble::raio::origem).
+		addData("direcao", &bubble::raio::direcao).
+		endClass().
+		beginClass<bubble::resultadoRaio>("resultadoRaio").			///< define transformacao
+		addConstructor<void(*)()>().
+		addData("objetoAtingido", &bubble::resultadoRaio::objetoAtingido, false).
+		addData("atingiu", &bubble::resultadoRaio::atingiu, false).
+		addData("pontoDeColisao", &bubble::resultadoRaio::pontoDeColisao, false).
+		addData("normalAtingida", &bubble::resultadoRaio::normalAtingida, false).
+		endClass().
+		beginClass<bubble::fisica>("fisica").			///< define transformacao
+		addConstructor<void(*)()>().
+		addFunction("aplicarForca", &bubble::fisica::aplicarForca).
+		addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
+		addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
+		addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
+		endClass().
+		beginNamespace("fisica").
+		addFunction("raioIntersecta", &bubble::raioIntersecta).
+		endNamespace();
 }

@@ -6,12 +6,17 @@
 
 namespace bubble
 {
-
     struct fisica : componente {
         static constexpr mascara mascara { COMPONENTE_FISICA };
+        enum camada {
+            COLISAO_PADRAO = 1 << 0,  // Objetos comuns
+            COLISAO_ESPECIAL = 1 << 1 // Objeto especial
+        };
+
+        camada camada_colisao{camada::COLISAO_PADRAO};
         fisica() = default;
-        fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial);
-        fisica(bool malha, btScalar massa, btVector3 posicaoInicial);
+        fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada = COLISAO_PADRAO);
+        fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada = fisica::COLISAO_PADRAO);
         virtual ~fisica();
 
         btRigidBody* obterCorpoRigido();
