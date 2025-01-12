@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\api\api_entidade.cpp" />
+    <ClCompile Include="src\api\api_lua.cpp" />
     <ClCompile Include="src\arquivadores\fonte.cpp" />
     <ClCompile Include="src\arquivadores\imageloader.cpp" />
     <ClCompile Include="src\arquivadores\modelo.cpp" />
@@ -157,6 +157,7 @@
     <ClCompile Include="src\componentes\camera.cpp" />
     <ClCompile Include="src\componentes\codigo.cpp" />
     <ClCompile Include="src\componentes\fisica.cpp" />
+    <ClCompile Include="src\componentes\transformacao.cpp" />
     <ClCompile Include="src\depuracao\debug.cpp" />
     <ClCompile Include="src\entidades\entidade.cpp" />
     <ClCompile Include="src\inputs\inputs.cpp" />
@@ -206,7 +207,7 @@
     <ClInclude Include="assets\shaders_na_memoria.hpp" />
     <ClInclude Include="assets\imagems_na_memoria.hpp" />
     <ClInclude Include="os\tempo.hpp" />
-    <ClInclude Include="src\api\api_entidade.hpp" />
+    <ClInclude Include="src\api\api_lua.hpp" />
     <ClInclude Include="src\api\mat.hpp" />
     <ClInclude Include="src\arquivadores\fonte.hpp" />
     <ClInclude Include="src\arquivadores\imageloader.hpp" />

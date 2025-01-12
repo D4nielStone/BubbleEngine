@@ -43,7 +43,7 @@ namespace bubble
     inline static resultadoRaio novoRaio(const raio& raio) {
         // Configuração do ponto inicial e final do raio no espaço 3D
         btVector3 origem(raio.origem.x, raio.origem.y, raio.origem.z);
-        btVector3 destino = origem + btVector3(raio.direcao.x, raio.direcao.y, raio.direcao.z) * 1000.0f; // Alcança até 1000 unidades
+        btVector3 destino = origem + btVector3(raio.direcao.x, raio.direcao.y, raio.direcao.z) * 300.0f; // Alcança até 300 unidades
 
         // Criar o callback de raycast
         btCollisionWorld::ClosestRayResultCallback callback(origem, destino);

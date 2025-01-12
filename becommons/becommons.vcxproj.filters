@@ -57,7 +57,7 @@
     <ClCompile Include="src\componentes\codigo.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="src\api\api_entidade.cpp">
+    <ClCompile Include="src\api\api_lua.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\componentes\camera.cpp">
@@ -70,6 +70,9 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="src\componentes\fisica.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\componentes\transformacao.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,7 +278,7 @@
     <ClInclude Include="src\nucleo\sistema_de_codigo.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="src\api\api_entidade.hpp">
+    <ClInclude Include="src\api\api_lua.hpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="src\nucleo\fase.hpp">

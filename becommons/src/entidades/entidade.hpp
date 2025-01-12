@@ -116,8 +116,16 @@ namespace bubble
 	template<typename T>
 	inline std::shared_ptr<T> registro::obter(const uint32_t& entity)
 	{
-		auto it = entidades[entity].find(T::mascara);
-		return std::static_pointer_cast<T>(it->second);
+		if (entidades.find(entity) != entidades.end())
+		{
+			auto it = entidades[entity].find(T::mascara);
+			if(it != entidades[entity].end())
+			return std::static_pointer_cast<T>(it->second);
+			else
+				return nullptr;
+		}
+		else
+			return nullptr;
 	}
 
 }	///< namespace bubble

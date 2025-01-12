@@ -3,6 +3,7 @@
 #pragma once
 #include <src/componentes/camera.hpp>
 #include <cstdint>
+#include <bullet/btBulletDynamicsCommon.h>
 #include <src/componentes/transformacao.hpp>
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
@@ -24,7 +25,7 @@ namespace bapi
 		bubble::texto* _Mtexto{ nullptr };
 		bubble::imagem* _Mimagem{ nullptr };
 		uint32_t id;
-		static void definir(lua_State* L) 
+		static void definir(lua_State* L)
 		{
 			luabridge::getGlobalNamespace(L).
 				beginClass<glm::vec3>("vetor3").		///< define vetor3
@@ -56,6 +57,8 @@ namespace bapi
 				addData<glm::vec3>("posicao", &bubble::transformacao::posicao, true).
 				addData<glm::vec3>("escala", &bubble::transformacao::escala, true).
 				addData<glm::vec3>("rotacao", &bubble::transformacao::rotacao, true).
+				addFunction("apontarEntidade", &bubble::transformacao::apontarEntidade).
+				addFunction("apontarV3", &bubble::transformacao::apontarV3).
 				endClass().
 				beginClass<bubble::imagem>("imagem").			///< define transformacao
 				addConstructor<void(*)(std::string)>().
@@ -64,19 +67,13 @@ namespace bapi
 				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
-				addFunction("olhar", &bubble::camera::olhar).
-				addFunction("olharPara", &bubble::camera::olharPara).
 				addFunction("pontoParaRaio", &bubble::camera::pontoParaRaio).
-				addData("posicao", &bubble::camera::posicao).
 				addData("fov", &bubble::camera::fov).
 				addData("corte_curto", &bubble::camera::corte_curto).
 				addData("corte_longo", &bubble::camera::corte_longo).
 				addData("frente", &bubble::camera::forward).
-				addData("yaw", &bubble::camera::yaw).
-				addData("pitch", &bubble::camera::pitch).
 				addData("ceu", &bubble::camera::ceu).
 				addData("escala", &bubble::camera::escala).
-				addData("flag_alvo", &bubble::camera::flag_alvo).
 				addData("flag_ortho", &bubble::camera::flag_orth).
 				endClass().
 				beginClass<bapi::entidade>("entidade").			///< define entidade
@@ -92,6 +89,10 @@ namespace bapi
 		void destruir() const;
 		entidade(const uint32_t& id);
 	};
+	static bool igual(btCollisionObject* c1, btRigidBody* rb)
+	{
+		return c1 == rb;
+	}
 	inline static void definirFisica(lua_State* L)
 	{
 		luabridge::getGlobalNamespace(L).
@@ -116,6 +117,9 @@ namespace bapi
 			addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
 			addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
 			addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
-			endClass();
+			endClass().
+			beginNamespace("fisica").
+			addFunction("igual", &igual).
+			endNamespace();
 	}
 }

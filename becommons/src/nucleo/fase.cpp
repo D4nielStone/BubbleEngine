@@ -81,25 +81,16 @@ static void analizarEntidades(Document& doc, fase* f)
 						const char* i = componente["tipo"].GetString();
 						if (std::strcmp(i, "camera") == 0)
 						{
-							reg->adicionar<camera>(id, vetor3(0.f, 0.f, 0.f));
+							reg->adicionar<camera>(id);
 							f->definirCamera(id);
 
 							auto arr = componente["posicao"].GetArray();
 							f->obterCamera()->posicao = {arr[0].GetFloat(), arr[1].GetFloat(), arr[2].GetFloat()};
 							if (componente.HasMember("olhar"))
-								f->obterCamera()->olhar(componente["olhar"].GetInt());
-
-							if (componente.HasMember("yaw"))
-								f->obterCamera()->yaw = componente["yaw"].GetFloat();
-
-							if (componente.HasMember("pitch"))
-								f->obterCamera()->pitch = componente["pitch"].GetFloat();
+								reg->obter<transformacao>(id.id)->apontarEntidade(componente["apontarEntidade"].GetInt());
 
 							if (componente.HasMember("escala"))
 								f->obterCamera()->escala = componente["escala"].GetFloat();
-
-							if (componente.HasMember("alvo"))
-								f->obterCamera()->flag_alvo = componente["alvo"].GetBool();
 
 							if (componente.HasMember("ortho"))
 								f->obterCamera()->flag_orth = componente["ortho"].GetBool();

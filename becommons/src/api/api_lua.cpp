@@ -1,4 +1,4 @@
-#include "api_entidade.hpp"
+#include "api_lua.hpp"
 #include <src/nucleo/fase.hpp>
 #include <src/componentes/renderizador.hpp>
 #include <src/componentes/codigo.hpp>

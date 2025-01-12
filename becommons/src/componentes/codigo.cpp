@@ -1,6 +1,6 @@
 #include "codigo.hpp"
 #include "src/nucleo/fase.hpp"
-#include "src/api/api_entidade.hpp"
+#include "src/api/api_lua.hpp"
 #include "src/api/mat.hpp"
 #include <src/inputs/inputs.hpp>
 #include "os/janela.hpp"
@@ -31,6 +31,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.addFunction("distanciaV2", &bubble::distancia2)
 		.addFunction("telaParaMundo", &bubble::telaParaMundo)
 		.addFunction("novoRaio", &bubble::novoRaio)
+		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>)
 		.endNamespace();
 			
 	/*-------------------------*/
