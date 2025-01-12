@@ -54,6 +54,9 @@ static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
 	/// recebe luz
 	if (malha.HasMember("recebe_luz"))
 		m->material.recebe_luz = malha["recebe_luz"].GetBool();
+	/// sobrepor
+	if (malha.HasMember("sobrepor"))
+		m->sobrepor = malha["sobrepor"].GetBool();
 	/// itera instancias
 	if (malha.HasMember("instancias"))
 	{

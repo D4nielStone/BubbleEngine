@@ -22,6 +22,8 @@ namespace bubble
 
     void malha::desenhar(bubble::shader& shader)
     {
+        if(sobrepor)
+            glDepthFunc(GL_ALWAYS);
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
 
@@ -75,6 +77,8 @@ namespace bubble
                 number = std::to_string(specularNr++);
             shader.setBool((name + number + "_bool").c_str(), false);
         }
+        if(sobrepor)
+            glDepthFunc(GL_LESS);
     }
 
     void malha::definirBuffers()

@@ -29,7 +29,7 @@ namespace bubble
 		glm::vec3 forward, posicao;
 		std::shared_ptr<bubble::transformacao> transform{ nullptr };
 
-		glm::mat4 viewMatrix, projMatriz;
+		glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);
 
 		float fov			{ 75.f };
 		float aspecto		{ 0.f };

@@ -20,6 +20,7 @@ void bubble::fisica::init()
     btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(massa, estadoDeMovimento, forma, inertia);
     corpoRigido = new btRigidBody(rigidBodyCI);
     corpoRigido->setRollingFriction(0.1);
+    corpoRigido->setRestitution(0.8f);
 }
 // Construtor para criação de malha
 bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
@@ -101,6 +102,7 @@ void bubble::fisica::aplicarForca(const glm::vec3& vetor)
 // Aplicar velocidade
 void bubble::fisica::aplicarVelocidade(const glm::vec3& velocidade)
 {
+    corpoRigido->activate();
     corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
 }
 
