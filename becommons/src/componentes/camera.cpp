@@ -3,8 +3,68 @@
 #include <src/nucleo/fase.hpp>
 #include <os/janela.hpp>
 
+void bubble::camera::desenharFB() const
+{
+    if (flag_fb)
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glViewport(0, 0, 800, 600);
+    }
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
+}
+
+
+bubble::camera::~camera()
+{
+    desativarFB();
+}
+
 bubble::camera::camera(const bool orth)
     : flag_orth(orth) {
+}
+
+void bubble::camera::ativarFB()
+{
+    if (flag_fb) return;
+    flag_fb = true;
+
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+    // Criando uma textura para armazenar a imagem renderizada
+    glGenTextures(1, &textura);
+    glBindTexture(GL_TEXTURE_2D, textura);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Anexando a textura ao framebuffer
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textura, 0);
+
+    // Criando um renderbuffer para armazenar depth e stencil
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+    // Verificando se o framebuffer está completo
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        std::cerr << "Erro: Framebuffer não está completo!" << std::endl;
+    }
+
+    // Voltando ao framebuffer padrão
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+}
+
+void bubble::camera::desativarFB()
+{
+    if (!flag_fb) return;
+    flag_fb = false;
+
+    glDeleteFramebuffers(1, &fbo);
+    glDeleteTextures(1, &textura);
 }
 
 glm::mat4 bubble::camera::obtViewMatrix() {

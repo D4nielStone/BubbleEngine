@@ -24,6 +24,8 @@ namespace bubble
         void atualizarTransformacao();
         void aplicarForca(const glm::vec3& vetor);
         void aplicarVelocidade(const glm::vec3& vetor);
+        void definirPosicao(const glm::vec3& posicao); 
+        void definirRotacao(const glm::vec3& rotacao);
         glm::vec3 obterVelocidade() const;
         void init();
     private:

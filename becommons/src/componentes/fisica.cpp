@@ -106,6 +106,26 @@ void bubble::fisica::aplicarVelocidade(const glm::vec3& velocidade)
     corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
 }
 
+// definir posição
+void bubble::fisica::definirPosicao(const glm::vec3& posicao)
+{
+    btTransform bt;
+    estadoDeMovimento->getWorldTransform(bt); // Recupera transformação atual
+    bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Define nova posição
+    estadoDeMovimento->setWorldTransform(bt); // Aplica transformação
+}
+
+// definir rotação
+void bubble::fisica::definirRotacao(const glm::vec3& rotacao)
+{
+    btTransform bt;
+    estadoDeMovimento->getWorldTransform(bt); // Recupera transformação atual
+    btQuaternion btRot;
+    btRot.setEulerZYX(rotacao.z, rotacao.y, rotacao.x); // Define rotação com Euler ZYX
+    bt.setRotation(btRot); // Aplica rotação
+    estadoDeMovimento->setWorldTransform(bt); // Aplica transformação
+}
+
 // Obter velocidade
 glm::vec3 bubble::fisica::obterVelocidade() const
 {

@@ -3,12 +3,6 @@
 #include "src/depuracao/debug.hpp"
 #include "src/arquivadores/imageloader.hpp"
 
-static void callbackSize(GLFWwindow* window, int w, int h)
-{
-    auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window));
-    janela->tamanho.w = w;
-    janela->tamanho.h = h;
-}
 bubble::janela::~janela()
 {
 }
@@ -20,8 +14,7 @@ bubble::janela::janela(const char* nome, const char* icon_path)
         debug::emitir(Erro, "Iniciando janela glfw");
         abort();
     }
-    glfwWindowHint(GLFW_SAMPLES, 3);
-    window = glfwCreateWindow(800, 400, nome, NULL, NULL);
+    window = glfwCreateWindow(400, 400, nome, NULL, NULL);
     if (!window) {
         debug::emitir(Erro, "Janla invalida");
         abort();
@@ -48,10 +41,8 @@ bubble::janela::janela(const char* nome, const char* icon_path)
 
     // ativa blend
     glEnable(GL_BLEND); 
-    glEnable(GL_MULTISAMPLE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    glfwSetWindowSizeCallback(window, callbackSize);
     glfwSetCursorPosCallback(window,bubble::mousePosCallBack);
     glfwSetMouseButtonCallback(window, bubble::mouseButtonCallBack);
     glfwSetKeyCallback(window,bubble::callbackKey);
@@ -63,15 +54,19 @@ bubble::janela::janela(const char* nome, const char* icon_path)
     tamanho.w = tam.w;
 }
 
-void bubble::janela::poll()
+void bubble::janela::poll() const
 {
+
     glfwPollEvents();
-    _Mtempo.deltaT = glfwGetTime() - _Mtempo.tempoCorrido;
-    _Mtempo.tempoCorrido = glfwGetTime();
 }
 
-void bubble::janela::swap() const
+void bubble::janela::swap() 
 {
+    bubble::vetor4<int> tam{};
+    glfwGetWindowSize(window, &tam.w, &tam.h);
+    tamanho.h = tam.h;
+    tamanho.w = tam.w;
+    _Mtempo.calcularDT();
     glfwSwapBuffers(window);
 }
 

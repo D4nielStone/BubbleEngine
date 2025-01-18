@@ -31,8 +31,8 @@ namespace bubble
 		inputs inputs;
 		janela(const char* nome, const char* icon_path = nullptr);
 		~janela();
-		void poll();
-		void swap() const;
+		void poll() const;
+		void swap();
 		void viewport() const;
 		void nome(const char* novo_nome) const;
 	};

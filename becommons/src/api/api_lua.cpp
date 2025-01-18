@@ -42,6 +42,11 @@ bapi::entidade::entidade(const uint32_t& id) : id(id)
 void bapi::definirFisica(lua_State* L)
 {
 	luabridge::getGlobalNamespace(L).
+		beginClass<bubble::fase>("fase").		///< define vetor3
+		addConstructor<void(*)(const char*)>().
+		addFunction("pausar", &bubble::fase::pausar).
+		addFunction("parar", &bubble::fase::parar).
+		endClass().
 		beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
 		addConstructor<void(*)()>().
 		endClass().
@@ -64,6 +69,8 @@ void bapi::definirFisica(lua_State* L)
 		addFunction("aplicarForca", &bubble::fisica::aplicarForca).
 		addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
 		addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
+		addFunction("defPosicao", &bubble::fisica::definirPosicao).
+		addFunction("defRotacao", &bubble::fisica::definirRotacao).
 		addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
 		endClass().
 		beginNamespace("fisica").

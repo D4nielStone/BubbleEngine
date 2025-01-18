@@ -13,6 +13,13 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 
 	bapi::definirFisica(L);
 	bapi::entidade::definir(L);
+
+	std::function<double()> obterDeltaTimeFunc = []() -> double {
+		if (!fase_atual) {
+			return 0.0;
+		}
+		return instanciaJanela->_Mtempo.obterDeltaTime();
+		};
 	/*-------------------------*/
 	luabridge::getGlobalNamespace(L)
 		.beginNamespace("inputs")
@@ -21,7 +28,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 		.addFunction("tamanhoTela", &bubble::tamanhoJanela)
 		.endNamespace()
 		.beginNamespace("tempo")
-		.addVariable("deltaT", &instanciaJanela->_Mtempo.deltaT)
+		.addFunction<double>("obterDeltaTime", obterDeltaTimeFunc)
 		.endNamespace()
 		.beginNamespace("util")
 		.addFunction("lerp", &std::lerp<float, float, float>)
@@ -44,6 +51,7 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 void bubble::codigo::iniciar() const
 {
 	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
+	luabridge::setGlobal(L, &fase_atual, "faseAtual");
 	// Tentar obter a função "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
 
@@ -53,18 +61,16 @@ void bubble::codigo::iniciar() const
 		// Chamar a função Lua "iniciar" - é uma função local dentro do escopo do script
 		if (lua_pcall(L, 0, 0, 0) != LUA_OK)
 		{
-			debug::emitir(Erro, std::string("funcao 'iniciar': ") + lua_tostring(L, -1));
 			lua_pop(L, 1);  // Remover a mensagem de erro da pilha
 		}
 	}
 	else
 	{
-		debug::emitir(Erro, "Funcao 'iniciar' nao encontrada ou nao eh uma funcao local.");
 		lua_pop(L, 1); // Remover da pilha se não for uma função válida
 	}
 }
 
-void bubble::codigo::atualizar(double deltaTime) const
+void bubble::codigo::atualizar() const
 {
 	// Chamar função de atualização no Lua, se existir
 	lua_getglobal(L, "atualizar");
@@ -79,4 +85,18 @@ void bubble::codigo::atualizar(double deltaTime) const
 	{
 		lua_pop(L, 1); // Remover da pilha se não for função
 	}
+}
+void bubble::codigo::encerrar()
+{
+	if (L) {
+		lua_pushnil(L);
+		lua_setglobal(L, "eu");
+		lua_setglobal(L, "faseAtual");
+		lua_close(L);
+		L = nullptr;
+	}
+}
+bubble::codigo::~codigo()
+{
+	encerrar();
 }

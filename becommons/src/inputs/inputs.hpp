@@ -28,6 +28,7 @@ namespace bubble
         int mouseEnter{ 0 }, teclado_action{ 0 }, mods{ 0 }, mouseButton{ 0 };
         char letra{ '\0' };
         bool mouseClick{ false }, char_press{ false };
+        int gamepad_eixo;
         std::unordered_map<std::string, bool> keyStates;
     protected:
         virtual void handleKey(const std::string&key);

@@ -244,8 +244,9 @@ int bubble::texturaDoArquivo(const std::string& directory,GLuint tipo_textura) {
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
     }
     else {
         std::cerr << "Failed to load texture: " << directory << std::endl;
@@ -282,8 +283,48 @@ int bubble::texturaDoArquivo(const std::string& directory, int* width_ptr , int*
         glActiveTexture(GL_TEXTURE0);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    }
+    else {
+        std::cerr << "Failed to load texture: " << directory << std::endl;
+        return -1;
+    }
+
+    return textureID;
+}
+int bubble::texturaDoArquivo(const std::string& directory, double* width_ptr , double* height_ptr) {
+    // Gera um ID de textura e carrega a imagem
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+
+    int width, height, nrComponents;
+    bubble::imageLoader img(directory.c_str());
+    auto data = img.obterDados();
+    nrComponents = img.obterCanal();
+    width = img.obterLargura();
+    height = img.obterAltura();
+    if (width_ptr) *width_ptr = width;
+    if (height_ptr) *height_ptr = height;
+    if (data) {
+        GLenum format;
+        if (nrComponents == 1)
+            format = GL_RED;
+        else if (nrComponents == 3)
+            format = GL_RGB;
+        else if (nrComponents == 4)
+            format = GL_RGBA;
+
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glActiveTexture(GL_TEXTURE0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
     }
     else {
         std::cerr << "Failed to load texture: " << directory << std::endl;
@@ -312,8 +353,9 @@ int bubble::texturaDoArquivo(unsigned char* data, unsigned int width, unsigned i
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 
     }
     else {
@@ -331,6 +373,19 @@ bubble::textureLoader& bubble::textureLoader::obterInstancia()
 }
 
 GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
+{
+    // Verificar se a textura já foi carregada
+    if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
+        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+    }
+
+    // Carregar nova textura
+    GLuint id = texturaDoArquivo(caminho.c_str(), width, height);
+    texturasCarregadas[caminho] = id; // Armazena o ID da textura no mapa
+
+    return id;
+}
+GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
 {
     // Verificar se a textura já foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {

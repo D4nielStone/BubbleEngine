@@ -18,7 +18,7 @@ namespace bubble
 	public:
 		sistemaInterface() = default;
 		~sistemaInterface() override;
-		void atualizar(double deltaTime) override;
+		void atualizar() override;
 		void inicializar(bubble::fase* fase) override;
 		static void desenharTexto(shader& s, const texto& t);
 		static void desenharImagem(shader& s, const imagem& img);

@@ -25,7 +25,7 @@ namespace bubble
         glDeleteVertexArrays(1, &text_VAO);
         glDeleteVertexArrays(1, &img_VAO);
     }
-    void sistemaInterface::atualizar(double deltaTime)
+    void sistemaInterface::atualizar()
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
@@ -161,6 +161,7 @@ namespace bubble
         s.use();
         s.setVec2("quadrado.posicao", img.padding.x,img.padding.y);
         s.setVec2("quadrado.tamanho", img.limite.x, img.limite.y);
+        s.setCor("difusa", { img.difusa });
         s.setInt("textura", 0);
         s.setInt("flip", img.flip);
         s.setMat4("projecao", glm::value_ptr(projection));

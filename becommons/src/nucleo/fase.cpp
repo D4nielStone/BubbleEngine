@@ -11,9 +11,12 @@
 #include <src/componentes/imagem.hpp>
 #include <iostream>
 #include <os/janela.hpp>
+#include <queue>
 
 using namespace rapidjson;
 using namespace bubble;
+
+std::queue<std::function<void()>> fila;
 
 fase::fase() : _Mnome("")
 {
@@ -246,10 +249,13 @@ void bubble::fase::analizar(const char* diretorio)
 
 void bubble::fase::pausar()
 {
-	debug::emitir("fase", "Pausando");
-	rodando = false;
-	scodigo.pararThread();
-	sfisica.pararThread();
+	fila.push([this]() 
+		{
+			debug::emitir("fase", "Pausando");
+			rodando = false;
+			scodigo.pararThread();
+			sfisica.pararThread();
+		});
 }
 
 void bubble::fase::parar()
@@ -267,23 +273,32 @@ void bubble::fase::iniciar()
 	if (rodando != false)
 		return;
 
-	/// o sistema de código apenas inicia ao começar a fase
-	/// no modo de joo
-	scodigo.inicializar(this);
-	sfisica.inicializar(this);
-
+	if (inicializacao)
+	{
+		/// o sistema de código apenas inicia ao começar a fase
+		/// no modo de joo
+		scodigo.inicializar(this);
+		sfisica.inicializar(this);
+		inicializacao = false;
+	}
 	// capturar snapshot do registro
 	rodando = true;
-	scodigo.iniciarThread();
-	sfisica.iniciarThread();
+	//scodigo.iniciarThread();
+	//sfisica.iniciarThread();
 }
-
-double elapsedTime;
 
 void bubble::fase::atualizar(double deltaTime)
 {
-	srender.atualizar(deltaTime);
-	sinterface.atualizar(deltaTime);
+	sfisica.atualizar();
+	scodigo.atualizar();
+	srender.atualizar();
+	sinterface.atualizar();
+	while (!fila.empty())
+	{
+		auto func = fila.front();
+		func();
+		fila.pop();
+	}
 }
 
 void bubble::fase::definirCamera(const entidade& ent)

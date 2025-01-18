@@ -26,9 +26,15 @@ bubble::sistemaFisica::~sistemaFisica()
 }
 
 
-void bubble::sistemaFisica::atualizar(double deltaTime)
+void bubble::sistemaFisica::atualizar()
 {
-    mundoDinamico->stepSimulation(deltaTime);
+    mundoDinamico->stepSimulation(instanciaJanela->_Mtempo.obterDeltaTime());
+    reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
+        {
+            /// adiciona corpos rigidos
+            reg->obter<fisica>(entidade)->atualizarTransformacao();
+        }
+    );
 }
 
 void bubble::sistemaFisica::inicializar(bubble::fase* f)
@@ -53,14 +59,7 @@ void bubble::sistemaFisica::iniciarThread()
     fisicaThread = std::thread([this]() {
         while (rodando) {
             {
-                this->atualizar(0.016666);
-                reg->cada<bubble::fisica, bubble::transformacao>([&](const uint32_t entidade)
-                    {
-                        /// adiciona corpos rigidos
-                        reg->obter<fisica>(entidade)->atualizarTransformacao();
-                    }
-                );
-                std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aguarda 16ms
+                this->atualizar();
             }
         }
         });

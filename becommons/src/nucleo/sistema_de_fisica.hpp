@@ -21,7 +21,7 @@ namespace bubble
          sistemaFisica();
         ~sistemaFisica();
 
-        void atualizar(double deltaTime) override;
+        void atualizar() override;
         void inicializar(bubble::fase* f) override;
         void iniciarThread();
         void pararThread();

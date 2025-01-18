@@ -21,14 +21,9 @@ namespace bubble
 		/**
 		* @brief limpa recursos
 		*/
-		~codigo()
-		{
-			if (L)
-			{
-				lua_close(L);
-			}
-		}
+		~codigo();
 		void iniciar() const;
-		void atualizar(double deltaTime) const;
+		void encerrar();
+		void atualizar() const;
 	};
 }

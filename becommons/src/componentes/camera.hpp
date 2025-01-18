@@ -31,6 +31,8 @@ namespace bubble
 
 		glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);
 
+		unsigned int fbo, textura, rbo;
+
 		float fov			{ 75.f };
 		float aspecto		{ 0.f };
 		float corte_curto	{ 0.1f }; 
@@ -40,13 +42,20 @@ namespace bubble
 		float left, top, bottom, right;
 
 		bool flag_orth		{ false };
+		bool flag_fb		{ false };
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
 		vetor4<float>* viewport_ptr{ nullptr };
 
+		void desenharFB() const;
+
+		~camera();
 		camera() = default;
 		camera(const bool ortho);
+
+		void ativarFB();
+		void desativarFB();
 		glm::mat4 obtViewMatrix();
 
 		glm::mat4 obtProjectionMatrix();

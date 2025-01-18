@@ -14,7 +14,7 @@ namespace bubble
 	{
 	public:
 		sistemaRenderizacao() = default;
-		void atualizar(double deltaTime) override;
+		void atualizar() override;
 		void inicializar(bubble::fase* fase) override;
 	};
 }

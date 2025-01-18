@@ -37,7 +37,7 @@ namespace bubble
          * @brief Atualiza o sistema dentro do loop principal
          * @param deltaTime Tempo desde a última atualização (em segundos)
          */
-        virtual void atualizar(double deltaTime) = 0;
+        virtual void atualizar() = 0;
 
     protected:
         fase* fase;

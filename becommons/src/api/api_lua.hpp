@@ -33,6 +33,13 @@ namespace bapi
 				addData<float>("y", &glm::vec3::y).
 				addData<float>("z", &glm::vec3::z).
 				endClass().
+				beginClass<bubble::cor>("cor").		///< define cor
+				addConstructor<void(*)(float, float, float, float)>().
+				addData<float>("r", &bubble::cor::r).
+				addData<float>("g", &bubble::cor::g).
+				addData<float>("b", &bubble::cor::b).
+				addData<float>("a", &bubble::cor::a).
+				endClass().
 				beginClass<bubble::vetor2<int>>("vetor2i").		///< define vetor3
 				addConstructor<void(*)(int, int)>().
 				addConstructor<void(*)(float, float)>().
@@ -61,8 +68,9 @@ namespace bapi
 				endClass().
 				beginClass<bubble::imagem>("imagem").			///< define transformacao
 				addConstructor<void(*)(std::string)>().
-				addData<bubble::vetor2<int>>("padding", &bubble::imagem::padding, true).
-				addData<bubble::vetor2<int>>("limite", &bubble::imagem::limite, true).
+				addData<vet2>("padding", &bubble::imagem::padding, true).
+				addData<vet2>("limite", &bubble::imagem::limite, true).
+				addData<bubble::cor>("difusa", &bubble::imagem::difusa, true).
 				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
@@ -75,6 +83,8 @@ namespace bapi
 				addData("escala", &bubble::camera::escala).
 				addData("flag_ortho", &bubble::camera::flag_orth).
 				addFunction("telaParaMundo", &bubble::camera::telaParaMundo).
+				addFunction("ativarFB", &bubble::camera::ativarFB).
+				addFunction("desativarFB", &bubble::camera::desativarFB).
 				endClass().
 				beginClass<bapi::entidade>("entidade").			///< define entidade
 				addConstructor<void(*)(int)>().

@@ -39,6 +39,7 @@ inputMode inputs::getInputMode() const {
     return currentMode;
 }
 inputs::inputs() : currentMode(inputMode::Game) {
+    
     // Inicializa o mapa com valores padrão
     for (auto& key : keyMap)
     {
@@ -61,6 +62,7 @@ void inputs::keyPressed(const std::string &key) {
         std::cerr << "Tecla desconhecida pressionada: " << key << std::endl;
     }
 }
+
 void inputs::keyReleased(const std::string &key) {
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {

@@ -3,6 +3,7 @@
 #include "componente.hpp"
 #include <string>
 #include <src/util/vetor2.hpp>
+#include <src/util/cor.hpp>
 #include "src/arquivadores/imageloader.hpp"
 #include <filesystem>
 
@@ -12,10 +13,11 @@ namespace bubble
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
 		const std::string arquivo	{ "" };
-		vetor2<int> limite			{ 20, 20 };
-		vetor2<int> padding			{ 0,0 };
+		vet2 limite			{ 20, 20 };
+		vet2 padding			{ 0,0 };
 		bool flip					{ false };
 		unsigned int id;
+		cor difusa					{ 1.f, 1.f, 1.f, 1.f };
 		imagem(const std::string& diretorio) : arquivo(diretorio) 
 		{
 			std::string dir{};

@@ -5,12 +5,27 @@
  * @brief Inicia e gerencia o tempo
  */
 
+#include <thread>
+#include <chrono>
 #pragma once
+
 namespace bubble
 {
-	struct tempo
-	{
-		double deltaT		{ 0 };
-		double tempoCorrido { 0 };
-	};
+    struct tempo {
+        tempo() : tempoCorrido(std::chrono::high_resolution_clock::now()) {}
+
+        // Calcula e retorna o delta time em segundos
+        double obterDeltaTime() {
+            return delta.count();
+        }
+        void calcularDT()
+        {
+            auto tempoAtual = std::chrono::high_resolution_clock::now();
+            delta = tempoAtual - tempoCorrido;
+            tempoCorrido = tempoAtual; // Atualiza o último tempo
+        }
+
+        std::chrono::duration<double> delta;
+        std::chrono::time_point<std::chrono::high_resolution_clock> tempoCorrido;
+    };
 }

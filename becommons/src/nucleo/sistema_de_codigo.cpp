@@ -2,26 +2,29 @@
 #include "fase.hpp"
 #include <src/componentes/codigo.hpp>
 #include <os/janela.hpp>
+#include <mutex>
+
+std::mutex mtx;
 
 namespace bubble
 {
-    void sistemaCodigo::atualizar(double deltaTime)
+    void sistemaCodigo::atualizar()
     {
-        //atualiza os componentes
+        std::lock_guard<std::mutex> lock(mtx); // Protege o acesso ao registro
         reg->cada<codigo>([&](const uint32_t entidade)
             {
                 auto componente_codigo = reg->obter<codigo>(entidade);
-                componente_codigo->atualizar(deltaTime);
+                componente_codigo->atualizar();
             }
         );
     }
 
     void sistemaCodigo::inicializar(bubble::fase* fase)
     {
+        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante a inicialização
         this->fase = fase;
         this->reg = fase->obterRegistro();
 
-        //inicializa os componentes
         reg->cada<codigo>([&](const uint32_t entidade)
             {
                 auto componente_codigo = reg->obter<codigo>(entidade);
@@ -29,19 +32,22 @@ namespace bubble
             }
         );
     }
+
     void sistemaCodigo::iniciarThread() {
         rodando = true;
         codigoThread = std::thread([this]() {
             while (rodando) {
                 {
-                    this->atualizar(0.016666);
-                    std::this_thread::sleep_for(std::chrono::milliseconds(16)); // Aguarda 16ms
+                    this->atualizar();
                 }
             }
             });
     }
 
     void sistemaCodigo::pararThread() {
+        // Chama a função `encerrar` para todos os componentes de código
+        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante o encerramento
+       
         rodando = false;
         if (codigoThread.joinable()) {
             codigoThread.join();
@@ -49,6 +55,5 @@ namespace bubble
     }
 
     sistemaCodigo::~sistemaCodigo() {
-        pararThread();
     }
 }

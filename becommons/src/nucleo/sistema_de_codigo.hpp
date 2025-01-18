@@ -20,7 +20,7 @@ namespace bubble
 	public:
 		sistemaCodigo() = default;
 		~sistemaCodigo();
-		void atualizar(double deltaTime) override;
+		void atualizar() override;
 		void inicializar(bubble::fase* fase) override;
 		void iniciarThread();
 		void pararThread();
