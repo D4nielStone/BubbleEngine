@@ -26,7 +26,7 @@ namespace bubble
 	struct janela
 	{
 		tempo _Mtempo;
-		vetor4<float> tamanho;
+		vet2 tamanho;
 		GLFWwindow* window;
 		inputs inputs;
 		janela(const char* nome, const char* icon_path = nullptr);

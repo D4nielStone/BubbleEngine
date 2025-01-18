@@ -21,6 +21,9 @@ void bubble::fisica::init()
     corpoRigido = new btRigidBody(rigidBodyCI);
     corpoRigido->setRollingFriction(0.1);
     corpoRigido->setRestitution(0.8f);
+    corpoRigido->setCcdMotionThreshold(0.01f); // Pequeno movimento necessário para ativar o CCD
+    corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colisões
+
 }
 // Construtor para criação de malha
 bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)

@@ -190,7 +190,7 @@ bubble::vetor2<int> bubble::tamanhoJanela()
 {
     auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window));
 
-    return bubble::vetor2<int>( janela->tamanho.w, janela->tamanho.h );
+    return bubble::vetor2<int>( janela->tamanho.x, janela->tamanho.y );
 };
 
 bool bubble::pressionada(const std::string &letra)

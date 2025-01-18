@@ -14,6 +14,7 @@ namespace bubble
     {
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
+
         auto camera = fase->obterCamera();
         if (!camera) return;
 
@@ -33,14 +34,16 @@ namespace bubble
             s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
             s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
             s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
-            s.setVec2("resolution", instanciaJanela->tamanho.w, instanciaJanela->tamanho.h);
+            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
             s.setMat4("modelo", transform->obter());
             render->modelo->desenhar(s);
             });
 
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glClearColor(1, 1, 1, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
     }
 
     void sistemaRenderizacao::inicializar(bubble::fase* fase)

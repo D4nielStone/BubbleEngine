@@ -7,11 +7,17 @@ void bubble::camera::desenharFB() const
 {
     if (flag_fb)
     {
+        glBindTexture(GL_TEXTURE_2D, textura);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportFBO.x, viewportFBO.y, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportFBO.x, viewportFBO.y);
+        glBindRenderbuffer(GL_RENDERBUFFER, 0);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-        glViewport(0, 0, 800, 600);
+        glViewport(0, 0, viewportFBO.x, viewportFBO.y);
     }
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 
@@ -68,6 +74,7 @@ void bubble::camera::desativarFB()
 }
 
 glm::mat4 bubble::camera::obtViewMatrix() {
+    if (!flag_fb) viewportFBO = *viewport_ptr;
     if (!transform)
         transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
 
@@ -91,10 +98,15 @@ glm::mat4 bubble::camera::obtViewMatrix() {
     return viewMatrix;
 }
 
+void bubble::camera::viewport(const vet2& viewp)
+{
+    viewportFBO = viewp;
+}
+
 glm::mat4 bubble::camera::obtProjectionMatrix() {
     if (flag_orth && viewport_ptr) {
-        float largura = viewport_ptr->w;
-        float altura = viewport_ptr->h;
+        float largura = viewportFBO.x;
+        float altura = viewportFBO.y;
         aspecto = largura / altura;
 
         left = -escala * aspecto;
@@ -105,8 +117,8 @@ glm::mat4 bubble::camera::obtProjectionMatrix() {
         projMatriz = glm::ortho(left, right, bottom, top, corte_curto, corte_longo);
     }
     else if (viewport_ptr) {
-        float largura = viewport_ptr->w;
-        float altura = viewport_ptr->h;
+        float largura = viewportFBO.x;
+        float altura = viewportFBO.y;
         aspecto = largura / altura;
 
         projMatriz = glm::perspective(glm::radians(fov), aspecto, corte_curto, corte_longo);
@@ -127,8 +139,8 @@ bubble::raio bubble::camera::pontoParaRaio(vet2 screenPoint) const
 
 glm::vec3 bubble::camera::telaParaMundo(const vet2 &screenPoint, float profundidade) const
 {
-    float ndcX = (2.0f * screenPoint.x) / viewport_ptr->w - 1.0f;
-    float ndcY = 1.0f - (2.0f * screenPoint.y) / viewport_ptr->h;
+    float ndcX = (2.0f * screenPoint.x) / viewportFBO.x - 1.0f;
+    float ndcY = 1.0f - (2.0f * screenPoint.y) / viewportFBO.y;
     glm::vec4 clipCoords = glm::vec4(ndcX, ndcY, profundidade, 1.0f);
 
     glm::vec4 eyeCoords = glm::inverse(projMatriz) * clipCoords;

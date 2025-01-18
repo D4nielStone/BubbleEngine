@@ -50,8 +50,8 @@ bubble::janela::janela(const char* nome, const char* icon_path)
 
     bubble::vetor4<int> tam{};
     glfwGetWindowSize(window, &tam.w, &tam.h);
-    tamanho.h = tam.h;
-    tamanho.w = tam.w;
+    tamanho.y = tam.h;
+    tamanho.x = tam.w;
 }
 
 void bubble::janela::poll() const
@@ -64,15 +64,15 @@ void bubble::janela::swap()
 {
     bubble::vetor4<int> tam{};
     glfwGetWindowSize(window, &tam.w, &tam.h);
-    tamanho.h = tam.h;
-    tamanho.w = tam.w;
+    tamanho.y = tam.h;
+    tamanho.x = tam.w;
     _Mtempo.calcularDT();
     glfwSwapBuffers(window);
 }
 
 void bubble::janela::viewport() const
 {
-    glViewport(0, 0, tamanho.w, tamanho.h);
+    glViewport(0, 0, tamanho.x, tamanho.y);
 }
 
 void bubble::janela::nome(const char* novo_nome) const

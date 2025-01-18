@@ -12,7 +12,7 @@ namespace bubble
 	struct imagem : componente
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_IMAGEM;
-		const std::string arquivo	{ "" };
+		std::string arquivo	{ "" };
 		vet2 limite			{ 20, 20 };
 		vet2 padding			{ 0,0 };
 		bool flip					{ false };
@@ -29,6 +29,11 @@ namespace bubble
 				dir = (std::filesystem::absolute(diretorio).string().c_str());
 			}
 			id = bubble::textureLoader::obterInstancia().carregarTextura(dir, &limite.x, &limite.y);
+		}
+		imagem(unsigned int id) : id(id) {}
+		void definirID(unsigned int id_)
+		{
+			id = id_;
 		}
 	};
 } 

@@ -68,15 +68,18 @@ namespace bapi
 				endClass().
 				beginClass<bubble::imagem>("imagem").			///< define transformacao
 				addConstructor<void(*)(std::string)>().
+				addConstructor<void(*)(unsigned int)>().
 				addData<vet2>("padding", &bubble::imagem::padding, true).
 				addData<vet2>("limite", &bubble::imagem::limite, true).
 				addData<bubble::cor>("difusa", &bubble::imagem::difusa, true).
+				addFunction("definirID", &bubble::imagem::definirID).
 				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
 				addFunction("pontoParaRaio", &bubble::camera::pontoParaRaio).
 				addData("fov", &bubble::camera::fov).
 				addData("corte_curto", &bubble::camera::corte_curto).
+				addData("framebuffer", &bubble::camera::textura).
 				addData("corte_longo", &bubble::camera::corte_longo).
 				addData("frente", &bubble::camera::forward).
 				addData("ceu", &bubble::camera::ceu).
@@ -85,6 +88,7 @@ namespace bapi
 				addFunction("telaParaMundo", &bubble::camera::telaParaMundo).
 				addFunction("ativarFB", &bubble::camera::ativarFB).
 				addFunction("desativarFB", &bubble::camera::desativarFB).
+				addFunction("viewport", &bubble::camera::viewport).
 				endClass().
 				beginClass<bapi::entidade>("entidade").			///< define entidade
 				addConstructor<void(*)(int)>().

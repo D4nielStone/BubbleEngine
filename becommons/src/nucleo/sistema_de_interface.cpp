@@ -29,7 +29,7 @@ namespace bubble
     {
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_CULL_FACE);
-        projection = glm::ortho(0.f, instanciaJanela->tamanho.w, 0.f, instanciaJanela->tamanho.h);
+        projection = glm::ortho(0.0, instanciaJanela->tamanho.x, 0.0, instanciaJanela->tamanho.y);
         reg->cada<bubble::texto>([&](const uint32_t ent) 
             {
                 desenharTexto(*shader_texto, *reg->obter<bubble::texto>(ent));

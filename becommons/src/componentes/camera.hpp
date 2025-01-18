@@ -46,7 +46,8 @@ namespace bubble
 
 		static constexpr mascara mascara = COMPONENTE_CAM;
 
-		vetor4<float>* viewport_ptr{ nullptr };
+		vet2* viewport_ptr{ nullptr };
+		vet2 viewportFBO{ 400, 400 };
 
 		void desenharFB() const;
 
@@ -57,6 +58,7 @@ namespace bubble
 		void ativarFB();
 		void desativarFB();
 		glm::mat4 obtViewMatrix();
+		void viewport(const vet2& viewp);
 
 		glm::mat4 obtProjectionMatrix();
 
