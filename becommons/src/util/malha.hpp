@@ -3,8 +3,8 @@
 #include "vertice.hpp"
 #include <vector>
 #include "textura.hpp"
-#include "src/arquivadores/shader.hpp"
-#include "src/util/material.hpp"
+#include "../arquivadores/shader.hpp"
+#include "../util/material.hpp"
 
 namespace bubble
 {
@@ -15,7 +15,7 @@ namespace bubble
         std::vector<glm::vec3> instancias_pos;
         std::vector<vertice> vertices;
         std::vector<unsigned int> indices;
-        material material;
+        bubble::material material;
 
         malha(std::vector<vertice> vertices, std::vector<unsigned int> indices, bubble::material& material);
         ~malha();

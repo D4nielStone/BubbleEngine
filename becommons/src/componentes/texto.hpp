@@ -1,9 +1,10 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
+
 #pragma once
 #include "componente.hpp"
-#include "src/util/cor.hpp"
+#include "../util/cor.hpp"
+#include "../util/vetor2.hpp"
 #include <string>
-#include <src/util/vetor2.hpp>
 
 namespace bubble
 {

@@ -3,8 +3,12 @@
 #include "componente.hpp"
 #include "transformacao.hpp"
 #include <string>
-#include "src/depuracao/debug.hpp"
+#include "../depuracao/debug.hpp"
 #include <lua.hpp>
+
+extern "C" {
+#include <lua5.1/lua.h>
+}
 
 namespace bubble
 {

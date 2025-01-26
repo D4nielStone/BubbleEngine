@@ -1,7 +1,7 @@
 #include "sistema_de_codigo.hpp"
 #include "fase.hpp"
-#include <src/componentes/codigo.hpp>
-#include <os/janela.hpp>
+#include "../componentes/codigo.hpp"
+#include "../../os/janela.hpp"
 #include <mutex>
 
 std::mutex mtx;
@@ -19,11 +19,11 @@ namespace bubble
         );
     }
 
-    void sistemaCodigo::inicializar(bubble::fase* fase)
+    void sistemaCodigo::inicializar(bubble::fase* fase_ptr)
     {
-        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante a inicialização
-        this->fase = fase;
-        this->reg = fase->obterRegistro();
+        std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante a inicializaï¿½ï¿½o
+        this->_Mfase = fase_ptr;
+        this->reg = _Mfase->obterRegistro();
 
         reg->cada<codigo>([&](const uint32_t entidade)
             {
@@ -45,7 +45,7 @@ namespace bubble
     }
 
     void sistemaCodigo::pararThread() {
-        // Chama a função `encerrar` para todos os componentes de código
+        // Chama a funï¿½ï¿½o `encerrar` para todos os componentes de cï¿½digo
         std::lock_guard<std::mutex> lock(mtx); // Protege o registro durante o encerramento
        
         rodando = false;

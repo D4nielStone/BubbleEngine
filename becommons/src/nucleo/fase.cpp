@@ -2,15 +2,15 @@
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
 #include <filesystem>
-#include <src/componentes/codigo.hpp>
-#include <src/componentes/texto.hpp>
-#include <src/componentes/transformacao.hpp>
-#include <src/componentes/propriedades.hpp>
-#include <src/componentes/fisica.hpp>
-#include <src/componentes/renderizador.hpp>
-#include <src/componentes/imagem.hpp>
+#include "../componentes/codigo.hpp"
+#include "../componentes/texto.hpp"
+#include "../componentes/transformacao.hpp"
+#include "../componentes/propriedades.hpp"
+#include "../componentes/fisica.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../componentes/imagem.hpp"
+#include "../../os/janela.hpp"
 #include <iostream>
-#include <os/janela.hpp>
 #include <queue>
 
 using namespace rapidjson;
@@ -275,7 +275,7 @@ void bubble::fase::iniciar()
 
 	if (inicializacao)
 	{
-		/// o sistema de código apenas inicia ao começar a fase
+		/// o sistema de cï¿½digo apenas inicia ao comeï¿½ar a fase
 		/// no modo de joo
 		scodigo.inicializar(this);
 		sfisica.inicializar(this);

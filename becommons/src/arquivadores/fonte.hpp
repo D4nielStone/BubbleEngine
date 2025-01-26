@@ -2,7 +2,7 @@
 
 #pragma once
 #include <glad/glad.h>
-#include "src/util/vetor2.hpp"
+#include "../util/vetor2.hpp"
 #include <string>
 #include <map>
 #include <ft2build.h>
@@ -36,10 +36,10 @@ namespace bubble
         // Destrutor
         ~gerenciadorFontes();
 
-        // Carrega uma fonte com a resolução especificada
+        // Carrega uma fonte com a resoluï¿½ï¿½o especificada
         void carregar(const std::string& nome_da_fonte, unsigned int resolucao);
 
-        // Obtém um ponteiro para os caracteres de uma fonte já carregada
+        // Obtï¿½m um ponteiro para os caracteres de uma fonte jï¿½ carregada
         const std::map<char32_t, caractere>& obter(const std::string& nome_da_fonte) const;
 
     private:

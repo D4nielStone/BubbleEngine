@@ -1,8 +1,8 @@
 #include "api_lua.hpp"
-#include <src/nucleo/fase.hpp>
-#include <src/componentes/renderizador.hpp>
-#include <src/nucleo/sistema_de_fisica.hpp>
-#include <src/componentes/codigo.hpp>
+#include "../nucleo/fase.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../nucleo/sistema_de_fisica.hpp"
+#include "../componentes/codigo.hpp"
 
 using namespace bubble;
 

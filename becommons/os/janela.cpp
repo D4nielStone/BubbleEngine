@@ -1,7 +1,7 @@
 #include <glad/glad.h>
 #include "janela.hpp"
-#include "src/depuracao/debug.hpp"
-#include "src/arquivadores/imageloader.hpp"
+#include "../depuracao/debug.hpp"
+#include "../arquivadores/imageloader.hpp"
 
 bubble::janela::~janela()
 {
@@ -30,7 +30,7 @@ bubble::janela::janela(const char* nome, const char* icon_path)
 
     bubble::imageLoader icone_;
 
-    // define o ícone da janela
+    // define o ï¿½cone da janela
     if(icon_path)
     icone_ = bubble::imageLoader(icon_path);
     else

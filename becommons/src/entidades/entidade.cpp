@@ -1,8 +1,8 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "entidade.hpp"
-#include "src/componentes/renderizador.hpp"
-#include "src/arquivadores/shader.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../arquivadores/shader.hpp"
 
 bubble::entidade bubble::registro::criar()
 {
@@ -14,7 +14,7 @@ bubble::entidade bubble::registro::criar()
 bubble::componente::mascara bubble::registro::obterComponentes(const uint32_t& id) const {
     auto it = mascaras.find(id);
     if (it != mascaras.end()) {
-        return it->second; // Retorna a máscara associada à entidade.
+        return it->second; // Retorna a mï¿½scara associada ï¿½ entidade.
     }
-    return componente::COMPONENTE_NONE; // Retorna uma máscara vazia se a entidade não existir.
+    return componente::COMPONENTE_NONE; // Retorna uma mï¿½scara vazia se a entidade nï¿½o existir.
 }

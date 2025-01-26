@@ -1,11 +1,12 @@
+/** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "src/util/vetor2.hpp"
-#include "src/util/vetor4.hpp"
+#include "../util/vetor2.hpp"
+#include "../util/vetor4.hpp"
 #include <glm/glm.hpp>
-#include "becommons.hpp"
+
 struct GLFWwindow;
 
 namespace bubble

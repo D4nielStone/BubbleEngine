@@ -7,7 +7,7 @@
 
 #pragma once
 #include "sistema.hpp"
-#include "src/util/raio.hpp"
+#include "../util/raio.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
 #include <thread>
 #include <atomic>
@@ -39,6 +39,6 @@ namespace bubble
         btDiscreteDynamicsWorld* mundoDinamico;
     };
 
-    // Função de Raycast
+    // Funï¿½ï¿½o de Raycast
     resultadoRaio raioIntersecta(const raio& raio);
 }

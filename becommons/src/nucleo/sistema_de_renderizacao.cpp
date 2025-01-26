@@ -1,12 +1,12 @@
 #include <glad/glad.h>
 #include "sistema_de_renderizacao.hpp"
-#include "src/componentes/renderizador.hpp"
-#include "src/componentes/transformacao.hpp"
-#include "src/componentes/camera.hpp"
-#include "src/nucleo/fase.hpp"
-#include "src/arquivadores/shader.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../componentes/transformacao.hpp"
+#include "../componentes/camera.hpp"
+#include "../nucleo/fase.hpp"
+#include "../arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include <os/janela.hpp>
+#include "../../os/janela.hpp"
 
 namespace bubble
 {
@@ -15,7 +15,7 @@ namespace bubble
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_CULL_FACE);
 
-        auto camera = fase->obterCamera();
+        auto camera = _Mfase->obterCamera();
         if (!camera) return;
 
         camera->desenharFB();
@@ -46,10 +46,10 @@ namespace bubble
         glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
     }
 
-    void sistemaRenderizacao::inicializar(bubble::fase* fase)
+    void sistemaRenderizacao::inicializar(bubble::fase* fase_ptr)
     {
-        this->fase = fase;
-        this->reg = fase->obterRegistro();
+        this->_Mfase = fase_ptr;
+        this->reg = _Mfase->obterRegistro();
 
         glCullFace(GL_BACK);
     }

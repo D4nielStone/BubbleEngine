@@ -1,10 +1,10 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "componente.hpp"
+#include "../util/vetor2.hpp"
+#include "../arquivadores/imageloader.hpp"
+#include "../util/cor.hpp"
 #include <string>
-#include <src/util/vetor2.hpp>
-#include <src/util/cor.hpp>
-#include "src/arquivadores/imageloader.hpp"
 #include <filesystem>
 
 namespace bubble

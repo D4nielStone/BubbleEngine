@@ -3,10 +3,10 @@
 #include "imageloader.hpp"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "assets/imagems_na_memoria.hpp"
+#include "../../assets/imagems_na_memoria.hpp"
 #include <map>
 #include <filesystem>
-#include "src/depuracao/debug.hpp"
+#include "../depuracao/debug.hpp"
 #include <iostream>
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria
@@ -42,7 +42,7 @@ bubble::imageLoader::~imageLoader()
 {
     if (data) {
         //delete[] data;
-        data = nullptr; // Precaução para evitar acesso duplo
+        data = nullptr; // Precauï¿½ï¿½o para evitar acesso duplo
     }
 }
 void bubble::imageLoader::flipVertical()
@@ -104,12 +104,12 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
         return;
     }
 
-    // Obtém as dimensões da imagem  
+    // Obtï¿½m as dimensï¿½es da imagem  
     width = FreeImage_GetWidth(converted);
     height = FreeImage_GetHeight(converted);
     channels = 4;  // RGBA  
 
-    // Aloca memória para os dados da imagem  
+    // Aloca memï¿½ria para os dados da imagem  
     data = new unsigned char[width * height * channels];
     unsigned char* bits = FreeImage_GetBits(converted);
 
@@ -134,14 +134,14 @@ void bubble::imageLoader::carregarImagem(const std::string& filepath)
 }
 void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho) 
 {
-    // Cria um stream de memória com o buffer da imagem
+    // Cria um stream de memï¿½ria com o buffer da imagem
     FIMEMORY* memoryStream = FreeImage_OpenMemory(data, tamanho);
     if (!memoryStream) {
-        fprintf(stderr, "Erro ao criar o stream de memória.");
+        fprintf(stderr, "Erro ao criar o stream de memï¿½ria.");
         return;
     }
 
-    // Detecta o formato da imagem no stream de memória
+    // Detecta o formato da imagem no stream de memï¿½ria
     FREE_IMAGE_FORMAT format = FreeImage_GetFileTypeFromMemory(memoryStream, 0);
     if (format == FIF_UNKNOWN) {
         fprintf(stderr, "Formato de imagem desconhecido.");
@@ -149,7 +149,7 @@ void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho)
         return;
     }
 
-    // Carrega a imagem do stream de memória
+    // Carrega a imagem do stream de memï¿½ria
     FIBITMAP* bitmap_ = FreeImage_LoadFromMemory(format, memoryStream, 0);
 
     if (!bitmap_) {
@@ -159,12 +159,12 @@ void bubble::imageLoader::embutida(BYTE* data, const unsigned int tamanho)
     }
     // Converte a imagem para 32 bits  
     FIBITMAP* bitmap = FreeImage_ConvertTo32Bits(bitmap_);
-    // Obtém as propriedades da imagem (largura, altura, canais, dados)
+    // Obtï¿½m as propriedades da imagem (largura, altura, canais, dados)
     width = FreeImage_GetWidth(bitmap);     // Largura da imagem
     height = FreeImage_GetHeight(bitmap);   // Altura da imagem
     channels = FreeImage_GetBPP(bitmap)/8; // Canais de cor (assumindo 8 bits por canal)
 
-    // Aloca memória para os dados da imagem  
+    // Aloca memï¿½ria para os dados da imagem  
     this->data = new unsigned char[width * height * channels];
     unsigned char* bits = FreeImage_GetBits(bitmap);
 
@@ -374,9 +374,9 @@ bubble::textureLoader& bubble::textureLoader::obterInstancia()
 
 GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *width, int *height)
 {
-    // Verificar se a textura já foi carregada
+    // Verificar se a textura jï¿½ foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura jï¿½ carregada
     }
 
     // Carregar nova textura
@@ -387,9 +387,9 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, int *w
 }
 GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double *width, double *height)
 {
-    // Verificar se a textura já foi carregada
+    // Verificar se a textura jï¿½ foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura jï¿½ carregada
     }
 
     // Carregar nova textura
@@ -400,9 +400,9 @@ GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, double
 }
 GLuint bubble::textureLoader::carregarTextura(const std::string& caminho, GLuint tipo_textura)
 {
-    // Verificar se a textura já foi carregada
+    // Verificar se a textura jï¿½ foi carregada
     if (texturasCarregadas.find(caminho) != texturasCarregadas.end()) {
-        return texturasCarregadas[caminho]; // Retorna ID da textura já carregada
+        return texturasCarregadas[caminho]; // Retorna ID da textura jï¿½ carregada
     }
 
     // Carregar nova textura

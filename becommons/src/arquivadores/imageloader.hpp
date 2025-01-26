@@ -2,9 +2,9 @@
 #pragma once
 #include <string>
 #include "unordered_map"
-#include "becommons.hpp"
-#include <freeimage.h>
+#include <FreeImage.h>
 #include <assimp/scene.h>
+#include <vector>
 #include <glad/glad.h>
 
 struct GLFWimage;
@@ -52,7 +52,7 @@ namespace bubble
         // Construtor privado para Singleton
         textureLoader() {}
 
-        // Desabilitar cópia e atribuição
+        // Desabilitar cï¿½pia e atribuiï¿½ï¿½o
         textureLoader(const textureLoader&) = delete;
         void operator=(const textureLoader&) = delete;
     };

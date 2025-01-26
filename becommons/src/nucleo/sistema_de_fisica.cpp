@@ -1,8 +1,8 @@
 #include "sistema_de_fisica.hpp"
 #include "fase.hpp"
-#include <os/janela.hpp>
-#include <src/componentes/transformacao.hpp>
-#include <src/componentes/fisica.hpp>
+#include "../../os/janela.hpp"
+#include "../componentes/transformacao.hpp"
+#include "../componentes/fisica.hpp"
 
 bubble::sistemaFisica::sistemaFisica()
 {
@@ -45,7 +45,7 @@ void bubble::sistemaFisica::inicializar(bubble::fase* f)
         {
             /// adiciona corpos rigidos
             auto comp_fisica = reg->obter<fisica>(entidade);
-            // Adicionar ao mundo com grupo e máscara
+            // Adicionar ao mundo com grupo e mï¿½scara
             int camada = comp_fisica->camada_colisao;
             int mascara = comp_fisica->camada_colisao;
             mundoDinamicoPrincipal->addRigidBody(comp_fisica->obterCorpoRigido(), camada, mascara);
@@ -86,11 +86,11 @@ btDiscreteDynamicsWorld* bubble::sistemaFisica::mundo()
 
 bubble::resultadoRaio bubble::raioIntersecta(const raio& raio)
 {
-    // Configuração do ponto inicial e final do raio no espaço 3D
+    // Configuraï¿½ï¿½o do ponto inicial e final do raio no espaï¿½o 3D
     btVector3 origem(raio.origem.x, raio.origem.y, raio.origem.z);
     btVector3 destino = origem + btVector3(raio.direcao.x, raio.direcao.y, raio.direcao.z) * 300.0f;
 
-    // Criar o callback com máscaras de camada
+    // Criar o callback com mï¿½scaras de camada
     btCollisionWorld::ClosestRayResultCallback callback(origem, destino);
     callback.m_collisionFilterGroup = fisica::COLISAO_PADRAO | fisica::COLISAO_ESPECIAL; // Raycast pode detectar ambas
     callback.m_collisionFilterMask = fisica::COLISAO_ESPECIAL;                  // Detectar apenas o especial

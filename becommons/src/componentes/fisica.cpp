@@ -1,9 +1,9 @@
 #include "fisica.hpp"
 #include "transformacao.hpp"
-#include <src/nucleo/fase.hpp>
+#include "../nucleo/fase.hpp"
 #include "renderizador.hpp"
 
-// Construtor para forma genérica
+// Construtor para forma genï¿½rica
 bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 
     : forma(forma), malha(false), massa(massa), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
@@ -21,11 +21,11 @@ void bubble::fisica::init()
     corpoRigido = new btRigidBody(rigidBodyCI);
     corpoRigido->setRollingFriction(0.1);
     corpoRigido->setRestitution(0.8f);
-    corpoRigido->setCcdMotionThreshold(0.01f); // Pequeno movimento necessário para ativar o CCD
-    corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colisões
+    corpoRigido->setCcdMotionThreshold(0.01f); // Pequeno movimento necessï¿½rio para ativar o CCD
+    corpoRigido->setCcdSweptSphereRadius(0.05f); // Define um raio de varredura para detectar colisï¿½es
 
 }
-// Construtor para criação de malha
+// Construtor para criaï¿½ï¿½o de malha
 bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, camada camada)
     : malha(malha), massa(0), posicaoInicial(posicaoInicial), camada_colisao(camada)
 {
@@ -40,7 +40,7 @@ bubble::fisica::~fisica()
     delete forma;
 }
 
-// Obter o corpo rígido
+// Obter o corpo rï¿½gido
 btRigidBody* bubble::fisica::obterCorpoRigido()
 {
 
@@ -52,10 +52,10 @@ btRigidBody* bubble::fisica::obterCorpoRigido()
     return corpoRigido;
 }
 
-// Criar forma para múltiplas malhas
+// Criar forma para mï¿½ltiplas malhas
 void bubble::fisica::criarMalha()
 {
-    // Obtém as malhas do modelo associado ao objeto
+    // Obtï¿½m as malhas do modelo associado ao objeto
     auto modelo = fase_atual->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
     auto& malhas = modelo->malhas;
 
@@ -73,18 +73,18 @@ void bubble::fisica::criarMalha()
         mesh.m_triangleIndexStride = 3 * sizeof(unsigned int);
         mesh.m_numVertices = vertices.size();
         mesh.m_vertexBase = (const unsigned char*)vertices.data();
-        mesh.m_vertexStride = sizeof(vertice); // Supondo que Vertex tem posições contíguas
+        mesh.m_vertexStride = sizeof(vertice); // Supondo que Vertex tem posiï¿½ï¿½es contï¿½guas
         mesh.m_indexType = PHY_INTEGER;
         mesh.m_vertexType = PHY_FLOAT;
 
         indexVertexArray->addIndexedMesh(mesh, PHY_INTEGER);
     }
 
-    // Cria a forma de colisão como um btBvhTriangleMeshShape
+    // Cria a forma de colisï¿½o como um btBvhTriangleMeshShape
     forma = new btBvhTriangleMeshShape(indexVertexArray, true);
 }
 
-// Atualizar transformação
+// Atualizar transformaï¿½ï¿½o
 void bubble::fisica::atualizarTransformacao()
 {
     if (massa == 0)  return;
@@ -96,7 +96,7 @@ void bubble::fisica::atualizarTransformacao()
     _Mtransformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
 }
 
-// Aplicar força
+// Aplicar forï¿½a
 void bubble::fisica::aplicarForca(const glm::vec3& vetor)
 {
     corpoRigido->applyCentralForce({ vetor.x, vetor.y, vetor.z });
@@ -109,24 +109,24 @@ void bubble::fisica::aplicarVelocidade(const glm::vec3& velocidade)
     corpoRigido->setLinearVelocity(btVector3(velocidade.x, velocidade.y, velocidade.z));
 }
 
-// definir posição
+// definir posiï¿½ï¿½o
 void bubble::fisica::definirPosicao(const glm::vec3& posicao)
 {
     btTransform bt;
-    estadoDeMovimento->getWorldTransform(bt); // Recupera transformação atual
-    bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Define nova posição
-    estadoDeMovimento->setWorldTransform(bt); // Aplica transformação
+    estadoDeMovimento->getWorldTransform(bt); // Recupera transformaï¿½ï¿½o atual
+    bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Define nova posiï¿½ï¿½o
+    estadoDeMovimento->setWorldTransform(bt); // Aplica transformaï¿½ï¿½o
 }
 
-// definir rotação
+// definir rotaï¿½ï¿½o
 void bubble::fisica::definirRotacao(const glm::vec3& rotacao)
 {
     btTransform bt;
-    estadoDeMovimento->getWorldTransform(bt); // Recupera transformação atual
+    estadoDeMovimento->getWorldTransform(bt); // Recupera transformaï¿½ï¿½o atual
     btQuaternion btRot;
-    btRot.setEulerZYX(rotacao.z, rotacao.y, rotacao.x); // Define rotação com Euler ZYX
-    bt.setRotation(btRot); // Aplica rotação
-    estadoDeMovimento->setWorldTransform(bt); // Aplica transformação
+    btRot.setEulerZYX(rotacao.z, rotacao.y, rotacao.x); // Define rotaï¿½ï¿½o com Euler ZYX
+    bt.setRotation(btRot); // Aplica rotaï¿½ï¿½o
+    estadoDeMovimento->setWorldTransform(bt); // Aplica transformaï¿½ï¿½o
 }
 
 // Obter velocidade

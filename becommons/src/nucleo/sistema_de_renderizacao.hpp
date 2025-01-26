@@ -15,6 +15,6 @@ namespace bubble
 	public:
 		sistemaRenderizacao() = default;
 		void atualizar() override;
-		void inicializar(bubble::fase* fase) override;
+		void inicializar(bubble::fase* fase_ptr) override;
 	};
 }

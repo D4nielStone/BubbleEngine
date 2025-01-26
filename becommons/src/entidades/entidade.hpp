@@ -2,16 +2,16 @@
 
 /**
  * @file entidade.hpp
- * @brief Inclusoes e definições relacionadas à entidade
+ * @brief Inclusoes e definiï¿½ï¿½es relacionadas ï¿½ entidade
  */
 
 #pragma once
 #include <unordered_map>
 #include <memory>
 #include <functional>
-#include "src/componentes/componente.hpp"
-#include "src/componentes/fisica.hpp"
-#include "src/depuracao/debug.hpp"
+#include "../componentes/componente.hpp"
+#include "../componentes/fisica.hpp"
+#include "../depuracao/debug.hpp"
 
 namespace bubble
 {
@@ -69,12 +69,12 @@ namespace bubble
 		std::shared_ptr<T> obter(const uint32_t& entity);
 	};
 
-	/* Definições de templates */
+	/* Definiï¿½ï¿½es de templates */
 
 	template<typename T, typename ...Args>
 	void registro::adicionar(entidade& ent, Args&&... args) {
 		ent.mascara |= T::mascara;
-		mascaras[ent.id] = ent.mascara; // Atualiza a máscara no mapa auxiliar
+		mascaras[ent.id] = ent.mascara; // Atualiza a mï¿½scara no mapa auxiliar
 		entidades[ent.id][T::mascara] = std::make_shared<T>(std::forward<Args>(args)...); // Adiciona o componente
 		entidades[ent.id][T::mascara]->meu_objeto = ent.id;
 	}
@@ -88,7 +88,7 @@ namespace bubble
 			it->second.erase(T::mascara);
 			mascaras[ent] &= ~T::mascara; // Remove o bit correspondente ao componente.
 			if (it->second.empty()) {
-				entidades.erase(it); // Remove a entidade se não houver mais componentes.
+				entidades.erase(it); // Remove a entidade se nï¿½o houver mais componentes.
 			}
 		}
 		debug::emitir("registro", "entidade removida: " + std::to_string(ent));
@@ -130,7 +130,7 @@ namespace bubble
 
 }	///< namespace bubble
 
-// Implementação de std::hash para entidade
+// Implementaï¿½ï¿½o de std::hash para entidade
 namespace std {
 	template <>
 	struct hash<bubble::entidade> {

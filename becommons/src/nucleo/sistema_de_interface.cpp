@@ -1,14 +1,14 @@
 #include <glad/glad.h>
 #include "sistema_de_interface.hpp"
-#include "src/componentes/renderizador.hpp"
-#include "src/componentes/transformacao.hpp"
-#include "src/componentes/camera.hpp"
-#include "src/nucleo/fase.hpp"
-#include "src/arquivadores/shader.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../componentes/transformacao.hpp"
+#include "../componentes/camera.hpp"
+#include "../nucleo/fase.hpp"
+#include "../arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include <src/componentes/texto.hpp>
-#include <src/arquivadores/fonte.hpp>
-#include <os/janela.hpp>
+#include "../componentes/texto.hpp"
+#include "../arquivadores/fonte.hpp"
+#include "../../os/janela.hpp"
 
 bubble::shader* shader_texto{ nullptr };
 bubble::shader* shader_imagem{ nullptr };
@@ -42,10 +42,10 @@ namespace bubble
         );
     }
 
-    void sistemaInterface::inicializar(bubble::fase* fase)
+    void sistemaInterface::inicializar(bubble::fase* fase_ptr)
     {
-        this->fase = fase;
-        this->reg = fase->obterRegistro();
+        this->_Mfase = fase_ptr;
+        this->reg = _Mfase->obterRegistro();
 
         if (!shader_texto) shader_texto = new bubble::shader("texto.vert", "texto.frag");
         if (!shader_imagem) shader_imagem = new bubble::shader("imagem.vert", "imagem.frag");
@@ -61,46 +61,46 @@ namespace bubble
         glBindVertexArray(0);
 
         /*--------------imagem--------------*/
-        // Definição de dados do quadrado (posição e UV)
+        // Definiï¿½ï¿½o de dados do quadrado (posiï¿½ï¿½o e UV)
         float vertices[] = {
-            // Posição (x, y)    // UV (u, v)
+            // Posiï¿½ï¿½o (x, y)    // UV (u, v)
             0.0f, 0.0f,        0.0f, 0.0f, // Inferior esquerdo
              1.0f, 0.0f,        1.0f, 0.0f, // Inferior direito
              1.0f,  1.0f,        1.0f, 1.0f, // Superior direito
             0.0f,  1.0f,        0.0f, 1.0f  // Superior esquerdo
         };
 
-        // Índices para formar dois triângulos
+        // ï¿½ndices para formar dois triï¿½ngulos
         unsigned int indices[] = {
-            0, 1, 2, // Primeiro triângulo
-            2, 3, 0  // Segundo triângulo
+            0, 1, 2, // Primeiro triï¿½ngulo
+            2, 3, 0  // Segundo triï¿½ngulo
         };
 
-        // Geração de VAO, VBO e EBO
+        // Geraï¿½ï¿½o de VAO, VBO e EBO
         glGenVertexArrays(1, &img_VAO);
         glGenBuffers(1, &img_VBO);
         glGenBuffers(1, &img_EBO);
 
-        // Configuração do VAO
+        // Configuraï¿½ï¿½o do VAO
         glBindVertexArray(img_VAO);
 
-        // Configuração do VBO (dados do quadrado)
+        // Configuraï¿½ï¿½o do VBO (dados do quadrado)
         glBindBuffer(GL_ARRAY_BUFFER, img_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        // Configuração do EBO (índices)
+        // Configuraï¿½ï¿½o do EBO (ï¿½ndices)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, img_EBO);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-        // Configuração do atributo de posição (layout location = 0)
+        // Configuraï¿½ï¿½o do atributo de posiï¿½ï¿½o (layout location = 0)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
-        // Configuração do atributo UV (layout location = 1)
+        // Configuraï¿½ï¿½o do atributo UV (layout location = 1)
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
         glEnableVertexAttribArray(1);
 
-        // Desassociar o VAO para evitar alterações
+        // Desassociar o VAO para evitar alteraï¿½ï¿½es
         glBindVertexArray(0);
 
     }

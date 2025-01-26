@@ -1,7 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "componente.hpp"
-#include "src/util/vetor3.hpp"
+#include "../util/vetor3.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 
@@ -39,13 +39,13 @@ namespace bubble
 		{
 			if (alvo)
 			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
+				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translaï¿½ï¿½o
 				matrizmodelo *= glm::inverse(glm::lookAt(glm::vec3(0.f), *alvo - posicao, cima));
 				matrizmodelo = glm::scale(matrizmodelo, escala);       // Aplica a escala
 			}
 			else
 			{
-				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translação
+				matrizmodelo = glm::translate(glm::mat4(1.f), posicao); // Aplica a translaï¿½ï¿½o
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.x), glm::vec3(1.f, 0.f, 0.f));
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.y), glm::vec3(0.f, 1.f, 0.f));
 				matrizmodelo = glm::rotate(matrizmodelo, glm::radians(rotacao.z), glm::vec3(0.f, 0.f, 1.f));

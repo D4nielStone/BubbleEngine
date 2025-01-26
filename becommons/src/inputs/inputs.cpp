@@ -2,11 +2,11 @@
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
-#include <src/depuracao/debug.hpp>
-#include <src/nucleo/fase.hpp>
+#include "../depuracao/debug.hpp"
+#include "../nucleo/fase.hpp"
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-#include <os/janela.hpp>
+#include "../../os/janela.hpp"
 
 using namespace bubble;
 static const std::unordered_map<int, std::string> keyMap = {
@@ -40,7 +40,7 @@ inputMode inputs::getInputMode() const {
 }
 inputs::inputs() : currentMode(inputMode::Game) {
     
-    // Inicializa o mapa com valores padrão
+    // Inicializa o mapa com valores padrï¿½o
     for (auto& key : keyMap)
     {
         keyStates.insert(std::pair(key.second, false));
@@ -50,7 +50,7 @@ void inputs::setInputMode(inputMode mode) {
     currentMode = mode;
 }
 void inputs::keyPressed(const std::string &key) {
-    // Acesso direto ao mapa sem verificar se está vazio
+    // Acesso direto ao mapa sem verificar se estï¿½ vazio
     auto it = keyStates.find(key);
     if (it != keyStates.end()) {
         it->second = true;
@@ -58,7 +58,7 @@ void inputs::keyPressed(const std::string &key) {
     }
     else 
     {
-        // Tecla inválida, pode ser registrado para depuração se necessário
+        // Tecla invï¿½lida, pode ser registrado para depuraï¿½ï¿½o se necessï¿½rio
         std::cerr << "Tecla desconhecida pressionada: " << key << std::endl;
     }
 }
@@ -69,7 +69,7 @@ void inputs::keyReleased(const std::string &key) {
         it->second = false;
     }
     else {
-        // Tecla desconhecida, pode ser registrado para depuração se necessário
+        // Tecla desconhecida, pode ser registrado para depuraï¿½ï¿½o se necessï¿½rio
         std::cerr << "Tecla desconhecida liberada: " << key << std::endl;
     }
 }
@@ -112,7 +112,7 @@ void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, 
         }
 }
 
-// Callback de posição do mouse
+// Callback de posiï¿½ï¿½o do mouse
 void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
     auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
@@ -145,7 +145,7 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
     auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
 
-    // Converte o código Unicode para um caractere UTF-8
+    // Converte o cï¿½digo Unicode para um caractere UTF-8
     std::string utf8_char;
     if (codepoint <= 0x7F) {
         // Caracteres ASCII
@@ -170,7 +170,7 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
         utf8_char.push_back(static_cast<char>(0x80 | (codepoint & 0x3F)));
     }
 
-    // Ajusta para letras maiúsculas/minúsculas se a tecla SHIFT estiver pressionada
+    // Ajusta para letras maiï¿½sculas/minï¿½sculas se a tecla SHIFT estiver pressionada
     if (input.mods & GLFW_MOD_SHIFT && utf8_char.length() == 1) {
         utf8_char[0] = toupper(utf8_char[0]);
     }

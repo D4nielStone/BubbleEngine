@@ -2,7 +2,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <src/depuracao/debug.hpp>
+#include "../depuracao/debug.hpp"
 #include "imageloader.hpp"
 #include <filesystem>
 

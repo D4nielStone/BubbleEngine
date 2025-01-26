@@ -7,9 +7,9 @@
 
 #pragma once
 #include "sistema.hpp"
-#include "src/arquivadores/shader.hpp"
-#include "src/componentes/texto.hpp"
-#include "src/componentes/imagem.hpp"
+#include "../arquivadores/shader.hpp"
+#include "../componentes/texto.hpp"
+#include "../componentes/imagem.hpp"
 
 namespace bubble
 {
@@ -19,7 +19,7 @@ namespace bubble
 		sistemaInterface() = default;
 		~sistemaInterface() override;
 		void atualizar() override;
-		void inicializar(bubble::fase* fase) override;
+		void inicializar(bubble::fase* fase_ptr) override;
 		static void desenharTexto(shader& s, const texto& t);
 		static void desenharImagem(shader& s, const imagem& img);
 	private:

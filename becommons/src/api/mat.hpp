@@ -3,7 +3,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glm/detail/type_vec3.hpp>
-#include <src/util/vetor2.hpp>
+#include "../util/vetor2.hpp"
 
 namespace bubble
 {

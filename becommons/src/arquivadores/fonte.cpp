@@ -1,7 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #include "fonte.hpp"
-#include "assets/fontes_na_memoria.hpp"
+#include "../../assets/fontes_na_memoria.hpp"
 #include <filesystem>
 
 namespace bubble
@@ -40,7 +40,7 @@ namespace bubble
     {
         if (fontes.find(nome_da_fonte) != fontes.end())
         {
-            return; // Fonte já carregada
+            return; // Fonte jï¿½ carregada
         }
 
         FT_Face face{};
@@ -59,7 +59,7 @@ namespace bubble
                 }
             }
             else {
-                //Fonte não encontrada
+                //Fonte nï¿½o encontrada
                 return;
             }
 

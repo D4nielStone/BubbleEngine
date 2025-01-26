@@ -2,7 +2,7 @@
 #pragma once
 #include "componente.hpp"
 #include "texto.hpp"
-#include <src/util/vetor4.hpp>
+#include "../util/vetor4.hpp"
 #include <glm/ext/matrix_float4x4.hpp>
 #include <glm/ext/matrix_clip_space.hpp>
 

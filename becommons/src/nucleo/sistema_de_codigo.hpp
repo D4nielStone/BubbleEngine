@@ -21,7 +21,7 @@ namespace bubble
 		sistemaCodigo() = default;
 		~sistemaCodigo();
 		void atualizar() override;
-		void inicializar(bubble::fase* fase) override;
+		void inicializar(bubble::fase* fase_ptr) override;
 		void iniciarThread();
 		void pararThread();
 	};

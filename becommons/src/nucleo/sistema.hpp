@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "src/entidades/entidade.hpp"
+#include "../entidades/entidade.hpp"
 
  /**
   * @class Sistema
@@ -24,23 +24,23 @@ namespace bubble
         sistema() = default;
 
         /**
-         * @brief Destrutor virtual para garantir a destruição adequada das subclasses
+         * @brief Destrutor virtual para garantir a destruiï¿½ï¿½o adequada das subclasses
          */
         virtual ~sistema() = default;
 
         /**
          * @brief Inicializa o sistema
          */
-        virtual void inicializar(bubble::fase* fase);
+        virtual void inicializar(bubble::fase* fase_ptr);
 
         /**
          * @brief Atualiza o sistema dentro do loop principal
-         * @param deltaTime Tempo desde a última atualização (em segundos)
+         * @param deltaTime Tempo desde a ï¿½ltima atualizaï¿½ï¿½o (em segundos)
          */
         virtual void atualizar() = 0;
 
     protected:
-        fase* fase;
+        fase* _Mfase;
         registro* reg;
     };
 }

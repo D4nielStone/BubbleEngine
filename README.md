@@ -24,6 +24,8 @@ sudo apt install libfreeimage-dev
 sudo apt install rapidjson-dev
 sudo apt install libbullet-dev
 sudo apt install libfreetype6-dev
+
+*instalar luabridge
 ```
 ## Contribuição
 pull requests são bem-vindas. Para maiores alterações, por favor abra uma discução primeiro para discutir o que você gostaria de mudar.

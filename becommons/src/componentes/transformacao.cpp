@@ -1,5 +1,5 @@
 #include "transformacao.hpp"
-#include <src/nucleo/fase.hpp>
+#include "../nucleo/fase.hpp"
 
 void bubble::transformacao::apontarEntidade(const uint32_t& ent)
 {

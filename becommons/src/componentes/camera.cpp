@@ -1,7 +1,7 @@
 #include "camera.hpp"
 #include "transformacao.hpp"
-#include <src/nucleo/fase.hpp>
-#include <os/janela.hpp>
+#include "../nucleo/fase.hpp"
+#include "../../os/janela.hpp"
 
 void bubble::camera::desenharFB() const
 {
@@ -54,12 +54,12 @@ void bubble::camera::ativarFB()
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
-    // Verificando se o framebuffer está completo
+    // Verificando se o framebuffer estï¿½ completo
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        std::cerr << "Erro: Framebuffer não está completo!" << std::endl;
+        std::cerr << "Erro: Framebuffer nï¿½o estï¿½ completo!" << std::endl;
     }
 
-    // Voltando ao framebuffer padrão
+    // Voltando ao framebuffer padrï¿½o
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 }

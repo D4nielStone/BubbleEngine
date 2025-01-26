@@ -1,30 +1,23 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-/// Definindo título da janela
-#include <Windows.h>
+/// Definindo tï¿½tulo da janela
 #include <glad/glad.h>
 #include "os/janela.hpp"
-#include "src/entidades/entidade.hpp"
-#include "src/componentes/renderizador.hpp"
-#include "src/componentes/camera.hpp"
-#include "src/componentes/transformacao.hpp"
+#include "../entidades/entidade.hpp"
+#include "../componentes/renderizador.hpp"
+#include "../componentes/camera.hpp"
+#include "../componentes/transformacao.hpp"
 #include "ui/formas/retangulo.hpp"
-#include "src/nucleo/fase.hpp"
+#include "../nucleo/fase.hpp"
 #include <random>
-#include <src/componentes/texto.hpp>
-#include <src/componentes/codigo.hpp>
-#include <src/componentes/fisica.hpp>
+#include "../componentes/texto.hpp"
+#include "../componentes/codigo.hpp"
+#include "../componentes/fisica.hpp"
 
 const std::string title = "Golf - (C) 2025 Daniel Oliveira | ";
 using namespace bubble;
 
-#ifdef _DEBUG
-#define INIT int main()
-#else
-#define INIT int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, LPSTR cmdline, int cmdshow)
-#endif 
-
-INIT
+int main()
 {
 	instanciaJanela = new janela(title.c_str(), "icon_golf.ico");
 

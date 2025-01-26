@@ -1,8 +1,8 @@
 #include "sistema.hpp"
-#include "src/nucleo/fase.hpp"
+#include "../nucleo/fase.hpp"
 
-void bubble::sistema::inicializar(bubble::fase* fase)
+void bubble::sistema::inicializar(bubble::fase* fase_ptr)
 {
-	this->fase = fase;
-	this->reg= fase->obterRegistro();
+	this->_Mfase = fase_ptr;
+	this->reg= _Mfase->obterRegistro();
 }

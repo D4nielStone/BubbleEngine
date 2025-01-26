@@ -1,9 +1,9 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
-#include "src/util/malha.hpp"
-#include "src/util/textura.hpp"
+#include "../util/malha.hpp"
+#include "../util/textura.hpp"
+#include "../arquivadores/shader.hpp"
 #include <assimp/scene.h>
-#include <src/arquivadores/shader.hpp>
 #include <filesystem>
 
 namespace bubble
