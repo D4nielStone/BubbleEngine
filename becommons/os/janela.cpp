@@ -1,7 +1,6 @@
 #include <glad/glad.h>
 #include "janela.hpp"
-#include "../depuracao/debug.hpp"
-#include "../arquivadores/imageloader.hpp"
+#include "../src/depuracao/debug.hpp"
 
 bubble::janela::~janela()
 {
@@ -27,18 +26,7 @@ bubble::janela::janela(const char* nome, const char* icon_path)
         debug::emitir(Erro, "Glad");
         abort();
     }
-
-    bubble::imageLoader icone_;
-
-    // define o �cone da janela
-    if(icon_path)
-    icone_ = bubble::imageLoader(icon_path);
-    else
-    icone_ = bubble::imageLoader("icon.ico");
-    const GLFWimage icone = icone_.converterParaGlfw();
-
-    if (icone_.carregado)   glfwSetWindowIcon(window, 1, &icone);
-
+    
     // ativa blend
     glEnable(GL_BLEND); 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

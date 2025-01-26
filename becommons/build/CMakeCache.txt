@@ -14,9 +14,6 @@
 # EXTERNAL cache entries
 ########################
 
-//The directory containing a CMake configuration file for Assimp.
-Assimp_DIR:PATH=Assimp_DIR-NOTFOUND
-
 //Path to a library.
 BULLET_COLLISION_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libBulletCollision.so
 
@@ -171,9 +168,6 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 //Path to a program.
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
-//No help, variable specified on the command line.
-CMAKE_PREFIX_PATH:UNINITIALIZED=/path/to/glm
-
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
 
@@ -260,30 +254,6 @@ FREETYPE_LIBRARY_DEBUG:FILEPATH=FREETYPE_LIBRARY_DEBUG-NOTFOUND
 //Path to a library.
 FREETYPE_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libfreetype.so
 
-//The directory containing a CMake configuration file for FreeImage.
-FreeImage_DIR:PATH=FreeImage_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for Freeimage.
-Freeimage_DIR:PATH=Freeimage_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for GLFW3.
-GLFW3_DIR:PATH=GLFW3_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for GLFW.
-GLFW_DIR:PATH=GLFW_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for GLM::GLM.
-"GLM::GLM_DIR":PATH=GLM::GLM_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for GLM.
-GLM_DIR:PATH=GLM_DIR-NOTFOUND
-
-//Path to a file.
-GLM_INCLUDE_DIR:PATH=GLM_INCLUDE_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for Glad.
-Glad_DIR:PATH=Glad_DIR-NOTFOUND
-
 //Path to a file.
 LUA_INCLUDE_DIR:PATH=/usr/include/lua5.1
 
@@ -311,14 +281,8 @@ becommons_LIB_DEPENDS:STATIC=general;lua5.1;general;glfw;general;glad;general;as
 //Value Computed by CMake
 becommons_SOURCE_DIR:STATIC=/source/repos/BubbleEngine/becommons
 
-//The directory containing a CMake configuration file for freeimage.
-freeimage_DIR:PATH=freeimage_DIR-NOTFOUND
-
 //The directory containing a CMake configuration file for glfw3.
 glfw3_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/glfw3
-
-//The directory containing a CMake configuration file for glfw.
-glfw_DIR:PATH=glfw_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for glm.
 glm_DIR:PATH=/usr/share/cmake/glm

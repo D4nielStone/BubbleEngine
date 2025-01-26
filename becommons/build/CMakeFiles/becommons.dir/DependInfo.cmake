@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/usr/include/glad/glad.c" "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o" "gcc" "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o.d"
+  "/source/repos/BubbleEngine/becommons/os/janela.cpp" "CMakeFiles/becommons.dir/os/janela.cpp.o" "gcc" "CMakeFiles/becommons.dir/os/janela.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/api/api_lua.cpp" "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/arquivadores/fonte.cpp" "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.cpp" "CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o.d"

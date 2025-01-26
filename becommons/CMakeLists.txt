@@ -1,19 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
-
-# Nome do projeto
 project(becommons)
 
-# Definir a versão do projeto
-set(PROJECT_VERSION "1.0")
+set(CMAKE_CXX_STANDARD 20)
 
-# Definir como uma biblioteca estática
-add_library(becommons STATIC)
-
-# Adicionar as diretivas para compilar com C++21
-set(CMAKE_CXX_STANDARD 21)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Adicionar diretórios de include das bibliotecas
 include_directories(
     /usr/include/lua5.1
     /usr/include/glm
@@ -26,14 +15,17 @@ include_directories(
     /usr/include/freetype2
 )
 
-# Adicionar as dependências da biblioteca
 find_package(Lua REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp REQUIRED)
 find_package(RapidJSON REQUIRED)
-find_package(Bullet REQUIRED)
+find_package(Bullet REQUIRED )
 find_package(Freetype REQUIRED)
+
+add_library(becommons STATIC)
+
+target_include_directories(becommons PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
 # Adicionar os arquivos de código fonte da biblioteca
 target_sources(becommons PRIVATE
@@ -57,6 +49,7 @@ target_sources(becommons PRIVATE
     src/nucleo/sistema_de_renderizacao.cpp
     src/nucleo/sistema.cpp
     src/util/malha.cpp
+    os/janela.cpp
 )
 
 # Linkar as bibliotecas necessárias
@@ -64,7 +57,7 @@ target_link_libraries(becommons
     PRIVATE
     lua5.1
     glfw
-    glad
+    glad 
     assimp
     FreeImage
     rapidjson

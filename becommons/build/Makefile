@@ -174,6 +174,30 @@ becommons/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/build
 .PHONY : becommons/fast
 
+os/janela.o: os/janela.cpp.o
+.PHONY : os/janela.o
+
+# target to build an object file
+os/janela.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.o
+.PHONY : os/janela.cpp.o
+
+os/janela.i: os/janela.cpp.i
+.PHONY : os/janela.i
+
+# target to preprocess a source file
+os/janela.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.i
+.PHONY : os/janela.cpp.i
+
+os/janela.s: os/janela.cpp.s
+.PHONY : os/janela.s
+
+# target to generate assembly for a file
+os/janela.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.s
+.PHONY : os/janela.cpp.s
+
 src/api/api_lua.o: src/api/api_lua.cpp.o
 .PHONY : src/api/api_lua.o
 
@@ -667,6 +691,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... becommons"
+	@echo "... os/janela.o"
+	@echo "... os/janela.i"
+	@echo "... os/janela.s"
 	@echo "... src/api/api_lua.o"
 	@echo "... src/api/api_lua.i"
 	@echo "... src/api/api_lua.s"

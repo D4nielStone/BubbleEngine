@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/becommons.dir/os/janela.cpp.o"
+  "CMakeFiles/becommons.dir/os/janela.cpp.o.d"
   "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o"
   "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o.d"
   "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o"
