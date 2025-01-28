@@ -291,7 +291,7 @@ void bubble::fase::atualizar(double deltaTime)
 {
 	//sfisica.atualizar();
 	//scodigo.atualizar();
-	srender.atualizar();
+	srender.atualizar(); 
 	//sinterface.atualizar();
 	while (!fila.empty())
 	{
