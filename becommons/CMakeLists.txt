@@ -63,6 +63,9 @@ target_link_libraries(becommons
     rapidjson
     Bullet
     freetype
+    BulletCollision
+    BulletDynamics
+    Bullet3Common
 )
 
 # Se você ainda estiver incluindo GLM manualmente, remova isso

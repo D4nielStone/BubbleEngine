@@ -50,10 +50,10 @@ void bubble::janela::poll() const
 
 void bubble::janela::swap() 
 {
-    bubble::vetor4<int> tam{};
-    glfwGetWindowSize(window, &tam.w, &tam.h);
-    tamanho.y = tam.h;
-    tamanho.x = tam.w;
+    int w, h;
+    glfwGetWindowSize(window, &w, &h);
+    tamanho.y = w;
+    tamanho.x = h;
     _Mtempo.calcularDT();
     glfwSwapBuffers(window);
 }

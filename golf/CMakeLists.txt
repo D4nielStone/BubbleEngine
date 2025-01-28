@@ -13,6 +13,7 @@ find_package(assimp REQUIRED)
 find_package(RapidJSON REQUIRED)
 find_package(Bullet REQUIRED )
 find_package(Freetype REQUIRED)
+find_package(assimp REQUIRED)
 
 add_executable(golf 
     src/main.cpp
@@ -38,10 +39,19 @@ target_link_libraries(golf PRIVATE
  becommons 
  BulletDynamics
  LinearMath 
+ BulletCollision
+ Bullet3Common
  glfw 
+ assimp
 )
 
 
 find_library(BULLET_DYNAMICS_LIBRARY BulletDynamics)
 find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
+
+# Definir _DEBUG para Debug e NDEBUG para Release
+add_compile_definitions(
+    $<$<CONFIG:Debug>:_DEBUG>
+    $<$<CONFIG:Release,RelWithDebInfo,MinSizeRel>:NDEBUG>
+)

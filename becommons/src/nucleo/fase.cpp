@@ -6,9 +6,9 @@
 #include "../componentes/texto.hpp"
 #include "../componentes/transformacao.hpp"
 #include "../componentes/propriedades.hpp"
-#include "../componentes/fisica.hpp"
+//#include "../componentes/fisica.hpp"
 #include "../componentes/renderizador.hpp"
-#include "../componentes/imagem.hpp"
+//#include "../componentes/imagem.hpp"
 #include "../../os/janela.hpp"
 #include <iostream>
 #include <queue>
@@ -21,14 +21,14 @@ std::queue<std::function<void()>> fila;
 fase::fase() : _Mnome("")
 {
 	srender.inicializar(this);
-	sinterface.inicializar(this);
+	//sinterface.inicializar(this);
 	fase_atual = this;
 }
 
 fase::fase(const char* diretorio) : diretorio(diretorio)
 {
 	srender.inicializar(this);
-	sinterface.inicializar(this);
+	//sinterface.inicializar(this);
 
 	/// efetua a analise do json
 	fase_atual = this;
@@ -71,7 +71,7 @@ static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
 }
 static void analizarEntidades(Document& doc, fase* f)
 {
-	auto reg = f->obterRegistro();
+	/*auto reg = f->obterRegistro();
 	if (doc.HasMember("entidades") && doc["entidades"].IsArray())
 	{
 		for (auto& entidade : doc["entidades"].GetArray())
@@ -215,11 +215,11 @@ static void analizarEntidades(Document& doc, fase* f)
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void bubble::fase::analizar(const char* diretorio)
-{
+{/*
 	std::ifstream file(diretorio);
 	std::stringstream sb;
 	sb << file.rdbuf();
@@ -230,7 +230,7 @@ void bubble::fase::analizar(const char* diretorio)
 	{
 		debug::emitir(Erro, "Parse da fase");
 	}
-	/*----Analise da cena-----*/
+	/*----Analise da cena-----*//*
 	if (doc.HasMember("nome") && doc["nome"].IsString())
 	{
 		_Mnome = doc["nome"].GetString();
@@ -243,8 +243,8 @@ void bubble::fase::analizar(const char* diretorio)
 			debug::emitir("Fase", "Fase ativa");
 		}
 	}
-	/*------------------------*/
-	analizarEntidades(doc, this);
+	/*------------------------*//*
+	analizarEntidades(doc, this);*/
 }
 
 void bubble::fase::pausar()
@@ -253,8 +253,8 @@ void bubble::fase::pausar()
 		{
 			debug::emitir("fase", "Pausando");
 			rodando = false;
-			scodigo.pararThread();
-			sfisica.pararThread();
+			//scodigo.pararThread();
+			//sfisica.pararThread();
 		});
 }
 
@@ -263,8 +263,8 @@ void bubble::fase::parar()
 	debug::emitir("fase", "Parando");
 	// TODO: snapshot para retornar o rodando do registro
 	rodando = false;
-	scodigo.pararThread();
-	sfisica.pararThread();
+	//scodigo.pararThread();
+	//sfisica.pararThread();
 }
 
 void bubble::fase::iniciar()
@@ -277,8 +277,8 @@ void bubble::fase::iniciar()
 	{
 		/// o sistema de c�digo apenas inicia ao come�ar a fase
 		/// no modo de joo
-		scodigo.inicializar(this);
-		sfisica.inicializar(this);
+		//scodigo.inicializar(this);
+		//sfisica.inicializar(this);
 		inicializacao = false;
 	}
 	// capturar snapshot do registro
@@ -289,10 +289,10 @@ void bubble::fase::iniciar()
 
 void bubble::fase::atualizar(double deltaTime)
 {
-	sfisica.atualizar();
-	scodigo.atualizar();
+	//sfisica.atualizar();
+	//scodigo.atualizar();
 	srender.atualizar();
-	sinterface.atualizar();
+	//sinterface.atualizar();
 	while (!fila.empty())
 	{
 		auto func = fila.front();

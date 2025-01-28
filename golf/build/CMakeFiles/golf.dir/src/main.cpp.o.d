@@ -1,8 +1,8 @@
 CMakeFiles/golf.dir/src/main.cpp.o: \
  /source/repos/BubbleEngine/golf/src/main.cpp /usr/include/stdc-predef.h \
- /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+ /usr/include/glad/glad.h /usr/include/glad/KHR/khrplatform.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/bits/timesize.h \
@@ -10,18 +10,26 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/iosfwd \
  /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/memoryfwd.h /usr/include/c++/13/bits/postypes.h \
  /usr/include/c++/13/cwchar /usr/include/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
@@ -50,10 +58,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h \
  /usr/include/c++/13/clocale /usr/include/locale.h \
  /usr/include/x86_64-linux-gnu/bits/locale.h /usr/include/c++/13/cctype \
- /usr/include/ctype.h /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/ctype.h /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endianness.h \
  /usr/include/c++/13/bits/ios_base.h /usr/include/c++/13/ext/atomicity.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
@@ -114,8 +119,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/ext/string_conversions.h /usr/include/c++/13/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
@@ -154,13 +158,26 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
- /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/atomic_base.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/fase.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/entidade.hpp \
+ /usr/include/c++/13/unordered_map \
+ /usr/include/c++/13/bits/unordered_map.h \
+ /usr/include/c++/13/bits/hashtable.h \
+ /usr/include/c++/13/bits/hashtable_policy.h \
+ /usr/include/c++/13/ext/aligned_buffer.h \
+ /usr/include/c++/13/bits/enable_special_members.h \
+ /usr/include/c++/13/bits/node_handle.h \
+ /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_tempbuf.h \
+ /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr_base.h \
+ /usr/include/c++/13/bits/allocated_ptr.h \
+ /usr/include/c++/13/ext/concurrence.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/bits/atomic_base.h \
  /usr/include/c++/13/bits/atomic_lockfree_defines.h \
  /usr/include/c++/13/bits/atomic_wait.h /usr/include/c++/13/cstdint \
  /usr/include/c++/13/climits \
@@ -184,74 +201,30 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h \
  /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/bits/std_thread.h \
- /usr/include/c++/13/bits/unique_ptr.h /usr/include/c++/13/semaphore \
- /usr/include/c++/13/bits/semaphore_base.h \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/limits /usr/include/c++/13/ctime \
- /usr/include/c++/13/bits/parse_numbers.h \
- /usr/include/c++/13/bits/atomic_timed_wait.h \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/bits/ranges_uninitialized.h \
+ /usr/include/c++/13/bits/ranges_algobase.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h \
+ /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/functional \
+ /usr/include/c++/13/bits/std_function.h /usr/include/c++/13/vector \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/bits/stl_algo.h \
+ /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/array \
+ /usr/include/c++/13/bits/stl_algo.h \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h \
- /usr/include/c++/13/bits/shared_ptr.h \
- /usr/include/c++/13/bits/shared_ptr_base.h \
- /usr/include/c++/13/bits/allocated_ptr.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/ext/concurrence.h /usr/include/c++/13/bits/align.h \
- /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
- /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
- /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
- /usr/include/c++/13/array /usr/include/c++/13/charconv \
- /usr/include/c++/13/optional \
- /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/span /usr/include/c++/13/variant \
- /usr/include/c++/13/bits/ranges_algobase.h /usr/include/GLFW/glfw3.h \
- /usr/include/GL/gl.h /usr/include/GL/glext.h \
- /usr/include/glad/KHR/khrplatform.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/util/vetor4.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/sistema.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/entidade.hpp \
- /usr/include/c++/13/unordered_map \
- /usr/include/c++/13/bits/unordered_map.h \
- /usr/include/c++/13/bits/hashtable.h \
- /usr/include/c++/13/bits/hashtable_policy.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/bits/ranges_uninitialized.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
- /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/functional \
- /usr/include/c++/13/bits/std_function.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/../componentes/componente.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/../componentes/fisica.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/../componentes/transformacao.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/../componentes/../util/vetor3.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/componente.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/fisica.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/../util/vetor3.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
  /usr/include/glm/detail/type_vec3.hpp \
  /usr/include/glm/detail/qualifier.hpp /usr/include/glm/detail/setup.hpp \
  /usr/include/c++/13/cassert /usr/include/assert.h \
  /usr/include/glm/simd/platform.h /usr/include/glm/detail/type_vec3.inl \
  /usr/include/glm/detail/compute_vector_relational.hpp \
- /usr/include/glm/ext/matrix_float4x4.hpp \
+ /usr/include/c++/13/limits /usr/include/glm/ext/matrix_float4x4.hpp \
  /usr/include/glm/detail/type_mat4x4.hpp \
  /usr/include/glm/detail/type_vec4.hpp \
  /usr/include/glm/detail/type_vec4.inl \
@@ -564,8 +537,69 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/../entidades/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/camera.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/raio.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/vetor2.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/vetor4.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/cor.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
+ /usr/include/c++/13/bits/sstream.tcc \
+ /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
+ /usr/include/c++/13/charconv /usr/include/c++/13/optional \
+ /usr/include/c++/13/span /usr/include/c++/13/variant \
+ /usr/include/GLFW/glfw3.h \
  /source/repos/BubbleEngine/golf/../becommons/os/../src/inputs/inputs.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/inputs/../util/vetor2.hpp
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/malha.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/vertice.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/textura.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../arquivadores/shader.hpp \
+ /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../util/material.hpp \
+ /usr/include/assimp/scene.h /usr/include/assimp/types.h \
+ /usr/include/assimp/defs.h /usr/include/assimp/config.h \
+ /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
+ /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
+ /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
+ /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
+ /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
+ /usr/include/assimp/quaternion.inl /usr/include/assimp/texture.h \
+ /usr/include/assimp/Compiler/pushpack1.h \
+ /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/mesh.h \
+ /usr/include/assimp/aabb.h /usr/include/assimp/light.h \
+ /usr/include/assimp/camera.h /usr/include/assimp/material.h \
+ /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
+ /usr/include/assimp/metadata.h /usr/include/c++/13/filesystem \
+ /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
+ /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
+ /usr/include/c++/13/bits/fs_ops.h

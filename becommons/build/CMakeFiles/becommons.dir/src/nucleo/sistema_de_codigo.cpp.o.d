@@ -555,46 +555,6 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../arquivadores/shader.hpp \
- /usr/include/c++/13/fstream /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/texto.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/imageloader.hpp \
- /usr/include/FreeImage.h /usr/include/inttypes.h \
- /usr/include/assimp/scene.h /usr/include/assimp/types.h \
- /usr/include/assimp/defs.h /usr/include/assimp/config.h \
- /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
- /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
- /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
- /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
- /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
- /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
- /usr/include/c++/13/pstl/glue_algorithm_defs.h \
- /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
- /usr/include/assimp/quaternion.inl /usr/include/assimp/texture.h \
- /usr/include/assimp/Compiler/pushpack1.h \
- /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/mesh.h \
- /usr/include/assimp/aabb.h /usr/include/assimp/light.h \
- /usr/include/assimp/camera.h /usr/include/assimp/material.h \
- /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
- /usr/include/assimp/metadata.h /usr/include/glad/glad.h \
- /usr/include/glad/KHR/khrplatform.h /usr/include/c++/13/filesystem \
- /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
- /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
- /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/codigo.hpp \
  /usr/include/lua5.1/lua.hpp /usr/include/lua5.1/lua.h \
  /usr/include/lua5.1/luaconf.h \
@@ -603,9 +563,22 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: \
  /usr/include/lua5.1/lua.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
- /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
- /usr/include/c++/13/format /usr/include/c++/13/charconv \
- /usr/include/c++/13/optional /usr/include/c++/13/span \
- /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
+ /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
+ /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
+ /usr/include/c++/13/bits/sstream.tcc \
+ /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
+ /usr/include/c++/13/charconv /usr/include/c++/13/optional \
+ /usr/include/c++/13/span /usr/include/c++/13/variant \
+ /usr/include/GLFW/glfw3.h /usr/include/GL/gl.h /usr/include/GL/glext.h \
+ /usr/include/glad/KHR/khrplatform.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/../src/inputs/inputs.hpp \
- /usr/include/c++/13/mutex /usr/include/c++/13/bits/unique_lock.h
+ /usr/include/c++/13/iostream /usr/include/c++/13/mutex \
+ /usr/include/c++/13/bits/unique_lock.h

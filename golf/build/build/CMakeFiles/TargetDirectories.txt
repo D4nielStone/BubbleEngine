@@ -1,0 +1,4 @@
+/source/repos/BubbleEngine/golf/build/build/CMakeFiles/golf.dir
+/source/repos/BubbleEngine/golf/build/build/CMakeFiles/glad.dir
+/source/repos/BubbleEngine/golf/build/build/CMakeFiles/edit_cache.dir
+/source/repos/BubbleEngine/golf/build/build/CMakeFiles/rebuild_cache.dir

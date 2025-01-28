@@ -1,3 +1,3 @@
 file(REMOVE_RECURSE
-  "libgolf.a"
+  "libglad.a"
 )

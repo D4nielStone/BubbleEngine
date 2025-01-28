@@ -1,3 +1,4 @@
+#include <glad/glad.h>
 #include "camera.hpp"
 #include "transformacao.hpp"
 #include "../nucleo/fase.hpp"

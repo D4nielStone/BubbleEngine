@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/golf.dir/src/main.cpp.o -o golf  libglad.a /source/repos/BubbleEngine/golf/../becommons/build/libbecommons.a -lBulletDynamics -lLinearMath /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 
+/usr/bin/c++ CMakeFiles/golf.dir/src/main.cpp.o -o golf  libglad.a /source/repos/BubbleEngine/golf/../becommons/build/libbecommons.a -lBulletDynamics -lLinearMath -lBulletCollision -lBullet3Common /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 -lassimp 

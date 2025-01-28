@@ -276,7 +276,7 @@ becommons_BINARY_DIR:STATIC=/source/repos/BubbleEngine/becommons/build
 becommons_IS_TOP_LEVEL:STATIC=ON
 
 //Dependencies for the target
-becommons_LIB_DEPENDS:STATIC=general;lua5.1;general;glfw;general;glad;general;assimp;general;FreeImage;general;rapidjson;general;Bullet;general;freetype;
+becommons_LIB_DEPENDS:STATIC=general;lua5.1;general;glfw;general;glad;general;assimp;general;FreeImage;general;rapidjson;general;Bullet;general;freetype;general;BulletCollision;general;BulletDynamics;general;Bullet3Common;
 
 //Value Computed by CMake
 becommons_SOURCE_DIR:STATIC=/source/repos/BubbleEngine/becommons

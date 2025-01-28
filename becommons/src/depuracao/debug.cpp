@@ -17,7 +17,6 @@ std::vector<std::string> debug::obterMensagems()
 
 void debug::emitir(Tipo t, std::string msg) 
 {
-#ifdef _DEBUG
 	switch (t)
 	{
 	case Mensagem:
@@ -32,12 +31,9 @@ void debug::emitir(Tipo t, std::string msg)
 	default:
 		break;
 	}
-#endif
 }
 void debug::emitir(std::string t, std::string msg)
 {
-#ifdef _DEBUG
 	std::cout << "[" << t << "] " << msg << "\n";
 
-#endif
 }
