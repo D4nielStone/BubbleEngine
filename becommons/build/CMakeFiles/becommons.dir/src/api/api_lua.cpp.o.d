@@ -630,4 +630,11 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/../util/material.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_fisica.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/codigo.hpp \
- /usr/include/lua5.3/lua.h
+ /usr/include/lua5.3/lua.h \
+ /source/repos/BubbleEngine/becommons/src/api/../../os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/src/api/../../os/tempo.hpp \
+ /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
+ /usr/include/c++/13/format /usr/include/c++/13/charconv \
+ /usr/include/c++/13/optional /usr/include/c++/13/span \
+ /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
+ /source/repos/BubbleEngine/becommons/src/api/../../os/../src/inputs/inputs.hpp

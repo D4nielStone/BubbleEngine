@@ -3,8 +3,15 @@
 #include "../componentes/renderizador.hpp"
 #include "../nucleo/sistema_de_fisica.hpp"
 #include "../componentes/codigo.hpp"
+#include "../../os/janela.hpp"
+#include "../inputs/inputs.hpp"
 
 using namespace bubble;
+
+template <class T>
+T lerp(T start, T end, T alpha) {
+    return start + alpha * (end - start);
+}
 
 void bapi::entidade::destruir() const
 {
@@ -76,4 +83,41 @@ void bapi::definirFisica(lua_State* L)
 		beginNamespace("fisica").
 		addFunction("raioIntersecta", &bubble::raioIntersecta).
 		endNamespace();
+}
+
+void bapi::definirTempo(lua_State *L)
+{
+	std::function<double()> obterDeltaTimeFunc = []() -> double {
+		if (!fase_atual) {
+			return 0.0;
+		}
+		return instanciaJanela->_Mtempo.obterDeltaTime();
+		};
+	luabridge::getGlobalNamespace(L)
+		.beginNamespace("tempo")
+		.addFunction<double>("obterDeltaTime", obterDeltaTimeFunc)
+		.endNamespace();
+}
+
+void bapi::definirInputs(lua_State *L)
+{
+	luabridge::getGlobalNamespace(L)
+		.beginNamespace("inputs")
+		.addFunction("pressionada", &bubble::pressionada)
+		.addFunction("mouse", &bubble::obterMouse)
+		.addFunction("tamanhoTela", &bubble::tamanhoJanela)
+		.addFunction("cursor", &bubble::posicionarCursor)
+		.endNamespace();
+}
+void bapi::definirUtils(lua_State *L)
+{
+	luabridge::getGlobalNamespace(L)
+		.beginNamespace("util")
+		.addFunction("lerp", &lerp<float>)
+		.addFunction("lerpV3", &bubble::lerpV3)
+		.addFunction("clamp", &std::clamp<float>)
+		.addFunction("distanciaV3", &bubble::distancia3)
+		.addFunction("distanciaV2", &bubble::distancia2)
+		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>)
+		.endNamespace();
 }

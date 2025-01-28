@@ -42,7 +42,11 @@ namespace bubble
     extern "C" void callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods);
     extern "C" void mouseButtonCallBack(GLFWwindow* window, int a, int b, int c);
     extern "C" void charCallback(GLFWwindow* window, unsigned int codepoint);
-    bubble::vetor2<double> obterMouse();
+
+    /// @brief posiciona o cursor do mouse em uma posição na tela.
+    /// @param pos 
+    void posicionarCursor(double x, double y);
+    vet2 obterMouse();
     bubble::vetor2<int> tamanhoJanela();
     bool pressionada(const std::string &tecla);
 }

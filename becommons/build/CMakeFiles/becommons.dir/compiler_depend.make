@@ -639,6 +639,9 @@ CMakeFiles/becommons.dir/os/janela.cpp.o: /source/repos/BubbleEngine/becommons/o
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becommons/src/api/api_lua.cpp \
+  /source/repos/BubbleEngine/becommons/src/inputs/inputs.hpp \
+  /source/repos/BubbleEngine/becommons/os/janela.hpp \
+  /source/repos/BubbleEngine/becommons/os/tempo.hpp \
   /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp \
   /source/repos/BubbleEngine/becommons/src/util/material.hpp \
   /source/repos/BubbleEngine/becommons/src/util/malha.hpp \
@@ -669,6 +672,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /source/repos/BubbleEngine/becommons/src/api/api_lua.hpp \
   /source/repos/BubbleEngine/becommons/src/api/mat.hpp \
   /usr/include/FreeImage.h \
+  /usr/include/GLFW/glfw3.h \
   /usr/include/LuaBridge/LuaBridge.h \
   /usr/include/LuaBridge/detail/CFunctions.h \
   /usr/include/LuaBridge/detail/ClassInfo.h \
@@ -838,6 +842,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
   /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/chrono_io.h \
   /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -937,6 +942,8 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/cfloat \
+  /usr/include/c++/13/charconv \
+  /usr/include/c++/13/chrono \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
@@ -962,6 +969,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
   /usr/include/c++/13/filesystem \
+  /usr/include/c++/13/format \
   /usr/include/c++/13/fstream \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
@@ -977,6 +985,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/memory \
   /usr/include/c++/13/new \
   /usr/include/c++/13/numbers \
+  /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_algorithm_defs.h \
@@ -984,6 +993,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
   /usr/include/c++/13/semaphore \
+  /usr/include/c++/13/span \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
@@ -1010,6 +1020,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/c++/13/typeinfo \
   /usr/include/c++/13/unordered_map \
   /usr/include/c++/13/utility \
+  /usr/include/c++/13/variant \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \

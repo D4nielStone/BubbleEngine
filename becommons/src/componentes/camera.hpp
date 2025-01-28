@@ -26,7 +26,7 @@ namespace bubble
 
 		cor ceu				{0.43F, 0.78F, 0.86F, 1.0F};
 
-		glm::vec3 forward, posicao;
+		glm::vec3 forward, direita, cima, posicao;
 		std::shared_ptr<bubble::transformacao> transform{ nullptr };
 
 		glm::mat4 viewMatrix = glm::mat4(1.f), projMatriz = glm::mat4(1.f);

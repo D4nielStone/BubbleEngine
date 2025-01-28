@@ -6,17 +6,15 @@
 #include "../../os/janela.hpp"
 #include <cmath>
 
-template <class T>
-T lerp(T start, T end, T alpha) {
-    return start + alpha * (end - start);
-}
-
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)
 
 {
 	luaL_openlibs(L);
 
 	bapi::definirFisica(L);
+	bapi::definirTempo(L);
+	bapi::definirUtils(L);
+	bapi::definirInputs(L);
 	bapi::entidade::definir(L);
 
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
@@ -26,33 +24,6 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 	{
 		debug::emitir(Mensagem, "Codigo encontrado: " + arquivo);
 	}
-
-	std::function<double()> obterDeltaTimeFunc = []() -> double {
-		if (!fase_atual) {
-			return 0.0;
-		}
-		return instanciaJanela->_Mtempo.obterDeltaTime();
-		};
-	/*-------------------------*/
-	luabridge::getGlobalNamespace(L)
-		.beginNamespace("inputs")
-		.addFunction("pressionada", &bubble::pressionada)
-		.addFunction("mouse", &bubble::obterMouse)
-		.addFunction("tamanhoTela", &bubble::tamanhoJanela)
-		.endNamespace()
-		.beginNamespace("tempo")
-		.addFunction<double>("obterDeltaTime", obterDeltaTimeFunc)
-		.endNamespace()
-		.beginNamespace("util")
-		.addFunction("lerp", &lerp<float>)
-		.addFunction("lerpV3", &bubble::lerpV3)
-		.addFunction("clamp", &std::clamp<float>)
-		.addFunction("distanciaV3", &bubble::distancia3)
-		.addFunction("distanciaV2", &bubble::distancia2)
-		.addFunction("normalizarV3", &glm::normalize<3, float, glm::packed_highp>)
-		.endNamespace();
-			
-	/*-------------------------*/
 }
 
 void bubble::codigo::iniciar() const
@@ -63,6 +34,7 @@ void bubble::codigo::iniciar() const
 	lua_getglobal(L, "iniciar");
 	if (lua_isfunction(L, -1)) {
 	    debug::emitir(Mensagem, "Função 'iniciar' encontrada no Lua: " + arquivo);
+	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
 	} else {
 	    std::cerr << "Função 'iniciar' não definida no Lua!" << std::endl;
 	    if (lua_isnil(L, -1)) {
@@ -78,6 +50,7 @@ void bubble::codigo::atualizar() const
 	lua_getglobal(L, "atualizar");
 	if (lua_isfunction(L, -1)) {
 	    // Chamar a função 'atualizar' no Lua
+
 	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
 	} else {
 	    std::cerr << "Função 'atualizar' não definida no Lua!" << std::endl;

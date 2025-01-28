@@ -97,7 +97,7 @@ static std::string glfwkeyTokey(int glfwkey) {
 // Callback de teclado GLFW
 void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, int mods) 
 {
-    auto &input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
+    auto &input = instanciaJanela->inputs;
     input.mods = mods;
     input.teclado_action = action;
 
@@ -115,7 +115,7 @@ void bubble::callbackKey(GLFWwindow* window, int key, int scancode, int action, 
 // Callback de posi��o do mouse
 void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
 {
-    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
+    auto& input = instanciaJanela->inputs;
 
         input.mousex = x;
         input.mousey = y;
@@ -124,7 +124,7 @@ void bubble::mousePosCallBack(GLFWwindow* window, double x, double y)
 // Callback de clique do mouse
 void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int mods)
 {
-    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
+    auto& input = instanciaJanela->inputs;
 
     // Processar o clique do mouse
     input.mouseEnter = action;
@@ -143,7 +143,7 @@ void bubble::mouseButtonCallBack(GLFWwindow* window, int button, int action, int
 // Callback para caracteres
 void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
 {
-    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(window))->inputs;
+    auto& input = instanciaJanela->inputs;
 
     // Converte o c�digo Unicode para um caractere UTF-8
     std::string utf8_char;
@@ -179,23 +179,30 @@ void bubble::charCallback(GLFWwindow* window, unsigned int codepoint)
     input.char_press = true;
 }
 
+void bubble::posicionarCursor(double x, double y)
+{
+    auto& input = instanciaJanela->inputs;
+    
+    input.mousex = x;
+    input.mousey = y;
+    glfwSetCursorPos(instanciaJanela->window, x, y);
+}
+
 bubble::vetor2<double> bubble::obterMouse()
 {
-    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window))->inputs;
+    auto& input = instanciaJanela->inputs;
 
         return bubble::vetor2<double>( input.mousex, input.mousey );
 };
 
 bubble::vetor2<int> bubble::tamanhoJanela()
 {
-    auto janela = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window));
-
-    return bubble::vetor2<int>( janela->tamanho.x, janela->tamanho.y );
+    return bubble::vetor2<int>( instanciaJanela->tamanho.x, instanciaJanela->tamanho.y );
 };
 
 bool bubble::pressionada(const std::string &letra)
 {
-    auto& input = static_cast<bubble::janela*>(glfwGetWindowUserPointer(instanciaJanela->window))->inputs;
+    auto& input = instanciaJanela->inputs;
 
     return input.isKeyPressed(letra);
 }

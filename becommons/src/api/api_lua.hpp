@@ -46,7 +46,7 @@ namespace bapi
 				addData<int>("x", &bubble::vetor2<int>::x).
 				addData<int>("y", &bubble::vetor2<int>::y).
 				endClass().
-				beginClass<bubble::vetor2<double>>("vetor2d").		///< define vetor3
+				beginClass<vet2>("vetor2d").		///< define vetor3
 				addConstructor<void(*)(double, double)>().
 				addData<double>("x", &bubble::vetor2<double>::x).
 				addData<double>("y", &bubble::vetor2<double>::y).
@@ -105,4 +105,7 @@ namespace bapi
 		entidade(const uint32_t& id);
 	};
 	void definirFisica(lua_State* L);
+	void definirTempo(lua_State* L);
+	void definirUtils(lua_State* L);
+	void definirInputs(lua_State* L);
 }

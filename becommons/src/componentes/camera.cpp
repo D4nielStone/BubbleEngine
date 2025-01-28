@@ -83,17 +83,25 @@ glm::mat4 bubble::camera::obtViewMatrix() {
     posicao = transform->posicao;
     glm::vec3 up = transform->cima;
 
+    // Recalcular os vetores de referência
+    glm::vec3 frente = glm::vec3(
+        cos(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x)),
+        sin(glm::radians(transform->rotacao.x)),
+        sin(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x))
+    );
+    forward = glm::normalize(frente);
+        
+    direita = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));  // Mantém eixo Y fixo
+    cima = glm::normalize(glm::cross(direita, forward));
+
+    // Atualiza os vetores na transformação
+    transform->cima = cima;
+
     glm::vec3 alvo;
     if (transform->alvo) {
         alvo = *transform->alvo;
     }
     else {
-        glm::vec3 frente = glm::vec3(
-            cos(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x)),
-            sin(glm::radians(transform->rotacao.x)),
-            sin(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x))
-        );
-        forward = glm::normalize(frente);
         alvo = posicao + forward;
     }
 
@@ -161,14 +169,13 @@ glm::vec3 bubble::camera::telaParaMundo(const vet2 &screenPoint, float profundid
 
 void bubble::camera::mover(glm::vec3 &pos)
 {
-    // Verifica se a transformação do objeto não está inicializada
     if (!transform)
         transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
-    glm::vec3 direita = glm::normalize(glm::cross(forward, transform->cima));
-    transform->cima = glm::normalize(glm::cross(direita, forward));
-    // Atualiza a posição com base no vetor de movimento pos
-    transform->posicao += forward * pos.z; // Exemplo: pos.z pode representar a movimentação para frente
-    transform->posicao += direita * pos.x;   // pos.x pode representar a movimentação para os lados
-    transform->posicao += transform->cima * pos.y;      // pos.y pode representar a movimentação para cima ou para baixo
-}
 
+    
+
+    // Atualiza a posição com base na entrada
+    transform->posicao += forward * pos.z;  // Move para frente/trás
+    transform->posicao += direita * pos.x;  // Move para os lados
+    transform->posicao += cima * pos.y;     // Move para cima/baixo
+}

@@ -2,11 +2,17 @@
 #include "janela.hpp"
 #include "../src/depuracao/debug.hpp"
 
+// Callback de erro
+void errorCallback(int error, const char* description) {
+    std::cerr << "GLFW Error (" << error << "): " << description << std::endl;
+}
+
 bubble::janela::~janela()
 {
 }
 bubble::janela::janela(const char* nome, const char* icon_path)
 {
+    glfwSetErrorCallback(errorCallback);
     // inicia glfw
     if (!glfwInit())
     {
