@@ -365,6 +365,7 @@ CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/arquivadores/../util/../arquivadores/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/arquivadores/../util/../arquivadores/../util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/src/arquivadores/../util/../util/material.hpp \
+ /source/repos/BubbleEngine/becommons/src/arquivadores/../depuracao/debug.hpp \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h \
@@ -414,7 +415,6 @@ CMakeFiles/becommons.dir/src/arquivadores/modelo.cpp.o: \
  /usr/include/c++/13/bits/unique_ptr.h /usr/include/c++/13/bits/align.h \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /usr/include/assimp/Importer.hpp /usr/include/assimp/postprocess.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../depuracao/debug.hpp \
  /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
  /usr/include/glad/glad.h /usr/include/glad/KHR/khrplatform.h

@@ -50,8 +50,5 @@ find_library(BULLET_DYNAMICS_LIBRARY BulletDynamics)
 find_library(BULLET_COLLISION_LIBRARY BulletCollision)
 find_library(BULLET_LINEAR_MATH_LIBRARY LinearMath)
 
-# Definir _DEBUG para Debug e NDEBUG para Release
-add_compile_definitions(
-    $<$<CONFIG:Debug>:_DEBUG>
-    $<$<CONFIG:Release,RelWithDebInfo,MinSizeRel>:NDEBUG>
-)
+set(CMAKE_BUILD_TYPE Debug)  # Garante que estamos gerando uma build de depuração
+set(CMAKE_CXX_FLAGS_DEBUG "-g")  # Adiciona símbolos de depuração

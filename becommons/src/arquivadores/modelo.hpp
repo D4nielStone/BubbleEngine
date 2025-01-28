@@ -1,6 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "../util/malha.hpp"
+#include "../depuracao/debug.hpp"
 #include "../util/textura.hpp"
 #include "../arquivadores/shader.hpp"
 #include <assimp/scene.h>
@@ -19,6 +20,9 @@ namespace bubble
             {
 
                 carregarmodelo(std::filesystem::absolute(diretorio).string().c_str());
+            }else
+            {
+                debug::emitir(Erro, "Diretorio do modelo inexistente.");
             }
         }
         void definirShader(const char* vertex,const char* frag);

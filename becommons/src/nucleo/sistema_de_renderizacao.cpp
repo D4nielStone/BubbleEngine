@@ -7,6 +7,7 @@
 #include "../arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "../../os/janela.hpp"
+#include "../depuracao/debug.hpp"
 
 namespace bubble
 {
@@ -16,7 +17,11 @@ namespace bubble
         glEnable(GL_CULL_FACE);
 
         auto camera = _Mfase->obterCamera();
-        if (!camera) return;
+        if (!camera) 
+        {
+            debug::emitir("fase", "Camera não configurada");
+            return;
+        }
 
         camera->desenharFB();
 
@@ -39,10 +44,12 @@ namespace bubble
             render->modelo->desenhar(s);
             });
 
-
+    if(camera->flag_fb){
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glClearColor(1, 1, 1, 1);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glViewport(0, 0, instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+    }
     }
 
     void sistemaRenderizacao::inicializar(bubble::fase* fase_ptr)

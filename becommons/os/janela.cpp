@@ -52,8 +52,8 @@ void bubble::janela::swap()
 {
     int w, h;
     glfwGetWindowSize(window, &w, &h);
-    tamanho.y = w;
-    tamanho.x = h;
+    tamanho.y = h;
+    tamanho.x = w;
     _Mtempo.calcularDT();
     glfwSwapBuffers(window);
 }

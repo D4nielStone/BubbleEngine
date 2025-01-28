@@ -19,10 +19,12 @@ int main()
 	auto cam = teste.obterRegistro()->criar();
 	
 	teste.obterRegistro()->adicionar<bubble::transformacao>(ent);
-	//teste.obterRegistro()->adicionar<bubble::renderizador>(ent, "~/Modelos/cubo.obj");
+	teste.obterRegistro()->adicionar<bubble::renderizador>(ent, new bubble::modelo("/source/repos/BubbleEngine/golf/cubo.obj"));
+	teste.obterRegistro()->adicionar<bubble::transformacao>(cam,  vet3(0, 0, 3));
 	teste.obterRegistro()->adicionar<bubble::camera>(cam);
 	teste.definirCamera(cam);
-	teste.obterCamera()->viewport_ptr = nullptr;//&instanciaJanela->tamanho;
+	teste.obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
+	teste.obterRegistro()->obter<transformacao>(cam.id)->apontarEntidade(ent.id);
 	teste.iniciar();
 
 	while(!glfwWindowShouldClose(instanciaJanela->window))
@@ -33,6 +35,5 @@ int main()
 
 		instanciaJanela->swap();
 	}
-	system("pause");
 	return 0;
 }

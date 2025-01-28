@@ -19,6 +19,7 @@ void bubble::camera::desenharFB() const
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
 }
 
 
@@ -105,23 +106,29 @@ void bubble::camera::viewport(const vet2& viewp)
 }
 
 glm::mat4 bubble::camera::obtProjectionMatrix() {
-    if (flag_orth && viewport_ptr) {
-        float largura = viewportFBO.x;
-        float altura = viewportFBO.y;
-        aspecto = largura / altura;
+    vet2 viewp;
+    if (flag_fb)
+        viewp = viewportFBO;
+    else if(viewport_ptr)
+        viewp = *viewport_ptr;
+    else return glm::mat4(1.f);
 
+    if (flag_orth)
+    {
+        float largura = viewp.x;
+        float altura = viewp.y;
+        aspecto = largura / altura;
         left = -escala * aspecto;
         right = escala * aspecto;
         bottom = -escala;
         top = escala;
-
         projMatriz = glm::ortho(left, right, bottom, top, corte_curto, corte_longo);
     }
-    else if (viewport_ptr) {
-        float largura = viewportFBO.x;
-        float altura = viewportFBO.y;
+    else 
+    {
+        float largura = viewp.x;
+        float altura = viewp.y;
         aspecto = largura / altura;
-
         projMatriz = glm::perspective(glm::radians(fov), aspecto, corte_curto, corte_longo);
     }
     return projMatriz;
