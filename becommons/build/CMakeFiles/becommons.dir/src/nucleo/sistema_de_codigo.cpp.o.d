@@ -556,11 +556,11 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/codigo.hpp \
- /usr/include/lua5.1/lua.hpp /usr/include/lua5.1/lua.h \
- /usr/include/lua5.1/luaconf.h \
- /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
- /usr/include/lua5.1/lualib.h /usr/include/lua5.1/lauxlib.h \
- /usr/include/lua5.1/lua.h \
+ /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
+ /usr/include/lua5.3/luaconf.h \
+ /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
+ /usr/include/lua5.3/lualib.h /usr/include/lua5.3/lauxlib.h \
+ /usr/include/lua5.3/lua.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/sstream \

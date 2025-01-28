@@ -277,7 +277,6 @@ void bubble::fase::iniciar()
 	{
 		/// o sistema de c�digo apenas inicia ao come�ar a fase
 		/// no modo de joo
-		//scodigo.inicializar(this);
 		//sfisica.inicializar(this);
 		inicializacao = false;
 	}
@@ -285,12 +284,14 @@ void bubble::fase::iniciar()
 	rodando = true;
 	//scodigo.iniciarThread();
 	//sfisica.iniciarThread();
+		scodigo.inicializar(this);
+
 }
 
 void bubble::fase::atualizar(double deltaTime)
 {
 	//sfisica.atualizar();
-	//scodigo.atualizar();
+	scodigo.atualizar();
 	srender.atualizar(); 
 	//sinterface.atualizar();
 	while (!fila.empty())

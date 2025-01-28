@@ -87,6 +87,7 @@ namespace bapi
 				addData("flag_ortho", &bubble::camera::flag_orth).
 				addFunction("telaParaMundo", &bubble::camera::telaParaMundo).
 				addFunction("ativarFB", &bubble::camera::ativarFB).
+				addFunction("mover", &bubble::camera::mover).
 				addFunction("desativarFB", &bubble::camera::desativarFB).
 				addFunction("viewport", &bubble::camera::viewport).
 				endClass().

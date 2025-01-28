@@ -5,6 +5,7 @@
 #include "os/janela.hpp"
 #include "src/componentes/transformacao.hpp"
 #include "src/componentes/renderizador.hpp"
+#include "src/componentes/codigo.hpp"
 #include "src/componentes/camera.hpp"
 
 using namespace bubble;
@@ -13,25 +14,25 @@ using namespace bubble;
 int main()
 {
 	instanciaJanela = new bubble::janela("Golf - (c) Daniel Oliveira");
-	bubble::fase teste;
+	fase_atual = new fase();
 
-	auto ent = teste.obterRegistro()->criar();
-	auto cam = teste.obterRegistro()->criar();
+	auto ent = fase_atual->obterRegistro()->criar();
+	auto cam = fase_atual->obterRegistro()->criar();
 	
-	teste.obterRegistro()->adicionar<bubble::transformacao>(ent);
-	teste.obterRegistro()->adicionar<bubble::renderizador>(ent, new bubble::modelo("/source/repos/BubbleEngine/golf/cubo.obj"));
-	teste.obterRegistro()->adicionar<bubble::transformacao>(cam,  vet3(0, 0, 3));
-	teste.obterRegistro()->adicionar<bubble::camera>(cam);
-	teste.definirCamera(cam);
-	teste.obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
-	teste.obterRegistro()->obter<transformacao>(cam.id)->apontarEntidade(ent.id);
-	teste.iniciar();
+	fase_atual->obterRegistro()->adicionar<bubble::transformacao>(ent);
+	fase_atual->obterRegistro()->adicionar<bubble::renderizador>(ent, new bubble::modelo("/source/repos/BubbleEngine/golf/cubo.obj"));
+	fase_atual->obterRegistro()->adicionar<bubble::transformacao>(cam,  vet3(0, 0, 3));
+	fase_atual->obterRegistro()->adicionar<bubble::camera>(cam);
+	fase_atual->obterRegistro()->adicionar<bubble::codigo>(cam, "/source/repos/BubbleEngine/golf/cam.lua");
+	fase_atual->definirCamera(cam);
+	fase_atual->obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
+	fase_atual->iniciar();
 
 	while(!glfwWindowShouldClose(instanciaJanela->window))
 	{
 		instanciaJanela->poll();
 
-		teste.atualizar(0.01666);
+		fase_atual->atualizar(0.01666);
 
 		instanciaJanela->swap();
 	}

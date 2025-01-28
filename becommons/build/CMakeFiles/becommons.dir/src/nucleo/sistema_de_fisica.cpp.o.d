@@ -555,6 +555,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/sstream \

@@ -548,4 +548,34 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/../util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema.hpp
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/tempo.hpp \
+ /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
+ /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
+ /usr/include/c++/13/bits/sstream.tcc \
+ /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
+ /usr/include/c++/13/charconv /usr/include/c++/13/optional \
+ /usr/include/c++/13/span /usr/include/c++/13/variant \
+ /usr/include/GLFW/glfw3.h /usr/include/GL/gl.h /usr/include/GL/glext.h \
+ /usr/include/glad/KHR/khrplatform.h \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/../src/inputs/inputs.hpp \
+ /usr/include/c++/13/iostream

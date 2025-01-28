@@ -549,10 +549,7 @@ CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/inputs/../nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/inputs/../nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/inputs/../nucleo/sistema.hpp \
- /usr/include/glad/glad.h /usr/include/glad/KHR/khrplatform.h \
- /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/src/inputs/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/inputs/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/src/inputs/../nucleo/sistema_de_codigo.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -561,7 +558,10 @@ CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: \
  /usr/include/c++/13/bits/atomic_timed_wait.h \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/glad/glad.h \
+ /usr/include/glad/KHR/khrplatform.h /usr/include/GLFW/glfw3.h \
+ /source/repos/BubbleEngine/becommons/src/inputs/../../os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/src/inputs/../../os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc \
  /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \

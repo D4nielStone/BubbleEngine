@@ -15,7 +15,7 @@ vcpkg install freetype
 ```
 ## Ou no linux:
 ```bash
-sudo apt install liblua5.1-0
+sudo apt install liblua5.3-0
 sudo apt install libglm-dev
 sudo apt install libglfw3
 sudo apt install libglad-dev

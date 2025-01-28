@@ -12,6 +12,7 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /source/repos/BubbleEngine/becommons/src/util/textura.hpp
  /source/repos/BubbleEngine/becommons/src/util/vertice.hpp
  /source/repos/BubbleEngine/becommons/src/arquivadores/modelo.hpp
+ /source/repos/BubbleEngine/becommons/src/componentes/codigo.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/renderizador.hpp
  /source/repos/BubbleEngine/becommons/src/util/cor.hpp
  /source/repos/BubbleEngine/becommons/src/util/raio.hpp
@@ -26,6 +27,7 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp
+ /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp
  /usr/include/GLFW/glfw3.h
  /usr/include/alloca.h
@@ -559,6 +561,11 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /usr/include/linux/errno.h
  /usr/include/linux/limits.h
  /usr/include/locale.h
+ /usr/include/lua5.3/lauxlib.h
+ /usr/include/lua5.3/lua.h
+ /usr/include/lua5.3/lua.hpp
+ /usr/include/lua5.3/luaconf.h
+ /usr/include/lua5.3/lualib.h
  /usr/include/math.h
  /usr/include/memory.h
  /usr/include/pthread.h
@@ -678,6 +685,7 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h
  /usr/include/x86_64-linux-gnu/gnu/stubs.h
+ /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h
  /usr/include/x86_64-linux-gnu/sys/cdefs.h
  /usr/include/x86_64-linux-gnu/sys/select.h
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h

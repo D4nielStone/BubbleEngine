@@ -586,8 +586,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/camera.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/raio.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/fase.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/sistema_de_codigo.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -595,6 +594,8 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \

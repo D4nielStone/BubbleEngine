@@ -663,6 +663,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/api/api_lua.hpp \
@@ -1213,11 +1214,11 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
-  /usr/include/lua5.1/lauxlib.h \
-  /usr/include/lua5.1/lua.h \
-  /usr/include/lua5.1/lua.hpp \
-  /usr/include/lua5.1/luaconf.h \
-  /usr/include/lua5.1/lualib.h \
+  /usr/include/lua5.3/lauxlib.h \
+  /usr/include/lua5.3/lua.h \
+  /usr/include/lua5.3/lua.hpp \
+  /usr/include/lua5.3/luaconf.h \
+  /usr/include/lua5.3/lualib.h \
   /usr/include/math.h \
   /usr/include/memory.h \
   /usr/include/pthread.h \
@@ -1337,7 +1338,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
-  /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
+  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
@@ -2963,6 +2964,7 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: /source/repos/BubbleEngin
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/util/cor.hpp \
   /source/repos/BubbleEngine/becommons/src/util/raio.hpp \
@@ -3614,6 +3616,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: /source/repos/BubbleEngin
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/codigo.hpp \
@@ -4171,11 +4174,11 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: /source/repos/BubbleEngin
   /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
-  /usr/include/lua5.1/lauxlib.h \
-  /usr/include/lua5.1/lua.h \
-  /usr/include/lua5.1/lua.hpp \
-  /usr/include/lua5.1/luaconf.h \
-  /usr/include/lua5.1/lualib.h \
+  /usr/include/lua5.3/lauxlib.h \
+  /usr/include/lua5.3/lua.h \
+  /usr/include/lua5.3/lua.hpp \
+  /usr/include/lua5.3/luaconf.h \
+  /usr/include/lua5.3/lualib.h \
   /usr/include/math.h \
   /usr/include/memory.h \
   /usr/include/pthread.h \
@@ -4293,7 +4296,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: /source/repos/BubbleEngin
   /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
-  /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
+  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
@@ -4323,6 +4326,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/componente.hpp \
@@ -4462,6 +4466,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/bullet/btBulletDynamicsCommon.h \
   /usr/include/c++/13/algorithm \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -4472,6 +4477,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -4535,6 +4541,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -4543,6 +4550,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -4562,6 +4570,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
@@ -4618,13 +4627,16 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
   /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
   /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -4847,6 +4859,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/memory.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -4894,6 +4907,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -4964,6 +4978,7 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
@@ -4973,6 +4988,9 @@ CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o: /source/repos/BubbleEngin
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
 CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/BubbleEngine/becommons/src/componentes/transformacao.cpp \
+  /source/repos/BubbleEngine/becommons/src/inputs/inputs.hpp \
+  /source/repos/BubbleEngine/becommons/os/janela.hpp \
+  /source/repos/BubbleEngine/becommons/os/tempo.hpp \
   /source/repos/BubbleEngine/becommons/src/util/cor.hpp \
   /source/repos/BubbleEngine/becommons/src/util/raio.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor2.hpp \
@@ -4983,10 +5001,14 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/transformacao.hpp \
+  /usr/include/GL/gl.h \
+  /usr/include/GL/glext.h \
+  /usr/include/GLFW/glfw3.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -5091,6 +5113,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/bullet/btBulletCollisionCommon.h \
   /usr/include/bullet/btBulletDynamicsCommon.h \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -5101,6 +5124,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -5108,6 +5132,9 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/chrono.h \
+  /usr/include/c++/13/bits/chrono_io.h \
+  /usr/include/c++/13/bits/codecvt.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -5124,11 +5151,15 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/hashtable_policy.h \
   /usr/include/c++/13/bits/invoke.h \
   /usr/include/c++/13/bits/ios_base.h \
+  /usr/include/c++/13/bits/istream.tcc \
   /usr/include/c++/13/bits/iterator_concepts.h \
   /usr/include/c++/13/bits/locale_classes.h \
   /usr/include/c++/13/bits/locale_classes.tcc \
+  /usr/include/c++/13/bits/locale_conv.h \
   /usr/include/c++/13/bits/locale_facets.h \
   /usr/include/c++/13/bits/locale_facets.tcc \
+  /usr/include/c++/13/bits/locale_facets_nonio.h \
+  /usr/include/c++/13/bits/locale_facets_nonio.tcc \
   /usr/include/c++/13/bits/localefwd.h \
   /usr/include/c++/13/bits/max_size_type.h \
   /usr/include/c++/13/bits/memory_resource.h \
@@ -5139,9 +5170,11 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/node_handle.h \
   /usr/include/c++/13/bits/ostream.tcc \
   /usr/include/c++/13/bits/ostream_insert.h \
+  /usr/include/c++/13/bits/parse_numbers.h \
   /usr/include/c++/13/bits/postypes.h \
   /usr/include/c++/13/bits/predefined_ops.h \
   /usr/include/c++/13/bits/ptr_traits.h \
+  /usr/include/c++/13/bits/quoted_string.h \
   /usr/include/c++/13/bits/range_access.h \
   /usr/include/c++/13/bits/ranges_algobase.h \
   /usr/include/c++/13/bits/ranges_base.h \
@@ -5150,13 +5183,16 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
   /usr/include/c++/13/bits/specfun.h \
+  /usr/include/c++/13/bits/sstream.tcc \
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -5176,6 +5212,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
@@ -5187,6 +5224,8 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/cctype \
   /usr/include/c++/13/cerrno \
   /usr/include/c++/13/cfloat \
+  /usr/include/c++/13/charconv \
+  /usr/include/c++/13/chrono \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
@@ -5197,6 +5236,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
   /usr/include/c++/13/cstring \
+  /usr/include/c++/13/ctime \
   /usr/include/c++/13/cwchar \
   /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
@@ -5209,25 +5249,37 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/format \
   /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
+  /usr/include/c++/13/iomanip \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
+  /usr/include/c++/13/iostream \
+  /usr/include/c++/13/istream \
   /usr/include/c++/13/limits \
+  /usr/include/c++/13/locale \
   /usr/include/c++/13/math.h \
   /usr/include/c++/13/memory \
   /usr/include/c++/13/new \
   /usr/include/c++/13/numbers \
+  /usr/include/c++/13/optional \
   /usr/include/c++/13/ostream \
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
+  /usr/include/c++/13/span \
+  /usr/include/c++/13/sstream \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -5245,12 +5297,14 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/c++/13/typeinfo \
   /usr/include/c++/13/unordered_map \
   /usr/include/c++/13/utility \
+  /usr/include/c++/13/variant \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/glad/KHR/khrplatform.h \
   /usr/include/glm/common.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/glm/detail/_vectorize.hpp \
@@ -5440,6 +5494,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/glm/vec3.hpp \
   /usr/include/glm/vec4.hpp \
   /usr/include/glm/vector_relational.hpp \
+  /usr/include/libintl.h \
   /usr/include/limits.h \
   /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
@@ -5449,6 +5504,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/memory.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -5496,6 +5552,7 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -5555,13 +5612,16 @@ CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o: /source/repos/Bubb
   /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr-default.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
   /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
+  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
@@ -6447,6 +6507,7 @@ CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o: /source/repos/BubbleEngine/bec
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor2.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor4.hpp \
@@ -7101,6 +7162,7 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: /source/repos/BubbleEngine/becom
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /usr/include/GL/gl.h \
   /usr/include/GL/glext.h \
@@ -7643,11 +7705,11 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
-  /usr/include/lua5.1/lauxlib.h \
-  /usr/include/lua5.1/lua.h \
-  /usr/include/lua5.1/lua.hpp \
-  /usr/include/lua5.1/luaconf.h \
-  /usr/include/lua5.1/lualib.h \
+  /usr/include/lua5.3/lauxlib.h \
+  /usr/include/lua5.3/lua.h \
+  /usr/include/lua5.3/lua.hpp \
+  /usr/include/lua5.3/luaconf.h \
+  /usr/include/lua5.3/lualib.h \
   /usr/include/math.h \
   /usr/include/memory.h \
   /usr/include/pthread.h \
@@ -7785,7 +7847,7 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: /source/repos/BubbleEngine/becom
   /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
-  /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
+  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
@@ -7812,6 +7874,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /source/repos/BubbleEngine/becommons/src/util/vetor4.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/camera.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
   /usr/include/alloca.h \
@@ -7918,6 +7981,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/bullet/btBulletCollisionCommon.h \
   /usr/include/bullet/btBulletDynamicsCommon.h \
   /usr/include/c++/13/array \
+  /usr/include/c++/13/atomic \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
@@ -7928,6 +7992,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/allocator.h \
   /usr/include/c++/13/bits/atomic_base.h \
   /usr/include/c++/13/bits/atomic_lockfree_defines.h \
+  /usr/include/c++/13/bits/atomic_timed_wait.h \
   /usr/include/c++/13/bits/atomic_wait.h \
   /usr/include/c++/13/bits/basic_ios.h \
   /usr/include/c++/13/bits/basic_ios.tcc \
@@ -7935,6 +8000,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/basic_string.tcc \
   /usr/include/c++/13/bits/char_traits.h \
   /usr/include/c++/13/bits/charconv.h \
+  /usr/include/c++/13/bits/chrono.h \
   /usr/include/c++/13/bits/concept_check.h \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
@@ -7966,6 +8032,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/node_handle.h \
   /usr/include/c++/13/bits/ostream.tcc \
   /usr/include/c++/13/bits/ostream_insert.h \
+  /usr/include/c++/13/bits/parse_numbers.h \
   /usr/include/c++/13/bits/postypes.h \
   /usr/include/c++/13/bits/predefined_ops.h \
   /usr/include/c++/13/bits/ptr_traits.h \
@@ -7977,6 +8044,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/ranges_util.h \
   /usr/include/c++/13/bits/refwrap.h \
   /usr/include/c++/13/bits/requires_hosted.h \
+  /usr/include/c++/13/bits/semaphore_base.h \
   /usr/include/c++/13/bits/shared_ptr.h \
   /usr/include/c++/13/bits/shared_ptr_atomic.h \
   /usr/include/c++/13/bits/shared_ptr_base.h \
@@ -7984,6 +8052,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/std_abs.h \
   /usr/include/c++/13/bits/std_function.h \
   /usr/include/c++/13/bits/std_mutex.h \
+  /usr/include/c++/13/bits/std_thread.h \
   /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
@@ -8003,6 +8072,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/this_thread_sleep.h \
   /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_ptr.h \
   /usr/include/c++/13/bits/unordered_map.h \
@@ -8024,6 +8094,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/cstdio \
   /usr/include/c++/13/cstdlib \
   /usr/include/c++/13/cstring \
+  /usr/include/c++/13/ctime \
   /usr/include/c++/13/cwchar \
   /usr/include/c++/13/cwctype \
   /usr/include/c++/13/debug/assertions.h \
@@ -8049,12 +8120,16 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/c++/13/pstl/execution_defs.h \
   /usr/include/c++/13/pstl/glue_memory_defs.h \
   /usr/include/c++/13/pstl/pstl_config.h \
+  /usr/include/c++/13/ratio \
+  /usr/include/c++/13/semaphore \
   /usr/include/c++/13/stdexcept \
   /usr/include/c++/13/stdlib.h \
+  /usr/include/c++/13/stop_token \
   /usr/include/c++/13/streambuf \
   /usr/include/c++/13/string \
   /usr/include/c++/13/string_view \
   /usr/include/c++/13/system_error \
+  /usr/include/c++/13/thread \
   /usr/include/c++/13/tr1/bessel_function.tcc \
   /usr/include/c++/13/tr1/beta_function.tcc \
   /usr/include/c++/13/tr1/ell_integral.tcc \
@@ -8276,6 +8351,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/memory.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/semaphore.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -8323,6 +8399,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
   /usr/include/x86_64-linux-gnu/bits/select.h \
+  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
   /usr/include/x86_64-linux-gnu/bits/setjmp.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
@@ -8389,6 +8466,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: /source/repos/BubbleEngine/be
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
   /usr/include/x86_64-linux-gnu/sys/syscall.h \
+  /usr/include/x86_64-linux-gnu/sys/time.h \
   /usr/include/x86_64-linux-gnu/sys/types.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/limits.h \
@@ -8913,11 +8991,11 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: /source/repos/Bubbl
   /usr/include/linux/errno.h \
   /usr/include/linux/limits.h \
   /usr/include/locale.h \
-  /usr/include/lua5.1/lauxlib.h \
-  /usr/include/lua5.1/lua.h \
-  /usr/include/lua5.1/lua.hpp \
-  /usr/include/lua5.1/luaconf.h \
-  /usr/include/lua5.1/lualib.h \
+  /usr/include/lua5.3/lauxlib.h \
+  /usr/include/lua5.3/lua.h \
+  /usr/include/lua5.3/lua.hpp \
+  /usr/include/lua5.3/luaconf.h \
+  /usr/include/lua5.3/lualib.h \
   /usr/include/math.h \
   /usr/include/memory.h \
   /usr/include/pthread.h \
@@ -9035,7 +9113,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o: /source/repos/Bubbl
   /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
-  /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
+  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
   /usr/include/x86_64-linux-gnu/sys/select.h \
   /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
@@ -9066,6 +9144,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o: /source/repos/Bubbl
   /source/repos/BubbleEngine/becommons/src/util/raio.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /usr/include/GL/gl.h \
@@ -9719,6 +9798,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o: /source/repos/Bu
   /source/repos/BubbleEngine/becommons/src/depuracao/debug.hpp \
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.hpp \
@@ -10431,6 +10511,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: /source/repos
   /source/repos/BubbleEngine/becommons/src/depuracao/debug.hpp \
   /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
   /usr/include/GLFW/glfw3.h \
@@ -11643,11 +11724,11 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/c++/13/bits/stl_deque.h:
 
+/source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp:
+
 /usr/include/rapidjson/internal/biginteger.h:
 
 /usr/include/GL/glext.h:
-
-/source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp:
 
 /source/repos/BubbleEngine/becommons/src/componentes/fisica.cpp:
 
@@ -11719,13 +11800,15 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /source/repos/BubbleEngine/becommons/assets/fontes/consolas/Consola.hpp:
 
-/usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h:
+/usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h:
 
-/usr/include/lua5.1/luaconf.h:
+/usr/include/lua5.3/lualib.h:
 
-/usr/include/lua5.1/lauxlib.h:
+/usr/include/lua5.3/lua.hpp:
+
+/usr/include/lua5.3/lua.h:
 
 /usr/include/c++/13/pstl/glue_algorithm_defs.h:
 
@@ -12325,8 +12408,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/c++/13/ext/concurrence.h:
 
-/usr/include/lua5.1/lua.hpp:
-
 /source/repos/BubbleEngine/becommons/src/componentes/fisica.hpp:
 
 /usr/include/c++/13/bits/alloc_traits.h:
@@ -12508,8 +12589,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/bullet/BulletDynamics/ConstraintSolver/btContactSolverInfo.h:
 
 /usr/include/glad/KHR/khrplatform.h:
-
-/usr/include/lua5.1/lualib.h:
 
 /usr/include/glm/gtc/quaternion.inl:
 
@@ -12815,6 +12894,8 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/c++/13/vector:
 
+/usr/include/lua5.3/lauxlib.h:
+
 /usr/include/glm/ext/vector_double1.hpp:
 
 /usr/include/bullet/LinearMath/btMatrix3x3.h:
@@ -12826,6 +12907,8 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/stdint.h:
 
 /source/repos/BubbleEngine/becommons/assets/shaders/skybox_vert.hpp:
+
+/usr/include/lua5.3/luaconf.h:
 
 /usr/include/inttypes.h:
 
@@ -13048,8 +13131,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/glm/ext/matrix_float4x2.hpp:
 
 /usr/include/glm/ext/matrix_float4x3.hpp:
-
-/usr/include/lua5.1/lua.h:
 
 /usr/include/glm/ext/matrix_projection.inl:
 

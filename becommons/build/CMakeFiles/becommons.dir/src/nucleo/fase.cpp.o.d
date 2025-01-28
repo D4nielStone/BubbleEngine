@@ -545,6 +545,16 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
+ /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h \
  /usr/include/rapidjson/rapidjson.h /usr/include/inttypes.h \
  /usr/include/rapidjson/document.h /usr/include/rapidjson/reader.h \
  /usr/include/rapidjson/allocators.h /usr/include/rapidjson/rapidjson.h \
@@ -566,8 +576,6 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/rapidjson/stream.h /usr/include/c++/13/iterator \
  /usr/include/c++/13/bits/stream_iterator.h \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
- /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
- /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
  /usr/include/c++/13/bits/fs_path.h /usr/include/c++/13/locale \
  /usr/include/c++/13/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
@@ -580,11 +588,11 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/codigo.hpp \
- /usr/include/lua5.1/lua.hpp /usr/include/lua5.1/lua.h \
- /usr/include/lua5.1/luaconf.h \
- /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
- /usr/include/lua5.1/lualib.h /usr/include/lua5.1/lauxlib.h \
- /usr/include/lua5.1/lua.h \
+ /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
+ /usr/include/lua5.3/luaconf.h \
+ /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
+ /usr/include/lua5.3/lualib.h /usr/include/lua5.3/lauxlib.h \
+ /usr/include/lua5.3/lua.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/texto.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/propriedades.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/renderizador.hpp \
@@ -617,13 +625,6 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/assimp/metadata.h \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
  /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
- /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
- /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
- /usr/include/c++/13/bits/atomic_timed_wait.h \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \

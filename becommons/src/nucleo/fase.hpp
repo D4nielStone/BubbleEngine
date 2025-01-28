@@ -8,9 +8,9 @@
 #include "../entidades/entidade.hpp"
 #include "../componentes/camera.hpp"
 #include "sistema_de_renderizacao.hpp"
-/*#include "sistema_de_fisica.hpp"
-#include "sistema_de_interface.hpp"
-#include "sistema_de_codigo.hpp"*/
+//#include "sistema_de_fisica.hpp"
+//#include "sistema_de_interface.hpp"
+#include "sistema_de_codigo.hpp"
 #include <string>
 #include <memory>
 
@@ -37,7 +37,7 @@ namespace bubble
 		//sistemaFisica sfisica;
 		sistemaRenderizacao srender;
 		//sistemaInterface sinterface;
-		//sistemaCodigo scodigo;
+		sistemaCodigo scodigo;
 	private:
 		bool inicializacao = true;
 		const char* diretorio;

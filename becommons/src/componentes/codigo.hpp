@@ -7,7 +7,7 @@
 #include <lua.hpp>
 
 extern "C" {
-#include <lua5.1/lua.h>
+#include <lua5.3/lua.h>
 }
 
 namespace bubble

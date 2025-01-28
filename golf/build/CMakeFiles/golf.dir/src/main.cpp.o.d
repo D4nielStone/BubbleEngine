@@ -546,8 +546,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_codigo.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -557,6 +556,8 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc \
  /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
@@ -602,4 +603,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/assimp/metadata.h /usr/include/c++/13/filesystem \
  /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
  /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
- /usr/include/c++/13/bits/fs_ops.h
+ /usr/include/c++/13/bits/fs_ops.h \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/codigo.hpp \
+ /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
+ /usr/include/lua5.3/luaconf.h \
+ /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
+ /usr/include/lua5.3/lualib.h /usr/include/lua5.3/lauxlib.h \
+ /usr/include/lua5.3/lua.h

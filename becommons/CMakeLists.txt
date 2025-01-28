@@ -4,7 +4,7 @@ project(becommons)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
-    /usr/include/lua5.1
+    /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
     /usr/include/glad
@@ -55,7 +55,7 @@ target_sources(becommons PRIVATE
 # Linkar as bibliotecas necessárias
 target_link_libraries(becommons
     PRIVATE
-    lua5.1
+    lua5.3
     glfw
     glad 
     assimp

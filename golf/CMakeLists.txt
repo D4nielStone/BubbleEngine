@@ -24,7 +24,7 @@ target_link_libraries(golf PRIVATE glad)
 
 target_include_directories(golf PRIVATE 
     ../becommons
-    /usr/include/lua5.1
+    /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
     /usr/include/glad
@@ -43,6 +43,8 @@ target_link_libraries(golf PRIVATE
  Bullet3Common
  glfw 
  assimp
+ lua5.3
+ freeimage
 )
 
 

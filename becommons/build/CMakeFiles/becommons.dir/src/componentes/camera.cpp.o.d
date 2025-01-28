@@ -548,8 +548,7 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_codigo.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -559,6 +558,8 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
  /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
  /usr/include/c++/13/bits/sstream.tcc \

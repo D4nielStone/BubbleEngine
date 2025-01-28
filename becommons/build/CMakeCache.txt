@@ -255,7 +255,7 @@ FREETYPE_LIBRARY_DEBUG:FILEPATH=FREETYPE_LIBRARY_DEBUG-NOTFOUND
 FREETYPE_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libfreetype.so
 
 //Path to a file.
-LUA_INCLUDE_DIR:PATH=/usr/include/lua5.1
+LUA_INCLUDE_DIR:PATH=/usr/include/lua5.3
 
 //Path to a library.
 LUA_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/liblua5.1.so
@@ -276,7 +276,7 @@ becommons_BINARY_DIR:STATIC=/source/repos/BubbleEngine/becommons/build
 becommons_IS_TOP_LEVEL:STATIC=ON
 
 //Dependencies for the target
-becommons_LIB_DEPENDS:STATIC=general;lua5.1;general;glfw;general;glad;general;assimp;general;FreeImage;general;rapidjson;general;Bullet;general;freetype;general;BulletCollision;general;BulletDynamics;general;Bullet3Common;
+becommons_LIB_DEPENDS:STATIC=general;lua5.3;general;glfw;general;glad;general;assimp;general;FreeImage;general;rapidjson;general;Bullet;general;freetype;general;BulletCollision;general;BulletDynamics;general;Bullet3Common;
 
 //Value Computed by CMake
 becommons_SOURCE_DIR:STATIC=/source/repos/BubbleEngine/becommons
@@ -458,7 +458,7 @@ FIND_PACKAGE_MESSAGE_DETAILS_Bullet:INTERNAL=[/usr/lib/x86_64-linux-gnu/libBulle
 //Details about finding Freetype
 FIND_PACKAGE_MESSAGE_DETAILS_Freetype:INTERNAL=[/usr/lib/x86_64-linux-gnu/libfreetype.so][/usr/include/freetype2][v2.13.2()]
 //Details about finding Lua
-FIND_PACKAGE_MESSAGE_DETAILS_Lua:INTERNAL=[/usr/lib/x86_64-linux-gnu/liblua5.1.so;/usr/lib/x86_64-linux-gnu/libm.so][/usr/include/lua5.1][v5.1.5()]
+FIND_PACKAGE_MESSAGE_DETAILS_Lua:INTERNAL=[/usr/lib/x86_64-linux-gnu/liblua5.1.so;/usr/lib/x86_64-linux-gnu/libm.so][/usr/include/lua5.3][v5.3.6()]
 //ADVANCED property for variable: FREETYPE_INCLUDE_DIR_freetype2
 FREETYPE_INCLUDE_DIR_freetype2-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: FREETYPE_INCLUDE_DIR_ft2build

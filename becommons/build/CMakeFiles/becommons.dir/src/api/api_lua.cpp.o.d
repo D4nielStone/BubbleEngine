@@ -578,10 +578,10 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/fisica.hpp \
- /usr/include/lua5.1/lua.hpp /usr/include/lua5.1/lua.h \
- /usr/include/lua5.1/luaconf.h \
- /usr/include/x86_64-linux-gnu/lua5.1-deb-multiarch.h \
- /usr/include/lua5.1/lualib.h /usr/include/lua5.1/lauxlib.h \
+ /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
+ /usr/include/lua5.3/luaconf.h \
+ /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
+ /usr/include/lua5.3/lualib.h /usr/include/lua5.3/lauxlib.h \
  /usr/include/LuaBridge/LuaBridge.h \
  /usr/include/LuaBridge/detail/CFunctions.h \
  /usr/include/LuaBridge/detail/Config.h \
@@ -609,6 +609,14 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/../entidades/../depuracao/debug.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
+ /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
+ /usr/include/c++/13/bits/atomic_timed_wait.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
+ /usr/include/x86_64-linux-gnu/bits/semaphore.h \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/modelo.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/malha.hpp \
@@ -621,12 +629,5 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/fstream.tcc \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/../util/material.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_fisica.hpp \
- /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
- /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
- /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
- /usr/include/c++/13/bits/atomic_timed_wait.h \
- /usr/include/c++/13/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/codigo.hpp \
- /usr/include/lua5.1/lua.h
+ /usr/include/lua5.3/lua.h

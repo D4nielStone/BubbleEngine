@@ -93,7 +93,8 @@ glm::mat4 bubble::camera::obtViewMatrix() {
             sin(glm::radians(transform->rotacao.x)),
             sin(glm::radians(transform->rotacao.y)) * cos(glm::radians(transform->rotacao.x))
         );
-        alvo = posicao + glm::normalize(frente);
+        forward = glm::normalize(frente);
+        alvo = posicao + forward;
     }
 
     viewMatrix = glm::lookAt(posicao, alvo, up);
@@ -157,3 +158,17 @@ glm::vec3 bubble::camera::telaParaMundo(const vet2 &screenPoint, float profundid
     glm::vec4 worldCoords = glm::inverse(viewMatrix) * eyeCoords;
     return glm::normalize(glm::vec3(worldCoords));
 }
+
+void bubble::camera::mover(glm::vec3 &pos)
+{
+    // Verifica se a transformação do objeto não está inicializada
+    if (!transform)
+        transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
+    glm::vec3 direita = glm::normalize(glm::cross(forward, transform->cima));
+    transform->cima = glm::normalize(glm::cross(direita, forward));
+    // Atualiza a posição com base no vetor de movimento pos
+    transform->posicao += forward * pos.z; // Exemplo: pos.z pode representar a movimentação para frente
+    transform->posicao += direita * pos.x;   // pos.x pode representar a movimentação para os lados
+    transform->posicao += transform->cima * pos.y;      // pos.y pode representar a movimentação para cima ou para baixo
+}
+
