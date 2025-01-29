@@ -7,7 +7,7 @@
 
 #pragma once
 #include "sistema.hpp"
-#include "../util/raio.hpp"
+#include "util/raio.hpp"
 #include <bullet/btBulletDynamicsCommon.h>
 #include <thread>
 #include <atomic>

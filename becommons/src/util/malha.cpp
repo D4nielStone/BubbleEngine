@@ -1,6 +1,6 @@
 #include <glad/glad.h>
-#include "malha.hpp"
-#include "material.hpp"
+#include "util/malha.hpp"
+#include "util/material.hpp"
 
 namespace bubble
 {

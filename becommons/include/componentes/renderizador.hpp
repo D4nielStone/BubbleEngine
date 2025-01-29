@@ -1,7 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "componente.hpp"
-#include "../arquivadores/modelo.hpp"
+#include "arquivadores/modelo.hpp"
 
 namespace bubble
 {

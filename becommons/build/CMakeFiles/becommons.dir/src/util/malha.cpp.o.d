@@ -18,10 +18,10 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /source/repos/BubbleEngine/becommons/src/util/malha.hpp \
- /source/repos/BubbleEngine/becommons/src/util/vertice.hpp \
- /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp \
- /source/repos/BubbleEngine/becommons/src/util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/malha.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vertice.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -72,7 +72,7 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.o: \
  /usr/include/c++/13/bits/ranges_util.h \
  /usr/include/c++/13/bits/ranges_base.h \
  /usr/include/c++/13/bits/max_size_type.h /usr/include/c++/13/numbers \
- /source/repos/BubbleEngine/becommons/src/util/textura.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/textura.hpp \
  /usr/include/c++/13/string /usr/include/c++/13/bits/stringfwd.h \
  /usr/include/c++/13/bits/char_traits.h \
  /usr/include/c++/13/bits/postypes.h /usr/include/c++/13/cwchar \
@@ -133,7 +133,7 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
  /usr/include/c++/13/bits/charconv.h \
  /usr/include/c++/13/bits/basic_string.tcc \
- /source/repos/BubbleEngine/becommons/src/util/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/ios /usr/include/c++/13/exception \
  /usr/include/c++/13/bits/exception_ptr.h \
@@ -360,6 +360,6 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.o: \
  /usr/include/glm/ext/vector_uint1_sized.hpp /usr/include/c++/13/cstring \
  /usr/include/string.h /usr/include/strings.h \
  /usr/include/glm/gtc/type_ptr.inl \
- /source/repos/BubbleEngine/becommons/src/util/../arquivadores/../util/cor.hpp \
- /source/repos/BubbleEngine/becommons/src/util/../arquivadores/../util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/src/util/../util/material.hpp
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/material.hpp

@@ -1,7 +1,7 @@
 CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.cpp \
  /usr/include/stdc-predef.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -195,23 +195,23 @@ CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /usr/include/glad/glad.h \
  /usr/include/glad/KHR/khrplatform.h /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems_na_memoria.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/folder.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/banner.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/icon.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/arco_cor.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/camera.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/check.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/fisica.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/iluminacao.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/terreno.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/transformacao.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/stop.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/play.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/cube.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/scene.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/codigo.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/imagems/renderizador.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems_na_memoria.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/folder.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/banner.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/icon.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/arco_cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/camera.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/check.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/iluminacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/terreno.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/transformacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/stop.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/play.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/cube.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/scene.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/imagems/renderizador.hpp \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h /usr/include/c++/13/filesystem \
@@ -269,6 +269,6 @@ CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o: \
  /usr/include/c++/13/bits/allocated_ptr.h \
  /usr/include/c++/13/bits/unique_ptr.h /usr/include/c++/13/bits/align.h \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
  /usr/include/c++/13/iostream

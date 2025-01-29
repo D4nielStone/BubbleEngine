@@ -1,8 +1,8 @@
 #include <glad/glad.h>
-#include "camera.hpp"
-#include "transformacao.hpp"
-#include "../nucleo/fase.hpp"
-#include "../../os/janela.hpp"
+#include "componentes/camera.hpp"
+#include "componentes/transformacao.hpp"
+#include "nucleo/fase.hpp"
+#include "os/janela.hpp"
 
 void bubble::camera::desenharFB() const
 {

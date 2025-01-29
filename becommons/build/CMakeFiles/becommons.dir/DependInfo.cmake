@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/usr/include/glad/glad.c" "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o" "gcc" "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o.d"
-  "/source/repos/BubbleEngine/becommons/os/janela.cpp" "CMakeFiles/becommons.dir/os/janela.cpp.o" "gcc" "CMakeFiles/becommons.dir/os/janela.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/api/api_lua.cpp" "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/arquivadores/fonte.cpp" "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.cpp" "CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/arquivadores/imageloader.cpp.o.d"
@@ -28,6 +27,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o.d"
+  "/source/repos/BubbleEngine/becommons/src/os/janela.cpp" "CMakeFiles/becommons.dir/src/os/janela.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/os/janela.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/util/malha.cpp" "CMakeFiles/becommons.dir/src/util/malha.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/util/malha.cpp.o.d"
   )
 

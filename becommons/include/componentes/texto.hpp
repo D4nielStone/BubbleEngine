@@ -2,8 +2,8 @@
 
 #pragma once
 #include "componente.hpp"
-#include "../util/cor.hpp"
-#include "../util/vetor2.hpp"
+#include "util/cor.hpp"
+#include "util/vetor2.hpp"
 #include <string>
 
 namespace bubble

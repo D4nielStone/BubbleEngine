@@ -1,15 +1,15 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
 #pragma once
-#include "../componentes/camera.hpp"
-#include "../util/vetor2.hpp"
-#include "../util/raio.hpp"
-#include "../componentes/texto.hpp"
-#include "../componentes/imagem.hpp"
-#include "../componentes/fisica.hpp"
+#include "componentes/camera.hpp"
+#include "util/vetor2.hpp"
+#include "util/raio.hpp"
+#include "componentes/texto.hpp"
+#include "componentes/imagem.hpp"
+#include "componentes/fisica.hpp"
 #include <cstdint>
 #include <bullet/btBulletDynamicsCommon.h>
-#include "../componentes/transformacao.hpp"
+#include "componentes/transformacao.hpp"
 #include <lua.hpp>
 #include <LuaBridge/LuaBridge.h>
 #include "mat.hpp"

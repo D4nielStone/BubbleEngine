@@ -7,8 +7,8 @@
 #include <utility>
 #include <unordered_map>
 #include <glm/gtc/type_ptr.hpp>
-#include "../util/cor.hpp"
-#include "../util/vetor4.hpp"
+#include "util/cor.hpp"
+#include "util/vetor4.hpp"
 
 namespace bubble
 {

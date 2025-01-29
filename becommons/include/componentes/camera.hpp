@@ -1,11 +1,11 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
 #include "componente.hpp"
-#include "../util/raio.hpp"
-#include "../util/vetor2.hpp"
-#include "../util/vetor3.hpp"
-#include "../util/vetor4.hpp"
-#include "../util/cor.hpp"
+#include "util/raio.hpp"
+#include "util/vetor2.hpp"
+#include "util/vetor3.hpp"
+#include "util/vetor4.hpp"
+#include "util/cor.hpp"
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/matrix_transform.hpp>
 #include "transformacao.hpp"

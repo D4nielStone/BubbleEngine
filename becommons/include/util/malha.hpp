@@ -3,8 +3,8 @@
 #include "vertice.hpp"
 #include <vector>
 #include "textura.hpp"
-#include "../arquivadores/shader.hpp"
-#include "../util/material.hpp"
+#include "arquivadores/shader.hpp"
+#include "util/material.hpp"
 
 namespace bubble
 {

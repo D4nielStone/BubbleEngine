@@ -1,16 +1,16 @@
-#include "fase.hpp"
+#include "nucleo/fase.hpp"
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
 #include <filesystem>
-#include "../componentes/codigo.hpp"
-#include "../componentes/texto.hpp"
-#include "../componentes/transformacao.hpp"
-#include "../componentes/propriedades.hpp"
-#include "../componentes/fisica.hpp"
-#include "../componentes/renderizador.hpp"
-#include "../componentes/imagem.hpp"
-#include "../../os/janela.hpp"
-#include "../../os/sistema.hpp"
+#include "componentes/codigo.hpp"
+#include "componentes/texto.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/propriedades.hpp"
+#include "componentes/fisica.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/imagem.hpp"
+#include "os/janela.hpp"
+#include "os/sistema.hpp"
 #include <iostream>
 #include <queue>
 

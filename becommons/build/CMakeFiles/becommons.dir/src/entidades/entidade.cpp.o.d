@@ -1,7 +1,7 @@
 CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp \
  /usr/include/stdc-predef.h \
- /source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -212,10 +212,10 @@ CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/componente.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/fisica.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/transformacao.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../util/vetor3.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
  /usr/include/glm/detail/type_vec3.hpp \
  /usr/include/glm/detail/qualifier.hpp /usr/include/glm/detail/setup.hpp \
@@ -535,24 +535,24 @@ CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/becommons/src/entidades/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/renderizador.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/modelo.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/malha.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/vertice.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/vetor2.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/malha.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vertice.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/textura.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/../arquivadores/../util/cor.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/../arquivadores/../util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/src/entidades/../componentes/../arquivadores/../util/../util/material.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/material.hpp \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
  /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \

@@ -1,9 +1,9 @@
-#include "modelo.hpp"
+#include "arquivadores/modelo.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include "../depuracao/debug.hpp"
-#include "imageloader.hpp"
+#include "depuracao/debug.hpp"
+#include "arquivadores/imageloader.hpp"
 #include <filesystem>
 
 namespace bubble

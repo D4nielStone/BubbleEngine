@@ -1,8 +1,8 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-#include "entidade.hpp"
-#include "../componentes/renderizador.hpp"
-#include "../arquivadores/shader.hpp"
+#include "entidades/entidade.hpp"
+#include "componentes/renderizador.hpp"
+#include "arquivadores/shader.hpp"
 
 bubble::entidade bubble::registro::criar()
 {

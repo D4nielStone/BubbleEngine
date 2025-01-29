@@ -5,8 +5,8 @@
  * @brief Gerencia sistemas numa fase
  */
 
-#include "../entidades/entidade.hpp"
-#include "../componentes/camera.hpp"
+#include "entidades/entidade.hpp"
+#include "componentes/camera.hpp"
 #include "sistema_de_renderizacao.hpp"
 #include "sistema_de_fisica.hpp"
 #include "sistema_de_interface.hpp"

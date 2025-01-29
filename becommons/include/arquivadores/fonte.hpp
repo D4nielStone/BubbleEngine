@@ -2,7 +2,7 @@
 
 #pragma once
 #include <glad/glad.h>
-#include "../util/vetor2.hpp"
+#include "util/vetor2.hpp"
 #include <string>
 #include <map>
 #include <ft2build.h>

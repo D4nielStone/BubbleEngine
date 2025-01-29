@@ -1,6 +1,6 @@
 #include <glad/glad.h>
-#include "janela.hpp"
-#include "../src/depuracao/debug.hpp"
+#include "os/janela.hpp"
+#include "depuracao/debug.hpp"
 
 // Callback de erro
 void errorCallback(int error, const char* description) {

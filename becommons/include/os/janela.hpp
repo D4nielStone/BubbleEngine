@@ -8,10 +8,10 @@
 #pragma once
 #include "tempo.hpp"
 #include <GLFW/glfw3.h>
-#include "../src/util/vetor4.hpp"
-#include "../src/nucleo/sistema.hpp"
-#include "../src/nucleo/sistema_de_renderizacao.hpp"
-#include "../src/inputs/inputs.hpp"
+#include "util/vetor4.hpp"
+#include "nucleo/sistema.hpp"
+#include "nucleo/sistema_de_renderizacao.hpp"
+#include "inputs/inputs.hpp"
 #include <functional>
 #include <memory>
 #include <unordered_map>

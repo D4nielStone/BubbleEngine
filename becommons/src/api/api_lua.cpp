@@ -1,10 +1,10 @@
-#include "api_lua.hpp"
-#include "../nucleo/fase.hpp"
-#include "../componentes/renderizador.hpp"
-#include "../nucleo/sistema_de_fisica.hpp"
-#include "../componentes/codigo.hpp"
-#include "../../os/janela.hpp"
-#include "../inputs/inputs.hpp"
+#include "api/api_lua.hpp"
+#include "nucleo/fase.hpp"
+#include "componentes/renderizador.hpp"
+#include "nucleo/sistema_de_fisica.hpp"
+#include "componentes/codigo.hpp"
+#include "os/janela.hpp"
+#include "inputs/inputs.hpp"
 
 using namespace bubble;
 

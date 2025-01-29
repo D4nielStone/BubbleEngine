@@ -1,7 +1,7 @@
-#include "sistema_de_codigo.hpp"
-#include "fase.hpp"
-#include "../componentes/codigo.hpp"
-#include "../../os/janela.hpp"
+#include "nucleo/sistema_de_codigo.hpp"
+#include "nucleo/fase.hpp"
+#include "componentes/codigo.hpp"
+#include "os/janela.hpp"
 #include <mutex>
 
 std::mutex mtx;

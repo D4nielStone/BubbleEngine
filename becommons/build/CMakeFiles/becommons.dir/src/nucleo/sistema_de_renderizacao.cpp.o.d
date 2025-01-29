@@ -18,9 +18,9 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -214,10 +214,10 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/../componentes/componente.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/../componentes/fisica.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/../componentes/transformacao.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/../componentes/../util/vetor3.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
  /usr/include/glm/detail/type_vec3.hpp \
  /usr/include/glm/detail/qualifier.hpp /usr/include/glm/detail/setup.hpp \
@@ -537,24 +537,24 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../entidades/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/renderizador.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/modelo.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/malha.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/vertice.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/vetor2.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/malha.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vertice.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/textura.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/../arquivadores/../util/cor.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/../arquivadores/../util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../arquivadores/../util/../util/material.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/material.hpp \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
  /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
@@ -583,10 +583,10 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/camera.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../componentes/../util/raio.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/fase.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/raio.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -594,16 +594,16 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/sistema_de_interface.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/../componentes/texto.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/../componentes/../arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../nucleo/sistema_de_codigo.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/nucleo/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
  /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/src/nucleo/../../os/../src/inputs/inputs.hpp
+ /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp

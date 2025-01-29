@@ -4,6 +4,7 @@ project(becommons)
 set(CMAKE_CXX_STANDARD 20)
 
 include_directories(
+    ${CMAKE_SOURCE_DIR}/include
     /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW
@@ -49,7 +50,7 @@ target_sources(becommons PRIVATE
     src/nucleo/sistema_de_renderizacao.cpp
     src/nucleo/sistema.cpp
     src/util/malha.cpp
-    os/janela.cpp
+    src/os/janela.cpp
 )
 
 # Linkar as bibliotecas necessárias

@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "../entidades/entidade.hpp"
+#include "entidades/entidade.hpp"
 
  /**
   * @class Sistema

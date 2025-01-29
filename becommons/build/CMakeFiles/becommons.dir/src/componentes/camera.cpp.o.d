@@ -18,14 +18,14 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /source/repos/BubbleEngine/becommons/src/componentes/camera.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
  /usr/include/c++/13/cstdint \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/cpu_defines.h \
  /usr/include/c++/13/pstl/pstl_config.h /usr/include/c++/13/type_traits \
- /source/repos/BubbleEngine/becommons/src/componentes/../util/raio.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/raio.hpp \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
  /usr/include/c++/13/cmath /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -407,10 +407,10 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../util/vetor2.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../util/vetor3.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
  /usr/include/glm/ext/matrix_clip_space.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \
  /usr/include/glm/ext/scalar_constants.inl \
@@ -418,7 +418,7 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp /usr/include/glm/gtc/constants.inl \
  /usr/include/glm/ext/matrix_transform.inl \
- /source/repos/BubbleEngine/becommons/src/componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
  /usr/include/glm/gtc/type_ptr.hpp /usr/include/glm/gtc/quaternion.hpp \
  /usr/include/glm/gtc/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_projection.hpp \
@@ -526,8 +526,8 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/fase.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
+ /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
@@ -543,12 +543,12 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../entidades/../componentes/fisica.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../entidades/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -558,17 +558,17 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_interface.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/texto.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/../arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
@@ -596,11 +596,11 @@ CMakeFiles/becommons.dir/src/componentes/camera.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_codigo.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
  /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../../os/../src/inputs/inputs.hpp
+ /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp

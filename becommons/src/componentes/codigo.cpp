@@ -1,10 +1,10 @@
-#include "codigo.hpp"
-#include "../nucleo/fase.hpp"
-#include "../api/api_lua.hpp"
-#include "../api/mat.hpp"
-#include "../inputs/inputs.hpp"
-#include "../../os/janela.hpp"
-#include "../../os/sistema.hpp"
+#include "componentes/codigo.hpp"
+#include "nucleo/fase.hpp"
+#include "api/api_lua.hpp"
+#include "api/mat.hpp"
+#include "inputs/inputs.hpp"
+#include "os/janela.hpp"
+#include "os/sistema.hpp"
 #include <cmath>
 
 bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo(arquivo)

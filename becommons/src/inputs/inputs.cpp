@@ -1,12 +1,12 @@
-#include "inputs.hpp"
+#include "inputs/inputs.hpp"
 #include <iostream>
 #include <unordered_map>
 #include <stdexcept>
-#include "../depuracao/debug.hpp"
-#include "../nucleo/fase.hpp"
+#include "depuracao/debug.hpp"
+#include "nucleo/fase.hpp"
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-#include "../../os/janela.hpp"
+#include "os/janela.hpp"
 
 using namespace bubble;
 static const std::unordered_map<int, std::string> keyMap = {

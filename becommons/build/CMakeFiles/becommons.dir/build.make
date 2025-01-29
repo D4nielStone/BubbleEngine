@@ -349,19 +349,19 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/util/malha.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/util/malha.cpp -o CMakeFiles/becommons.dir/src/util/malha.cpp.s
 
-CMakeFiles/becommons.dir/os/janela.cpp.o: CMakeFiles/becommons.dir/flags.make
-CMakeFiles/becommons.dir/os/janela.cpp.o: /source/repos/BubbleEngine/becommons/os/janela.cpp
-CMakeFiles/becommons.dir/os/janela.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/becommons.dir/os/janela.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/os/janela.cpp.o -MF CMakeFiles/becommons.dir/os/janela.cpp.o.d -o CMakeFiles/becommons.dir/os/janela.cpp.o -c /source/repos/BubbleEngine/becommons/os/janela.cpp
+CMakeFiles/becommons.dir/src/os/janela.cpp.o: CMakeFiles/becommons.dir/flags.make
+CMakeFiles/becommons.dir/src/os/janela.cpp.o: /source/repos/BubbleEngine/becommons/src/os/janela.cpp
+CMakeFiles/becommons.dir/src/os/janela.cpp.o: CMakeFiles/becommons.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/becommons.dir/src/os/janela.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/becommons.dir/src/os/janela.cpp.o -MF CMakeFiles/becommons.dir/src/os/janela.cpp.o.d -o CMakeFiles/becommons.dir/src/os/janela.cpp.o -c /source/repos/BubbleEngine/becommons/src/os/janela.cpp
 
-CMakeFiles/becommons.dir/os/janela.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/becommons.dir/os/janela.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /source/repos/BubbleEngine/becommons/os/janela.cpp > CMakeFiles/becommons.dir/os/janela.cpp.i
+CMakeFiles/becommons.dir/src/os/janela.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/becommons.dir/src/os/janela.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /source/repos/BubbleEngine/becommons/src/os/janela.cpp > CMakeFiles/becommons.dir/src/os/janela.cpp.i
 
-CMakeFiles/becommons.dir/os/janela.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/os/janela.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/os/janela.cpp -o CMakeFiles/becommons.dir/os/janela.cpp.s
+CMakeFiles/becommons.dir/src/os/janela.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/becommons.dir/src/os/janela.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /source/repos/BubbleEngine/becommons/src/os/janela.cpp -o CMakeFiles/becommons.dir/src/os/janela.cpp.s
 
 # Object files for target becommons
 becommons_OBJECTS = \
@@ -385,7 +385,7 @@ becommons_OBJECTS = \
 "CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o" \
 "CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o" \
 "CMakeFiles/becommons.dir/src/util/malha.cpp.o" \
-"CMakeFiles/becommons.dir/os/janela.cpp.o"
+"CMakeFiles/becommons.dir/src/os/janela.cpp.o"
 
 # External object files for target becommons
 becommons_EXTERNAL_OBJECTS =
@@ -410,7 +410,7 @@ libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/src/util/malha.cpp.o
-libbecommons.a: CMakeFiles/becommons.dir/os/janela.cpp.o
+libbecommons.a: CMakeFiles/becommons.dir/src/os/janela.cpp.o
 libbecommons.a: CMakeFiles/becommons.dir/build.make
 libbecommons.a: CMakeFiles/becommons.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/source/repos/BubbleEngine/becommons/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX static library libbecommons.a"

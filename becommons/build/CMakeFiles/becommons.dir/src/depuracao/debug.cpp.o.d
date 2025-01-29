@@ -1,7 +1,7 @@
 CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/depuracao/debug.cpp \
  /usr/include/stdc-predef.h \
- /source/repos/BubbleEngine/becommons/src/depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/vector /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

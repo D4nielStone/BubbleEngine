@@ -1,7 +1,7 @@
 CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/arquivadores/fonte.cpp \
  /usr/include/stdc-predef.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/fonte.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/fonte.hpp \
  /usr/include/glad/glad.h /usr/include/glad/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -19,7 +19,7 @@ CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -158,14 +158,14 @@ CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o: \
  /usr/include/freetype2/freetype/fterrors.h \
  /usr/include/freetype2/freetype/ftmoderr.h \
  /usr/include/freetype2/freetype/fterrdef.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes_na_memoria.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/consolas/Consola.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/consolas/consolai.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/consolas/Consolas.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/consolas/consolaz.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/noto_sans/noto_italic.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/noto_sans/noto_bold.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/fontes/noto_sans/noto_regular.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes_na_memoria.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/consolas/Consola.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/consolas/consolai.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/consolas/Consolas.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/consolas/consolaz.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/noto_sans/noto_italic.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/noto_sans/noto_bold.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/fontes/noto_sans/noto_regular.hpp \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/system_error \
  /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h \

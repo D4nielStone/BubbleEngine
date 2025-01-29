@@ -1,6 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/becommons.dir/os/janela.cpp.o"
-  "CMakeFiles/becommons.dir/os/janela.cpp.o.d"
   "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o"
   "CMakeFiles/becommons.dir/src/api/api_lua.cpp.o.d"
   "CMakeFiles/becommons.dir/src/arquivadores/fonte.cpp.o"
@@ -37,6 +35,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o.d"
   "CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o"
   "CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o.d"
+  "CMakeFiles/becommons.dir/src/os/janela.cpp.o"
+  "CMakeFiles/becommons.dir/src/os/janela.cpp.o.d"
   "CMakeFiles/becommons.dir/src/util/malha.cpp.o"
   "CMakeFiles/becommons.dir/src/util/malha.cpp.o.d"
   "CMakeFiles/becommons.dir/usr/include/glad/glad.c.o"

@@ -1,7 +1,7 @@
 
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-#include "debug.hpp"
+#include "depuracao/debug.hpp"
 #include <iostream>
 
 std::vector<std::string> msgs;

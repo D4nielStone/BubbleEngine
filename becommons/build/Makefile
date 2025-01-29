@@ -174,30 +174,6 @@ becommons/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/build
 .PHONY : becommons/fast
 
-os/janela.o: os/janela.cpp.o
-.PHONY : os/janela.o
-
-# target to build an object file
-os/janela.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.o
-.PHONY : os/janela.cpp.o
-
-os/janela.i: os/janela.cpp.i
-.PHONY : os/janela.i
-
-# target to preprocess a source file
-os/janela.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.i
-.PHONY : os/janela.cpp.i
-
-os/janela.s: os/janela.cpp.s
-.PHONY : os/janela.s
-
-# target to generate assembly for a file
-os/janela.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/os/janela.cpp.s
-.PHONY : os/janela.cpp.s
-
 src/api/api_lua.o: src/api/api_lua.cpp.o
 .PHONY : src/api/api_lua.o
 
@@ -630,6 +606,30 @@ src/nucleo/sistema_de_renderizacao.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.s
 .PHONY : src/nucleo/sistema_de_renderizacao.cpp.s
 
+src/os/janela.o: src/os/janela.cpp.o
+.PHONY : src/os/janela.o
+
+# target to build an object file
+src/os/janela.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/os/janela.cpp.o
+.PHONY : src/os/janela.cpp.o
+
+src/os/janela.i: src/os/janela.cpp.i
+.PHONY : src/os/janela.i
+
+# target to preprocess a source file
+src/os/janela.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/os/janela.cpp.i
+.PHONY : src/os/janela.cpp.i
+
+src/os/janela.s: src/os/janela.cpp.s
+.PHONY : src/os/janela.s
+
+# target to generate assembly for a file
+src/os/janela.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/os/janela.cpp.s
+.PHONY : src/os/janela.cpp.s
+
 src/util/malha.o: src/util/malha.cpp.o
 .PHONY : src/util/malha.o
 
@@ -691,9 +691,6 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... becommons"
-	@echo "... os/janela.o"
-	@echo "... os/janela.i"
-	@echo "... os/janela.s"
 	@echo "... src/api/api_lua.o"
 	@echo "... src/api/api_lua.i"
 	@echo "... src/api/api_lua.s"
@@ -748,6 +745,9 @@ help:
 	@echo "... src/nucleo/sistema_de_renderizacao.o"
 	@echo "... src/nucleo/sistema_de_renderizacao.i"
 	@echo "... src/nucleo/sistema_de_renderizacao.s"
+	@echo "... src/os/janela.o"
+	@echo "... src/os/janela.i"
+	@echo "... src/os/janela.s"
 	@echo "... src/util/malha.o"
 	@echo "... src/util/malha.i"
 	@echo "... src/util/malha.s"

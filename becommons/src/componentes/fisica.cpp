@@ -1,7 +1,7 @@
-#include "fisica.hpp"
-#include "transformacao.hpp"
-#include "../nucleo/fase.hpp"
-#include "renderizador.hpp"
+#include "componentes/fisica.hpp"
+#include "componentes/transformacao.hpp"
+#include "nucleo/fase.hpp"
+#include "componentes/renderizador.hpp"
 
 // Construtor para forma gen�rica
 bubble::fisica::fisica(btCollisionShape* forma, btScalar massa, btVector3 posicaoInicial, camada camada) 

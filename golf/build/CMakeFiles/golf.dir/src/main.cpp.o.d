@@ -158,8 +158,8 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
  /usr/include/c++/13/bits/istream.tcc \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/fase.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/entidade.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/fase.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/entidades/entidade.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
@@ -214,10 +214,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/algorithmfwd.h \
  /usr/include/c++/13/bits/stl_heap.h \
  /usr/include/c++/13/bits/uniform_int_dist.h \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/componente.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/fisica.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/transformacao.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../componentes/../util/vetor3.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/componente.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/fisica.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/vetor3.hpp \
  /usr/include/glm/ext/vector_float3.hpp \
  /usr/include/glm/detail/type_vec3.hpp \
  /usr/include/glm/detail/qualifier.hpp /usr/include/glm/detail/setup.hpp \
@@ -537,16 +537,16 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../entidades/../depuracao/debug.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/depuracao/debug.hpp \
  /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/camera.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/raio.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/vetor2.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/vetor4.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/cor.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/camera.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/raio.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/vetor2.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/cor.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -556,16 +556,16 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_interface.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
  /usr/include/c++/13/bits/sstream.tcc \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/texto.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/texto.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/imagem.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
@@ -593,22 +593,22 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_codigo.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/os/janela.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
  /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/inputs/inputs.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/sistema.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/renderizador.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/modelo.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/malha.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/vertice.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../util/material.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/codigo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/inputs/inputs.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/os/sistema.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/malha.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/vertice.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/textura.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/util/material.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/include/componentes/codigo.hpp \
  /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
  /usr/include/lua5.3/luaconf.h \
  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \

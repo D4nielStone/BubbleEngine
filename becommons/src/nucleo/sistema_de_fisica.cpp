@@ -1,8 +1,8 @@
-#include "sistema_de_fisica.hpp"
-#include "fase.hpp"
-#include "../../os/janela.hpp"
-#include "../componentes/transformacao.hpp"
-#include "../componentes/fisica.hpp"
+#include "nucleo/sistema_de_fisica.hpp"
+#include "nucleo/fase.hpp"
+#include "os/janela.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/fisica.hpp"
 
 bubble::sistemaFisica::sistemaFisica()
 {

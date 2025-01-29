@@ -7,9 +7,9 @@
 
 #pragma once
 #include "sistema.hpp"
-#include "../arquivadores/shader.hpp"
-#include "../componentes/texto.hpp"
-#include "../componentes/imagem.hpp"
+#include "arquivadores/shader.hpp"
+#include "componentes/texto.hpp"
+#include "componentes/imagem.hpp"
 
 namespace bubble
 {

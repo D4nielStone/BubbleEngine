@@ -1,12 +1,12 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-#include "imageloader.hpp"
+#include "arquivadores/imageloader.hpp"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "../../assets/imagems_na_memoria.hpp"
+#include "assets/imagems_na_memoria.hpp"
 #include <map>
 #include <filesystem>
-#include "../depuracao/debug.hpp"
+#include "depuracao/debug.hpp"
 #include <iostream>
 
 const std::map<const std::string, std::pair<BYTE*, const unsigned int>> imagems_memoria

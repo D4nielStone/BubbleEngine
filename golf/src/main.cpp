@@ -1,13 +1,13 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #include <glad/glad.h>
 #include <iostream>
-#include "src/nucleo/fase.hpp"
+#include "nucleo/fase.hpp"
 #include "os/janela.hpp"
 #include "os/sistema.hpp"
-#include "src/componentes/transformacao.hpp"
-#include "src/componentes/renderizador.hpp"
-#include "src/componentes/codigo.hpp"
-#include "src/componentes/camera.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/codigo.hpp"
+#include "componentes/camera.hpp"
 
 using namespace bubble;
 

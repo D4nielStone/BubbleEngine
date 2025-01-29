@@ -3,8 +3,8 @@
 #include <iostream>
 #include <unordered_map>
 #include <functional>
-#include "../util/vetor2.hpp"
-#include "../util/vetor4.hpp"
+#include "util/vetor2.hpp"
+#include "util/vetor4.hpp"
 #include <glm/glm.hpp>
 
 struct GLFWwindow;

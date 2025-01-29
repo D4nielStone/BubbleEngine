@@ -1,5 +1,5 @@
-#include "sistema.hpp"
-#include "../nucleo/fase.hpp"
+#include "nucleo/sistema.hpp"
+#include "nucleo/fase.hpp"
 
 void bubble::sistema::inicializar(bubble::fase* fase_ptr)
 {

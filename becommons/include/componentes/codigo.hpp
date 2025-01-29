@@ -3,7 +3,7 @@
 #include "componente.hpp"
 #include "transformacao.hpp"
 #include <string>
-#include "../depuracao/debug.hpp"
+#include "depuracao/debug.hpp"
 #include <lua.hpp>
 
 extern "C" {

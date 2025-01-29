@@ -18,7 +18,7 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -353,8 +353,8 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: \
  /usr/include/glm/ext/vector_uint1_sized.hpp /usr/include/c++/13/cstring \
  /usr/include/string.h /usr/include/strings.h \
  /usr/include/glm/gtc/type_ptr.inl \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../util/cor.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
@@ -371,14 +371,14 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: \
  /usr/include/c++/13/bits/allocated_ptr.h \
  /usr/include/c++/13/bits/unique_ptr.h /usr/include/c++/13/bits/align.h \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders_na_memoria.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/quad_frag.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/quad_vert.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/texto_frag.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/texto_vert.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/imagem_frag.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/imagem_vert.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/skybox_frag.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/skybox_vert.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/phong_frag.hpp \
- /source/repos/BubbleEngine/becommons/src/arquivadores/../../assets/shaders/phong_vert.hpp
+ /source/repos/BubbleEngine/becommons/include/assets/shaders_na_memoria.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/quad_frag.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/quad_vert.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/texto_frag.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/texto_vert.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/imagem_frag.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/imagem_vert.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/skybox_frag.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/skybox_vert.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/phong_frag.hpp \
+ /source/repos/BubbleEngine/becommons/include/assets/shaders/phong_vert.hpp

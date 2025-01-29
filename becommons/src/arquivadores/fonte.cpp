@@ -1,7 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 
-#include "fonte.hpp"
-#include "../../assets/fontes_na_memoria.hpp"
+#include "arquivadores/fonte.hpp"
+#include "assets/fontes_na_memoria.hpp"
 #include <filesystem>
 
 namespace bubble

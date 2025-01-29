@@ -1,8 +1,8 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #include <glad/glad.h>
-#include "shader.hpp"
+#include "arquivadores/shader.hpp"
 #include <filesystem>
-#include "../../assets/shaders_na_memoria.hpp"
+#include "assets/shaders_na_memoria.hpp"
 
 inline std::vector<std::pair<std::pair<const char*, const char*>, unsigned int>> shaders;
 // Mapeia os shaders na memória para facilitar o acesso aos shaders embutidos

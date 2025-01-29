@@ -23,7 +23,7 @@ add_library(glad STATIC /usr/include/glad/glad.c)
 target_link_libraries(golf PRIVATE glad)
 
 target_include_directories(golf PRIVATE 
-    ../becommons
+    ../becommons/include
     /usr/include/lua5.3
     /usr/include/glm
     /usr/include/GLFW

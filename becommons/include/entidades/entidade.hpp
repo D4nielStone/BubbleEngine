@@ -9,9 +9,9 @@
 #include <unordered_map>
 #include <memory>
 #include <functional>
-#include "../componentes/componente.hpp"
-#include "../componentes/fisica.hpp"
-#include "../depuracao/debug.hpp"
+#include "componentes/componente.hpp"
+#include "componentes/fisica.hpp"
+#include "depuracao/debug.hpp"
 
 namespace bubble
 {

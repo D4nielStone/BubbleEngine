@@ -1,14 +1,14 @@
 #include <glad/glad.h>
-#include "sistema_de_interface.hpp"
-#include "../componentes/renderizador.hpp"
-#include "../componentes/transformacao.hpp"
-#include "../componentes/camera.hpp"
-#include "../nucleo/fase.hpp"
-#include "../arquivadores/shader.hpp"
+#include "nucleo/sistema_de_interface.hpp"
+#include "componentes/renderizador.hpp"
+#include "componentes/transformacao.hpp"
+#include "componentes/camera.hpp"
+#include "nucleo/fase.hpp"
+#include "arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
-#include "../componentes/texto.hpp"
-#include "../arquivadores/fonte.hpp"
-#include "../../os/janela.hpp"
+#include "componentes/texto.hpp"
+#include "arquivadores/fonte.hpp"
+#include "os/janela.hpp"
 
 bubble::shader* shader_texto{ nullptr };
 bubble::shader* shader_imagem{ nullptr };

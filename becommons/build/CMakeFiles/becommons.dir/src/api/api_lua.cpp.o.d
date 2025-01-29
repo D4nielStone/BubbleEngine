@@ -1,9 +1,9 @@
 CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/api/api_lua.cpp \
  /usr/include/stdc-predef.h \
- /source/repos/BubbleEngine/becommons/src/api/api_lua.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/camera.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/componente.hpp \
+ /source/repos/BubbleEngine/becommons/include/api/api_lua.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
  /usr/include/c++/13/cstdint \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
@@ -26,7 +26,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
  /usr/include/c++/13/type_traits \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../util/raio.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/raio.hpp \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
  /usr/include/c++/13/cmath /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/c++/13/bits/cpp_type_traits.h \
@@ -408,10 +408,10 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/bullet/BulletDynamics/Vehicle/btWheelInfo.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h \
  /usr/include/bullet/BulletDynamics/Dynamics/btRigidBody.h \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../util/vetor2.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../util/vetor3.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../util/cor.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
  /usr/include/glm/ext/matrix_clip_space.hpp \
  /usr/include/glm/ext/scalar_constants.hpp \
  /usr/include/glm/ext/scalar_constants.inl \
@@ -419,7 +419,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/glm/ext/matrix_transform.hpp \
  /usr/include/glm/gtc/constants.hpp /usr/include/glm/gtc/constants.inl \
  /usr/include/glm/ext/matrix_transform.inl \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/transformacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
  /usr/include/glm/gtc/type_ptr.hpp /usr/include/glm/gtc/quaternion.hpp \
  /usr/include/glm/gtc/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_projection.hpp \
@@ -527,9 +527,9 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/ranges_algobase.h \
  /usr/include/c++/13/pstl/glue_memory_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/texto.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/c++/13/unordered_map \
  /usr/include/c++/13/bits/unordered_map.h \
  /usr/include/c++/13/bits/hashtable.h \
@@ -577,7 +577,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
  /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
  /usr/include/lua5.3/luaconf.h \
  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
@@ -603,13 +603,13 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/stl_relops.h \
  /usr/include/LuaBridge/detail/Namespace.h \
  /usr/include/LuaBridge/detail/Security.h \
- /source/repos/BubbleEngine/becommons/src/api/mat.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/fase.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/../entidades/entidade.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/../entidades/../depuracao/debug.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/api/mat.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
+ /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -617,25 +617,25 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_interface.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/../arquivadores/shader.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_codigo.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/renderizador.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/modelo.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/malha.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/vertice.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/../util/material.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/malha.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vertice.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/textura.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/material.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/codigo.hpp \
  /usr/include/lua5.3/lua.h \
- /source/repos/BubbleEngine/becommons/src/api/../../os/janela.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../../os/tempo.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
+ /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
  /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/src/api/../../os/../src/inputs/inputs.hpp
+ /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp
