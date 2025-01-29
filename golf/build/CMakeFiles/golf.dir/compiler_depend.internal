@@ -5,8 +5,8 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /source/repos/BubbleEngine/golf/src/main.cpp
  /source/repos/BubbleEngine/becommons/src/inputs/inputs.hpp
  /source/repos/BubbleEngine/becommons/os/janela.hpp
+ /source/repos/BubbleEngine/becommons/os/sistema.hpp
  /source/repos/BubbleEngine/becommons/os/tempo.hpp
- /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp
  /source/repos/BubbleEngine/becommons/src/util/material.hpp
  /source/repos/BubbleEngine/becommons/src/util/malha.hpp
  /source/repos/BubbleEngine/becommons/src/util/textura.hpp
@@ -14,11 +14,15 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /source/repos/BubbleEngine/becommons/src/arquivadores/modelo.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/codigo.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/renderizador.hpp
+ /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp
+ /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.hpp
  /source/repos/BubbleEngine/becommons/src/util/cor.hpp
  /source/repos/BubbleEngine/becommons/src/util/raio.hpp
  /source/repos/BubbleEngine/becommons/src/util/vetor2.hpp
  /source/repos/BubbleEngine/becommons/src/util/vetor4.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/camera.hpp
+ /source/repos/BubbleEngine/becommons/src/componentes/imagem.hpp
+ /source/repos/BubbleEngine/becommons/src/componentes/texto.hpp
  /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/componente.hpp
  /source/repos/BubbleEngine/becommons/src/componentes/fisica.hpp
@@ -28,7 +32,10 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp
+ /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp
+ /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.hpp
  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp
+ /usr/include/FreeImage.h
  /usr/include/GLFW/glfw3.h
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
@@ -555,6 +562,7 @@ CMakeFiles/golf.dir/src/main.cpp.o
  /usr/include/glm/vec3.hpp
  /usr/include/glm/vec4.hpp
  /usr/include/glm/vector_relational.hpp
+ /usr/include/inttypes.h
  /usr/include/libintl.h
  /usr/include/limits.h
  /usr/include/linux/close_range.h

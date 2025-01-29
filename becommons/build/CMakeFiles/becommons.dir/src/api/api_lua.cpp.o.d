@@ -609,7 +609,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/../entidades/../depuracao/debug.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -617,18 +617,19 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/becommons/src/api/../nucleo/../arquivadores/shader.hpp \
+ /usr/include/c++/13/fstream \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc \
+ /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_codigo.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/modelo.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/malha.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/vertice.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/../arquivadores/shader.hpp \
- /usr/include/c++/13/fstream \
- /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/../arquivadores/../util/../util/material.hpp \
- /source/repos/BubbleEngine/becommons/src/api/../nucleo/sistema_de_fisica.hpp \
  /source/repos/BubbleEngine/becommons/src/api/../componentes/codigo.hpp \
  /usr/include/lua5.3/lua.h \
  /source/repos/BubbleEngine/becommons/src/api/../../os/janela.hpp \

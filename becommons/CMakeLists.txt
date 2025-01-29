@@ -74,3 +74,8 @@ target_link_libraries(becommons
 # Instalar a biblioteca (se necessário)
 install(TARGETS becommons DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
+
+#set(CMAKE_BUILD_TYPE Debug)  # Garante que estamos gerando uma build de depuração
+#set(CMAKE_CXX_FLAGS_DEBUG "-g")  # Adiciona símbolos de depuração
+
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -march=native -flto")

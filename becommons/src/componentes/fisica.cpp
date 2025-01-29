@@ -34,7 +34,7 @@ bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, cam
 // Destrutor
 bubble::fisica::~fisica()
 {
-    //fase_atual->sfisica.remover(corpoRigido);
+    fase_atual->sfisica.remover(corpoRigido);
     delete corpoRigido;
     delete estadoDeMovimento;
     delete forma;

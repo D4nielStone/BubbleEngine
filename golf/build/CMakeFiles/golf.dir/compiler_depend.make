@@ -4,8 +4,8 @@
 CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp \
   /source/repos/BubbleEngine/becommons/src/inputs/inputs.hpp \
   /source/repos/BubbleEngine/becommons/os/janela.hpp \
+  /source/repos/BubbleEngine/becommons/os/sistema.hpp \
   /source/repos/BubbleEngine/becommons/os/tempo.hpp \
-  /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp \
   /source/repos/BubbleEngine/becommons/src/util/material.hpp \
   /source/repos/BubbleEngine/becommons/src/util/malha.hpp \
   /source/repos/BubbleEngine/becommons/src/util/textura.hpp \
@@ -13,11 +13,15 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
   /source/repos/BubbleEngine/becommons/src/arquivadores/modelo.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/codigo.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/renderizador.hpp \
+  /source/repos/BubbleEngine/becommons/src/arquivadores/shader.hpp \
+  /source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.hpp \
   /source/repos/BubbleEngine/becommons/src/util/cor.hpp \
   /source/repos/BubbleEngine/becommons/src/util/raio.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor2.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor4.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/camera.hpp \
+  /source/repos/BubbleEngine/becommons/src/componentes/imagem.hpp \
+  /source/repos/BubbleEngine/becommons/src/componentes/texto.hpp \
   /source/repos/BubbleEngine/becommons/src/util/vetor3.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/src/componentes/fisica.hpp \
@@ -27,7 +31,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
   /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp \
+  /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.hpp \
   /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp \
+  /usr/include/FreeImage.h \
   /usr/include/GLFW/glfw3.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -554,6 +561,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
   /usr/include/glm/vec3.hpp \
   /usr/include/glm/vec4.hpp \
   /usr/include/glm/vector_relational.hpp \
+  /usr/include/inttypes.h \
   /usr/include/libintl.h \
   /usr/include/limits.h \
   /usr/include/linux/close_range.h \
@@ -698,8 +706,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
   /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h \
   /usr/lib/gcc/x86_64-linux-gnu/13/include/syslimits.h
 
-
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/13/include/float.h:
 
@@ -883,9 +889,9 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/glm/mat4x2.hpp:
 
-/usr/include/bullet/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h:
+/usr/include/glm/mat3x2.hpp:
 
-/usr/include/c++/13/utility:
+/usr/include/glm/gtx/quaternion.inl:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -894,8 +900,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/c++/13/initializer_list:
 
 /usr/include/c++/13/tr1/bessel_function.tcc:
-
-/usr/include/c++/13/bits/stl_construct.h:
 
 /usr/include/c++/13/bits/std_mutex.h:
 
@@ -914,6 +918,8 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/c++/13/bits/std_abs.h:
 
 /usr/include/c++/13/bits/parse_numbers.h:
+
+/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.hpp:
 
 /usr/include/glm/vector_relational.hpp:
 
@@ -963,19 +969,15 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletDynamics/Dynamics/btDynamicsWorld.h:
 
+/usr/include/glm/mat2x2.hpp:
+
+/usr/include/c++/13/bits/hashtable.h:
+
 /usr/include/c++/13/bits/hash_bytes.h:
 
 /usr/include/bullet/LinearMath/btTransformUtil.h:
 
 /usr/include/c++/13/bits/functional_hash.h:
-
-/usr/include/c++/13/bits/stl_iterator.h:
-
-/usr/include/c++/13/ext/numeric_traits.h:
-
-/usr/include/glm/ext/matrix_float3x2_precision.hpp:
-
-/usr/include/glm/ext/quaternion_transform.hpp:
 
 /usr/include/memory.h:
 
@@ -1067,6 +1069,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletDynamics/Vehicle/btRaycastVehicle.h:
 
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stddef.h:
+
+/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_interface.hpp:
+
 /usr/include/assimp/quaternion.inl:
 
 /usr/include/c++/13/bits/ranges_cmp.h:
@@ -1077,23 +1083,29 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/LinearMath/btQuaternion.h:
 
-/usr/include/c++/13/bits/algorithmfwd.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
-/usr/include/glm/ext/matrix_double2x3_precision.hpp:
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btSliderConstraint.h:
 
-/usr/include/assimp/quaternion.h:
+/usr/include/c++/13/bits/sstream.tcc:
 
-/usr/include/glm/mat2x4.hpp:
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h:
 
-/usr/include/c++/13/tr1/legendre_function.tcc:
+/usr/include/bullet/LinearMath/btThreads.h:
 
-/usr/include/glm/gtc/matrix_transform.hpp:
+/usr/include/glm/geometric.hpp:
+
+/usr/include/bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h:
+
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h:
+
+/usr/include/c++/13/bits/exception.h:
+
+/usr/include/bullet/LinearMath/btAlignedAllocator.h:
 
 /usr/include/c++/13/sstream:
 
 /usr/include/glm/ext/vector_float1_precision.hpp:
-
-/usr/include/c++/13/codecvt:
 
 /usr/include/c++/13/bits/codecvt.h:
 
@@ -1114,6 +1126,8 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
 /usr/include/assimp/Compiler/pushpack1.h:
+
+/source/repos/BubbleEngine/becommons/src/componentes/texto.hpp:
 
 /usr/include/c++/13/bits/memoryfwd.h:
 
@@ -1143,7 +1157,41 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/assimp/aabb.h:
 
-/usr/include/glm/ext/vector_int3_sized.hpp:
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+
+/usr/include/assimp/defs.h:
+
+/usr/include/c++/13/bits/align.h:
+
+/usr/include/glm/ext/vector_bool4_precision.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/c++/13/tr1/hypergeometric.tcc:
+
+/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp:
+
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btUniversalConstraint.h:
+
+/usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h:
+
+/usr/include/x86_64-linux-gnu/bits/local_lim.h:
+
+/usr/include/glm/ext/matrix_double3x4_precision.hpp:
+
+/usr/include/c++/13/array:
+
+/usr/include/x86_64-linux-gnu/asm/unistd.h:
+
+/usr/include/glm/detail/qualifier.hpp:
+
+/usr/include/glm/detail/type_mat2x3.hpp:
+
+/usr/include/glm/detail/type_mat4x3.hpp:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h:
+
+/usr/include/c++/13/bits/locale_classes.h:
 
 /usr/include/c++/13/bits/iterator_concepts.h:
 
@@ -1161,15 +1209,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.hpp:
 
-/usr/include/bullet/LinearMath/btThreads.h:
-
-/usr/include/glm/geometric.hpp:
-
-/usr/include/bullet/BulletDynamics/Dynamics/btDiscreteDynamicsWorld.h:
-
-/usr/include/glm/mat3x2.hpp:
-
-/source/repos/BubbleEngine/becommons/src/util/cor.hpp:
+/usr/include/glm/ext/vector_int3_sized.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
@@ -1177,27 +1217,21 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
 
-/usr/include/c++/13/bits/hashtable.h:
+/usr/include/glm/mat2x3.hpp:
 
-/usr/include/glm/mat2x2.hpp:
+/usr/include/bullet/BulletCollision/CollisionShapes/btTriangleMeshShape.h:
 
-/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h:
 
-/usr/include/asm-generic/errno-base.h:
+/usr/include/assimp/mesh.h:
 
 /usr/include/c++/13/bits/ptr_traits.h:
 
 /usr/include/glm/ext/vector_uint4.hpp:
 
-/usr/include/assimp/config.h:
+/usr/include/glm/gtc/matrix_transform.inl:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
-
-/source/repos/BubbleEngine/becommons/src/util/vertice.hpp:
-
-/usr/include/c++/13/bits/node_handle.h:
-
-/usr/include/c++/13/bits/stl_pair.h:
+/usr/include/c++/13/bits/fs_path.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/atomic_word.h:
 
@@ -1215,19 +1249,21 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/glm/ext/quaternion_relational.inl:
 
-/usr/include/c++/13/bits/align.h:
+/usr/include/FreeImage.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+/usr/include/glm/ext/vector_double1_precision.hpp:
 
-/usr/include/assimp/defs.h:
+/usr/include/glm/ext/vector_int3.hpp:
+
+/usr/include/bullet/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h:
 
 /usr/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofSpringConstraint.h:
 
 /usr/include/c++/13/bits/ranges_algobase.h:
 
-/usr/include/assert.h:
-
 /usr/include/glm/ext/quaternion_trigonometric.inl:
+
+/usr/include/assert.h:
 
 /usr/include/bullet/BulletCollision/CollisionShapes/btCylinderShape.h:
 
@@ -1238,22 +1274,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/x86_64-linux-gnu/bits/timex.h:
 
 /source/repos/BubbleEngine/becommons/src/util/material.hpp:
-
-/usr/include/bullet/BulletCollision/CollisionShapes/btOptimizedBvh.h:
-
-/usr/include/c++/13/bits/exception_defines.h:
-
-/usr/include/c++/13/bits/atomic_wait.h:
-
-/usr/include/assimp/scene.h:
-
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
-
-/usr/include/c++/13/ext/aligned_buffer.h:
-
-/usr/include/glm/detail/type_vec2.inl:
-
-/usr/include/assimp/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
@@ -1293,23 +1313,19 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h:
 
-/usr/include/c++/13/bits/shared_ptr_base.h:
+/usr/include/c++/13/bits/algorithmfwd.h:
 
-/usr/include/glm/ext/vector_double3_precision.hpp:
+/usr/include/glm/ext/matrix_double2x3_precision.hpp:
 
-/usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h:
+/usr/include/assimp/quaternion.h:
 
-/usr/include/c++/13/bits/stl_iterator_base_types.h:
+/usr/include/glm/mat2x4.hpp:
 
-/source/repos/BubbleEngine/becommons/src/componentes/renderizador.hpp:
+/usr/include/c++/13/tr1/legendre_function.tcc:
 
-/usr/include/c++/13/bits/locale_classes.h:
+/usr/include/glm/gtc/matrix_transform.hpp:
 
-/usr/include/bullet/BulletCollision/CollisionShapes/btBvhTriangleMeshShape.h:
-
-/usr/include/assimp/metadata.h:
-
-/usr/include/c++/13/bits/fs_ops.h:
+/source/repos/BubbleEngine/becommons/os/sistema.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/posix_opt.h:
 
@@ -1319,17 +1335,25 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/glm/ext/vector_relational.hpp:
 
-/usr/include/bullet/BulletCollision/CollisionShapes/btBoxShape.h:
+/usr/include/glm/mat3x3.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+/usr/include/glm/exponential.hpp:
 
-/usr/include/c++/13/bits/nested_exception.h:
+/usr/include/c++/13/bits/stl_iterator_base_types.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/source/repos/BubbleEngine/becommons/src/componentes/renderizador.hpp:
 
-/usr/include/c++/13/tuple:
+/usr/include/assimp/metadata.h:
 
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h:
+/usr/include/c++/13/bits/fs_ops.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
+
+/source/repos/BubbleEngine/becommons/src/util/vertice.hpp:
+
+/usr/include/assimp/config.h:
+
+/usr/include/c++/13/bits/node_handle.h:
 
 /usr/include/c++/13/bits/new_allocator.h:
 
@@ -1345,47 +1369,53 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/glm/ext/vector_bool2_precision.hpp:
 
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btUniversalConstraint.h:
+/usr/include/glm/ext/vector_double3_precision.hpp:
 
-/usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionCreateFunc.h:
+/usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionObjectWrapper.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+/usr/include/c++/13/bits/shared_ptr_base.h:
 
-/usr/include/c++/13/tr1/hypergeometric.tcc:
-
-/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_renderizacao.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/local_lim.h:
-
-/usr/include/glm/ext/matrix_double3x4_precision.hpp:
-
-/usr/include/glm/ext/vector_bool4_precision.hpp:
-
-/usr/include/c++/13/array:
-
-/usr/include/x86_64-linux-gnu/asm/unistd.h:
-
-/usr/include/glm/detail/qualifier.hpp:
-
-/usr/include/glm/detail/type_mat2x3.hpp:
-
-/usr/include/c++/13/bits/fs_path.h:
-
-/usr/include/glm/gtc/matrix_transform.inl:
-
-/usr/include/assimp/mesh.h:
-
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btConeTwistConstraint.h:
-
-/usr/include/glm/detail/type_mat4x3.hpp:
-
-/usr/include/assimp/light.h:
-
-/source/repos/BubbleEngine/becommons/src/componentes/fisica.hpp:
+/source/repos/BubbleEngine/becommons/src/util/cor.hpp:
 
 /usr/include/c++/13/bits/move.h:
 
 /usr/include/glm/gtc/vec1.hpp:
+
+/usr/include/assimp/light.h:
+
+/source/repos/BubbleEngine/becommons/src/arquivadores/imageloader.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/usr/include/c++/13/bits/nested_exception.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/c++/13/tuple:
+
+/source/repos/BubbleEngine/becommons/src/componentes/fisica.hpp:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btOptimizedBvh.h:
+
+/usr/include/c++/13/bits/exception_defines.h:
+
+/usr/include/c++/13/bits/atomic_wait.h:
+
+/usr/include/assimp/scene.h:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:
+
+/usr/include/c++/13/ext/aligned_buffer.h:
+
+/usr/include/glm/detail/type_vec2.inl:
+
+/usr/include/assimp/types.h:
+
+/source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp:
+
+/usr/include/c++/13/debug/assertions.h:
+
+/usr/include/glm/ext/vector_float3_precision.hpp:
 
 /usr/include/c++/13/bits/max_size_type.h:
 
@@ -1406,6 +1436,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionConfiguration.h:
 
 /usr/include/c++/13/bits/basic_string.h:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btBoxShape.h:
+
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btGeneric6DofSpring2Constraint.h:
 
 /source/repos/BubbleEngine/becommons/src/nucleo/fase.hpp:
 
@@ -1432,12 +1466,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/glm/detail/type_mat3x3.inl:
 
 /usr/include/c++/13/tr1/riemann_zeta.tcc:
-
-/source/repos/BubbleEngine/becommons/src/entidades/entidade.hpp:
-
-/usr/include/c++/13/debug/assertions.h:
-
-/usr/include/glm/ext/vector_float3_precision.hpp:
 
 /usr/include/bullet/BulletCollision/BroadphaseCollision/btBroadphaseProxy.h:
 
@@ -1467,7 +1495,21 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionObject.h:
 
+/usr/include/bullet/BulletCollision/CollisionDispatch/btDefaultCollisionConfiguration.h:
+
+/usr/include/c++/13/utility:
+
 /usr/include/c++/13/bits/ranges_util.h:
+
+/usr/include/glm/integer.hpp:
+
+/usr/include/glm/detail/func_trigonometric.inl:
+
+/usr/include/glm/ext/matrix_float4x4.hpp:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/c++/13/bits/stl_iterator_base_funcs.h:
 
 /usr/include/assimp/vector2.h:
 
@@ -1480,8 +1522,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/glm/ext/matrix_float2x3_precision.hpp:
 
 /usr/include/bullet/LinearMath/btSerializer.h:
-
-/usr/include/c++/13/bits/stl_function.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
@@ -1521,6 +1561,10 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletCollision/CollisionShapes/btUniformScalingShape.h:
 
+/usr/include/c++/13/codecvt:
+
+/source/repos/BubbleEngine/becommons/src/componentes/imagem.hpp:
+
 /usr/include/c++/13/unordered_map:
 
 /usr/include/bullet/BulletCollision/CollisionShapes/btSphereShape.h:
@@ -1531,8 +1575,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/bullet/BulletCollision/CollisionShapes/btTriangleInfoMap.h:
 
-/usr/include/bullet/BulletCollision/NarrowPhaseCollision/btDiscreteCollisionDetectorInterface.h:
-
 /usr/include/bullet/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h:
 
 /usr/include/c++/13/bits/quoted_string.h:
@@ -1541,19 +1583,19 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/c++/13/pstl/pstl_config.h:
 
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btHingeConstraint.h:
+/usr/include/c++/13/bits/stl_construct.h:
 
-/usr/include/c++/13/bits/sstream.tcc:
+/usr/include/c++/13/bits/stl_function.h:
 
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btSequentialImpulseConstraintSolver.h:
+/usr/include/c++/13/bits/stl_iterator.h:
 
-/usr/include/bullet/LinearMath/btAlignedAllocator.h:
+/usr/include/c++/13/ext/numeric_traits.h:
 
-/usr/include/c++/13/bits/exception.h:
+/usr/include/glm/ext/matrix_float3x2_precision.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
+/usr/include/glm/ext/quaternion_transform.hpp:
 
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btSliderConstraint.h:
+/usr/include/c++/13/bits/stl_pair.h:
 
 /usr/include/c++/13/bits/stl_relops.h:
 
@@ -1701,8 +1743,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/c++/13/limits:
 
-/usr/include/glm/gtx/quaternion.inl:
-
 /usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
 
 /usr/include/c++/13/locale:
@@ -1786,6 +1826,8 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/ctype.h:
 
 /usr/include/lua5.3/luaconf.h:
+
+/usr/include/inttypes.h:
 
 /usr/include/bullet/LinearMath/btMinMax.h:
 
@@ -1943,9 +1985,9 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/syscall.h:
 
-/usr/include/c++/13/bits/stl_heap.h:
-
 /usr/include/c++/13/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/13/bits/stl_heap.h:
 
 /usr/include/glm/ext/quaternion_exponential.hpp:
 
@@ -1988,10 +2030,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 /usr/include/glm/ext/matrix_float3x2.hpp:
 
 /usr/include/glm/ext/vector_bool4.hpp:
-
-/usr/include/glm/ext/vector_double1_precision.hpp:
-
-/usr/include/glm/ext/vector_int3.hpp:
 
 /usr/include/glm/ext/vector_double2.hpp:
 
@@ -2073,20 +2111,6 @@ CMakeFiles/golf.dir/src/main.cpp.o: /source/repos/BubbleEngine/golf/src/main.cpp
 
 /usr/include/glm/gtx/component_wise.hpp:
 
-/usr/include/glm/detail/func_trigonometric.inl:
-
-/usr/include/glm/ext/matrix_float4x4.hpp:
-
-/usr/include/glm/integer.hpp:
-
 /usr/include/glm/gtx/norm.hpp:
 
 /usr/include/glm/gtx/norm.inl:
-
-/usr/include/bullet/BulletCollision/CollisionShapes/btTriangleMeshShape.h:
-
-/usr/include/glm/mat2x3.hpp:
-
-/usr/include/glm/exponential.hpp:
-
-/usr/include/glm/mat3x3.hpp:

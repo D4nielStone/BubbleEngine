@@ -19,6 +19,7 @@ void bubble::camera::desenharFB() const
     }
     glClearColor(ceu.r, ceu.g, ceu.b, ceu.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if(viewport_ptr)
     glViewport(0, 0, viewport_ptr->x, viewport_ptr->y);
 }
 
@@ -76,7 +77,6 @@ void bubble::camera::desativarFB()
 }
 
 glm::mat4 bubble::camera::obtViewMatrix() {
-    if (!flag_fb) viewportFBO = *viewport_ptr;
     if (!transform)
         transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
 

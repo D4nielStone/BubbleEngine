@@ -546,7 +546,7 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -556,34 +556,17 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
- /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
- /usr/include/c++/13/chrono /usr/include/c++/13/sstream \
- /usr/include/c++/13/bits/sstream.tcc \
- /usr/include/c++/13/bits/chrono_io.h /usr/include/c++/13/iomanip \
- /usr/include/c++/13/locale \
- /usr/include/c++/13/bits/locale_facets_nonio.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
- /usr/include/c++/13/bits/locale_facets_nonio.tcc \
- /usr/include/c++/13/bits/locale_conv.h \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/format \
- /usr/include/c++/13/charconv /usr/include/c++/13/optional \
- /usr/include/c++/13/span /usr/include/c++/13/variant \
- /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/golf/../becommons/os/../src/inputs/inputs.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/renderizador.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/modelo.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/malha.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/vertice.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/textura.hpp \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../arquivadores/shader.hpp \
- /usr/include/c++/13/fstream \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../arquivadores/shader.hpp \
+ /usr/include/c++/13/fstream /usr/include/c++/13/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc \
- /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../util/material.hpp \
+ /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
+ /usr/include/c++/13/bits/sstream.tcc \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/texto.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/imagem.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/../componentes/../arquivadores/imageloader.hpp \
+ /usr/include/FreeImage.h /usr/include/inttypes.h \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
  /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
@@ -602,8 +585,29 @@ CMakeFiles/golf.dir/src/main.cpp.o: \
  /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
  /usr/include/assimp/metadata.h /usr/include/c++/13/filesystem \
  /usr/include/c++/13/bits/fs_fwd.h /usr/include/c++/13/bits/fs_path.h \
- /usr/include/c++/13/codecvt /usr/include/c++/13/bits/fs_dir.h \
- /usr/include/c++/13/bits/fs_ops.h \
+ /usr/include/c++/13/locale \
+ /usr/include/c++/13/bits/locale_facets_nonio.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
+ /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /source/repos/BubbleEngine/golf/../becommons/src/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/janela.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/tempo.hpp \
+ /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
+ /usr/include/c++/13/format /usr/include/c++/13/charconv \
+ /usr/include/c++/13/optional /usr/include/c++/13/span \
+ /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
+ /source/repos/BubbleEngine/golf/../becommons/os/../src/inputs/inputs.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/os/sistema.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/renderizador.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/malha.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/vertice.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/textura.hpp \
+ /source/repos/BubbleEngine/golf/../becommons/src/componentes/../arquivadores/../util/../util/material.hpp \
  /source/repos/BubbleEngine/golf/../becommons/src/componentes/codigo.hpp \
  /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
  /usr/include/lua5.3/luaconf.h \

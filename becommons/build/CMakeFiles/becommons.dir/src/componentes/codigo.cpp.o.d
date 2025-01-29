@@ -555,7 +555,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/../util/cor.hpp \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -565,10 +565,17 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
- /source/repos/BubbleEngine/becommons/src/componentes/../api/api_lua.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../api/../componentes/texto.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../api/../componentes/imagem.hpp \
- /source/repos/BubbleEngine/becommons/src/componentes/../api/../componentes/../arquivadores/imageloader.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_interface.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../arquivadores/shader.hpp \
+ /usr/include/c++/13/fstream /usr/include/c++/13/istream \
+ /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
+ /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/sstream \
+ /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/iostream \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/texto.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/imagem.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/../componentes/../arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
  /usr/include/assimp/scene.h /usr/include/assimp/types.h \
  /usr/include/assimp/defs.h /usr/include/assimp/config.h \
@@ -593,13 +600,12 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /usr/include/c++/13/bits/locale_facets_nonio.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/time_members.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/13/bits/codecvt.h \
- /usr/include/c++/13/bits/locale_facets_nonio.tcc \
+ /usr/include/libintl.h /usr/include/c++/13/bits/locale_facets_nonio.tcc \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
- /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/sstream \
- /usr/include/c++/13/istream /usr/include/c++/13/bits/istream.tcc \
- /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
+ /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /source/repos/BubbleEngine/becommons/src/componentes/../nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/src/componentes/../api/api_lua.hpp \
  /usr/include/LuaBridge/LuaBridge.h \
  /usr/include/LuaBridge/detail/CFunctions.h \
  /usr/include/LuaBridge/detail/Config.h \
@@ -613,8 +619,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /usr/include/LuaBridge/detail/Constructor.h \
  /usr/include/LuaBridge/detail/Iterator.h \
  /usr/include/LuaBridge/detail/LuaRef.h \
- /usr/include/LuaBridge/detail/LuaException.h \
- /usr/include/c++/13/iostream /usr/include/c++/13/map \
+ /usr/include/LuaBridge/detail/LuaException.h /usr/include/c++/13/map \
  /usr/include/c++/13/bits/stl_tree.h /usr/include/c++/13/bits/stl_map.h \
  /usr/include/c++/13/bits/stl_multimap.h \
  /usr/include/LuaBridge/detail/Namespace.h \
@@ -626,4 +631,5 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \
  /usr/include/c++/13/format /usr/include/c++/13/charconv \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
- /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h
+ /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
+ /source/repos/BubbleEngine/becommons/src/componentes/../../os/sistema.hpp
