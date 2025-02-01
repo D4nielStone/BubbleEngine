@@ -225,7 +225,7 @@ CMakeFiles/becommons.dir/src/os/janela.cpp.o: \
  /usr/include/c++/13/bits/enable_special_members.h \
  /usr/include/c++/13/span /usr/include/c++/13/variant \
  /usr/include/c++/13/bits/ranges_algobase.h /usr/include/GLFW/glfw3.h \
- /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
  /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
  /usr/include/c++/13/unordered_map \
@@ -569,4 +569,23 @@ CMakeFiles/becommons.dir/src/os/janela.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp \
  /usr/include/c++/13/iostream \
- /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp
+ /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
+ /usr/include/FreeImage.h /usr/include/inttypes.h \
+ /usr/include/assimp/scene.h /usr/include/assimp/types.h \
+ /usr/include/assimp/defs.h /usr/include/assimp/config.h \
+ /usr/include/assimp/vector2.h /usr/include/assimp/vector3.h \
+ /usr/include/assimp/color4.h /usr/include/assimp/matrix3x3.h \
+ /usr/include/assimp/matrix4x4.h /usr/include/assimp/quaternion.h \
+ /usr/include/assimp/vector2.inl /usr/include/assimp/vector3.inl \
+ /usr/include/assimp/color4.inl /usr/include/assimp/matrix3x3.inl \
+ /usr/include/c++/13/algorithm /usr/include/c++/13/bits/ranges_algo.h \
+ /usr/include/c++/13/pstl/glue_algorithm_defs.h \
+ /usr/include/assimp/matrix4x4.inl /usr/include/assimp/MathFunctions.h \
+ /usr/include/assimp/quaternion.inl /usr/include/assimp/texture.h \
+ /usr/include/assimp/Compiler/pushpack1.h \
+ /usr/include/assimp/Compiler/poppack1.h /usr/include/assimp/mesh.h \
+ /usr/include/assimp/aabb.h /usr/include/assimp/light.h \
+ /usr/include/assimp/camera.h /usr/include/assimp/material.h \
+ /usr/include/assimp/material.inl /usr/include/assimp/anim.h \
+ /usr/include/assimp/metadata.h

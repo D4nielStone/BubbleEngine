@@ -1,6 +1,7 @@
 #include "componentes/fisica.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "componentes/renderizador.hpp"
 
 // Construtor para forma gen�rica
@@ -34,7 +35,7 @@ bubble::fisica::fisica(bool malha, btScalar massa, btVector3 posicaoInicial, cam
 // Destrutor
 bubble::fisica::~fisica()
 {
-    fase_atual->sfisica.remover(corpoRigido);
+    projeto_atual->fase_atual->sfisica.remover(corpoRigido);
     delete corpoRigido;
     delete estadoDeMovimento;
     delete forma;
@@ -56,7 +57,7 @@ btRigidBody* bubble::fisica::obterCorpoRigido()
 void bubble::fisica::criarMalha()
 {
     // Obt�m as malhas do modelo associado ao objeto
-    auto modelo = fase_atual->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
+    auto modelo = projeto_atual->fase_atual->obterRegistro()->obter<bubble::renderizador>(meu_objeto)->modelo;
     auto& malhas = modelo->malhas;
 
     // Criar o btTriangleIndexVertexArray para todas as malhas
@@ -91,7 +92,7 @@ void bubble::fisica::atualizarTransformacao()
     btTransform bt;
     estadoDeMovimento->getWorldTransform(bt);
 
-    _Mtransformacao = fase_atual->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
+    _Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(meu_objeto).get();
     _Mtransformacao->posicao = { bt.getOrigin().getX(), bt.getOrigin().getY(), bt.getOrigin().getZ() };
     _Mtransformacao->rotacao = { bt.getRotation().getX(), bt.getRotation().getY(), bt.getRotation().getZ() };
 }

@@ -605,6 +605,10 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/projeto.hpp \
  /source/repos/BubbleEngine/becommons/include/api/api_lua.hpp \
  /usr/include/LuaBridge/LuaBridge.h \
  /usr/include/LuaBridge/detail/CFunctions.h \

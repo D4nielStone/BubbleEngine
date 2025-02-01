@@ -1,0 +1,4 @@
+won=false
+lost=false
+score=0
+level=1

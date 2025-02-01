@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/source/repos/BubbleEngine/golf/../becommons/include -I/usr/include/lua5.3 -I/usr/include/glm -I/usr/include/GLFW -I/usr/include/glad -I/usr/include/assimp -I/usr/include/rapidjson -I/usr/include/bullet -I/usr/include/freetype2
 
-CXX_FLAGS = -std=gnu++20
+CXX_FLAGS = -g -std=gnu++20
 

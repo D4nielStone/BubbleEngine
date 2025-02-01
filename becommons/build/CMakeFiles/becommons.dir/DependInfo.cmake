@@ -22,6 +22,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp" "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/inputs/inputs.cpp" "CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/fase.cpp" "CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o.d"
+  "/source/repos/BubbleEngine/becommons/src/nucleo/projeto.cpp" "CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_fisica.cpp" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/nucleo/sistema_de_fisica.cpp.o.d"

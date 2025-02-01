@@ -1,8 +1,9 @@
 local ax = 270
 local ay = 45
 local posicaoAlvo = vetor3(0, 0, 0)
-local velocidade = 30 -- Controle da suavidade do movimento
-local s = 40
+local velocidade = 10 -- Controle da suavidade do movimento
+local velocidadeMouse = 10 -- Controle da suavidade do movimento do mouse
+local s = 50
 local mouseXAnterior = 0
 local mouseYAnterior = 0
 local deltaMouseX = 0
@@ -18,7 +19,8 @@ local modulo = require("arrastando")
 
 function iniciar()
     -- Configurações da câmera
-    eu.camera.fov = 20
+    eu.camera.flag_ortho= false
+    eu.camera.fov = 10
     eu.camera.escala = s
     eu.camera:ativarFB()
     eu.transformacao.posicao = vetor3(s * 3, s * 3, s * 3) -- Posição inicial da câmera
@@ -38,7 +40,7 @@ function atualizar()
     local distancia = util.distanciaV3(bola.transformacao.posicao, eu.transformacao.posicao)
 
     -- Define a velocidade proporcional à distância, com limite mínimo
-    local velocidadeAproximacao = math.max(0.01, distancia * 0.01)
+    local velocidadeAproximacao = math.max(0.01, distancia * deltaTime * 0.05)
 
     local vb = bola.fisica:obtVelocidade().x + bola.fisica:obtVelocidade().y + bola.fisica:obtVelocidade().z
 
@@ -82,8 +84,8 @@ function atualizar()
     local mouse = inputs:mouse()
 
     -- Calcula o delta do movimento do mouse
-    deltaMouseX = mouse.x - mouseXAnterior
-    deltaMouseY = mouse.y - mouseYAnterior
+    deltaMouseX = (mouse.x - mouseXAnterior) * velocidadeMouse
+    deltaMouseY = (mouse.y - mouseYAnterior) * velocidadeMouse
 
     -- Atualiza os valores anteriores do mouse
     mouseXAnterior = mouse.x

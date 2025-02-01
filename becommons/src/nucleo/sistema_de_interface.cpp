@@ -18,8 +18,6 @@ namespace bubble
 {
     sistemaInterface::~sistemaInterface()
     {
-        delete shader_texto;
-        delete shader_imagem;
         glDeleteBuffers(1, &text_VBO);
         glDeleteBuffers(1, &img_VBO);
         glDeleteVertexArrays(1, &text_VAO);

@@ -600,6 +600,9 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
  /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \

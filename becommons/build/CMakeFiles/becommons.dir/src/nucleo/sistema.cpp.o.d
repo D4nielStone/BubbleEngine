@@ -594,4 +594,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h

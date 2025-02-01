@@ -5,6 +5,7 @@
  * @brief Gerencia sistemas numa fase
  */
 
+#pragma once
 #include "entidades/entidade.hpp"
 #include "componentes/camera.hpp"
 #include "sistema_de_renderizacao.hpp"
@@ -13,6 +14,7 @@
 #include "sistema_de_codigo.hpp"
 #include <string>
 #include <memory>
+#include <queue>
 
 /**
  * @class fase
@@ -20,11 +22,14 @@
 
 namespace bubble
 {
+	inline std::queue<std::function<void()>> file_de_tarefas;
 	class fase
 	{
 	public:
 		fase(const char* diretorio);
+		fase(const std::string& diretorio);
 		fase();
+		~fase();
 		std::string nome() const;
 		void pausar();
 		void parar();
@@ -47,5 +52,3 @@ namespace bubble
 		std::string _Mnome;
 	};
 }
-
-inline bubble::fase* fase_atual{ nullptr };

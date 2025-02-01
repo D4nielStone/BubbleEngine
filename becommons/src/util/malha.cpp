@@ -1,10 +1,11 @@
 #include <glad/glad.h>
 #include "util/malha.hpp"
 #include "util/material.hpp"
+#include "depuracao/debug.hpp"
 
 namespace bubble
 {
-    malha::malha(std::vector<vertice> vertices, std::vector<unsigned int> indices, bubble::material& material)
+    malha::malha(std::vector<vertice>& vertices, std::vector<unsigned int>& indices, bubble::material& material)
     {
         this->vertices = vertices;
         this->indices = indices;
@@ -15,12 +16,17 @@ namespace bubble
 
     malha::~malha()
     {
-        //glDeleteVertexArrays(1, &VAO);
-        //glDeleteBuffers(1, &VBO);
-        //glDeleteBuffers(1, &EBO);
+        
     }
 
-    void malha::desenhar(bubble::shader& shader)
+    void malha::descarregar()
+    {
+        debug::emitir("malha", "descarregando");
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+        glDeleteBuffers(1, &EBO);
+    }
+    void malha::desenhar(bubble::shader &shader)
     {
         if(sobrepor)
             glDepthFunc(GL_ALWAYS);

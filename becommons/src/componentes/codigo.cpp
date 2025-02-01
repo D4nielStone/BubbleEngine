@@ -1,5 +1,6 @@
 #include "componentes/codigo.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "api/api_lua.hpp"
 #include "api/mat.hpp"
 #include "inputs/inputs.hpp"
@@ -21,17 +22,14 @@ bubble::codigo::codigo(const std::string& arquivo) : L(luaL_newstate()), arquivo
 	if (luaL_dofile(L, arquivo.c_str()) != LUA_OK) {
         std::cerr << "Erro ao carregar o script Lua: " << lua_tostring(L, -1) << std::endl;
         lua_pop(L, 1);  // Limpa a mensagem de erro
-    }else
-	{
-		debug::emitir(Mensagem, "Codigo encontrado: " + arquivo);
-	}
+    }
 }
 
 void bubble::codigo::iniciar() const
 {
 
 	luabridge::setGlobal(L, new bapi::entidade(meu_objeto), "eu");
-	luabridge::setGlobal(L, &fase_atual, "faseAtual");
+	luabridge::setGlobal(L, &projeto_atual, "projetoAtual");
 	// Tentar obter a fun��o "iniciar" definida localmente no script
 	lua_getglobal(L, "iniciar");
 	if (lua_isfunction(L, -1)) {
@@ -51,8 +49,6 @@ void bubble::codigo::atualizar() const
 	lua_getglobal(L, "atualizar");
 	if (lua_isfunction(L, -1)) {
 	    // Chamar a função 'atualizar' no Lua
-	    debug::emitir(Mensagem, "atualizando " + arquivo);
-		
 	    lua_pcall(L, 0, 0, 0); // Chama a função sem argumentos e sem retorno
 	} else {
 	    std::cerr << "Função 'atualizar' não definida no Lua!" << std::endl;
@@ -63,12 +59,14 @@ void bubble::codigo::encerrar()
 	if (L) {
 		lua_pushnil(L);
 		lua_setglobal(L, "eu");
-		lua_setglobal(L, "faseAtual");
+		lua_setglobal(L, "projetoAtual");
 		lua_close(L);
 		L = nullptr;
 	}
 }
 bubble::codigo::~codigo()
 {
+        debug::emitir("codigo", "descarregando");
+
 	encerrar();
 }

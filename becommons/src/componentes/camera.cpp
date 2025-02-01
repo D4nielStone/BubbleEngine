@@ -2,6 +2,7 @@
 #include "componentes/camera.hpp"
 #include "componentes/transformacao.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "os/janela.hpp"
 
 void bubble::camera::desenharFB() const
@@ -26,6 +27,8 @@ void bubble::camera::desenharFB() const
 
 bubble::camera::~camera()
 {
+    debug::emitir("camera", "descarregando");
+    
     desativarFB();
 }
 
@@ -78,7 +81,7 @@ void bubble::camera::desativarFB()
 
 glm::mat4 bubble::camera::obtViewMatrix() {
     if (!transform)
-        transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
+        transform = projeto_atual->fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
 
     posicao = transform->posicao;
     glm::vec3 up = transform->cima;
@@ -170,7 +173,7 @@ glm::vec3 bubble::camera::telaParaMundo(const vet2 &screenPoint, float profundid
 void bubble::camera::mover(glm::vec3 &pos)
 {
     if (!transform)
-        transform = fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
+        transform = projeto_atual->fase_atual->obterRegistro()->obter<transformacao>(meu_objeto);
 
     
 

@@ -3,6 +3,12 @@ local s_click
 local img_click
 local gatilho = false
 local meio
+local elapsedTime
+
+local script_path = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
+package.path = package.path .. ";" .. script_path .. "?.lua"
+local gs = require("gamestate")
+
 function iniciar()
 	eu.imagem.padding = vetor2d(inputs:tamanhoTela().x/2-s/2,inputs:tamanhoTela().y/2-s/2)
 	eu.imagem.limite = vetor2d(s, s)
@@ -13,8 +19,8 @@ end
 function atualizar()
 	s = inputs:tamanhoTela().y / 6
 
-
-	if inputs.pressionada("MouseE") then
+	gs:load()
+	if inputs.pressionada("MouseE") or gs.won then
 		gatilho = true
 		eu.imagem.limite = vetor2d(0, 0)
 	else

@@ -362,4 +362,5 @@ CMakeFiles/becommons.dir/src/util/malha.cpp.o: \
  /usr/include/glm/gtc/type_ptr.inl \
  /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
- /source/repos/BubbleEngine/becommons/include/util/material.hpp
+ /source/repos/BubbleEngine/becommons/include/util/material.hpp \
+ /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp

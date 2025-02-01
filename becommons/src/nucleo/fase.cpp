@@ -1,4 +1,5 @@
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include <rapidjson/rapidjson.h>
 #include <rapidjson/document.h>
 #include <filesystem>
@@ -12,18 +13,19 @@
 #include "os/janela.hpp"
 #include "os/sistema.hpp"
 #include <iostream>
-#include <queue>
 
 using namespace rapidjson;
 using namespace bubble;
-
-std::queue<std::function<void()>> fila;
 
 fase::fase() : _Mnome("")
 {
 	srender.inicializar(this);
 	sinterface.inicializar(this);
-	fase_atual = this;
+	projeto_atual->fase_atual = this;
+}
+
+fase::~fase()
+{
 }
 
 fase::fase(const char* diretorio) : diretorio(diretorio)
@@ -32,7 +34,7 @@ fase::fase(const char* diretorio) : diretorio(diretorio)
 	sinterface.inicializar(this);
 
 	/// efetua a analise do json
-	fase_atual = this;
+	projeto_atual->fase_atual = this;
 
 	if(std::filesystem::exists(diretorio))
 		analizar(diretorio);
@@ -42,7 +44,22 @@ fase::fase(const char* diretorio) : diretorio(diretorio)
 		analizar(std::filesystem::absolute(diretorio).string().c_str());
 	}
 }
+fase::fase(const std::string& diretorio) : diretorio(diretorio.c_str())
+{
+	srender.inicializar(this);
+	sinterface.inicializar(this);
 
+	/// efetua a analise do json
+	projeto_atual->fase_atual = this;
+
+	if(std::filesystem::exists(diretorio))
+		analizar(diretorio.c_str());
+	else if (std::filesystem::exists(std::filesystem::absolute(diretorio)))
+	{
+		
+		analizar(std::filesystem::absolute(diretorio).string().c_str());
+	}
+}
 static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
 {
 	/// cor difusa
@@ -246,7 +263,7 @@ void bubble::fase::analizar(const char* diretorio)
 
 void bubble::fase::pausar()
 {
-	fila.push([this]() 
+	file_de_tarefas.push([this]() 
 		{
 			debug::emitir("fase", "Pausando");
 			rodando = false;
@@ -290,11 +307,11 @@ void bubble::fase::atualizar(double deltaTime)
 	scodigo.atualizar();
 	srender.atualizar(); 
 	sinterface.atualizar();
-	while (!fila.empty())
+	while (!file_de_tarefas.empty())
 	{
-		auto func = fila.front();
+		auto func = file_de_tarefas.front();
 		func();
-		fila.pop();
+		file_de_tarefas.pop();
 	}
 }
 

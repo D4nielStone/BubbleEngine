@@ -486,6 +486,30 @@ src/nucleo/fase.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/fase.cpp.s
 .PHONY : src/nucleo/fase.cpp.s
 
+src/nucleo/projeto.o: src/nucleo/projeto.cpp.o
+.PHONY : src/nucleo/projeto.o
+
+# target to build an object file
+src/nucleo/projeto.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.o
+.PHONY : src/nucleo/projeto.cpp.o
+
+src/nucleo/projeto.i: src/nucleo/projeto.cpp.i
+.PHONY : src/nucleo/projeto.i
+
+# target to preprocess a source file
+src/nucleo/projeto.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.i
+.PHONY : src/nucleo/projeto.cpp.i
+
+src/nucleo/projeto.s: src/nucleo/projeto.cpp.s
+.PHONY : src/nucleo/projeto.s
+
+# target to generate assembly for a file
+src/nucleo/projeto.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.s
+.PHONY : src/nucleo/projeto.cpp.s
+
 src/nucleo/sistema.o: src/nucleo/sistema.cpp.o
 .PHONY : src/nucleo/sistema.o
 
@@ -730,6 +754,9 @@ help:
 	@echo "... src/nucleo/fase.o"
 	@echo "... src/nucleo/fase.i"
 	@echo "... src/nucleo/fase.s"
+	@echo "... src/nucleo/projeto.o"
+	@echo "... src/nucleo/projeto.i"
+	@echo "... src/nucleo/projeto.s"
 	@echo "... src/nucleo/sistema.o"
 	@echo "... src/nucleo/sistema.i"
 	@echo "... src/nucleo/sistema.s"

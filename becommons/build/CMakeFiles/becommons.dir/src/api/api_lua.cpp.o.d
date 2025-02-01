@@ -624,6 +624,10 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/projeto.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
  /source/repos/BubbleEngine/becommons/include/util/malha.hpp \

@@ -8,7 +8,7 @@
 #pragma once
 #include "tempo.hpp"
 #include <GLFW/glfw3.h>
-#include "util/vetor4.hpp"
+#include "util/vetor2.hpp"
 #include "nucleo/sistema.hpp"
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "inputs/inputs.hpp"
@@ -29,7 +29,7 @@ namespace bubble
 		vet2 tamanho;
 		GLFWwindow* window;
 		bubble::inputs inputs;
-		janela(const char* nome, const char* icon_path = nullptr);
+		janela(const char* nome, vet2 bounds = vet2(600, 400), const char* icon_path = nullptr);
 		~janela();
 		void poll() const;
 		void swap();

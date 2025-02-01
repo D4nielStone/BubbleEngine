@@ -23,7 +23,7 @@
 				{
 					"tipo": "fisica",
 					"forma": "esfera",
-					"posicao_inicial": [0, -1.45, -5.0],
+					"posicao_inicial": [0, 0, -4],
 					"raio": 0.3,
 					"massa": 1.0
 				}
@@ -92,7 +92,7 @@
 					"tipo": "camera",
 					"posicao": [10,15,10],
 					"ceu": [93, 83,114, 255.0],
-					"escala": 20.0,
+					"escala": 10.0,
 					"ortho": false
 				},
 				{
@@ -127,7 +127,7 @@
 			[
 				{
 					"tipo": "transformacao",
-					"posicao": [0.0,-1.5,4.45],
+					"posicao": [0.0,0,4],
 					"rotacao": [0.0,270.0,0.0],
 					"escala": [2.0,2.0,2.0]
 				},
@@ -201,20 +201,6 @@
 					"posicao": [0.0,0.0,0.0],
 					"rotacao": [0.0,0.0,0.0],
 					"escala": [0.3,0.3,0.3]
-				},
-				{
-					"tipo": "renderizador",
-					"diretorio": "/Golf/objetos/bola.obj",
-					"malhas":[
-						{
-							"id": "todos",
-							"sobrepor": true
-						}
-					]
-				},
-				{
-					"tipo": "codigo",
-					"diretorio": "/Golf/scripts/vidas.lua"
 				}
 			]
 		},

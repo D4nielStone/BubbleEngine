@@ -17,8 +17,9 @@ namespace bubble
         std::vector<unsigned int> indices;
         bubble::material material;
 
-        malha(std::vector<vertice> vertices, std::vector<unsigned int> indices, bubble::material& material);
+        malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, bubble::material& material);
         ~malha();
+        void descarregar();
         void desenhar(bubble::shader& shader);
     private:
         //  dados de renderizacao

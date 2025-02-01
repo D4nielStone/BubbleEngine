@@ -1,5 +1,6 @@
 #include "api/api_lua.hpp"
 #include "nucleo/fase.hpp"
+#include "nucleo/projeto.hpp"
 #include "componentes/renderizador.hpp"
 #include "nucleo/sistema_de_fisica.hpp"
 #include "componentes/codigo.hpp"
@@ -15,44 +16,51 @@ T lerp(T start, T end, T alpha) {
 
 void bapi::entidade::destruir() const
 {
-	auto componentes = fase_atual->obterRegistro()->obterComponentes(id);
+	auto componentes = projeto_atual->fase_atual->obterRegistro()->obterComponentes(id);
 	if (componentes & bubble::componente::COMPONENTE_CAM)
-		fase_atual->obterRegistro()->remover<camera>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<camera>(id);
 	if (componentes & bubble::componente::COMPONENTE_RENDER)
-		fase_atual->obterRegistro()->remover<renderizador>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<renderizador>(id);
 	if (componentes & bubble::componente::COMPONENTE_TRANSFORMACAO)
-		fase_atual->obterRegistro()->remover<transformacao>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<transformacao>(id);
 	if (componentes & bubble::componente::COMPONENTE_CODIGO)
-		fase_atual->obterRegistro()->remover<codigo>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<codigo>(id);
 	if (componentes & bubble::componente::COMPONENTE_FISICA)
-		fase_atual->obterRegistro()->remover<fisica>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<fisica>(id);
 	if (componentes & bubble::componente::COMPONENTE_TEXTO)
-		fase_atual->obterRegistro()->remover<texto>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<texto>(id);
 	if (componentes & bubble::componente::COMPONENTE_IMAGEM)
-		fase_atual->obterRegistro()->remover<imagem>(id);
+		projeto_atual->fase_atual->obterRegistro()->remover<imagem>(id);
 
 }
 
 bapi::entidade::entidade(const uint32_t& id) : id(id)
 {
-	if (fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
-		_Mtransformacao = fase_atual->obterRegistro()->obter<bubble::transformacao>(id).get();
-	if (fase_atual->obterRegistro()->tem<bubble::camera>(id))
-		_Mcamera = fase_atual->obterRegistro()->obter<bubble::camera>(id).get();
-	if (fase_atual->obterRegistro()->tem<bubble::texto>(id))
-		_Mtexto = fase_atual->obterRegistro()->obter<bubble::texto>(id).get();
-	if (fase_atual->obterRegistro()->tem<bubble::imagem>(id))
-		_Mimagem = fase_atual->obterRegistro()->obter<bubble::imagem>(id).get();
-	if (fase_atual->obterRegistro()->tem<bubble::fisica>(id))
-		_Mfisica = fase_atual->obterRegistro()->obter<bubble::fisica>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::transformacao>(id))
+		_Mtransformacao = projeto_atual->fase_atual->obterRegistro()->obter<bubble::transformacao>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::camera>(id))
+		_Mcamera = projeto_atual->fase_atual->obterRegistro()->obter<bubble::camera>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::texto>(id))
+		_Mtexto = projeto_atual->fase_atual->obterRegistro()->obter<bubble::texto>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::imagem>(id))
+		_Mimagem = projeto_atual->fase_atual->obterRegistro()->obter<bubble::imagem>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::fisica>(id))
+		_Mfisica = projeto_atual->fase_atual->obterRegistro()->obter<bubble::fisica>(id).get();
 }
 void bapi::definirFisica(lua_State* L)
 {
 	luabridge::getGlobalNamespace(L).
-		beginClass<bubble::fase>("fase").		///< define vetor3
+		beginClass<bubble::fase>("fase").		///< define fase
 		addConstructor<void(*)(const char*)>().
 		addFunction("pausar", &bubble::fase::pausar).
 		addFunction("parar", &bubble::fase::parar).
+		addFunction("iniciar", &bubble::fase::iniciar).
+		addFunction("nome", &bubble::fase::nome).
+		endClass().
+		beginClass<bubble::projeto>("projeto").		///< define projeto
+		addConstructor<void(*)(const std::string&)>().
+		addFunction("abrirFase", &bubble::projeto::fase).
+		addFunction("faseAtual", &bubble::projeto::obterFaseAtual).
 		endClass().
 		beginClass<btCollisionObject>("objetoDeColisao").			///< define transformacao
 		addConstructor<void(*)()>().
@@ -88,7 +96,7 @@ void bapi::definirFisica(lua_State* L)
 void bapi::definirTempo(lua_State *L)
 {
 	std::function<double()> obterDeltaTimeFunc = []() -> double {
-		if (!fase_atual) {
+		if (!projeto_atual->fase_atual) {
 			return 0.0;
 		}
 		return instanciaJanela->_Mtempo.obterDeltaTime();

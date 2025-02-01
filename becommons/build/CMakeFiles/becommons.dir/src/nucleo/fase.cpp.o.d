@@ -595,6 +595,10 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/projeto.hpp \
  /usr/include/rapidjson/rapidjson.h /usr/include/rapidjson/document.h \
  /usr/include/rapidjson/reader.h /usr/include/rapidjson/allocators.h \
  /usr/include/rapidjson/rapidjson.h /usr/include/rapidjson/stream.h \
@@ -635,7 +639,4 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/c++/13/optional /usr/include/c++/13/span \
  /usr/include/c++/13/variant /usr/include/GLFW/glfw3.h \
  /source/repos/BubbleEngine/becommons/include/inputs/inputs.hpp \
- /source/repos/BubbleEngine/becommons/include/os/sistema.hpp \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h
+ /source/repos/BubbleEngine/becommons/include/os/sistema.hpp

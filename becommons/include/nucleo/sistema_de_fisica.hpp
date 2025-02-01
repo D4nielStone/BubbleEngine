@@ -14,7 +14,7 @@
 
 namespace bubble
 {
-    inline btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
+    inline static btDiscreteDynamicsWorld* mundoDinamicoPrincipal;
     
     class sistemaFisica : public sistema {
     public:

@@ -14,5 +14,13 @@ namespace bubble
 		{
 		}
 		renderizador(const char* diretorio = "") {};
+		~renderizador()
+		{
+			for(auto& malha : modelo->malhas)
+			{
+				malha.descarregar();
+			}
+			delete modelo;
+		}
 	};
 }

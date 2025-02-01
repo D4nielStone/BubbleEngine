@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/becommons.dir/src/inputs/inputs.cpp.o.d"
   "CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o"
   "CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o.d"
+  "CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.o"
+  "CMakeFiles/becommons.dir/src/nucleo/projeto.cpp.o.d"
   "CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o"
   "CMakeFiles/becommons.dir/src/nucleo/sistema.cpp.o.d"
   "CMakeFiles/becommons.dir/src/nucleo/sistema_de_codigo.cpp.o"
