@@ -21,3 +21,6 @@ pull requests são bem-vindas. Para maiores alterações, por favor abra uma dis
 [MIT](https://choosealicense.com/licenses/mit/)
 
 # ScreenShots
+![image](https://github.com/user-attachments/assets/215acec4-dfc3-4be6-8fab-0ba943bb36d0)
+![image](https://github.com/user-attachments/assets/dcd15824-1e2a-4ef1-a0b8-441722cd36d0)
+
