@@ -13,9 +13,8 @@ namespace bubble
 {
     class projeto
     {
-        private:
-            std::string diretorioDoProjeto;
         public:
+            std::string diretorioDoProjeto;
             /// @brief construtor
             /// @param diretorio 
             inline static bubble::fase* fase_atual{ nullptr };

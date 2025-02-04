@@ -1,4 +1,0 @@
-won=false
-lost=false
-trys=2
-level=0

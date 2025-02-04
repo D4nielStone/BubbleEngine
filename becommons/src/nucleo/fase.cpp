@@ -132,7 +132,7 @@ static void analizarEntidades(Document& doc, fase* f)
 				}
 				else if (std::strcmp(tipo_str, "renderizador") == 0)
 				{
-					auto path = obterExecDir() + std::string(componente["diretorio"].GetString());
+					auto path = projeto_atual->diretorioDoProjeto + std::string(componente["diretorio"].GetString());
 					reg->adicionar<renderizador>(id, new modelo(path.c_str()));
 					auto render = reg->obter<renderizador>(id.id);
 					/// extrai sahder
@@ -187,16 +187,16 @@ static void analizarEntidades(Document& doc, fase* f)
 				}
 				else if (std::strcmp(tipo_str, "codigo") == 0)
 				{
-					reg->adicionar<codigo>(id,obterExecDir()+ componente["diretorio"].GetString());
+					reg->adicionar<codigo>(id,projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
 				}
 				else if (std::strcmp(tipo_str, "imagem") == 0)
 				{
-					reg->adicionar<imagem>(id,obterExecDir()+ componente["diretorio"].GetString());
+					reg->adicionar<imagem>(id,projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
 					reg->obter<imagem>(id.id)->flip = componente["flip"].GetBool();
 				}
 				else if (std::strcmp(tipo_str, "codigo") == 0)
 				{
-					reg->adicionar<codigo>(id, obterExecDir() + componente["diretorio"].GetString());
+					reg->adicionar<codigo>(id, projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
 				}
 				else if (std::strcmp(tipo_str, "fisica") == 0)
 				{
