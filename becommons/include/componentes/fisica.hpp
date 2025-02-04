@@ -27,7 +27,9 @@ namespace bubble
         void definirPosicao(const glm::vec3& posicao); 
         void definirRotacao(const glm::vec3& rotacao);
         glm::vec3 obterVelocidade() const;
+        glm::vec3 obterPosicao() const;
         void init();
+
     private:
         bool malha{ false };
         btCollisionShape* forma;

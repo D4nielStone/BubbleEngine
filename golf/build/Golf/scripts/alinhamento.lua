@@ -20,7 +20,7 @@ function atualizar()
 	s = inputs:tamanhoTela().y / 6
 
 	gs:load()
-	if inputs.pressionada("MouseE") or gs.won then
+	if inputs.pressionada("MouseE") or gs.won or gs.lost then
 		gatilho = true
 		eu.imagem.limite = vetor2d(0, 0)
 	else

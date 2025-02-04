@@ -74,6 +74,13 @@ namespace bapi
 				addData<bubble::cor>("difusa", &bubble::imagem::difusa, true).
 				addFunction("definirID", &bubble::imagem::definirID).
 				endClass().
+				beginClass<bubble::texto>("texto").
+				addConstructor<void(*)(const std::string&)>().
+				addConstructor<void(*)(const std::string&,float)>().
+				addData("frase", &bubble::texto::frase).
+				addData("fonte", &bubble::texto::fonte).
+				addData("cor", &bubble::texto::cor).
+				endClass().
 				beginClass<bubble::camera>("camera").			///< define camera
 				addConstructor<void(*)()>().
 				addFunction("pontoParaRaio", &bubble::camera::pontoParaRaio).
@@ -96,6 +103,7 @@ namespace bapi
 				addData("transformacao", &bapi::entidade::_Mtransformacao, true).
 				addData("camera", &bapi::entidade::_Mcamera, true).
 				addData("imagem", &bapi::entidade::_Mimagem, true).
+				addData("texto", &bapi::entidade::_Mtexto, true).
 				addData("fisica", &bapi::entidade::_Mfisica, true).
 				addData("id", &bapi::entidade::id, false).
 				addFunction("destruir", &bapi::entidade::destruir).

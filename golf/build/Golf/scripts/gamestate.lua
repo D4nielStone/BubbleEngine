@@ -2,7 +2,7 @@
 GameState = {
     won = false,
     lost = false,
-    score = 0,
+    trys = 0,
     level = 0
 }
 
@@ -14,18 +14,18 @@ function GameState.setLose()
     GameState.lost = true
 end
 
-function GameState.addScore(points)
-    GameState.score = GameState.score + points
+function GameState.setTrys(new_trys)
+    GameState.trys = new_trys
 end
 
 function GameState.write()
     file = io.open("golfgamestate.txt", "w")
     file:write(
         string.format(
-        "won=%s\nlost=%s\nscore=%d\nlevel=%d\n",
+        "won=%s\nlost=%s\ntrys=%d\nlevel=%d\n",
         tostring(GameState.won),
         tostring(GameState.lost),
-        GameState.score,
+        GameState.trys,
         GameState.level)
     )
     file:close()
@@ -45,6 +45,7 @@ function GameState.load()
                 elseif value == "false" then
                     GameState[key] = false
                 else
+                    -- Allow for negative numbers by using tonumber directly
                     GameState[key] = tonumber(value) or value
                 end
             end

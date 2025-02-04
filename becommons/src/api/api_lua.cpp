@@ -85,6 +85,7 @@ void bapi::definirFisica(lua_State* L)
 		addFunction("defVelocidade", &bubble::fisica::aplicarVelocidade).
 		addFunction("obtVelocidade", &bubble::fisica::obterVelocidade).
 		addFunction("defPosicao", &bubble::fisica::definirPosicao).
+		addFunction("obtPosicao", &bubble::fisica::obterPosicao).
 		addFunction("defRotacao", &bubble::fisica::definirRotacao).
 		addFunction("corpoRigido", &bubble::fisica::obterCorpoRigido).
 		endClass().

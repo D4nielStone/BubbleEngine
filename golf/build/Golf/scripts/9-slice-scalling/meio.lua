@@ -10,10 +10,6 @@ local s = config.padding + config.escalaBorda
 function iniciar()
 	eu.imagem.limite = vetor2d(1,0)
 	eu.imagem.padding = vetor2d(inputs:tamanhoTela().x/2,inputs:tamanhoTela().y/2)
-	if projetoAtual:faseAtual():nome() == "Tutorial" then
-		gamestate.write()
-		
-	end
 end
 function atualizar()
 	gamestate.load()
@@ -29,6 +25,7 @@ function atualizar()
 	if eu.imagem.limite.x < 0.5 then
 		gamestate.level = gamestate.level + 1
     	gamestate.won = false
+    	gamestate.lost = false
 		gamestate.write()
         projetoAtual:abrirFase("level" .. tostring(gamestate.level))
 	end

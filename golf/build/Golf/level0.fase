@@ -315,6 +315,19 @@
 					"diretorio": "/Golf/scripts/9-slice-scalling/borda_bd.lua"
 				}
 			]
+		},
+		{
+			"componentes":
+			[
+				{
+					"tipo": "texto",
+					"frase": "Tentativas"
+				},
+				{
+					"tipo": "codigo",
+					"diretorio": "/Golf/scripts/tentativas.lua"
+				}
+			]
 		}
 	]
 }

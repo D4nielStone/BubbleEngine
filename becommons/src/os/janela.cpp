@@ -19,6 +19,7 @@ bubble::janela::janela(const char* nome, vet2 bounds, const char* icon_path)
         debug::emitir(Erro, "Iniciando janela glfw");
         abort();
     }
+    
     window = glfwCreateWindow(bounds.x, bounds.y, nome, NULL, NULL);
     if (!window) {
         debug::emitir(Erro, "Janla invalida");

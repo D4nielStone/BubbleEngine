@@ -10,6 +10,7 @@ local meio
 local script_path = debug.getinfo(1, "S").source:sub(2):match("(.*/)")
 package.path = package.path .. ";" .. script_path .. "?.lua"
 local modulo = require("arrastando")
+local gamestate = require("gamestate")
 
 function iniciar()
     cubo = entidade(10) -- Criar o cubo
@@ -20,6 +21,7 @@ function iniciar()
 end
 
 function atualizar()
+    gamestate.load()
     local deltaTime = tempo.obterDeltaTime()
     local tamanhoTela = inputs:tamanhoTela()
     local meioTela = vetor2d(tamanhoTela.x / 2, tamanhoTela.y / 2)
@@ -59,12 +61,14 @@ function atualizar()
                                     eu.fisica:obtVelocidade().y +
                                     eu.fisica:obtVelocidade().z 
 
-            if contando_forca and not inputs.pressionada("MouseE") and velocidadetotal < 0.1 then
+            if contando_forca and not inputs.pressionada("MouseE") and velocidadetotal < 0.1 and not gamestate.lost then
                 eu.fisica:defVelocidade(vetor3(
                     direcao.x * -(distancia_ * forca * deltaTime),
                     0,
                     direcao.z * -(distancia_ * forca * deltaTime)
                 ))
+                gamestate.setTrys(gamestate.trys - 1)
+                gamestate.write()
             end
 
             -- O arrasto serve para detectar se o mouse está 

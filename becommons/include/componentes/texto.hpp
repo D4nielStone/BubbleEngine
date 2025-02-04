@@ -11,7 +11,7 @@ namespace bubble
 	struct texto : componente
 	{
 		constexpr static componente::mascara mascara = componente::COMPONENTE_TEXTO;
-		std::string frase;
+		std::string frase, fonte = "noto_sans.regular.ttf";
 		const float escala;
 		bubble::vetor2<int> padding{0,0};
 		bubble::cor cor;

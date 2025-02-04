@@ -113,10 +113,22 @@ void bubble::fisica::aplicarVelocidade(const glm::vec3& velocidade)
 // definir posi��o
 void bubble::fisica::definirPosicao(const glm::vec3& posicao)
 {
-    btTransform bt;
-    estadoDeMovimento->getWorldTransform(bt); // Recupera transforma��o atual
-    bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Define nova posi��o
-    estadoDeMovimento->setWorldTransform(bt); // Aplica transforma��o
+    _Mtransformacao->posicao = posicao;
+    // Ensure the rigid body exists
+    if (estadoDeMovimento)
+    {
+        // Create a new transform with the updated position
+        btTransform bt;
+        estadoDeMovimento->getWorldTransform(bt); // Get the current transform
+        bt.setOrigin(btVector3(posicao.x, posicao.y, posicao.z)); // Set the new position
+
+            estadoDeMovimento->setWorldTransform(bt); // Update the transform
+            corpoRigido->setLinearVelocity(btVector3(0, 0, 0)); // Reset velocity to avoid unwanted movement
+            corpoRigido->setAngularVelocity(btVector3(0, 0, 0)); // Reset angular velocity
+            corpoRigido->activate(); // Reactivate the body if it was sleeping
+            corpoRigido->setMotionState(estadoDeMovimento);
+        
+    }
 }
 
 // definir rota��o
@@ -136,4 +148,14 @@ glm::vec3 bubble::fisica::obterVelocidade() const
     return { corpoRigido->getLinearVelocity().getX(),
             corpoRigido->getLinearVelocity().getY(),
             corpoRigido->getLinearVelocity().getZ() };
+}// Obter velocidade
+glm::vec3 bubble::fisica::obterPosicao() const
+{
+    btTransform bt;
+    corpoRigido->getMotionState()->getWorldTransform(bt);
+    return { 
+        bt.getOrigin().getX(),
+        bt.getOrigin().getY(),
+        bt.getOrigin().getZ()
+    };
 }

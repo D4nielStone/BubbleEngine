@@ -116,7 +116,7 @@ namespace bubble
 
         // iterate through all characters
         std::string::const_iterator c;
-        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter("noto_sans.regular.ttf");
+        auto& chs = bubble::gerenciadorFontes::obterInstancia().obter(text.fonte);
         for(char32_t ca : text.frase)
         {
             if (chs.empty())
