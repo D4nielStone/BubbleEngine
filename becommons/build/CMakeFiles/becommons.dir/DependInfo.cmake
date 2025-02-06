@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/source/repos/BubbleEngine/becommons/src/componentes/camera.cpp" "CMakeFiles/becommons.dir/src/componentes/camera.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/componentes/camera.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/componentes/codigo.cpp" "CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/componentes/fisica.cpp" "CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o.d"
+  "/source/repos/BubbleEngine/becommons/src/componentes/terreno.cpp" "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/componentes/transformacao.cpp" "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/depuracao/debug.cpp" "CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o.d"
   "/source/repos/BubbleEngine/becommons/src/entidades/entidade.cpp" "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o" "gcc" "CMakeFiles/becommons.dir/src/entidades/entidade.cpp.o.d"

@@ -40,6 +40,7 @@ target_sources(becommons PRIVATE
     src/componentes/codigo.cpp
     src/componentes/fisica.cpp
     src/componentes/transformacao.cpp
+    src/componentes/terreno.cpp
     src/depuracao/debug.cpp
     src/entidades/entidade.cpp
     src/inputs/inputs.cpp

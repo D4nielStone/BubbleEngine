@@ -1,6 +1,7 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura vetor3 */
+#include <cmath>
+/* Definiï¿½ï¿½o da estrutura vetor3 */
 
 namespace bubble
 {
@@ -9,10 +10,10 @@ namespace bubble
     {
         T x, y, z;
 
-        // Construtor com parâmetros
+        // Construtor com parï¿½metros
         vetor3(T x, T y, T z) : x(x), y(y), z(z) {}
 
-        // Construtor padrão
+        // Construtor padrï¿½o
         vetor3() : x(T{}), y(T{}), z(T{}) {}
 
         // Operador de soma com outro vetor3
@@ -45,19 +46,19 @@ namespace bubble
             return *this;
         }
 
-        // Operador de subtração com outro vetor3
+        // Operador de subtraï¿½ï¿½o com outro vetor3
         vetor3 operator-(const vetor3& other) const
         {
             return vetor3{ x - other.x, y - other.y, z - other.z };
         }
 
-        // Operador de subtração com um escalar
+        // Operador de subtraï¿½ï¿½o com um escalar
         vetor3 operator-(const T& scalar) const
         {
             return vetor3{ x - scalar, y - scalar, z - scalar };
         }
 
-        // Operador de subtração acumulada com outro vetor3
+        // Operador de subtraï¿½ï¿½o acumulada com outro vetor3
         vetor3& operator-=(const vetor3& other)
         {
             x -= other.x;
@@ -66,7 +67,7 @@ namespace bubble
             return *this;
         }
 
-        // Operador de subtração acumulada com um escalar
+        // Operador de subtraï¿½ï¿½o acumulada com um escalar
         vetor3& operator-=(const T& scalar)
         {
             x -= scalar;
@@ -75,19 +76,19 @@ namespace bubble
             return *this;
         }
 
-        // Operador de multiplicação com outro vetor3
+        // Operador de multiplicaï¿½ï¿½o com outro vetor3
         vetor3 operator*(const vetor3& other) const
         {
             return vetor3{ x * other.x, y * other.y, z * other.z };
         }
 
-        // Operador de multiplicação com um escalar
+        // Operador de multiplicaï¿½ï¿½o com um escalar
         vetor3 operator*(const T& scalar) const
         {
             return vetor3{ x * scalar, y * scalar, z * scalar };
         }
 
-        // Operador de multiplicação acumulada com outro vetor3
+        // Operador de multiplicaï¿½ï¿½o acumulada com outro vetor3
         vetor3& operator*=(const vetor3& other)
         {
             x *= other.x;
@@ -96,7 +97,7 @@ namespace bubble
             return *this;
         }
 
-        // Operador de multiplicação acumulada com um escalar
+        // Operador de multiplicaï¿½ï¿½o acumulada com um escalar
         vetor3& operator*=(const T& scalar)
         {
             x *= scalar;
@@ -111,12 +112,19 @@ namespace bubble
             return x == other.x && y == other.y && z == other.z;
         }
 
-        // Operador de diferença
+        // Operador de diferenï¿½a
         bool operator!=(const vetor3& other) const
         {
             return !(*this == other);
         }
-
+        void normalizar()
+        {
+            float mag = std::sqrt(x*x + y*y + z*z);
+            if(mag < 0) return;
+            x = x / mag;
+            y = y / mag;
+            z = z / mag;
+        }
     };
 }
 

@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o.d"
   "CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o"
   "CMakeFiles/becommons.dir/src/componentes/fisica.cpp.o.d"
+  "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o"
+  "CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o.d"
   "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o"
   "CMakeFiles/becommons.dir/src/componentes/transformacao.cpp.o.d"
   "CMakeFiles/becommons.dir/src/depuracao/debug.cpp.o"

@@ -3,6 +3,7 @@
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
 #include "componentes/camera.hpp"
+#include "componentes/terreno.hpp"
 #include "nucleo/fase.hpp"
 #include "arquivadores/shader.hpp"
 #include "glm/gtc/type_ptr.hpp"
@@ -43,6 +44,20 @@ namespace bubble
             s.setMat4("modelo", transform->obter());
             render->modelo->desenhar(s);
             });
+        reg->cada<terreno, transformacao>([&](const uint32_t ent) {
+            auto terr = reg->obter<terreno>(ent);
+            auto transform = reg->obter<transformacao>(ent);
+            
+            auto s = terr->shader();
+
+            s.use();
+            s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
+            s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
+            s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
+            s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
+            s.setMat4("modelo", transform->obter());
+            terr->desenhar(s);
+        });
 
     if(camera->flag_fb){
         glBindFramebuffer(GL_FRAMEBUFFER, 0);

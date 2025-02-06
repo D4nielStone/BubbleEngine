@@ -366,6 +366,30 @@ src/componentes/fisica.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/fisica.cpp.s
 .PHONY : src/componentes/fisica.cpp.s
 
+src/componentes/terreno.o: src/componentes/terreno.cpp.o
+.PHONY : src/componentes/terreno.o
+
+# target to build an object file
+src/componentes/terreno.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/terreno.cpp.o
+.PHONY : src/componentes/terreno.cpp.o
+
+src/componentes/terreno.i: src/componentes/terreno.cpp.i
+.PHONY : src/componentes/terreno.i
+
+# target to preprocess a source file
+src/componentes/terreno.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/terreno.cpp.i
+.PHONY : src/componentes/terreno.cpp.i
+
+src/componentes/terreno.s: src/componentes/terreno.cpp.s
+.PHONY : src/componentes/terreno.s
+
+# target to generate assembly for a file
+src/componentes/terreno.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/becommons.dir/build.make CMakeFiles/becommons.dir/src/componentes/terreno.cpp.s
+.PHONY : src/componentes/terreno.cpp.s
+
 src/componentes/transformacao.o: src/componentes/transformacao.cpp.o
 .PHONY : src/componentes/transformacao.o
 
@@ -739,6 +763,9 @@ help:
 	@echo "... src/componentes/fisica.o"
 	@echo "... src/componentes/fisica.i"
 	@echo "... src/componentes/fisica.s"
+	@echo "... src/componentes/terreno.o"
+	@echo "... src/componentes/terreno.i"
+	@echo "... src/componentes/terreno.s"
 	@echo "... src/componentes/transformacao.o"
 	@echo "... src/componentes/transformacao.i"
 	@echo "... src/componentes/transformacao.s"

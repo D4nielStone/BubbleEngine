@@ -17,14 +17,15 @@ namespace bubble
         std::vector<unsigned int> indices;
         bubble::material material;
 
+        malha() = default;
         malha(std::vector<vertice>& vertices, std::vector<unsigned int> &indices, bubble::material& material);
         ~malha();
         void descarregar();
         void desenhar(bubble::shader& shader);
+        void definirBuffers();
     private:
         //  dados de renderizacao
         unsigned int VAO, VBO, EBO;
 
-        void definirBuffers();
     };
 }

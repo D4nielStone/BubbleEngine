@@ -6,6 +6,7 @@
 #include "componentes/codigo.hpp"
 #include "componentes/texto.hpp"
 #include "componentes/transformacao.hpp"
+#include "componentes/terreno.hpp"
 #include "componentes/propriedades.hpp"
 #include "componentes/fisica.hpp"
 #include "componentes/renderizador.hpp"
@@ -44,6 +45,7 @@ fase::fase(const char* diretorio) : diretorio(diretorio)
 		analizar(std::filesystem::absolute(diretorio).string().c_str());
 	}
 }
+
 fase::fase(const std::string& diretorio) : diretorio(diretorio.c_str())
 {
 	srender.inicializar(this);
@@ -60,7 +62,8 @@ fase::fase(const std::string& diretorio) : diretorio(diretorio.c_str())
 		analizar(std::filesystem::absolute(diretorio).string().c_str());
 	}
 }
-static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
+
+static void analizarMalha(bubble::malha* m, const rapidjson::Value& malha)
 {
 	/// cor difusa
 
@@ -88,8 +91,35 @@ static void analizarMalha(bubble::malha* m, rapidjson::Value& malha)
 	}
 }
 
-static void analizarEntidades(Document& doc, fase* f)
+static void analizarCamera(bubble::entidade& ent, const Value& value, bubble::fase* fase)
 {
+	auto reg = fase->obterRegistro();
+
+	reg->adicionar<camera>(ent);
+	fase->definirCamera(ent);
+	fase->obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
+	if (value.HasMember("olhar"))
+		reg->obter<transformacao>(ent.id)->apontarEntidade(value["apontarEntidade"].GetInt());
+	if (value.HasMember("escala"))
+		fase->obterCamera()->escala = value["escala"].GetFloat();
+	if (value.HasMember("ortho"))
+		fase->obterCamera()->flag_orth = value["ortho"].GetBool();
+	if (value.HasMember("ceu"))
+	{
+		auto ceu = value["ceu"].GetArray();
+		fase->obterCamera()->ceu =
+		{
+			ceu[0].GetFloat() / 255,
+			ceu[1].GetFloat() / 255,
+			ceu[2].GetFloat() / 255,
+			ceu[3].GetFloat() / 255,
+		};
+	}
+}
+
+static void analizarEntidades(const Document& doc, fase* f)
+{
+	/// facilita acesso ao registro
 	auto reg = f->obterRegistro();
 	if (!(doc.HasMember("entidades") && doc["entidades"].IsArray())) return;
 
@@ -107,28 +137,7 @@ static void analizarEntidades(Document& doc, fase* f)
 				const char* tipo_str = componente["tipo"].GetString();
 				if (std::strcmp(tipo_str, "camera") == 0)
 				{
-					reg->adicionar<camera>(id);
-					f->definirCamera(id);
-					auto arr = componente["posicao"].GetArray();
-					f->obterCamera()->posicao = {arr[0].GetFloat(), arr[1].GetFloat(), arr[2].GetFloat()};
-					f->obterCamera()->viewport_ptr = &instanciaJanela->tamanho;
-					if (componente.HasMember("olhar"))
-						reg->obter<transformacao>(id.id)->apontarEntidade(componente["apontarEntidade"].GetInt());
-					if (componente.HasMember("escala"))
-						f->obterCamera()->escala = componente["escala"].GetFloat();
-					if (componente.HasMember("ortho"))
-						f->obterCamera()->flag_orth = componente["ortho"].GetBool();
-					if (componente.HasMember("ceu"))
-					{
-						auto ceu = componente["ceu"].GetArray();
-						f->obterCamera()->ceu =
-						{
-							ceu[0].GetFloat() / 255,
-							ceu[1].GetFloat() / 255,
-							ceu[2].GetFloat() / 255,
-							ceu[3].GetFloat() / 255,
-						};
-					}
+					analizarCamera(id, componente, f);
 				}
 				else if (std::strcmp(tipo_str, "renderizador") == 0)
 				{
@@ -197,6 +206,19 @@ static void analizarEntidades(Document& doc, fase* f)
 				else if (std::strcmp(tipo_str, "codigo") == 0)
 				{
 					reg->adicionar<codigo>(id, projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
+				}
+				else if (std::strcmp(tipo_str, "terreno") == 0)
+				{
+					reg->adicionar<terreno>(id, projeto_atual->diretorioDoProjeto + componente["textura"].GetString());
+					if (componente.HasMember("textura_difusa") && componente["textura_difusa"].IsString())
+					{
+						bubble::textura tex;
+						tex.path = projeto_atual->diretorioDoProjeto +componente["textura_difusa"].GetString();
+						tex.id = bubble::textureLoader::obterInstancia().carregarTextura(tex.path, 3553U);
+						tex.tipo = "texture_diffuse";
+						reg->obter<terreno>(id.id)->_Mmalha.material.texturas.push_back(tex);
+						reg->obter<terreno>(id.id)->_Mmalha.material.uvMundo = true;
+					}
 				}
 				else if (std::strcmp(tipo_str, "fisica") == 0)
 				{

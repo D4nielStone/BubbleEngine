@@ -43,7 +43,7 @@ namespace bubble
         static textureLoader& obterInstancia();
         GLuint carregarTextura(const std::string& caminho, int* width = nullptr, int* height = nullptr);
         GLuint carregarTextura(const std::string& caminho, double* width, double* height);
-        GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura);
+        GLuint carregarTextura(const std::string& caminho, GLuint tipo_textura = GL_TEXTURE_2D);
         GLuint carregarSkybox(const char*, std::vector<std::string> faces);
         GLuint carregarAiTexture(const aiTexture* texture);
     private:

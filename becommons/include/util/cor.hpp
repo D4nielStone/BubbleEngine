@@ -1,11 +1,11 @@
 /** @copyright Copyright (c) 2024 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura cor */
+/* Definiï¿½ï¿½o da estrutura cor */
 namespace bubble
 {
     struct cor
     {
-        float r = 0.26f, g = 0.21f, b = 0.28f, a = 1.f;
+        float r = 1.0, g = 1.0, b = 1.0, a = 1.0;
         cor(const float& r, const float& g, const float& b, const float& a) : r(r), g(g), b(b), a(a) {};
         cor(const float& r, const float& g, const float& b) : r(r), g(g), b(b) {};
         cor() = default;
@@ -19,7 +19,7 @@ namespace bubble
         {
             return r == other.r && g == other.g && b == other.b && a == other.a;
         }
-        // Operador de diferença (!=)
+        // Operador de diferenï¿½a (!=)
         bool operator!=(const cor& other) const
         {
             return !(*this == other);

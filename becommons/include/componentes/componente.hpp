@@ -33,7 +33,8 @@ namespace bubble
 			COMPONENTE_TEXTO = 1 << 4,
 			COMPONENTE_CODIGO = 1 << 5,
 			COMPONENTE_IMAGEM = 1 << 6,
-			COMPONENTE_FISICA = 1 << 7
+			COMPONENTE_FISICA = 1 << 7,
+			COMPONENTE_TERRENO = 1 << 8
 		};
 		uint32_t meu_objeto{ 0 };
 		componente() = default;
