@@ -27,10 +27,15 @@ void bapi::entidade::destruir() const
 		projeto_atual->fase_atual->obterRegistro()->remover<codigo>(id);
 	if (componentes & bubble::componente::COMPONENTE_FISICA)
 		projeto_atual->fase_atual->obterRegistro()->remover<fisica>(id);
-	if (componentes & bubble::componente::COMPONENTE_TEXTO)
+	if (
+      componentes & bubble::componente::COMPONENTE_TEXTO)
 		projeto_atual->fase_atual->obterRegistro()->remover<texto>(id);
-	if (componentes & bubble::componente::COMPONENTE_IMAGEM)
+	if (
+      componentes & bubble::componente::COMPONENTE_IMAGEM)
 		projeto_atual->fase_atual->obterRegistro()->remover<imagem>(id);
+	if (
+      componentes & bubble::componente::COMPONENTE_LUZ_DIRECIONAL)
+		projeto_atual->fase_atual->obterRegistro()->remover<luz_direcional>(id);
 
 }
 
@@ -46,6 +51,8 @@ bapi::entidade::entidade(const uint32_t& id) : id(id)
 		_Mimagem = projeto_atual->fase_atual->obterRegistro()->obter<bubble::imagem>(id).get();
 	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::fisica>(id))
 		_Mfisica = projeto_atual->fase_atual->obterRegistro()->obter<bubble::fisica>(id).get();
+	if (projeto_atual->fase_atual->obterRegistro()->tem<bubble::luz_direcional>(id))
+		_MluzDir = projeto_atual->fase_atual->obterRegistro()->obter<bubble::luz_direcional>(id).get(); 
 }
 void bapi::definirFisica(lua_State* L)
 {

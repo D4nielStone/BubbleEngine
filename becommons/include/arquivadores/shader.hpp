@@ -9,6 +9,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "util/cor.hpp"
 #include "util/vetor4.hpp"
+#include "util/vetor3.hpp"
 
 namespace bubble
 {
@@ -40,7 +41,8 @@ namespace bubble
         void setCor(const std::string& name, const bubble::cor& cor) const;
         void setVec4(const std::string& name, const vetor4<int>& vec4) const;
         void setVec3(const std::string& name, const float& r, const float& g, const float& b) const;
-        void setVec2(const std::string& name, const float& r, const float& g) const;
+        void setVec3(const std::string &name, const vet3 &vet) const;
+        void setVec2(const std::string &name, const float &r, const float &g) const;
         void setMat4(const std::string& name, const float* value) const;
         void setMat3(const std::string& name, const float* value) const;
         bool checkCompileErrors(unsigned int shader, const std::string& type);

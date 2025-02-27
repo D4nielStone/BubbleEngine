@@ -33,6 +33,8 @@ namespace bubble
         unsigned int diffuseNr = 1;
         unsigned int specularNr = 1;
 
+        shader.setFloat("material.brilho", material.brilho);
+        shader.setCor("material.cor_especular", material.especular);
         shader.setCor("material.cor_difusa", material.difusa);
         shader.setBool("uvMundo", material.uvMundo);
         for (unsigned int i = 0; i < material.texturas.size(); i++)

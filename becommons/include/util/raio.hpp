@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
 #include <glm/glm.hpp>
 #include <bullet/btBulletDynamicsCommon.h>
@@ -13,8 +13,8 @@ namespace bubble
     };
     struct resultadoRaio {
         bool atingiu;                      // Se o raio atingiu algo
-        glm::vec3 pontoDeColisao;            // Ponto de colisão
-        glm::vec3 normalAtingida;           // Normal da superfície atingida
+        glm::vec3 pontoDeColisao;            // Ponto de colisï¿½o
+        glm::vec3 normalAtingida;           // Normal da superfï¿½cie atingida
         const btCollisionObject* objetoAtingido; // Objeto atingido
     };
 }

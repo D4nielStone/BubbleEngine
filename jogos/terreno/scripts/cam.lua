@@ -17,9 +17,13 @@ function atualizar()
     eu.transformacao.rotacao.x = eu.transformacao.rotacao.x + deltaY * sensibilidade
     
     if inputs.pressionada("W") then
-        eu.camera:mover(vetor3(0, 0, 10))
-    elseif inputs.pressionada("S") then
+        eu.camera:mover(vetor3(0, 0, 1))
+    end if inputs.pressionada("S") then
         eu.camera:mover(vetor3(0, 0, -1))
+    end if inputs.pressionada("A") then
+        eu.camera:mover(vetor3(-1, 0, 0))
+    end if inputs.pressionada("D") then
+        eu.camera:mover(vetor3(1, 0, 0))
 end
    
 end

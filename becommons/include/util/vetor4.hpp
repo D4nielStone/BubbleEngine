@@ -1,6 +1,6 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura vetor4 */
+/* Definiï¿½ï¿½o da estrutura vetor4 */
 
 namespace bubble
 {
@@ -100,7 +100,7 @@ namespace bubble
         {
             return x == other.x && y == other.y && w == other.w && h == other.h;
         }
-        // Operador de diferença (!=)
+        // Operador de diferenï¿½a (!=)
         bool operator!=(const vetor4& other) const
         {
             return !(*this == other);

@@ -13,6 +13,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp
@@ -1889,6 +1890,7 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o
  /source/repos/BubbleEngine/becommons/include/assets/shaders/texto_vert.hpp
  /source/repos/BubbleEngine/becommons/include/assets/shaders_na_memoria.hpp
  /source/repos/BubbleEngine/becommons/include/util/cor.hpp
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
@@ -3050,6 +3052,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp
@@ -7220,6 +7223,7 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/propriedades.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/terreno.hpp
@@ -11484,6 +11488,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o
  /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/terreno.hpp
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp

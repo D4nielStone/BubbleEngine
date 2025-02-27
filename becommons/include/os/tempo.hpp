@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 /**
  * @file tempo.hpp
@@ -22,7 +22,7 @@ namespace bubble
         {
             auto tempoAtual = std::chrono::high_resolution_clock::now();
             delta = tempoAtual - tempoCorrido;
-            tempoCorrido = tempoAtual; // Atualiza o último tempo
+            tempoCorrido = tempoAtual; // Atualiza o ï¿½ltimo tempo
         }
 
         std::chrono::duration<double> delta;

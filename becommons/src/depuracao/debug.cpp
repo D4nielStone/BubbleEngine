@@ -1,5 +1,5 @@
 
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 #include "depuracao/debug.hpp"
 #include <iostream>
@@ -16,7 +16,7 @@ std::vector<std::string> debug::obterMensagems()
 }
 
 void debug::emitir(Tipo t, std::string msg) 
-{
+{/*
 	switch (t)
 	{
 	case Mensagem:
@@ -30,10 +30,10 @@ void debug::emitir(Tipo t, std::string msg)
 		break;
 	default:
 		break;
-	}
+	}*/
 }
 void debug::emitir(std::string t, std::string msg)
-{
+{/*
 	std::cout << "[" << t << "] " << msg << "\n";
-
+*/
 }

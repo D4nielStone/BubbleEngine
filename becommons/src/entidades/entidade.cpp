@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 #include "entidades/entidade.hpp"
 #include "componentes/renderizador.hpp"

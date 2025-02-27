@@ -12,6 +12,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: /source/repos/BubbleEngine/becom
   /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+  /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
@@ -1884,6 +1885,7 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: /source/repos/BubbleEngi
   /source/repos/BubbleEngine/becommons/include/assets/shaders/texto_vert.hpp \
   /source/repos/BubbleEngine/becommons/include/assets/shaders_na_memoria.hpp \
   /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
+  /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
   /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -3043,6 +3045,7 @@ CMakeFiles/becommons.dir/src/componentes/codigo.cpp.o: /source/repos/BubbleEngin
   /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+  /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp \
   /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
@@ -7206,6 +7209,7 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: /source/repos/BubbleEngine/becom
   /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+  /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/propriedades.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/terreno.hpp \
@@ -11464,6 +11468,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: /source/repos
   /source/repos/BubbleEngine/becommons/include/componentes/componente.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
+  /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/terreno.hpp \
   /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
@@ -13597,8 +13602,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
-
 /usr/include/x86_64-linux-gnu/asm/unistd_64.h:
 
 /usr/include/x86_64-linux-gnu/asm/errno.h:
@@ -13692,6 +13695,8 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/glm/ext/vector_uint1_sized.hpp:
 
 /usr/include/glm/ext/vector_uint1.hpp:
+
+/usr/include/glm/ext/vector_relational.inl:
 
 /usr/include/glm/ext/vector_uint4.hpp:
 
@@ -13967,13 +13972,13 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/assimp/matrix4x4.inl:
 
-/usr/include/lua5.3/lua.hpp:
-
-/source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp:
-
 /usr/include/assimp/Compiler/poppack1.h:
 
 /usr/include/c++/13/tr1/ell_integral.tcc:
+
+/usr/include/lua5.3/lua.hpp:
+
+/source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp:
 
 /usr/include/bullet/BulletDynamics/ConstraintSolver/btConstraintSolver.h:
 
@@ -13988,6 +13993,18 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/13/ext/type_traits.h:
+
+/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.cpp:
+
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btSolverConstraint.h:
+
+/source/repos/BubbleEngine/becommons/include/util/vetor3.hpp:
+
+/usr/include/glm/ext/matrix_clip_space.hpp:
+
+/source/repos/BubbleEngine/becommons/include/util/material.hpp:
+
+/usr/include/glm/ext/vector_bool4_precision.hpp:
 
 /usr/include/bullet/BulletCollision/NarrowPhaseCollision/btManifoldPoint.h:
 
@@ -14015,16 +14032,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/c++/13/memory:
 
-/usr/include/assimp/Compiler/pushpack1.h:
-
-/source/repos/BubbleEngine/becommons/include/componentes/codigo.hpp:
-
-/usr/include/c++/13/bits/memoryfwd.h:
-
-/usr/include/glm/detail/type_mat2x3.inl:
-
-/usr/include/glm/detail/type_vec2.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
 /usr/include/glm/mat4x3.hpp:
@@ -14033,51 +14040,35 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp:
 
-/source/repos/BubbleEngine/becommons/include/util/material.hpp:
+/usr/include/c++/13/array:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+/usr/include/x86_64-linux-gnu/asm/unistd.h:
 
-/usr/include/c++/13/bits/ostream.tcc:
+/usr/include/glm/detail/qualifier.hpp:
 
-/source/repos/BubbleEngine/becommons/include/util/vetor4.hpp:
+/usr/include/glm/detail/type_mat2x3.hpp:
 
-/usr/include/glm/mat4x4.hpp:
+/source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp:
 
-/source/repos/BubbleEngine/becommons/include/util/raio.hpp:
+/usr/include/glm/detail/type_mat4x3.hpp:
 
-/usr/include/c++/13/bits/iterator_concepts.h:
-
-/usr/include/glm/ext/vector_uint3.hpp:
-
-/usr/include/bullet/BulletCollision/CollisionShapes/btCollisionMargin.h:
-
-/usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h:
-
-/usr/include/assimp/material.inl:
-
-/usr/include/bullet/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h:
-
-/source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp:
-
-/source/repos/BubbleEngine/becommons/include/os/sistema.hpp:
-
-/usr/include/c++/13/bits/algorithmfwd.h:
-
-/usr/include/glm/ext/matrix_double2x3_precision.hpp:
-
-/source/repos/BubbleEngine/becommons/include/assets/shaders/imagem_vert.hpp:
-
-/usr/include/bullet/LinearMath/btHashMap.h:
-
-/usr/include/c++/13/backward/auto_ptr.h:
-
-/usr/include/assimp/quaternion.h:
-
-/usr/include/glm/mat2x4.hpp:
-
-/usr/include/c++/13/tr1/legendre_function.tcc:
+/source/repos/BubbleEngine/becommons/include/os/janela.hpp:
 
 /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp:
+
+/usr/include/bullet/btBulletCollisionCommon.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/bullet/BulletDynamics/ConstraintSolver/btGearConstraint.h:
+
+/usr/include/bullet/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h:
+
+/usr/include/c++/13/span:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp:
 
 /usr/include/glm/ext/vector_int3_sized.hpp:
 
@@ -14096,6 +14087,12 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/bullet/BulletCollision/BroadphaseCollision/btQuantizedBvh.h:
 
 /usr/include/glm/ext/vector_relational.hpp:
+
+/usr/include/c++/13/backward/auto_ptr.h:
+
+/source/repos/BubbleEngine/becommons/include/assets/shaders/imagem_vert.hpp:
+
+/usr/include/bullet/LinearMath/btHashMap.h:
 
 /source/repos/BubbleEngine/becommons/include/api/api_lua.hpp:
 
@@ -14117,39 +14114,11 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/bullet/BulletCollision/CollisionDispatch/btCollisionDispatcher.h:
 
-/usr/include/glm/ext/quaternion_trigonometric.inl:
-
-/usr/include/assert.h:
-
-/usr/include/bullet/BulletCollision/CollisionShapes/btCylinderShape.h:
-
 /usr/include/c++/13/bits/ranges_algobase.h:
 
 /usr/include/c++/13/bits/locale_facets_nonio.h:
 
-/usr/include/bullet/btBulletCollisionCommon.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btGearConstraint.h:
-
-/usr/include/bullet/BulletCollision/CollisionDispatch/btActivatingCollisionAlgorithm.h:
-
-/usr/include/c++/13/span:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp:
-
-/usr/include/glm/ext/vector_relational.inl:
-
 /usr/include/c++/13/bits/locale_facets.h:
-
-/usr/include/bullet/LinearMath/btScalar.h:
-
-/usr/include/c++/13/chrono:
-
-/usr/include/LuaBridge/detail/LuaHelpers.h:
 
 /usr/include/c++/13/bits/stl_multimap.h:
 
@@ -14179,6 +14148,62 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 
 /usr/include/bullet/BulletCollision/BroadphaseCollision/btDispatcher.h:
 
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp:
+
+/usr/include/rapidjson/reader.h:
+
+/usr/include/glm/detail/_fixes.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/c++locale.h:
+
+/usr/include/c++/13/bits/ostream.tcc:
+
+/source/repos/BubbleEngine/becommons/include/util/vetor4.hpp:
+
+/usr/include/glm/mat4x4.hpp:
+
+/source/repos/BubbleEngine/becommons/include/util/raio.hpp:
+
+/source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp:
+
+/source/repos/BubbleEngine/becommons/include/os/sistema.hpp:
+
+/usr/include/c++/13/bits/algorithmfwd.h:
+
+/usr/include/glm/ext/matrix_double2x3_precision.hpp:
+
+/usr/include/assimp/quaternion.h:
+
+/usr/include/glm/mat2x4.hpp:
+
+/usr/include/c++/13/tr1/legendre_function.tcc:
+
+/usr/include/c++/13/bits/iterator_concepts.h:
+
+/usr/include/glm/ext/vector_uint3.hpp:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btCollisionMargin.h:
+
+/usr/include/assert.h:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btCylinderShape.h:
+
+/usr/include/glm/ext/quaternion_trigonometric.inl:
+
+/usr/include/bullet/BulletDynamics/Dynamics/btActionInterface.h:
+
+/usr/include/assimp/material.inl:
+
+/usr/include/bullet/LinearMath/btScalar.h:
+
+/usr/include/LuaBridge/detail/LuaHelpers.h:
+
+/usr/include/c++/13/chrono:
+
+/usr/include/bullet/BulletCollision/CollisionShapes/btConvexTriangleMeshShape.h:
+
 /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp:
 
 /usr/include/bullet/BulletDynamics/ConstraintSolver/btUniversalConstraint.h:
@@ -14188,30 +14213,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
 /usr/include/glm/ext/matrix_double3x4_precision.hpp:
-
-/usr/include/glm/ext/vector_bool4_precision.hpp:
-
-/usr/include/c++/13/array:
-
-/usr/include/x86_64-linux-gnu/asm/unistd.h:
-
-/usr/include/glm/detail/qualifier.hpp:
-
-/usr/include/glm/detail/type_mat2x3.hpp:
-
-/source/repos/BubbleEngine/becommons/include/componentes/transformacao.hpp:
-
-/usr/include/glm/detail/type_mat4x3.hpp:
-
-/source/repos/BubbleEngine/becommons/include/os/janela.hpp:
-
-/source/repos/BubbleEngine/becommons/src/nucleo/sistema_de_codigo.cpp:
-
-/usr/include/bullet/BulletDynamics/ConstraintSolver/btSolverConstraint.h:
-
-/source/repos/BubbleEngine/becommons/include/util/vetor3.hpp:
-
-/usr/include/glm/ext/matrix_clip_space.hpp:
 
 /usr/include/freetype2/freetype/config/public-macros.h:
 
@@ -14226,6 +14227,16 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /source/repos/BubbleEngine/becommons/include/api/mat.hpp:
 
 /usr/include/bullet/BulletCollision/CollisionDispatch/btManifoldResult.h:
+
+/usr/include/assimp/Compiler/pushpack1.h:
+
+/source/repos/BubbleEngine/becommons/include/componentes/codigo.hpp:
+
+/usr/include/c++/13/bits/memoryfwd.h:
+
+/usr/include/glm/detail/type_mat2x3.inl:
+
+/usr/include/glm/detail/type_vec2.hpp:
 
 /usr/include/assimp/config.h:
 
@@ -14518,10 +14529,6 @@ CMakeFiles/becommons.dir/usr/include/glad/glad.c.o: /usr/include/glad/glad.c \
 /usr/include/glm/ext/matrix_float3x2_precision.hpp:
 
 /usr/include/glm/ext/quaternion_transform.hpp:
-
-/usr/include/rapidjson/reader.h:
-
-/usr/include/glm/detail/_fixes.hpp:
 
 /usr/include/c++/13/bits/stl_pair.h:
 

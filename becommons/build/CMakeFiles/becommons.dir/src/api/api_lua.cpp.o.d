@@ -578,6 +578,7 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/sstream.tcc /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
  /source/repos/BubbleEngine/becommons/include/componentes/fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
  /usr/include/lua5.3/lua.hpp /usr/include/lua5.3/lua.h \
  /usr/include/lua5.3/luaconf.h \
  /usr/include/x86_64-linux-gnu/lua5.3-deb-multiarch.h \
@@ -607,9 +608,11 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
  /source/repos/BubbleEngine/becommons/include/entidades/entidade.hpp \
  /source/repos/BubbleEngine/becommons/include/depuracao/debug.hpp \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -617,16 +620,14 @@ CMakeFiles/becommons.dir/src/api/api_lua.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream \
  /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
  /usr/include/c++/13/bits/fstream.tcc \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/projeto.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \

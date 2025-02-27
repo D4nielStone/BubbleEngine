@@ -1,5 +1,5 @@
 
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 inline unsigned char icon_png[] = {
   0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x0d, 0x0d, 0x00, 0x00, 0x00, 0x00,

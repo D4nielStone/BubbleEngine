@@ -3,14 +3,16 @@ inline const char* phong_frag = R"(
 out vec4 FragColor;
 
 in vec2 Uv; // Coordenadas da textura
-in vec3 Normal;    // Normal da superfície
-in vec3 Position;   // Posição do fragmento
+in vec3 Normal;    // Normal da superfï¿½cie
+in vec3 Position;   // Posiï¿½ï¿½o do fragmento
+
+#define NUM_POINT_LIGHTS 5 
 
 struct Material
 {
     vec4 cor_difusa;
     vec4 cor_especular;
-    float brilho; // A intensidade do brilho especular (ex: shininess)
+    float brilho;
 };
 
 uniform Material material;
@@ -22,32 +24,43 @@ uniform bool uvMundo;
 
 uniform bool recebe_luz;
 
+struct DirLight {
+    vec3 direction;
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+uniform DirLight dirLight;
+vec4 baseColor;
+
+vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir);
 void main()
 {
-    vec3 result;
     vec2 novoUv = uvMundo ? Position.xz : Uv;
-    // Verifica se a textura existe ou se deve usar a cor base
-    vec4 texColor = texture(texture_diffuse1, novoUv);  // Obtém a cor da textura
-    vec4 baseColor = (texture_diffuse1_bool) ? texColor : material.cor_difusa;  // Cor final após aplicar a textura ou a cor base
-    if(recebe_luz)
-    {
+    // Verifica se a textura existe ou se deve usar a cor base 
+    vec4 texColor = texture(texture_diffuse1, novoUv);
+    baseColor = (texture_diffuse1_bool) ? texColor : material.cor_difusa;
 
     vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(viewPos);
+    vec3 viewDir = normalize(viewPos - Position);
+    
+    vec3 result = recebe_luz ? CalcDirLight(dirLight, norm, viewDir) : vec3(baseColor);
 
-    // Calculando a iluminação difusa
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * vec3(baseColor);
+    FragColor = vec4(result, baseColor.a);
+}
 
-
-    // Combina a iluminação difusa, especular e a cor ambiente
-    result = diffuse;
-    }
-    else
-    {    
-        result = baseColor.xyz;
-    }
-    // Aplica o resultado final ao fragmento
-    FragColor = vec4(result, 1);
+vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
+{
+    vec3 lightDir = normalize(-light.direction); // Correctly use the light's direction
+    // Difusa
+    float diff = max(dot(normal, lightDir), 0.0);
+    // Especular
+    vec3 reflectDir = reflect(-lightDir, normal);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.brilho); // Use material.brilho for shininess
+    // Combina os resultados
+    vec3 ambient = light.ambient * vec3(baseColor);
+    vec3 diffuse = light.diffuse * diff * vec3(baseColor);
+    vec3 specular = light.specular * spec * material.cor_especular.rgb;
+    return (ambient + diffuse + specular); // Add the specular component to the result
 }
 )";

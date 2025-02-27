@@ -355,6 +355,7 @@ CMakeFiles/becommons.dir/src/arquivadores/shader.cpp.o: \
  /usr/include/glm/gtc/type_ptr.inl \
  /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
+ /source/repos/BubbleEngine/becommons/include/util/vetor3.hpp \
  /usr/include/c++/13/filesystem /usr/include/c++/13/bits/fs_fwd.h \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \

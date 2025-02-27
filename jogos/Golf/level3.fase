@@ -324,6 +324,18 @@
 					"diretorio": "/scripts/tentativas.lua"
 				}
 			]
-		}
+		},
+		{
+            "componentes":
+            [
+            {
+                "tipo": "luz_direcional",
+                "direcao": [-1, -1, -1],
+                "ambiente": [0.5, 0.5,0.5],
+                "difusa": [0, 0, 0],
+                "especular": [0.1, 0.1, 0.1]
+            }
+			]
+        }
 	]
 }

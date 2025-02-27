@@ -585,10 +585,14 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp \
  /source/repos/BubbleEngine/becommons/include/util/raio.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/terreno.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
@@ -597,15 +601,12 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_renderizacao.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/texto.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/imagem.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/imageloader.hpp \
  /usr/include/FreeImage.h /usr/include/inttypes.h \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
  /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \

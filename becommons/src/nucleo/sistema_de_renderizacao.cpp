@@ -2,6 +2,7 @@
 #include "nucleo/sistema_de_renderizacao.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/transformacao.hpp"
+#include "componentes/luz_direcional.hpp"
 #include "componentes/camera.hpp"
 #include "componentes/terreno.hpp"
 #include "nucleo/fase.hpp"
@@ -26,6 +27,11 @@ namespace bubble
 
         camera->desenharFB();
 
+        luz_direcional ld;
+
+        reg->cada<luz_direcional>([&](const uint32_t ent) {
+            if(reg->tem<luz_direcional>(ent)) ld = *reg->obter<luz_direcional>(ent);
+        });
         reg->cada<transformacao>([&](const uint32_t ent) {
             auto transform = reg->obter<transformacao>(ent);
             transform->calcular();
@@ -38,6 +44,10 @@ namespace bubble
 
             s.use();
             s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
+            s.setVec3("dirLight.direction", ld.direcao);
+            s.setVec3("dirLight.ambient", ld.ambiente);
+            s.setVec3("dirLight.specular", ld.especular);
+            s.setVec3("dirLight.diffuse", ld.difusa);
             s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
             s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
             s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);
@@ -52,6 +62,10 @@ namespace bubble
 
             s.use();
             s.setMat4("view", glm::value_ptr(camera->obtViewMatrix()));
+            s.setVec3("dirLight.direction", ld.direcao);
+            s.setVec3("dirLight.ambient", ld.ambiente);
+            s.setVec3("dirLight.specular", ld.especular);
+            s.setVec3("dirLight.diffuse", ld.difusa);
             s.setVec3("viewPos", camera->posicao.x,camera->posicao.y,camera->posicao.z);
             s.setMat4("projection", glm::value_ptr(camera->obtProjectionMatrix()));
             s.setVec2("resolution", instanciaJanela->tamanho.x, instanciaJanela->tamanho.y);

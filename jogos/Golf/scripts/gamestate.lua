@@ -19,7 +19,7 @@ function GameState.setTrys(new_trys)
 end
 
 function GameState.write()
-    file = io.open("golfgamestate.txt", "w")
+    file = io.open(".gamestate", "w")
     file:write(
         string.format(
         "won=%s\nlost=%s\ntrys=%d\nlevel=%d\n",
@@ -33,10 +33,10 @@ end
 
 function GameState.load()
     -- Verifica se o arquivo existe
-    local file = io.open("golfgamestate.txt", "r")
+    local file = io.open(".gamestate", "r")
     if file then
         -- Se o arquivo existir, carrega os dados
-        for line in io.lines("golfgamestate.txt") do
+        for line in io.lines(".gamestate") do
             local key, value = line:match("([^=]+)=([^=]+)")
             if key and value then
                 -- Tenta converter para número, caso contrário, verifica se é booleano

@@ -1,6 +1,6 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
-/* Definição da estrutura vetor2 */
+/* Definiï¿½ï¿½o da estrutura vetor2 */
 
 namespace bubble
 {
@@ -9,10 +9,10 @@ namespace bubble
     {
         T x, y;
 
-        // Construtor com parâmetros
+        // Construtor com parï¿½metros
         vetor2(T x, T y) : x(x), y(y) {}
 
-        // Construtor padrão
+        // Construtor padrï¿½o
         vetor2() : x(T{}), y(T{}) {}
 
         // Operador de soma com outro vetor2
@@ -44,19 +44,19 @@ namespace bubble
             return *this;
         }
 
-        // Operador de subtração com outro vetor2
+        // Operador de subtraï¿½ï¿½o com outro vetor2
         vetor2 operator-(const vetor2& other) const
         {
             return vetor2{ x - other.x, y - other.y };
         }
 
-        // Operador de subtração com um escalar
+        // Operador de subtraï¿½ï¿½o com um escalar
         vetor2 operator-(const T& scalar) const
         {
             return vetor2{ x - scalar, y - scalar };
         }
 
-        // Operador de subtração acumulada com outro vetor2
+        // Operador de subtraï¿½ï¿½o acumulada com outro vetor2
         vetor2& operator-=(const vetor2& other)
         {
             x -= other.x;
@@ -65,7 +65,7 @@ namespace bubble
             return *this;
         }
 
-        // Operador de subtração acumulada com um escalar
+        // Operador de subtraï¿½ï¿½o acumulada com um escalar
         vetor2& operator-=(const T& scalar)
         {
             x -= scalar;
@@ -73,19 +73,19 @@ namespace bubble
             return *this;
         }
 
-        // Operador de multiplicação com outro vetor2
+        // Operador de multiplicaï¿½ï¿½o com outro vetor2
         vetor2 operator*(const vetor2& other) const
         {
             return vetor2{ x * other.x, y * other.y };
         }
 
-        // Operador de multiplicação com um escalar
+        // Operador de multiplicaï¿½ï¿½o com um escalar
         vetor2 operator*(const T& scalar) const
         {
             return vetor2{ x * scalar, y * scalar };
         }
 
-        // Operador de multiplicação acumulada com outro vetor2
+        // Operador de multiplicaï¿½ï¿½o acumulada com outro vetor2
         vetor2& operator*=(const vetor2& other)
         {
             x *= other.x;
@@ -94,7 +94,7 @@ namespace bubble
             return *this;
         }
 
-        // Operador de multiplicação acumulada com um escalar
+        // Operador de multiplicaï¿½ï¿½o acumulada com um escalar
         vetor2& operator*=(const T& scalar)
         {
             x *= scalar;
@@ -108,7 +108,7 @@ namespace bubble
             return x == other.x && y == other.y;
         }
 
-        // Operador de diferença
+        // Operador de diferenï¿½a
         bool operator!=(const vetor2& other) const
         {
             return !(*this == other);

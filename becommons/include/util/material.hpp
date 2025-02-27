@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #pragma once
 #include "cor.hpp"
 #include "textura.hpp"
@@ -14,5 +14,6 @@ namespace bubble
 		bool uvMundo{ false }, recebe_luz{ true };
 		bubble::cor difusa;
 		bubble::cor especular;
+    float brilho = 32.f;
 	};
 }

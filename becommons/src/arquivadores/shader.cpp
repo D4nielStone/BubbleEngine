@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #include <glad/glad.h>
 #include "arquivadores/shader.hpp"
 #include <filesystem>
@@ -150,6 +150,9 @@ void bubble::shader::setVec4(const std::string& name, const vetor4<int>& vec4 ) 
 }
 void bubble::shader::setVec3(const std::string& name, const float& r, const float& g, const float& b) const {
     glUniform3f(glGetUniformLocation(ID, name.c_str()), r, g, b);
+}
+void bubble::shader::setVec3(const std::string& name, const vet3& vet) const {
+    glUniform3f(glGetUniformLocation(ID, name.c_str()), vet.x, vet.y, vet.z);
 }
 
 void bubble::shader::setVec2(const std::string& name, const float& r, const float& g) const {

@@ -592,7 +592,9 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/componentes/camera.hpp \
  /source/repos/BubbleEngine/becommons/include/util/raio.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/fase.hpp \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
@@ -602,9 +604,7 @@ CMakeFiles/becommons.dir/src/nucleo/sistema_de_interface.cpp.o: \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/fonte.hpp \
  /usr/include/c++/13/map /usr/include/c++/13/bits/stl_tree.h \
  /usr/include/c++/13/bits/stl_map.h \

@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 #include "nucleo/projeto.hpp"
 #include "os/sistema.hpp"
 #include "depuracao/debug.hpp"

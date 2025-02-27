@@ -98,7 +98,7 @@ function atualizar()
         gatilho = true
         ax = ax + (deltaMouseX / 10) * deltaTime
         ay = ay + (deltaMouseY / 10) * deltaTime -- Inverte o sinal para ajustar elevação
-        ay = math.max(45, math.min(75, ay)) -- Clamping para manter dentro dos limites
+        ay = math.max(15, math.min(75, ay)) -- Clamping para manter dentro dos limites
     end
 
     -- Converte os ângulos em radianos para cálculos

@@ -545,9 +545,11 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/util/vetor2.hpp \
  /source/repos/BubbleEngine/becommons/include/util/vetor4.hpp \
  /source/repos/BubbleEngine/becommons/include/util/cor.hpp \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
+ /usr/include/c++/13/queue /usr/include/c++/13/deque \
+ /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
+ /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_fisica.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema.hpp \
  /usr/include/c++/13/thread /usr/include/c++/13/stop_token \
  /usr/include/c++/13/atomic /usr/include/c++/13/bits/std_thread.h \
  /usr/include/c++/13/semaphore /usr/include/c++/13/bits/semaphore_base.h \
@@ -557,6 +559,8 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/c++/13/bits/this_thread_sleep.h \
  /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
+ /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_renderizacao.hpp \
  /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_interface.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/shader.hpp \
  /usr/include/c++/13/fstream /usr/include/c++/13/istream \
@@ -596,10 +600,6 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /usr/include/c++/13/bits/locale_conv.h /usr/include/c++/13/iomanip \
  /usr/include/c++/13/bits/quoted_string.h /usr/include/c++/13/codecvt \
  /usr/include/c++/13/bits/fs_dir.h /usr/include/c++/13/bits/fs_ops.h \
- /source/repos/BubbleEngine/becommons/include/nucleo/sistema_de_codigo.hpp \
- /usr/include/c++/13/queue /usr/include/c++/13/deque \
- /usr/include/c++/13/bits/stl_deque.h /usr/include/c++/13/bits/deque.tcc \
- /usr/include/c++/13/bits/stl_queue.h \
  /source/repos/BubbleEngine/becommons/include/nucleo/projeto.hpp \
  /usr/include/rapidjson/rapidjson.h /usr/include/rapidjson/document.h \
  /usr/include/rapidjson/reader.h /usr/include/rapidjson/allocators.h \
@@ -635,6 +635,7 @@ CMakeFiles/becommons.dir/src/nucleo/fase.cpp.o: \
  /source/repos/BubbleEngine/becommons/include/componentes/propriedades.hpp \
  /source/repos/BubbleEngine/becommons/include/componentes/renderizador.hpp \
  /source/repos/BubbleEngine/becommons/include/arquivadores/modelo.hpp \
+ /source/repos/BubbleEngine/becommons/include/componentes/luz_direcional.hpp \
  /source/repos/BubbleEngine/becommons/include/os/janela.hpp \
  /source/repos/BubbleEngine/becommons/include/os/tempo.hpp \
  /usr/include/c++/13/chrono /usr/include/c++/13/bits/chrono_io.h \

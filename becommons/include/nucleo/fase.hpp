@@ -1,4 +1,4 @@
-/** @copyright Copyright (c) 2024 Daniel Oliveira */
+/** @copyright Copyright (c) 2025 Daniel Oliveira */
 
 /**
  * @file fase.hpp
@@ -8,13 +8,13 @@
 #pragma once
 #include "entidades/entidade.hpp"
 #include "componentes/camera.hpp"
-#include "sistema_de_renderizacao.hpp"
-#include "sistema_de_fisica.hpp"
-#include "sistema_de_interface.hpp"
-#include "sistema_de_codigo.hpp"
 #include <string>
 #include <memory>
 #include <queue>
+#include "sistema_de_fisica.hpp"
+#include "sistema_de_codigo.hpp"
+#include "sistema_de_renderizacao.hpp"
+#include "sistema_de_interface.hpp"
 
 /**
  * @class fase
@@ -42,7 +42,7 @@ namespace bubble
 		sistemaFisica sfisica;
 		sistemaRenderizacao srender;
 		sistemaInterface sinterface;
-		sistemaCodigo scodigo;
+		sistemaCodigo scodigo;	
 	private:
 		bool inicializacao = true;
 		const char* diretorio;

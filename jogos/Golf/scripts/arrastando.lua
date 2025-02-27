@@ -1,3 +1,7 @@
+--[[
+	Copyright (c) 2025 Daniel Oliveira dos Santos. Todos os direitos reservados.
+	Este código é parte do projeto BubbleEngine.
+]]
 -- arrastando.lua
 local M = {}
 

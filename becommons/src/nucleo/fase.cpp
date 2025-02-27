@@ -11,6 +11,7 @@
 #include "componentes/fisica.hpp"
 #include "componentes/renderizador.hpp"
 #include "componentes/imagem.hpp"
+#include "componentes/luz_direcional.hpp"
 #include "os/janela.hpp"
 #include "os/sistema.hpp"
 #include <iostream>
@@ -147,7 +148,7 @@ static void analizarEntidades(const Document& doc, fase* f)
 					/// extrai sahder
 					if (componente.HasMember("vertex_shader") && componente.HasMember("fragment_shader"))
 					{
-						render->modelo->definirShader(componente["vertex_shader"].GetString(), componente["fragment_shader"].GetString());
+						render->modelo->definirShader((projeto_atual->diretorioDoProjeto +componente["vertex_shader"].GetString()).c_str(), (projeto_atual->diretorioDoProjeto +componente["fragment_shader"].GetString()).c_str());
 					}
 					/// extrai material
 					if (componente.HasMember("malhas"))
@@ -197,6 +198,15 @@ static void analizarEntidades(const Document& doc, fase* f)
 				else if (std::strcmp(tipo_str, "codigo") == 0)
 				{
 					reg->adicionar<codigo>(id,projeto_atual->diretorioDoProjeto + componente["diretorio"].GetString());
+				}
+				else if (std::strcmp(tipo_str, "luz_direcional") == 0)
+				{
+					reg->adicionar<luz_direcional>(id, 
+					vet3(componente["direcao"].GetArray()[0].GetFloat(),componente["direcao"].GetArray()[1].GetFloat(),componente["direcao"].GetArray()[2].GetFloat()),
+					vet3(componente["ambiente"].GetArray()[0].GetFloat(),componente["ambiente"].GetArray()[1].GetFloat(),componente["ambiente"].GetArray()[2].GetFloat()),
+					vet3(componente["difusa"].GetArray()[0].GetFloat(),componente["difusa"].GetArray()[1].GetFloat(),componente["difusa"].GetArray()[2].GetFloat()),
+					vet3(componente["especular"].GetArray()[0].GetFloat(),componente["especular"].GetArray()[1].GetFloat(),componente["especular"].GetArray()[2].GetFloat())
+					);
 				}
 				else if (std::strcmp(tipo_str, "imagem") == 0)
 				{
