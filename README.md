@@ -1,5 +1,5 @@
-## Berry Engine
-Berry é um projeto individual criado por mim para estudo, e futuramente criar um jogo usando esse engine.
+## Bubble Engine
+Bubble é um projeto individual criado por mim para estudo, e futuramente criar um jogo usando esse engine.
 ## Instalação
 ### linux:
 ```bash
